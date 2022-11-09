@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-config.dtd">
+  
+<configuration>
+	<typeAliases>
+		<typeAlias alias="AdminDto" type="kr.co.lookst.admin.domain.AdminDto"/>
+		<typeAlias alias="BoardDto" type="kr.co.lookst.board.domain.BoardDto"/>
+		<typeAlias alias="MemberDto" type="kr.co.lookst.member.domain.MemberDto"/>
+		<typeAlias alias="PostDto" type="kr.co.lookst.post.domain.PostDto"/>
+		<typeAlias alias="SellerDto" type="kr.co.lookst.seller.domain.SellerDto"/>
+		<typeAlias alias="ShopDto" type="kr.co.lookst.shop.domain.ShopDto"/>
+		<typeAlias alias="SnsDto" type="kr.co.lookst.sns.domain.SnsDto"/>
+	</typeAliases>
+</configuration>
