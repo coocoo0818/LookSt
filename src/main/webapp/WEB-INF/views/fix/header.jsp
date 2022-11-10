@@ -58,7 +58,7 @@
 		  </div> -->
 		  <!-- 다크모드 끝 -->
         <li class="nav-item">
-          <a class="nav-link" href="#">SNS
+          <a class="nav-link" href="<c:url value="/post/main"/>">SNS
             <span class="visually-hidden">(current)</span>
           </a>
         </li>
