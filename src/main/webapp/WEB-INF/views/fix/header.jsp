@@ -15,8 +15,6 @@
 	<link href="${pageContext.request.contextPath }/resources/Bootswatch/5/lux/bootstrap.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath }/resources/Bootswatch/5/lux/bootstrap.min.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath }/resources/fix/css/header.css" rel="stylesheet">
- 	<%-- <link href="${pageContext.request.contextPath }/resources/5/lux/_bootswatch.scss" rel="stylesheet">
-	<link href="${pageContext.request.contextPath }/resources/5/lux/_variables.scss" rel="stylesheet"> --%>
 <%-- 	<link href="${pageContext.request.contextPath }/resources/_assets/css/custom.min.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath }/resources/_assets/scss/custom.scss" rel="stylesheet">
 	<link href="${pageContext.request.contextPath }/resources/_vendor/bootstrap/dist/css/bootstrap-grid.css" rel="stylesheet">
