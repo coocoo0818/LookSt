@@ -12,4 +12,9 @@ public class AdminController {
 	public String adminForm() {
 		return "admin/memberlist";
 	}
+	
+	@GetMapping("/memberlist2")
+	public String adminForm2() {
+		return "admin/memberlist2";
+	}
 }
