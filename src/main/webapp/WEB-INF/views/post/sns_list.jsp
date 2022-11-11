@@ -124,7 +124,7 @@
 				<div class="card">
 					<img
 						src="${pageContext.request.contextPath }/resources/post/img/p_25b2d5ab0b7a433aa72c98b1c468deef.jpeg"
-						class="card-img-top" alt="...">
+						class="card-img-top" onclick="location.href='${pageContext.request.contextPath }/post/mylist'">
 					<div class="card-body">
 						<div class="row justify-content-start d-flex">
 							<div class="col-3">
@@ -134,9 +134,10 @@
 							</div>
 							<div class="col-5 my-auto" onclick="location.href='./'">
 								MyMelody</div>
-							<div class="main_hash d-inline-flex p-2">
-								<a href="">#LookSt</a><a href="">#스타일컬렉터</a> #OOTD
-								</p>
+							<div class="tag_link" style="margin-top: 10px; margin-bottom: 10px;">
+								<p class="tag_text" onclick="location.href='./'" style="display: inline;"><b>#LOOKST챌린지</b></p>
+								<p class="tag_text" onclick="location.href='./'" style="display: inline;"><b>#나이키</b></p>
+								<p class="tag_text" onclick="location.href='./'" style="display: inline;"><b>#조던</b></p>
 							</div>
 							<div class="like_comment">
 								<button onclick="clickBtn()" class="border border-white "
@@ -157,10 +158,10 @@
 								</span>
 							</div>
 							<div class="productDetail d-flex row justify-content-start">
-								<img src="${pageContext.request.contextPath }/resources/post/img/a_b4cd98023c4541ad80e3b8743923a812.jpg"
+								<img src="${pageContext.request.contextPath }/resources/post/img/maison_margiela.png"
 									id="product_img" class="col-3 ">
 								<span class="d-inline-block text-truncate" style="max-width: 280px; font-size: 14px; padding-top: 10px;">
-  									Yeezy Gap Engineered By Balenciaga Flame Cap Black<br>170,000원
+  									MM6 Maison Margiela x Eastpak Mini Shoulder Bag Black<br>399,000원
 								</span>
 							</div>
 						</div>
@@ -182,9 +183,10 @@
 							</div>
 							<div class="col-5 my-auto" onclick="location.href='./'">
 								MyMelody</div>
-							<div class="main_hash d-inline-flex p-2">
-								<a href="">#LookSt</a><a href="">#스타일컬렉터</a> #OOTD
-								</p>
+							<div class="tag_link" style="margin-top: 10px; margin-bottom: 10px;">
+								<p class="tag_text" onclick="location.href='./'" style="display: inline;"><b>#LOOKST챌린지</b></p>
+								<p class="tag_text" onclick="location.href='./'" style="display: inline;"><b>#나이키</b></p>
+								<p class="tag_text" onclick="location.href='./'" style="display: inline;"><b>#조던</b></p>
 							</div>
 							<div class="like_comment">
 								<button onclick="clickBtn()" class="border border-white "
@@ -200,10 +202,9 @@
 								<img
 									src="${pageContext.request.contextPath }/resources/post/img/adidas-yeezy-foam-runner-sand-fy4567_1.jpg"
 									onclick="location.href='./'" id="product_img" class="col-3">
-								<div style="font-size: 14px; padding-top: 20px;"
-									class="col-auto" onclick="location.href='./'">
-									Adidas Yeezy Foam RNNR Sand<br>174,000원
-								</div>
+								<span class="d-inline-block text-truncate" style="max-width: 280px; font-size: 14px; padding-top: 10px;">
+  									Adidas Yeezy Foam RNNR Sand<br>174,000원
+								</span>
 							</div>
 							<div class="productDetail d-flex row justify-content-start">
 								<img src="${pageContext.request.contextPath }/resources/post/img/a_b4cd98023c4541ad80e3b8743923a812.jpg"
@@ -220,7 +221,7 @@
 			<div class="col">
 				<div class="card">
 					<img
-						src="${pageContext.request.contextPath }/resources/post/img/master.jpg"
+						src="${pageContext.request.contextPath }/resources/post/img/KREAM2.jpeg"
 						class="card-img-top" alt="...">
 					<div class="card-body">
 						<div class="row justify-content-start d-flex">
@@ -231,9 +232,10 @@
 							</div>
 							<div class="col-5 my-auto" onclick="location.href='./'">
 								MyMelody</div>
-							<div class="main_hash d-inline-flex p-2">
-								<a href="">#LookSt</a><a href="">#스타일컬렉터</a> #OOTD
-								</p>
+							<div class="tag_link" style="margin-top: 10px; margin-bottom: 10px;">
+								<p class="tag_text" onclick="location.href='./'" style="display: inline;"><b>#LOOKST챌린지</b></p>
+								<p class="tag_text" onclick="location.href='./'" style="display: inline;"><b>#나이키</b></p>
+								<p class="tag_text" onclick="location.href='./'" style="display: inline;"><b>#조던</b></p>
 							</div>
 							<div class="like_comment">
 								<button onclick="clickBtn()" class="border border-white "
@@ -247,21 +249,19 @@
 							</div>
 							<div class="productDetail d-flex row justify-content-start ">
 								<img
-									src="${pageContext.request.contextPath }/resources/post/img/mircoday.jpg"
+									src="${pageContext.request.contextPath }/resources/post/img/airforce.png"
 									onclick="location.href='./'" id="product_img" class="col-3">
-								<div style="font-size: 14px; padding-top: 20px;"
-									class="col-auto" onclick="location.href='./'">
-									Nike Air Force 1'07 Low White<br>133,000원
-								</div>
+								<span class="d-inline-block text-truncate" style="max-width: 280px; font-size: 14px; padding-top: 10px;">
+  									(W) Nike Air Force 1 '07 LV8 Photon Dust Cashmere<br>300,000원
+								</span>
 							</div>
 							<div class="productDetail d-flex row justify-content-start">
 								<img
-									src="${pageContext.request.contextPath }/resources/post/img/mircoday.jpg"
+									src="${pageContext.request.contextPath }/resources/post/img/vivienne.webp"
 									id="product_img" class="col-3 ">
-								<div style="font-size: 14px; padding-top: 20px;"
-									class="col-auto" onclick="location.href='./'">
-									Nike Air Force 1'07 Low White<br>133,000원
-								</div>
+								<span class="d-inline-block text-truncate" style="max-width: 280px; font-size: 14px; padding-top: 10px;">
+  									Vivienne Westwood Mayfair Bas Relief Pendant Silver<br>170,000원
+								</span>
 							</div>
 						</div>
 					</div>
@@ -300,19 +300,17 @@
 								<img
 									src="${pageContext.request.contextPath }/resources/post/img/mircoday.jpg"
 									onclick="location.href='./'" id="product_img" class="col-3">
-								<div style="font-size: 14px; padding-top: 20px;"
-									class="col-auto" onclick="location.href='./'">
-									Nike Air Force 1'07 Low White<br>133,000원
-								</div>
+								<span class="d-inline-block text-truncate" style="max-width: 280px; font-size: 14px; padding-top: 10px;">
+  									(W) Nike Air Force 1 '07 LV8 Photon Dust Cashmere<br>300,000원
+								</span>
 							</div>
 							<div class="productDetail d-flex row justify-content-start">
 								<img
 									src="${pageContext.request.contextPath }/resources/post/img/mircoday.jpg"
 									id="product_img" class="col-3 ">
-								<div style="font-size: 14px; padding-top: 20px;"
-									class="col-auto" onclick="location.href='./'">
-									Nike Air Force 1'07 Low White<br>133,000원
-								</div>
+								<span class="d-inline-block text-truncate" style="max-width: 280px; font-size: 14px; padding-top: 10px;">
+  									(W) Nike Air Force 1 '07 LV8 Photon Dust Cashmere<br>300,000원
+								</span>
 							</div>
 						</div>
 					</div>
@@ -351,19 +349,17 @@
 								<img
 									src="${pageContext.request.contextPath }/resources/post/img/mircoday.jpg"
 									onclick="location.href='./'" id="product_img" class="col-3">
-								<div style="font-size: 14px; padding-top: 20px;"
-									class="col-auto" onclick="location.href='./'">
-									Nike Air Force 1'07 Low White<br>133,000원
-								</div>
+								<span class="d-inline-block text-truncate" style="max-width: 280px; font-size: 14px; padding-top: 10px;">
+  									(W) Nike Air Force 1 '07 LV8 Photon Dust Cashmere<br>300,000원
+								</span>
 							</div>
 							<div class="productDetail d-flex row justify-content-start">
 								<img
 									src="${pageContext.request.contextPath }/resources/post/img/mircoday.jpg"
 									id="product_img" class="col-3 ">
-								<div style="font-size: 14px; padding-top: 20px;"
-									class="col-auto" onclick="location.href='./'">
-									Nike Air Force 1'07 Low White<br>133,000원
-								</div>
+								<span class="d-inline-block text-truncate" style="max-width: 280px; font-size: 14px; padding-top: 10px;">
+  									(W) Nike Air Force 1 '07 LV8 Photon Dust Cashmere<br>300,000원
+								</span>
 							</div>
 						</div>
 					</div>
@@ -402,19 +398,17 @@
 								<img
 									src="${pageContext.request.contextPath }/resources/post/img/mircoday.jpg"
 									onclick="location.href='./'" id="product_img" class="col-3">
-								<div style="font-size: 14px; padding-top: 20px;"
-									class="col-auto" onclick="location.href='./'">
-									Nike Air Force 1'07 Low White<br>133,000원
-								</div>
+								<span class="d-inline-block text-truncate" style="max-width: 280px; font-size: 14px; padding-top: 10px;">
+  									(W) Nike Air Force 1 '07 LV8 Photon Dust Cashmere<br>300,000원
+								</span>
 							</div>
 							<div class="productDetail d-flex row justify-content-start">
 								<img
 									src="${pageContext.request.contextPath }/resources/post/img/mircoday.jpg"
 									id="product_img" class="col-3 ">
-								<div style="font-size: 14px; padding-top: 20px;"
-									class="col-auto" onclick="location.href='./'">
-									Nike Air Force 1'07 Low White<br>133,000원
-								</div>
+								<span class="d-inline-block text-truncate" style="max-width: 280px; font-size: 14px; padding-top: 10px;">
+  									(W) Nike Air Force 1 '07 LV8 Photon Dust Cashmere<br>300,000원
+								</span>
 							</div>
 						</div>
 					</div>
