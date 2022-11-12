@@ -72,6 +72,6 @@
 	</div> 
 	<!-- / row -->
 </section> <!-- / projects -->
-<script type="text/javascript" src="${pageContext.request.contextPath }/resources/fix/js/categorygallery.js"></script>
+<%-- <script type="text/javascript" src="${pageContext.request.contextPath }/resources/fix/js/categorygallery.js"></script> --%>
 </body>
 </html>

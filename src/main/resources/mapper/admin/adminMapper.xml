@@ -1,9 +1,15 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="kr.co.lookst.admin.dao.AdminMapper">
+<mapper namespace="kr.co.lookst.main.dao.AdminMapper">
 
+	<select id="newProducts" resultType="Product">
+		select product_name, product_kind , product_price , prdt_img_name  from product product , prdt_img prdt_img 
+		where product.product_no = prdt_img.product_no
+		and product_type = 'Y'
+		order by product_date desc
+	</select>
 	
 </mapper>

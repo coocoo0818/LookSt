@@ -17,10 +17,10 @@
 		<div class="row row-cols-1 row-cols-md-4 g-4">
 			<a href="#" class="text-decoration-none">
 				<div class="col">
-					<div class="card">
+					<div class="card border-0">
 						<img
 							src="${pageContext.request.contextPath }/resources/fix/img/1.png"
-							class="card-img-top" alt="...">
+							class="card-img-top rounded" alt="...">
 						<div class="card-body">
 							<h5 class="card-title text-decoration-underline">Andersson
 								Bell</h5>
@@ -34,10 +34,10 @@
 			</a> 
 			<a href="#" class="text-decoration-none">
 				<div class="col">
-					<div class="card">
+					<div class="card border-0">
 						<img
 							src="${pageContext.request.contextPath }/resources/fix/img/2.png"
-							class="card-img-top" alt="...">
+							class="card-img-top rounded" alt="...">
 						<div class="card-body">
 							<h5 class="card-title text-decoration-underline">Andersson
 								Bell</h5>
@@ -51,10 +51,10 @@
 			</a> 
 			<a href="#" class="text-decoration-none">
 				<div class="col">
-					<div class="card">
+					<div class="card border-0">
 						<img
 							src="${pageContext.request.contextPath }/resources/fix/img/3.png"
-							class="card-img-top" alt="...">
+							class="card-img-top rounded" alt="...">
 						<div class="card-body">
 							<h5 class="card-title text-decoration-underline">Andersson
 								Bell</h5>
@@ -68,10 +68,10 @@
 			</a> 
 			<a href="#" class="text-decoration-none">
 				<div class="col">
-					<div class="card">
+					<div class="card border-0">
 						<img
 							src="${pageContext.request.contextPath }/resources/fix/img/4.png"
-							class="card-img-top" alt="...">
+							class="card-img-top rounded" alt="...">
 						<div class="card-body">
 							<h5 class="card-title text-decoration-underline">Andersson
 								Bell</h5>
