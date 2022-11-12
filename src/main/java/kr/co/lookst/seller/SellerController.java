@@ -8,9 +8,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/seller")
 public class SellerController {
 
-	@GetMapping("/test")
+	@GetMapping("/orderList")
 	public String adminForm() {
-		return "seller/test";
+		return "seller/orderList";
+
+	}
+	
+	@GetMapping("/refundList")
+	public String adminForm1() {
+		return "seller/refundList";
+
+	}
+	
+	@GetMapping("/testorder")
+	public String adminForm3() {
+		return "seller/testorder";
 
 	}
 }

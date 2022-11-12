@@ -2,14 +2,17 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-	<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-  	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=dege">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Insert title here</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript"></script>
+	<meta name="viewport" content="width=device-width"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+	<link href="${pageContext.request.contextPath }/resources/seller/css/list.css" rel="stylesheet">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
 	
-<title>Insert title here</title>
-
-<style type="text/css">
+	<style type="text/css">
 	#orderpagetitle {
 		margin-top: 30px;
 		margin-bottom: 30px;
@@ -18,34 +21,34 @@
 	.pagination {
 		justify-content: center;
 	}
+	
+	</style>
+	
+	<script type="text/javascript">
+		const myModal = document.getElementById('myModal')
+		const myInput = document.getElementById('myInput')
+		
+		myModal.addEventListener('shown.bs.modal', () => {
+		  myInput.focus()
+		})
+
+	</script>
+	
+	
 
 	
-</style>
-
-<script type="text/javascript">
-const myModal = document.getElementById('myModal')
-const myInput = document.getElementById('myInput')
-
-myModal.addEventListener('shown.bs.modal', () => {
-  myInput.focus()
-})
-
-</script>
-
-
 </head>
-
-
 <body>
-<%@ include file="/WEB-INF/views/fix/adminheader.jsp" %>
-
-<h2 id="orderpagetitle" class="disply-2 text-center">ORDER LIST</h2>
-
+<%@ include file="/WEB-INF/views/fix/sellerheader.jsp" %>
+	
+	
+<h2 id="orderpagetitle" class="disply-2 text-center">ORDER LIST</h2>	
+	
 <div class="container">
-<div class="row">
-  <div class="col">
+<div class="row mt-5 py-3">
+  <div class="col mt-1">
     
-    <select id="inputState" class="form-select">
+    <select id="inputState" class="form-select form-select-md">
       <option selected>결제대기</option>
       <option selected>결제완료</option>
       <option selected>배송준비중</option>
@@ -54,139 +57,111 @@ myModal.addEventListener('shown.bs.modal', () => {
     </select>
   </div> 
 
-  <form class="d-flex col-6">
-      <input class="form-control me-sm-2" type="text" placeholder="Search" style="float:right;">
-      <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+  <form class="d-flex col-md-9 mt-1">
+      <input class="form-control form-control me-1" type="text" placeholder="Search" style="float:right;">
+      <button class="btn btn-secondary" type="submit"><i class="d-flex fa fa-search"></i></button>
  </form>
 </div> 
 </div>
+
+	
+	
+	<!-- partial:index.partial.html -->
 <div class="container">
-
-</div> 
-<div class="container">
-	<div class="row">
-		<div>
-          <button type="button" class="btn btn-outline-dark btn-sm text-right" href="customer-order.html" style="float:right;">수정</button>
-        </div>
-    </div>
+  <table class="responsive-table">
+    
+    <thead>
+      <tr>
+        <th scope="col">주문번호</th>
+        <th scope="col">구매자</th>
+        <th scope="col">상품정보</th>
+        <th scope="col">결제금액</th>
+        <th scope="col">주문일자</th>
+        <th scope="col">주문상태</th>
+        <th scope="col">상세</th>
+      </tr>
+    </thead>
+    <tfoot>
+      
+    </tfoot>
+    <tbody>
+      <tr>
+        <th scope="row">#0001</th>
+        <td data-title="Buyer">김이젠</td>
+        <td data-title="PrdtInfo">예쁜트렌치코트[1234]</td>
+        <td data-title="TotalPay" data-type="currency">68000원</td>
+        <td data-title="PayDate" data-type="currency">2022-10-17</td>
+        <td data-title="OrderStaus" data-type="currency">배송준비중</td>
+        <td data-title="Detail" data-type="currency">VIEW</td>
+      </tr>
+      <tr>
+        <th scope="row">#0002</th>
+        <td data-title="Buyer">김이젠2</td>
+        <td data-title="PrdtInfo">예쁜트렌치코트[1234]</td>
+        <td data-title="TotalPay" data-type="currency">68000원</td>
+        <td data-title="PayDate" data-type="currency">2022-10-17</td>
+        <td data-title="OrderStaus" data-type="currency">배송준비중</td>
+        <td data-title="Detail" data-type="currency">VIEW</td>
+      </tr>
+      <tr>
+        <th scope="row">#0003</th>
+        <td data-title="Buyer">김이젠3</td>
+        <td data-title="PrdtInfo">예쁜트렌치코트[1234]</td>
+        <td data-title="TotalPay" data-type="currency">68000원</td>
+        <td data-title="PayDate" data-type="currency">2022-10-17</td>
+        <td data-title="OrderStaus" data-type="currency">배송준비중</td>
+        <td data-title="Detail" data-type="currency">VIEW</td>
+      </tr>
+       <tr>
+        <th scope="row">#0004</th>
+        <td data-title="Buyer">김이젠4</td>
+        <td data-title="PrdtInfo">예쁜트렌치코트[1234]</td>
+        <td data-title="TotalPay" data-type="currency">68000원</td>
+        <td data-title="PayDate" data-type="currency">2022-10-17</td>
+        <td data-title="OrderStaus" data-type="currency">배송준비중</td>
+        <td data-title="Detail" data-type="currency">VIEW</td>
+      </tr>
+      <tr>
+        <th scope="row">#0005</th>
+        <td data-title="Buyer">김이젠5</td>
+        <td data-title="PrdtInfo">예쁜트렌치코트[1234]</td>
+        <td data-title="TotalPay" data-type="currency">68000원</td>
+        <td data-title="PayDate" data-type="currency">2022-10-17</td>
+        <td data-title="OrderStaus" data-type="currency">배송준비중</td>
+        <td data-title="Detail" data-type="currency">VIEW</td>
+      </tr>
+      <tr>
+        <th scope="row">#0006</th>
+        <td data-title="Buyer">김이젠6</td>
+        <td data-title="PrdtInfo">예쁜트렌치코트[1234]</td>
+        <td data-title="TotalPay" data-type="currency">68000원</td>
+        <td data-title="PayDate" data-type="currency">2022-10-17</td>
+        <td data-title="OrderStaus" data-type="currency">배송준비중</td>
+        <td data-title="Detail" data-type="currency">VIEW</td>
+      </tr>
+      <tr>
+        <th scope="row">#0007</th>
+        <td data-title="Buyer">김이젠7</td>
+        <td data-title="PrdtInfo">예쁜트렌치코트[1234]</td>
+        <td data-title="TotalPay" data-type="currency">68000원</td>
+        <td data-title="PayDate" data-type="currency">2022-10-17</td>
+        <td data-title="OrderStaus" data-type="currency">배송준비중</td>
+        <td data-title="Detail" data-type="currency">VIEW</td>
+      </tr>
+      <tr>
+        <th scope="row">#0008</th>
+        <td data-title="Buyer">김이젠8</td>
+        <td data-title="PrdtInfo">예쁜트렌치코트[1234]</td>
+        <td data-title="TotalPay" data-type="currency">68000원</td>
+        <td data-title="PayDate" data-type="currency">2022-10-17</td>
+        <td data-title="OrderStaus" data-type="currency">배송준비중</td>
+        <td data-title="Detail" data-type="currency">VIEW</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
-
-<div class="container">
-
-	<div class="col-lg-8-md-col-xl-9">
-
-            <table class="table table-borderless table-hover table-responsive-md">
-              <thead class="bg-light">
-                <tr>
-                  <th class="py-3 text-uppercase text-sm text-center">주문번호</th>
-                  <th class="py-3 text-uppercase text-sm text-center">구매자</th>
-                  <th class="py-3 text-uppercase text-sm text-center">주문정보</th>
-                  <th class="py-3 text-uppercase text-sm text-center">결제금액</th>
-                  <th class="py-3 text-uppercase text-sm text-center">주문일자</th>
-                  <th class="py-3 text-uppercase text-sm text-center">주문상태</th>
-                  <th class="py-3 text-uppercase text-sm text-center">상세</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th class="py-2 align-middle text-center"># 1735</th>
-                  <td class="py-2 align-middle text-center">김이젠</td>
-                  <td class="py-2 align-middle text-center">트렌치코트[1234]</td>
-                  <td class="py-2 align-middle text-center">68000원</td>
-                  <td class="py-2 align-middle text-center">2022-10-17</td>
-                  <td class="py-2 align-middle text-center"><span class="badge text-bg-primary text-uppercase">Being prepared</span></td>
-                  <td class="py-2 align-middle text-center"><button type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-  					VIEW</button></td>
-                </tr>
-                <tr>
-                  <th class="py-2 align-middle text-center"># 1735</th>
-                  <td class="py-2 align-middle text-center">김이젠</td>
-                  <td class="py-2 align-middle text-center">트렌치코트[1234]</td>
-                  <td class="py-2 align-middle text-center">68000원</td>
-                  <td class="py-2 align-middle text-center">2022-10-17</td>
-                  <td class="py-2 align-middle text-center"><span class="badge text-bg-primary text-uppercase">Being prepared</span></td>
-                  <td class="py-2 align-middle text-center"><button type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-  					VIEW</button></td>
-                </tr>
-                <tr>
-                  <th class="py-2 align-middle text-center"># 1735</th>
-                  <td class="py-2 align-middle text-center">김이젠</td>
-                  <td class="py-2 align-middle text-center">트렌치코트[1234]</td>
-                  <td class="py-2 align-middle text-center">68000원</td>
-                  <td class="py-2 align-middle text-center">2022-10-17</td>
-                  <td class="py-2 align-middle text-center"><span class="badge text-bg-primary text-uppercase">Being prepared</span></td>
-                  <td class="py-2 align-middle text-center"><button type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-  					VIEW</button></td>
-                </tr>
-               <tr>
-                  <th class="py-2 align-middle text-center"># 1735</th>
-                  <td class="py-2 align-middle text-center">김이젠</td>
-                  <td class="py-2 align-middle text-center">트렌치코트[1234]</td>
-                  <td class="py-2 align-middle text-center">68000원</td>
-                  <td class="py-2 align-middle text-center">2022-10-17</td>
-                  <td class="py-2 align-middle text-center"><span class="badge text-bg-primary text-uppercase">Being prepared</span></td>
-                  <td class="py-2 align-middle text-center"><button type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-  					VIEW</button></td>
-                </tr>
-                <tr>
-                  <th class="py-2 align-middle text-center"># 1735</th>
-                  <td class="py-2 align-middle text-center">김이젠</td>
-                  <td class="py-2 align-middle text-center">트렌치코트[1234]</td>
-                  <td class="py-2 align-middle text-center">68000원</td>
-                  <td class="py-2 align-middle text-center">2022-10-17</td>
-                  <td class="py-2 align-middle text-center"><span class="badge text-bg-primary text-uppercase">Being prepared</span></td>
-                  <td class="py-2 align-middle text-center"><button type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-  					VIEW</button></td>
-                </tr>
-              </tbody>
-            </table>
-       </div>
-            
-</div>
-
-
-
-
-	<nav aria-label="Page navigation example">
-		  <ul class="pagination">
-		    <li class="page-item">
-		      <a class="page-link" href="#" aria-label="Previous">
-       			 <span aria-hidden="true">&laquo;</span>
-      		  </a>
-    		</li>
-			<li class="page-item"><a class="page-link" href="#">1</a></li>
-			<li class="page-item"><a class="page-link" href="#">2</a></li>
-			<li class="page-item"><a class="page-link" href="#">3</a></li>
-			<li class="page-item">
-      		  <a class="page-link" href="#" aria-label="Next">
-        		<span aria-hidden="true">&raquo;</span>
-      		  </a>
-   			</li>
- 		  </ul>
-	</nav>
-
-
-<!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="staticBackdropLabel">Detail Information</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-			
-			
-			
-
+<!-- partial -->
+  <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <%@ include file="/WEB-INF/views/fix/footer.jsp" %>
 </body>
 </html>
