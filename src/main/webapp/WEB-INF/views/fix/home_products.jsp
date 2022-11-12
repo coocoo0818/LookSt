@@ -12,9 +12,13 @@
 	<div class="style_title">
 		<h3>New Product Picks!</h3>
 	</div>
+	
+		
+	
 	<!-- 신상 시작 -->
 	<div class="container products">
 		<div class="row row-cols-1 row-cols-md-4 g-4">
+		<c:forEach var="new_prdt" items="${new_prdt}">
 			<a href="#" class="text-decoration-none">
 				<div class="col">
 					<div class="card border-0">
@@ -22,17 +26,16 @@
 							src="${pageContext.request.contextPath }/resources/fix/img/1.png"
 							class="card-img-top rounded" alt="...">
 						<div class="card-body">
-							<h5 class="card-title text-decoration-underline">Andersson
-								Bell</h5>
-							<p class="card-text">Andersson Bell x Asics Contrast Quilting
-								Bomber</p>
-							<p class="fw-bold">255,000원</p>
+							<h5 class="card-title text-decoration-underline">${new_prdt.product_name}</h5>
+							<p class="card-text">${new_prdt.product_kind}</p>
+							<p class="fw-bold">${new_prdt.product_price}</p>
 							<h6 class="text-muted">즉시 구매가</h6>
 						</div>
 					</div>
 				</div>
 			</a> 
-			<a href="#" class="text-decoration-none">
+				</c:forEach>
+			<%-- <a href="#" class="text-decoration-none">
 				<div class="col">
 					<div class="card border-0">
 						<img
@@ -82,7 +85,7 @@
 						</div>
 					</div>
 				</div>
-			</a>
+			</a> --%>
 		</div>
 	</div>
 	<!-- 신상 끝 -->

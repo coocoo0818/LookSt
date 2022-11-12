@@ -13,6 +13,7 @@
 	<a href="<c:url value="/admin/memberlist"/>">admin</a>
 	<a href="<c:url value="/sns/test"/>">sns test</a>
 	<a href="<c:url value="/seller/test"/>">seller</a>
+
 <%@ include file="/WEB-INF/views/fix/mainbanner.jsp"%>
 <%@ include file="/WEB-INF/views/fix/categorygallery.jsp"%>
 <%@ include file="/WEB-INF/views/fix/home_products.jsp"%>

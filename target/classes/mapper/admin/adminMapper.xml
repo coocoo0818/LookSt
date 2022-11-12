@@ -10,6 +10,7 @@
 		where product.product_no = prdt_img.product_no
 		and product_type = 'Y'
 		order by product_date desc
+		LIMIT 4
 	</select>
 	
 </mapper>
