@@ -20,7 +20,6 @@
 <%@ include file="/WEB-INF/views/fix/scrolltrigger.jsp"%>
 <%@ include file="/WEB-INF/views/fix/snsbanner.jsp"%>
 
-
 	<%@ include file="/WEB-INF/views/fix/footer.jsp"%>
 </body>
 </html>
