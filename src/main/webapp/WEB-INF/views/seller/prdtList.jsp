@@ -8,7 +8,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>PRODUCT LIST</title>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript"></script>
-	<meta name="viewport" content="width=device-width"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+	<meta name="viewport" content="width=device-width">
+	<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"> -->
 	<link href="${pageContext.request.contextPath }/resources/seller/css/list.css" rel="stylesheet">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
 	
@@ -28,15 +29,6 @@
 	
 	</style>
 	
-	<script type="text/javascript">
-		const myModal = document.getElementById('myModal')
-		const myInput = document.getElementById('myInput')
-		
-		myModal.addEventListener('shown.bs.modal', () => {
-		  myInput.focus()
-		})
-
-	</script>
 	
 	
 
