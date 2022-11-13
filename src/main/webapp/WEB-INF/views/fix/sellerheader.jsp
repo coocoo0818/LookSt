@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>LookSt</title>
 	<!-- CDN only -->
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.0/css/all.css">
+	<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.0/css/all.css"> -->
 <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
@@ -48,17 +48,6 @@
     
     <div class="collapse navbar-collapse" id="navbarColor01">
       <ul class="navbar-nav ms-auto">
-      <!-- 다크모드 시작-->
-	  <!-- <div class="wrap ms-auto">
-	      <div class="darkmode">
-	          <div class="inner">
-	              <input type="radio" name="toggle" id="toggle-radio-light" checked><label for="toggle-radio-light" class="tolight"><i class="fas fa-sun tolight fa-xs"></i></label>
-	              <input type="radio" name="toggle" id="toggle-radio-dark"><label for="toggle-radio-dark" class="todark"><i class="fas fa-moon todark fa-xs"></i></label>
-	              <div class="darkmode-bg"></div>
-	          </div>
-	      </div>
-	  </div> -->
-	  <!-- 다크모드 끝 -->
         <li class="nav-item">
           <a class="nav-link" href="<c:url value="/"/>">Home
             <!-- <span class="visually-hidden">(current)</span> -->
