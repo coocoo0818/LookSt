@@ -5,13 +5,24 @@
 <head>
 <meta charset="UTF-8">
 <title>footer</title>
+	<!-- 플로팅버튼 -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/hung1001/font-awesome-pro@4cac1a6/css/all.css" />
 <!-- <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'> -->
 <!-- <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css'> -->
 <link href="${pageContext.request.contextPath }/resources/fix/css/footer.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-
+<!--하단 플로팅 버튼 시작-->
+<div class="floating-button">
+   <span class="move-guestBook">
+      <a class="guest-btn btn-info" href="#"></a>
+	  </span>
+   	<!-- <span class="move-myWebSite">
+      <a class="myWebSite-btn" href="https://goldsystem.tistory.com/"></a>
+	  </span> -->
+</div>
+<!--하단 플로팅 버튼 끝-->
 <!-- Footer -->
 <div class="footer-dark">
         <footer>
