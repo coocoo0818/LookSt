@@ -110,7 +110,7 @@
     <!-- 프로필 정보 끝 -->
     <!--profile-edit-Modal -->
     <div class="modal fade" id="profile-edit-Modal" tabindex="-1" aria-labelledby="profile-edit-ModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
             <h1 class="modal-title fs-5" id="profile-edit-Modal">프로필수정</h1>
@@ -140,7 +140,7 @@
     <!--profile-edit-Modal 끝 -->
     <!-- following-Modal -->
     <div class="modal fade" id="following-Modal" tabindex="-1" aria-labelledby="following-Modal" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="following-Modal">팔로워</h1>
@@ -153,9 +153,9 @@
         </div>
     </div>
     <!-- following-Modal 끝 -->
-    <!-- follwer-Modal -->
+    <!-- follower-Modal -->
     <div class="modal fade" id="follwer-Modal" tabindex="-1" aria-labelledby="follwer-Modal" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="follwer-Modal">팔로워</h1>
@@ -167,7 +167,7 @@
             </div>
         </div>
     </div>
-    <!-- follwer-Modal 끝 -->
+    <!-- follower-Modal 끝 -->
 <%@ include file="/WEB-INF/views/fix/footer.jsp" %>
 </body>
 </html>

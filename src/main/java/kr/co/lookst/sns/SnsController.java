@@ -18,13 +18,10 @@ public class SnsController {
 		return "sns/myProfile";
 	}
 	
-	@GetMapping("/myProfileEdit")
-	public String myProfileEdit() {
-		return "sns/myProfileEdit";
-	}
-	
 	@GetMapping("/postUpload")
 	public String postUpload() {
 		return "sns/postUpload";
 	}
+	
+	
 }
