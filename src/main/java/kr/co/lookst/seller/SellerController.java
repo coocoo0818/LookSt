@@ -20,9 +20,22 @@ public class SellerController {
 
 	}
 	
-	@GetMapping("/testorder")
+	@GetMapping("/prdtList")
 	public String adminForm3() {
-		return "seller/testorder";
+		return "seller/prdtList";
+
+	}
+	
+	
+	@GetMapping("/registerPrdt")
+	public String adminForm4() {
+		return "seller/registerPrdt";
+
+	}
+	
+	@GetMapping("/mySales")
+	public String adminForm5() {
+		return "seller/mySales";
 
 	}
 }
