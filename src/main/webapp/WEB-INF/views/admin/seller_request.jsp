@@ -28,9 +28,10 @@
 			<div class="col mt-1">
 				<select id="inputState" class="form-select form-select-md">
 					<option selected>전체</option>
-					<option value="1">아이디</option>
-					<option value="2">이름</option>
-					<option value="3">권한</option>
+					<option value="1">번호</option>
+					<option value="2">회사명</option>
+					<option value="3">사업자번호</option>
+					<option value="4">신청인</option>
 				</select>
 			</div>
 			<form class="d-flex col-md-9 mt-1">
@@ -49,9 +50,9 @@
 				<tr>
 				<tr class="table-dark">
 					<th scope="col">순번</th>
-					<th scope="col">글제목</th>
-					<th scope="col">작성자</th>
-					<th scope="col">작성일</th>
+					<th scope="col">회사명</th>
+					<th scope="col">사업자번호</th>
+					<th scope="col">신청인</th>
 					<th scope="col">관리</th>
 				</tr>
 			</thead>
@@ -63,130 +64,120 @@
 			<tbody>
 				<tr class="table-primary">
 					<th class="text-center" scope="row">1</th>
-					<td class="text-center" data-title="profile"><a
-						href="http://en.wikipedia.org/wiki/Avatar_(2009_film)">이게 첫글 제목임</a></td>
-					<td class="text-center" data-title="name">김현민</td>
-					<td class="text-center" data-title="since" data-type="currency">2022-11-08</td>
+					<td class="text-center" data-title="profile">이젠아카데미</td>
+					<td class="text-center" data-title="name">444-2222-1112</td>
+					<td class="text-center" data-title="since" data-type="currency">김현민</td>
 					<td class="text-center" data-title="button" data-type="currency">
 						<input class="btn btn-outline-primary btn-sm" tabindex="-1"
-						role="button" type="button" value="게시" /> <input
+						role="button" type="button" value="수락" /> <input
 						class="btn btn-outline-danger btn-sm" tabindex="-1" role="button"
 						type="button" value="거부" />
 					</td>
 				</tr>
 				<tr class="table-primary">
 					<th class="text-center" scope="row">2</th>
-					<td class="text-center" data-title="profile"><a
-						href="http://en.wikipedia.org/wiki/Avatar_(2009_film)">이게 첫글 제목임</a></td>
-					<td class="text-center" data-title="name">김현민</td>
-					<td class="text-center" data-title="since" data-type="currency">2022-11-08</td>
+					<td class="text-center" data-title="profile">이젠아카데미</td>
+					<td class="text-center" data-title="name">444-2222-1112</td>
+					<td class="text-center" data-title="since" data-type="currency">김현민</td>
 					<td class="text-center" data-title="button" data-type="currency">
 						<input class="btn btn-outline-primary btn-sm" tabindex="-1"
-						role="button" type="button" value="게시" /> <input
+						role="button" type="button" value="수락" /> <input
 						class="btn btn-outline-danger btn-sm" tabindex="-1" role="button"
 						type="button" value="거부" />
 					</td>
 				</tr>
 				<tr class="table-primary">
 					<th class="text-center" scope="row">3</th>
-					<td class="text-center" data-title="profile"><a
-						href="http://en.wikipedia.org/wiki/Avatar_(2009_film)">이게 첫글 제목임</a></td>
-					<td class="text-center" data-title="name">김현민</td>
-					<td class="text-center" data-title="since" data-type="currency">2022-11-08</td>
+					<td class="text-center" data-title="profile">이젠아카데미</td>
+					<td class="text-center" data-title="name">444-2222-1112</td>
+					<td class="text-center" data-title="since" data-type="currency">김현민</td>
 					<td class="text-center" data-title="button" data-type="currency">
 						<input class="btn btn-outline-primary btn-sm" tabindex="-1"
-						role="button" type="button" value="게시" /> <input
+						role="button" type="button" value="수락" /> <input
 						class="btn btn-outline-danger btn-sm" tabindex="-1" role="button"
 						type="button" value="거부" />
 					</td>
 				</tr>
 				<tr class="table-primary">
 					<th class="text-center" scope="row">4</th>
-					<td class="text-center" data-title="profile"><a
-						href="http://en.wikipedia.org/wiki/Avatar_(2009_film)">이게 첫글 제목임</a></td>
-					<td class="text-center" data-title="name">김현민</td>
-					<td class="text-center" data-title="since" data-type="currency">2022-11-08</td>
+					<td class="text-center" data-title="profile">이젠아카데미</td>
+					<td class="text-center" data-title="name">444-2222-1112</td>
+					<td class="text-center" data-title="since" data-type="currency">김현민</td>
 					<td class="text-center" data-title="button" data-type="currency">
 						<input class="btn btn-outline-primary btn-sm" tabindex="-1"
-						role="button" type="button" value="게시" /> <input
+						role="button" type="button" value="수락" /> <input
 						class="btn btn-outline-danger btn-sm" tabindex="-1" role="button"
 						type="button" value="거부" />
 					</td>
 				</tr>
 				<tr class="table-primary">
 					<th class="text-center" scope="row">5</th>
-					<td class="text-center" data-title="profile"><a
-						href="http://en.wikipedia.org/wiki/Avatar_(2009_film)">이게 첫글 제목임</a></td>
-					<td class="text-center" data-title="name">김현민</td>
-					<td class="text-center" data-title="since" data-type="currency">2022-11-08</td>
+					<td class="text-center" data-title="profile">이젠아카데미</td>
+					<td class="text-center" data-title="name">444-2222-1112</td>
+					<td class="text-center" data-title="since" data-type="currency">김현민</td>
 					<td class="text-center" data-title="button" data-type="currency">
 						<input class="btn btn-outline-primary btn-sm" tabindex="-1"
-						role="button" type="button" value="게시" /> <input
+						role="button" type="button" value="수락" /> <input
 						class="btn btn-outline-danger btn-sm" tabindex="-1" role="button"
 						type="button" value="거부" />
 					</td>
 				</tr>
 				<tr class="table-primary">
 					<th class="text-center" scope="row">6</th>
-					<td class="text-center" data-title="profile"><a
-						href="http://en.wikipedia.org/wiki/Avatar_(2009_film)">이게 첫글 제목임</a></td>
-					<td class="text-center" data-title="name">김현민</td>
-					<td class="text-center" data-title="since" data-type="currency">2022-11-08</td>
+					<td class="text-center" data-title="profile">이젠아카데미</td>
+					<td class="text-center" data-title="name">444-2222-1112</td>
+					<td class="text-center" data-title="since" data-type="currency">김현민</td>
 					<td class="text-center" data-title="button" data-type="currency">
 						<input class="btn btn-outline-primary btn-sm" tabindex="-1"
-						role="button" type="button" value="게시" /> <input
+						role="button" type="button" value="수락" /> <input
 						class="btn btn-outline-danger btn-sm" tabindex="-1" role="button"
 						type="button" value="거부" />
 					</td>
 				</tr>
 				<tr class="table-primary">
 					<th class="text-center" scope="row">7</th>
-					<td class="text-center" data-title="profile"><a
-						href="http://en.wikipedia.org/wiki/Avatar_(2009_film)">이게 첫글 제목임</a></td>
-					<td class="text-center" data-title="name">김현민</td>
-					<td class="text-center" data-title="since" data-type="currency">2022-11-08</td>
+					<td class="text-center" data-title="profile">이젠아카데미</td>
+					<td class="text-center" data-title="name">444-2222-1112</td>
+					<td class="text-center" data-title="since" data-type="currency">김현민</td>
 					<td class="text-center" data-title="button" data-type="currency">
 						<input class="btn btn-outline-primary btn-sm" tabindex="-1"
-						role="button" type="button" value="게시" /> <input
+						role="button" type="button" value="수락" /> <input
 						class="btn btn-outline-danger btn-sm" tabindex="-1" role="button"
 						type="button" value="거부" />
 					</td>
 				</tr>
 				<tr class="table-primary">
 					<th class="text-center" scope="row">8</th>
-					<td class="text-center" data-title="profile"><a
-						href="http://en.wikipedia.org/wiki/Avatar_(2009_film)">이게 첫글 제목임</a></td>
-					<td class="text-center" data-title="name">김현민</td>
-					<td class="text-center" data-title="since" data-type="currency">2022-11-08</td>
+					<td class="text-center" data-title="profile">이젠아카데미</td>
+					<td class="text-center" data-title="name">444-2222-1112</td>
+					<td class="text-center" data-title="since" data-type="currency">김현민</td>
 					<td class="text-center" data-title="button" data-type="currency">
 						<input class="btn btn-outline-primary btn-sm" tabindex="-1"
-						role="button" type="button" value="게시" /> <input
+						role="button" type="button" value="수락" /> <input
 						class="btn btn-outline-danger btn-sm" tabindex="-1" role="button"
 						type="button" value="거부" />
 					</td>
 				</tr>
 				<tr class="table-primary">
 					<th class="text-center" scope="row">9</th>
-					<td class="text-center" data-title="profile"><a
-						href="http://en.wikipedia.org/wiki/Avatar_(2009_film)">이게 첫글 제목임</a></td>
-					<td class="text-center" data-title="name">김현민</td>
-					<td class="text-center" data-title="since" data-type="currency">2022-11-08</td>
+					<td class="text-center" data-title="profile">이젠아카데미</td>
+					<td class="text-center" data-title="name">444-2222-1112</td>
+					<td class="text-center" data-title="since" data-type="currency">김현민</td>
 					<td class="text-center" data-title="button" data-type="currency">
 						<input class="btn btn-outline-primary btn-sm" tabindex="-1"
-						role="button" type="button" value="게시" /> <input
+						role="button" type="button" value="수락" /> <input
 						class="btn btn-outline-danger btn-sm" tabindex="-1" role="button"
 						type="button" value="거부" />
 					</td>
 				</tr>
 				<tr class="table-primary">
 					<th class="text-center" scope="row">10</th>
-					<td class="text-center" data-title="profile"><a
-						href="http://en.wikipedia.org/wiki/Avatar_(2009_film)">이게 첫글 제목임</a></td>
-					<td class="text-center" data-title="name">김현민</td>
-					<td class="text-center" data-title="since" data-type="currency">2022-11-08</td>
+					<td class="text-center" data-title="profile">이젠아카데미</td>
+					<td class="text-center" data-title="name">444-2222-1112</td>
+					<td class="text-center" data-title="since" data-type="currency">김현민</td>
 					<td class="text-center" data-title="button" data-type="currency">
 						<input class="btn btn-outline-primary btn-sm" tabindex="-1"
-						role="button" type="button" value="게시" /> <input
+						role="button" type="button" value="수락" /> <input
 						class="btn btn-outline-danger btn-sm" tabindex="-1" role="button"
 						type="button" value="거부" />
 					</td>

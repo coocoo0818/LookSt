@@ -28,9 +28,9 @@
 			<div class="col mt-1">
 				<select id="inputState" class="form-select form-select-md">
 					<option selected>전체</option>
-					<option value="1">아이디</option>
-					<option value="2">이름</option>
-					<option value="3">권한</option>
+					<option value="1">글제목</option>
+					<option value="2">작성자</option>
+					<option value="3">번호</option>
 				</select>
 			</div>
 			<form class="d-flex col-md-9 mt-1">

@@ -57,7 +57,7 @@
           <a class="nav-link text-center" href="<c:url value="/admin/member_management"/>">MEMBER<br>MANAGEMENT</a>
         </li>
         <li class="nav-item align-self-center">
-          <a class="nav-link text-center" href="<c:url value="/admin/member_management"/>">SNS<br>MANAGEMENT</a>
+          <a class="nav-link text-center" href="<c:url value="/admin/sns_management"/>">SNS<br>MANAGEMENT</a>
         </li>
         <li class="nav-item align-self-center">
           <a class="nav-link text-center" href="<c:url value="/admin/board_management"/>">BOARD<br>MANAGEMENT</a>
