@@ -14,7 +14,7 @@
 <!-- partial:index.partial.html -->
 <div class='container' id="scrolltrigger-container">
   <div class='reveal'>
-    <img src='${pageContext.request.contextPath }/resources/fix/img/a_95b217199ea247d2bccfe3518998475f.jpg'>
+    <img src='${pageContext.request.contextPath }/resources/fix/img/banner4.jpg'>
   </div>
 </div>
 <!-- <div class='container' id="scrolltrigger-container">
