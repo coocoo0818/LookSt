@@ -10,7 +10,7 @@
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/fix/header.jsp"%>
-	<a href="<c:url value="/admin/memberlist"/>">admin</a>
+	<a href="<c:url value="/admin/member_management"/>">admin</a>
 	<a href="<c:url value="/sns/test"/>">sns test</a>
 	<a href="<c:url value="/seller/test"/>">seller</a>
 
