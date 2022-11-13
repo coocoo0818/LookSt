@@ -60,28 +60,28 @@
 	  </div> -->
 	  <!-- 다크모드 끝 -->
         <li class="nav-item">
-          <a class="nav-link" href="#">Home
+          <a class="nav-link" href="<c:url value="/"/>">Home
             <!-- <span class="visually-hidden">(current)</span> -->
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">나의 매출</a>
+          <a class="nav-link" href="<c:url value="/seller/mySales"/>">나의 매출</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">나의 상품</a>
+          <a class="nav-link" href="<c:url value="/seller/prdtList"/>">나의 상품</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">상품 등록</a>
+          <a class="nav-link" href="<c:url value="/seller/registerPrdt"/>">상품 등록</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">주문</a>
           <div class="dropdown-menu dropdown-menu-end dropdown-menu-xs-start">
-            <a class="dropdown-item" href="#">주문 목록</a>
-            <a class="dropdown-item" href="#">취소/환불/반품 목록</a>
+            <a class="dropdown-item" href="<c:url value="/seller/orderList"/>">주문 목록</a>
+            <a class="dropdown-item" href="<c:url value="/seller/refundList"/>">취소/환불/반품 목록</a>
             <!-- <a class="dropdown-item" href="#">Something else here</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Separated link</a>
-          </div> -->
+            <a class="dropdown-item" href="#">Separated link</a>-->
+          </div>
         </li>
       </ul>
     </div>
