@@ -16,24 +16,24 @@
   </div>
   <div class="carousel-inner">
     <div class="carousel-item active" data-bs-interval="10000">
-      <img src="${pageContext.request.contextPath }/resources/fix/img/a_95b217199ea247d2bccfe3518998475f.jpg" class="d-block w-100" alt="...">
+      <img src="${pageContext.request.contextPath }/resources/fix/img/banner1.jpg" class="d-block w-100" alt="...">
       <div class="carousel-caption d-none d-md-block">
-        <h5>First slide label</h5>
-        <p>Some representative placeholder content for the first slide.</p>
+        <h3>겨울 필수 액세서리 셀렉션</h3>
+        <p>Winter Essentials</p>
       </div>
     </div>
     <div class="carousel-item" data-bs-interval="2000">
-      <img src="${pageContext.request.contextPath }/resources/fix/img/a_95b217199ea247d2bccfe3518998475f.jpg" class="d-block w-100" alt="...">
+      <img src="${pageContext.request.contextPath }/resources/fix/img/banner2.jpg" class="d-block w-100" alt="...">
       <div class="carousel-caption d-none d-md-block">
-        <h5>Second slide label</h5>
-        <p>Some representative placeholder content for the second slide.</p>
+        <h3>런업이 추천하는 브랜드관 컬렉션</h3>
+        <p>브랜드관 런업 큐레이션</p>
       </div>
     </div>
     <div class="carousel-item">
-      <img src="${pageContext.request.contextPath }/resources/fix/img/a_95b217199ea247d2bccfe3518998475f.jpg" class="d-block w-100" alt="...">
+      <img src="${pageContext.request.contextPath }/resources/fix/img/banner3.jpg" class="d-block w-100" alt="...">
       <div class="carousel-caption d-none d-md-block">
-        <h5>Third slide label</h5>
-        <p>Some representative placeholder content for the third slide.</p>
+        <h3>Tag Your Style</h3>
+        <p>#스타일챌린지 베스트 4의 모노톤 스타일링</p>
       </div>
     </div>
   </div>
