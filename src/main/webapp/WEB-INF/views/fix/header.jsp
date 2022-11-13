@@ -46,17 +46,6 @@
   
     <div class="collapse navbar-collapse" id="navbarColor03">
 	    <ul class="navbar-nav ms-auto">
-	    <!-- 다크모드 시작-->
-		  <!-- <div class="wrap ms-auto">
-		      <div class="darkmode">
-		          <div class="inner">
-		              <input type="radio" name="toggle" id="toggle-radio-light" checked><label for="toggle-radio-light" class="tolight"><i class="fas fa-sun tolight fa-xs"></i></label>
-		              <input type="radio" name="toggle" id="toggle-radio-dark"><label for="toggle-radio-dark" class="todark"><i class="fas fa-moon todark fa-xs"></i></label>
-		              <div class="darkmode-bg"></div>
-		          </div>
-		      </div>
-		  </div> -->
-		  <!-- 다크모드 끝 -->
         <li class="nav-item">
           <a class="nav-link" href="<c:url value="/post/main"/>">SNS
             <span class="visually-hidden">(current)</span>
