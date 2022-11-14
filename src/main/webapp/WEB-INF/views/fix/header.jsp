@@ -48,7 +48,7 @@
     <div class="collapse navbar-collapse" id="navbarColor03">
 	    <ul class="navbar-nav ms-auto">
         <li class="nav-item">
-          <a class="nav-link" href="<c:url value="/post/main"/>">SNS
+          <a class="nav-link" href="${contextPath}/post/sns_list">SNS
             <span class="visually-hidden">(current)</span>
           </a>
         </li>
