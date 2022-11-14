@@ -81,7 +81,7 @@
         </div>
         <!-- 피드 -->
         <div class="post container">
-            <div class="row mt-5">
+            <div class="row mt-5 mb-5">
                 <div class="col-sm-4">
                 <div class="card">
                     <div class="post_img card-body">
