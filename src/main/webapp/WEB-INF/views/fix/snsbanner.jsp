@@ -19,16 +19,18 @@
 <!-- 서브캐러셀 시작 -->
 <div class="carousel-wrap">
   <div class="owl-carousel">
-    <div class="item">
-	    <a href="#" class="card_link">
-	    	<img class="post_img_box" src="${contextPath}/resources/fix/img/p_07f1179c2f3f4ca6bc198d36a5487ce6.jpeg">
-	    	<div class="rounded-circle profile_img_box">
-	    		<img class="rounded-circle img_profile" alt="img" src="${contextPath}/resources/fix/img/p_07f1179c2f3f4ca6bc198d36a5487ce6.jpeg">
-	    	</div>
-	    	<p class="profile_id">@NickName</p>
-	    </a>
-    </div>
-    <div class="item">
+  	<c:forEach var="stylePick" items="${stylePick}">
+	    <div class="item">
+		    <a href="#" class="card_link">
+		    	<img class="post_img_box" src="${contextPath}/resources/fix/img/${stylePick.post_img_img}">
+		    	<div class="rounded-circle profile_img_box">
+		    		<img class="rounded-circle img_profile" alt="img" src="${contextPath}/resources/fix/img/${stylePick.profile_img}">
+		    	</div>
+		    	<p class="profile_id">@${stylePick.member_nick}</p>
+		    </a>
+	    </div>
+  	</c:forEach>
+<%--     <div class="item">
 	    <a href="#" class="card_link">
 	    	<img class="post_img_box" src="${contextPath}/resources/fix/img/p_07f1179c2f3f4ca6bc198d36a5487ce6.jpeg">
 	    	<div class="rounded-circle profile_img_box">
@@ -126,7 +128,7 @@
 	    	</div>
 	    	<p class="profile_id">@NickName</p>
 	    </a>
-    </div>
+    </div> --%>
   </div>
 </div>
 <!-- 서브캐러셀 끝 -->
