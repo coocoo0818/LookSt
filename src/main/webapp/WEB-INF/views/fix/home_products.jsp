@@ -13,8 +13,7 @@
 		<h3>New Product Picks!</h3>
 	</div>
 	
-		
-	
+	<%-- ${new_prdt.prdt_img_name} --%>
 	<!-- 신상 시작 -->
 	<div class="container products">
 		<div class="row row-cols-1 row-cols-md-4 g-4">
@@ -23,11 +22,11 @@
 				<div class="col">
 					<div class="card border-0">
 						<img
-							src="${contextPath}/resources/fix/img/1.png"
+							src="${contextPath}/resources/fix/img/${new_prdt.prdt_img_name}"
 							class="card-img-top rounded" alt="...">
 						<div class="card-body">
 							<h5 class="card-title text-decoration-underline">${new_prdt.product_name}</h5>
-							<p class="card-text">${new_prdt.product_kind}</p>
+							<p class="card-text">${new_prdt.product_info}</p>
 							<p class="fw-bold">${new_prdt.product_price}</p>
 							<h6 class="text-muted">즉시 구매가</h6>
 						</div>
