@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -82,15 +85,17 @@
       
     </tfoot>
     <tbody>
+    <c:forEach var="prdtListDto" items="${list }">
       <tr>
-        <th scope="row" data-title="prdtnum">#1234</th>
+        <th scope="row" data-title="prdtnum">${prdtListDto.product_no }</th>
         <td data-title="PrdtImg"><img class="card-img-top" src="${pageContext.request.contextPath }/resources/post/img/carousel1_2.jpeg"  alt="..." /></td>
-        <td data-title="PrdtCate">OUTER</td>
-        <td data-title="PrdtInfo">예쁜트렌치코트</td>
-        <td data-title="PrdtPrice" data-type="currency">34000원</td>
-        <td data-title="PtdtStock" data-type="currency"><input type="number" class="ptdtStock" min="0" max="100" value="4" th:value="${productList[index.index].productCount}"></td>
+        <td data-title="PrdtCate">${prdtListDto.product_kind }</td>
+        <td data-title="PrdtInfo">${prdtListDto.product_name }</td>
+        <td data-title="PrdtPrice" data-type="currency">${prdtListDto.product_price }</td>
+        <td data-title="PtdtStock" data-type="currency"><input type="number" class="ptdtStock" min="0" max="100" value="${prdtListDto.prdt_option_stock }"></td>
         <td data-title="Detail" data-type="currency"><button type="button" class="btn btn-dark btn-sm">삭제</button></td>
       </tr>
+      </c:forEach>
       <tr>
         <th scope="row" data-title="prdtnum">#1234</th>
         <td data-title="PrdtImg"><img class="card-img-top" src="${pageContext.request.contextPath }/resources/post/img/carousel1_2.jpeg"  alt="..." /></td>
