@@ -104,7 +104,7 @@
 				<div class="d-flex justify-content-between">
 					<div class=" mb-2 mt-2 align-self-center">
 						<img
-							src="${pageContext.request.contextPath }/resources/post/img/프사2.jpg"
+							src="${pageContext.request.contextPath }/resources/post/img/프사2.jpg "
 							onclick="location.href='./'" id="profile_img">
 						<p class="my-auto d-inline ms-3" onclick="location.href='./'">MyMelody</p>
 					</div>
