@@ -81,6 +81,9 @@
 		}
 	</script>
 
+<c:forEach var="post_list" items="${post_list}">
+${post_list.post_img_img}
+</c:forEach>
 	<div class="container">
 		<!-- 상단 인기/최신/팔로우 탭 -->
 		<ul class="nav nav-pills col-4 mx-auto my-4" id="pills-tab"
@@ -120,10 +123,11 @@
 		<!-- sns 메인 -->
 		<!-- sns 리스트 #1 -->
 		<div class="row row-cols-1 row-cols-md-3 g-4">
+		<c:forEach var="post_list" items="${post_list}">
 			<div class="col">
 				<div class="card">
 					<img
-						src="${pageContext.request.contextPath }/resources/post/img/p_25b2d5ab0b7a433aa72c98b1c468deef.jpeg"
+						src="${pageContext.request.contextPath }/resources/post/img/${post_list.post_img_img}"
 						class="card-img-top" onclick="location.href='${pageContext.request.contextPath }/post/mylist'">
 					<div class="card-body">
 						<div class="row justify-content-start d-flex">
@@ -168,6 +172,7 @@
 					</div>
 				</div>
 			</div>
+			</c:forEach>
 			<!-- sns 리스트 #2 -->
 			<div class="col">
 				<div class="card">
