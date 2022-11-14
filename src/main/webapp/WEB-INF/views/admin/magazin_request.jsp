@@ -12,7 +12,7 @@
 <meta name="viewport" content="width=device-width">
 <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"> -->
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath }/resources/admin/css/member_management.css">
+	href="${contextPath}/resources/admin/css/member_management.css">
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
 </head>

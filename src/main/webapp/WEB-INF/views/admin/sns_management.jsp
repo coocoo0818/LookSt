@@ -12,7 +12,7 @@
 <meta name="viewport" content="width=device-width">
 <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"> -->
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath }/resources/admin/css/member_management.css">
+	href="${contextPath}/resources/admin/css/member_management.css">
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
 </head>
@@ -48,13 +48,13 @@
 			<div class="col">
 				<div class="card border-0">
 					<img
-						src="${pageContext.request.contextPath }/resources/post/img/p_25b2d5ab0b7a433aa72c98b1c468deef.jpeg"
-						class="card-img-top rounded" onclick="location.href='${pageContext.request.contextPath }/post/mylist'">
+						src="${contextPath}/resources/post/img/p_25b2d5ab0b7a433aa72c98b1c468deef.jpeg"
+						class="card-img-top rounded" onclick="location.href='${contextPath}/post/mylist'">
 					<div class="card-body">
 						<div class="row justify-content-start d-flex">
 							<div class="col-2">
 								<img class="rounded-circle" style="width: 40px; height: 40px;"
-									src="${pageContext.request.contextPath }/resources/post/img/프사2.jpg"
+									src="${contextPath}/resources/post/img/프사2.jpg"
 									onclick="location.href='./'" id="profile_img">
 							</div>
 							<div class="col-6 my-auto" onclick="location.href='./'"> MyMelody</div>
@@ -68,13 +68,13 @@
 		<div class="col">
 				<div class="card border-0">
 					<img
-						src="${pageContext.request.contextPath }/resources/post/img/p_25b2d5ab0b7a433aa72c98b1c468deef.jpeg"
-						class="card-img-top rounded" onclick="location.href='${pageContext.request.contextPath }/post/mylist'">
+						src="${contextPath}/resources/post/img/p_25b2d5ab0b7a433aa72c98b1c468deef.jpeg"
+						class="card-img-top rounded" onclick="location.href='${contextPath}/post/mylist'">
 					<div class="card-body">
 						<div class="row justify-content-start d-flex">
 							<div class="col-2">
 								<img class="rounded-circle" style="width: 40px; height: 40px;"
-									src="${pageContext.request.contextPath }/resources/post/img/프사2.jpg"
+									src="${contextPath}/resources/post/img/프사2.jpg"
 									onclick="location.href='./'" id="profile_img">
 							</div>
 							<div class="col-6 my-auto" onclick="location.href='./'"> MyMelody</div>
@@ -88,13 +88,13 @@
 			<div class="col">
 				<div class="card border-0">
 					<img
-						src="${pageContext.request.contextPath }/resources/post/img/p_25b2d5ab0b7a433aa72c98b1c468deef.jpeg"
-						class="card-img-top rounded" onclick="location.href='${pageContext.request.contextPath }/post/mylist'">
+						src="${contextPath}/resources/post/img/p_25b2d5ab0b7a433aa72c98b1c468deef.jpeg"
+						class="card-img-top rounded" onclick="location.href='${contextPath}/post/mylist'">
 					<div class="card-body">
 						<div class="row justify-content-start d-flex">
 							<div class="col-2">
 								<img class="rounded-circle" style="width: 40px; height: 40px;"
-									src="${pageContext.request.contextPath }/resources/post/img/프사2.jpg"
+									src="${contextPath}/resources/post/img/프사2.jpg"
 									onclick="location.href='./'" id="profile_img">
 							</div>
 							<div class="col-6 my-auto" onclick="location.href='./'"> MyMelody</div>
@@ -108,13 +108,13 @@
 			<div class="col">
 				<div class="card border-0">
 					<img
-						src="${pageContext.request.contextPath }/resources/post/img/p_25b2d5ab0b7a433aa72c98b1c468deef.jpeg"
-						class="card-img-top rounded" onclick="location.href='${pageContext.request.contextPath }/post/mylist'">
+						src="${contextPath}/resources/post/img/p_25b2d5ab0b7a433aa72c98b1c468deef.jpeg"
+						class="card-img-top rounded" onclick="location.href='${contextPath}/post/mylist'">
 					<div class="card-body">
 						<div class="row justify-content-start d-flex">
 							<div class="col-2">
 								<img class="rounded-circle" style="width: 40px; height: 40px;"
-									src="${pageContext.request.contextPath }/resources/post/img/프사2.jpg"
+									src="${contextPath}/resources/post/img/프사2.jpg"
 									onclick="location.href='./'" id="profile_img">
 							</div>
 							<div class="col-6 my-auto" onclick="location.href='./'"> MyMelody</div>
@@ -128,13 +128,13 @@
 			<div class="col">
 				<div class="card border-0">
 					<img
-						src="${pageContext.request.contextPath }/resources/post/img/p_25b2d5ab0b7a433aa72c98b1c468deef.jpeg"
-						class="card-img-top rounded" onclick="location.href='${pageContext.request.contextPath }/post/mylist'">
+						src="${contextPath}/resources/post/img/p_25b2d5ab0b7a433aa72c98b1c468deef.jpeg"
+						class="card-img-top rounded" onclick="location.href='${contextPath}/post/mylist'">
 					<div class="card-body">
 						<div class="row justify-content-start d-flex">
 							<div class="col-2">
 								<img class="rounded-circle" style="width: 40px; height: 40px;"
-									src="${pageContext.request.contextPath }/resources/post/img/프사2.jpg"
+									src="${contextPath}/resources/post/img/프사2.jpg"
 									onclick="location.href='./'" id="profile_img">
 							</div>
 							<div class="col-6 my-auto" onclick="location.href='./'"> MyMelody</div>
@@ -148,13 +148,13 @@
 			<div class="col">
 				<div class="card border-0">
 					<img
-						src="${pageContext.request.contextPath }/resources/post/img/p_25b2d5ab0b7a433aa72c98b1c468deef.jpeg"
-						class="card-img-top rounded" onclick="location.href='${pageContext.request.contextPath }/post/mylist'">
+						src="${contextPath}/resources/post/img/p_25b2d5ab0b7a433aa72c98b1c468deef.jpeg"
+						class="card-img-top rounded" onclick="location.href='${contextPath}/post/mylist'">
 					<div class="card-body">
 						<div class="row justify-content-start d-flex">
 							<div class="col-2">
 								<img class="rounded-circle" style="width: 40px; height: 40px;"
-									src="${pageContext.request.contextPath }/resources/post/img/프사2.jpg"
+									src="${contextPath}/resources/post/img/프사2.jpg"
 									onclick="location.href='./'" id="profile_img">
 							</div>
 							<div class="col-6 my-auto" onclick="location.href='./'"> MyMelody</div>
@@ -168,13 +168,13 @@
 			<div class="col">
 				<div class="card border-0">
 					<img
-						src="${pageContext.request.contextPath }/resources/post/img/p_25b2d5ab0b7a433aa72c98b1c468deef.jpeg"
-						class="card-img-top rounded" onclick="location.href='${pageContext.request.contextPath }/post/mylist'">
+						src="${contextPath}/resources/post/img/p_25b2d5ab0b7a433aa72c98b1c468deef.jpeg"
+						class="card-img-top rounded" onclick="location.href='${contextPath}/post/mylist'">
 					<div class="card-body">
 						<div class="row justify-content-start d-flex">
 							<div class="col-2">
 								<img class="rounded-circle" style="width: 40px; height: 40px;"
-									src="${pageContext.request.contextPath }/resources/post/img/프사2.jpg"
+									src="${contextPath}/resources/post/img/프사2.jpg"
 									onclick="location.href='./'" id="profile_img">
 							</div>
 							<div class="col-6 my-auto" onclick="location.href='./'"> MyMelody</div>
@@ -188,13 +188,13 @@
 			<div class="col">
 				<div class="card border-0">
 					<img
-						src="${pageContext.request.contextPath }/resources/post/img/p_25b2d5ab0b7a433aa72c98b1c468deef.jpeg"
-						class="card-img-top rounded" onclick="location.href='${pageContext.request.contextPath }/post/mylist'">
+						src="${contextPath}/resources/post/img/p_25b2d5ab0b7a433aa72c98b1c468deef.jpeg"
+						class="card-img-top rounded" onclick="location.href='${contextPath}/post/mylist'">
 					<div class="card-body">
 						<div class="row justify-content-start d-flex">
 							<div class="col-2">
 								<img class="rounded-circle" style="width: 40px; height: 40px;"
-									src="${pageContext.request.contextPath }/resources/post/img/프사2.jpg"
+									src="${contextPath}/resources/post/img/프사2.jpg"
 									onclick="location.href='./'" id="profile_img">
 							</div>
 							<div class="col-6 my-auto" onclick="location.href='./'"> MyMelody</div>

@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>LookSt</title>
+<c:set var="contextPath" value="${pageContext.request.contextPath == '/' ? '' : pageContext.request.contextPath }" scope="application" />
 	<!-- CDN only -->
 	<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.0/css/all.css"> -->
 <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
@@ -12,9 +13,9 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script> -->
 	<!-- CSS only -->
-	<link href="${pageContext.request.contextPath }/resources/Bootswatch/5/lux/bootstrap.css" rel="stylesheet">
-	<link href="${pageContext.request.contextPath }/resources/Bootswatch/5/lux/bootstrap.min.css" rel="stylesheet">
-	<link href="${pageContext.request.contextPath }/resources/fix/css/header.css" rel="stylesheet">
+	<link href="${contextPath}/resources/Bootswatch/5/lux/bootstrap.css" rel="stylesheet">
+	<link href="${contextPath}/resources/Bootswatch/5/lux/bootstrap.min.css" rel="stylesheet">
+	<link href="${contextPath}/resources/fix/css/header.css" rel="stylesheet">
  	<%-- <link href="${pageContext.request.contextPath }/resources/5/lux/_bootswatch.scss" rel="stylesheet">
 	<link href="${pageContext.request.contextPath }/resources/5/lux/_variables.scss" rel="stylesheet"> --%>
 <%-- 	<link href="${pageContext.request.contextPath }/resources/_assets/css/custom.min.css" rel="stylesheet">
@@ -54,20 +55,20 @@
           </a>
         </li>
         <li class="nav-item align-self-center">
-          <a class="nav-link text-center" href="<c:url value="/admin/member_management"/>">MEMBER<br>MANAGEMENT</a>
+          <a class="nav-link text-center" href="${contextPath}/admin/member_management">MEMBER<br>MANAGEMENT</a>
         </li>
         <li class="nav-item align-self-center">
-          <a class="nav-link text-center" href="<c:url value="/admin/sns_management"/>">SNS<br>MANAGEMENT</a>
+          <a class="nav-link text-center" href="${contextPath}/admin/sns_management">SNS<br>MANAGEMENT</a>
         </li>
         <li class="nav-item align-self-center">
-          <a class="nav-link text-center" href="<c:url value="/admin/board_management"/>">BOARD<br>MANAGEMENT</a>
+          <a class="nav-link text-center" href="${contextPath}/admin/board_management">BOARD<br>MANAGEMENT</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle text-center" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">REQUEST<br>MANAGEMENT</a>
           <div class="dropdown-menu dropdown-menu-end dropdown-menu-xs-start">
-            <a class="dropdown-item text-center" href="<c:url value="/admin/magazin_request"/>">MAGAZIN</a>
-            <a class="dropdown-item text-center" href="<c:url value="/admin/seller_request"/>">SELLER</a>
-            <a class="dropdown-item text-center" href="<c:url value="/admin/member_management"/>">Something else here</a>
+            <a class="dropdown-item text-center" href="${contextPath}/admin/magazin_request">MAGAZIN</a>
+            <a class="dropdown-item text-center" href="${contextPath}/admin/seller_request">SELLER</a>
+            <a class="dropdown-item text-center" href="${contextPath}/admin/member_management">Something else here</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item text-center" href="#">Separated link</a>
           </div>

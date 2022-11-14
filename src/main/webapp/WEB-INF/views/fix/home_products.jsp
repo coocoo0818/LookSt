@@ -23,7 +23,7 @@
 				<div class="col">
 					<div class="card border-0">
 						<img
-							src="${pageContext.request.contextPath }/resources/fix/img/1.png"
+							src="${contextPath}/resources/fix/img/1.png"
 							class="card-img-top rounded" alt="...">
 						<div class="card-body">
 							<h5 class="card-title text-decoration-underline">${new_prdt.product_name}</h5>
