@@ -8,13 +8,13 @@
   	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Insert title here</title>
 	<link rel='stylesheet' href='https://use.typekit.net/skn8ash.css'>
-	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/fix/css/scrolltrigger.css">
+	<link rel="stylesheet" href="${contextPath}/resources/fix/css/scrolltrigger.css">
 </head>
 <body>
 <!-- partial:index.partial.html -->
 <div class='container' id="scrolltrigger-container">
   <div class='reveal'>
-    <img src='${pageContext.request.contextPath }/resources/fix/img/banner4.jpg'>
+    <img src='${contextPath}/resources/fix/img/banner4.jpg'>
   </div>
 </div>
 <!-- <div class='container' id="scrolltrigger-container">
@@ -35,6 +35,6 @@
 <!-- partial -->
   <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.4.0/gsap.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.3/ScrollTrigger.min.js'></script>
-<script  src="${pageContext.request.contextPath }/resources/fix/js/scrolltrigger.js"></script>
+<script  src="${contextPath}/resources/fix/js/scrolltrigger.js"></script>
 </body>
 </html>

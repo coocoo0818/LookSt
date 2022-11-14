@@ -7,7 +7,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
   	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>category Gallery</title>
-	<link href="${pageContext.request.contextPath }/resources/fix/css/categorygallery.css" rel="stylesheet">
+	<link href="${contextPath}/resources/fix/css/categorygallery.css" rel="stylesheet">
 </head>
 <body>
 

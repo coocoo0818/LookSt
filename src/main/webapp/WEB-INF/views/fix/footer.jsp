@@ -9,7 +9,7 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/hung1001/font-awesome-pro@4cac1a6/css/all.css" />
 <!-- <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'> -->
 <!-- <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css'> -->
-<link href="${pageContext.request.contextPath }/resources/fix/css/footer.css" rel="stylesheet">
+<link href="${contextPath}/resources/fix/css/footer.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
@@ -61,8 +61,8 @@
     </div>
 <!-- Footer -->
 </body>
-<script type="text/javascript" src="${pageContext.request.contextPath }/resources/Bootswatch/_vendor/bootstrap/dist/js/bootstrap.bundle.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath }/resources/fix/js/header.js"></script>
+<script type="text/javascript" src="${contextPath}/resources/Bootswatch/_vendor/bootstrap/dist/js/bootstrap.bundle.js"></script>
+<script type="text/javascript" src="${contextPath}/resources/fix/js/header.js"></script>
 <%--  <script type="module" src="${pageContext.request.contextPath }/resources/_vendor/bootstrap/dist/js/bootstrap.esm.js"></script>
   <script type="module" src="${pageContext.request.contextPath }/resources/_vendor/bootstrap/dist/js/bootstrap.esm.min.js"></script>
   <script type="text/javascript" src="${pageContext.request.contextPath }/resources/_assets/js/custom.js"></script>

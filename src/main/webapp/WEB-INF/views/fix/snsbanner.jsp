@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>sub-banner</title>
 
-	<link href="${pageContext.request.contextPath }/resources/fix/css/snsbanner.css" rel="stylesheet">
+	<link href="${contextPath}/resources/fix/css/snsbanner.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.0/css/all.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css'>
@@ -21,9 +21,27 @@
   <div class="owl-carousel">
     <div class="item">
 	    <a href="#" class="card_link">
-	    	<img class="post_img_box" src="${pageContext.request.contextPath }/resources/fix/img/p_07f1179c2f3f4ca6bc198d36a5487ce6.jpeg">
+	    	<img class="post_img_box" src="${contextPath}/resources/fix/img/p_07f1179c2f3f4ca6bc198d36a5487ce6.jpeg">
 	    	<div class="rounded-circle profile_img_box">
-	    		<img class="rounded-circle img_profile" alt="img" src="${pageContext.request.contextPath }/resources/fix/img/p_07f1179c2f3f4ca6bc198d36a5487ce6.jpeg">
+	    		<img class="rounded-circle img_profile" alt="img" src="${contextPath}/resources/fix/img/p_07f1179c2f3f4ca6bc198d36a5487ce6.jpeg">
+	    	</div>
+	    	<p class="profile_id">@NickName</p>
+	    </a>
+    </div>
+    <div class="item">
+	    <a href="#" class="card_link">
+	    	<img class="post_img_box" src="${contextPath}/resources/fix/img/p_07f1179c2f3f4ca6bc198d36a5487ce6.jpeg">
+	    	<div class="rounded-circle profile_img_box">
+	    		<img class="rounded-circle img_profile" alt="img" src="${contextPath}/resources/fix/img/p_07f1179c2f3f4ca6bc198d36a5487ce6.jpeg">
+	    	</div>
+	    	<p class="profile_id">@NickName</p>
+	    </a>
+    </div>
+    <div class="item">
+	    <a href="#" class="card_link">
+	    	<img class="post_img_box" src="${contextPath}/resources/fix/img/p_07f1179c2f3f4ca6bc198d36a5487ce6.jpeg">
+	    	<div class="rounded-circle profile_img_box">
+	    		<img class="rounded-circle img_profile" alt="img" src="${contextPath}/resources/fix/img/p_07f1179c2f3f4ca6bc198d36a5487ce6.jpeg">
 	    	</div>
 	    	<p class="profile_id">@NickName</p>
 	    </a>
@@ -39,90 +57,72 @@
     </div>
     <div class="item">
 	    <a href="#" class="card_link">
-	    	<img class="post_img_box" src="${pageContext.request.contextPath }/resources/fix/img/p_07f1179c2f3f4ca6bc198d36a5487ce6.jpeg">
+	    	<img class="post_img_box" src="${contextPath}/resources/fix/img/p_07f1179c2f3f4ca6bc198d36a5487ce6.jpeg">
 	    	<div class="rounded-circle profile_img_box">
-	    		<img class="rounded-circle img_profile" alt="img" src="${pageContext.request.contextPath }/resources/fix/img/p_07f1179c2f3f4ca6bc198d36a5487ce6.jpeg">
+	    		<img class="rounded-circle img_profile" alt="img" src="${contextPath}/resources/fix/img/p_07f1179c2f3f4ca6bc198d36a5487ce6.jpeg">
 	    	</div>
 	    	<p class="profile_id">@NickName</p>
 	    </a>
     </div>
     <div class="item">
 	    <a href="#" class="card_link">
-	    	<img class="post_img_box" src="${pageContext.request.contextPath }/resources/fix/img/p_07f1179c2f3f4ca6bc198d36a5487ce6.jpeg">
+	    	<img class="post_img_box" src="${contextPath}/resources/fix/img/p_07f1179c2f3f4ca6bc198d36a5487ce6.jpeg">
 	    	<div class="rounded-circle profile_img_box">
-	    		<img class="rounded-circle img_profile" alt="img" src="${pageContext.request.contextPath }/resources/fix/img/p_07f1179c2f3f4ca6bc198d36a5487ce6.jpeg">
+	    		<img class="rounded-circle img_profile" alt="img" src="${contextPath}/resources/fix/img/p_07f1179c2f3f4ca6bc198d36a5487ce6.jpeg">
 	    	</div>
 	    	<p class="profile_id">@NickName</p>
 	    </a>
     </div>
     <div class="item">
 	    <a href="#" class="card_link">
-	    	<img class="post_img_box" src="${pageContext.request.contextPath }/resources/fix/img/p_07f1179c2f3f4ca6bc198d36a5487ce6.jpeg">
+	    	<img class="post_img_box" src="${contextPath}/resources/fix/img/p_07f1179c2f3f4ca6bc198d36a5487ce6.jpeg">
 	    	<div class="rounded-circle profile_img_box">
-	    		<img class="rounded-circle img_profile" alt="img" src="${pageContext.request.contextPath }/resources/fix/img/p_07f1179c2f3f4ca6bc198d36a5487ce6.jpeg">
+	    		<img class="rounded-circle img_profile" alt="img" src="${contextPath}/resources/fix/img/p_07f1179c2f3f4ca6bc198d36a5487ce6.jpeg">
 	    	</div>
 	    	<p class="profile_id">@NickName</p>
 	    </a>
     </div>
     <div class="item">
 	    <a href="#" class="card_link">
-	    	<img class="post_img_box" src="${pageContext.request.contextPath }/resources/fix/img/p_07f1179c2f3f4ca6bc198d36a5487ce6.jpeg">
+	    	<img class="post_img_box" src="${contextPath}/resources/fix/img/p_07f1179c2f3f4ca6bc198d36a5487ce6.jpeg">
 	    	<div class="rounded-circle profile_img_box">
-	    		<img class="rounded-circle img_profile" alt="img" src="${pageContext.request.contextPath }/resources/fix/img/p_07f1179c2f3f4ca6bc198d36a5487ce6.jpeg">
+	    		<img class="rounded-circle img_profile" alt="img" src="${contextPath}/resources/fix/img/p_07f1179c2f3f4ca6bc198d36a5487ce6.jpeg">
 	    	</div>
 	    	<p class="profile_id">@NickName</p>
 	    </a>
     </div>
     <div class="item">
 	    <a href="#" class="card_link">
-	    	<img class="post_img_box" src="${pageContext.request.contextPath }/resources/fix/img/p_07f1179c2f3f4ca6bc198d36a5487ce6.jpeg">
+	    	<img class="post_img_box" src="${contextPath}/resources/fix/img/p_07f1179c2f3f4ca6bc198d36a5487ce6.jpeg">
 	    	<div class="rounded-circle profile_img_box">
-	    		<img class="rounded-circle img_profile" alt="img" src="${pageContext.request.contextPath }/resources/fix/img/p_07f1179c2f3f4ca6bc198d36a5487ce6.jpeg">
+	    		<img class="rounded-circle img_profile" alt="img" src="${contextPath}/resources/fix/img/p_07f1179c2f3f4ca6bc198d36a5487ce6.jpeg">
 	    	</div>
 	    	<p class="profile_id">@NickName</p>
 	    </a>
     </div>
     <div class="item">
 	    <a href="#" class="card_link">
-	    	<img class="post_img_box" src="${pageContext.request.contextPath }/resources/fix/img/p_07f1179c2f3f4ca6bc198d36a5487ce6.jpeg">
+	    	<img class="post_img_box" src="${contextPath}/resources/fix/img/p_07f1179c2f3f4ca6bc198d36a5487ce6.jpeg">
 	    	<div class="rounded-circle profile_img_box">
-	    		<img class="rounded-circle img_profile" alt="img" src="${pageContext.request.contextPath }/resources/fix/img/p_07f1179c2f3f4ca6bc198d36a5487ce6.jpeg">
+	    		<img class="rounded-circle img_profile" alt="img" src="${contextPath}/resources/fix/img/p_07f1179c2f3f4ca6bc198d36a5487ce6.jpeg">
 	    	</div>
 	    	<p class="profile_id">@NickName</p>
 	    </a>
     </div>
     <div class="item">
 	    <a href="#" class="card_link">
-	    	<img class="post_img_box" src="${pageContext.request.contextPath }/resources/fix/img/p_07f1179c2f3f4ca6bc198d36a5487ce6.jpeg">
+	    	<img class="post_img_box" src="${contextPath}/resources/fix/img/p_07f1179c2f3f4ca6bc198d36a5487ce6.jpeg">
 	    	<div class="rounded-circle profile_img_box">
-	    		<img class="rounded-circle img_profile" alt="img" src="${pageContext.request.contextPath }/resources/fix/img/p_07f1179c2f3f4ca6bc198d36a5487ce6.jpeg">
+	    		<img class="rounded-circle img_profile" alt="img" src="${contextPath}/resources/fix/img/p_07f1179c2f3f4ca6bc198d36a5487ce6.jpeg">
 	    	</div>
 	    	<p class="profile_id">@NickName</p>
 	    </a>
     </div>
     <div class="item">
 	    <a href="#" class="card_link">
-	    	<img class="post_img_box" src="${pageContext.request.contextPath }/resources/fix/img/p_07f1179c2f3f4ca6bc198d36a5487ce6.jpeg">
+	    	<img class="post_img_box" src="${contextPath}/resources/fix/img/p_07f1179c2f3f4ca6bc198d36a5487ce6.jpeg">
 	    	<div class="rounded-circle profile_img_box">
-	    		<img class="rounded-circle img_profile" alt="img" src="${pageContext.request.contextPath }/resources/fix/img/p_07f1179c2f3f4ca6bc198d36a5487ce6.jpeg">
-	    	</div>
-	    	<p class="profile_id">@NickName</p>
-	    </a>
-    </div>
-    <div class="item">
-	    <a href="#" class="card_link">
-	    	<img class="post_img_box" src="${pageContext.request.contextPath }/resources/fix/img/p_07f1179c2f3f4ca6bc198d36a5487ce6.jpeg">
-	    	<div class="rounded-circle profile_img_box">
-	    		<img class="rounded-circle img_profile" alt="img" src="${pageContext.request.contextPath }/resources/fix/img/p_07f1179c2f3f4ca6bc198d36a5487ce6.jpeg">
-	    	</div>
-	    	<p class="profile_id">@NickName</p>
-	    </a>
-    </div>
-    <div class="item">
-	    <a href="#" class="card_link">
-	    	<img class="post_img_box" src="${pageContext.request.contextPath }/resources/fix/img/p_07f1179c2f3f4ca6bc198d36a5487ce6.jpeg">
-	    	<div class="rounded-circle profile_img_box">
-	    		<img class="rounded-circle img_profile" alt="img" src="${pageContext.request.contextPath }/resources/fix/img/p_07f1179c2f3f4ca6bc198d36a5487ce6.jpeg">
+	    		<img class="rounded-circle img_profile" alt="img" src="${contextPath}/resources/fix/img/p_07f1179c2f3f4ca6bc198d36a5487ce6.jpeg">
 	    	</div>
 	    	<p class="profile_id">@NickName</p>
 	    </a>
@@ -136,6 +136,6 @@
 
 
 </body>
-<script type="text/javascript" src="${pageContext.request.contextPath }/resources/fix/js/snsbanner.js"></script>
+<script type="text/javascript" src="${contextPath}/resources/fix/js/snsbanner.js"></script>
 
 </html>
