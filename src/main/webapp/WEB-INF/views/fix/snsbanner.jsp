@@ -21,7 +21,7 @@
   <div class="owl-carousel">
   	<c:forEach var="stylePick" items="${stylePick}">
 	    <div class="item">
-		    <a href="#" class="card_link">
+		    <a href="#" class="card_link align-self-center">
 		    	<img class="post_img_box" src="${contextPath}/resources/fix/img/${stylePick.post_img_img}">
 		    	<div class="rounded-circle profile_img_box">
 		    		<img class="rounded-circle img_profile" alt="img" src="${contextPath}/resources/fix/img/${stylePick.profile_img}">
