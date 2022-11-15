@@ -1,5 +1,8 @@
 package kr.co.lookst.member.service;
 
-public interface MemberService {
+import kr.co.lookst.member.domain.MemberDto;
 
+public interface MemberService {
+	public MemberDto login(MemberDto dto);
+	
 }
