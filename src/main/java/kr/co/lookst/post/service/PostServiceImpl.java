@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import kr.co.lookst.post.dao.PostDao;
 import kr.co.lookst.post.domain.Post_imgDto;
+import kr.co.lookst.post.domain.ProdInfoDto;
 
 
 @Service
@@ -18,6 +19,11 @@ public class PostServiceImpl implements PostService{
 	@Override
 	public List<Post_imgDto> getpostlistimg() throws Exception {
 		return postDao.post_listimg();
+	}
+
+	@Override
+	public List<ProdInfoDto> getprodInfo() throws Exception {
+		return postDao.prod_info();
 	}
 
 }
