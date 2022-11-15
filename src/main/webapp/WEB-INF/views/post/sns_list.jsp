@@ -81,9 +81,9 @@
 		}
 	</script>
 
-<c:forEach var="post_list" items="${post_list}">
+<%-- <c:forEach var="post_list" items="${post_list}">
 ${post_list.post_img_img}
-</c:forEach>
+</c:forEach> --%>
 	<div class="container">
 		<!-- 상단 인기/최신/팔로우 탭 -->
 		<ul class="nav nav-pills col-4 mx-auto my-4" id="pills-tab"
@@ -153,14 +153,16 @@ ${post_list.post_img_img}
 									<i class="fa-regular fa-comment-dots fa-lg"></i>
 								</button>
 							</div>
+							<c:forEach var="prod_info" items="${prodinfo }">
 							<div class="productDetail d-flex row justify-content-start ">
 								<img
-									src="${pageContext.request.contextPath }/resources/post/img/Jordan_1.png"
+									src="${pageContext.request.contextPath }/resources/post/img/${prodinfo.prdt_img_name}"
 									onclick="location.href='./'" id="product_img" class="col-3">
 								<span class="d-inline-block text-truncate" style="max-width: 280px; font-size: 14px; padding-top: 10px;">
-  									Jordan 1 x Travis Scott x Fragment Retro Low OG SP Military Blue<br>1,983,000원
+  									<!-- Jordan 1 x Travis Scott x Fragment Retro Low OG SP Military Blue -->${prodinfo.product_name}<br><!-- 1,983,000원 -->${prodinfo.product_price}
 								</span>
 							</div>
+							</c:forEach>
 							<div class="productDetail d-flex row justify-content-start">
 								<img src="${pageContext.request.contextPath }/resources/post/img/maison_margiela.png"
 									id="product_img" class="col-3 ">
@@ -174,7 +176,7 @@ ${post_list.post_img_img}
 			</div>
 			</c:forEach>
 			<!-- sns 리스트 #2 -->
-			<div class="col">
+			<%-- <div class="col">
 				<div class="card">
 					<img
 						src="${pageContext.request.contextPath }/resources/post/img/KREAM1.jpeg"
@@ -221,9 +223,9 @@ ${post_list.post_img_img}
 						</div>
 					</div>
 				</div>
-			</div>
+			</div> --%>
 			<!-- sns 리스트 #3 -->
-			<div class="col">
+			<%-- <div class="col">
 				<div class="card">
 					<img
 						src="${pageContext.request.contextPath }/resources/post/img/KREAM2.jpeg"
@@ -271,9 +273,9 @@ ${post_list.post_img_img}
 						</div>
 					</div>
 				</div>
-			</div>
+			</div> --%>
 			<!-- sns 리스트 #4 -->
-			<div class="col">
+			<%-- <div class="col">
 				<div class="card">
 					<img
 						src="${pageContext.request.contextPath }/resources/post/img/master.jpg"
@@ -320,9 +322,9 @@ ${post_list.post_img_img}
 						</div>
 					</div>
 				</div>
-			</div>
+			</div> --%>
 			<!-- sns 리스트 #5 -->
-			<div class="col">
+			<%-- <div class="col">
 				<div class="card">
 					<img
 						src="${pageContext.request.contextPath }/resources/post/img/master.jpg"
@@ -369,9 +371,9 @@ ${post_list.post_img_img}
 						</div>
 					</div>
 				</div>
-			</div>
+			</div> --%>
 			<!-- sns 리스트 #6 -->
-			<div class="col">
+			<%-- <div class="col">
 				<div class="card">
 					<img
 						src="${pageContext.request.contextPath }/resources/post/img/master.jpg"
@@ -418,7 +420,7 @@ ${post_list.post_img_img}
 						</div>
 					</div>
 				</div>
-			</div>
+			</div> --%>
 			<!-- sns 리스트끝  -->
 		</div>
 		<!-- sns 메인 끝 -->
