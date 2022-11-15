@@ -16,6 +16,13 @@ public class ShopController {
 	public String myProfile() {
 		return "shop/productdetail";
 	}
-	
+	@GetMapping("/orderHistory")
+	public String myProfile1() {
+		return "shop/orderHistory";
+	}
+	@GetMapping("/productList")
+	public String myProfile2() {
+		return "shop/productList";
+	}
 	
 }
