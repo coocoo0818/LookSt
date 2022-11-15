@@ -82,94 +82,19 @@
 
 			</tfoot>
 			<tbody>
-				<tr>
-					<th scope="row">#0001</th>
-					<td data-title="Buyer">김이젠</td>
-					<td data-title="PrdtInfo">예쁜트렌치코트[1234]</td>
-					<td data-title="TotalPay" data-type="currency">68000원</td>
-					<td data-title="PayDate" data-type="currency">2022-10-17</td>
-					<td data-title="OrderStaus" data-type="currency">배송준비중</td>
-					<td data-title="Detail" data-type="currency"><button
-							type="button" class="btn btn-outline-dark btn-sm"
-							data-bs-toggle="modal" data-bs-target="#staticBackdrop">VIEW</button></td>
-				</tr>
-				<tr>
-					<th scope="row">#0002</th>
-					<td data-title="Buyer">김이젠2</td>
-					<td data-title="PrdtInfo">예쁜트렌치코트[1234]</td>
-					<td data-title="TotalPay" data-type="currency">68000원</td>
-					<td data-title="PayDate" data-type="currency">2022-10-17</td>
-					<td data-title="OrderStaus" data-type="currency">배송준비중</td>
-					<td data-title="Detail" data-type="currency"><button
-							type="button" class="btn btn-outline-dark btn-sm"
-							data-bs-toggle="modal" data-bs-target="#staticBackdrop">VIEW</button></td>
-				</tr>
-				<tr>
-					<th scope="row">#0003</th>
-					<td data-title="Buyer">김이젠3</td>
-					<td data-title="PrdtInfo">예쁜트렌치코트[1234]</td>
-					<td data-title="TotalPay" data-type="currency">68000원</td>
-					<td data-title="PayDate" data-type="currency">2022-10-17</td>
-					<td data-title="OrderStaus" data-type="currency">배송준비중</td>
-					<td data-title="Detail" data-type="currency"><button
-							type="button" class="btn btn-outline-dark btn-sm"
-							data-bs-toggle="modal" data-bs-target="#staticBackdrop">VIEW</button></td>
-				</tr>
-				<tr>
-					<th scope="row">#0004</th>
-					<td data-title="Buyer">김이젠4</td>
-					<td data-title="PrdtInfo">예쁜트렌치코트[1234]</td>
-					<td data-title="TotalPay" data-type="currency">68000원</td>
-					<td data-title="PayDate" data-type="currency">2022-10-17</td>
-					<td data-title="OrderStaus" data-type="currency">배송준비중</td>
-					<td data-title="Detail" data-type="currency"><button
-							type="button" class="btn btn-outline-dark btn-sm"
-							data-bs-toggle="modal" data-bs-target="#staticBackdrop">VIEW</button></td>
-				</tr>
-				<tr>
-					<th scope="row">#0005</th>
-					<td data-title="Buyer">김이젠5</td>
-					<td data-title="PrdtInfo">예쁜트렌치코트[1234]</td>
-					<td data-title="TotalPay" data-type="currency">68000원</td>
-					<td data-title="PayDate" data-type="currency">2022-10-17</td>
-					<td data-title="OrderStaus" data-type="currency">배송준비중</td>
-					<td data-title="Detail" data-type="currency"><button
-							type="button" class="btn btn-outline-dark btn-sm"
-							data-bs-toggle="modal" data-bs-target="#staticBackdrop">VIEW</button></td>
-				</tr>
-				<tr>
-					<th scope="row">#0006</th>
-					<td data-title="Buyer">김이젠6</td>
-					<td data-title="PrdtInfo">예쁜트렌치코트[1234]</td>
-					<td data-title="TotalPay" data-type="currency">68000원</td>
-					<td data-title="PayDate" data-type="currency">2022-10-17</td>
-					<td data-title="OrderStaus" data-type="currency">배송준비중</td>
-					<td data-title="Detail" data-type="currency"><button
-							type="button" class="btn btn-outline-dark btn-sm"
-							data-bs-toggle="modal" data-bs-target="#staticBackdrop">VIEW</button></td>
-				</tr>
-				<tr>
-					<th scope="row">#0007</th>
-					<td data-title="Buyer">김이젠7</td>
-					<td data-title="PrdtInfo">예쁜트렌치코트[1234]</td>
-					<td data-title="TotalPay" data-type="currency">68000원</td>
-					<td data-title="PayDate" data-type="currency">2022-10-17</td>
-					<td data-title="OrderStaus" data-type="currency">배송준비중</td>
-					<td data-title="Detail" data-type="currency"><button
-							type="button" class="btn btn-outline-dark btn-sm"
-							data-bs-toggle="modal" data-bs-target="#staticBackdrop">VIEW</button></td>
-				</tr>
-				<tr>
-					<th scope="row">#0008</th>
-					<td data-title="Buyer">김이젠8</td>
-					<td data-title="PrdtInfo">예쁜트렌치코트[1234]</td>
-					<td data-title="TotalPay" data-type="currency">68000원</td>
-					<td data-title="PayDate" data-type="currency">2022-10-17</td>
-					<td data-title="OrderStaus" data-type="currency">배송준비중</td>
-					<td data-title="Detail" data-type="currency"><button
-							type="button" class="btn btn-outline-dark btn-sm"
-							data-bs-toggle="modal" data-bs-target="#staticBackdrop">VIEW</button></td>
-				</tr>
+				<c:forEach var="orderListDto" items="${orderlist }">
+					<tr>
+						<th scope="row" data-title="ordernum">${orderListDto.prdt_order_no }</th>
+						<td data-title="Buyer">${orderListDto.member_name }</td>
+						<td data-title="PrdtInfo">${orderListDto.product_name }[${orderListDto.product_no }]</td>
+						<td data-title="TotalPay" data-type="currency">${orderListDto.payment }</td>
+						<td data-title="PayDate" data-type="currency">${orderListDto.prdt_order_date }</td>
+						<td data-title="OrderStaus" data-type="currency">${orderListDto.prdt_order_type }</td>
+						<td data-title="Detail" data-type="currency"><button
+								type="button" class="btn btn-outline-dark btn-sm"
+								data-bs-toggle="modal" data-bs-target="#staticBackdrop">VIEW</button></td>
+					</tr>
+				</c:forEach>
 			</tbody>
 		</table>
 	</div>
@@ -218,11 +143,12 @@
 				</div>
 				<div class="modal-body">
 					<div class="detail-info">
-						<span>수령인 :</span> <span text="${order.name}">박이름</span><br /> <span>수령주소
-							:</span>
+						<span>수령인 :</span>
+						<div>"${orderListDto.prdt_order_person}"</div>
+						<br /> <span>수령주소 :</span>
 						<!--수정필요-->
-						<span text="${order.address}">서울시 00구 00동 00-00 00호</span><br /> <span>전화번호
-							:</span>
+						<span text="${order.address}">서울시 00구 00동 00-00 00호</span><br />
+						<span>전화번호 :</span>
 						<!--수정필요-->
 						<span text="${order.phonenumber}">010-1234-1234</span><br /> <span>주문번호
 							:</span> <span text="${order.number}">178789</span><br /> <span>상품번호
