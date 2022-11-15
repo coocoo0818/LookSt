@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.co.lookst.post.domain.Post_imgDto;
+import kr.co.lookst.post.domain.ProdInfoDto;
 import kr.co.lookst.post.service.PostService;
 
 @Controller
@@ -17,11 +18,15 @@ public class PostController {
 
 	@Autowired
 	PostService postService;
-
+	
+	@GetMapping("/mylist")
+	public String sns_list() {
+		return "/post/my_list";
+	}
+	
 	@GetMapping("/sns_list")
 	public String sns_main(Model m) {
 		try {
-
 			List<Post_imgDto> post_list = postService.getpostlistimg();
 			m.addAttribute("post_list", post_list);
 
@@ -31,9 +36,16 @@ public class PostController {
 		return "/post/sns_list";
 	}
 
-	@GetMapping("/mylist")
-	public String sns_list() {
-		return "/post/my_list";
+	@GetMapping("/prodInfo")
+	public String prodInfo(Model m) {
+		try {
+			List<ProdInfoDto> prod_info = postService.getprodInfo();
+			m.addAttribute("prod_info", prod_info);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "/post/sns_list";
 	}
 
 }
