@@ -157,11 +157,12 @@ label {
 }
  
 .checkout {
-  float: right;
+  
   border: 0;
   margin-top: 20px;
+  margin-bottom: 20px;
   padding: 6px 25px;
-  background-color: #6b6;
+  background-color: black;
   color: #fff;
   font-size: 25px;
   border-radius: 3px;
@@ -513,7 +514,9 @@ input {
 }
 
 </style>
+
 </head>
+
 <body>
 <%@ include file="/WEB-INF/views/fix/header.jsp" %>
   <container>
@@ -648,6 +651,7 @@ input {
                   <i class="far fa-credit-card"></i> 결제정보
               </h1>
             </center>
+            <div class="container">
             <p>
               <div class="cc-num">
                   <label for="card-num">카드번호</label>
@@ -673,30 +677,12 @@ input {
   </div>
   </div>
     </container>
-		   
+		   <center>
 		  <button class="checkout">주문하기</button>
-	 
+	 </center>
 	</div>
 
 
 <%@ include file="/WEB-INF/views/fix/footer.jsp" %>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
