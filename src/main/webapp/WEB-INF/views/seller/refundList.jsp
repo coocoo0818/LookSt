@@ -225,8 +225,8 @@
 						<span>수령인 :</span> <span text="${order.name}">박이름</span><br /> <span>수령주소
 							:</span>
 						<!--수정필요-->
-						<span text="${order.address}">서울시 00구 00동 00-00 00호</span><br /> <span>전화번호
-							:</span>
+						<span text="${order.address}">서울시 00구 00동 00-00 00호</span><br />
+						<span>전화번호 :</span>
 						<!--수정필요-->
 						<span text="${order.phonenumber}">010-1234-1234</span><br /> <span>주문번호
 							:</span> <span text="${order.number}">178789</span><br /> <span>상품번호
@@ -245,7 +245,8 @@
 						<span text="${order.orderPrice}">68000원</span><br /> <span>주문상태
 							:</span>
 						<!--수정필요-->
-						<span text="${order.status}">결제완료</span><br /> <span>요청상태 :</span>
+						<span text="${order.status}">결제완료</span><br /> <span>요청상태
+							:</span>
 						<!--수정필요-->
 						<span text="${order.reqstatus}">취소접수</span><br /> <span>요청사유
 							:</span>

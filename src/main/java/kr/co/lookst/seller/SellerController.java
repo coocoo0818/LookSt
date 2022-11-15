@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 import kr.co.lookst.main.domain.Product;
+import kr.co.lookst.seller.domain.OrderListDto;
 import kr.co.lookst.seller.domain.PrdtListDto;
 import kr.co.lookst.seller.service.SellerService;
 
@@ -24,11 +25,11 @@ public class SellerController {
 	
 	
 	@GetMapping("/prdtList")
-	public String adminForm3(Model m) {
+	public String prdtpage(Model m) {
 		try {
 			
-			List<PrdtListDto> list = sellerService.sellproductList();
-			m.addAttribute("list", list);
+			List<PrdtListDto> prdtlist = sellerService.sellproductList();
+			m.addAttribute("prdtlist", prdtlist);
 		
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -41,10 +42,25 @@ public class SellerController {
 	
 	
 	@GetMapping("/orderList")
-	public String adminForm() {
+	public String orderpage(Model m) {
+		
+		
+		try {
+			List<OrderListDto> orderlist = sellerService.sellorderList();
+			m.addAttribute("orderlist", orderlist);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		return "seller/orderList";
 
 	}
+	
+	
+	
+	
+	
 	
 	@GetMapping("/refundList")
 	public String adminForm1() {
