@@ -16,7 +16,7 @@ public class indexDaoImpl implements indexDao{
 
 	@Autowired
 	private SqlSession session;
-	private static String namespace = "kr.co.lookst.main.dao.AdminMapper.";
+	private static String namespace = "kr.co.lookst.admin.dao.AdminMapper.";
 
 	@Override
 	public List<IndexDto> newProductsInfo() throws Exception {
