@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<c:set var="loginout" value="${sessionScope.res==null ? 'Login' : 'Logout' }"/>
+<c:set var="loginhidden" value="${sessionScope.res==null ? 'dropdown-item' : 'visually-hidden' }"/>
+<c:set var="loginoutlink" value="${sessionScope.res==null ? '/lookst/login' : '/lookst/logout' }" />
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -64,12 +69,10 @@
           </div>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">LOGIN</a>
+          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">${loginout}</a>
           <div class="dropdown-menu dropdown-menu-end dropdown-menu-xs-start">
-            <a class="dropdown-item" href="#">Sign-In</a>
-            <a class="dropdown-item" href="#">Sign-Up</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">logout</a>
+            <a class="dropdown-item" href="${loginoutlink}">${loginout}</a>
+            <a class="${loginhidden}" href="#">Sign-Up</a>
           </div>
         </li>
       </ul>
