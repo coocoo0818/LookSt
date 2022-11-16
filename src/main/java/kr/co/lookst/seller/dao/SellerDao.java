@@ -13,6 +13,6 @@ public interface SellerDao {
 
 	List<OrderListDto> selectOrder() throws Exception;
 	
-	
+	List<OrderListDto> selectRequest() throws Exception;
 	
 }
