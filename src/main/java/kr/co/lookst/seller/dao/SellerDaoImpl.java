@@ -29,6 +29,12 @@ public class SellerDaoImpl implements SellerDao{
 		return session.selectList(namespace + "selectOrders");
 	}
 
+	@Override
+	public List<OrderListDto> selectRequest() throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectList(namespace + "selectRequests");
+	}
+
 	
 	
 
