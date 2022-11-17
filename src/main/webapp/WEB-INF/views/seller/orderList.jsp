@@ -84,7 +84,7 @@
 			<tbody>
 				<c:forEach var="orderListDto" items="${orderlist }">
 					<tr>
-						<th scope="row" data-title="ordernum">${orderListDto.prdt_order_no }</th>
+						<th scope="row" data-title="OrderNum">${orderListDto.prdt_order_no }</th>
 						<td data-title="Buyer">${orderListDto.member_name }</td>
 						<td data-title="PrdtInfo">${orderListDto.product_name }[${orderListDto.product_no }]</td>
 						<td data-title="TotalPay" data-type="currency">${orderListDto.payment }</td>
