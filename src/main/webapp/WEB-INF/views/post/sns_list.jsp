@@ -126,8 +126,7 @@ ${post_list.post_img_img}
 		<c:forEach var="post_list" items="${post_list}">
 			<div class="col">
 				<div class="card">
-					<img
-						src="${pageContext.request.contextPath }/resources/post/img/${post_list.post_img_img}"
+					<img src="${pageContext.request.contextPath }/resources/post/img/${post_list.post_img_img}"
 						class="card-img-top" onclick="location.href='${pageContext.request.contextPath }/post/mylist'">
 					<div class="card-body">
 						<div class="row justify-content-start d-flex">
@@ -136,8 +135,7 @@ ${post_list.post_img_img}
 									src="${pageContext.request.contextPath }/resources/post/img/프사2.jpg"
 									onclick="location.href='./'" id="profile_img">
 							</div>
-							<div class="col-5 my-auto" onclick="location.href='./'">
-								MyMelody</div>
+							<div class="col-5 my-auto" onclick="location.href='./'">MyMelody</div>
 							<div class="tag_link" style="margin-top: 10px; margin-bottom: 10px;">
 								<p class="tag_text" onclick="location.href='./'" style="display: inline;"><b>#LOOKST챌린지</b></p>
 								<p class="tag_text" onclick="location.href='./'" style="display: inline;"><b>#나이키</b></p>
@@ -156,10 +154,10 @@ ${post_list.post_img_img}
 							<c:forEach var="prod_info" items="${prodinfo }">
 							<div class="productDetail d-flex row justify-content-start ">
 								<img
-									src="${pageContext.request.contextPath }/resources/post/img/${prodinfo.prdt_img_name}"
+									src="${pageContext.request.contextPath }/resources/post/img/${post_tag.post_tag_img}"
 									onclick="location.href='./'" id="product_img" class="col-3">
 								<span class="d-inline-block text-truncate" style="max-width: 280px; font-size: 14px; padding-top: 10px;">
-  									<!-- Jordan 1 x Travis Scott x Fragment Retro Low OG SP Military Blue -->${prodinfo.product_name}<br><!-- 1,983,000원 -->${prodinfo.product_price}
+  									<!-- Jordan 1 x Travis Scott x Fragment Retro Low OG SP Military Blue -->${post_tag.post_tag_name}<br><!-- 1,983,000원 -->${post_tag.post_tag_price}
 								</span>
 							</div>
 							</c:forEach>

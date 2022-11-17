@@ -2,50 +2,51 @@ package kr.co.lookst.post.domain;
 
 public class ProdInfoDto {
 
-	private String prdt_img_name;
-	private String product_name;
-	private int product_price;
+	private String post_tag_img;
+	private String post_tag_name;
+	private int post_tag_price;
 	
 	public ProdInfoDto() {
 		
 	}
 
-	public ProdInfoDto(String prdt_img_name, String product_name, int product_price) {
+	public ProdInfoDto(String post_tag_img, String post_tag_name, int post_tag_price) {
 		//super();
-		this.prdt_img_name = prdt_img_name;
-		this.product_name = product_name;
-		this.product_price = product_price;
+		this.post_tag_img = post_tag_img;
+		this.post_tag_name = post_tag_name;
+		this.post_tag_price = post_tag_price;
 	}
 
-	public String getPrdt_img_name() {
-		return prdt_img_name;
+	public String getPost_tag_img() {
+		return post_tag_img;
 	}
 
-	public void setPrdt_img_name(String prdt_img_name) {
-		this.prdt_img_name = prdt_img_name;
+	public void setPost_tag_img(String post_tag_img) {
+		this.post_tag_img = post_tag_img;
 	}
 
-	public String getProduct_name() {
-		return product_name;
+	public String getPost_tag_name() {
+		return post_tag_name;
 	}
 
-	public void setProduct_name(String product_name) {
-		this.product_name = product_name;
+	public void setPost_tag_name(String post_tag_name) {
+		this.post_tag_name = post_tag_name;
 	}
 
-	public int getProduct_price() {
-		return product_price;
+	public int getPost_tag_price() {
+		return post_tag_price;
 	}
 
-	public void setProduct_price(int product_price) {
-		this.product_price = product_price;
+	public void setPost_tag_price(int post_tag_price) {
+		this.post_tag_price = post_tag_price;
 	}
 
 	@Override
 	public String toString() {
-		return "prodInfoDto [prdt_img_name=" + prdt_img_name + ", product_name=" + product_name + ", product_price="
-				+ product_price + "]";
+		return "ProdInfoDto [post_tag_img=" + post_tag_img + ", post_tag_name=" + post_tag_name + ", post_tag_price="
+				+ post_tag_price + "]";
 	}
+
 	
 	
 

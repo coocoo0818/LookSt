@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.co.lookst.post.domain.Post_imgDto;
 import kr.co.lookst.post.domain.ProdInfoDto;
+import kr.co.lookst.post.domain.snslist_infoDto;
 import kr.co.lookst.post.service.PostService;
 
 @Controller
@@ -43,6 +44,19 @@ public class PostController {
 			m.addAttribute("prod_info", prod_info);
 			
 		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "/post/sns_list";
+	}
+	
+	@GetMapping("/postlistInfo")
+	public String postlistInfo(Model m) {
+		try {
+			
+			List<snslist_infoDto> postlist_Info = postService.getpostlistInfo();
+			m.addAttribute("postlist_Info", postlist_Info);
+			
+		} catch(Exception e) {
 			e.printStackTrace();
 		}
 		return "/post/sns_list";
