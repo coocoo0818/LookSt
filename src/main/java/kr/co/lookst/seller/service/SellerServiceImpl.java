@@ -30,6 +30,13 @@ public class SellerServiceImpl implements SellerService{
 		// TODO Auto-generated method stub
 		return sellerDao.selectOrder();
 	}
+
+
+	@Override
+	public List<OrderListDto> sellrefundList() throws Exception {
+		// TODO Auto-generated method stub
+		return sellerDao.selectRequest();
+	}
 	
 	
 

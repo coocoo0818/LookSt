@@ -72,8 +72,9 @@
 				<tr>
 					<th scope="col">주문번호</th>
 					<th scope="col">구매자</th>
-					<th scope="col">요청사유</th>
+					<th scope="col">상품정보</th>
 					<th scope="col">결제금액</th>
+					<th scope="col">주문상태</th>
 					<th scope="col">주문일자</th>
 					<th scope="col">요청상태</th>
 					<th scope="col">상세</th>
@@ -83,94 +84,20 @@
 
 			</tfoot>
 			<tbody>
-				<tr>
-					<th scope="row">#0001</th>
-					<td data-title="Buyer">김이젠</td>
-					<td data-title="ReqReason">단순변심</td>
-					<td data-title="TotalPay" data-type="currency">68000원</td>
-					<td data-title="PayDate" data-type="currency">2022-10-17</td>
-					<td data-title="ReqStaus" data-type="currency">취소접수</td>
-					<td data-title="Detail" data-type="currency"><button
-							type="button" class="btn btn-outline-dark btn-sm"
-							data-bs-toggle="modal" data-bs-target="#staticBackdrop">VIEW</button></td>
-				</tr>
-				<tr>
-					<th scope="row">#0002</th>
-					<td data-title="Buyer">김이젠</td>
-					<td data-title="ReqReason">단순변심</td>
-					<td data-title="TotalPay" data-type="currency">68000원</td>
-					<td data-title="PayDate" data-type="currency">2022-10-17</td>
-					<td data-title="ReqStaus" data-type="currency">취소접수</td>
-					<td data-title="Detail" data-type="currency"><button
-							type="button" class="btn btn-outline-dark btn-sm"
-							data-bs-toggle="modal" data-bs-target="#staticBackdrop">VIEW</button></td>
-				</tr>
-				<tr>
-					<th scope="row">#0003</th>
-					<td data-title="Buyer">김이젠</td>
-					<td data-title="ReqReason">단순변심</td>
-					<td data-title="TotalPay" data-type="currency">68000원</td>
-					<td data-title="PayDate" data-type="currency">2022-10-17</td>
-					<td data-title="ReqStaus" data-type="currency">취소접수</td>
-					<td data-title="Detail" data-type="currency"><button
-							type="button" class="btn btn-outline-dark btn-sm"
-							data-bs-toggle="modal" data-bs-target="#staticBackdrop">VIEW</button></td>
-				</tr>
-				<tr>
-					<th scope="row">#0004</th>
-					<td data-title="Buyer">김이젠</td>
-					<td data-title="ReqReason">단순변심</td>
-					<td data-title="TotalPay" data-type="currency">68000원</td>
-					<td data-title="PayDate" data-type="currency">2022-10-17</td>
-					<td data-title="ReqStaus" data-type="currency">취소접수</td>
-					<td data-title="Detail" data-type="currency"><button
-							type="button" class="btn btn-outline-dark btn-sm"
-							data-bs-toggle="modal" data-bs-target="#staticBackdrop">VIEW</button></td>
-				</tr>
-				<tr>
-					<th scope="row">#0005</th>
-					<td data-title="Buyer">김이젠</td>
-					<td data-title="ReqReason">단순변심</td>
-					<td data-title="TotalPay" data-type="currency">68000원</td>
-					<td data-title="PayDate" data-type="currency">2022-10-17</td>
-					<td data-title="ReqStaus" data-type="currency">취소접수</td>
-					<td data-title="Detail" data-type="currency"><button
-							type="button" class="btn btn-outline-dark btn-sm"
-							data-bs-toggle="modal" data-bs-target="#staticBackdrop">VIEW</button></td>
-				</tr>
-				<tr>
-					<th scope="row">#0006</th>
-					<td data-title="Buyer">김이젠</td>
-					<td data-title="ReqReason">단순변심</td>
-					<td data-title="TotalPay" data-type="currency">68000원</td>
-					<td data-title="PayDate" data-type="currency">2022-10-17</td>
-					<td data-title="ReqStaus" data-type="currency">취소접수</td>
-					<td data-title="Detail" data-type="currency"><button
-							type="button" class="btn btn-outline-dark btn-sm"
-							data-bs-toggle="modal" data-bs-target="#staticBackdrop">VIEW</button></td>
-				</tr>
-				<tr>
-					<th scope="row">#0007</th>
-					<td data-title="Buyer">김이젠</td>
-					<td data-title="ReqReason">단순변심</td>
-					<td data-title="TotalPay" data-type="currency">68000원</td>
-					<td data-title="PayDate" data-type="currency">2022-10-17</td>
-					<td data-title="ReqStaus" data-type="currency">취소접수</td>
-					<td data-title="Detail" data-type="currency"><button
-							type="button" class="btn btn-outline-dark btn-sm"
-							data-bs-toggle="modal" data-bs-target="#staticBackdrop">VIEW</button></td>
-				</tr>
-				<tr>
-					<th scope="row">#0008</th>
-					<td data-title="Buyer">김이젠</td>
-					<td data-title="ReqReason">단순변심</td>
-					<td data-title="TotalPay" data-type="currency">68000원</td>
-					<td data-title="PayDate" data-type="currency">2022-10-17</td>
-					<td data-title="ReqStaus" data-type="currency">취소접수</td>
-					<td data-title="Detail" data-type="currency"><button
-							type="button" class="btn btn-outline-dark btn-sm"
-							data-bs-toggle="modal" data-bs-target="#staticBackdrop">VIEW</button></td>
-				</tr>
+				<c:forEach var="refundListDto" items="${refundlist }">
+					<tr>
+						<th scope="row" data-title="Ordernum">${refundListDto.prdt_order_no }</th>
+						<td data-title="Buyer">${refundListDto.member_name }</td>
+						<td data-title="PrdtInfo">${refundListDto.product_name }[${refundListDto.product_no }]</td>
+						<td data-title="TotalPay" data-type="currency">${refundListDto.payment }</td>
+						<td data-title="OrderStaus">${refundListDto.prdt_order_type }</td>
+						<td data-title="PayDate" data-type="currency">${refundListDto.prdt_order_date }</td>
+						<td data-title="ReqStaus" data-type="currency">${refundListDto.prdt_order_reqtype }</td>
+						<td data-title="Detail" data-type="currency"><button
+								type="button" class="btn btn-outline-dark btn-sm"
+								data-bs-toggle="modal" data-bs-target="#staticBackdrop">VIEW</button></td>
+					</tr>
+				</c:forEach>
 			</tbody>
 		</table>
 	</div>
@@ -248,10 +175,7 @@
 						<span text="${order.status}">결제완료</span><br /> <span>요청상태
 							:</span>
 						<!--수정필요-->
-						<span text="${order.reqstatus}">취소접수</span><br /> <span>요청사유
-							:</span>
-						<!--수정필요-->
-						<span text="${order.reqreason}">단순변심</span><br />
+						<span text="${order.reqstatus}">취소접수</span><br />
 					</div>
 				</div>
 				<div class="modal-footer">

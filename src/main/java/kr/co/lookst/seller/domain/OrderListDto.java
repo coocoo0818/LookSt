@@ -19,17 +19,19 @@ public class OrderListDto {
 	private Integer prdt_order_quan;
 	private Integer product_price;
 	private String prdt_order_way;
-	
+	private String prdt_order_reqtype;
 	
 	public OrderListDto() {
 		// TODO Auto-generated constructor stub
 	}
 
+	
+	
 
 	public OrderListDto(Integer prdt_order_no, String member_name, String product_name, Integer product_no,
 			Integer payment, Date prdt_order_date, String prdt_order_type, String prdt_order_person,
 			String prdt_order_addr, String prdt_order_addr2, Integer prdt_order_phone, Integer prdt_order_quan,
-			Integer product_price, String prdt_order_way) {
+			Integer product_price, String prdt_order_way, String prdt_order_reqtype) {
 		super();
 		this.prdt_order_no = prdt_order_no;
 		this.member_name = member_name;
@@ -45,7 +47,11 @@ public class OrderListDto {
 		this.prdt_order_quan = prdt_order_quan;
 		this.product_price = product_price;
 		this.prdt_order_way = prdt_order_way;
+		this.prdt_order_reqtype = prdt_order_reqtype;
 	}
+
+
+	
 
 
 	public Integer getPrdt_order_no() {
@@ -53,9 +59,13 @@ public class OrderListDto {
 	}
 
 
+
+
 	public void setPrdt_order_no(Integer prdt_order_no) {
 		this.prdt_order_no = prdt_order_no;
 	}
+
+
 
 
 	public String getMember_name() {
@@ -63,9 +73,13 @@ public class OrderListDto {
 	}
 
 
+
+
 	public void setMember_name(String member_name) {
 		this.member_name = member_name;
 	}
+
+
 
 
 	public String getProduct_name() {
@@ -73,9 +87,13 @@ public class OrderListDto {
 	}
 
 
+
+
 	public void setProduct_name(String product_name) {
 		this.product_name = product_name;
 	}
+
+
 
 
 	public Integer getProduct_no() {
@@ -83,9 +101,13 @@ public class OrderListDto {
 	}
 
 
+
+
 	public void setProduct_no(Integer product_no) {
 		this.product_no = product_no;
 	}
+
+
 
 
 	public Integer getPayment() {
@@ -93,9 +115,13 @@ public class OrderListDto {
 	}
 
 
+
+
 	public void setPayment(Integer payment) {
 		this.payment = payment;
 	}
+
+
 
 
 	public Date getPrdt_order_date() {
@@ -103,9 +129,13 @@ public class OrderListDto {
 	}
 
 
+
+
 	public void setPrdt_order_date(Date prdt_order_date) {
 		this.prdt_order_date = prdt_order_date;
 	}
+
+
 
 
 	public String getPrdt_order_type() {
@@ -113,9 +143,13 @@ public class OrderListDto {
 	}
 
 
+
+
 	public void setPrdt_order_type(String prdt_order_type) {
 		this.prdt_order_type = prdt_order_type;
 	}
+
+
 
 
 	public String getPrdt_order_person() {
@@ -123,9 +157,13 @@ public class OrderListDto {
 	}
 
 
+
+
 	public void setPrdt_order_person(String prdt_order_person) {
 		this.prdt_order_person = prdt_order_person;
 	}
+
+
 
 
 	public String getPrdt_order_addr() {
@@ -133,9 +171,13 @@ public class OrderListDto {
 	}
 
 
+
+
 	public void setPrdt_order_addr(String prdt_order_addr) {
 		this.prdt_order_addr = prdt_order_addr;
 	}
+
+
 
 
 	public String getPrdt_order_addr2() {
@@ -143,9 +185,13 @@ public class OrderListDto {
 	}
 
 
+
+
 	public void setPrdt_order_addr2(String prdt_order_addr2) {
 		this.prdt_order_addr2 = prdt_order_addr2;
 	}
+
+
 
 
 	public Integer getPrdt_order_phone() {
@@ -153,9 +199,13 @@ public class OrderListDto {
 	}
 
 
+
+
 	public void setPrdt_order_phone(Integer prdt_order_phone) {
 		this.prdt_order_phone = prdt_order_phone;
 	}
+
+
 
 
 	public Integer getPrdt_order_quan() {
@@ -163,9 +213,13 @@ public class OrderListDto {
 	}
 
 
+
+
 	public void setPrdt_order_quan(Integer prdt_order_quan) {
 		this.prdt_order_quan = prdt_order_quan;
 	}
+
+
 
 
 	public Integer getProduct_price() {
@@ -173,9 +227,13 @@ public class OrderListDto {
 	}
 
 
+
+
 	public void setProduct_price(Integer product_price) {
 		this.product_price = product_price;
 	}
+
+
 
 
 	public String getPrdt_order_way() {
@@ -183,17 +241,37 @@ public class OrderListDto {
 	}
 
 
+
+
 	public void setPrdt_order_way(String prdt_order_way) {
 		this.prdt_order_way = prdt_order_way;
 	}
 
 
+
+
+	public String getPrdt_order_reqtype() {
+		return prdt_order_reqtype;
+	}
+
+
+
+
+	public void setPrdt_order_reqtype(String prdt_order_reqtype) {
+		this.prdt_order_reqtype = prdt_order_reqtype;
+	}
+
+
+
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(member_name, payment, prdt_order_addr, prdt_order_addr2, prdt_order_date, prdt_order_no,
-				prdt_order_person, prdt_order_phone, prdt_order_quan, prdt_order_type, prdt_order_way, product_name,
-				product_no, product_price);
+				prdt_order_person, prdt_order_phone, prdt_order_quan, prdt_order_reqtype, prdt_order_type,
+				prdt_order_way, product_name, product_no, product_price);
 	}
+
+
 
 
 	@Override
@@ -213,11 +291,16 @@ public class OrderListDto {
 				&& Objects.equals(prdt_order_person, other.prdt_order_person)
 				&& Objects.equals(prdt_order_phone, other.prdt_order_phone)
 				&& Objects.equals(prdt_order_quan, other.prdt_order_quan)
+				&& Objects.equals(prdt_order_reqtype, other.prdt_order_reqtype)
 				&& Objects.equals(prdt_order_type, other.prdt_order_type)
 				&& Objects.equals(prdt_order_way, other.prdt_order_way)
 				&& Objects.equals(product_name, other.product_name) && Objects.equals(product_no, other.product_no)
 				&& Objects.equals(product_price, other.product_price);
 	}
+
+
+
+	
 	
 	
 	
