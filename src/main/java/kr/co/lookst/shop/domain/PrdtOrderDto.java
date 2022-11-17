@@ -17,14 +17,10 @@ public class PrdtOrderDto {
 	private String order_person;
 	private String order_type;
 	private String order_cancel;
-
 	
 	public PrdtOrderDto() {
 		// TODO Auto-generated constructor stub
-	}
-	
-	
-	 
+	}	
 
 	public PrdtOrderDto(Integer order_no, Integer product_no, Character member_id, Integer order_quan, Date order_date,
 			String order_way, String order_phone, String order_addr, String order_addr2, String order_person,
@@ -43,9 +39,6 @@ public class PrdtOrderDto {
 		this.order_type = order_type;
 		this.order_cancel = order_cancel;
 	}
-
-
-
 
 	public Integer getOrder_no() {
 		return order_no;
@@ -166,7 +159,6 @@ public class PrdtOrderDto {
 				&& Objects.equals(order_quan, other.order_quan) && Objects.equals(order_type, other.order_type)
 				&& Objects.equals(order_way, other.order_way) && Objects.equals(product_no, other.product_no);
 	}
-
 
 	@Override
 	public String toString() {
