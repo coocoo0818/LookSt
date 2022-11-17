@@ -10,5 +10,7 @@ public interface SellerService {
 	List<PrdtListDto> sellproductList() throws Exception;
 
 	List<OrderListDto> sellorderList() throws Exception;
+	
+	List<OrderListDto> sellrefundList() throws Exception;
 	 
 }

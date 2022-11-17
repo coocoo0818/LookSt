@@ -63,7 +63,16 @@ public class SellerController {
 	
 	
 	@GetMapping("/refundList")
-	public String adminForm1() {
+	public String refundpage(Model m) {
+		
+		try {
+			List<OrderListDto> refundlist = sellerService.sellrefundList();
+			m.addAttribute("refundlist", refundlist);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		return "seller/refundList";
 
 	}
