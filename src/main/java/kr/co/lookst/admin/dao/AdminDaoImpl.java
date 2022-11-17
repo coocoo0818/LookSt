@@ -29,4 +29,9 @@ public class AdminDaoImpl implements AdminDao{
 		map.put("auth", auth);
 		return session.update(namespace + "authModify", map);
 	}
+
+	@Override
+	public int memberKickOut(String member_id) throws Exception {
+		return session.delete(namespace + "memberKickOut", member_id);
+	}
 }

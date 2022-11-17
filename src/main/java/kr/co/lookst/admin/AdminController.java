@@ -46,6 +46,19 @@ public class AdminController {
 		return "redirect:/admin/member_management";
 	}
 	
+	@RequestMapping(value="/memberKickOut", method={RequestMethod.POST})
+	public String adminFormMemberKickOut(Model model,  
+			@RequestParam("member_id") String member_id) {
+		System.out.println(member_id);
+		
+		try {
+			adminService.memberKickOut(member_id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:/admin/member_management";
+	}
+	
 	@GetMapping("/board_management")
 	public String adminFormBoard() {
 		return "admin/board_management";

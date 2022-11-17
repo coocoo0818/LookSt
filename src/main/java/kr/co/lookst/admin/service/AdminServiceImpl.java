@@ -24,4 +24,9 @@ public class AdminServiceImpl implements AdminService{
 		return adminDao.memberAuthModify(member_id, auth);
 	}
 
+	@Override
+	public int memberKickOut(String member_id) throws Exception {
+		return adminDao.memberKickOut(member_id);
+	}
+
 }
