@@ -17,17 +17,21 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-		$('#authModify').click(function() {
-			let member_id = $('#member_id').text()
+		$('.authModify').click(function(obj) {
+			let member_id = $(this).parent().attr("data-memberid") // <li>태그는 <button>의 부모임.
+			let index = $(this).parent().attr("data-index")
+			let auth = document.getElementById("auth_auth"+index).value;
+
 			$.ajax({
 				type : 'post',
 				url : '${contextPath}/admin/authModify',
 				data : {
 						member_id : member_id,
-						auth : $('#auth_auth').val()
+						auth : auth
 				},
 				success : function(data) {
 					alert("회원권한이 수정되었습니다.")
+					location.reload()
 				},
 				error : function() {alert("error")}		//에러가 발생했을 때 호출될 함수
 			})
@@ -87,39 +91,25 @@
       </tr> -->
 				</tfoot>
 				<tbody>
-					<c:forEach var="member_management" items="${member_management}">
+					<c:forEach var="member_management" items="${member_management}" varStatus="status">
 						<tr class="table-primary">
-							<th class="text-center" scope="row"><img
-								class="rounded-circle profile-result"
-								src="${contextPath}/resources/fix/img/${member_management.profile_img}"
-								alt="" /></th>
-							<td class="text-center" data-title="profile">
-							<a href="#" id="member_id" name="member_id">${member_management.member_id}</a></td>
-							<td class="text-center" data-title="name">${member_management.member_name}</td>
-							<td class="text-center" data-title="since" data-type="currency"><fmt:formatDate
-									value="${member_management.member_since}" pattern="yyyy-MM-dd"
-									type="date" /></td>
-							<td class="text-center" data-title="update-date"
-								data-type="currency"><fmt:formatDate
-									value="${member_management.member_updt}" pattern="yyyy-MM-dd"
-									type="date" /></td>
-							<td class="text-center" data-title="Auth" data-type="currency">
-								<select class="form-select form-select-sm"
-								aria-label=".form-select-sm example" id="auth_auth">
-									<option id="auth" name="auth">${member_management.mem_auth_auth}</option>
-									<option value="member">member</option>
-									<option value="seller">seller</option>
-									<option value="admin">admin</option>
-							</select>
+							<th class="text-center" scope="row"><img class="rounded-circle profile-result" src="${contextPath}/resources/fix/img/${member_management.profile_img}" alt="" /></th>
+								<td class="text-center" data-title="profile">
+									<a href="#" id="member_id${status.index}" name="member_id">${member_management.member_id}</a>
+								</td>
+							<td class="text-center" data-title="name"">${member_management.member_name}</td>
+							<td class="text-center" data-title="since" data-type="currency"><fmt:formatDate value="${member_management.member_since}" pattern="yyyy-MM-dd" type="date" /></td>
+							<td class="text-center" data-title="update-date" data-type="currency"><fmt:formatDate value="${member_management.member_updt}" pattern="yyyy-MM-dd" type="date" /></td>
+							<td class="text-center auth" data-title="Auth" data-type="currency">
+								<select class="form-select form-select-sm" aria-label=".form-select-sm example" id="auth_auth${status.index}">
+									<option value="member" <c:if test="${member_management.mem_auth_auth eq 'member'}">disabled='disabled' selected='selected' style='color: red;'</c:if>>member<c:if test="${member_management.mem_auth_auth eq 'member'}"> 🍊 </c:if></option>
+									<option value="seller" <c:if test="${member_management.mem_auth_auth eq 'seller'}">disabled='disabled' selected='selected' style='color: red;'</c:if>>seller<c:if test="${member_management.mem_auth_auth eq 'seller'}"> 🍊 </c:if></option>
+									<option value="admin" <c:if test="${member_management.mem_auth_auth eq 'admin'}">disabled='disabled' selected='selected' style='color: red;'</c:if>>admin<c:if test="${member_management.mem_auth_auth eq 'admin'}"> 🍊 </c:if></option>
+								</select>
 							</td>
-							<td class="text-center" data-title="button" data-type="currency">
-
-								<input class="btn btn-outline-primary btn-sm" tabindex="-1"
-								role="button" type="button" value="수정" id="authModify" /> 
-								
-								<input
-								class="btn btn-outline-danger btn-sm" tabindex="-1"
-								role="button" type="button" value="삭제" id="kickOut"/>
+							<td class="text-center" data-title="button" data-type="currency" data-memberid="${member_management.member_id}" data-auth="${member_management.mem_auth_auth}" data-index="${status.index}">
+								<input class="btn btn-outline-primary btn-sm authModify" tabindex="-1" role="button" type="button" value="수정" id="authModify"/> 
+								<input class="btn btn-outline-danger btn-sm" tabindex="-1" role="button" type="button" value="삭제" id="kickOut"/>
 							</td>
 						</tr>
 					</c:forEach>

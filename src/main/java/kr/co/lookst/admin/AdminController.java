@@ -32,7 +32,7 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/authModify", method={RequestMethod.POST})
-	public String adminFormMemberModify(Model model, 
+	public String adminFormMemberModify(Model model,  
 			@RequestParam("member_id") String member_id,
 			@RequestParam("auth") String Auth) {
 		System.out.println(member_id);
