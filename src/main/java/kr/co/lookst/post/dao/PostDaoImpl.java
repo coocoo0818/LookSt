@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.co.lookst.post.domain.Post_imgDto;
 import kr.co.lookst.post.domain.ProdInfoDto;
+import kr.co.lookst.post.domain.snslist_infoDto;
 
 @Repository
 public class PostDaoImpl implements PostDao{
@@ -23,6 +24,14 @@ public class PostDaoImpl implements PostDao{
 
 	@Override
 	public List<ProdInfoDto> prod_info() throws Exception {
-		return session.selectList(namespace + "prod_info_list");
+		List<ProdInfoDto> list = session.selectList(namespace + "prod_info_list");
+		System.out.println(list);
+		return list;
+	}
+
+	@Override
+	public List<snslist_infoDto> postlist_Info() throws Exception {
+		
+		return session.selectList(namespace + "sns_post_listInfo");
 	}
 }
