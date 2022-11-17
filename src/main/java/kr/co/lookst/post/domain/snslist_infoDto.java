@@ -1,6 +1,6 @@
 package kr.co.lookst.post.domain;
 
-public class snslist_infoDto {
+public class snslist_infoDto { 
 
 	private String post_img_img;
 	private String post_content;
