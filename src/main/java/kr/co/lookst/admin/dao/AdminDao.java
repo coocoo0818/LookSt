@@ -9,5 +9,6 @@ public interface AdminDao {
 
 	List<IndexDto> memberList() throws Exception;
 	int memberAuthModify(String member_id, String auth) throws Exception;
+	int memberKickOut(String member_id) throws Exception;
 
 }
