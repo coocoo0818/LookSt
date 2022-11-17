@@ -367,8 +367,8 @@ justify-content: center;
         <td data-title="주문날짜" data-type="Released">2022/11/11</td>
         <td data-title="수량" data-type="Released">1 개</td>
         <td data-title="주문금액" data-type="currency">120,000원</td>
-        <td data-title="주문관리" data-type="Released">배송준비중</td>
-      
+        <td data-title="주문관리" data-type="Released" style="float: right;">배송준비중 <input type='button' align-text:'end' value='주문취소'/></td>
+      	
       </tr>
       <tr>
         <th scope="row">1111</th>
@@ -378,7 +378,7 @@ justify-content: center;
         <td data-title="주문날짜" data-type="Released">2022/11/11</td>
         <td data-title="수량" data-type="Released">1 개</td>
         <td data-title="주문금액" data-type="currency">120,000원</td>
-        <td data-title="주문관리" data-type="Released">배송준비중</td>
+        <td data-title="주문관리" data-type="Released" style="float: right;">배송준비중 <input type='button' align-text:'end' value='주문취소'/></td>
 
       </tr>
       <tr>
@@ -389,7 +389,7 @@ justify-content: center;
         <td data-title="주문날짜" data-type="Released">2022/11/11</td>
         <td data-title="수량" data-type="Released">1 개</td>
         <td data-title="주문금액" data-type="currency">120,000원</td>
-        <td data-title="주문관리" data-type="Released">배송준비중</td>
+        <td data-title="주문관리" data-type="Released" style="float: right;">배송준비중 <input type='button' align-text:'end' value='주문취소'/></td>
 
       </tr>
        <tr>
@@ -400,7 +400,7 @@ justify-content: center;
         <td data-title="주문날짜" data-type="Released">2022/11/11</td>
         <td data-title="수량" data-type="Released">1 개</td>
         <td data-title="주문금액" data-type="currency">120,000원</td>
-        <td data-title="주문관리" data-type="Released">배송준비중</td>
+        <td data-title="주문관리" data-type="Released" style="float: right;">배송준비중 <input type='button' align-text:'end' value='주문취소'/></td>
  
       </tr>
       <tr>
@@ -411,7 +411,7 @@ justify-content: center;
         <td data-title="주문날짜" data-type="Released">2022/11/11</td>
         <td data-title="수량" data-type="Released">1 개</td>
         <td data-title="주문금액" data-type="currency">120,000원</td>
-        <td data-title="주문관리" data-type="Released">배송준비중</td>
+        <td data-title="주문관리" data-type="Released" style="float: right;">배송준비중 <input type='button' align-text:'end' value='주문취소'/></td>
 
       </tr>
       <tr>
@@ -422,7 +422,7 @@ justify-content: center;
         <td data-title="주문날짜" data-type="Released">2022/11/11</td>
         <td data-title="수량" data-type="Released">1 개</td>
         <td data-title="주문금액" data-type="currency">120,000원</td>
-        <td data-title="주문관리" data-type="Released">배송준비중</td>
+        <td data-title="주문관리" data-type="Released" style="float: right;">배송준비중 <input type='button' align-text:'end' value='주문취소'/></td>
 
       </tr>
       <tr>
@@ -433,7 +433,7 @@ justify-content: center;
         <td data-title="주문날짜" data-type="Released">2022/11/11</td>
         <td data-title="수량" data-type="Released">1 개</td>
         <td data-title="주문금액" data-type="currency">120,000원</td>
-        <td data-title="주문관리" data-type="Released">배송준비중</td>
+        <td data-title="주문관리" data-type="Released" style="float: right;">배송준비중 <input class="btn btn-outline-dark btn-sm" type='button' align-text:'end' value='주문취소'/></td>
 
       </tr>
       <tr>
@@ -444,7 +444,7 @@ justify-content: center;
         <td data-title="주문날짜" data-type="Released">2022/11/11</td>
         <td data-title="수량" data-type="Released">1 개</td>
         <td data-title="주문금액" data-type="currency">120,000원</td>
-        <td data-title="주문관리" data-type="Released">배송준비중</td>
+        <td data-title="주문관리" data-type="Released" style="float: right;">배송준비중 <input type='button' align-text:'end' value='주문취소'/></td>
 
       </tr>
       <tr>
