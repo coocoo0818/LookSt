@@ -12,7 +12,11 @@ public interface PostDao {
 
 	List<ProdInfoDto> prod_info() throws Exception;
 
-	List<snslist_infoDto> postlist_Info() throws Exception;
+	
+
+	List<ProdInfoDto> postImgListCarousel(Integer post_no) throws Exception;
+
+	List<snslist_infoDto> postImgListPrdt(Integer post_no) throws Exception;
 
 
 }

@@ -53,8 +53,7 @@ public class Post_imgDto {
 
 	@Override
 	public String toString() {
-		return "Post_imgDto [post_no=" + post_no + ", post_img_no=" + post_img_no + ", post_img_img=" + post_img_img
-				+ ", post_img_seq=" + post_img_seq + "]";
+		return String.valueOf(post_no) ;
 	}
 	
 	
