@@ -24,13 +24,30 @@ public class PostServiceImpl implements PostService{
 
 	@Override
 	public List<ProdInfoDto> getprodInfo() throws Exception {
+		// TODO Auto-generated method stub
 		return postDao.prod_info();
 	}
 
 	@Override
-	public List<snslist_infoDto> getpostlistInfo() throws Exception {
-		// TODO Auto-generated method stub
-		return postDao.postlist_Info();
+	public List<ProdInfoDto> postImgListCarousel(Integer post_no) throws Exception {
+		return postDao.postImgListCarousel(post_no);
 	}
+
+	//@Override
+	//public List<snslist_infoDto> getpostlistInfo(Integer post_no) throws Exception {
+		// TODO Auto-generated method stub
+		//return postDao.postImgListPrdt(post_no);
+	//}
+
+	@Override
+	public List<snslist_infoDto> postImgListPrdt(Integer post_no) throws Exception {
+		// TODO Auto-generated method stub
+		return postDao.postImgListPrdt(post_no);
+	}
+
+
+
+
+	
 
 }

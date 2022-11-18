@@ -124,16 +124,13 @@
 						<!-- <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button> -->
 					</div>
 					<div class="carousel-inner">
+					<c:forEach var="postImgListCarousel" items="${postImgListCarousel}">
 						<div class="carousel-item active">
 							<img
-								src="${pageContext.request.contextPath }/resources/post/img/p_25b2d5ab0b7a433aa72c98b1c468deef.jpeg"
+								src="${pageContext.request.contextPath }/resources/post/img/${postImgListCarousel.post_img_img}"
 								class="d-block w-100" alt="...">
-						</div>
-						<div class="carousel-item">
-							<img
-								src="${pageContext.request.contextPath }/resources/post/img/carousel1_2.jpeg"
-								class="d-block w-100" alt="...">
-						</div>
+						</div>					
+					</c:forEach>
 					</div>
 					<button class="carousel-control-prev" type="button"
 						data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -153,30 +150,23 @@
 						<small class="text-muted">Last updated 3 mins ago</small>
 					</p>
 					<p class="card-title"><b>상품태그 2개</b></p>
-					<div class="row row-cols-1 row-cols-md-3 g-4">
-					  <div class="col">
-					    <div class="card">
-					      <img src="${pageContext.request.contextPath }/resources/post/img/Jordan_1.png" class="card-img-top" onclick="location.href='./'">
-					      <div class="card-body">
-					        <span class="prod_detail">
-  									Jordan 1 x Travis Scott x Fragment Retro Low OG SP Military Bluebr
-							</span>
-							<p>170,000원</p>
-					      </div>
-					    </div>
-					  </div>
-					  <div class="col">
-					    <div class="card">
-					      <img src="${pageContext.request.contextPath }/resources/post/img/maison_margiela.png" class="card-img-top" onclick="location.href='./'">
-					      <div class="card-body">
-					        <span class="prod_detail">
-  									MM6 Maison Margiela x Eastpak Mini Shoulder Bag Black
-							</span>
-							<p>399,000원</p>
-					      </div>
-					    </div>
-					  </div>
-					</div>
+					<c:forEach var="postImgListPrdt" items="${postImgListPrdt}">
+						<div class="row row-cols-1 row-cols-md-3 g-4">
+						  <div class="col">
+						    <div class="card">
+						      <img src="${pageContext.request.contextPath }/resources/post/img/${postImgListPrdt.post_tag_img}" class="card-img-top" onclick="location.href='./'">
+						      <div class="card-body">
+						        <span class="prod_detail">
+	  									${postImgListPrdt.post_tag_name}
+								</span>
+								<p><!-- 399,000원 -->${postImgListPrdt.post_tag_price}
+								</span></p>
+						      </div>
+						    </div>
+						  </div>
+					  
+						</div>
+					</c:forEach>
 					<!-- 상품 상세 설명 끝 -->
 					<!-- 좋아요 / 댓글 / 공유 버튼 -->
 					<div class="like_comment">
