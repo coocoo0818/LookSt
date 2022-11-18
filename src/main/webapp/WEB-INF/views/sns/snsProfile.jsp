@@ -6,50 +6,99 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!--   	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous"> -->
-<!--     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script> -->
-<style type="text/css">
-#profile_img {
-	width: 250px;
-	height: 250px;
-	border-radius: 50%;
-}
+<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 
+<style type="text/css">
 .profileEdit_Btn {
 	margin-left: 100px;
 }
 
+.pro_img_box {
+	width: 300px;
+	height: 300px;
+	border-radius: 70%;
+}
+
+#profile_img {
+	width: 300px;
+	height: 300px;
+	border-radius: 70%;
+	object-fit: cover;
+}
+
 .feed_img {
+	width: 100%;
 	height: 400px;
-	width: 370px;
+	object-fit: cover;
+	border-radius: 7%;
 }
 
-@media ( max-width : 1400px) {
-	.feed_img {
-		height: 350px;
-		width: 316px;
-	}
-}
-
-@media ( max-width : 1200px) {
-	.feed_img {
-		height: 280px;
-		width: 255px;
-	}
-}
-
-@media ( max-width : 992px) {
-	.feed_img {
-		height: 200px;
-		width: 176px;
-	}
-	#profile_img {
-		height: 174px;
-	}
-	
-
+@media ( max-width : 576px;) {
 }
 </style>
+
+<!-- <script type="text/javascript"> 
+// 	$(document).ready(function(){
+		
+// 		let member_id = @database
+		
+// 		let showList = function (member_id) {
+// 			$.ajax({
+// 				type: 'GET', //요청 메서드
+// 				url: '/lookst/sns/snsProfile?'+member_id+'_follwer',	// 요청 URI
+// 				success: function (result) {		// 서버로부터 응답이 도착하면 호출될 함수
+// 					$("#followerList").html(toHtml(result))	// result는 서버가 전송한 데이터
+// 				},
+// 				error: function() { alert("ERROR")}	// 에러가 발생할 때, 호출될 함수				
+// 			})
+// 		}
+		
+// 		let toHtml = function(followers) {
+// 			let tmp = "<ul style='display: block;'>"
+			
+// 			pro_follwer.forEach(function(follower) {
+// 				tmp += '<li  ' 
+// 				tmp += ' data-follower=' + pro_follwer.follower + '>'
+// 				tmp += ' follower=<span class="follower" >' + pro_follwer.follower + '</span>'
+// 				tmp += '</li>'
+// 			})
+// 			return tmp += "</ul>"
+// 		}
+// // 		var followerUrl='';
+// // 		$('.show').click(function(){
+// // 			followerUrl = $(this).val();
+// // 			console.log(followerUrl);
+// // 			$.ajax({			
+// // 				url: 'followerUrl?'+member_id+'_follwer',  
+// // 	 			type:"Post",
+// // 	 			contentType:'application/json;charset=utf-8',
+// // 				dataType:'json',
+// // 				data : JSON.stringify({member:bno, comment:comment}),
+// // 	 			success:function(response) {
+// // 	 				showList(response);
+// // 	 			},
+// // 	 			error:function(xhr,status,msg){
+// // 	 				console.log("상태값 : " + status + " Http에러메시지 : "+msg);
+// // 	 			}
+// // 	 		});
+// // 		});
+// // 		function showList(data){
+// // 			var tmp = '';
+// // 			$(".modal-body").empty();
+// // 			var head = '<span>'+movieUrl+'</span>';
+// // 			$(".modal-body").append(head);
+// // 			$.each(data, function(index, item){
+// // 				tmp = '<tr>';
+// // 				tmp += '<td>' + item.idx + '</td>';
+// // 				tmp += '<td>' + item.time + '</td>';
+// // 				tmp += '</tr>';
+// // 				$(".modal-body").append(timeList);
+// // 			})
+// // 		}
+// 	});
+</script> -->
+
+
 
 <title>snsProfile</title>
 </head>
@@ -70,10 +119,12 @@
 			<div class="row g-0">
 				<!-- 프로필 이미지-->
 				<div class="profile_img col-md-6">
-					<div class="col-6 offset-3">
-						<img
-							src="${pageContext.request.contextPath }/resources/sns/img/${pro_info.profile_img}"
-							id="profile_img" class="img-thumbnail" alt="...">
+					<div class="col-6 offset-3 ">
+						<div class="pro_img_box">
+							<img
+								src="${pageContext.request.contextPath }/resources/sns/img/${pro_info.profile_img}"
+								id="profile_img" class="" alt="...">
+						</div>
 					</div>
 				</div>
 				<!-- 프로필 기본정보 -->
@@ -98,15 +149,16 @@
 						<div class="cnt d-flex flex-row mb-5 d-grid gap-md-5 mt-5">
 							<button type="button" class="post_Cnt btn fs-4">
 								게시물
-								<div class="count fs-4 fw-bold m-auto">3</div>
+								<div class="count fs-4 fw-bold m-auto">${feed_Cnt }</div>
 							</button>
 							<button type="button" class="follwing_Cnt btn fs-4"
 								data-bs-toggle="modal" data-bs-target="#following-Modal">
 								팔로잉
 								<div class="count fs-4 fw-bold m-auto">3</div>
 							</button>
-							<button type="button" class="follwer_Cnt btn fs-4"
-								data-bs-toggle="modal" data-bs-target="#follwer-Modal">
+							<button type="button" class="show btn fs-4 "
+								data-bs-toggle="modal" data-bs-target="#follwer-Modal"
+								value="follower">
 								팔로워
 								<div class="count fs-4 fw-bold m-auto">3</div>
 							</button>
@@ -126,7 +178,7 @@
 
 				<c:forEach var="pro_feed" items="${pro_feed }">
 					<div class="col-sm-4 mb-3">
-						<div class="card">
+						<div class="card" style="border: none;">
 							<div class="post_img card-body">
 								<img class="feed_img"
 									src="${pageContext.request.contextPath }/resources/sns/img/${pro_feed.post_img_img}"
@@ -177,6 +229,7 @@
 		</div>
 	</div>
 	<!--profile-edit-Modal 끝 -->
+
 	<!-- following-Modal -->
 	<div class="modal fade" id="following-Modal" tabindex="-1"
 		aria-labelledby="following-Modal" aria-hidden="true">
@@ -188,11 +241,21 @@
 					<button type="button" class="btn-close" data-bs-dismiss="modal"
 						aria-label="Close"></button>
 				</div>
-				<div class="modal-body">...</div>
+				<div class="modal-body">
+					<ul>
+
+						<c:forEach var="pro_follwing" items="${pro_follwing }">
+							<br />
+							<li class="fs-4" style="list-style: none;"><span>${pro_follwing.following }</span></li>
+						</c:forEach>
+
+					</ul>
+				</div>
 			</div>
 		</div>
 	</div>
 	<!-- following-Modal 끝 -->
+
 	<!-- follower-Modal -->
 	<div class="modal fade" id="follwer-Modal" tabindex="-1"
 		aria-labelledby="follwer-Modal" aria-hidden="true">
@@ -204,7 +267,16 @@
 					<button type="button" class="btn-close" data-bs-dismiss="modal"
 						aria-label="Close"></button>
 				</div>
-				<div class="modal-body">...</div>
+				<div class="follower modal-body" id="followerList">
+					<ul>
+
+						<c:forEach var="pro_follwer" items="${pro_follwer }">
+							<br />
+							<li class="fs-4" style="list-style: none;"><span>${pro_follwer.follower }</span></li>
+						</c:forEach>
+
+					</ul>
+				</div>
 			</div>
 		</div>
 	</div>
