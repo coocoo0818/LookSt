@@ -8,7 +8,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.co.lookst.admin.domain.MemMGMDto;
 import kr.co.lookst.main.domain.IndexDto;
+import kr.co.lookst.main.domain.SearchItem;
 
 @Repository
 public class AdminDaoImpl implements AdminDao{
@@ -33,5 +35,20 @@ public class AdminDaoImpl implements AdminDao{
 	@Override
 	public int memberKickOut(String member_id) throws Exception {
 		return session.delete(namespace + "memberKickOut", member_id);
+	}
+
+	@Override
+	public int count() throws Exception {
+		return session.selectOne(namespace + "count");
+	}
+	
+	@Override
+	public int searchResultCnt(SearchItem sc) throws Exception {
+		return session.selectOne(namespace + "searchResultCnt", sc);
+	}
+
+	@Override
+	public List<MemMGMDto> searchSelectPage(SearchItem sc) throws Exception {
+		return session.selectList(namespace + "searchSelectPage", sc);
 	}
 }

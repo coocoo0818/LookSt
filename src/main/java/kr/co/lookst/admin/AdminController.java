@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.co.lookst.admin.service.AdminService;
 import kr.co.lookst.main.domain.IndexDto;
+import kr.co.lookst.main.domain.PageResolver;
+import kr.co.lookst.main.domain.SearchItem;
 
 @Controller
 @RequestMapping("/admin")
@@ -21,10 +23,17 @@ public class AdminController {
 	AdminService adminService;
 	
 	@GetMapping("/member_management")
-	public String adminFormMember(Model model) {
+	public String adminFormMember(SearchItem sc,Model model) {
 		try {
+			
+			int totalCnt = adminService.getSearchResultCnt(sc);
+			model.addAttribute("totalCnt", totalCnt);
+			PageResolver pageResolver = new PageResolver(totalCnt, sc);
+			
 			List<IndexDto> member_management = adminService.getMemberList();
 			model.addAttribute("member_management", member_management);
+			model.addAttribute("pr", pageResolver);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
