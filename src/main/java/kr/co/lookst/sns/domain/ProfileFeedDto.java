@@ -15,6 +15,14 @@ public class ProfileFeedDto {
 		// TODO Auto-generated constructor stub
 	}
 
+	public ProfileFeedDto(String member_id, Integer post_no) {
+		//super();
+		this.member_id = member_id;
+		this.post_no = post_no;
+	}
+
+
+
 	public ProfileFeedDto(String member_id, Integer post_no, String post_img_img, 
 							int post_img_seq, Date post_date, String post_type) {
 		//super();
