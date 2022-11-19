@@ -150,23 +150,25 @@
 						<small class="text-muted">Last updated 3 mins ago</small>
 					</p>
 					<p class="card-title"><b>상품태그 2개</b></p>
-					<c:forEach var="postImgListPrdt" items="${postImgListPrdt}">
+					
 						<div class="row row-cols-1 row-cols-md-3 g-4">
+						<c:forEach var="postImgListPrdt" items="${postImgListPrdt}">
 						  <div class="col">
 						    <div class="card">
 						      <img src="${pageContext.request.contextPath }/resources/post/img/${postImgListPrdt.post_tag_img}" class="card-img-top" onclick="location.href='./'">
 						      <div class="card-body">
 						        <span class="prod_detail">
-	  									${postImgListPrdt.post_tag_name}
+	  									${postImgListPrdt.post_tag_name}	
 								</span>
-								<p><!-- 399,000원 -->${postImgListPrdt.post_tag_price}
-								</span></p>
+								<span>
+									<!-- 399,000원 -->${postImgListPrdt.post_tag_price}
+								</span>
 						      </div>
 						    </div>
 						  </div>
-					  
+						 </c:forEach> 
 						</div>
-					</c:forEach>
+					
 					<!-- 상품 상세 설명 끝 -->
 					<!-- 좋아요 / 댓글 / 공유 버튼 -->
 					<div class="like_comment">
