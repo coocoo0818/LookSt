@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,7 +37,6 @@ public class AdminController {
 			model.addAttribute("member_management", member_management);
 			model.addAttribute("pr", pageResolver);
 			/* 회원 리스트 끝 */
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -74,22 +72,22 @@ public class AdminController {
 		return "redirect:/admin/member_management";
 	}
 	
-	@PostMapping(value = "/board_management")
-	public String adminFormBoard(Object o, int sd, boolean a) {
+	@RequestMapping(value="/board_management", method=RequestMethod.GET)
+	public String adminFormBoard() {
 		return "admin/board_management";
 	}
 	
-	@PostMapping("/sns_management")
+	@RequestMapping(value="/sns_management", method=RequestMethod.GET)
 	public String adminFormSns() {
 		return "admin/sns_management";
 	}
 	
-	@PostMapping("/magazin_request")
+	@RequestMapping(value="/magazin_request", method=RequestMethod.GET)
 	public String adminFormMagazinRequest() {
 		return "admin/magazin_request";
 	}
 	
-	@PostMapping("/seller_request")
+	@RequestMapping(value="/seller_request", method=RequestMethod.GET)
 	public String adminFormSellerRequest() {
 		return "admin/seller_request";
 	}

@@ -11,12 +11,13 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.js"></script>
 <meta name="viewport" content="width=device-width">
 <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"> -->
-<link rel="stylesheet"
-	href="${contextPath}/resources/admin/css/member_management.css">
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+<link rel="stylesheet" href="${contextPath}/resources/admin/css/member_management.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
+		let page = ${pr.sc.page}
+		let pageSize = ${pr.sc.pageSize}
+		
 		$('.authModify').click(function() {
 			let member_id = $(this).parent().attr("data-memberid") // <li>태그는 <button>의 부모임.
 			let index = $(this).parent().attr("data-index")
@@ -65,9 +66,9 @@
 		<h2 id="orderpagetitle" class="disply-2 text-center py-4">MEMBER MANAGEMENT</h2>
 		<!--  -->
 		<div>
-			<form class="d-flex row py-3" action="${contextPath}/admin/member_management" method="get">
+			<form class="d-flex row py-3" action="${contextPath}/admin/member_management/" method="get">
 				<div class="col mt-1">
-					<select id="inputState" class="form-select form-select-md">
+					<select id="inputState" class="form-select form-select-md" name="option">
 						<option selected>전체</option>
 						<option value="I" ${pr.sc.option=='I' || pr.sc.option=='' ? "selected" : ""}>아이디</option>
 						<option value="N" ${pr.sc.option=='N'? "selected" : ""}>이름</option>
@@ -75,7 +76,7 @@
 					</select>
 				</div>
 				<div class="d-flex col-md-9 mt-1">
-					<input class="form-control form-control me-1" type="text" placeholder="Search" style="float: right;"  value="${param.keywork}" >
+					<input class="form-control form-control me-1" type="text" placeholder="Search" style="float: right;" name="keyword" value="${param.keywork}" >
 					<button class="btn btn-secondary" type="submit"><i class="d-flex fa fa-search"></i></button>
 				</div>
 			</form>
@@ -166,8 +167,7 @@
 	</div>
 	<!-- 리스트 -->
 
-	<script
-		src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+	<script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 	<%@ include file="/WEB-INF/views/fix/footer.jsp"%>
 </body>
 </html>
