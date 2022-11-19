@@ -154,13 +154,13 @@
 							<button type="button" class="follwing_Cnt btn fs-4"
 								data-bs-toggle="modal" data-bs-target="#following-Modal">
 								팔로잉
-								<div class="count fs-4 fw-bold m-auto">3</div>
+								<div class="count fs-4 fw-bold m-auto">2</div>
 							</button>
 							<button type="button" class="show btn fs-4 "
 								data-bs-toggle="modal" data-bs-target="#follwer-Modal"
 								value="follower">
 								팔로워
-								<div class="count fs-4 fw-bold m-auto">3</div>
+								<div class="count fs-4 fw-bold m-auto">16</div>
 							</button>
 						</div>
 						<div class="IDIntro d-flex flex-row mb-3 d-grid gap-md-2 mt-5">

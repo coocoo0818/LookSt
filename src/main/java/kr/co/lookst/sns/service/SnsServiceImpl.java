@@ -35,4 +35,5 @@ public class SnsServiceImpl implements SnsService{
 	public List<FollowDto> getFollowing(String member_id) throws Exception {
 		return snsProfileDao.followingList(member_id);
 	}
+
 }
