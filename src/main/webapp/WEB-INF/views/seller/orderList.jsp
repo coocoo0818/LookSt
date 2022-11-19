@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -6,6 +7,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=dege">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 <title>ORDER LIST</title>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"
@@ -17,6 +19,30 @@
 	rel="stylesheet">
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+
+		$('.myModal').click(function() {
+			let prdt_order_no = $(this).attr("data-prdt_order_no") // <li>태그는 <button>의 부모임.
+			$.ajax({
+				type : 'post',
+				url : '${contextPath}/seller/selectOrderinfo',
+				data : {
+					prdt_order_no : prdt_order_no
+				},
+				success : function(data) {
+					$('#modal_con').load(location.href + '#modal_con');
+
+				},
+				error : function() {
+					alert("error")
+				} //에러가 발생했을 때 호출될 함수
+			})
+		})
+	})
+</script>
+
+
 
 <style type="text/css">
 #orderpagetitle {
@@ -34,31 +60,32 @@
 	<%@ include file="/WEB-INF/views/fix/sellerheader.jsp"%>
 
 
+
 	<h2 id="orderpagetitle" class="disply-2 text-center py-4">ORDER
 		LIST</h2>
 
 	<div class="container">
-		<div class="row py-3">
+	
+		<form class="d-flex row py-3"
+			action="<c:url value="/seller/orderList" />" class="search-form"
+			method="get">
 			<div class="col mt-1">
-
-				<select id="inputState" class="form-select form-select-md">
-					<option selected>전체</option>
-					<option value="1">결제대기</option>
-					<option value="2">결제완료</option>
-					<option value="3">배송준비중</option>
-					<option value="4">배송중</option>
-					<option value="5">배송완료</option>
+				<select id="inputState" class="form-select form-select-md" name="option">
+					<option value="A" ${pr.sc.option=='' ? "selected" : ""}>전체</option>
+					<option value="C" ${pr.sc.option=='C' ? "selected" : ""}>구매자</option>
+					<option value="N" ${pr.sc.option=='N' ? "selected" : ""}>주문번호</option>
+					<option value="P" ${pr.sc.option=='P' ? "selected" : ""}>상품이름</option>		
 				</select>
 			</div>
-
-			<form class="d-flex col-md-9 mt-1">
+			<div class="d-flex col-md-9 mt-1">
 				<input class="form-control form-control me-1" type="text"
-					placeholder="Search" style="float: right;">
+					name="keyword" value="${param.keyword}" placeholder="Search"
+					style="float: right;">
 				<button class="btn btn-secondary" type="submit">
 					<i class="d-flex fa fa-search"></i>
 				</button>
-			</form>
-		</div>
+			</div>
+		</form>
 	</div>
 
 
@@ -91,8 +118,10 @@
 						<td data-title="PayDate" data-type="currency">${orderListDto.prdt_order_date }</td>
 						<td data-title="OrderStaus" data-type="currency">${orderListDto.prdt_order_type }</td>
 						<td data-title="Detail" data-type="currency"><button
-								type="button" class="btn btn-outline-dark btn-sm"
-								data-bs-toggle="modal" data-bs-target="#staticBackdrop">VIEW</button></td>
+								type="button" class="btn btn-outline-dark btn-sm myModal"
+								id="myModal" data-bs-toggle="modal"
+								data-bs-target="#staticBackdrop"
+								data-prdt_order_no="${orderListDto.prdt_order_no }">VIEW</button></td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -112,28 +141,85 @@
 
 	<div class="row my-5"></div>
 
-	<!-- pagination -->
-	<nav aria-label="Page navigation example">
-		<ul class="pagination">
-			<li class="page-item"><a class="page-link" href="#"
-				aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-			</a></li>
-			<li class="page-item"><a class="page-link" href="#">1</a></li>
-			<li class="page-item"><a class="page-link" href="#">2</a></li>
-			<li class="page-item"><a class="page-link" href="#">3</a></li>
-			<li class="page-item"><a class="page-link" href="#"
-				aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-			</a></li>
+
+	<!-- 페이지 시작 -->
+		<ul class="pagination" style="justify-content: center;">
+			<c:if test="${totalCnt == null || totalCnt == 0}">
+				<div>게시물이 없습니다.</div>
+			</c:if>
+			<c:if test="${totalCnt != null || totalCnt != 0}">
+				<c:if test="${pr.showPrev}">
+					<li class="page-item disabled"><a class="page-link" href="${contextPath}/seller/orderList${pr.sc.getQueryString(pr.beginPage-1)}">&laquo;</a></li>
+				</c:if>
+				
+				<c:forEach var="i" begin="${pr.beginPage}" end="${pr.endPage}">
+
+					<c:if test="${pr.sc.page == i }">
+						<c:if test="${pr.sc.page > 0 }">
+							<li class="page-item active"><a class="page-link" href="${contextPath}/seller/orderList${pr.sc.getQueryString(i)}">${i}</a></li>
+						</c:if>
+					</c:if>
+					<c:if test="${pr.sc.page != i }">
+						<c:if test="${pr.sc.page > 0 }">
+							<li class="page-item"><a class="page-link" href="${contextPath}/seller/orderList${pr.sc.getQueryString(i)}">${i}</a></li>
+						</c:if>
+					</c:if>
+				</c:forEach>
+				
+				<c:if test="${pr.showNext}">
+					<li class="page-item"><a class="page-link" href="${contextPath}/seller/orderList${pr.sc.getQueryString(pr.endPage+1)}">&raquo;</a></li>
+				</c:if>
+				
+			</c:if>
 		</ul>
-	</nav>
+		<!-- 페이지 끝  -->
+		
 
 
+
+
+
+
+
+
+
+
+
+
+
+<!-- 	<!-- pagination --> -->
+<!-- 	<div class="pagination" style="justify-content: center;"> -->
+<!-- 		<div class="paging"> -->
+<%-- 			<c:if test="${totalCnt == null || totalCnt == 0 }"> --%>
+<!-- 				<div>게시물이 없습니다.</div> -->
+<%-- 			</c:if> --%>
+<%-- 			<c:if test="${totalCnt != null || totalCnt != 0 }"> --%>
+<%-- 				<c:if test="${pr.showPrev }"> --%>
+<!-- 					<a class="page" -->
+<%-- 						href="<c:url value="/seller/orderList${pr.sc.getQueryString(pr.beginPage-1) }" />"> --%>
+<!-- 						&lt; </a> -->
+<%-- 				</c:if> --%>
+<%-- 				<c:forEach var="i" begin="${pr.beginPage }" end="${pr.endPage }"> --%>
+<!-- 					<a class="page" -->
+<%-- 						href="<c:url value="/seller/orderList${pr.sc.getQueryString(i)}" />">${i }</a> --%>
+<%-- 				</c:forEach> --%>
+<%-- 				<c:if test="${pr.showNext }"> --%>
+<!-- 					<a class="page" -->
+<%-- 						href="<c:url value="/seller/orderList${pr.sc.getQueryString(pr.endPage+1) }" />"> --%>
+<!-- 						&gt; </a> -->
+<%-- 				</c:if> --%>
+<%-- 			</c:if> --%>
+<!-- 		</div> -->
+<!-- 	</div> -->
 	<!-- Modal -->
+
 	<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
 		data-bs-keyboard="false" tabindex="-1"
-		aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		aria-labelledby="staticBackdropLabel" aria-hidden="true"
+		id="modal_con">
 		<div
-			class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+			class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+			role="document">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h1 class="modal-title fs-5" id="staticBackdropLabel">Detail
@@ -143,28 +229,11 @@
 				</div>
 				<div class="modal-body">
 					<div class="detail-info">
-						<span>수령인 :</span>
-						<div>"${orderListDto.prdt_order_person}"</div>
-						<br /> <span>수령주소 :</span>
-						<!--수정필요-->
-						<span text="${order.address}">서울시 00구 00동 00-00 00호</span><br />
-						<span>전화번호 :</span>
-						<!--수정필요-->
-						<span text="${order.phonenumber}">010-1234-1234</span><br /> <span>주문번호
-							:</span> <span text="${order.number}">178789</span><br /> <span>상품번호
-							:</span> <span text="${product.itemIdx}">1659826</span><br /> <span>상품명
-							:</span> <span text="${order.itemName}">예쁜 트렌치코트</span><br /> <span>상품가격
-							:</span> <span text="${order.orderPrice}">34000원</span><br /> <span>구매수량
-							:</span>
-						<!--수정필요-->
-						<span text="${order.number}">2</span><br /> <span>결제금액 :</span>
-						<!--수정필요-->
-						<span text="${order.orderPrice}">68000원</span><br /> <span>결제일시
-							:</span> <span text="${order.orderedAt}">2022-10-17</span><br /> <span>결제수단
-							:</span> <span text="${order.payment}">카드결제</span><br /> <span>주문상태
-							:</span>
-						<!--수정필요-->
-						<span text="${order.status}">결제완료</span><br />
+						<ul>
+							<br />
+							<li><span id="Context">주문번호${dto.prdt_order_no }
+									${Payment}${od }</span></li>
+						</ul>
 					</div>
 				</div>
 				<div class="modal-footer">

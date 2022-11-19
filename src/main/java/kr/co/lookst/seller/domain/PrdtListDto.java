@@ -4,11 +4,11 @@ import java.util.Objects;
 
 public class PrdtListDto {
 
-	private Integer product_no;
+	private int product_no;
 	private String prdt_img_name;
 	private String product_kind;
 	private String product_name;
-	private Integer product_price;
+	private int product_price;
 	private String prdt_option_stock;
 	
 	
@@ -18,8 +18,8 @@ public class PrdtListDto {
 	
 	
 
-	public PrdtListDto(Integer product_no, String prdt_img_name, String product_kind, String product_name,
-			Integer product_price, String prdt_option_stock) {
+	public PrdtListDto(int product_no, String prdt_img_name, String product_kind, String product_name,
+			int product_price, String prdt_option_stock) {
 		super();
 		this.product_no = product_no;
 		this.prdt_img_name = prdt_img_name;
@@ -30,12 +30,12 @@ public class PrdtListDto {
 	}
 
 
-	public Integer getProduct_no() {
+	public int getProduct_no() {
 		return product_no;
 	}
 
 
-	public void setProduct_no(Integer product_no) {
+	public void setProduct_no(int product_no) {
 		this.product_no = product_no;
 	}
 
@@ -70,12 +70,12 @@ public class PrdtListDto {
 	}
 
 
-	public Integer getProduct_price() {
+	public int getProduct_price() {
 		return product_price;
 	}
 
 
-	public void setProduct_price(Integer product_price) {
+	public void setProduct_price(int product_price) {
 		this.product_price = product_price;
 	}
 

@@ -51,26 +51,27 @@
 		LIST</h2>
 
 	<div class="container">
-		<div class="row py-3">
+	
+		<form class="d-flex row py-3"
+			action="<c:url value="/seller/prdtList" />" class="search-form"
+			method="get">
 			<div class="col mt-1">
-
-				<select id="inputState" class="form-select form-select-md">
-					<option selected>전체</option>
-					<option value="1">TOP</option>
-					<option value="2">BOTTOM</option>
-					<option value="3">ACC</option>
-					<option value="4">SHOES</option>
+				<select id="inputState" class="form-select form-select-md" name="option">
+					<option value="A" ${pr.sc.option=='' ? "selected" : ""}>전체</option>
+					<option value="C" ${pr.sc.option=='C' ? "selected" : ""}>카테고리</option>
+					<option value="M" ${pr.sc.option=='M' ? "selected" : ""}>상품이름</option>
+					<option value="P" ${pr.sc.option=='P' ? "selected" : ""}>상품번호</option>		
 				</select>
 			</div>
-
-			<form class="d-flex col-md-9 mt-1">
+			<div class="d-flex col-md-9 mt-1">
 				<input class="form-control form-control me-1" type="text"
-					placeholder="Search" style="float: right;">
+					name="keyword" value="${param.keyword}" placeholder="Search"
+					style="float: right;">
 				<button class="btn btn-secondary" type="submit">
 					<i class="d-flex fa fa-search"></i>
 				</button>
-			</form>
-		</div>
+			</div>
+		</form>
 	</div>
 
 
@@ -131,20 +132,37 @@
 
 	<div class="row my-5"></div>
 
-	<!-- pagination -->
-	<nav aria-label="Page navigation example">
-		<ul class="pagination">
-			<li class="page-item"><a class="page-link" href="#"
-				aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-			</a></li>
-			<li class="page-item"><a class="page-link" href="#">1</a></li>
-			<li class="page-item"><a class="page-link" href="#">2</a></li>
-			<li class="page-item"><a class="page-link" href="#">3</a></li>
-			<li class="page-item"><a class="page-link" href="#"
-				aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-			</a></li>
+	<!-- 페이지 시작 -->
+		<ul class="pagination" style="justify-content: center;">
+			<c:if test="${totalCnt == null || totalCnt == 0}">
+				<div>게시물이 없습니다.</div>
+			</c:if>
+			<c:if test="${totalCnt != null || totalCnt != 0}">
+				<c:if test="${pr.showPrev}">
+					<li class="page-item disabled"><a class="page-link" href="${contextPath}/seller/prdtList${pr.sc.getQueryString(pr.beginPage-1)}">&laquo;</a></li>
+				</c:if>
+				
+				<c:forEach var="i" begin="${pr.beginPage}" end="${pr.endPage}">
+
+					<c:if test="${pr.sc.page == i }">
+						<c:if test="${pr.sc.page > 0 }">
+							<li class="page-item active"><a class="page-link" href="${contextPath}/seller/prdtList${pr.sc.getQueryString(i)}">${i}</a></li>
+						</c:if>
+					</c:if>
+					<c:if test="${pr.sc.page != i }">
+						<c:if test="${pr.sc.page > 0 }">
+							<li class="page-item"><a class="page-link" href="${contextPath}/seller/prdtList${pr.sc.getQueryString(i)}">${i}</a></li>
+						</c:if>
+					</c:if>
+				</c:forEach>
+				
+				<c:if test="${pr.showNext}">
+					<li class="page-item"><a class="page-link" href="${contextPath}/seller/prdtList${pr.sc.getQueryString(pr.endPage+1)}">&raquo;</a></li>
+				</c:if>
+				
+			</c:if>
 		</ul>
-	</nav>
+		<!-- 페이지 끝  -->
 
 
 
