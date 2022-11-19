@@ -9,11 +9,11 @@ public class SearchItem {
 	public static final int MIN_DEFAULT_PAGE_SIZE = 5;
 	public static final int MAX_DEFAULT_PAGE_SIZE = 50;
 	
-	private Integer page = 1;
-	private	Integer pageSize = DEFAULT_PAGE_SIZE;
-	private String option = "";
-	private String keyword = "";
-	private Integer offset;
+	private Integer page = 1;							//현재 페이지
+	private	Integer pageSize = DEFAULT_PAGE_SIZE;		//한 페이지당 게시물 갯수
+	private String option = "";							//검색 옵션
+	private String keyword = "";						//검색어
+	private Integer offset;								//페이지 시작
 	
 	public SearchItem() {
 

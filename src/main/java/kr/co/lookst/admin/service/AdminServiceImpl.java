@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import kr.co.lookst.admin.dao.AdminDao;
 import kr.co.lookst.admin.domain.MemMGMDto;
-import kr.co.lookst.main.domain.IndexDto;
 import kr.co.lookst.main.domain.SearchItem;
 
 @Service
@@ -16,26 +15,30 @@ public class AdminServiceImpl implements AdminService{
 	@Autowired
 	AdminDao adminDao;
 	
-	@Override
-	public List<IndexDto> getMemberList() throws Exception {
-		return adminDao.memberList();
-	}
+	/* 회원 리스트 */
+	/*
+	 * @Override public List<IndexDto> getMemberList() throws Exception { return
+	 * adminDao.memberList(); }
+	 */
 
+	/* 회원 권한 변경 */
 	@Override
 	public int authModify(String member_id, String auth) throws Exception {
 		return adminDao.memberAuthModify(member_id, auth);
 	}
 
+	/* 회원 강퇴 */
 	@Override
 	public int memberKickOut(String member_id) throws Exception {
 		return adminDao.memberKickOut(member_id);
 	}
 
+	/* 회원 토탈 */
 	@Override
 	public int getSearchResultCnt(SearchItem sc) throws Exception {
 		return adminDao.searchResultCnt(sc);
 	}
-
+	/* 회원 검색 리스트 */
 	@Override
 	public List<MemMGMDto> getsearchResultPage(SearchItem sc) throws Exception {
 		return adminDao.searchSelectPage(sc);

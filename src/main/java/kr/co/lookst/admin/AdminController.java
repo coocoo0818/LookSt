@@ -6,12 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import kr.co.lookst.admin.domain.MemMGMDto;
 import kr.co.lookst.admin.service.AdminService;
-import kr.co.lookst.main.domain.IndexDto;
 import kr.co.lookst.main.domain.PageResolver;
 import kr.co.lookst.main.domain.SearchItem;
 
@@ -22,24 +23,29 @@ public class AdminController {
 	@Autowired
 	AdminService adminService;
 	
+	/* 회원 리스트 */
 	@GetMapping("/member_management")
 	public String adminFormMember(SearchItem sc,Model model) {
 		try {
-			
+			/* 회원 페이징 시작 */
 			int totalCnt = adminService.getSearchResultCnt(sc);
 			model.addAttribute("totalCnt", totalCnt);
 			PageResolver pageResolver = new PageResolver(totalCnt, sc);
+			/* 회원 페이징 끝 */
 			
-			List<IndexDto> member_management = adminService.getMemberList();
+			/* 회원 리스트 출력 */
+			List<MemMGMDto> member_management = adminService.getsearchResultPage(sc);
 			model.addAttribute("member_management", member_management);
 			model.addAttribute("pr", pageResolver);
-
+			/* 회원 리스트 끝 */
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return "admin/member_management";
 	}
 	
+	/* 회원 권한 변경 */
 	@RequestMapping(value="/authModify", method={RequestMethod.POST})
 	public String adminFormMemberModify(Model model,  
 			@RequestParam("member_id") String member_id,
@@ -54,7 +60,7 @@ public class AdminController {
 		}
 		return "redirect:/admin/member_management";
 	}
-	
+	/* 회원 강퇴 */
 	@RequestMapping(value="/memberKickOut", method={RequestMethod.POST})
 	public String adminFormMemberKickOut(Model model,  
 			@RequestParam("member_id") String member_id) {
@@ -68,22 +74,22 @@ public class AdminController {
 		return "redirect:/admin/member_management";
 	}
 	
-	@GetMapping("/board_management")
-	public String adminFormBoard() {
+	@PostMapping(value = "/board_management")
+	public String adminFormBoard(Object o, int sd, boolean a) {
 		return "admin/board_management";
 	}
 	
-	@GetMapping("/sns_management")
+	@PostMapping("/sns_management")
 	public String adminFormSns() {
 		return "admin/sns_management";
 	}
 	
-	@GetMapping("/magazin_request")
+	@PostMapping("/magazin_request")
 	public String adminFormMagazinRequest() {
 		return "admin/magazin_request";
 	}
 	
-	@GetMapping("/seller_request")
+	@PostMapping("/seller_request")
 	public String adminFormSellerRequest() {
 		return "admin/seller_request";
 	}
