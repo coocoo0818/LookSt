@@ -2,70 +2,64 @@ package kr.co.lookst.post.domain;
 
 public class PostDto {
 
-	private String member_id;
-	private int	post_no;
-	private String post_content;
-	private int post_date;
-	private String post_type;
+	private String member_nick;
+	private String sns_comment_con;
+	private String profile_img;
+	private int sns_comment_date;
 	
 	public PostDto() {
 		
 	}
 
-	public PostDto(String member_id, int post_no, String post_content, int post_date, String post_type) {
+	public PostDto(String member_nick, String sns_comment_con, String profile_img, int sns_comment_date) {
 		super();
-		this.member_id = member_id;
-		this.post_no = post_no;
-		this.post_content = post_content;
-		this.post_date = post_date;
-		this.post_type = post_type;
+		this.member_nick = member_nick;
+		this.sns_comment_con = sns_comment_con;
+		this.profile_img = profile_img;
+		this.sns_comment_date = sns_comment_date;
 	}
 
-	public String getMember_id() {
-		return member_id;
+	public String getMember_nick() {
+		return member_nick;
 	}
 
-	public void setMember_id(String member_id) {
-		this.member_id = member_id;
+	public void setMember_nick(String member_nick) {
+		this.member_nick = member_nick;
 	}
 
-	public int getPost_no() {
-		return post_no;
+	public String getSns_comment_con() {
+		return sns_comment_con;
 	}
 
-	public void setPost_no(int post_no) {
-		this.post_no = post_no;
+	public void setSns_comment_con(String sns_comment_con) {
+		this.sns_comment_con = sns_comment_con;
 	}
 
-	public String getPost_content() {
-		return post_content;
+	public String getProfile_img() {
+		return profile_img;
 	}
 
-	public void setPost_content(String post_content) {
-		this.post_content = post_content;
+	public void setProfile_img(String profile_img) {
+		this.profile_img = profile_img;
 	}
 
-	public int getPost_date() {
-		return post_date;
+	public int getSns_comment_date() {
+		return sns_comment_date;
 	}
 
-	public void setPost_date(int post_date) {
-		this.post_date = post_date;
-	}
-
-	public String getPost_type() {
-		return post_type;
-	}
-
-	public void setPost_type(String post_type) {
-		this.post_type = post_type;
+	public void setSns_comment_date(int sns_comment_date) {
+		this.sns_comment_date = sns_comment_date;
 	}
 
 	@Override
 	public String toString() {
-		return "PostDto [member_id=" + member_id + ", post_no=" + post_no + ", post_content=" + post_content
-				+ ", post_date=" + post_date + ", post_type=" + post_type + "]";
+		return "PostDto [member_nick=" + member_nick + ", sns_comment_con=" + sns_comment_con + ", profile_img="
+				+ profile_img + ", sns_comment_date=" + sns_comment_date + "]";
 	}
+	
+	
+	
+	
 	
 	
 }
