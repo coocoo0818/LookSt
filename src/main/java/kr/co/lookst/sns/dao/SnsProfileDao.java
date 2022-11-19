@@ -3,6 +3,7 @@ package kr.co.lookst.sns.dao;
 import java.util.List;
 
 import kr.co.lookst.sns.domain.FollowDto;
+import kr.co.lookst.sns.domain.Follow_CntDto;
 import kr.co.lookst.sns.domain.ProfileFeedDto;
 import kr.co.lookst.sns.domain.SnsProfileDto;
 
