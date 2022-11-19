@@ -2,16 +2,17 @@ package kr.co.lookst.seller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
-
-import kr.co.lookst.main.domain.Product;
+import kr.co.lookst.main.domain.PageResolver;
+import kr.co.lookst.main.domain.SearchItem;
 import kr.co.lookst.seller.domain.OrderListDto;
 import kr.co.lookst.seller.domain.PrdtListDto;
 import kr.co.lookst.seller.service.SellerService;
@@ -25,11 +26,15 @@ public class SellerController {
 	
 	
 	@GetMapping("/prdtList")
-	public String prdtpage(Model m) {
+	public String prdtpage(SearchItem sc, Model m) {
 		try {
+			int totalCnt = sellerService.getSearchResultCntP(sc);
+			m.addAttribute("totalCnt", totalCnt);
+			PageResolver pageResolver = new PageResolver(totalCnt, sc);
 			
-			List<PrdtListDto> prdtlist = sellerService.sellproductList();
+			List<PrdtListDto> prdtlist = sellerService.getsearchResultPageP(sc);
 			m.addAttribute("prdtlist", prdtlist);
+			m.addAttribute("pr",pageResolver);
 		
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -38,16 +43,18 @@ public class SellerController {
 
 	}
 	
-	
-	
-	
 	@GetMapping("/orderList")
-	public String orderpage(Model m) {
+	public String orderpage(SearchItem sc, Model m) {
 		
 		
 		try {
-			List<OrderListDto> orderlist = sellerService.sellorderList();
+			int totalCnt = sellerService.getSearchResultCnt(sc);
+			m.addAttribute("totalCnt", totalCnt);
+			PageResolver pageResolver = new PageResolver(totalCnt, sc);
+			
+			List<OrderListDto> orderlist = sellerService.getsearchResultPage(sc);
 			m.addAttribute("orderlist", orderlist);
+			m.addAttribute("pr",pageResolver);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -57,17 +64,40 @@ public class SellerController {
 
 	}
 	
-	
-	
+	@RequestMapping(value="/selectOrderinfo", method={RequestMethod.POST})
+	public String orderpageselect(Model model,  
+			@RequestParam("prdt_order_no") Integer prdt_order_no) {
+		System.out.println(prdt_order_no);
+		
+		try {
+			OrderListDto dto = sellerService.selectOrderinfo(prdt_order_no);
+			model.addAttribute("dto", dto);
+			
+			ModelAndView mv = new ModelAndView();
+			
+			OrderListDto od = new OrderListDto();
+			od.setPayment(dto.getPayment());
+			
+			mv.addObject(od);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:/seller/orderList";
+	}
 	
 	
 	
 	@GetMapping("/refundList")
-	public String refundpage(Model m) {
+	public String refundpage(SearchItem sc, Model m) {
 		
 		try {
-			List<OrderListDto> refundlist = sellerService.sellrefundList();
+			int totalCnt = sellerService.getSearchResultCntR(sc);
+			m.addAttribute("totalCnt", totalCnt);
+			PageResolver pageResolver = new PageResolver(totalCnt, sc);
+			
+			List<OrderListDto> refundlist = sellerService.getsearchResultPageR(sc);
 			m.addAttribute("refundlist", refundlist);
+			m.addAttribute("pr",pageResolver);
 			
 		} catch (Exception e) {
 			e.printStackTrace();

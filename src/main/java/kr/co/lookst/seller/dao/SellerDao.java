@@ -2,17 +2,25 @@ package kr.co.lookst.seller.dao;
 
 
 import java.util.List;
+import java.util.Map;
 
+import kr.co.lookst.main.domain.SearchItem;
 import kr.co.lookst.seller.domain.OrderListDto;
 import kr.co.lookst.seller.domain.PrdtListDto;
 
 public interface SellerDao {
 
-	List<PrdtListDto> selectPrdt() throws Exception; 
+	OrderListDto selectOrderDetail(Integer prdt_order_no) throws Exception;
 
+	int searchResultCnt(SearchItem sc) throws Exception;
+	
+	List<OrderListDto> searchSelectPage(SearchItem sc) throws Exception;
 
-	List<OrderListDto> selectOrder() throws Exception;
+	int searchResultCntP(SearchItem sc) throws Exception;
+
+	List<PrdtListDto> searchSelectPageP(SearchItem sc) throws Exception;
 	
-	List<OrderListDto> selectRequest() throws Exception;
-	
+	int searchResultCntR(SearchItem sc) throws Exception;
+
+	List<OrderListDto> searchSelectPageR (SearchItem sc) throws Exception;
 }

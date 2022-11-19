@@ -5,21 +5,21 @@ import java.util.Objects;
 
 public class OrderListDto {
 	
-	private Integer prdt_order_no;
+	private int prdt_order_no;
 	private String member_name;
 	private String product_name;
-	private Integer product_no;
-	private Integer payment;
+	private int product_no;
+	private int payment;
 	private Date prdt_order_date;
 	private String prdt_order_type;
 	private String prdt_order_person;
 	private String prdt_order_addr;
 	private String prdt_order_addr2;
-	private Integer prdt_order_phone;
-	private Integer prdt_order_quan;
-	private Integer product_price;
+	private int prdt_order_phone;
+	private int prdt_order_quan;
+	private int product_price;
 	private String prdt_order_way;
-	private String prdt_order_reqtype;
+	private String prdt_order_cancel;
 	
 	public OrderListDto() {
 		// TODO Auto-generated constructor stub
@@ -28,10 +28,10 @@ public class OrderListDto {
 	
 	
 
-	public OrderListDto(Integer prdt_order_no, String member_name, String product_name, Integer product_no,
-			Integer payment, Date prdt_order_date, String prdt_order_type, String prdt_order_person,
-			String prdt_order_addr, String prdt_order_addr2, Integer prdt_order_phone, Integer prdt_order_quan,
-			Integer product_price, String prdt_order_way, String prdt_order_reqtype) {
+	public OrderListDto(int prdt_order_no, String member_name, String product_name, int product_no,
+			int payment, Date prdt_order_date, String prdt_order_type, String prdt_order_person,
+			String prdt_order_addr, String prdt_order_addr2, int prdt_order_phone, int prdt_order_quan,
+			int product_price, String prdt_order_way, String prdt_order_cancel) {
 		super();
 		this.prdt_order_no = prdt_order_no;
 		this.member_name = member_name;
@@ -47,21 +47,21 @@ public class OrderListDto {
 		this.prdt_order_quan = prdt_order_quan;
 		this.product_price = product_price;
 		this.prdt_order_way = prdt_order_way;
-		this.prdt_order_reqtype = prdt_order_reqtype;
+		this.prdt_order_cancel = prdt_order_cancel;
 	}
 
 
 	
 
 
-	public Integer getPrdt_order_no() {
+	public int getPrdt_order_no() {
 		return prdt_order_no;
 	}
 
 
 
 
-	public void setPrdt_order_no(Integer prdt_order_no) {
+	public void setPrdt_order_no(int prdt_order_no) {
 		this.prdt_order_no = prdt_order_no;
 	}
 
@@ -96,28 +96,28 @@ public class OrderListDto {
 
 
 
-	public Integer getProduct_no() {
+	public int getProduct_no() {
 		return product_no;
 	}
 
 
 
 
-	public void setProduct_no(Integer product_no) {
+	public void setProduct_no(int product_no) {
 		this.product_no = product_no;
 	}
 
 
 
 
-	public Integer getPayment() {
+	public int getPayment() {
 		return payment;
 	}
 
 
 
 
-	public void setPayment(Integer payment) {
+	public void setPayment(int payment) {
 		this.payment = payment;
 	}
 
@@ -194,42 +194,42 @@ public class OrderListDto {
 
 
 
-	public Integer getPrdt_order_phone() {
+	public int getPrdt_order_phone() {
 		return prdt_order_phone;
 	}
 
 
 
 
-	public void setPrdt_order_phone(Integer prdt_order_phone) {
+	public void setPrdt_order_phone(int prdt_order_phone) {
 		this.prdt_order_phone = prdt_order_phone;
 	}
 
 
 
 
-	public Integer getPrdt_order_quan() {
+	public int getPrdt_order_quan() {
 		return prdt_order_quan;
 	}
 
 
 
 
-	public void setPrdt_order_quan(Integer prdt_order_quan) {
+	public void setPrdt_order_quan(int prdt_order_quan) {
 		this.prdt_order_quan = prdt_order_quan;
 	}
 
 
 
 
-	public Integer getProduct_price() {
+	public int getProduct_price() {
 		return product_price;
 	}
 
 
 
 
-	public void setProduct_price(Integer product_price) {
+	public void setProduct_price(int product_price) {
 		this.product_price = product_price;
 	}
 
@@ -250,15 +250,15 @@ public class OrderListDto {
 
 
 
-	public String getPrdt_order_reqtype() {
-		return prdt_order_reqtype;
+	public String getPrdt_order_cancel() {
+		return prdt_order_cancel;
 	}
 
 
 
 
-	public void setPrdt_order_reqtype(String prdt_order_reqtype) {
-		this.prdt_order_reqtype = prdt_order_reqtype;
+	public void setPrdt_order_cancel(String prdt_order_cancel) {
+		this.prdt_order_cancel = prdt_order_cancel;
 	}
 
 
@@ -267,7 +267,7 @@ public class OrderListDto {
 	@Override
 	public int hashCode() {
 		return Objects.hash(member_name, payment, prdt_order_addr, prdt_order_addr2, prdt_order_date, prdt_order_no,
-				prdt_order_person, prdt_order_phone, prdt_order_quan, prdt_order_reqtype, prdt_order_type,
+				prdt_order_person, prdt_order_phone, prdt_order_quan, prdt_order_cancel, prdt_order_type,
 				prdt_order_way, product_name, product_no, product_price);
 	}
 
@@ -291,7 +291,7 @@ public class OrderListDto {
 				&& Objects.equals(prdt_order_person, other.prdt_order_person)
 				&& Objects.equals(prdt_order_phone, other.prdt_order_phone)
 				&& Objects.equals(prdt_order_quan, other.prdt_order_quan)
-				&& Objects.equals(prdt_order_reqtype, other.prdt_order_reqtype)
+				&& Objects.equals(prdt_order_cancel, other.prdt_order_cancel)
 				&& Objects.equals(prdt_order_type, other.prdt_order_type)
 				&& Objects.equals(prdt_order_way, other.prdt_order_way)
 				&& Objects.equals(product_name, other.product_name) && Objects.equals(product_no, other.product_no)
