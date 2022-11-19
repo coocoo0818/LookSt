@@ -62,37 +62,34 @@
 	<!-- 리스트 -->
 
 	<div class="container">
-		<h2 id="orderpagetitle" class="disply-2 text-center py-4">MEMBER
-			MANAGEMENT</h2>
+		<h2 id="orderpagetitle" class="disply-2 text-center py-4">MEMBER MANAGEMENT</h2>
 		<!--  -->
-		<div class="row py-3">
-			<div class="col mt-1">
-				<select id="inputState" class="form-select form-select-md">
-					<option selected>전체</option>
-					<option value="A" ${pr.sc.option=='A' || pr.sc.option=='' ? "selected" : ""}>아이디</option>
-					<option value="T" ${pr.sc.option=='T'? "selected" : ""}>이름</option>
-					<option value="W" ${pr.sc.option=='W'? "selected" : ""}>권한</option>
-				</select>
-			</div>
-			<form class="d-flex col-md-9 mt-1">
-				<input class="form-control form-control me-1" type="text"
-					placeholder="Search" style="float: right;"  value="${param.keywork}" >
-				<button class="btn btn-secondary" type="submit">
-					<i class="d-flex fa fa-search"></i>
-				</button>
+		<div>
+			<form class="d-flex row py-3" action="${contextPath}/admin/member_management" method="get">
+				<div class="col mt-1">
+					<select id="inputState" class="form-select form-select-md">
+						<option selected>전체</option>
+						<option value="I" ${pr.sc.option=='I' || pr.sc.option=='' ? "selected" : ""}>아이디</option>
+						<option value="N" ${pr.sc.option=='N'? "selected" : ""}>이름</option>
+						<option value="A" ${pr.sc.option=='A'? "selected" : ""}>권한</option>
+					</select>
+				</div>
+				<div class="d-flex col-md-9 mt-1">
+					<input class="form-control form-control me-1" type="text" placeholder="Search" style="float: right;"  value="${param.keywork}" >
+					<button class="btn btn-secondary" type="submit"><i class="d-flex fa fa-search"></i></button>
+				</div>
 			</form>
 		</div>
 		<!--  -->
 
-		<form name="form" class="frm" action="${contextPath}/admin/authModify"
-			method="post">
+		<form name="form" class="frm" action="${contextPath}/admin/authModify" method="post">
 			<table class="responsive-table">
 				<%-- <caption>Top 10 Grossing Animated Films of All Time</caption> --%>
 				<thead>
 					<tr>
 					<tr class="table-dark">
 						<th scope="col">프로필</th>
-						<th scope="col">id</th>
+						<th scope="col">아이디</th>
 						<th scope="col">이름</th>
 						<th scope="col">가입일</th>
 						<th scope="col">최근 접속일</th>
@@ -133,7 +130,8 @@
 				</tbody>
 			</table>
 		</form>
-		<!--  -->
+		
+		<!-- 페이지 시작 -->
 		<ul class="pagination" style="justify-content: center;">
 			<c:if test="${totalCnt == null || totalCnt == 0}">
 				<div>게시물이 없습니다.</div>
@@ -144,11 +142,16 @@
 				</c:if>
 				
 				<c:forEach var="i" begin="${pr.beginPage}" end="${pr.endPage}">
+
 					<c:if test="${pr.sc.page == i }">
-						<li class="page-item active"><a class="page-link" href="${contextPath}/admin/member_management${pr.sc.getQueryString(i)}">${i}</a></li>
+						<c:if test="${pr.sc.page > 0 }">
+							<li class="page-item active"><a class="page-link" href="${contextPath}/admin/member_management${pr.sc.getQueryString(i)}">${i}</a></li>
+						</c:if>
 					</c:if>
 					<c:if test="${pr.sc.page != i }">
-						<li class="page-item"><a class="page-link" href="${contextPath}/admin/member_management${pr.sc.getQueryString(i)}">${i}</a></li>
+						<c:if test="${pr.sc.page > 0 }">
+							<li class="page-item"><a class="page-link" href="${contextPath}/admin/member_management${pr.sc.getQueryString(i)}">${i}</a></li>
+						</c:if>
 					</c:if>
 				</c:forEach>
 				
@@ -158,7 +161,8 @@
 				
 			</c:if>
 		</ul>
-		<!--  -->
+		<!-- 페이지 끝  -->
+		
 	</div>
 	<!-- 리스트 -->
 
