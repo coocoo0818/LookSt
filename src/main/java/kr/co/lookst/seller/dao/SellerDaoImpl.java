@@ -53,6 +53,13 @@ public class SellerDaoImpl implements SellerDao{
 	}
 
 	@Override
+	public int productDelete(Integer product_no) throws Exception {
+		// TODO Auto-generated method stub
+		return session.delete(namespace+"productDelete", product_no);
+	}
+
+	
+	@Override
 	public int searchResultCntR(SearchItem sc) throws Exception {
 		// TODO Auto-generated method stub
 		return session.selectOne(namespace+"searchResultCntR", sc);
@@ -66,7 +73,7 @@ public class SellerDaoImpl implements SellerDao{
 	}
 
 
-
+	
 	
 	
 }

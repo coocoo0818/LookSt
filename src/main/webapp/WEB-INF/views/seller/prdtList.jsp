@@ -14,6 +14,7 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"
 	type="text/javascript"></script>
 <meta name="viewport" content="width=device-width">
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.js"></script>
 <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"> -->
 <link
 	href="${pageContext.request.contextPath }/resources/seller/css/list.css"
@@ -38,7 +39,29 @@
 }
 </style>
 
+<script type="text/javascript">
+	$(document).ready(function() {
+		let page = ${pr.sc.page}
+		let pageSize = ${pr.sc.pageSize}
+		
+		$('.deleteP').click(function() {
+			let product_no = $(this).parent().attr("data-product_no")
 
+			$.ajax({
+				type : 'post',
+				url : '${contextPath}/seller/productDelete',
+				data : {
+					product_no : product_no
+				},
+				success : function(data) {
+					alert("상품이 삭제되었습니다.")
+					location.reload()
+				},
+				error : function() {alert("error")}
+			})
+		})
+	})
+</script>	
 
 
 
@@ -108,8 +131,8 @@
 						<td data-title="PtdtStock" data-type="currency"><input
 							type="number" class="ptdtStock" min="0" max="100"
 							value="${prdtListDto.prdt_option_stock }"></td>
-						<td data-title="Detail" data-type="currency"><button
-								type="button" class="btn btn-dark btn-sm">삭제</button></td>
+						<td data-title="Detail" data-type="currency" data-product_no="${prdtListDto.product_no }">
+						<input tabindex="-1" role="button" type="button" value="삭제" class="btn btn-dark btn-sm deleteP" id="deleteP" /></td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -120,9 +143,6 @@
 	<div class="container">
 		<div class="row">
 			<div>
-				<button type="button" class="btn btn-outline-dark"
-					style="float: left;">수정</button>
-				<button type="button" class="btn btn-outline-dark ms-1">저장</button>
 				<a role="button" class="btn btn-outline-danger ms-1"
 					href="<c:url value="/seller/registerPrdt"/>" style="float: right">상품
 					등록</a>

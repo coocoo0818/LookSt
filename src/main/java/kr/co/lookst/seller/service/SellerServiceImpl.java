@@ -51,6 +51,14 @@ public class SellerServiceImpl implements SellerService{
 		// TODO Auto-generated method stub
 		return sellerDao.searchSelectPageP(sc);
 	}
+	
+
+	@Override
+	public int productDelete(Integer product_no) throws Exception {
+		// TODO Auto-generated method stub
+		return sellerDao.productDelete(product_no);
+	}
+
 
 	@Override
 	public int getSearchResultCntR(SearchItem sc) throws Exception {
@@ -64,6 +72,7 @@ public class SellerServiceImpl implements SellerService{
 		// TODO Auto-generated method stub
 		return sellerDao.searchSelectPageR(sc);
 	}
+
 
 
 
