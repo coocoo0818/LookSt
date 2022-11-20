@@ -1,20 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>member management</title>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"
-	type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.js"></script>
 <meta name="viewport" content="width=device-width">
 <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"> -->
-<link rel="stylesheet"
-	href="${contextPath}/resources/admin/css/member_management.css">
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+<link rel="stylesheet" href="${contextPath}/resources/admin/css/member_management.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/fix/adminheader.jsp"%>
@@ -23,25 +19,24 @@
 
 	<div class="container">
 		<h2 id="orderpagetitle" class="disply-2 text-center py-4">MAGAZIN REQUEST</h2>
-		<!--  -->
-		<div class="row py-3">
-			<div class="col mt-1">
-				<select id="inputState" class="form-select form-select-md">
-					<option selected>전체</option>
-					<option value="1">글제목</option>
-					<option value="2">작성자</option>
-					<option value="3">번호</option>
-				</select>
-			</div>
-			<form class="d-flex col-md-9 mt-1">
-				<input class="form-control form-control me-1" type="text"
-					placeholder="Search" style="float: right;">
-				<button class="btn btn-secondary" type="submit">
-					<i class="d-flex fa fa-search"></i>
-				</button>
+		<!-- 검색 시작 -->
+		<div>
+			<form class="d-flex row py-3" action="${contextPath}/admin/magazin_request/" method="get">
+				<div class="col mt-1">
+					<select id="inputState" class="form-select form-select-md" name="option">
+						<option selected>전체</option>
+						<option value="T" ${pr.sc.option=='I' || pr.sc.option=='' ? "selected" : ""}>글제목</option>
+						<option value="W" ${pr.sc.option=='N'? "selected" : ""}>작성자</option>
+						<option value="N" ${pr.sc.option=='A'? "selected" : ""}>게시글번호</option>
+					</select>
+				</div>
+				<div class="d-flex col-md-9 mt-1">
+					<input class="form-control form-control me-1" type="text" placeholder="Search" style="float: right;" name="keyword" value="${param.keywork}" >
+					<button class="btn btn-secondary" type="submit"><i class="d-flex fa fa-search"></i></button>
+				</div>
 			</form>
 		</div>
-		<!--  -->
+		<!-- 검색 끝 -->
 
 		<table class="responsive-table">
 			<%-- <caption>Top 10 Grossing Animated Films of All Time</caption> --%>
@@ -61,152 +56,54 @@
       </tr> -->
 			</tfoot>
 			<tbody>
-				<tr class="table-primary">
-					<th class="text-center" scope="row">1</th>
-					<td class="text-center" data-title="profile"><a
-						href="http://en.wikipedia.org/wiki/Avatar_(2009_film)">이게 첫글 제목임</a></td>
-					<td class="text-center" data-title="name">김현민</td>
-					<td class="text-center" data-title="since" data-type="currency">2022-11-08</td>
-					<td class="text-center" data-title="button" data-type="currency">
-						<input class="btn btn-outline-primary btn-sm" tabindex="-1"
-						role="button" type="button" value="게시" /> <input
-						class="btn btn-outline-danger btn-sm" tabindex="-1" role="button"
-						type="button" value="거부" />
-					</td>
-				</tr>
-				<tr class="table-primary">
-					<th class="text-center" scope="row">2</th>
-					<td class="text-center" data-title="profile"><a
-						href="http://en.wikipedia.org/wiki/Avatar_(2009_film)">이게 첫글 제목임</a></td>
-					<td class="text-center" data-title="name">김현민</td>
-					<td class="text-center" data-title="since" data-type="currency">2022-11-08</td>
-					<td class="text-center" data-title="button" data-type="currency">
-						<input class="btn btn-outline-primary btn-sm" tabindex="-1"
-						role="button" type="button" value="게시" /> <input
-						class="btn btn-outline-danger btn-sm" tabindex="-1" role="button"
-						type="button" value="거부" />
-					</td>
-				</tr>
-				<tr class="table-primary">
-					<th class="text-center" scope="row">3</th>
-					<td class="text-center" data-title="profile"><a
-						href="http://en.wikipedia.org/wiki/Avatar_(2009_film)">이게 첫글 제목임</a></td>
-					<td class="text-center" data-title="name">김현민</td>
-					<td class="text-center" data-title="since" data-type="currency">2022-11-08</td>
-					<td class="text-center" data-title="button" data-type="currency">
-						<input class="btn btn-outline-primary btn-sm" tabindex="-1"
-						role="button" type="button" value="게시" /> <input
-						class="btn btn-outline-danger btn-sm" tabindex="-1" role="button"
-						type="button" value="거부" />
-					</td>
-				</tr>
-				<tr class="table-primary">
-					<th class="text-center" scope="row">4</th>
-					<td class="text-center" data-title="profile"><a
-						href="http://en.wikipedia.org/wiki/Avatar_(2009_film)">이게 첫글 제목임</a></td>
-					<td class="text-center" data-title="name">김현민</td>
-					<td class="text-center" data-title="since" data-type="currency">2022-11-08</td>
-					<td class="text-center" data-title="button" data-type="currency">
-						<input class="btn btn-outline-primary btn-sm" tabindex="-1"
-						role="button" type="button" value="게시" /> <input
-						class="btn btn-outline-danger btn-sm" tabindex="-1" role="button"
-						type="button" value="거부" />
-					</td>
-				</tr>
-				<tr class="table-primary">
-					<th class="text-center" scope="row">5</th>
-					<td class="text-center" data-title="profile"><a
-						href="http://en.wikipedia.org/wiki/Avatar_(2009_film)">이게 첫글 제목임</a></td>
-					<td class="text-center" data-title="name">김현민</td>
-					<td class="text-center" data-title="since" data-type="currency">2022-11-08</td>
-					<td class="text-center" data-title="button" data-type="currency">
-						<input class="btn btn-outline-primary btn-sm" tabindex="-1"
-						role="button" type="button" value="게시" /> <input
-						class="btn btn-outline-danger btn-sm" tabindex="-1" role="button"
-						type="button" value="거부" />
-					</td>
-				</tr>
-				<tr class="table-primary">
-					<th class="text-center" scope="row">6</th>
-					<td class="text-center" data-title="profile"><a
-						href="http://en.wikipedia.org/wiki/Avatar_(2009_film)">이게 첫글 제목임</a></td>
-					<td class="text-center" data-title="name">김현민</td>
-					<td class="text-center" data-title="since" data-type="currency">2022-11-08</td>
-					<td class="text-center" data-title="button" data-type="currency">
-						<input class="btn btn-outline-primary btn-sm" tabindex="-1"
-						role="button" type="button" value="게시" /> <input
-						class="btn btn-outline-danger btn-sm" tabindex="-1" role="button"
-						type="button" value="거부" />
-					</td>
-				</tr>
-				<tr class="table-primary">
-					<th class="text-center" scope="row">7</th>
-					<td class="text-center" data-title="profile"><a
-						href="http://en.wikipedia.org/wiki/Avatar_(2009_film)">이게 첫글 제목임</a></td>
-					<td class="text-center" data-title="name">김현민</td>
-					<td class="text-center" data-title="since" data-type="currency">2022-11-08</td>
-					<td class="text-center" data-title="button" data-type="currency">
-						<input class="btn btn-outline-primary btn-sm" tabindex="-1"
-						role="button" type="button" value="게시" /> <input
-						class="btn btn-outline-danger btn-sm" tabindex="-1" role="button"
-						type="button" value="거부" />
-					</td>
-				</tr>
-				<tr class="table-primary">
-					<th class="text-center" scope="row">8</th>
-					<td class="text-center" data-title="profile"><a
-						href="http://en.wikipedia.org/wiki/Avatar_(2009_film)">이게 첫글 제목임</a></td>
-					<td class="text-center" data-title="name">김현민</td>
-					<td class="text-center" data-title="since" data-type="currency">2022-11-08</td>
-					<td class="text-center" data-title="button" data-type="currency">
-						<input class="btn btn-outline-primary btn-sm" tabindex="-1"
-						role="button" type="button" value="게시" /> <input
-						class="btn btn-outline-danger btn-sm" tabindex="-1" role="button"
-						type="button" value="거부" />
-					</td>
-				</tr>
-				<tr class="table-primary">
-					<th class="text-center" scope="row">9</th>
-					<td class="text-center" data-title="profile"><a
-						href="http://en.wikipedia.org/wiki/Avatar_(2009_film)">이게 첫글 제목임</a></td>
-					<td class="text-center" data-title="name">김현민</td>
-					<td class="text-center" data-title="since" data-type="currency">2022-11-08</td>
-					<td class="text-center" data-title="button" data-type="currency">
-						<input class="btn btn-outline-primary btn-sm" tabindex="-1"
-						role="button" type="button" value="게시" /> <input
-						class="btn btn-outline-danger btn-sm" tabindex="-1" role="button"
-						type="button" value="거부" />
-					</td>
-				</tr>
-				<tr class="table-primary">
-					<th class="text-center" scope="row">10</th>
-					<td class="text-center" data-title="profile"><a
-						href="http://en.wikipedia.org/wiki/Avatar_(2009_film)">이게 첫글 제목임</a></td>
-					<td class="text-center" data-title="name">김현민</td>
-					<td class="text-center" data-title="since" data-type="currency">2022-11-08</td>
-					<td class="text-center" data-title="button" data-type="currency">
-						<input class="btn btn-outline-primary btn-sm" tabindex="-1"
-						role="button" type="button" value="게시" /> <input
-						class="btn btn-outline-danger btn-sm" tabindex="-1" role="button"
-						type="button" value="거부" />
-					</td>
-				</tr>
+				<c:forEach var="board_management" items="${board_management}">
+					<tr class="table-primary">
+						<th class="text-center" scope="row">${board_management.NBoardDto.board_no}</th>
+						<td class="text-center" data-title="profile">
+							<a href="http://en.wikipedia.org/wiki/Avatar_(2009_film)">${board_management.NBoardDto.board_title}</a>
+						</td>
+						<td class="text-center" data-title="name">${board_management.member_name}</td>
+						<td class="text-center" data-title="since" data-type="currency"><fmt:formatDate value="${board_management.NBoardDto.board_date}" pattern="yyyy-MM-dd" type="date" /></td>
+						<td class="text-center" data-title="button" data-type="currency">
+							<input class="btn btn-outline-primary btn-sm" tabindex="-1" role="button" type="button" value="게시" /> 
+							<input class="btn btn-outline-danger btn-sm" tabindex="-1" role="button" type="button" value="거부" />
+						</td>
+					</tr>
+				</c:forEach>
 			</tbody>
 		</table>
-		<!--  -->
+		
+		<!-- 페이지 시작 -->
 		<ul class="pagination" style="justify-content: center;">
-			<li class="page-item disabled"><a class="page-link" href="#">&laquo;</a>
-			</li>
-			<li class="page-item active"><a class="page-link" href="#">1</a>
-			</li>
-			<li class="page-item"><a class="page-link" href="#">2</a></li>
-			<li class="page-item"><a class="page-link" href="#">3</a></li>
-			<li class="page-item"><a class="page-link" href="#">4</a></li>
-			<li class="page-item"><a class="page-link" href="#">5</a></li>
-			<li class="page-item"><a class="page-link" href="#">&raquo;</a>
-			</li>
+			<c:if test="${totalCnt == null || totalCnt == 0}">
+				<div>게시물이 없습니다.</div>
+			</c:if>
+			<c:if test="${totalCnt != null || totalCnt != 0}">
+				<c:if test="${pr.showPrev}">
+					<li class="page-item disabled"><a class="page-link" href="${contextPath}/admin/member_management${pr.sc.getQueryString(pr.beginPage-1)}">&laquo;</a></li>
+				</c:if>
+				
+				<c:forEach var="i" begin="${pr.beginPage}" end="${pr.endPage}">
+
+					<c:if test="${pr.sc.page == i }">
+						<c:if test="${pr.sc.page > 0 }">
+							<li class="page-item active"><a class="page-link" href="${contextPath}/admin/member_management${pr.sc.getQueryString(i)}">${i}</a></li>
+						</c:if>
+					</c:if>
+					<c:if test="${pr.sc.page != i }">
+						<c:if test="${pr.sc.page > 0 }">
+							<li class="page-item"><a class="page-link" href="${contextPath}/admin/member_management${pr.sc.getQueryString(i)}">${i}</a></li>
+						</c:if>
+					</c:if>
+				</c:forEach>
+				
+				<c:if test="${pr.showNext}">
+					<li class="page-item"><a class="page-link" href="${contextPath}/admin/member_management${pr.sc.getQueryString(pr.endPage+1)}">&raquo;</a></li>
+				</c:if>
+				
+			</c:if>
 		</ul>
-		<!--  -->
+		<!-- 페이지 끝  -->
 	</div>
 	<!-- 리스트 -->
 
