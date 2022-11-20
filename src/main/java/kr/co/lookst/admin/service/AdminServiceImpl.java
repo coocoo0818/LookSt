@@ -43,5 +43,16 @@ public class AdminServiceImpl implements AdminService{
 	public List<MemMGMDto> getsearchResultPage(SearchItem sc) throws Exception {
 		return adminDao.searchSelectPage(sc);
 	}
+	
+	/* SNS 토탈 */
+	@Override
+	public int getPostSearchResultCnt(SearchItem sc) throws Exception {
+		return adminDao.postSearchResultCnt(sc);
+	}
+	/* SNS 검색 리스트 */
+	@Override
+	public List<MemMGMDto> getPostsearchResultPage(SearchItem sc) throws Exception {
+		return adminDao.postSearchResultPage(sc);
+	}
 
 }

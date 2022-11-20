@@ -17,5 +17,11 @@ public interface AdminDao {
 	int searchResultCnt(SearchItem sc) throws Exception;
 	/* 회원 검색 리스트 */
 	List<MemMGMDto> searchSelectPage(SearchItem sc) throws Exception;
+	
+	/* SNS 토탈 */
+	int postSearchResultCnt(SearchItem sc) throws Exception;
+	/* SNS 검색 리스트 */
+	List<MemMGMDto> postSearchResultPage(SearchItem sc) throws Exception;
+
 
 }
