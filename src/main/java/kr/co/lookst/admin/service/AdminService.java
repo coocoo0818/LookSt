@@ -16,4 +16,9 @@ public interface AdminService {
 	int getSearchResultCnt(SearchItem sc) throws Exception;
 	/* 회원 검색 리스트 */
 	List<MemMGMDto> getsearchResultPage(SearchItem sc) throws Exception;
+	
+	/* SNS 토탈 */
+	int getPostSearchResultCnt(SearchItem sc) throws Exception;
+	/* SNS 검색 리스트 */
+	List<MemMGMDto> getPostsearchResultPage(SearchItem sc) throws Exception;
 }

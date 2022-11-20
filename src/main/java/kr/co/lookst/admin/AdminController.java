@@ -72,16 +72,32 @@ public class AdminController {
 		return "redirect:/admin/member_management";
 	}
 	
-	@RequestMapping(value="/board_management", method=RequestMethod.GET)
-	public String adminFormBoard() {
-		return "admin/board_management";
-	}
-	
 	@RequestMapping(value="/sns_management", method=RequestMethod.GET)
-	public String adminFormSns() {
+	public String adminFormSns(SearchItem sc,Model model) {
+		try {
+			/* 포스트 페이징 시작 */
+			int totalCnt = adminService.getPostSearchResultCnt(sc);
+			model.addAttribute("totalCnt", totalCnt);
+			PageResolver pageResolver = new PageResolver(totalCnt, sc);
+			/* 포스트 페이징 끝 */
+			
+			/* 포스트 리스트 출력 */
+			List<MemMGMDto> member_management = adminService.getPostsearchResultPage(sc);
+			model.addAttribute("member_management", member_management);
+			model.addAttribute("pr", pageResolver);
+			/* 포스트 리스트 끝 */
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return "admin/sns_management";
 	}
-	
+
+	@RequestMapping(value="/board_management", method=RequestMethod.GET)
+	public String adminFormBoard() {
+		
+		return "admin/board_management";
+	}
+		
 	@RequestMapping(value="/magazin_request", method=RequestMethod.GET)
 	public String adminFormMagazinRequest() {
 		return "admin/magazin_request";

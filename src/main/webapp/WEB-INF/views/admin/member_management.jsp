@@ -64,7 +64,7 @@
 
 	<div class="container">
 		<h2 id="orderpagetitle" class="disply-2 text-center py-4">MEMBER MANAGEMENT</h2>
-		<!--  -->
+		<!-- 검색 시작 -->
 		<div>
 			<form class="d-flex row py-3" action="${contextPath}/admin/member_management/" method="get">
 				<div class="col mt-1">
@@ -81,7 +81,7 @@
 				</div>
 			</form>
 		</div>
-		<!--  -->
+		<!-- 검색 끝 -->
 
 		<form name="form" class="frm" action="${contextPath}/admin/authModify" method="post">
 			<table class="responsive-table">
