@@ -70,5 +70,15 @@ public class AdminServiceImpl implements AdminService{
 	public List<MemMGMDto> boardApplyingsearchResultPage(SearchItem sc) throws Exception {
 		return adminDao.boardApplyingsearchResultPage(sc);
 	}
+	/* 판매자 신청 토탈 */
+	@Override
+	public int sellerApplyingSearchResultCnt(SearchItem sc) throws Exception {
+		return adminDao.sellerApplyingSearchResultCnt(sc);
+	}
+	/* 판매자 신청 검색 리스트 */
+	@Override
+	public List<MemMGMDto> sellerApplyingsearchResultPage(SearchItem sc) throws Exception {
+		return adminDao.sellerApplyingsearchResultPage(sc);
+	}
 
 }
