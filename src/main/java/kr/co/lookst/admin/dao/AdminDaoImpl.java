@@ -47,14 +47,19 @@ public class AdminDaoImpl implements AdminDao{
 	public List<MemMGMDto> searchSelectPage(SearchItem sc) throws Exception {
 		return session.selectList(namespace + "searchSelectPage", sc);
 	}
-
+	/* SNS 토탈 */
 	@Override
 	public int postSearchResultCnt(SearchItem sc) throws Exception {
 		return session.selectOne(namespace + "postSearchResultCnt", sc);
 	}
-
+	/* SNS 검색 리스트 */
 	@Override
 	public List<MemMGMDto> postSearchResultPage(SearchItem sc) throws Exception {
 		return session.selectList(namespace + "postSearchResultPage", sc);
+	}
+	/* SNS 강제 삭제*/
+	@Override
+	public int postDelete(int postNo) throws Exception {
+		return session.delete(namespace + "postDelete", postNo);
 	}
 }

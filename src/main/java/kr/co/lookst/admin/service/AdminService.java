@@ -21,4 +21,6 @@ public interface AdminService {
 	int getPostSearchResultCnt(SearchItem sc) throws Exception;
 	/* SNS 검색 리스트 */
 	List<MemMGMDto> getPostsearchResultPage(SearchItem sc) throws Exception;
+	/* SNS 강제 삭제*/
+	int postDelete(int postNo) throws Exception;
 }

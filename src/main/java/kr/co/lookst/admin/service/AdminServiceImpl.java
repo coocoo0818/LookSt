@@ -55,4 +55,10 @@ public class AdminServiceImpl implements AdminService{
 		return adminDao.postSearchResultPage(sc);
 	}
 
+	/* SNS 강제 삭제*/
+	@Override
+	public int postDelete(int postNo) throws Exception {
+		return adminDao.postDelete(postNo);
+	}
+
 }

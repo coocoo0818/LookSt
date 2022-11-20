@@ -7,10 +7,30 @@
 <meta charset="UTF-8">
 <title>member management</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.js"></script>
 <meta name="viewport" content="width=device-width">
 <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"> -->
 <link rel="stylesheet" href="${contextPath}/resources/admin/css/member_management.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('.postDelete').click(function() {
+			let post_no = $(this).parent().parent().prev("span").attr("data-postNo") // <li>태그는 <button>의 부모임.
+			$.ajax({
+				type : 'post',
+				url : '${contextPath}/admin/postDelete',
+				data : {
+					post_no : post_no
+				},
+				success : function(data) {
+					alert("포스트가 삭제되었습니다.")
+					location.reload()
+				},
+				error : function() {alert("error")}		//에러가 발생했을 때 호출될 함수
+			})
+		})
+	})
+</script>
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/fix/adminheader.jsp"%>
@@ -42,14 +62,15 @@
 			<c:forEach var="member_management" items="${member_management}">
 				<div class="col">
 					<div class="card border-0">
-						<img src="${contextPath}/resources/post/img/${member_management.post_imgDto.post_img_img}" class="card-img-top rounded" onclick="location.href='${contextPath}/post/mylist'">
+						<img src="${contextPath}/resources/post/img/${member_management.post_imgDto.post_img_img}" class="card-img-top rounded position-relative" onclick="location.href='${contextPath}/post/mylist'">
+						<span class="position-absolute badge rounded-pill bg-light m-1" data-postNo="${member_management.post_imgDto.post_no}">No.${member_management.post_imgDto.post_no}</span>
 						<div class="card-body">
 							<div class="row justify-content-start d-flex">
 								<div class="col-3">
-									<img class="rounded-circle" style="width: 40px; height: 40px; margin-right: 1px;" src="${contextPath}/resources/fix/img/${member_management.profile_img}" onclick="location.href='./'" id="profile_img">
+									<img class="rounded-circle" style="width: 40px; height: 40px;" src="${contextPath}/resources/fix/img/${member_management.profile_img}" onclick="location.href='./'" id="profile_img">
 								</div>
 								<div class="col-6 my-auto" onclick="location.href='./'">${member_management.member_nick}</div>
-								<button class="col-3 btn btn-outline-danger btn-sm rounded">삭제</button>
+								<button class="col-3 btn btn-outline-danger btn-sm rounded postDelete" id="postDelete">삭제</button>
 							</div>
 						</div>
 					</div>
