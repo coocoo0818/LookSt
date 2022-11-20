@@ -72,4 +72,14 @@ public class AdminDaoImpl implements AdminDao{
 	public List<MemMGMDto> boardApplyingsearchResultPage(SearchItem sc) throws Exception {
 		return session.selectList(namespace + "boardApplyingsearchResultPage", sc);
 	}
+
+	@Override
+	public int sellerApplyingSearchResultCnt(SearchItem sc) throws Exception {
+		return session.selectOne(namespace + "sellerApplyingSearchResultCnt", sc);
+	}
+
+	@Override
+	public List<MemMGMDto> sellerApplyingsearchResultPage(SearchItem sc) throws Exception {
+		return session.selectList(namespace + "sellerApplyingsearchResultPage", sc);
+	}
 }

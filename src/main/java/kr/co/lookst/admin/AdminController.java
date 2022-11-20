@@ -123,7 +123,6 @@ public class AdminController {
 			/* 메거진 신청 리스트 출력 */
 			List<MemMGMDto> board_management = adminService.boardApplyingsearchResultPage(sc);
 			model.addAttribute("board_management", board_management);
-			System.out.println(board_management);
 			model.addAttribute("pr", pageResolver);
 			/* 메거진 신청 리스트 끝 */
 		} catch (Exception e) {
@@ -133,7 +132,22 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/seller_request", method=RequestMethod.GET)
-	public String adminFormSellerRequest() {
+	public String adminFormSellerRequest(SearchItem sc,Model model) {
+		try {
+			/* 판매자 신청 페이징 시작 */
+			int totalCnt = adminService.sellerApplyingSearchResultCnt(sc);
+			model.addAttribute("totalCnt", totalCnt);
+			PageResolver pageResolver = new PageResolver(totalCnt, sc);
+			/* 판매자 신청 페이징 끝 */
+			
+			/* 판매자 신청 리스트 출력 */
+			List<MemMGMDto> seller_management = adminService.sellerApplyingsearchResultPage(sc);
+			model.addAttribute("seller_management", seller_management);
+			model.addAttribute("pr", pageResolver);
+			/* 판매자 신청 리스트 끝 */
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return "admin/seller_request";
 	}
 }

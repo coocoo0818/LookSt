@@ -43,7 +43,7 @@
 			<thead>
 				<tr>
 				<tr class="table-dark">
-					<th scope="col">순번</th>
+					<th scope="col">글번호</th>
 					<th scope="col">글제목</th>
 					<th scope="col">작성자</th>
 					<th scope="col">작성일</th>
@@ -59,12 +59,12 @@
 				<c:forEach var="board_management" items="${board_management}">
 					<tr class="table-primary">
 						<th class="text-center" scope="row">${board_management.NBoardDto.board_no}</th>
-						<td class="text-center" data-title="profile">
+						<td class="text-center" data-title="글제목">
 							<a href="http://en.wikipedia.org/wiki/Avatar_(2009_film)">${board_management.NBoardDto.board_title}</a>
 						</td>
-						<td class="text-center" data-title="name">${board_management.member_name}</td>
-						<td class="text-center" data-title="since" data-type="currency"><fmt:formatDate value="${board_management.NBoardDto.board_date}" pattern="yyyy-MM-dd" type="date" /></td>
-						<td class="text-center" data-title="button" data-type="currency">
+						<td class="text-center" data-title="작성자">${board_management.member_name}</td>
+						<td class="text-center" data-title="작성일" data-type="currency"><fmt:formatDate value="${board_management.NBoardDto.board_date}" pattern="yyyy-MM-dd" type="date" /></td>
+						<td class="text-center" data-title="관리" data-type="currency">
 							<input class="btn btn-outline-primary btn-sm" tabindex="-1" role="button" type="button" value="게시" /> 
 							<input class="btn btn-outline-danger btn-sm" tabindex="-1" role="button" type="button" value="거부" />
 						</td>

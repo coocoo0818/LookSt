@@ -29,4 +29,9 @@ public interface AdminDao {
 	int boardApplyingSearchResultCnt(SearchItem sc) throws Exception;
 	/* 메거진 신청 검색 리스트 */
 	List<MemMGMDto> boardApplyingsearchResultPage(SearchItem sc) throws Exception;
+	
+	/* 판매자 신청 토탈 */
+	int sellerApplyingSearchResultCnt(SearchItem sc) throws Exception;
+	/* 판매자 신청 검색 리스트 */
+	List<MemMGMDto> sellerApplyingsearchResultPage(SearchItem sc) throws Exception;
 }
