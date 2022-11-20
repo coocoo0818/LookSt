@@ -72,6 +72,7 @@ public class AdminController {
 		return "redirect:/admin/member_management";
 	}
 	
+	/* SNS 관리 페이지 이동 */
 	@RequestMapping(value="/sns_management", method=RequestMethod.GET)
 	public String adminFormSns(SearchItem sc,Model model) {
 		try {
@@ -91,7 +92,19 @@ public class AdminController {
 		}
 		return "admin/sns_management";
 	}
-
+	
+	/* SNS 관리 강제 삭제 */
+	@RequestMapping(value="/postDelete", method={RequestMethod.POST})
+	public String adminFormPostDelete(Model model,  
+			@RequestParam("post_no") int post_no) {
+		try {
+			adminService.postDelete(post_no);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:/admin/sns_management";
+	}
+	
 	@RequestMapping(value="/board_management", method=RequestMethod.GET)
 	public String adminFormBoard() {
 		
