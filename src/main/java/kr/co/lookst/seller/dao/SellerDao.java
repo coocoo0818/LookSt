@@ -20,7 +20,11 @@ public interface SellerDao {
 
 	List<PrdtListDto> searchSelectPageP(SearchItem sc) throws Exception;
 	
+	int productDelete(Integer product_no) throws Exception;
+	
 	int searchResultCntR(SearchItem sc) throws Exception;
 
 	List<OrderListDto> searchSelectPageR (SearchItem sc) throws Exception;
+
+	
 }

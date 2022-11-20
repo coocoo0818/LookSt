@@ -43,6 +43,19 @@ public class SellerController {
 
 	}
 	
+	@RequestMapping(value="/productDelete", method={RequestMethod.POST})
+	public String adminFormMemberKickOut(Model m,  
+			@RequestParam("product_no") Integer product_no) {
+		System.out.println(product_no);
+		
+		try {
+			sellerService.productDelete(product_no);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:/seller/prdtList";
+	}
+	
 	@GetMapping("/orderList")
 	public String orderpage(SearchItem sc, Model m) {
 		

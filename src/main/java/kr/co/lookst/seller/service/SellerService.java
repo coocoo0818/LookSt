@@ -19,7 +19,11 @@ public interface SellerService {
 	
 	List<PrdtListDto> getsearchResultPageP(SearchItem sc) throws Exception;
 	
+	int productDelete(Integer product_no) throws Exception;
+	
 	int getSearchResultCntR (SearchItem sc) throws Exception;
 	
 	List<OrderListDto> getsearchResultPageR(SearchItem sc) throws Exception;
+
+	
 }
