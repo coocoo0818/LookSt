@@ -62,4 +62,14 @@ public class AdminDaoImpl implements AdminDao{
 	public int postDelete(int postNo) throws Exception {
 		return session.delete(namespace + "postDelete", postNo);
 	}
+	/* 메거진 신청 토탈 */
+	@Override
+	public int boardApplyingSearchResultCnt(SearchItem sc) throws Exception {
+		return session.selectOne(namespace + "boardApplyingSearchResultCnt", sc);
+	}
+	/* 메거진 신청 검색 리스트 */
+	@Override
+	public List<MemMGMDto> boardApplyingsearchResultPage(SearchItem sc) throws Exception {
+		return session.selectList(namespace + "boardApplyingsearchResultPage", sc);
+	}
 }

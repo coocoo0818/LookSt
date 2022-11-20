@@ -60,5 +60,15 @@ public class AdminServiceImpl implements AdminService{
 	public int postDelete(int postNo) throws Exception {
 		return adminDao.postDelete(postNo);
 	}
+	/* 메거진 신청 토탈 */
+	@Override
+	public int boardApplyingSearchResultCnt(SearchItem sc) throws Exception {
+		return adminDao.boardApplyingSearchResultCnt(sc);
+	}
+	/* 메거진 신청 검색 리스트 */
+	@Override
+	public List<MemMGMDto> boardApplyingsearchResultPage(SearchItem sc) throws Exception {
+		return adminDao.boardApplyingsearchResultPage(sc);
+	}
 
 }

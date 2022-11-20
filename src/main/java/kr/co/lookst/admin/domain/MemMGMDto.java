@@ -2,6 +2,7 @@ package kr.co.lookst.admin.domain;
 
 import java.util.Date;
 
+import kr.co.lookst.main.domain.NBoardDto;
 import kr.co.lookst.post.domain.Post_imgDto;
 import lombok.Data;
 
@@ -23,7 +24,8 @@ public class MemMGMDto {
 	private String profile_img;
 	private String mem_auth_auth;
 	private Post_imgDto post_imgDto;
-
+	private NBoardDto nBoardDto;
+	
 	public MemMGMDto() {
 	}
 

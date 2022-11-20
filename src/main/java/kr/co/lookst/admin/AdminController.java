@@ -112,7 +112,23 @@ public class AdminController {
 	}
 		
 	@RequestMapping(value="/magazin_request", method=RequestMethod.GET)
-	public String adminFormMagazinRequest() {
+	public String adminFormMagazinRequest(SearchItem sc,Model model) {
+		try {
+			/* 메거진 신청 페이징 시작 */
+			int totalCnt = adminService.boardApplyingSearchResultCnt(sc);
+			model.addAttribute("totalCnt", totalCnt);
+			PageResolver pageResolver = new PageResolver(totalCnt, sc);
+			/* 메거진 신청 페이징 끝 */
+			
+			/* 메거진 신청 리스트 출력 */
+			List<MemMGMDto> board_management = adminService.boardApplyingsearchResultPage(sc);
+			model.addAttribute("board_management", board_management);
+			System.out.println(board_management);
+			model.addAttribute("pr", pageResolver);
+			/* 메거진 신청 리스트 끝 */
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return "admin/magazin_request";
 	}
 	

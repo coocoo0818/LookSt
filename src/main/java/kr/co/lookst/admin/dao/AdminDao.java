@@ -25,5 +25,8 @@ public interface AdminDao {
 	/* SNS 강제 삭제*/
 	int postDelete(int postNo) throws Exception;
 
-
+	/* 메거진 신청 토탈 */
+	int boardApplyingSearchResultCnt(SearchItem sc) throws Exception;
+	/* 메거진 신청 검색 리스트 */
+	List<MemMGMDto> boardApplyingsearchResultPage(SearchItem sc) throws Exception;
 }
