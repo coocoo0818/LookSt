@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import kr.co.lookst.post.domain.PostDto;
 import kr.co.lookst.post.domain.Post_imgDto;
 import kr.co.lookst.post.domain.ProdInfoDto;
 import kr.co.lookst.post.domain.snslist_infoDto;
@@ -26,11 +27,15 @@ public class PostController {
 		try {
 			post_no =1;
 			List<ProdInfoDto> postImgListCarousel = postService.postImgListCarousel(post_no);
+			System.out.println(post_no);
 			m.addAttribute("postImgListCarousel", postImgListCarousel);			
 			
 			
 			List<snslist_infoDto> postImgListPrdt = postService.postImgListPrdt(post_no);
 			m.addAttribute("postImgListPrdt", postImgListPrdt);	
+			
+			List<PostDto> snscommentlist = postService.snscommentlist(post_no); 
+			m.addAttribute("snscommentlist", snscommentlist);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -38,6 +43,18 @@ public class PostController {
 		
 		return "/post/my_list";
 	}
+	
+	/*
+	 * @GetMapping("/mylist") public String my_list_comment(Model m, Integer
+	 * post_no) { try { post_no = 1; List<PostDto> snscommentlist =
+	 * postService.snscommentlist(post_no); m.addAttribute("snscommentlist",
+	 * snscommentlist);
+	 * 
+	 * } catch (Exception e) { e.printStackTrace(); }
+	 * 
+	 * return "/post/my_list";}
+	 */
+	
 	
 	@GetMapping("/sns_list")
 	public String sns_main(Model m) {

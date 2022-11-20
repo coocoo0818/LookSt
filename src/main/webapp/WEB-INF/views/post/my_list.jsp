@@ -195,32 +195,34 @@
 						<p class="tag_text" onclick="location.href='./'" style="display: inline;"><b>#조던</b></p>
 					</div>
 					<!-- 댓글 -->
-					<div class="comment_box" style="display: inline;">
-                    	<div class="profile_info" style="display: flex; ">
-                     		<img src="${pageContext.request.contextPath }/resources/post/img/프사2.jpg" id="profile_img" >
-                   			<div class="comment_detail" style="margin-left: 10px;">
-	                      		<div class="comment_main">
-	                        		<span class="user_nm">ezen_0111</span>
-	                        		<span class="comment_txt">감망이감망이감망이</span>
-	                      		</div>
-	                      		<div class="sub">
-	                        		<span class="upload-time">8분전</span>
-                      			</div>
-                    		</div>
-                   		</div>
-                   		<div class="profile_info" style="display: flex; ">
-                     		<img src="${pageContext.request.contextPath }/resources/post/img/프사2.jpg" id="profile_img" >
-                   			<div class="comment_detail" style="margin-left: 10px;">
-	                      		<div class="comment_main">
-	                        		<span class="user_nm">ezen_0111</span>
-	                        		<span class="comment_txt">감망이감망이감망이</span>
-	                      		</div>
-	                      		<div class="sub">
-	                        		<span class="upload-time">8분전</span>
-                      			</div>
-                    		</div>
-                   		</div>
-                  	</div>
+						<div class="comment_box" style="display: inline;">
+							<c:forEach var="snscommentlist" items="${snscommentlist}">
+			                    <div class="profile_info" style="display: flex; ">
+			                     	<img src="${pageContext.request.contextPath }/resources/post/img/${snscommentlist.profile_img}" id="profile_img" >
+			                   		<div class="comment_detail" style="margin-left: 10px;">
+				                      	<div class="comment_main">
+				                        	<span class="user_nm">${snscommentlist.member_nick}</span>
+				                        	<span class="comment_txt">${snscommentlist.sns_comment_con}</span>
+				                      	</div>
+				                      	<div class="sub">
+				                        	<span class="upload-time">${snscommentlist.sns_comment_date}</span>
+			                      		</div>
+			                    	</div>
+			                   	</div>
+		                   		<div class="profile_info" style="display: flex; ">
+		                     		<img src="${pageContext.request.contextPath }/resources/post/img/프사2.jpg" id="profile_img" >
+		                   			<div class="comment_detail" style="margin-left: 10px;">
+			                      		<div class="comment_main">
+				                        	<span class="user_nm">ezen_0111</span>
+				                        	<span class="comment_txt">감망이감망이감망이</span>
+			                      		</div>
+			                      		<div class="sub">
+			                        		<span class="upload-time">8분전</span>
+		                      			</div>
+		                    		</div>
+		                   		</div>
+	                   		</c:forEach>
+	                  	</div>
                   	<button type="button" class="btn btn-secondary">댓글 더보기...</button>
 				</div>
 			</div>
