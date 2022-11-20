@@ -1,17 +1,19 @@
 package kr.co.lookst.post.domain;
 
+import java.util.Date;
+
 public class PostDto {
 
 	private String member_nick;
 	private String sns_comment_con;
 	private String profile_img;
-	private int sns_comment_date;
+	private Date sns_comment_date;
 	
 	public PostDto() {
 		
 	}
 
-	public PostDto(String member_nick, String sns_comment_con, String profile_img, int sns_comment_date) {
+	public PostDto(String member_nick, String sns_comment_con, String profile_img, Date sns_comment_date) {
 		super();
 		this.member_nick = member_nick;
 		this.sns_comment_con = sns_comment_con;
@@ -43,11 +45,11 @@ public class PostDto {
 		this.profile_img = profile_img;
 	}
 
-	public int getSns_comment_date() {
+	public Date getSns_comment_date() {
 		return sns_comment_date;
 	}
 
-	public void setSns_comment_date(int sns_comment_date) {
+	public void setSns_comment_date(Date sns_comment_date) {
 		this.sns_comment_date = sns_comment_date;
 	}
 
