@@ -41,7 +41,6 @@
 		<table class="responsive-table">
 			<%-- <caption>Top 10 Grossing Animated Films of All Time</caption> --%>
 			<thead>
-				<tr>
 				<tr class="table-dark">
 					<th scope="col">글번호</th>
 					<th scope="col">글제목</th>
@@ -56,17 +55,17 @@
       </tr> -->
 			</tfoot>
 			<tbody>
-				<c:forEach var="board_management" items="${board_management}">
+				<c:forEach var="magazin_management" items="${magazin_management}">
 					<tr class="table-primary">
-						<th class="text-center" scope="row">${board_management.NBoardDto.board_no}</th>
+						<th class="text-center" scope="row">${magazin_management.NBoardDto.board_no}</th>
 						<td class="text-center" data-title="글제목">
-							<a href="http://en.wikipedia.org/wiki/Avatar_(2009_film)">${board_management.NBoardDto.board_title}</a>
+							<a href="http://en.wikipedia.org/wiki/Avatar_(2009_film)">${magazin_management.NBoardDto.board_title}</a>
 						</td>
-						<td class="text-center" data-title="작성자">${board_management.member_name}</td>
-						<td class="text-center" data-title="작성일" data-type="currency"><fmt:formatDate value="${board_management.NBoardDto.board_date}" pattern="yyyy-MM-dd" type="date" /></td>
+						<td class="text-center" data-title="작성자">${magazin_management.member_name}</td>
+						<td class="text-center" data-title="작성일" data-type="currency"><fmt:formatDate value="${magazin_management.NBoardDto.board_date}" pattern="yyyy-MM-dd" type="date" /></td>
 						<td class="text-center" data-title="관리" data-type="currency">
-							<input class="btn btn-outline-primary btn-sm" tabindex="-1" role="button" type="button" value="게시" /> 
-							<input class="btn btn-outline-danger btn-sm" tabindex="-1" role="button" type="button" value="거부" />
+							<input class="btn btn-outline-primary btn-sm rounded" tabindex="-1" role="button" type="button" value="게시" /> 
+							<input class="btn btn-outline-danger btn-sm rounded" tabindex="-1" role="button" type="button" value="거부" />
 						</td>
 					</tr>
 				</c:forEach>
@@ -80,25 +79,25 @@
 			</c:if>
 			<c:if test="${totalCnt != null || totalCnt != 0}">
 				<c:if test="${pr.showPrev}">
-					<li class="page-item disabled"><a class="page-link" href="${contextPath}/admin/member_management${pr.sc.getQueryString(pr.beginPage-1)}">&laquo;</a></li>
+					<li class="page-item disabled"><a class="page-link" href="${contextPath}/admin/magazin_request${pr.sc.getQueryString(pr.beginPage-1)}">&laquo;</a></li>
 				</c:if>
 				
 				<c:forEach var="i" begin="${pr.beginPage}" end="${pr.endPage}">
 
 					<c:if test="${pr.sc.page == i }">
 						<c:if test="${pr.sc.page > 0 }">
-							<li class="page-item active"><a class="page-link" href="${contextPath}/admin/member_management${pr.sc.getQueryString(i)}">${i}</a></li>
+							<li class="page-item active"><a class="page-link" href="${contextPath}/admin/magazin_request${pr.sc.getQueryString(i)}">${i}</a></li>
 						</c:if>
 					</c:if>
 					<c:if test="${pr.sc.page != i }">
 						<c:if test="${pr.sc.page > 0 }">
-							<li class="page-item"><a class="page-link" href="${contextPath}/admin/member_management${pr.sc.getQueryString(i)}">${i}</a></li>
+							<li class="page-item"><a class="page-link" href="${contextPath}/admin/magazin_request${pr.sc.getQueryString(i)}">${i}</a></li>
 						</c:if>
 					</c:if>
 				</c:forEach>
 				
 				<c:if test="${pr.showNext}">
-					<li class="page-item"><a class="page-link" href="${contextPath}/admin/member_management${pr.sc.getQueryString(pr.endPage+1)}">&raquo;</a></li>
+					<li class="page-item"><a class="page-link" href="${contextPath}/admin/magazin_request${pr.sc.getQueryString(pr.endPage+1)}">&raquo;</a></li>
 				</c:if>
 				
 			</c:if>

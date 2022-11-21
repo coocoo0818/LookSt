@@ -115,14 +115,26 @@
 							<td class="text-center" data-title="update-date" data-type="currency"><fmt:formatDate value="${member_management.member_updt}" pattern="yyyy-MM-dd" type="date" /></td>
 							<td class="text-center auth" data-title="Auth" data-type="currency">
 								<select class="form-select form-select-sm" aria-label=".form-select-sm example" id="auth_auth${status.index}">
-									<option value="member" <c:if test="${member_management.mem_auth_auth eq 'member'}">disabled='disabled' selected='selected' style='color: red;'</c:if>>member<c:if test="${member_management.mem_auth_auth eq 'member'}"> 🍊 </c:if></option>
-									<option value="seller" <c:if test="${member_management.mem_auth_auth eq 'seller'}">disabled='disabled' selected='selected' style='color: red;'</c:if>>seller<c:if test="${member_management.mem_auth_auth eq 'seller'}"> 🍊 </c:if></option>
-									<option value="admin" <c:if test="${member_management.mem_auth_auth eq 'admin'}">disabled='disabled' selected='selected' style='color: red;'</c:if>>admin<c:if test="${member_management.mem_auth_auth eq 'admin'}"> 🍊 </c:if></option>
+									<c:if test="${member_management.mem_auth_auth eq 'member'}">
+					        			<option value="member" ${member_management.mem_auth_auth=='member'? "selected" : ""} disabled="disabled" selected="selected" style="color: red;">member 🍊 </option>
+					        			<option value="seller" ${member_management.mem_auth_auth=='seller'? "selected" : ""}>seller</option>
+					        			<option value="admin" ${member_management.mem_auth_auth=='admin'? "selected" : ""}>admin</option>
+					        		</c:if>
+									<c:if test="${member_management.mem_auth_auth eq 'seller'}">
+										<option value="member" ${member_management.mem_auth_auth=='member'? "selected" : ""}>member</option>
+					        			<option value="seller" ${member_management.mem_auth_auth=='seller'? "selected" : ""} disabled="disabled" selected="selected" style="color: red;">seller 🍊 </option>
+					        			<option value="admin" ${member_management.mem_auth_auth=='admin'? "selected" : ""}>admin</option>
+									</c:if>
+									<c:if test="${member_management.mem_auth_auth eq 'admin'}">
+										<option value="member" ${member_management.mem_auth_auth=='member'? "selected" : ""}>member</option>
+					        			<option value="seller" ${member_management.mem_auth_auth=='seller'? "selected" : ""}>seller</option>
+					        			<option value="admin" ${member_management.mem_auth_auth=='admin'? "selected" : ""} disabled="disabled" selected="selected" style="color: red;">admin 🍊 </option>
+									</c:if>
 								</select>
 							</td>
 							<td class="text-center" data-title="button" data-type="currency" data-memberid="${member_management.member_id}" data-auth="${member_management.mem_auth_auth}" data-index="${status.index}">
-								<input class="btn btn-outline-primary btn-sm authModify" tabindex="-1" role="button" type="button" value="수정" id="authModify"/> 
-								<input class="btn btn-outline-danger btn-sm kickOut" tabindex="-1" role="button" type="button" value="삭제" id="kickOut"/>
+								<input class="btn btn-outline-primary btn-sm rounded authModify" tabindex="-1" role="button" type="button" value="수정" id="authModify"/> 
+								<input class="btn btn-outline-danger btn-sm rounded kickOut" tabindex="-1" role="button" type="button" value="삭제" id="kickOut"/>
 							</td>
 						</tr>
 					</c:forEach>

@@ -26,13 +26,11 @@ public class AdminServiceImpl implements AdminService{
 	public int authModify(String member_id, String auth) throws Exception {
 		return adminDao.memberAuthModify(member_id, auth);
 	}
-
 	/* 회원 강퇴 */
 	@Override
 	public int memberKickOut(String member_id) throws Exception {
 		return adminDao.memberKickOut(member_id);
 	}
-
 	/* 회원 토탈 */
 	@Override
 	public int getSearchResultCnt(SearchItem sc) throws Exception {
@@ -54,12 +52,23 @@ public class AdminServiceImpl implements AdminService{
 	public List<MemMGMDto> getPostsearchResultPage(SearchItem sc) throws Exception {
 		return adminDao.postSearchResultPage(sc);
 	}
-
 	/* SNS 강제 삭제*/
 	@Override
 	public int postDelete(int postNo) throws Exception {
 		return adminDao.postDelete(postNo);
 	}
+	
+	/* 게시판 토탈 */
+	@Override
+	public int boardSearchResultCnt(SearchItem sc) throws Exception {
+		return adminDao.boardSearchResultCnt(sc);
+	}
+	/* 게시판 검색 리스트 */
+	@Override
+	public List<MemMGMDto> boardSearchResultPage(SearchItem sc) throws Exception {
+		return adminDao.boardSearchResultPage(sc);
+	}
+	
 	/* 메거진 신청 토탈 */
 	@Override
 	public int boardApplyingSearchResultCnt(SearchItem sc) throws Exception {
@@ -70,6 +79,7 @@ public class AdminServiceImpl implements AdminService{
 	public List<MemMGMDto> boardApplyingsearchResultPage(SearchItem sc) throws Exception {
 		return adminDao.boardApplyingsearchResultPage(sc);
 	}
+	
 	/* 판매자 신청 토탈 */
 	@Override
 	public int sellerApplyingSearchResultCnt(SearchItem sc) throws Exception {
@@ -80,5 +90,7 @@ public class AdminServiceImpl implements AdminService{
 	public List<MemMGMDto> sellerApplyingsearchResultPage(SearchItem sc) throws Exception {
 		return adminDao.sellerApplyingsearchResultPage(sc);
 	}
+
+
 
 }

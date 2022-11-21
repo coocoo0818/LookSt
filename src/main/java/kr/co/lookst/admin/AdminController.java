@@ -42,7 +42,6 @@ public class AdminController {
 		}
 		return "admin/member_management";
 	}
-	
 	/* 회원 권한 변경 */
 	@RequestMapping(value="/authModify", method={RequestMethod.POST})
 	public String adminFormMemberModify(Model model,  
@@ -92,7 +91,6 @@ public class AdminController {
 		}
 		return "admin/sns_management";
 	}
-	
 	/* SNS 관리 강제 삭제 */
 	@RequestMapping(value="/postDelete", method={RequestMethod.POST})
 	public String adminFormPostDelete(Model model,  
@@ -105,12 +103,28 @@ public class AdminController {
 		return "redirect:/admin/sns_management";
 	}
 	
+	/* 게시판 관리 페이지 이동 */
 	@RequestMapping(value="/board_management", method=RequestMethod.GET)
-	public String adminFormBoard() {
-		
+	public String adminFormBoard(SearchItem sc,Model model) {
+		try {
+			/* 게시판 페이징 시작 */
+			int totalCnt = adminService.boardSearchResultCnt(sc);
+			model.addAttribute("totalCnt", totalCnt);
+			PageResolver pageResolver = new PageResolver(totalCnt, sc);
+			/* 게시판 페이징 끝 */
+			
+			/* 게시판 리스트 출력 */
+			List<MemMGMDto> board_management = adminService.boardSearchResultPage(sc);
+			model.addAttribute("board_management", board_management);
+			model.addAttribute("pr", pageResolver);
+			/* 게시판 리스트 끝 */
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return "admin/board_management";
 	}
 		
+	/* 매거진 신청 페이지 이동 */
 	@RequestMapping(value="/magazin_request", method=RequestMethod.GET)
 	public String adminFormMagazinRequest(SearchItem sc,Model model) {
 		try {
@@ -121,8 +135,8 @@ public class AdminController {
 			/* 메거진 신청 페이징 끝 */
 			
 			/* 메거진 신청 리스트 출력 */
-			List<MemMGMDto> board_management = adminService.boardApplyingsearchResultPage(sc);
-			model.addAttribute("board_management", board_management);
+			List<MemMGMDto> magazin_management = adminService.boardApplyingsearchResultPage(sc);
+			model.addAttribute("magazin_management", magazin_management);
 			model.addAttribute("pr", pageResolver);
 			/* 메거진 신청 리스트 끝 */
 		} catch (Exception e) {
@@ -131,6 +145,7 @@ public class AdminController {
 		return "admin/magazin_request";
 	}
 	
+	/* 판매자 신청 페이지 이동 */
 	@RequestMapping(value="/seller_request", method=RequestMethod.GET)
 	public String adminFormSellerRequest(SearchItem sc,Model model) {
 		try {
