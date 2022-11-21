@@ -1,6 +1,6 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -116,7 +116,13 @@
 						<td data-title="PrdtInfo">${orderListDto.product_name }[${orderListDto.product_no }]</td>
 						<td data-title="TotalPay" data-type="currency">${orderListDto.payment }</td>
 						<td data-title="PayDate" data-type="currency">${orderListDto.prdt_order_date }</td>
-						<td data-title="OrderStaus" data-type="currency">${orderListDto.prdt_order_type }</td>
+						<td data-title="OrderStaus" data-type="currency">
+						<c:if test="${orderListDto.prdt_order_type eq 'W'}">결제대기</c:if>
+						<c:if test="${orderListDto.prdt_order_type eq 'C'}">결제완료</c:if>
+						<c:if test="${orderListDto.prdt_order_type eq 'P'}">배송준비중</c:if>
+						<c:if test="${orderListDto.prdt_order_type eq 'S'}">배송중</c:if>
+						<c:if test="${orderListDto.prdt_order_type eq 'Y'}">배송완료</c:if>
+						</td>
 						<td data-title="Detail" data-type="currency"><button
 								type="button" class="btn btn-outline-dark btn-sm myModal"
 								id="myModal" data-bs-toggle="modal"
