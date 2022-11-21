@@ -100,13 +100,14 @@
 		<!-- sns 리스트 상세#1 -->
 		<div class="list_container row justify-content-center">
 			<div class="card mb-3 w-50 p-3 " style="position: relative;">
+			<c:forEach var="postComTaglist" items="${postComTaglist}">
 				<!-- sns 프로필/닉네임 -->
 				<div class="d-flex justify-content-between">
 					<div class=" mb-2 mt-2 align-self-center">
 						<img
-							src="${pageContext.request.contextPath }/resources/post/img/프사2.jpg "
+							src="${pageContext.request.contextPath }/resources/post/img/${postComTaglist.profile_img} "
 							onclick="location.href='./'" id="profile_img">
-						<p class="my-auto d-inline ms-3" onclick="location.href='./'">MyMelody</p>
+						<p class="my-auto d-inline ms-3" onclick="location.href='./'">${postComTaglist.member_nick}</p>
 					</div>
 					<!-- sns 팔로우버튼 -->
 					<button type="button"
@@ -149,8 +150,6 @@
 					<p class="card-text">
 						<small class="text-muted">Last updated 3 mins ago</small>
 					</p>
-					<p class="card-title"><b>상품태그 2개</b></p>
-					
 						<div class="row row-cols-1 row-cols-md-3 g-4">
 						<c:forEach var="postImgListPrdt" items="${postImgListPrdt}">
 						  <div class="col">
@@ -188,12 +187,13 @@
 					<!-- 좋아요 개수-->
 					<p class="card-title"><b>좋아요 10개</b></p>
 					<!-- 게시글 / 태그 -->
-					<p class="card-text">EZEN</p>
+					<p class="card-text">${postComTaglist.post_content}</p>
 					<div class="tag_link">
-						<p class="tag_text" onclick="location.href='./'" style="display: inline;"><b>#LOOKST챌린지</b></p>
-						<p class="tag_text" onclick="location.href='./'" style="display: inline;"><b>#나이키</b></p>
-						<p class="tag_text" onclick="location.href='./'" style="display: inline;"><b>#조던</b></p>
+						<p class="tag_text" onclick="location.href='./'" style="display: inline;"><b>${postComTaglist.tag_content}</b></p>
+						<!--  <p class="tag_text" onclick="location.href='./'" style="display: inline;"><b>#나이키</b></p>
+						<p class="tag_text" onclick="location.href='./'" style="display: inline;"><b>#조던</b></p>-->
 					</div>
+			</c:forEach>
 					<!-- 댓글 -->
 						<div class="comment_box" style="display: inline;">
 							<c:forEach var="snscommentlist" items="${snscommentlist}">
