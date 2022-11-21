@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,75 +31,17 @@
 	width: 100%;
 	height: 400px;
 	object-fit: cover;
-	border-radius: 7%;
 }
 
 @media ( max-width : 576px;) {
 }
 </style>
 
-<!-- <script type="text/javascript"> 
-// 	$(document).ready(function(){
-		
-// 		let member_id = @database
-		
-// 		let showList = function (member_id) {
-// 			$.ajax({
-// 				type: 'GET', //요청 메서드
-// 				url: '/lookst/sns/snsProfile?'+member_id+'_follwer',	// 요청 URI
-// 				success: function (result) {		// 서버로부터 응답이 도착하면 호출될 함수
-// 					$("#followerList").html(toHtml(result))	// result는 서버가 전송한 데이터
-// 				},
-// 				error: function() { alert("ERROR")}	// 에러가 발생할 때, 호출될 함수				
-// 			})
-// 		}
-		
-// 		let toHtml = function(followers) {
-// 			let tmp = "<ul style='display: block;'>"
-			
-// 			pro_follwer.forEach(function(follower) {
-// 				tmp += '<li  ' 
-// 				tmp += ' data-follower=' + pro_follwer.follower + '>'
-// 				tmp += ' follower=<span class="follower" >' + pro_follwer.follower + '</span>'
-// 				tmp += '</li>'
-// 			})
-// 			return tmp += "</ul>"
-// 		}
-// // 		var followerUrl='';
-// // 		$('.show').click(function(){
-// // 			followerUrl = $(this).val();
-// // 			console.log(followerUrl);
-// // 			$.ajax({			
-// // 				url: 'followerUrl?'+member_id+'_follwer',  
-// // 	 			type:"Post",
-// // 	 			contentType:'application/json;charset=utf-8',
-// // 				dataType:'json',
-// // 				data : JSON.stringify({member:bno, comment:comment}),
-// // 	 			success:function(response) {
-// // 	 				showList(response);
-// // 	 			},
-// // 	 			error:function(xhr,status,msg){
-// // 	 				console.log("상태값 : " + status + " Http에러메시지 : "+msg);
-// // 	 			}
-// // 	 		});
-// // 		});
-// // 		function showList(data){
-// // 			var tmp = '';
-// // 			$(".modal-body").empty();
-// // 			var head = '<span>'+movieUrl+'</span>';
-// // 			$(".modal-body").append(head);
-// // 			$.each(data, function(index, item){
-// // 				tmp = '<tr>';
-// // 				tmp += '<td>' + item.idx + '</td>';
-// // 				tmp += '<td>' + item.time + '</td>';
-// // 				tmp += '</tr>';
-// // 				$(".modal-body").append(timeList);
-// // 			})
-// // 		}
-// 	});
-</script> -->
-
-
+<script type="text/javascript">
+	let msg = "${msg}"\
+	if (msg == "MOD_ERR")
+		alert("프로필 수정에 실패하였습니다. 다시 시도해 주세요.")
+</script>
 
 <title>snsProfile</title>
 </head>
@@ -149,18 +92,18 @@
 						<div class="cnt d-flex flex-row mb-5 d-grid gap-md-5 mt-5">
 							<button type="button" class="post_Cnt btn fs-4">
 								게시물
-								<div class="count fs-4 fw-bold m-auto">${feed_Cnt }</div>
+								<div class="count fs-4 fw-bold m-auto">${fn:length(pro_feed) }</div>
 							</button>
-							<button type="button" class="follwing_Cnt btn fs-4"
+							<button type="button" class="following_Cnt btn fs-4"
 								data-bs-toggle="modal" data-bs-target="#following-Modal">
 								팔로잉
-								<div class="count fs-4 fw-bold m-auto">2</div>
+								<div class="count fs-4 fw-bold m-auto">${fn:length(pro_following) }</div>
 							</button>
 							<button type="button" class="show btn fs-4 "
-								data-bs-toggle="modal" data-bs-target="#follwer-Modal"
+								data-bs-toggle="modal" data-bs-target="#follower-Modal"
 								value="follower">
 								팔로워
-								<div class="count fs-4 fw-bold m-auto">16</div>
+								<div class="count fs-4 fw-bold m-auto">${fn:length(pro_follower) }</div>
 							</button>
 						</div>
 						<div class="IDIntro d-flex flex-row mb-3 d-grid gap-md-2 mt-5">
@@ -175,19 +118,22 @@
 		<!-- 피드 -->
 		<div class="post container">
 			<div class="row mt-5 mb-5">
-
-				<c:forEach var="pro_feed" items="${pro_feed }">
-					<div class="col-sm-4 mb-3">
-						<div class="card" style="border: none;">
-							<div class="post_img card-body">
-								<img class="feed_img"
-									src="${pageContext.request.contextPath }/resources/sns/img/${pro_feed.post_img_img}"
-									alt="...">
+				<c:if test="${fn:length(pro_feed) == null || fn:length(pro_feed) == 0 }">
+					<div class="fs-4 fw-bold" style="align-content: center;">게시물이 없습니다.</div>
+				</c:if>
+				<c:if test="${fn:length(pro_feed) != null || fn:length(pro_feed) != 0 }">
+					<c:forEach var="pro_feed" items="${pro_feed }">
+						<div class="col-sm-4 mb-3">
+							<div class="card" style="border: none;">
+								<div class="post_img card-body">
+									<img class="feed_img"
+										src="${pageContext.request.contextPath }/resources/sns/img/${pro_feed.post_img_img}"
+										alt="...">
+								</div>
 							</div>
 						</div>
-					</div>
-				</c:forEach>
-
+					</c:forEach>
+				</c:if>
 			</div>
 		</div>
 		<!-- 피드 끝 -->
@@ -210,13 +156,15 @@
 							class="form-control" type="file" id="formFile">
 					</div>
 					<div class="input-group mb-3">
-						<span class="input-group-text" id="basic-addon1">@</span> <input
-							type="text" class="form-control" placeholder="Username"
-							aria-label="Username" aria-describedby="basic-addon1" readonly>
+						<span class="input-group-text" id="basic-addon1">닉네임</span> <input
+							type="text" class="form-control"
+							placeholder="${pro_info.member_nick }" aria-label="Username"
+							aria-describedby="basic-addon1" readonly>
 					</div>
 					<div class="input-group">
 						<span class="input-group-text">자기소개 글</span>
-						<textarea class="form-control" placeholder="자신을 소개해주세요."
+						<textarea class="form-control"
+							placeholder="${pro_info.profile_intro }"
 							aria-label="With textarea"></textarea>
 					</div>
 				</div>
@@ -244,9 +192,10 @@
 				<div class="modal-body">
 					<ul>
 
-						<c:forEach var="pro_follwing" items="${pro_follwing }">
+						<c:forEach var="pro_following" items="${pro_following }"
+							varStatus="following_status">
 							<br />
-							<li class="fs-4" style="list-style: none;"><span>${pro_follwing.following }</span></li>
+							<li class="fs-4" style="list-style: none;"><span>${pro_following.following }</span></li>
 						</c:forEach>
 
 					</ul>
@@ -257,22 +206,23 @@
 	<!-- following-Modal 끝 -->
 
 	<!-- follower-Modal -->
-	<div class="modal fade" id="follwer-Modal" tabindex="-1"
-		aria-labelledby="follwer-Modal" aria-hidden="true">
+	<div class="modal fade" id="follower-Modal" tabindex="-1"
+		aria-labelledby="follower-Modal" aria-hidden="true">
 		<div
 			class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h1 class="modal-title fs-5" id="follwer-Modal">팔로워</h1>
+					<h1 class="modal-title fs-5" id="follower-Modal">팔로워</h1>
 					<button type="button" class="btn-close" data-bs-dismiss="modal"
 						aria-label="Close"></button>
 				</div>
 				<div class="follower modal-body" id="followerList">
 					<ul>
 
-						<c:forEach var="pro_follwer" items="${pro_follwer }">
+						<c:forEach var="pro_follower" items="${pro_follower }"
+							varStatus="follower_status">
 							<br />
-							<li class="fs-4" style="list-style: none;"><span>${pro_follwer.follower }</span></li>
+							<li class="fs-4" style="list-style: none;"><span>${pro_follower.follower }</span></li>
 						</c:forEach>
 
 					</ul>
