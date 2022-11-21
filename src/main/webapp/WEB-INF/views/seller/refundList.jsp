@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -90,9 +91,20 @@
 						<td data-title="Buyer">${refundListDto.member_name }</td>
 						<td data-title="PrdtInfo">${refundListDto.product_name }[${refundListDto.product_no }]</td>
 						<td data-title="TotalPay" data-type="currency">${refundListDto.payment }</td>
-						<td data-title="OrderStaus">${refundListDto.prdt_order_type }</td>
+						<td data-title="OrderStaus" data-type="currency">
+						<c:if test="${refundListDto.prdt_order_type eq 'W'}">결제대기</c:if>
+						<c:if test="${refundListDto.prdt_order_type eq 'C'}">결제완료</c:if>
+						<c:if test="${refundListDto.prdt_order_type eq 'P'}">배송준비중</c:if>
+						<c:if test="${refundListDto.prdt_order_type eq 'S'}">배송중</c:if>
+						<c:if test="${refundListDto.prdt_order_type eq 'Y'}">배송완료</c:if>
 						<td data-title="PayDate" data-type="currency">${refundListDto.prdt_order_date }</td>
-						<td data-title="ReqStaus" data-type="currency">${refundListDto.prdt_order_cancel }</td>
+						<td data-title="ReqStaus" data-type="currency">
+						<c:if test="${refundListDto.prdt_order_cancel eq 'D'}">취소접수</c:if>
+						<c:if test="${refundListDto.prdt_order_cancel eq 'B'}">반품처리중</c:if>
+						<c:if test="${refundListDto.prdt_order_cancel eq 'H'}">환불처리중</c:if>
+						<c:if test="${refundListDto.prdt_order_cancel eq 'V'}">반품완료</c:if>
+						<c:if test="${refundListDto.prdt_order_cancel eq 'R'}">환불완료</c:if>
+						</td>
 						<td data-title="Detail" data-type="currency"><button
 								type="button" class="btn btn-outline-dark btn-sm"
 								data-bs-toggle="modal" data-bs-target="#staticBackdrop">VIEW</button></td>

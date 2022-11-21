@@ -125,7 +125,12 @@
 						<td data-title="PrdtImg"><img class="card-img-top"
 							src="${pageContext.request.contextPath }/resources/seller/img/${prdtListDto.prdt_img_name}"
 							alt="..." /></td>
-						<td data-title="PrdtCate">${prdtListDto.product_kind }</td>
+						<td data-title="PrdtCate">
+						<c:if test="${prdtListDto.product_kind eq 'T'}">상의</c:if>
+						<c:if test="${prdtListDto.product_kind eq 'B'}">하의</c:if>
+						<c:if test="${prdtListDto.product_kind eq 'A'}">잡화</c:if>
+						<c:if test="${prdtListDto.product_kind eq 'S'}">신발</c:if>
+						</td>
 						<td data-title="PrdtInfo">${prdtListDto.product_name }</td>
 						<td data-title="PrdtPrice" data-type="currency">${prdtListDto.product_price }</td>
 						<td data-title="PtdtStock" data-type="currency"><input
