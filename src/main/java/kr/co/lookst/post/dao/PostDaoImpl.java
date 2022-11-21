@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import kr.co.lookst.post.domain.PostDto;
 import kr.co.lookst.post.domain.Post_imgDto;
 import kr.co.lookst.post.domain.ProdInfoDto;
+import kr.co.lookst.post.domain.post_com_tagDto;
 import kr.co.lookst.post.domain.snslist_infoDto;
 
 @Repository
@@ -47,5 +48,12 @@ public class PostDaoImpl implements PostDao{
 	public List<PostDto> snscommentlist(Integer post_no) throws Exception {
 		// TODO Auto-generated method stub
 		return session.selectList(namespace + "snscommentlist", post_no);
+	}
+
+
+	@Override
+	public List<post_com_tagDto> postComTaglist(Integer post_no) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectList(namespace + "postComTaglist", post_no);
 	}
 }

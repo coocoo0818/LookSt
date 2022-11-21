@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import kr.co.lookst.post.domain.PostDto;
 import kr.co.lookst.post.domain.Post_imgDto;
 import kr.co.lookst.post.domain.ProdInfoDto;
+import kr.co.lookst.post.domain.post_com_tagDto;
 import kr.co.lookst.post.domain.snslist_infoDto;
 import kr.co.lookst.post.service.PostService;
 
@@ -36,6 +37,9 @@ public class PostController {
 			
 			List<PostDto> snscommentlist = postService.snscommentlist(post_no); 
 			m.addAttribute("snscommentlist", snscommentlist);
+			
+			List<post_com_tagDto> postComTaglist = postService.postComTaglist(post_no);
+			m.addAttribute("postComTaglist", postComTaglist);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
