@@ -30,13 +30,11 @@ public class AdminDaoImpl implements AdminDao{
 		map.put("auth", auth);
 		return session.update(namespace + "authModify", map);
 	}
-
 	/* 회원 강퇴 */
 	@Override
 	public int memberKickOut(String member_id) throws Exception {
 		return session.delete(namespace + "memberKickOut", member_id);
 	}
-
 	/* 회원 토탈 */
 	@Override
 	public int searchResultCnt(SearchItem sc) throws Exception {
@@ -47,6 +45,7 @@ public class AdminDaoImpl implements AdminDao{
 	public List<MemMGMDto> searchSelectPage(SearchItem sc) throws Exception {
 		return session.selectList(namespace + "searchSelectPage", sc);
 	}
+	
 	/* SNS 토탈 */
 	@Override
 	public int postSearchResultCnt(SearchItem sc) throws Exception {
@@ -62,6 +61,18 @@ public class AdminDaoImpl implements AdminDao{
 	public int postDelete(int postNo) throws Exception {
 		return session.delete(namespace + "postDelete", postNo);
 	}
+	
+	/* 게시판 토탈 */
+	@Override
+	public int boardSearchResultCnt(SearchItem sc) throws Exception {
+		return session.selectOne(namespace + "boardSearchResultCnt", sc);
+	}
+	/* 게시판 검색 리스트 */
+	@Override
+	public List<MemMGMDto> boardSearchResultPage(SearchItem sc) throws Exception {
+		return session.selectList(namespace + "boardSearchResultPage", sc);
+	}
+	
 	/* 메거진 신청 토탈 */
 	@Override
 	public int boardApplyingSearchResultCnt(SearchItem sc) throws Exception {
@@ -73,13 +84,16 @@ public class AdminDaoImpl implements AdminDao{
 		return session.selectList(namespace + "boardApplyingsearchResultPage", sc);
 	}
 
+	/* 판매자 신청 토탈 */
 	@Override
 	public int sellerApplyingSearchResultCnt(SearchItem sc) throws Exception {
 		return session.selectOne(namespace + "sellerApplyingSearchResultCnt", sc);
 	}
-
+	/* 판매자 신청 검색 리스트 */
 	@Override
 	public List<MemMGMDto> sellerApplyingsearchResultPage(SearchItem sc) throws Exception {
 		return session.selectList(namespace + "sellerApplyingsearchResultPage", sc);
 	}
+
+
 }

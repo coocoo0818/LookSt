@@ -18,6 +18,7 @@ public interface AdminDao {
 	/* 회원 검색 리스트 */
 	List<MemMGMDto> searchSelectPage(SearchItem sc) throws Exception;
 	
+	
 	/* SNS 토탈 */
 	int postSearchResultCnt(SearchItem sc) throws Exception;
 	/* SNS 검색 리스트 */
@@ -25,6 +26,11 @@ public interface AdminDao {
 	/* SNS 강제 삭제*/
 	int postDelete(int postNo) throws Exception;
 
+	/* 게시판 토탈 */
+	int boardSearchResultCnt(SearchItem sc) throws Exception;
+	/* 게시판 검색 리스트 */
+	List<MemMGMDto> boardSearchResultPage(SearchItem sc) throws Exception;
+	
 	/* 메거진 신청 토탈 */
 	int boardApplyingSearchResultCnt(SearchItem sc) throws Exception;
 	/* 메거진 신청 검색 리스트 */

@@ -66,8 +66,8 @@
 						<td class="text-center" data-title="신청인">${seller_management.member_name}</td>
 						<td class="text-center" data-title="회사번호" data-type="currency">${seller_management.NSellerDto.seller_number}</td>
 						<td class="text-center" data-title="관리" data-type="currency">
-							<input class="btn btn-outline-primary btn-sm" tabindex="-1" role="button" type="button" value="수락" />
-							<input class="btn btn-outline-danger btn-sm" tabindex="-1" role="button" type="button" value="거부" />
+							<input class="btn btn-outline-primary btn-sm rounded" tabindex="-1" role="button" type="button" value="수락" />
+							<input class="btn btn-outline-danger btn-sm rounded" tabindex="-1" role="button" type="button" value="거부" />
 						</td>
 					</tr>
 				</c:forEach>
@@ -80,25 +80,25 @@
 			</c:if>
 			<c:if test="${totalCnt != null || totalCnt != 0}">
 				<c:if test="${pr.showPrev}">
-					<li class="page-item disabled"><a class="page-link" href="${contextPath}/admin/member_management${pr.sc.getQueryString(pr.beginPage-1)}">&laquo;</a></li>
+					<li class="page-item disabled"><a class="page-link" href="${contextPath}/admin/seller_request${pr.sc.getQueryString(pr.beginPage-1)}">&laquo;</a></li>
 				</c:if>
 				
 				<c:forEach var="i" begin="${pr.beginPage}" end="${pr.endPage}">
 
 					<c:if test="${pr.sc.page == i }">
 						<c:if test="${pr.sc.page > 0 }">
-							<li class="page-item active"><a class="page-link" href="${contextPath}/admin/member_management${pr.sc.getQueryString(i)}">${i}</a></li>
+							<li class="page-item active"><a class="page-link" href="${contextPath}/admin/seller_request${pr.sc.getQueryString(i)}">${i}</a></li>
 						</c:if>
 					</c:if>
 					<c:if test="${pr.sc.page != i }">
 						<c:if test="${pr.sc.page > 0 }">
-							<li class="page-item"><a class="page-link" href="${contextPath}/admin/member_management${pr.sc.getQueryString(i)}">${i}</a></li>
+							<li class="page-item"><a class="page-link" href="${contextPath}/admin/seller_request${pr.sc.getQueryString(i)}">${i}</a></li>
 						</c:if>
 					</c:if>
 				</c:forEach>
 				
 				<c:if test="${pr.showNext}">
-					<li class="page-item"><a class="page-link" href="${contextPath}/admin/member_management${pr.sc.getQueryString(pr.endPage+1)}">&raquo;</a></li>
+					<li class="page-item"><a class="page-link" href="${contextPath}/admin/seller_request${pr.sc.getQueryString(pr.endPage+1)}">&raquo;</a></li>
 				</c:if>
 				
 			</c:if>
