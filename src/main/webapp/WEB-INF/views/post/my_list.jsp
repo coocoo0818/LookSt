@@ -35,6 +35,7 @@
 .like_comment {
 	margin: 10px 0 10px 0;
 }
+	input { width: 100%; height: 35px; margin: 5px 0px 10px 0px; border: 1px solid #e9e8e8; padding: 8px; background: #f8f8f8; outline-color: #e6e6e6; }
 </style>
 
 </head>
@@ -100,13 +101,14 @@
 		<!-- sns 리스트 상세#1 -->
 		<div class="list_container row justify-content-center">
 			<div class="card mb-3 w-50 p-3 " style="position: relative;">
+			<c:forEach var="postComTaglist" items="${postComTaglist}">
 				<!-- sns 프로필/닉네임 -->
 				<div class="d-flex justify-content-between">
 					<div class=" mb-2 mt-2 align-self-center">
 						<img
-							src="${pageContext.request.contextPath }/resources/post/img/프사2.jpg "
+							src="${pageContext.request.contextPath }/resources/post/img/${postComTaglist.profile_img} "
 							onclick="location.href='./'" id="profile_img">
-						<p class="my-auto d-inline ms-3" onclick="location.href='./'">MyMelody</p>
+						<p class="my-auto d-inline ms-3" onclick="location.href='./'">${postComTaglist.member_nick}</p>
 					</div>
 					<!-- sns 팔로우버튼 -->
 					<button type="button"
@@ -149,8 +151,6 @@
 					<p class="card-text">
 						<small class="text-muted">Last updated 3 mins ago</small>
 					</p>
-					<p class="card-title"><b>상품태그 2개</b></p>
-					
 						<div class="row row-cols-1 row-cols-md-3 g-4">
 						<c:forEach var="postImgListPrdt" items="${postImgListPrdt}">
 						  <div class="col">
@@ -188,16 +188,20 @@
 					<!-- 좋아요 개수-->
 					<p class="card-title"><b>좋아요 10개</b></p>
 					<!-- 게시글 / 태그 -->
-					<p class="card-text">EZEN</p>
-					<div class="tag_link">
-						<p class="tag_text" onclick="location.href='./'" style="display: inline;"><b>#LOOKST챌린지</b></p>
-						<p class="tag_text" onclick="location.href='./'" style="display: inline;"><b>#나이키</b></p>
-						<p class="tag_text" onclick="location.href='./'" style="display: inline;"><b>#조던</b></p>
+					<p class="card-text">${postComTaglist.post_content}</p>
+					<div class="tag_link" style="margin-bottom:20px;">
+						<p class="tag_text" onclick="location.href='./'" style="display: inline; margin-bottom:40px;"><b>${postComTaglist.tag_content}</b></p>
+						<!--  <p class="tag_text" onclick="location.href='./'" style="display: inline;"><b>#나이키</b></p>
+						<p class="tag_text" onclick="location.href='./'" style="display: inline;"><b>#조던</b></p>-->
 					</div>
+					댓글  <input type="text" name="comment" style="margin-bottom: 10px;"/><br/>
+					<button id="insertBtn" type="button">댓글작성</button>
+					<button id="modBtn" type="button">수정하기</button><hr>
+			</c:forEach>
 					<!-- 댓글 -->
-						<div class="comment_box" style="display: inline;">
+						<div class="comment_box" style="display: inline; ">
 							<c:forEach var="snscommentlist" items="${snscommentlist}">
-			                    <div class="profile_info" style="display: flex; ">
+			                    <div class="profile_info" style="display: flex; margin-top:30px">
 			                     	<img src="${pageContext.request.contextPath }/resources/post/img/${snscommentlist.profile_img}" id="profile_img" >
 			                   		<div class="comment_detail" style="margin-left: 10px;">
 				                      	<div class="comment_main">
