@@ -3,6 +3,9 @@ package kr.co.lookst.admin.service;
 import java.util.List;
 
 import kr.co.lookst.admin.domain.MemMGMDto;
+import kr.co.lookst.main.domain.Prdt_Img;
+import kr.co.lookst.main.domain.Prdt_Option;
+import kr.co.lookst.main.domain.Product;
 import kr.co.lookst.main.domain.SearchItem;
 
 public interface AdminService {
@@ -50,6 +53,11 @@ public interface AdminService {
 	int sellerAgree(String seller_no) throws Exception;
 	/* 판매자 거부 */
 	int sellerReject(String seller_no) throws Exception;
+	
+	/* 상품 정보 */
+	Product getproductInfo(Integer product_no) throws Exception;
+	List<Prdt_Option> getproductSize(Integer product_no) throws Exception;
+	List<Prdt_Img> getproductImg(Integer product_no) throws Exception;
 
 	
 

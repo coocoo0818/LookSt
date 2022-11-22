@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.co.lookst.admin.domain.MemMGMDto;
+import kr.co.lookst.main.domain.Prdt_Img;
+import kr.co.lookst.main.domain.Prdt_Option;
+import kr.co.lookst.main.domain.Product;
 import kr.co.lookst.main.domain.SearchItem;
 
 @Repository
@@ -17,11 +20,7 @@ public class AdminDaoImpl implements AdminDao{
 	@Autowired
 	private SqlSession session;
 	private static String namespace = "kr.co.lookst.admin.dao.AdminMapper.";
-	/* 회원 리스트 */
-	/*
-	 * @Override public List<IndexDto> memberList() throws Exception{ return
-	 * session.selectList(namespace + "memberList"); }
-	 */
+
 	/* 회원 권한 변경 */
 	@Override
 	public int memberAuthModify(String member_id, String auth) throws Exception {
@@ -124,6 +123,18 @@ public class AdminDaoImpl implements AdminDao{
 	@Override
 	public int sellerReject(String seller_no) throws Exception {
 		return session.update(namespace + "sellerReject", seller_no);
+	}
+	@Override
+	public Product getproductInfo(Integer product_no) throws Exception {
+		return session.selectOne(namespace + "getproductInfo", product_no);
+	}
+	@Override
+	public List<Prdt_Option> getproductSize(Integer product_no) {
+		return session.selectList(namespace + "getproductSize", product_no);
+	}
+	@Override
+	public List<Prdt_Img> getproductImg(Integer product_no) {
+		return session.selectList(namespace + "getproductImg", product_no);
 	}
 
 

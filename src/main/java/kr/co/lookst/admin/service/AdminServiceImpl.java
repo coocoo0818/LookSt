@@ -7,6 +7,9 @@ import org.springframework.stereotype.Service;
 
 import kr.co.lookst.admin.dao.AdminDao;
 import kr.co.lookst.admin.domain.MemMGMDto;
+import kr.co.lookst.main.domain.Prdt_Img;
+import kr.co.lookst.main.domain.Prdt_Option;
+import kr.co.lookst.main.domain.Product;
 import kr.co.lookst.main.domain.SearchItem;
 
 @Service
@@ -119,6 +122,20 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public int sellerReject(String seller_no) throws Exception {
 		return adminDao.sellerReject(seller_no);
+	}
+	
+	/* 상품 정보 */
+	@Override
+	public Product getproductInfo(Integer product_no) throws Exception {
+		return adminDao.getproductInfo(product_no);
+	}
+	@Override
+	public List<Prdt_Option> getproductSize(Integer product_no) throws Exception {
+		return adminDao.getproductSize(product_no);
+	}
+	@Override
+	public List<Prdt_Img> getproductImg(Integer product_no) throws Exception {
+		return adminDao.getproductImg(product_no);
 	}
 
 
