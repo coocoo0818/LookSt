@@ -7,6 +7,15 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>home products</title>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('.productDetail').on('click', function() {
+			let product_no = $(this).children().children().attr("data-productNo")
+			location.href = '${contextPath}/admin/productDetail/?product_no='+product_no;
+		});
+	});
+</script>
 </head>
 <body>
 	<div class="style_title">
@@ -18,9 +27,9 @@
 	<div class="container products">
 		<div class="row row-cols-1 row-cols-md-4 g-4">
 			<c:forEach var="new_prdt" items="${new_prdt}">
-				<a href="#" class="text-decoration-none">
+				<a href="javascript:productDetail();" class="text-decoration-none productDetail">
 					<div class="col">
-						<div class="card border-0" data-productNo = "${new_prdt.product_no}">
+						<div class="card border-0" data-productNo="${new_prdt.product_no}">
 							<img src="${contextPath}/resources/img/product/${new_prdt.prdt_img_name}" class="card-img-top rounded" alt="...">
 							<div class="card-body">
 								<h5 class="card-title text-decoration-underline">${new_prdt.product_name}</h5>
@@ -35,5 +44,6 @@
 		</div>
 	</div>
 	<!-- 신상 끝 -->
+	
 </body>
 </html>

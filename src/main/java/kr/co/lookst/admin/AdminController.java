@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import kr.co.lookst.admin.domain.MemMGMDto;
 import kr.co.lookst.admin.service.AdminService;
 import kr.co.lookst.main.domain.PageResolver;
+import kr.co.lookst.main.domain.Prdt_Img;
+import kr.co.lookst.main.domain.Prdt_Option;
+import kr.co.lookst.main.domain.Product;
 import kr.co.lookst.main.domain.SearchItem;
 
 @Controller
@@ -244,5 +247,26 @@ public class AdminController {
 			e.printStackTrace();
 		}
 		return "redirect:/admin/board_management";
+	}
+	
+	/* 판매자 신청 페이지 이동 */
+	@GetMapping("/productDetail")
+	public String productDetailPage(Model model,  
+			@RequestParam("product_no") Integer product_no) {
+			System.out.println(product_no);
+			try {
+				/* 상품 상세페이지 이동 */
+				Product productInfo = adminService.getproductInfo(product_no);
+				List<Prdt_Option> productSize = adminService.getproductSize(product_no);
+				List<Prdt_Img> productImg = adminService.getproductImg(product_no);
+				
+				model.addAttribute("productInfo", productInfo);
+				model.addAttribute("productSize", productSize);
+				model.addAttribute("productImg", productImg);
+				/* 상품 상세페이지 이동 끝 */
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		return "/admin/productDetail";
 	}
 }
