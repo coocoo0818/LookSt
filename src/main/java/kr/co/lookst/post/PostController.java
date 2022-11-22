@@ -12,6 +12,8 @@ import kr.co.lookst.post.domain.PostDto;
 import kr.co.lookst.post.domain.Post_imgDto;
 import kr.co.lookst.post.domain.ProdInfoDto;
 import kr.co.lookst.post.domain.post_com_tagDto;
+import kr.co.lookst.post.domain.snsPrdtImgDto;
+import kr.co.lookst.post.domain.sns_Main_ImgDto;
 import kr.co.lookst.post.domain.snslist_infoDto;
 import kr.co.lookst.post.service.PostService;
 
@@ -31,7 +33,6 @@ public class PostController {
 			System.out.println(post_no);
 			m.addAttribute("postImgListCarousel", postImgListCarousel);			
 			
-			
 			List<snslist_infoDto> postImgListPrdt = postService.postImgListPrdt(post_no);
 			m.addAttribute("postImgListPrdt", postImgListPrdt);	
 			
@@ -48,23 +49,21 @@ public class PostController {
 		return "/post/my_list";
 	}
 	
-	/*
-	 * @GetMapping("/mylist") public String my_list_comment(Model m, Integer
-	 * post_no) { try { post_no = 1; List<PostDto> snscommentlist =
-	 * postService.snscommentlist(post_no); m.addAttribute("snscommentlist",
-	 * snscommentlist);
-	 * 
-	 * } catch (Exception e) { e.printStackTrace(); }
-	 * 
-	 * return "/post/my_list";}
-	 */
-	
-	
+
 	@GetMapping("/sns_list")
-	public String sns_main(Model m) {
+	public String sns_main(Model m, Integer post_no) {
 		try {
-			List<Post_imgDto> post_list = postService.getpostlistimg();
-			m.addAttribute("post_list", post_list);
+			post_no = 1;
+			List<sns_Main_ImgDto> snsmainimg = postService.snsmainimg(post_no);
+			m.addAttribute("snsmainimg", snsmainimg);
+			
+			List<snsPrdtImgDto> snsPrdtImg = postService.snsPrdtImg(post_no);
+			m.addAttribute("snsPrdtImg", snsPrdtImg);
+			
+			
+			
+			//List<Post_imgDto> post_list = postService.getpostlistimg();
+			//m.addAttribute("post_list", post_list);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
