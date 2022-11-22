@@ -106,7 +106,7 @@
 				<div class="d-flex justify-content-between">
 					<div class=" mb-2 mt-2 align-self-center">
 						<img
-							src="${pageContext.request.contextPath }/resources/post/img/${postComTaglist.profile_img} "
+							src="${pageContext.request.contextPath }/resources/img/profile/${postComTaglist.profile_img} "
 							onclick="location.href='./'" id="profile_img">
 						<p class="my-auto d-inline ms-3" onclick="location.href='./'">${postComTaglist.member_nick}</p>
 					</div>
@@ -129,7 +129,7 @@
 					<c:forEach var="postImgListCarousel" items="${postImgListCarousel}">
 						<div class="carousel-item active">
 							<img
-								src="${pageContext.request.contextPath }/resources/post/img/${postImgListCarousel.post_img_img}"
+								src="${pageContext.request.contextPath }/resources/img/post/${postImgListCarousel.post_img_img}"
 								class="d-block w-100" alt="...">
 						</div>					
 					</c:forEach>
@@ -155,7 +155,7 @@
 						<c:forEach var="postImgListPrdt" items="${postImgListPrdt}">
 						  <div class="col">
 						    <div class="card">
-						      <img src="${pageContext.request.contextPath }/resources/post/img/${postImgListPrdt.post_tag_img}" class="card-img-top" onclick="location.href='./'">
+						      <img src="${pageContext.request.contextPath }/resources/img/post/${postImgListPrdt.post_tag_img}" class="card-img-top" onclick="location.href='./'">
 						      <div class="card-body">
 						        <span class="prod_detail">
 	  									${postImgListPrdt.post_tag_name}	
@@ -201,8 +201,8 @@
 					<!-- 댓글 -->
 						<div class="comment_box" style="display: inline; ">
 							<c:forEach var="snscommentlist" items="${snscommentlist}">
-			                    <div class="profile_info" style="display: flex; margin-top:30px">
-			                     	<img src="${pageContext.request.contextPath }/resources/post/img/${snscommentlist.profile_img}" id="profile_img" >
+			                    <div class="profile_info" style="display: flex; margin-top:10px">
+			                     	<img src="${pageContext.request.contextPath }/resources/img/profile/${snscommentlist.profile_img}" id="profile_img" >
 			                   		<div class="comment_detail" style="margin-left: 10px;">
 				                      	<div class="comment_main">
 				                        	<span class="user_nm">${snscommentlist.member_nick}</span>
@@ -213,8 +213,8 @@
 			                      		</div>
 			                    	</div>
 			                   	</div>
-		                   		<div class="profile_info" style="display: flex; ">
-		                     		<img src="${pageContext.request.contextPath }/resources/post/img/프사2.jpg" id="profile_img" >
+		                   		<%-- <div class="profile_info" style="display: flex; ">
+		                     		<img src="${pageContext.request.contextPath }/resources/img/post/프사2.jpg" id="profile_img" >
 		                   			<div class="comment_detail" style="margin-left: 10px;">
 			                      		<div class="comment_main">
 				                        	<span class="user_nm">ezen_0111</span>
@@ -224,7 +224,7 @@
 			                        		<span class="upload-time">8분전</span>
 		                      			</div>
 		                    		</div>
-		                   		</div>
+		                   		</div> --%>
 	                   		</c:forEach>
 	                  	</div>
                   	<button type="button" class="btn btn-secondary">댓글 더보기...</button>
@@ -238,7 +238,7 @@
 				<div class="d-flex justify-content-between">
 					<div class=" mb-2 mt-2 align-self-center">
 						<img
-							src="${pageContext.request.contextPath }/resources/post/img/프사2.jpg"
+							src="${pageContext.request.contextPath }/resources/img/post/프사2.jpg"
 							onclick="location.href='./'" id="profile_img">
 						<p class="my-auto d-inline ms-3" onclick="location.href='./'">MyMelody</p>
 					</div>
@@ -255,13 +255,13 @@
 				  </div>
 				  <div class="carousel-inner">
 				    <div class="carousel-item active">
-				      <img src="${pageContext.request.contextPath }/resources/post/img/KREAM2.jpeg" class="d-block w-100" alt="...">
+				      <img src="${pageContext.request.contextPath }/resources/img/post/KREAM2.jpeg" class="d-block w-100" alt="...">
 				    </div>
 				    <div class="carousel-item">
-				      <img src="${pageContext.request.contextPath }/resources/post/img/KREAM3.jpeg" class="d-block w-100" alt="...">
+				      <img src="${pageContext.request.contextPath }/resources/img/post/KREAM3.jpeg" class="d-block w-100" alt="...">
 				    </div>
 				    <div class="carousel-item">
-				      <img src="${pageContext.request.contextPath }/resources/post/img/KREAM4.jpeg" class="d-block w-100" alt="...">
+				      <img src="${pageContext.request.contextPath }/resources/img/post/KREAM4.jpeg" class="d-block w-100" alt="...">
 				    </div>
 				  </div>
 				  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators1" data-bs-slide="prev">
@@ -283,7 +283,7 @@
 					<div class="row row-cols-1 row-cols-md-3 g-4">
 					  <div class="col">
 					    <div class="card">
-					      <img src="${pageContext.request.contextPath }/resources/post/img/airforce.png" class="card-img-top" onclick="location.href='./'">
+					      <img src="${pageContext.request.contextPath }/resources/img/post/airforce.png" class="card-img-top" onclick="location.href='./'">
 					      <div class="card-body">
 					        <span class="prod_detail">
   									(W) Nike Air Force 1 '07 LV8 Photon Dust Cashmere
@@ -294,7 +294,7 @@
 					  </div>
 					  <div class="col">
 					    <div class="card">
-					      <img src="${pageContext.request.contextPath }/resources/post/img/vivienne.webp" class="card-img-top" onclick="location.href='./'">
+					      <img src="${pageContext.request.contextPath }/resources/img/post/vivienne.webp" class="card-img-top" onclick="location.href='./'">
 					      <div class="card-body">
 					        <span class="prod_detail">
   									Vivienne Westwood Mayfair Bas Relief Pendant Silver
@@ -332,7 +332,7 @@
 					<!-- 댓글 -->
 					<div class="comment_box" style="display: inline;">
                     	<div class="profile_info" style="display: flex; ">
-                     		<img src="${pageContext.request.contextPath }/resources/post/img/프사2.jpg" id="profile_img" >
+                     		<img src="${pageContext.request.contextPath }/resources/img/post/프사2.jpg" id="profile_img" >
                    			<div class="comment_detail" style="margin-left: 10px;">
 	                      		<div class="comment_main">
 	                        		<span class="user_nm">ezen_0111</span>
@@ -344,7 +344,7 @@
                     		</div>
                    		</div>
                    		<div class="profile_info" style="display: flex; ">
-                     		<img src="${pageContext.request.contextPath }/resources/post/img/프사2.jpg" id="profile_img" >
+                     		<img src="${pageContext.request.contextPath }/resources/img/post/프사2.jpg" id="profile_img" >
                    			<div class="comment_detail" style="margin-left: 10px;">
 	                      		<div class="comment_main">
 	                        		<span class="user_nm">ezen_0111</span>
