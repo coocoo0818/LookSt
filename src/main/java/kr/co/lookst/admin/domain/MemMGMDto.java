@@ -6,6 +6,8 @@ import kr.co.lookst.main.domain.NBoardDto;
 import kr.co.lookst.main.domain.NSellerDto;
 import kr.co.lookst.post.domain.Post_imgDto;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 
 @Data
 public class MemMGMDto {

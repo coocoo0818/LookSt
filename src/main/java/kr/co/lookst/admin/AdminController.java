@@ -123,6 +123,33 @@ public class AdminController {
 		}
 		return "admin/board_management";
 	}
+	/* 게시글 상태 변경 */
+	@RequestMapping(value="/boardModify", method={RequestMethod.POST})
+	public String adminBoardModify(Model model,  
+			@RequestParam("board_no") Integer board_no,
+			@RequestParam("board_type") String board_type) {
+		System.out.println(board_no);
+		System.out.println(board_type);
+		try {
+			adminService.boardModify(board_no, board_type);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:/admin/board_management";
+	}
+	/* 게시글 삭제 */
+	@RequestMapping(value="/boardDelete", method={RequestMethod.POST})
+	public String boardDelete(Model model,  
+			@RequestParam("board_no") Integer board_no) {
+		System.out.println(board_no);
+		
+		try {
+			adminService.boardDelete(board_no);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:/admin/board_management";
+	}
 		
 	/* 매거진 신청 페이지 이동 */
 	@RequestMapping(value="/magazin_request", method=RequestMethod.GET)
@@ -144,6 +171,32 @@ public class AdminController {
 		}
 		return "admin/magazin_request";
 	}
+	/* 메거진 수락 */
+	@RequestMapping(value="/magazinAgree", method={RequestMethod.POST})
+	public String magazinAgree(Model model,  
+			@RequestParam("board_no") Integer board_no) {
+		System.out.println(board_no);
+		
+		try {
+			adminService.magazinAgree(board_no);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:/admin/board_management";
+	}
+	/* 메거진 거부 */
+	@RequestMapping(value="/magazinReject", method={RequestMethod.POST})
+	public String magazinReject(Model model,  
+			@RequestParam("board_no") Integer board_no) {
+		System.out.println(board_no);
+		
+		try {
+			adminService.magazinReject(board_no);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:/admin/board_management";
+	}
 	
 	/* 판매자 신청 페이지 이동 */
 	@RequestMapping(value="/seller_request", method=RequestMethod.GET)
@@ -164,5 +217,32 @@ public class AdminController {
 			e.printStackTrace();
 		}
 		return "admin/seller_request";
+	}
+	/* 판매자 수락 */
+	@RequestMapping(value="/sellerAgree", method={RequestMethod.POST})
+	public String sellerAgree(Model model,  
+			@RequestParam("seller_no") String seller_no) {
+		System.out.println(seller_no);
+		
+		try {
+			adminService.sellerAgree(seller_no);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:/admin/board_management";
+	}
+	
+	/* 판매자 거부 */
+	@RequestMapping(value="/sellerReject", method={RequestMethod.POST})
+	public String sellerReject(Model model,  
+			@RequestParam("seller_no") String seller_no) {
+		System.out.println(seller_no);
+		
+		try {
+			adminService.sellerReject(seller_no);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:/admin/board_management";
 	}
 }

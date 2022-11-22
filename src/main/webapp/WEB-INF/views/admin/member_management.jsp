@@ -106,7 +106,7 @@
 				<tbody>
 					<c:forEach var="member_management" items="${member_management}" varStatus="status">
 						<tr class="table-primary">
-							<th class="text-center" scope="row"><img class="rounded-circle profile-result" src="${contextPath}/resources/fix/img/${member_management.profile_img}" alt="" /></th>
+							<th class="text-center" scope="row"><img class="rounded-circle profile-result" src="${contextPath}/resources/img/profile/${member_management.profile_img}" alt="" /></th>
 								<td class="text-center" data-title="profile">
 									<a href="#" id="member_id${status.index}" name="member_id">${member_management.member_id}</a>
 								</td>

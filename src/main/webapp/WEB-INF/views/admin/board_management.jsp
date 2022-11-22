@@ -23,13 +23,13 @@
 
 			$.ajax({
 				type : 'post',
-				url : '${contextPath}/',
+				url : '${contextPath}/admin/boardModify',
 				data : {
 						board_no : board_no,
 						board_type : board_type
 				},
 				success : function(data) {
-					alert("회원권한이 수정되었습니다.")
+					alert("게시글 상태가 수정되었습니다.")
 					location.reload()
 				},
 				error : function() {alert("error")}		//에러가 발생했을 때 호출될 함수
@@ -37,16 +37,16 @@
 		})
 		
 		$('.boardDelete').click(function() {
-			let member_id = $(this).parent().attr("data-memberid") // <li>태그는 <button>의 부모임.
+			let board_no = $(this).parent().prev().prev().prev().prev().prev().prev().attr("data-boardNo") // <li>태그는 <button>의 부모임.
 
 			$.ajax({
 				type : 'post',
-				url : '${contextPath}/admin/memberKickOut',
+				url : '${contextPath}/admin/boardDelete',
 				data : {
-						member_id : member_id
+						board_no : board_no
 				},
 				success : function(data) {
-					alert("탈퇴시켰습니다.")
+					alert("게시글 삭제했습니다.")
 					location.reload()
 				},
 				error : function() {alert("error")}		//에러가 발생했을 때 호출될 함수
@@ -112,7 +112,7 @@
 							<c:if test="${board_management.NBoardDto.board_kind eq 'I'}">문의사항</c:if>
 							<c:if test="${board_management.NBoardDto.board_kind eq 'M'}">MAGAZIN</c:if>
 							<c:if test="${board_management.NBoardDto.board_kind eq 'F'}">FAQ</c:if>
-							<c:if test="${board_management.NBoardDto.board_kind eq 'R'}">REQIEW</c:if>
+							<c:if test="${board_management.NBoardDto.board_kind eq 'R'}">REVIEW</c:if>
 						</td>
 						<td class="text-center" data-title="작성일" data-type="currency">
 							<fmt:formatDate value="${board_management.NBoardDto.board_date}" pattern="yyyy-MM-dd" type="date" />

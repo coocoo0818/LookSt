@@ -68,6 +68,16 @@ public class AdminServiceImpl implements AdminService{
 	public List<MemMGMDto> boardSearchResultPage(SearchItem sc) throws Exception {
 		return adminDao.boardSearchResultPage(sc);
 	}
+	/* 게시글 상태 변경 */
+	@Override
+	public int boardModify(Integer board_no, String board_type) throws Exception {
+		return adminDao.boardModify(board_no, board_type);
+	}
+	/* 게시글 삭제 */
+	@Override
+	public int boardDelete(Integer board_no) throws Exception {
+		return  adminDao.boardDelete(board_no);
+	}
 	
 	/* 메거진 신청 토탈 */
 	@Override
@@ -78,6 +88,16 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public List<MemMGMDto> boardApplyingsearchResultPage(SearchItem sc) throws Exception {
 		return adminDao.boardApplyingsearchResultPage(sc);
+	}
+	/* 메거진 수락 */
+	@Override
+	public int magazinAgree(Integer board_no) throws Exception {
+		return adminDao.magazinAgree(board_no);
+	}
+	/* 메거진 거부 */
+	@Override
+	public int magazinReject(Integer board_no) throws Exception {
+		return adminDao.magazinReject(board_no);
 	}
 	
 	/* 판매자 신청 토탈 */
@@ -90,7 +110,16 @@ public class AdminServiceImpl implements AdminService{
 	public List<MemMGMDto> sellerApplyingsearchResultPage(SearchItem sc) throws Exception {
 		return adminDao.sellerApplyingsearchResultPage(sc);
 	}
-
+	/* 판매자 수락 */
+	@Override
+	public int sellerAgree(String seller_no) throws Exception {
+		return adminDao.sellerAgree(seller_no);
+	}
+	/* 판매자 거부 */
+	@Override
+	public int sellerReject(String seller_no) throws Exception {
+		return adminDao.sellerReject(seller_no);
+	}
 
 
 }

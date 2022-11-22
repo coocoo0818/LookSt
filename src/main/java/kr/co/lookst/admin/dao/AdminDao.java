@@ -30,14 +30,28 @@ public interface AdminDao {
 	int boardSearchResultCnt(SearchItem sc) throws Exception;
 	/* 게시판 검색 리스트 */
 	List<MemMGMDto> boardSearchResultPage(SearchItem sc) throws Exception;
+	/* 게시글 상태 변경 */
+	int boardModify(Integer board_no, String board_type) throws Exception;
+	/* 게시글 삭제 */
+	int boardDelete(Integer board_no) throws Exception;
 	
 	/* 메거진 신청 토탈 */
 	int boardApplyingSearchResultCnt(SearchItem sc) throws Exception;
 	/* 메거진 신청 검색 리스트 */
 	List<MemMGMDto> boardApplyingsearchResultPage(SearchItem sc) throws Exception;
+	/* 메거진 수락 */
+	int magazinAgree(Integer board_no) throws Exception;
+	/* 메거진 거부 */
+	int magazinReject(Integer board_no) throws Exception;
 	
 	/* 판매자 신청 토탈 */
 	int sellerApplyingSearchResultCnt(SearchItem sc) throws Exception;
 	/* 판매자 신청 검색 리스트 */
 	List<MemMGMDto> sellerApplyingsearchResultPage(SearchItem sc) throws Exception;
+	/* 판매자 수락 */
+	int sellerAgree(String seller_no) throws Exception;
+	/* 판매자 거부 */
+	int sellerReject(String seller_no) throws Exception;
+
+	
 }
