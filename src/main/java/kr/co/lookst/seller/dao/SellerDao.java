@@ -26,5 +26,7 @@ public interface SellerDao {
 
 	List<OrderListDto> searchSelectPageR (SearchItem sc) throws Exception;
 
+	int productStock(Integer product_no, int stock) throws Exception;
+
 	
 }

@@ -43,6 +43,21 @@ public class SellerController {
 
 	}
 	
+	@RequestMapping(value="/productStock", method={RequestMethod.POST})
+	public String adminFormMemberModify(Model model,  
+			@RequestParam(value="product_no") Integer product_no,
+			@RequestParam(value="stock") int stock) {
+		System.out.println(product_no);
+		System.out.println(stock);
+		
+		try {
+			sellerService.productStock(product_no, stock);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:/seller/prdtList";
+	}
+	
 	@RequestMapping(value="/productDelete", method={RequestMethod.POST})
 	public String adminFormMemberKickOut(Model m,  
 			@RequestParam("product_no") Integer product_no) {
