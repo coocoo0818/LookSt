@@ -10,6 +10,8 @@ import kr.co.lookst.post.domain.PostDto;
 import kr.co.lookst.post.domain.Post_imgDto;
 import kr.co.lookst.post.domain.ProdInfoDto;
 import kr.co.lookst.post.domain.post_com_tagDto;
+import kr.co.lookst.post.domain.snsPrdtImgDto;
+import kr.co.lookst.post.domain.sns_Main_ImgDto;
 import kr.co.lookst.post.domain.snslist_infoDto;
 
 @Repository
@@ -56,4 +58,21 @@ public class PostDaoImpl implements PostDao{
 		// TODO Auto-generated method stub
 		return session.selectList(namespace + "postComTaglist", post_no);
 	}
+
+
+	@Override
+	public List<sns_Main_ImgDto> snsmainimg(Integer post_no) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectList(namespace + "snsmainimg", post_no);
+	}
+
+
+	@Override
+	public List<snsPrdtImgDto> snsPrdtImg(Integer post_no) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectList(namespace + "snsPrdtImg", post_no);
+	}
+
+
+
 }
