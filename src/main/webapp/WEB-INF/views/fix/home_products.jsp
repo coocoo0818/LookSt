@@ -17,74 +17,21 @@
 	<!-- 신상 시작 -->
 	<div class="container products">
 		<div class="row row-cols-1 row-cols-md-4 g-4">
-		<c:forEach var="new_prdt" items="${new_prdt}">
-			<a href="#" class="text-decoration-none">
-				<div class="col">
-					<div class="card border-0">
-						<img
-							src="${contextPath}/resources/img/product/${new_prdt.prdt_img_name}"
-							class="card-img-top rounded" alt="...">
-						<div class="card-body">
-							<h5 class="card-title text-decoration-underline">${new_prdt.product_name}</h5>
-							<p class="card-text">${new_prdt.product_info}</p>
-							<p class="fw-bold">${new_prdt.product_price}</p>
-							<h6 class="text-muted">즉시 구매가</h6>
+			<c:forEach var="new_prdt" items="${new_prdt}">
+				<a href="#" class="text-decoration-none">
+					<div class="col">
+						<div class="card border-0" data-productNo = "${new_prdt.product_no}">
+							<img src="${contextPath}/resources/img/product/${new_prdt.prdt_img_name}" class="card-img-top rounded" alt="...">
+							<div class="card-body">
+								<h5 class="card-title text-decoration-underline">${new_prdt.product_name}</h5>
+								<p class="card-text">${new_prdt.product_info}</p>
+								<p class="fw-bold">${new_prdt.product_price}</p>
+								<h6 class="text-muted">즉시 구매가</h6>
+							</div>
 						</div>
 					</div>
-				</div>
-			</a> 
-				</c:forEach>
-			<%-- <a href="#" class="text-decoration-none">
-				<div class="col">
-					<div class="card border-0">
-						<img
-							src="${pageContext.request.contextPath }/resources/fix/img/2.png"
-							class="card-img-top rounded" alt="...">
-						<div class="card-body">
-							<h5 class="card-title text-decoration-underline">Andersson
-								Bell</h5>
-							<p class="card-text">Andersson Bell x Asics Contrast Quilting
-								Bomber</p>
-							<p class="fw-bold">255,000원</p>
-							<h6 class="text-muted">즉시 구매가</h6>
-						</div>
-					</div>
-				</div>
-			</a> 
-			<a href="#" class="text-decoration-none">
-				<div class="col">
-					<div class="card border-0">
-						<img
-							src="${pageContext.request.contextPath }/resources/fix/img/3.png"
-							class="card-img-top rounded" alt="...">
-						<div class="card-body">
-							<h5 class="card-title text-decoration-underline">Andersson
-								Bell</h5>
-							<p class="card-text">Andersson Bell x Asics Contrast Quilting
-								Bomber</p>
-							<p class="fw-bold">255,000원</p>
-							<h6 class="text-muted">즉시 구매가</h6>
-						</div>
-					</div>
-				</div>
-			</a> 
-			<a href="#" class="text-decoration-none">
-				<div class="col">
-					<div class="card border-0">
-						<img
-							src="${pageContext.request.contextPath }/resources/fix/img/4.png"
-							class="card-img-top rounded" alt="...">
-						<div class="card-body">
-							<h5 class="card-title text-decoration-underline">Andersson
-								Bell</h5>
-							<p class="card-text">Andersson Bell x Asics Contrast Quilting
-								Bomber</p>
-							<p class="fw-bold">255,000원</p>
-							<h6 class="text-muted">즉시 구매가</h6>
-						</div>
-					</div>
-				</div>
-			</a> --%>
+				</a> 
+			</c:forEach>
 		</div>
 	</div>
 	<!-- 신상 끝 -->
