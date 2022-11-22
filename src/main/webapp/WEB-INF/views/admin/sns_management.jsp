@@ -61,12 +61,12 @@
 			<c:forEach var="member_management" items="${member_management}">
 				<div class="col">
 					<div class="card border-0">
-						<img src="${contextPath}/resources/post/img/${member_management.post_imgDto.post_img_img}" class="card-img-top rounded position-relative" onclick="location.href='${contextPath}/post/mylist'">
+						<img src="${contextPath}/resources/img/post/${member_management.post_imgDto.post_img_img}" class="card-img-top rounded position-relative" onclick="location.href='${contextPath}/post/mylist'">
 						<span class="position-absolute badge rounded-pill bg-light m-1" data-postNo="${member_management.post_imgDto.post_no}">No.${member_management.post_imgDto.post_no}</span>
 						<div class="card-body">
 							<div class="row justify-content-start d-flex">
 								<div class="col-3">
-									<img class="rounded-circle" style="width: 40px; height: 40px;" src="${contextPath}/resources/fix/img/${member_management.profile_img}" onclick="location.href='./'" id="profile_img">
+									<img class="rounded-circle" style="width: 40px; height: 40px;" src="${contextPath}/resources/img/profile/${member_management.profile_img}" onclick="location.href='./'" id="profile_img">
 								</div>
 								<div class="col-6 my-auto" onclick="location.href='./'">${member_management.member_nick}</div>
 								<button class="col-3 btn btn-outline-danger btn-sm rounded postDelete" id="postDelete">삭제</button>

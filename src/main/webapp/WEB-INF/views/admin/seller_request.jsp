@@ -5,15 +5,48 @@
 <head>
 <meta charset="UTF-8">
 <title>member management</title>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"
-	type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.js"></script>
 <meta name="viewport" content="width=device-width">
 <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"> -->
-<link rel="stylesheet"
-	href="${contextPath}/resources/admin/css/member_management.css">
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+<link rel="stylesheet" href="${contextPath}/resources/admin/css/member_management.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		
+		$('.sellerAgree').click(function() {
+			let seller_no = $(this).parent().prev().prev().prev().prev().attr("data-sellerNo") // <li>태그는 <button>의 부모임.
+			$.ajax({
+				type : 'post',
+				url : '${contextPath}/admin/sellerAgree',
+				data : {
+						seller_no : seller_no
+				},
+				success : function(data) {
+					alert("판매 자격이 수락되었습니다.")
+					location.reload()
+				},
+				error : function() {alert("error")}		//에러가 발생했을 때 호출될 함수
+			})
+		})
+		
+		$('.sellerReject').click(function() {
+			let seller_no = $(this).parent().prev().prev().prev().prev().attr("data-sellerNo") // <li>태그는 <button>의 부모임.
+			$.ajax({
+				type : 'post',
+				url : '${contextPath}/admin/sellerReject',
+				data : {
+						seller_no : seller_no
+				},
+				success : function(data) {
+					alert("판매자 자격이 거부 처리되었습니다.")
+					location.reload()
+				},
+				error : function() {alert("error")}		//에러가 발생했을 때 호출될 함수
+			})
+		})
+	})
+</script>
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/fix/adminheader.jsp"%>
@@ -61,13 +94,13 @@
 			<tbody>
 				<c:forEach var="seller_management" items="${seller_management}">
 					<tr class="table-primary">
-						<th class="text-center" scope="row">${seller_management.NSellerDto.seller_no}</th>
+						<th class="text-center" scope="row" data-sellerNo="${seller_management.NSellerDto.seller_no}">${seller_management.NSellerDto.seller_no}</th>
 						<td class="text-center" data-title="회사명">${seller_management.NSellerDto.seller_name}</td>
 						<td class="text-center" data-title="신청인">${seller_management.member_name}</td>
 						<td class="text-center" data-title="회사번호" data-type="currency">${seller_management.NSellerDto.seller_number}</td>
 						<td class="text-center" data-title="관리" data-type="currency">
-							<input class="btn btn-outline-primary btn-sm rounded" tabindex="-1" role="button" type="button" value="수락" />
-							<input class="btn btn-outline-danger btn-sm rounded" tabindex="-1" role="button" type="button" value="거부" />
+							<input class="btn btn-outline-primary btn-sm rounded sellerAgree" tabindex="-1" role="button" type="button" value="수락" />
+							<input class="btn btn-outline-danger btn-sm rounded sellerReject" tabindex="-1" role="button" type="button" value="거부" />
 						</td>
 					</tr>
 				</c:forEach>

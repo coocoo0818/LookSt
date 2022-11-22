@@ -11,6 +11,44 @@
 <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"> -->
 <link rel="stylesheet" href="${contextPath}/resources/admin/css/member_management.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		
+		$('.magazinAgree').click(function() {
+			let board_no = $(this).parent().prev().prev().prev().prev().attr("data-boardNo") // <li>태그는 <button>의 부모임.
+			
+			$.ajax({
+				type : 'post',
+				url : '${contextPath}/admin/magazinAgree',
+				data : {
+						board_no : board_no
+				},
+				success : function(data) {
+					alert("게시글 상태가 수락되었습니다.")
+					location.reload()
+				},
+				error : function() {alert("error")}		//에러가 발생했을 때 호출될 함수
+			})
+		})
+		
+		$('.magazinReject').click(function() {
+			let board_no = $(this).parent().prev().prev().prev().prev().attr("data-boardNo") // <li>태그는 <button>의 부모임.
+
+			$.ajax({
+				type : 'post',
+				url : '${contextPath}/admin/magazinReject',
+				data : {
+						board_no : board_no
+				},
+				success : function(data) {
+					alert("게시글 상태가 비공개처리되었습니다.")
+					location.reload()
+				},
+				error : function() {alert("error")}		//에러가 발생했을 때 호출될 함수
+			})
+		})
+	})
+</script>
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/fix/adminheader.jsp"%>
@@ -57,15 +95,15 @@
 			<tbody>
 				<c:forEach var="magazin_management" items="${magazin_management}">
 					<tr class="table-primary">
-						<th class="text-center" scope="row">${magazin_management.NBoardDto.board_no}</th>
+						<th class="text-center" scope="row" data-boardNo="${magazin_management.NBoardDto.board_no}">${magazin_management.NBoardDto.board_no}</th>
 						<td class="text-center" data-title="글제목">
 							<a href="http://en.wikipedia.org/wiki/Avatar_(2009_film)">${magazin_management.NBoardDto.board_title}</a>
 						</td>
 						<td class="text-center" data-title="작성자">${magazin_management.member_name}</td>
 						<td class="text-center" data-title="작성일" data-type="currency"><fmt:formatDate value="${magazin_management.NBoardDto.board_date}" pattern="yyyy-MM-dd" type="date" /></td>
 						<td class="text-center" data-title="관리" data-type="currency">
-							<input class="btn btn-outline-primary btn-sm rounded" tabindex="-1" role="button" type="button" value="게시" /> 
-							<input class="btn btn-outline-danger btn-sm rounded" tabindex="-1" role="button" type="button" value="거부" />
+							<input class="btn btn-outline-primary btn-sm rounded magazinAgree" tabindex="-1" role="button" type="button" value="게시" /> 
+							<input class="btn btn-outline-danger btn-sm rounded magazinReject" tabindex="-1" role="button" type="button" value="거부" />
 						</td>
 					</tr>
 				</c:forEach>

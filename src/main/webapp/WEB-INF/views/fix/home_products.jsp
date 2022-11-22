@@ -22,7 +22,7 @@
 				<div class="col">
 					<div class="card border-0">
 						<img
-							src="${contextPath}/resources/fix/img/${new_prdt.prdt_img_name}"
+							src="${contextPath}/resources/img/product/${new_prdt.prdt_img_name}"
 							class="card-img-top rounded" alt="...">
 						<div class="card-body">
 							<h5 class="card-title text-decoration-underline">${new_prdt.product_name}</h5>

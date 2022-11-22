@@ -72,6 +72,19 @@ public class AdminDaoImpl implements AdminDao{
 	public List<MemMGMDto> boardSearchResultPage(SearchItem sc) throws Exception {
 		return session.selectList(namespace + "boardSearchResultPage", sc);
 	}
+	/* 게시글 상태 변경 */
+	@Override
+	public int boardModify(Integer board_no, String board_type) throws Exception {
+		Map map = new HashMap();
+		map.put("board_no", board_no);
+		map.put("board_type", board_type);
+		return session.update(namespace + "boardModify", map);
+	}
+	/* 게시글 삭제 */
+	@Override
+	public int boardDelete(Integer board_no) throws Exception {
+		return session.delete(namespace + "boardDelete", board_no);
+	}
 	
 	/* 메거진 신청 토탈 */
 	@Override
@@ -83,6 +96,16 @@ public class AdminDaoImpl implements AdminDao{
 	public List<MemMGMDto> boardApplyingsearchResultPage(SearchItem sc) throws Exception {
 		return session.selectList(namespace + "boardApplyingsearchResultPage", sc);
 	}
+	/* 메거진 수락 */
+	@Override
+	public int magazinAgree(Integer board_no) throws Exception {
+		return session.update(namespace + "magazinAgree", board_no);
+	}
+	/* 메거진 거부 */
+	@Override
+	public int magazinReject(Integer board_no) throws Exception {
+		return session.update(namespace + "magazinReject", board_no);
+	}
 
 	/* 판매자 신청 토탈 */
 	@Override
@@ -93,6 +116,14 @@ public class AdminDaoImpl implements AdminDao{
 	@Override
 	public List<MemMGMDto> sellerApplyingsearchResultPage(SearchItem sc) throws Exception {
 		return session.selectList(namespace + "sellerApplyingsearchResultPage", sc);
+	}
+	@Override
+	public int sellerAgree(String seller_no) throws Exception {
+		return session.update(namespace + "sellerAgree", seller_no);
+	}
+	@Override
+	public int sellerReject(String seller_no) throws Exception {
+		return session.update(namespace + "sellerReject", seller_no);
 	}
 
 
