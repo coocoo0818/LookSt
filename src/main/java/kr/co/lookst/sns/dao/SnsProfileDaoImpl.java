@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.co.lookst.sns.domain.FollowDto;
-import kr.co.lookst.sns.domain.Follow_CntDto;
 import kr.co.lookst.sns.domain.ProfileFeedDto;
 import kr.co.lookst.sns.domain.SnsProfileDto;
 
@@ -37,6 +36,5 @@ public class SnsProfileDaoImpl implements SnsProfileDao {
 	public List<FollowDto> followingList(String member_id) throws Exception {
 		return session.selectList(namespace+"followingList", member_id);
 	}
-
-
+	
 }
