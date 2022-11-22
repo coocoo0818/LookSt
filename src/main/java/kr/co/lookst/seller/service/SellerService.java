@@ -25,5 +25,9 @@ public interface SellerService {
 	
 	List<OrderListDto> getsearchResultPageR(SearchItem sc) throws Exception;
 
+	int productStock(Integer product_no, int stock) throws Exception;
+
+	
+
 	
 }

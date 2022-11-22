@@ -44,6 +44,29 @@
 		let page = ${pr.sc.page}
 		let pageSize = ${pr.sc.pageSize}
 		
+		
+		$('.stockP').click(function() {
+			let stock = $('input[name=upstock]').val();
+			let product_no = $(this).parent().attr("data-product_no")
+			
+			
+			$.ajax({
+				type : 'post',
+				url : '${contextPath}/seller/productStock',
+				data : {
+						product_no : product_no, 
+						stock : stock
+						},
+				success : function(result) {
+					alert("재고수량이 변경되었습니다.")
+					location.reload()
+				},
+				error : function() {alert("에러")}		
+			})
+		})	
+		
+	
+		
 		$('.deleteP').click(function() {
 			let product_no = $(this).parent().attr("data-product_no")
 
@@ -61,6 +84,7 @@
 			})
 		})
 	})
+
 </script>	
 
 
@@ -133,10 +157,11 @@
 						</td>
 						<td data-title="PrdtInfo">${prdtListDto.product_name }</td>
 						<td data-title="PrdtPrice" data-type="currency">${prdtListDto.product_price }</td>
-						<td data-title="PtdtStock" data-type="currency"><input
-							type="number" class="ptdtStock" min="0" max="100"
-							value="${prdtListDto.prdt_option_stock }"></td>
+						<td class="stock" data-title="PtdtStock" data-type="currency"><input
+							type="number" min="0" max="100" id="upstock" name="upstock"
+							value="${prdtListDto.prdt_option_stock }" ></td>
 						<td data-title="Detail" data-type="currency" data-product_no="${prdtListDto.product_no }">
+						<input tabindex="-1" role="button" type="button" value="변경" class="btn btn-dark btn-sm stockP" id="stockP" />
 						<input tabindex="-1" role="button" type="button" value="삭제" class="btn btn-dark btn-sm deleteP" id="deleteP" /></td>
 					</tr>
 				</c:forEach>

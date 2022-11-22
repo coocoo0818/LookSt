@@ -74,6 +74,14 @@ public class SellerServiceImpl implements SellerService{
 	}
 
 
+	@Override
+	public int productStock(Integer product_no, int stock) throws Exception {
+		// TODO Auto-generated method stub
+		return sellerDao.productStock(product_no, stock);
+	}
+
+
+
 
 
 	

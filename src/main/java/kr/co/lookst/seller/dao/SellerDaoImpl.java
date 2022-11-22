@@ -1,6 +1,7 @@
 package kr.co.lookst.seller.dao;
 
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -70,6 +71,15 @@ public class SellerDaoImpl implements SellerDao{
 	public List<OrderListDto> searchSelectPageR(SearchItem sc) throws Exception {
 		// TODO Auto-generated method stub
 		return session.selectList(namespace+"searchSelectPageR", sc);
+	}
+
+
+	@Override
+	public int productStock(Integer product_no, int stock) throws Exception {
+		Map map = new HashMap();
+		map.put("product_no", product_no);
+		map.put("stock", stock);
+		return session.update(namespace + "productStock", map);
 	}
 
 
