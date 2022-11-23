@@ -3,14 +3,338 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="kr.co.lookst.main.dao.AdminMapper">
+<mapper namespace="kr.co.lookst.admin.dao.AdminMapper">
+        <!-- 메인 상품 리스트 -->
+        <select id="newProductsInfo" resultType="IndexDto">
+           select product.product_no, product_name, product_kind , product_price, product_info , prdt_img_name  
+           from product product , prdt_img prdt_img 
+           where product.product_no = prdt_img.product_no
+           and product_type = 'Y'
+           order by product_date desc
+           LIMIT 4
+        </select>
+        <!-- 메인 스타일 리스트 -->
+        <select id="stylePick" resultType="StylePickDto">
+                select * from stylePick
+        </select>
 
-	<select id="newProducts" resultType="Product">
-		select product_name, product_kind , product_price , prdt_img_name  from product product , prdt_img prdt_img 
-		where product.product_no = prdt_img.product_no
-		and product_type = 'Y'
-		order by product_date desc
-		LIMIT 4
-	</select>
-	
+        <resultMap type="Post_imgDto" id="post_imgDto">
+                <result column="post_no" property="post_no" />
+                <result column="post_img_img" property="post_img_img" />
+        </resultMap>
+
+        <resultMap type="NBoardDto" id="nBoardDto">
+                <result column="board_no" property="board_no" />
+                <result column="board_title" property="board_title" />
+                <result column="board_kind" property="board_kind" />
+                <result column="board_date" property="board_date" />
+                <result column="board_type" property="board_type" />
+        </resultMap>
+
+        <resultMap type="NSellerDto" id="nSellerDto">
+                <result column="seller_no" property="seller_no" />
+                <result column="seller_name" property="seller_name" />
+                <result column="seller_number" property="seller_number" />
+        </resultMap>
+
+        <resultMap type="MemMGMDto" id="MemMGMDto">
+                <result column="member_id" property="member_id" />
+                <result column="member_nick" property="member_nick" />
+                <result column="member_name" property="member_name" />
+                <result column="profile_img" property="profile_img" />
+                <collection property="post_imgDto" resultMap="post_imgDto" />
+                <collection property="nBoardDto" resultMap="nBoardDto" />
+                <collection property="nSellerDto" resultMap="nSellerDto" />
+        </resultMap>
+
+        <!-- 어드민 회원 리스트 sql -->
+        <sql id="selectFromMemberManagement">
+                SELECT profile.profile_img, member.member_id,
+                member.member_name,
+                member.member_since, member.member_updt,
+                mem_auth.mem_auth_auth
+                from member member, profile profile, mem_auth mem_auth
+                where member.member_id = profile.member_id
+                and member.member_id = mem_auth.member_id
+        </sql>
+        <!-- 어드민 회원 검색 리스트 sql -->
+        <sql id="searchCondition">
+                <choose>
+                        <when test='option=="I"'>
+                                AND member.member_id LIKE concat('%', #{keyword},'%')
+                        </when>
+                        <when test='option=="N"'>
+                                AND member.member_name LIKE concat('%', #{keyword},'%')
+                        </when>
+                        <otherwise>
+                                AND mem_auth.mem_auth_auth LIKE concat('%', #{keyword},'%')
+                        </otherwise>
+                </choose>
+        </sql>
+        <!-- 어드민 토탈 회원 출력 -->
+        <select id="searchResultCnt" parameterType="SearchItem"
+                resultType="int">
+                select count(*)
+                from member member, profile profile, mem_auth mem_auth
+                where member.member_id = profile.member_id
+                and member.member_id = mem_auth.member_id
+                and true
+                <include refid="searchCondition" />
+        </select>
+        <!-- 어드민 서치 회원 출력 -->
+        <select id="searchSelectPage" parameterType="SearchItem"
+                resultType="MemMGMDto">
+                <include refid="selectFromMemberManagement" />
+                and true
+                <include refid="searchCondition" />
+                order by member.member_since desc
+                limit #{pageSize} offset #{offset}
+        </select>
+        <!-- 어드민 권한 변경 -->
+        <update id="authModify" parameterType="map">
+                UPDATE mem_auth
+                SET mem_auth_auth = #{auth}
+                WHERE member_id = #{member_id}
+        </update>
+        <!-- 어드민 회원 강퇴 -->
+        <delete id="memberKickOut" parameterType="String">
+                DELETE FROM member
+                WHERE member_id= #{member_id}
+        </delete>
+
+
+        <!-- 어드민 SNS 리스트 sql -->
+        <sql id="selectFromSNSManagement">
+                select post.post_no, post_img.post_img_img,
+                profile.profile_img,
+                member.member_nick, member.member_id
+                from member member, profile profile, post post, post_img post_img
+                where member.member_id = profile.member_id
+                and member.member_id = post.member_id
+                and post.post_no = post_img.post_no
+                and post.post_type = 'Y'
+                and post_img.post_img_seq = 1
+        </sql>
+        <!-- 어드민 SNS 검색 리스트 sql -->
+        <sql id="searchSNSCondition">
+                <choose>
+                        <when test='option=="I"'>
+                                AND member.member_id LIKE concat('%', #{keyword},'%')
+                        </when>
+                        <when test='option=="N"'>
+                                AND member.member_nick LIKE concat('%', #{keyword},'%')
+                        </when>
+                        <when test='option=="A"'>
+                                AND post.post_no in(#{keyword}::integer)
+                        </when>
+                </choose>
+        </sql>
+        <!-- 어드민 토탈 SNS 출력 -->
+        <select id="postSearchResultCnt" parameterType="SearchItem"
+                resultType="int">
+                select count(*)
+                from member member, profile profile, post post,
+                post_img post_img
+                where member.member_id = profile.member_id
+                and member.member_id = post.member_id
+                and post.post_no = post_img.post_no
+                and post.post_type = 'Y'
+                and post_img.post_img_seq = 1
+                and true
+                <include refid="searchSNSCondition" />
+        </select>
+        <!-- 어드민 서치 SNS 출력 -->
+        <select id="postSearchResultPage" parameterType="SearchItem" resultMap="MemMGMDto">
+                <include refid="selectFromSNSManagement" />
+                and true
+                <include refid="searchSNSCondition" />
+                order by post.post_date desc
+                limit #{pageSize} offset #{offset}
+        </select>
+        <!-- SNS 강제 삭제 -->
+        <delete id="postDelete" parameterType="int">
+                DELETE FROM post
+                WHERE post_no = #{post_no}
+        </delete>
+
+        <!-- 게시판 리스트 sql -->
+        <sql id="selectFromBoardManagement">
+                select board.board_no, board.board_title, member.member_name, board.board_kind, board.board_date, board.board_type
+                from member member, board board
+                where member.member_id = board.member_id
+                and board.board_type in ('Y', 'N')
+        </sql>
+        <!-- 게시판 검색 리스트 sql -->
+        <sql id="searchBoardCondition">
+                <choose>
+                        <when test='option=="N"'>
+                                AND board.board_no in(#{keyword}::integer)
+                        </when>
+                        <when test='option=="T"'>
+                                AND board.board_title LIKE concat('%', #{keyword},'%')
+                        </when>
+                        <when test='option=="W"'>
+                                AND member.member_name LIKE concat('%', #{keyword},'%')
+                        </when>
+                </choose>
+        </sql>
+        <!-- 게시판 토탈 출력 -->
+        <select id="boardSearchResultCnt" parameterType="SearchItem" resultType="int">
+                select count(*)
+                from member member, board board
+                where member.member_id = board.member_id
+                and board.board_type in ('Y', 'N')
+                and true
+                <include refid="searchBoardCondition" />
+        </select>
+        <!-- 게시판 서치 출력 -->
+        <select id="boardSearchResultPage"
+                parameterType="SearchItem" resultMap="MemMGMDto">
+                <include refid="selectFromBoardManagement" />
+                and true
+                <include refid="searchBoardCondition" />
+                order by board.board_date desc
+                limit #{pageSize} offset #{offset}
+        </select>
+        <!-- 게시글 상태 변경 -->
+        <update id="boardModify" parameterType="map">
+                UPDATE board
+                SET board_type = #{board_type}
+                WHERE board_no = #{board_no}
+        </update>
+        <!-- 게시글 삭제 -->
+        <delete id="boardDelete" parameterType="integer">
+                DELETE FROM board
+                WHERE board_no = #{board_no}
+        </delete>
+
+        <!-- magazin 신청 리스트 sql -->
+        <sql id="selectFromMagazinManagement">
+                select board.board_no , board.board_title,
+                member.member_name,
+                board.board_kind, board.board_date,board.board_type
+                from member member, board board
+                where member.member_id =
+                board.member_id
+                and board.board_type = 'A'
+                and board.board_kind = 'M'
+        </sql>
+        <!-- magazin 신청 검색 리스트 sql -->
+        <sql id="searchMagazinCondition">
+                <choose>
+                        <when test='option=="T"'>
+                                AND board.board_title LIKE concat('%', #{keyword},'%')
+                        </when>
+                        <when test='option=="W"'>
+                                AND member.member_name LIKE concat('%', #{keyword},'%')
+                        </when>
+                        <when test='option=="N"'>
+                                AND board.board_no in(#{keyword}::integer)
+                        </when>
+                </choose>
+        </sql>
+        <!-- magazin 신청 토탈 출력 -->
+        <select id="boardApplyingSearchResultCnt"
+                parameterType="SearchItem" resultType="int">
+                select count(*)
+                from member member, board board
+                where member.member_id =
+                board.member_id
+                and board.board_type = 'A'
+                and board.board_kind = 'M'
+                and true
+                <include refid="searchMagazinCondition" />
+        </select>
+        <!-- magazin 신청 서치 출력 -->
+        <select id="boardApplyingsearchResultPage"
+                parameterType="SearchItem" resultMap="MemMGMDto">
+                <include refid="selectFromMagazinManagement" />
+                and true
+                <include refid="searchMagazinCondition" />
+                order by board.board_no desc
+                limit #{pageSize} offset #{offset}
+        </select>
+        <!-- magazin 수락 -->
+        <update id="magazinAgree" parameterType="integer">
+                UPDATE board
+                SET board_type = 'Y'
+                WHERE board_no = #{board_no}
+        </update>
+        <!-- magazin 거부 -->
+        <update id="magazinReject" parameterType="integer">
+                UPDATE board
+                SET board_type = 'N'
+                WHERE board_no = #{board_no}
+        </update>
+
+        <!-- 판매자 신청 리스트 sql -->
+        <sql id="selectFromSellerManagement">
+                select seller_no,seller.seller_name,
+                seller.seller_number,member.member_name
+                from member member,seller seller
+                where member.member_id = seller.member_id
+                and seller.seller_type = 'A'
+        </sql>
+        <!-- 판매자 신청 검색 리스트 sql -->
+        <sql id="searchSellerCondition">
+                <choose>
+                        <when test='option=="B"'>
+                                AND seller.seller_no LIKE concat('%', #{keyword},'%')
+                        </when>
+                        <when test='option=="N"'>
+                                AND seller.seller_name LIKE concat('%', #{keyword},'%')
+                        </when>
+                        <when test='option=="A"'>
+                                AND member.member_name LIKE concat('%', #{keyword},'%')
+                        </when>
+                </choose>
+        </sql>
+        <!-- 판매자 신청 토탈 출력 -->
+        <select id="sellerApplyingSearchResultCnt"
+                parameterType="SearchItem" resultType="int">
+                select count(*)
+                from member member,seller seller
+                where member.member_id = seller.member_id
+                and seller.seller_type = 'A'
+                and true
+                <include refid="searchSellerCondition" />
+        </select>
+        <!-- 판매자 신청 서치 출력 -->
+        <select id="sellerApplyingsearchResultPage"
+                parameterType="SearchItem" resultMap="MemMGMDto">
+                <include refid="selectFromSellerManagement" />
+                and true
+                <include refid="searchSellerCondition" />
+                order by seller.member_id
+                limit #{pageSize} offset #{offset}
+        </select>
+        <!-- 판매자 수락 -->
+        <update id="sellerAgree" parameterType="String">
+                UPDATE seller
+                SET seller_type = 'Y'
+                WHERE seller_no = #{seller_no}
+        </update>
+        <!-- 판매자 거부 -->
+        <update id="sellerReject" parameterType="String">
+                UPDATE seller
+                SET seller_type = 'N'
+                WHERE seller_no = #{seller_no}
+        </update>
+        
+        <!-- 상품 정보 -->
+      <select id="getproductInfo" parameterType="integer" resultType="product">
+         select * from product
+         where product_no = #{product_no}
+      </select>
+      <select id="getproductSize" parameterType="integer" resultType="Prdt_Option">
+         select distinct prdt_option_size from prdt_option
+         where product_no = #{product_no}
+         order by prdt_option_size DESC
+      </select>
+      <select id="getproductImg" parameterType="integer" resultType="Prdt_Img">
+         select * from prdt_img
+         where product_no = #{product_no}
+         order by prdt_img_seq asc
+      </select>
+      
 </mapper>

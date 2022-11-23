@@ -263,6 +263,7 @@ public class AdminController {
 				model.addAttribute("productInfo", productInfo);
 				model.addAttribute("productSize", productSize);
 				model.addAttribute("productImg", productImg);
+				System.out.println(productImg);
 				/* 상품 상세페이지 이동 끝 */
 			} catch (Exception e) {
 				e.printStackTrace();
