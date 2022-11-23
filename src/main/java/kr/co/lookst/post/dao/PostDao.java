@@ -5,9 +5,11 @@ import java.util.List;
 import kr.co.lookst.post.domain.PostDto;
 import kr.co.lookst.post.domain.Post_imgDto;
 import kr.co.lookst.post.domain.ProdInfoDto;
+import kr.co.lookst.post.domain.TpostDto;
 import kr.co.lookst.post.domain.post_com_tagDto;
 import kr.co.lookst.post.domain.snsPrdtImgDto;
 import kr.co.lookst.post.domain.sns_Main_ImgDto;
+import kr.co.lookst.post.domain.sns_com_tagDto;
 import kr.co.lookst.post.domain.snslist_infoDto;
 
 public interface PostDao {
@@ -27,6 +29,10 @@ public interface PostDao {
 	List<sns_Main_ImgDto> snsmainimg(Integer post_no) throws Exception;
 
 	List<snsPrdtImgDto> snsPrdtImg(Integer post_no) throws Exception;
+
+	List<sns_com_tagDto> snsComTag(Integer post_no) throws Exception;
+
+	List<TpostDto> postTotalList() throws Exception;
 
 
 

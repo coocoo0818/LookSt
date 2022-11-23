@@ -120,7 +120,7 @@
 		<!-- sns 메인 -->
 		<!-- sns 리스트 #1 -->
 		<div class="row row-cols-1 row-cols-md-3 g-4">
-
+			<c:forEach var="postTotalList" items="${postTotalList}">
 			<div class="col">
 				<div class="card">
 					<c:forEach var="snsmainimg" items="${snsmainimg}">
@@ -129,16 +129,17 @@
 					</c:forEach>
 						<div class="card-body">
 							<div class="row justify-content-start d-flex">
+							  <c:forEach var="snsComTag" items="${snsComTag}">
 								<div class="col-3">
-									<img src="${pageContext.request.contextPath }/resources/post/img/프사2.jpg"
+									<img src="${pageContext.request.contextPath }/resources/img/profile/${snsComTag.profile_img}"
 										onclick="location.href='./'" id="profile_img">
 								</div>
-								<div class="col-5 my-auto" onclick="location.href='./'">MyMelody</div>
+								<div class="col-5 my-auto" onclick="location.href='./'">${snsComTag.member_nick}</div>
+								<p class="card-text" style="margin-top:20px;">${snsComTag.post_content}</p>
 								<div class="tag_link" style="margin-top: 10px; margin-bottom: 10px;">
-									<p class="tag_text" onclick="location.href='./'" style="display: inline;"><b>#LOOKST챌린지</b></p>
-									<p class="tag_text" onclick="location.href='./'" style="display: inline;"><b>#나이키</b></p>
-									<p class="tag_text" onclick="location.href='./'" style="display: inline;"><b>#조던</b></p>
+									<p class="tag_text" onclick="location.href='./'" style="display: inline;"><b>${snsComTag.tag_content}</b></p>
 								</div>
+							 </c:forEach>
 								<div class="like_comment">
 									<button onclick="clickBtn()" class="border border-white "
 										style="background-color: transparent;">
@@ -162,6 +163,7 @@
 						</div>
 					</div>	
 				</div>
+							</c:forEach>
 			<%-- </c:forEach> --%>
 			<!-- sns 리스트 #2 -->
 			<%-- <div class="col">
