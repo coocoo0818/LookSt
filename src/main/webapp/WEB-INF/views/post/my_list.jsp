@@ -69,6 +69,15 @@
 				}
 			}
 		}
+		
+		// 프로필화면 이동
+		$(document).ready(function() {
+			$('.IDbox').on('click', function() {
+				let member_id = $(this).children().attr("data-member_id")
+				alert(member_nick)
+				location.href = '${contextPath}/sns/snsProfile/?member_id='+member_id;
+			});
+		});
 	</script>
 
 	<div class="container">
@@ -104,12 +113,14 @@
 			<c:forEach var="postComTaglist" items="${postComTaglist}">
 				<!-- sns 프로필/닉네임 -->
 				<div class="d-flex justify-content-between">
-					<div class=" mb-2 mt-2 align-self-center">
-						<img
-							src="${pageContext.request.contextPath }/resources/img/profile/${postComTaglist.profile_img} "
-							onclick="location.href='./'" id="profile_img">
-						<p class="my-auto d-inline ms-3" onclick="location.href='./'">${postComTaglist.member_nick}</p>
-					</div>
+					<a href="<!-- javascript:IDbox(); -->${contextPath}/sns/snsProfile/?member_id=${postComTaglist.member_id}" class="IDbox">
+						<div class="nickbox mb-2 mt-2 align-self-center" data-memberID="${postComTaglist.member_id}">
+							<img
+								src="${pageContext.request.contextPath }/resources/img/profile/${postComTaglist.profile_img} "
+								 id="profile_img">
+							<p class="my-auto d-inline ms-3" >${postComTaglist.member_nick}</p>
+						</div>
+					</a>
 					<!-- sns 팔로우버튼 -->
 					<button type="button"
 						class="btn btn-outline-dark h-75 align-self-center"><p>팔로우</p></button>
@@ -118,7 +129,7 @@
 				<div id="carouselExampleIndicators" class="carousel slide"
 					data-bs-ride="true">
 					<div class="carousel-indicators">
-						<button type="button" data-bs-target="#carouselExampleIndicators"
+						<button tymember_nickpe="button" data-bs-target="#carouselExampleIndicators"
 							data-bs-slide-to="0" class="active" aria-current="true"
 							aria-label="Slide 1"></button>
 						<button type="button" data-bs-target="#carouselExampleIndicators"
@@ -236,12 +247,14 @@
 			<div class="card mb-3 w-50 p-3 " style="position: relative;">
 				<!-- sns 프로필/닉네임 -->
 				<div class="d-flex justify-content-between">
-					<div class=" mb-2 mt-2 align-self-center">
-						<img
-							src="${pageContext.request.contextPath }/resources/img/post/프사2.jpg"
-							onclick="location.href='./'" id="profile_img">
-						<p class="my-auto d-inline ms-3" onclick="location.href='./'">MyMelody</p>
-					</div>
+					<a href="<!-- javascript:IDbox(); -->${contextPath}/sns/snsProfile/?member_id=${postComTaglist.member_id}" class="IDbox">
+						<div class=" mb-2 mt-2 align-self-center" data-memberID="${postComTaglist.member_id}">
+							<img
+								src="${pageContext.request.contextPath }/resources/img/post/프사2.jpg"
+								 id="profile_img">
+							<p class="my-auto d-inline ms-3">"${postComTaglist.member_nick}</p>
+						</div>
+					</a>
 					<!-- sns 팔로우버튼 -->
 					<button type="button"
 						class="btn btn-outline-dark h-75 align-self-center"><p>팔로우</p></button>

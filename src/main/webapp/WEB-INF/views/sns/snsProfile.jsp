@@ -65,7 +65,7 @@
 					<div class="col-6 offset-3 ">
 						<div class="pro_img_box">
 							<img
-								src="${pageContext.request.contextPath }/resources/img/sns/${pro_info.profile_img}"
+								src="${pageContext.request.contextPath }/resources/img/profile/${pro_info.profile_img}"
 								id="profile_img" class="" alt="...">
 						</div>
 					</div>
@@ -140,7 +140,7 @@
 							<div class="card" style="border: none;">
 								<div class="post_img card-body">
 									<img class="feed_img"
-										src="${pageContext.request.contextPath }/resources/img/sns/${pro_feed.post_img_img}"
+										src="${pageContext.request.contextPath }/resources/img/post/${pro_feed.post_img_img}"
 										alt="...">
 								</div>
 							</div>
