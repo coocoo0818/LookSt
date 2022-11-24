@@ -4,13 +4,29 @@
   "https://mybatis.org/dtd/mybatis-3-config.dtd">
   
 <configuration>
-	<typeAliases>
-		<typeAlias alias="AdminDto" type="kr.co.lookst.admin.domain.AdminDto"/>
-		<typeAlias alias="BoardDto" type="kr.co.lookst.board.domain.BoardDto"/>
-		<typeAlias alias="MemberDto" type="kr.co.lookst.member.domain.MemberDto"/>
-		<typeAlias alias="PostDto" type="kr.co.lookst.post.domain.PostDto"/>
-		<typeAlias alias="SellerDto" type="kr.co.lookst.seller.domain.SellerDto"/>
-		<typeAlias alias="ShopDto" type="kr.co.lookst.shop.domain.ShopDto"/>
-		<typeAlias alias="SnsDto" type="kr.co.lookst.sns.domain.SnsDto"/>
-	</typeAliases>
+   <typeAliases>
+      <typeAlias alias="Product" type="kr.co.lookst.main.domain.Product"/>
+      <typeAlias alias="Prdt_Img" type="kr.co.lookst.main.domain.Prdt_Img"/>
+      <typeAlias alias="Prdt_Option" type="kr.co.lookst.main.domain.Prdt_Option"/>
+      <typeAlias alias="PrdtListDto" type="kr.co.lookst.seller.domain.PrdtListDto" />
+      <typeAlias alias="OrderListDto" type="kr.co.lookst.seller.domain.OrderListDto" /> 
+      <typeAlias alias="IndexDto" type="kr.co.lookst.main.domain.IndexDto"/>
+      <typeAlias alias="StylePickDto" type="kr.co.lookst.main.domain.StylePickDto"/>
+      <typeAlias alias="BoardDto" type="kr.co.lookst.board.domain.BoardDto"/>
+      <typeAlias alias="MemberDto" type="kr.co.lookst.member.domain.MemberDto"/>
+      <typeAlias alias="PostDto" type="kr.co.lookst.post.domain.PostDto"/>
+      <typeAlias alias="SellerDto" type="kr.co.lookst.seller.domain.SellerDto"/>
+      <typeAlias alias="ShopDto" type="kr.co.lookst.shop.domain.ShopDto"/>
+      <typeAlias alias="SnsProfileDto" type="kr.co.lookst.sns.domain.SnsProfileDto"/>
+      <typeAlias alias="ProfileFeedDto" type="kr.co.lookst.sns.domain.ProfileFeedDto"/>
+      <typeAlias alias="FollowDto" type="kr.co.lookst.sns.domain.FollowDto"/>
+      <typeAlias alias="Post_imgDto" type="kr.co.lookst.post.domain.Post_imgDto"/>
+      <typeAlias alias="MemMGMDto" type="kr.co.lookst.admin.domain.MemMGMDto"/>
+      <typeAlias alias="ProdInfoDto" type="kr.co.lookst.post.domain.ProdInfoDto"/>
+      <typeAlias alias="PageResolver" type="kr.co.lookst.main.domain.PageResolver"/>
+      <typeAlias alias="SearchItem" type="kr.co.lookst.main.domain.SearchItem"/>
+      <typeAlias alias="snslist_infoDto" type="kr.co.lookst.post.domain.snslist_infoDto"/>
+      <typeAlias alias="NBoardDto" type="kr.co.lookst.main.domain.NBoardDto"/>
+      <typeAlias alias="NSellerDto" type="kr.co.lookst.main.domain.NSellerDto"/>
+   </typeAliases>
 </configuration>

@@ -3,12 +3,15 @@ package kr.co.lookst.admin;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.lookst.admin.domain.MemMGMDto;
 import kr.co.lookst.admin.service.AdminService;
@@ -249,11 +252,10 @@ public class AdminController {
 		return "redirect:/admin/board_management";
 	}
 	
-	/* 판매자 신청 페이지 이동 */
-	@GetMapping("/productDetail")
+	/* 상품 상세 페이지 이동 */
+	@RequestMapping(value="/productDetail", method={RequestMethod.POST, RequestMethod.GET})
 	public String productDetailPage(Model model,  
 			@RequestParam("product_no") Integer product_no) {
-			System.out.println(product_no);
 			try {
 				/* 상품 상세페이지 이동 */
 				Product productInfo = adminService.getproductInfo(product_no);
@@ -263,10 +265,28 @@ public class AdminController {
 				model.addAttribute("productInfo", productInfo);
 				model.addAttribute("productSize", productSize);
 				model.addAttribute("productImg", productImg);
+
 				/* 상품 상세페이지 이동 끝 */
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		return "/admin/productDetail";
+	}
+	/* 상품 컬러 출력 */
+	@RequestMapping(value="/productColor", method={RequestMethod.GET})
+	public ResponseEntity<List<Prdt_Option>> productColor(Model model, 
+			@RequestParam("product_no")Integer product_no, @RequestParam("prdt_option_size")String prdt_option_size) {
+		System.out.println(product_no);
+		System.out.println(prdt_option_size);
+		
+		try {
+			List<Prdt_Option> productColor = adminService.productColor(product_no, prdt_option_size);
+			System.out.println(productColor);
+			return new ResponseEntity<List<Prdt_Option>>(productColor, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<List<Prdt_Option>>(HttpStatus.BAD_REQUEST);
+		}
+		/* return "redirect:/admin/productDetail"; */
 	}
 }

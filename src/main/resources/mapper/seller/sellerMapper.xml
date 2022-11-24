@@ -4,5 +4,18 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="kr.co.lookst.seller.dao.SellerMapper">
-	
+   
+   <select id="selectProduct" resultType="PrdtListDto">
+      select * from SellerPrdtList
+   </select>
+   
+   <select id="selectOrders" resultType="OrderListDto">
+      select * from SellerOrderList
+   </select>
+   
+   <select id="selectRequests" resultType="OrderListDto">
+     select * from SellerOrderList
+     where prdt_order_cancel is not null
+   </select>
+
 </mapper>

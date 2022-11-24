@@ -4,5 +4,26 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="kr.co.lookst.member.dao.MemberMapper">
-	
+
+   <select id="login" parameterType="memberDto" resultType="memberDto">
+      SELECT *
+      FROM MEMBER
+      WHERE member_id = #{member_id}
+      AND member_pw = #{member_pw}
+   </select>
+
+   <insert id="register">
+      INSERT INTO member (
+         member_id, member_pw, member_nick,
+         member_name, member_since, member_check,
+         member_smscheck, member_type
+      )
+      VALUES (
+         #{member_id}, #{member_pw}, #{member_nick},
+         #{member_name}, now(), #{member_check},
+         #{member_smscheck}, #{member_type}
+      )
+   </insert>
+
+
 </mapper>
