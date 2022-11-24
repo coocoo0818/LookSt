@@ -3,6 +3,8 @@ package kr.co.lookst.admin;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -271,20 +273,20 @@ public class AdminController {
 		return "/admin/productDetail";
 	}
 	/* 상품 컬러 출력 */
-	@RequestMapping(value="/productColor", method={RequestMethod.POST, RequestMethod.GET})
-	@ResponseBody
-	public String productColor(Model model, @RequestParam(value = "product_no", required = false) Integer product_no,
-										@RequestParam(value = "prdt_option_size", required = false) String prdt_option_size) {
+	@RequestMapping(value="/productColor", method={RequestMethod.GET})
+	public ResponseEntity<List<Prdt_Option>> productColor(Model model, 
+			@RequestParam("product_no")Integer product_no, @RequestParam("prdt_option_size")String prdt_option_size) {
 		System.out.println(product_no);
 		System.out.println(prdt_option_size);
 		
 		try {
-			List<String> productColor = adminService.productColor(product_no, prdt_option_size);
-			model.addAttribute("productColor", productColor);
-			System.out.println(model);
+			List<Prdt_Option> productColor = adminService.productColor(product_no, prdt_option_size);
+			System.out.println(productColor);
+			return new ResponseEntity<List<Prdt_Option>>(productColor, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
+			return new ResponseEntity<List<Prdt_Option>>(HttpStatus.BAD_REQUEST);
 		}
-		return "redirect:/admin/productDetail";
+		/* return "redirect:/admin/productDetail"; */
 	}
 }

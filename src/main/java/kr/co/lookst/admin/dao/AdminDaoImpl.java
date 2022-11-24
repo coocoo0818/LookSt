@@ -137,7 +137,7 @@ public class AdminDaoImpl implements AdminDao{
 		return session.selectList(namespace + "getproductImg", product_no);
 	}
 	@Override
-	public List<String> productColor(Integer product_no, String prdt_option_size) throws Exception {
+	public List<Prdt_Option> productColor(Integer product_no, String prdt_option_size) throws Exception {
 		Map map = new HashMap();
 		map.put("product_no", product_no);
 		map.put("prdt_option_size", prdt_option_size);

@@ -11,28 +11,34 @@
 <link rel="stylesheet" href="${contextPath}/resources/admin/css/productDetail.css">
 <script type="text/javascript">
 	$(document).ready(function() {
+
+		let toHtml = function(prdtOptions) {
+			let tmp = "<div class='options'>"
+			prdtOptions.forEach(function(prdtOption, index) {
+				tmp += '<div class="option" style="width:25px; color: ' + prdtOption.prdt_option_color + ';"></div>'
+			})
+			return tmp += "</div>"
+		}
 		$(".productSize").click(function() { 
-			alert("진입")
-			let product_no = $(this).parent().prev().parent().parent().prev().prev().prev().parent().attr("data-productNo") // <li>태그는 <button>의 부모임.
-			let prdt_option_size = $(this).parent().parent().attr("data-productSize") // <li>태그는 <button>의 부모임.
-			alert(product_no)
-			alert(prdt_option_size)
-			
+			var product_no = $(this).parent().prev().parent().parent().prev().prev().prev().parent().attr("data-productNo") // <li>태그는 <button>의 부모임.
+			var prdt_option_size = $(this).attr("data-prdt-size") // <li>태그는 <button>의 부모임.
+
+			const encoded = encodeURI("${contextPath}/admin/productColor/")
 			$.ajax({
-				type : 'POST',
-				url : '${contextPath}/admin/productColor',
-				data : JSON.stringify({
+				type : 'GET',
+				url : encoded,
+
+				data : {
 					product_no : product_no,
 					prdt_option_size : prdt_option_size
 				},
 				success : function(result) {
-					alert(result)
-					var html = "<div class='option' style='color: #ef525e;'></div>"; 
-
+					$("#optionColor").html(toHtml(result))
  				},
  				error : function() {alert("error")}		//에러가 발생했을 때 호출될 함수
 			})
 		})
+
 	})
 
 /* 	
@@ -70,20 +76,16 @@
 							<p class="header">Select Size</p>
 							<div class="options">
 								<c:forEach var="productSize" items="${productSize}">
-									<div class="option productSize">${productSize.prdt_option_size}</div>
+									<div class="option productSize" data-prdt-size="${productSize.prdt_option_size}">${productSize.prdt_option_size}</div>
 								</c:forEach>
 							</div>
 						</div>
 						<div class="attrib color">
 							<p class="header">Select Color</p>
-							<div class="options">
-							<div id="optionColor" name="optionColor" class="option" style="color: #ef525e;"></div>
-								<c:forEach var="productColor" items="${productColor}">
-									<div class="option" style="color: #ef525e;"></div>
-									<div id="optionColor" name="optionColor" class="option" style="color: #60aec1;">${productColor.prdt_option_color}</div>
-									<div class="option" style="color: #000000;" disabled></div>
-								</c:forEach>
-							</div>
+							<!-- <div class="options">
+								<div id="optionColor" name="optionColor" class="option" style="color: #ef525e;" ></div>
+							</div> -->
+								<div id="optionColor" name="optionColor"></div>
 						</div>
 					</div>
 					<div class="buttons">

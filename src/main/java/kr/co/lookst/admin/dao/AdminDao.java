@@ -60,7 +60,7 @@ public interface AdminDao {
 	Product getproductInfo(Integer product_no) throws Exception;
 	List<Prdt_Option> getproductSize(Integer product_no) throws Exception;
 	List<Prdt_Img> getproductImg(Integer product_no) throws Exception;
-	List<String> productColor(Integer product_no, String prdt_option_size) throws Exception;
+	List<Prdt_Option> productColor(Integer product_no, String prdt_option_size) throws Exception;
 
 	
 }

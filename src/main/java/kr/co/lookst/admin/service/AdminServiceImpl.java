@@ -138,7 +138,7 @@ public class AdminServiceImpl implements AdminService{
 		return adminDao.getproductImg(product_no);
 	}
 	@Override
-	public List<String> productColor(Integer product_no, String prdt_option_size) throws Exception {
+	public List<Prdt_Option> productColor(Integer product_no, String prdt_option_size) throws Exception {
 		return adminDao.productColor(product_no, prdt_option_size);
 	}
 
