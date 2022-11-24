@@ -19,7 +19,7 @@
 		$('.authModify').click(function() {
 			let member_id = $(this).parent().attr("data-memberid") // <li>태그는 <button>의 부모임.
 			let index = $(this).parent().attr("data-index")
-			let auth = document.getElementById("auth_auth"+index).value;
+			let auth = document.getElementById("auth_auth" + index).value;
 
 			$.ajax({
 				type : 'post',
@@ -115,17 +115,17 @@
 							<td class="text-center" data-title="update-date" data-type="currency"><fmt:formatDate value="${member_management.member_updt}" pattern="yyyy-MM-dd" type="date" /></td>
 							<td class="text-center auth" data-title="Auth" data-type="currency">
 								<select class="form-select form-select-sm" aria-label=".form-select-sm example" id="auth_auth${status.index}">
-									<c:if test="${member_management.mem_auth_auth eq 'member'}">
+									<c:if test="${member_management.mem_auth_auth == 'member'}">
 					        			<option value="member" ${member_management.mem_auth_auth=='member'? "selected" : ""} disabled="disabled" selected="selected" style="color: red;">member 🍊 </option>
 					        			<option value="seller" ${member_management.mem_auth_auth=='seller'? "selected" : ""}>seller</option>
 					        			<option value="admin" ${member_management.mem_auth_auth=='admin'? "selected" : ""}>admin</option>
 					        		</c:if>
-									<c:if test="${member_management.mem_auth_auth eq 'seller'}">
+									<c:if test="${member_management.mem_auth_auth == 'seller'}">
 										<option value="member" ${member_management.mem_auth_auth=='member'? "selected" : ""}>member</option>
 					        			<option value="seller" ${member_management.mem_auth_auth=='seller'? "selected" : ""} disabled="disabled" selected="selected" style="color: red;">seller 🍊 </option>
 					        			<option value="admin" ${member_management.mem_auth_auth=='admin'? "selected" : ""}>admin</option>
 									</c:if>
-									<c:if test="${member_management.mem_auth_auth eq 'admin'}">
+									<c:if test="${member_management.mem_auth_auth == 'admin'}">
 										<option value="member" ${member_management.mem_auth_auth=='member'? "selected" : ""}>member</option>
 					        			<option value="seller" ${member_management.mem_auth_auth=='seller'? "selected" : ""}>seller</option>
 					        			<option value="admin" ${member_management.mem_auth_auth=='admin'? "selected" : ""} disabled="disabled" selected="selected" style="color: red;">admin 🍊 </option>

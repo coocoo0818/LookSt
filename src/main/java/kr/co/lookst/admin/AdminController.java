@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.lookst.admin.domain.MemMGMDto;
 import kr.co.lookst.admin.service.AdminService;
@@ -249,11 +250,10 @@ public class AdminController {
 		return "redirect:/admin/board_management";
 	}
 	
-	/* 판매자 신청 페이지 이동 */
-	@GetMapping("/productDetail")
+	/* 상품 상세 페이지 이동 */
+	@RequestMapping(value="/productDetail", method={RequestMethod.POST, RequestMethod.GET})
 	public String productDetailPage(Model model,  
 			@RequestParam("product_no") Integer product_no) {
-			System.out.println(product_no);
 			try {
 				/* 상품 상세페이지 이동 */
 				Product productInfo = adminService.getproductInfo(product_no);
@@ -263,11 +263,28 @@ public class AdminController {
 				model.addAttribute("productInfo", productInfo);
 				model.addAttribute("productSize", productSize);
 				model.addAttribute("productImg", productImg);
-				System.out.println(productImg);
+
 				/* 상품 상세페이지 이동 끝 */
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		return "/admin/productDetail";
+	}
+	/* 상품 컬러 출력 */
+	@RequestMapping(value="/productColor", method={RequestMethod.POST, RequestMethod.GET})
+	@ResponseBody
+	public String productColor(Model model, @RequestParam(value = "product_no", required = false) Integer product_no,
+										@RequestParam(value = "prdt_option_size", required = false) String prdt_option_size) {
+		System.out.println(product_no);
+		System.out.println(prdt_option_size);
+		
+		try {
+			List<String> productColor = adminService.productColor(product_no, prdt_option_size);
+			model.addAttribute("productColor", productColor);
+			System.out.println(model);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:/admin/productDetail";
 	}
 }
