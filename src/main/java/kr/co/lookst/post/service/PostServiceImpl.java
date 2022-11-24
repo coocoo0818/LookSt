@@ -9,9 +9,11 @@ import kr.co.lookst.post.dao.PostDao;
 import kr.co.lookst.post.domain.PostDto;
 import kr.co.lookst.post.domain.Post_imgDto;
 import kr.co.lookst.post.domain.ProdInfoDto;
+import kr.co.lookst.post.domain.TpostDto;
 import kr.co.lookst.post.domain.post_com_tagDto;
 import kr.co.lookst.post.domain.snsPrdtImgDto;
 import kr.co.lookst.post.domain.sns_Main_ImgDto;
+import kr.co.lookst.post.domain.sns_com_tagDto;
 import kr.co.lookst.post.domain.snslist_infoDto;
 
 
@@ -66,6 +68,20 @@ public class PostServiceImpl implements PostService{
 		// TODO Auto-generated method stub
 		return postDao.snsPrdtImg(post_no);
 	}
+
+	
+	@Override 
+	public List<sns_com_tagDto> snsComTag(Integer post_no) throws Exception { 
+		// TODO Auto-generated method stub 
+		return postDao.snsComTag(post_no); 
+	}
+
+	@Override
+	public List<TpostDto> postTotalList() throws Exception {
+		// TODO Auto-generated method stub
+		return postDao.postTotalList();
+	}
+
 
 
 
