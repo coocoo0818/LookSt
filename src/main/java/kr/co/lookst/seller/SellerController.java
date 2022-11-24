@@ -17,6 +17,11 @@ import kr.co.lookst.seller.domain.OrderListDto;
 import kr.co.lookst.seller.domain.PrdtListDto;
 import kr.co.lookst.seller.service.SellerService;
 
+
+
+
+
+
 @Controller
 @RequestMapping("/seller")
 public class SellerController {
@@ -44,7 +49,7 @@ public class SellerController {
 	}
 	
 	@RequestMapping(value="/productStock", method={RequestMethod.POST})
-	public String adminFormMemberModify(Model model,  
+	public String prdtpageStockMod(Model model,  
 			@RequestParam(value="product_no") Integer product_no,
 			@RequestParam(value="stock") int stock) {
 		System.out.println(product_no);
@@ -59,7 +64,7 @@ public class SellerController {
 	}
 	
 	@RequestMapping(value="/productDelete", method={RequestMethod.POST})
-	public String adminFormMemberKickOut(Model m,  
+	public String prdtpagePrdtDel(Model m,  
 			@RequestParam("product_no") Integer product_no) {
 		System.out.println(product_no);
 		
@@ -92,21 +97,15 @@ public class SellerController {
 
 	}
 	
-	@RequestMapping(value="/selectOrderinfo", method={RequestMethod.POST})
-	public String orderpageselect(Model model,  
-			@RequestParam("prdt_order_no") Integer prdt_order_no) {
+	@RequestMapping(value="/OstatusMod", method={RequestMethod.POST})
+	public String orderpageStatusMod(Model model,  
+			@RequestParam("prdt_order_no") Integer prdt_order_no,
+			@RequestParam("orderStatus") String orderStatus) {
 		System.out.println(prdt_order_no);
+		System.out.println(orderStatus);
 		
 		try {
-			OrderListDto dto = sellerService.selectOrderinfo(prdt_order_no);
-			model.addAttribute("dto", dto);
-			
-			ModelAndView mv = new ModelAndView();
-			
-			OrderListDto od = new OrderListDto();
-			od.setPayment(dto.getPayment());
-			
-			mv.addObject(od);
+			sellerService.OrderStatusMod(prdt_order_no, orderStatus);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -135,6 +134,21 @@ public class SellerController {
 
 	}
 	
+	@RequestMapping(value="/RstatusMod", method={RequestMethod.POST})
+	public String refundpageStatusMod(Model model,  
+			@RequestParam("prdt_order_no") Integer prdt_order_no,
+			@RequestParam("ReqOrderStatus") String ReqOrderStatus) {
+		System.out.println(prdt_order_no);
+		System.out.println(ReqOrderStatus);
+		
+		try {
+			sellerService.ReqOrderStatusMod(prdt_order_no, ReqOrderStatus);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:/seller/refundList";
+	}
+	
 	
 	@GetMapping("/registerPrdt")
 	public String adminForm4() {
@@ -147,4 +161,11 @@ public class SellerController {
 		return "seller/mySales";
 
 	}
+	
+	@GetMapping("/test")
+	public String adminForm6() {
+		return "seller/test";
+
+	}
+	
 }

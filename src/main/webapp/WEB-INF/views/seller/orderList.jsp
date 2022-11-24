@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,22 +22,27 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-
-		$('.myModal').click(function() {
-			let prdt_order_no = $(this).attr("data-prdt_order_no") // <li>태그는 <button>의 부모임.
+		let page = ${pr.sc.page}
+		let pageSize = ${pr.sc.pageSize}
+		
+		
+		$('.OrderStatusMod').click(function() {
+			let prdt_order_no = $(this).parent().attr("data-prdt_order_no")
+			let index = $(this).parent().attr("data-index")
+			let orderStatus = document.getElementById("order_status"+index).value;
+			
 			$.ajax({
 				type : 'post',
-				url : '${contextPath}/seller/selectOrderinfo',
+				url : '${contextPath}/seller/OstatusMod',
 				data : {
-					prdt_order_no : prdt_order_no
+						prdt_order_no : prdt_order_no,
+						orderStatus : orderStatus
 				},
 				success : function(data) {
-					$('#modal_con').load(location.href + '#modal_con');
-
+					alert("주문상태가 변경되었습니다.")
+					location.reload()
 				},
-				error : function() {
-					alert("error")
-				} //에러가 발생했을 때 호출될 함수
+				error : function() {alert("error")}	
 			})
 		})
 	})
@@ -65,16 +71,17 @@
 		LIST</h2>
 
 	<div class="container">
-	
+
 		<form class="d-flex row py-3"
 			action="<c:url value="/seller/orderList" />" class="search-form"
 			method="get">
 			<div class="col mt-1">
-				<select id="inputState" class="form-select form-select-md" name="option">
+				<select id="inputState" class="form-select form-select-md"
+					name="option">
 					<option value="A" ${pr.sc.option=='' ? "selected" : ""}>전체</option>
 					<option value="C" ${pr.sc.option=='C' ? "selected" : ""}>구매자</option>
 					<option value="N" ${pr.sc.option=='N' ? "selected" : ""}>주문번호</option>
-					<option value="P" ${pr.sc.option=='P' ? "selected" : ""}>상품이름</option>		
+					<option value="P" ${pr.sc.option=='P' ? "selected" : ""}>상품이름</option>
 				</select>
 			</div>
 			<div class="d-flex col-md-9 mt-1">
@@ -109,25 +116,96 @@
 
 			</tfoot>
 			<tbody>
-				<c:forEach var="orderListDto" items="${orderlist }">
+				<c:forEach var="orderListDto" items="${orderlist }"
+					varStatus="status">
 					<tr>
 						<th scope="row" data-title="OrderNum">${orderListDto.prdt_order_no }</th>
 						<td data-title="Buyer">${orderListDto.member_name }</td>
 						<td data-title="PrdtInfo">${orderListDto.product_name }[${orderListDto.product_no }]</td>
 						<td data-title="TotalPay" data-type="currency">${orderListDto.payment }</td>
-						<td data-title="PayDate" data-type="currency">${orderListDto.prdt_order_date }</td>
-						<td data-title="OrderStaus" data-type="currency">
-						<c:if test="${orderListDto.prdt_order_type eq 'W'}">결제대기</c:if>
-						<c:if test="${orderListDto.prdt_order_type eq 'C'}">결제완료</c:if>
-						<c:if test="${orderListDto.prdt_order_type eq 'P'}">배송준비중</c:if>
-						<c:if test="${orderListDto.prdt_order_type eq 'S'}">배송중</c:if>
-						<c:if test="${orderListDto.prdt_order_type eq 'Y'}">배송완료</c:if>
+						<td data-title="PayDate" data-type="currency"><fmt:formatDate
+								value="${orderListDto.prdt_order_date }" pattern="yyyy-MM-dd"
+								type="date" /></td>
+						<td data-title="OrderStaus" data-type="currency" class="oStatus">
+							<select class="form-select form-select-sm"
+							aria-label=".form-select-sm example"
+							id="order_status${status.index}">
+								<c:if test="${orderListDto.prdt_order_type eq 'W'}">
+									<option value="W"
+										${orderListDto.prdt_order_type=='W'? "selected" : ""}
+										disabled="disabled" selected="selected">결제대기</option>
+									<option value="C"
+										${orderListDto.prdt_order_type=='C'? "selected" : ""}>결제완료</option>
+									<option value="P"
+										${orderListDto.prdt_order_type=='P'? "selected" : ""}>배송준비중</option>
+									<option value="S"
+										${orderListDto.prdt_order_type=='S'? "selected" : ""}>배송중</option>
+									<option value="Y"
+										${orderListDto.prdt_order_type=='Y'? "selected" : ""}>배송완료</option>
+								</c:if>
+								<c:if test="${orderListDto.prdt_order_type eq 'C'}">
+									<option value="W"
+										${orderListDto.prdt_order_type=='W'? "selected" : ""}>결제대기</option>
+									<option value="C"
+										${orderListDto.prdt_order_type=='C'? "selected" : ""}
+										disabled="disabled" selected="selected">결제완료</option>
+									<option value="P"
+										${orderListDto.prdt_order_type=='P'? "selected" : ""}>배송준비중</option>
+									<option value="S"
+										${orderListDto.prdt_order_type=='S'? "selected" : ""}>배송중</option>
+									<option value="Y"
+										${orderListDto.prdt_order_type=='Y'? "selected" : ""}>배송완료</option>
+								</c:if>
+								<c:if test="${orderListDto.prdt_order_type eq 'P'}">
+									<option value="W"
+										${orderListDto.prdt_order_type=='W'? "selected" : ""}>결제대기</option>
+									<option value="C"
+										${orderListDto.prdt_order_type=='C'? "selected" : ""}>결제완료</option>
+									<option value="P"
+										${orderListDto.prdt_order_type=='P'? "selected" : ""}
+										disabled="disabled" selected="selected">배송준비중</option>
+									<option value="S"
+										${orderListDto.prdt_order_type=='S'? "selected" : ""}>배송중</option>
+									<option value="Y"
+										${orderListDto.prdt_order_type=='Y'? "selected" : ""}>배송완료</option>
+								</c:if>
+								<c:if test="${orderListDto.prdt_order_type eq 'S'}">
+									<option value="W"
+										${orderListDto.prdt_order_type=='W'? "selected" : ""}>결제대기</option>
+									<option value="C"
+										${orderListDto.prdt_order_type=='C'? "selected" : ""}>결제완료</option>
+									<option value="P"
+										${orderListDto.prdt_order_type=='P'? "selected" : ""}>배송준비중</option>
+									<option value="S"
+										${orderListDto.prdt_order_type=='S'? "selected" : ""}
+										disabled="disabled" selected="selected">배송중</option>
+									<option value="Y"
+										${orderListDto.prdt_order_type=='Y'? "selected" : ""}>배송완료</option>
+								</c:if>
+								<c:if test="${orderListDto.prdt_order_type eq 'Y'}">
+									<option value="W"
+										${orderListDto.prdt_order_type=='W'? "selected" : ""}>결제대기</option>
+									<option value="C"
+										${orderListDto.prdt_order_type=='C'? "selected" : ""}>결제완료</option>
+									<option value="P"
+										${orderListDto.prdt_order_type=='P'? "selected" : ""}>배송준비중</option>
+									<option value="S"
+										${orderListDto.prdt_order_type=='S'? "selected" : ""}>배송중</option>
+									<option value="Y"
+										${orderListDto.prdt_order_type=='Y'? "selected" : ""}
+										disabled="disabled" selected="selected">배송완료</option>
+								</c:if>
+						</select>
 						</td>
-						<td data-title="Detail" data-type="currency"><button
-								type="button" class="btn btn-outline-dark btn-sm myModal"
+						<td data-title="Detail" data-type="currency"
+							data-prdt_order_no="${orderListDto.prdt_order_no }"
+							data-index="${status.index}"><input tabindex="-1"
+							role="button" type="button" value="변경"
+							class="btn btn-outline-dark btn-sm OrderStatusMod"
+							id="OrderStatusMod" />
+							<button type="button" class="btn btn-outline-dark btn-sm myModal"
 								id="myModal" data-bs-toggle="modal"
-								data-bs-target="#staticBackdrop"
-								data-prdt_order_no="${orderListDto.prdt_order_no }">VIEW</button></td>
+								data-bs-target="#staticBackdrop">VIEW</button></td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -136,87 +214,49 @@
 	<!-- partial -->
 
 	<div class="container">
-		<div class="row">
-			<div>
-				<button type="button" class="btn btn-outline-dark"
-					style="float: left;">수정</button>
-				<button type="button" class="btn btn-outline-dark ms-1">저장</button>
-			</div>
-		</div>
+		<div class="row"></div>
 	</div>
 
 	<div class="row my-5"></div>
 
 
 	<!-- 페이지 시작 -->
-		<ul class="pagination" style="justify-content: center;">
-			<c:if test="${totalCnt == null || totalCnt == 0}">
-				<div>게시물이 없습니다.</div>
+	<ul class="pagination" style="justify-content: center;">
+		<c:if test="${totalCnt == null || totalCnt == 0}">
+			<div>게시물이 없습니다.</div>
+		</c:if>
+		<c:if test="${totalCnt != null || totalCnt != 0}">
+			<c:if test="${pr.showPrev}">
+				<li class="page-item disabled"><a class="page-link"
+					href="${contextPath}/seller/orderList${pr.sc.getQueryString(pr.beginPage-1)}">&laquo;</a></li>
 			</c:if>
-			<c:if test="${totalCnt != null || totalCnt != 0}">
-				<c:if test="${pr.showPrev}">
-					<li class="page-item disabled"><a class="page-link" href="${contextPath}/seller/orderList${pr.sc.getQueryString(pr.beginPage-1)}">&laquo;</a></li>
-				</c:if>
-				
-				<c:forEach var="i" begin="${pr.beginPage}" end="${pr.endPage}">
 
-					<c:if test="${pr.sc.page == i }">
-						<c:if test="${pr.sc.page > 0 }">
-							<li class="page-item active"><a class="page-link" href="${contextPath}/seller/orderList${pr.sc.getQueryString(i)}">${i}</a></li>
-						</c:if>
+			<c:forEach var="i" begin="${pr.beginPage}" end="${pr.endPage}">
+
+				<c:if test="${pr.sc.page == i }">
+					<c:if test="${pr.sc.page > 0 }">
+						<li class="page-item active"><a class="page-link"
+							href="${contextPath}/seller/orderList${pr.sc.getQueryString(i)}">${i}</a></li>
 					</c:if>
-					<c:if test="${pr.sc.page != i }">
-						<c:if test="${pr.sc.page > 0 }">
-							<li class="page-item"><a class="page-link" href="${contextPath}/seller/orderList${pr.sc.getQueryString(i)}">${i}</a></li>
-						</c:if>
-					</c:if>
-				</c:forEach>
-				
-				<c:if test="${pr.showNext}">
-					<li class="page-item"><a class="page-link" href="${contextPath}/seller/orderList${pr.sc.getQueryString(pr.endPage+1)}">&raquo;</a></li>
 				</c:if>
-				
+				<c:if test="${pr.sc.page != i }">
+					<c:if test="${pr.sc.page > 0 }">
+						<li class="page-item"><a class="page-link"
+							href="${contextPath}/seller/orderList${pr.sc.getQueryString(i)}">${i}</a></li>
+					</c:if>
+				</c:if>
+			</c:forEach>
+
+			<c:if test="${pr.showNext}">
+				<li class="page-item"><a class="page-link"
+					href="${contextPath}/seller/orderList${pr.sc.getQueryString(pr.endPage+1)}">&raquo;</a></li>
 			</c:if>
-		</ul>
-		<!-- 페이지 끝  -->
-		
+
+		</c:if>
+	</ul>
+	<!-- 페이지 끝  -->
 
 
-
-
-
-
-
-
-
-
-
-
-
-<!-- 	<!-- pagination --> -->
-<!-- 	<div class="pagination" style="justify-content: center;"> -->
-<!-- 		<div class="paging"> -->
-<%-- 			<c:if test="${totalCnt == null || totalCnt == 0 }"> --%>
-<!-- 				<div>게시물이 없습니다.</div> -->
-<%-- 			</c:if> --%>
-<%-- 			<c:if test="${totalCnt != null || totalCnt != 0 }"> --%>
-<%-- 				<c:if test="${pr.showPrev }"> --%>
-<!-- 					<a class="page" -->
-<%-- 						href="<c:url value="/seller/orderList${pr.sc.getQueryString(pr.beginPage-1) }" />"> --%>
-<!-- 						&lt; </a> -->
-<%-- 				</c:if> --%>
-<%-- 				<c:forEach var="i" begin="${pr.beginPage }" end="${pr.endPage }"> --%>
-<!-- 					<a class="page" -->
-<%-- 						href="<c:url value="/seller/orderList${pr.sc.getQueryString(i)}" />">${i }</a> --%>
-<%-- 				</c:forEach> --%>
-<%-- 				<c:if test="${pr.showNext }"> --%>
-<!-- 					<a class="page" -->
-<%-- 						href="<c:url value="/seller/orderList${pr.sc.getQueryString(pr.endPage+1) }" />"> --%>
-<!-- 						&gt; </a> -->
-<%-- 				</c:if> --%>
-<%-- 			</c:if> --%>
-<!-- 		</div> -->
-<!-- 	</div> -->
 	<!-- Modal -->
 
 	<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"

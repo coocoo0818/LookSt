@@ -1,6 +1,8 @@
 package kr.co.lookst.seller.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,20 +12,11 @@ import kr.co.lookst.seller.dao.SellerDao;
 import kr.co.lookst.seller.domain.OrderListDto;
 import kr.co.lookst.seller.domain.PrdtListDto;
 
-
 @Service
-public class SellerServiceImpl implements SellerService{
+public class SellerServiceImpl implements SellerService {
 
 	@Autowired
 	SellerDao sellerDao;
-
-
-	@Override
-	public OrderListDto selectOrderinfo(Integer prdt_order_no) throws Exception {
-		// TODO Auto-generated method stub
-		return sellerDao.selectOrderDetail(prdt_order_no);
-	}
-
 
 	@Override
 	public int getSearchResultCnt(SearchItem sc) throws Exception {
@@ -31,13 +24,11 @@ public class SellerServiceImpl implements SellerService{
 		return sellerDao.searchResultCnt(sc);
 	}
 
-
 	@Override
 	public List<OrderListDto> getsearchResultPage(SearchItem sc) throws Exception {
 		// TODO Auto-generated method stub
 		return sellerDao.searchSelectPage(sc);
 	}
-
 
 	@Override
 	public int getSearchResultCntP(SearchItem sc) throws Exception {
@@ -45,13 +36,11 @@ public class SellerServiceImpl implements SellerService{
 		return sellerDao.searchResultCntP(sc);
 	}
 
-
 	@Override
 	public List<PrdtListDto> getsearchResultPageP(SearchItem sc) throws Exception {
 		// TODO Auto-generated method stub
 		return sellerDao.searchSelectPageP(sc);
 	}
-	
 
 	@Override
 	public int productDelete(Integer product_no) throws Exception {
@@ -59,13 +48,11 @@ public class SellerServiceImpl implements SellerService{
 		return sellerDao.productDelete(product_no);
 	}
 
-
 	@Override
 	public int getSearchResultCntR(SearchItem sc) throws Exception {
 		// TODO Auto-generated method stub
 		return sellerDao.searchResultCntR(sc);
 	}
-	
 
 	@Override
 	public List<OrderListDto> getsearchResultPageR(SearchItem sc) throws Exception {
@@ -73,17 +60,22 @@ public class SellerServiceImpl implements SellerService{
 		return sellerDao.searchSelectPageR(sc);
 	}
 
-
 	@Override
 	public int productStock(Integer product_no, int stock) throws Exception {
 		// TODO Auto-generated method stub
 		return sellerDao.productStock(product_no, stock);
 	}
 
+	@Override
+	public int OrderStatusMod(Integer prdt_order_no, String orderStatus) throws Exception {
+		// TODO Auto-generated method stub
+		return sellerDao.OrderStatusMod(prdt_order_no, orderStatus);
+	}
 
-
-
-
-	
+	@Override
+	public int ReqOrderStatusMod(Integer prdt_order_no, String ReqOrderStatus) throws Exception {
+		// TODO Auto-generated method stub
+		return sellerDao.ReqOrderStatusMod(prdt_order_no, ReqOrderStatus);
+	}
 
 }
