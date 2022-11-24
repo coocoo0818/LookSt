@@ -14,7 +14,8 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"
 	type="text/javascript"></script>
 <meta name="viewport" content="width=device-width">
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.js"></script>
+<script type="text/javascript"
+	src="http://code.jquery.com/jquery-1.11.3.js"></script>
 <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"> -->
 <link
 	href="${pageContext.request.contextPath }/resources/seller/css/list.css"
@@ -85,7 +86,7 @@
 		})
 	})
 
-</script>	
+</script>
 
 
 
@@ -98,16 +99,17 @@
 		LIST</h2>
 
 	<div class="container">
-	
+
 		<form class="d-flex row py-3"
 			action="<c:url value="/seller/prdtList" />" class="search-form"
 			method="get">
 			<div class="col mt-1">
-				<select id="inputState" class="form-select form-select-md" name="option">
+				<select id="inputState" class="form-select form-select-md"
+					name="option">
 					<option value="A" ${pr.sc.option=='' ? "selected" : ""}>전체</option>
 					<option value="C" ${pr.sc.option=='C' ? "selected" : ""}>카테고리</option>
 					<option value="M" ${pr.sc.option=='M' ? "selected" : ""}>상품이름</option>
-					<option value="P" ${pr.sc.option=='P' ? "selected" : ""}>상품번호</option>		
+					<option value="P" ${pr.sc.option=='P' ? "selected" : ""}>상품번호</option>
 				</select>
 			</div>
 			<div class="d-flex col-md-9 mt-1">
@@ -147,22 +149,24 @@
 					<tr>
 						<th scope="row" data-title="prdtnum">${prdtListDto.product_no }</th>
 						<td data-title="PrdtImg"><img class="card-img-top"
-							src="${pageContext.request.contextPath }/resources/seller/img/${prdtListDto.prdt_img_name}"
+							src="${pageContext.request.contextPath }/resources/img/product/${prdtListDto.prdt_img_name}"
 							alt="..." /></td>
-						<td data-title="PrdtCate">
-						<c:if test="${prdtListDto.product_kind eq 'T'}">상의</c:if>
-						<c:if test="${prdtListDto.product_kind eq 'B'}">하의</c:if>
-						<c:if test="${prdtListDto.product_kind eq 'A'}">잡화</c:if>
-						<c:if test="${prdtListDto.product_kind eq 'S'}">신발</c:if>
-						</td>
+						<td data-title="PrdtCate"><c:if
+								test="${prdtListDto.product_kind eq 'T'}">상의</c:if> <c:if
+								test="${prdtListDto.product_kind eq 'B'}">하의</c:if> <c:if
+								test="${prdtListDto.product_kind eq 'A'}">잡화</c:if> <c:if
+								test="${prdtListDto.product_kind eq 'S'}">신발</c:if></td>
 						<td data-title="PrdtInfo">${prdtListDto.product_name }</td>
 						<td data-title="PrdtPrice" data-type="currency">${prdtListDto.product_price }</td>
 						<td class="stock" data-title="PtdtStock" data-type="currency"><input
 							type="number" min="0" max="100" id="upstock" name="upstock"
-							value="${prdtListDto.prdt_option_stock }" ></td>
-						<td data-title="Detail" data-type="currency" data-product_no="${prdtListDto.product_no }">
-						<input tabindex="-1" role="button" type="button" value="변경" class="btn btn-dark btn-sm stockP" id="stockP" />
-						<input tabindex="-1" role="button" type="button" value="삭제" class="btn btn-dark btn-sm deleteP" id="deleteP" /></td>
+							value="${prdtListDto.prdt_option_stock }"></td>
+						<td data-title="Detail" data-type="currency"
+							data-product_no="${prdtListDto.product_no }"><input
+							tabindex="-1" role="button" type="button" value="변경"
+							class="btn btn-dark btn-sm stockP" id="stockP" /> <input
+							tabindex="-1" role="button" type="button" value="삭제"
+							class="btn btn-dark btn-sm deleteP" id="deleteP" /></td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -183,36 +187,40 @@
 	<div class="row my-5"></div>
 
 	<!-- 페이지 시작 -->
-		<ul class="pagination" style="justify-content: center;">
-			<c:if test="${totalCnt == null || totalCnt == 0}">
-				<div>게시물이 없습니다.</div>
+	<ul class="pagination" style="justify-content: center;">
+		<c:if test="${totalCnt == null || totalCnt == 0}">
+			<div>게시물이 없습니다.</div>
+		</c:if>
+		<c:if test="${totalCnt != null || totalCnt != 0}">
+			<c:if test="${pr.showPrev}">
+				<li class="page-item disabled"><a class="page-link"
+					href="${contextPath}/seller/prdtList${pr.sc.getQueryString(pr.beginPage-1)}">&laquo;</a></li>
 			</c:if>
-			<c:if test="${totalCnt != null || totalCnt != 0}">
-				<c:if test="${pr.showPrev}">
-					<li class="page-item disabled"><a class="page-link" href="${contextPath}/seller/prdtList${pr.sc.getQueryString(pr.beginPage-1)}">&laquo;</a></li>
-				</c:if>
-				
-				<c:forEach var="i" begin="${pr.beginPage}" end="${pr.endPage}">
 
-					<c:if test="${pr.sc.page == i }">
-						<c:if test="${pr.sc.page > 0 }">
-							<li class="page-item active"><a class="page-link" href="${contextPath}/seller/prdtList${pr.sc.getQueryString(i)}">${i}</a></li>
-						</c:if>
+			<c:forEach var="i" begin="${pr.beginPage}" end="${pr.endPage}">
+
+				<c:if test="${pr.sc.page == i }">
+					<c:if test="${pr.sc.page > 0 }">
+						<li class="page-item active"><a class="page-link"
+							href="${contextPath}/seller/prdtList${pr.sc.getQueryString(i)}">${i}</a></li>
 					</c:if>
-					<c:if test="${pr.sc.page != i }">
-						<c:if test="${pr.sc.page > 0 }">
-							<li class="page-item"><a class="page-link" href="${contextPath}/seller/prdtList${pr.sc.getQueryString(i)}">${i}</a></li>
-						</c:if>
-					</c:if>
-				</c:forEach>
-				
-				<c:if test="${pr.showNext}">
-					<li class="page-item"><a class="page-link" href="${contextPath}/seller/prdtList${pr.sc.getQueryString(pr.endPage+1)}">&raquo;</a></li>
 				</c:if>
-				
+				<c:if test="${pr.sc.page != i }">
+					<c:if test="${pr.sc.page > 0 }">
+						<li class="page-item"><a class="page-link"
+							href="${contextPath}/seller/prdtList${pr.sc.getQueryString(i)}">${i}</a></li>
+					</c:if>
+				</c:if>
+			</c:forEach>
+
+			<c:if test="${pr.showNext}">
+				<li class="page-item"><a class="page-link"
+					href="${contextPath}/seller/prdtList${pr.sc.getQueryString(pr.endPage+1)}">&raquo;</a></li>
 			</c:if>
-		</ul>
-		<!-- 페이지 끝  -->
+
+		</c:if>
+	</ul>
+	<!-- 페이지 끝  -->
 
 
 

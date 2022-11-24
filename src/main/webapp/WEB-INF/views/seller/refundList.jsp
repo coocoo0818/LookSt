@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=dege">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 <title>REFUND LIST</title>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"
@@ -18,6 +20,37 @@
 	rel="stylesheet">
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+<script type="text/javascript">
+
+	$(document).ready(function() {
+		let page = ${pr.sc.page}
+		let pageSize = ${pr.sc.pageSize}
+		
+		
+		$('.ReqOrderStatusMod').click(function() {
+			let prdt_order_no = $(this).parent().attr("data-prdt_order_no")
+			let index = $(this).parent().attr("data-index")
+			let ReqOrderStatus = document.getElementById("ReqOrder_status"+index).value;
+			
+			$.ajax({
+				type : 'post',
+				url : '${contextPath}/seller/RstatusMod',
+				data : {
+						prdt_order_no : prdt_order_no,
+						ReqOrderStatus : ReqOrderStatus
+				},
+				success : function(data) {
+					alert("취소상태가 변경되었습니다.")
+					location.reload()
+				},
+				error : function() {alert("error")}	
+			})
+		})
+	})
+</script>
+
+
+
 
 <style type="text/css">
 #orderpagetitle {
@@ -85,7 +118,7 @@
 
 			</tfoot>
 			<tbody>
-				<c:forEach var="refundListDto" items="${refundlist }">
+				<c:forEach var="refundListDto" items="${refundlist }" varStatus="status">
 					<tr>
 						<th scope="row" data-title="Ordernum">${refundListDto.prdt_order_no }</th>
 						<td data-title="Buyer">${refundListDto.member_name }</td>
@@ -97,15 +130,84 @@
 						<c:if test="${refundListDto.prdt_order_type eq 'P'}">배송준비중</c:if>
 						<c:if test="${refundListDto.prdt_order_type eq 'S'}">배송중</c:if>
 						<c:if test="${refundListDto.prdt_order_type eq 'Y'}">배송완료</c:if>
-						<td data-title="PayDate" data-type="currency">${refundListDto.prdt_order_date }</td>
-						<td data-title="ReqStaus" data-type="currency">
-						<c:if test="${refundListDto.prdt_order_cancel eq 'D'}">취소접수</c:if>
-						<c:if test="${refundListDto.prdt_order_cancel eq 'B'}">반품처리중</c:if>
-						<c:if test="${refundListDto.prdt_order_cancel eq 'H'}">환불처리중</c:if>
-						<c:if test="${refundListDto.prdt_order_cancel eq 'V'}">반품완료</c:if>
-						<c:if test="${refundListDto.prdt_order_cancel eq 'R'}">환불완료</c:if>
+						<td data-title="PayDate" data-type="currency"><fmt:formatDate value="${refundListDto.prdt_order_date }" pattern="yyyy-MM-dd" type="date" /></td>
+						<td data-title="ReqStaus" data-type="currency" class="rStatus">
+						<select class="form-select form-select-sm"
+							aria-label=".form-select-sm example"
+							id="ReqOrder_status${status.index}">
+						<c:if test="${refundListDto.prdt_order_cancel eq 'D'}">
+							<option value="D"
+										${refundListDto.prdt_order_cancel=='D'? "selected" : ""}
+										disabled="disabled" selected="selected">취소접수</option>
+							<option value="B"
+										${refundListDto.prdt_order_cancel=='B'? "selected" : ""}>반품처리중</option>
+							<option value="H"
+										${refundListDto.prdt_order_cancel=='H'? "selected" : ""}>환불처리중</option>
+							<option value="V"
+										${refundListDto.prdt_order_cancel=='V'? "selected" : ""}>반품완료</option>
+							<option value="R"
+										${refundListDto.prdt_order_cancel=='R'? "selected" : ""}>환불완료</option>
+						</c:if>
+						<c:if test="${refundListDto.prdt_order_cancel eq 'B'}">
+							<option value="D"
+										${refundListDto.prdt_order_cancel=='D'? "selected" : ""}>취소접수</option>
+							<option value="B"
+										${refundListDto.prdt_order_cancel=='B'? "selected" : ""}
+										disabled="disabled" selected="selected">반품처리중</option>
+							<option value="H"
+										${refundListDto.prdt_order_cancel=='H'? "selected" : ""}>환불처리중</option>
+							<option value="V"
+										${refundListDto.prdt_order_cancel=='V'? "selected" : ""}>반품완료</option>
+							<option value="R"
+										${refundListDto.prdt_order_cancel=='R'? "selected" : ""}>환불완료</option>
+						</c:if>
+						<c:if test="${refundListDto.prdt_order_cancel eq 'H'}">
+							<option value="D"
+										${refundListDto.prdt_order_cancel=='D'? "selected" : ""}>취소접수</option>
+							<option value="B"
+										${refundListDto.prdt_order_cancel=='B'? "selected" : ""}>반품처리중</option>
+							<option value="H"
+										${refundListDto.prdt_order_cancel=='H'? "selected" : ""}
+										disabled="disabled" selected="selected">환불처리중</option>
+							<option value="V"
+										${refundListDto.prdt_order_cancel=='V'? "selected" : ""}>반품완료</option>
+							<option value="R"
+										${refundListDto.prdt_order_cancel=='R'? "selected" : ""}>환불완료</option>
+						</c:if>
+						<c:if test="${refundListDto.prdt_order_cancel eq 'V'}">
+							<option value="D"
+										${refundListDto.prdt_order_cancel=='D'? "selected" : ""}>취소접수</option>
+							<option value="B"
+										${refundListDto.prdt_order_cancel=='B'? "selected" : ""}>반품처리중</option>
+							<option value="H"
+										${refundListDto.prdt_order_cancel=='H'? "selected" : ""}>환불처리중</option>
+							<option value="V"
+										${refundListDto.prdt_order_cancel=='V'? "selected" : ""}
+										disabled="disabled" selected="selected">반품완료</option>
+							<option value="R"
+										${refundListDto.prdt_order_cancel=='R'? "selected" : ""}>환불완료</option>
+						</c:if>
+						<c:if test="${refundListDto.prdt_order_cancel eq 'R'}">
+							<option value="D"
+										${refundListDto.prdt_order_cancel=='D'? "selected" : ""}>취소접수</option>
+							<option value="B"
+										${refundListDto.prdt_order_cancel=='B'? "selected" : ""}>반품처리중</option>
+							<option value="H"
+										${refundListDto.prdt_order_cancel=='H'? "selected" : ""}>환불처리중</option>
+							<option value="V"
+										${refundListDto.prdt_order_cancel=='V'? "selected" : ""}>반품완료</option>
+							<option value="R"
+										${refundListDto.prdt_order_cancel=='R'? "selected" : ""}
+										disabled="disabled" selected="selected">환불완료</option>
+						</c:if>
+						</select>
 						</td>
-						<td data-title="Detail" data-type="currency"><button
+						<td data-title="Detail" data-type="currency" data-prdt_order_no="${refundListDto.prdt_order_no }"
+						data-index="${status.index}"><input tabindex="-1"
+							role="button" type="button" value="변경"
+							class="btn btn-outline-dark btn-sm ReqOrderStatusMod"
+							id="ReqOrderStatusMod" />
+						<button
 								type="button" class="btn btn-outline-dark btn-sm"
 								data-bs-toggle="modal" data-bs-target="#staticBackdrop">VIEW</button></td>
 					</tr>
@@ -120,11 +222,6 @@
 
 	<div class="container">
 		<div class="row">
-			<div>
-				<button type="button" class="btn btn-outline-dark"
-					style="float: left;">수정</button>
-				<button type="button" class="btn btn-outline-dark ms-1">저장</button>
-			</div>
 		</div>
 	</div>
 
