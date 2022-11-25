@@ -31,15 +31,15 @@ public class BoardDaoImplTest {
 		
 		BoardDto boardDto =  boardDao.select(1);
 		System.out.println("boardDto = " + boardDto );
-		assertTrue(boardDto.getBno().equals(1));
+		assertTrue(boardDto.getBoard_no()==1);
 		
 		boardDao.deleteAll();
-		boardDto = new BoardDto("Pioneering", "Ready for Action", "ezen");
+//		boardDto = new BoardDto(null, null, null, null, null, null);
 		boardDao.insert(boardDto);
 		
 		boardDto =  boardDao.select(2);
 		System.out.println("boardDto = " + boardDto );
-		assertTrue(boardDto.getBno().equals(2));
+		assertTrue(boardDto.getBoard_no()==2);
 		
 	}
 	
@@ -48,18 +48,18 @@ public class BoardDaoImplTest {
 		boardDao.deleteAll();
 		
 		for(int i = 1; i <= 10 ; i++) {
-			BoardDto boardDto = new BoardDto("Pioneering" + i , "취업 준비" + i, "ezen");
-			boardDao.insert(boardDto);
+//			BoardDto boardDto = new BoardDto("문의합니다" + i , i, "문의합니다" + i, null, "갱ㅇ", null);
+//			boardDao.insert(boardDto);
 		}
 		
 		Map map = new HashMap();
 		map.put("offset", 0);
 		map.put("pageSize", 3);
 		
-		List<BoardDto> list = boardDao.selectpage(map);
-		assertTrue(list.get(0).getTitle().equals("Pioneering10"));
-		assertTrue(list.get(1).getTitle().equals("Pioneering9"));
-		assertTrue(list.get(2).getTitle().equals("Pioneering8"));
+		List<BoardDto> list = boardDao.selectPage(map);
+		assertTrue(list.get(0).getBoard_title().equals("Pioneering10"));
+		assertTrue(list.get(1).getBoard_title().equals("Pioneering9"));
+		assertTrue(list.get(2).getBoard_title().equals("Pioneering8"));
 		
 		
 	}
