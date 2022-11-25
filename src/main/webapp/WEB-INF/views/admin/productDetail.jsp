@@ -15,8 +15,9 @@
 		let toHtml = function(prdtOptions) {
 			let tmp = "<div class='options'>"
 			prdtOptions.forEach(function(prdtOption, index) {
-				tmp += '<div class="option" style="width:25px; color: ' + prdtOption.prdt_option_color + ';"></div>'
+				tmp += '<div class="option" id = "color" style="width:25px; color: ' + prdtOption.prdt_option_color + ';"></div>'
 			})
+
 			return tmp += "</div>"
 		}
 		$(".productSize").click(function() { 
@@ -34,30 +35,36 @@
 				},
 				success : function(result) {
 					$("#optionColor").html(toHtml(result))
+					
+					$(function(){
+					  $('.attrib .option').click(function(){
+					    $(this).siblings().removeClass('activ');
+					    $(this).addClass('activ');
+					  })
+					  $('.zoomControl').click(function(){
+					    $(this).parents('.productCard').addClass('morph');
+					    $('body').addClass('noScroll');
+					  })
+					  $('.closePreview').click(function(){
+					    $(this).parents('.productCard').removeClass('morph');
+					    $('body').removeClass('noScroll');
+					  })
+					  $('.movControl').click(function(){
+					    let imgActiv = $(this).parents('.preview').find('.imgs img.activ');
+					    if ($(this).hasClass('left')) {
+					      imgActiv.index() == 0 ? $('.imgs img').last().addClass('activ') : $('.imgs img.activ').prev().addClass('activ');
+					    } else {
+					      imgActiv.index() == ($('.imgs img').length - 1) ? $('.imgs img').first().addClass('activ') : $('.imgs img.activ').next().addClass('activ');
+					    }
+					    imgActiv.removeClass('activ');
+					  })
+					})
  				},
  				error : function() {alert("error")}		//에러가 발생했을 때 호출될 함수
 			})
 		})
 
 	})
-
-/* 	
-				$.ajax({
-				type : 'POST',
-				url : '${contextPath}/admin/productColor',
-				data : JSON.stringify({
-					product_no : product_no,
-					prdt_option_size : prdt_option_size
-				},
-				success : function(data) {
-					alert(data)
-					alert(${productColor.prdt_option_color})
-					var html = "<div class='option' style='color: #ef525e;'></div>"; 
-					/* location.reload() */
- 				/* },
-				error : function() {alert("error")}		//에러가 발생했을 때 호출될 함수
-			})
-		}) */
 		
 </script>
 </head>
