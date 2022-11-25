@@ -3,11 +3,10 @@ package kr.co.lookst.admin.domain;
 import java.util.Date;
 
 import kr.co.lookst.main.domain.NBoardDto;
+import kr.co.lookst.main.domain.NPostDto;
 import kr.co.lookst.main.domain.NSellerDto;
 import kr.co.lookst.post.domain.Post_imgDto;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
 
 @Data
 public class MemMGMDto {
@@ -29,14 +28,16 @@ public class MemMGMDto {
 	private Post_imgDto post_imgDto;
 	private NBoardDto nBoardDto;
 	private NSellerDto nSellerDto;
+	private NPostDto nPostDto;
 	
 	public MemMGMDto() {
 	}
 
 	public MemMGMDto(String member_id, String member_pw, String member_nick, String member_name, String member_phon,
 			String member_addr, String member_addr2, String member_zip, Date member_since, Date member_updt,
-			boolean member_check, String member_type, String profile_img, String mem_auth_auth) {
-		//super();
+			boolean member_check, String member_type, String profile_img, String mem_auth_auth, Post_imgDto post_imgDto,
+			NBoardDto nBoardDto, NSellerDto nSellerDto, NPostDto nPostDto) {
+		super();
 		this.member_id = member_id;
 		this.member_pw = member_pw;
 		this.member_nick = member_nick;
@@ -51,6 +52,11 @@ public class MemMGMDto {
 		this.member_type = member_type;
 		this.profile_img = profile_img;
 		this.mem_auth_auth = mem_auth_auth;
+		this.post_imgDto = post_imgDto;
+		this.nBoardDto = nBoardDto;
+		this.nSellerDto = nSellerDto;
+		this.nPostDto = nPostDto;
 	}
+
 	
 }

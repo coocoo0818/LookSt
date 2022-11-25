@@ -1,6 +1,5 @@
 package kr.co.lookst.admin.dao;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,7 +13,7 @@ import kr.co.lookst.main.domain.Prdt_Img;
 import kr.co.lookst.main.domain.Prdt_Option;
 import kr.co.lookst.main.domain.Product;
 import kr.co.lookst.main.domain.SearchItem;
-import kr.co.lookst.post.domain.Post_imgDto;
+import kr.co.lookst.post.domain.Post_TagDto;
 
 @Repository
 public class AdminDaoImpl implements AdminDao{
@@ -157,8 +156,14 @@ public class AdminDaoImpl implements AdminDao{
 	}
 	
 	@Override
-	public List<String> snsTotalListCarousel(List<Integer> snsTotalList) throws Exception {
+	public List<MemMGMDto> snsTotalListCarousel(Integer snsTotalList) throws Exception {
 		return session.selectList(namespace + "snsTotalListCarousel", snsTotalList);
+	}
+
+	/* 포스트 태그 정보 */
+	@Override
+	public List<Post_TagDto> postTagInfo(Integer snsTotalList) throws Exception {
+		return session.selectList(namespace + "postTagInfo", snsTotalList);
 	}
 
 }

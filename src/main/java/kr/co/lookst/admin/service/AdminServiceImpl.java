@@ -1,6 +1,5 @@
 package kr.co.lookst.admin.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,7 @@ import kr.co.lookst.main.domain.Prdt_Img;
 import kr.co.lookst.main.domain.Prdt_Option;
 import kr.co.lookst.main.domain.Product;
 import kr.co.lookst.main.domain.SearchItem;
-import kr.co.lookst.post.domain.Post_imgDto;
+import kr.co.lookst.post.domain.Post_TagDto;
 
 @Service
 public class AdminServiceImpl implements AdminService{
@@ -151,8 +150,14 @@ public class AdminServiceImpl implements AdminService{
 	}
 	/* sns total 이미지 list */
 	@Override
-	public List<String> snsTotalListCarousel(List<Integer> snsTotalList) throws Exception {
+	public List<MemMGMDto> snsTotalListCarousel(Integer snsTotalList) throws Exception {
 		return adminDao.snsTotalListCarousel(snsTotalList);
+	}
+
+	/* 포스트 태그 정보 */
+	@Override
+	public List<Post_TagDto> postTagInfo(Integer snsTotalList) throws Exception {
+		return adminDao.postTagInfo(snsTotalList);
 	}
 
 
