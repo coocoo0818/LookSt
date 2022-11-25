@@ -19,6 +19,7 @@ import kr.co.lookst.main.domain.Prdt_Img;
 import kr.co.lookst.main.domain.Prdt_Option;
 import kr.co.lookst.main.domain.Product;
 import kr.co.lookst.main.domain.SearchItem;
+import kr.co.lookst.post.domain.Post_TagDto;
 
 @Controller
 @RequestMapping("/admin")
@@ -293,11 +294,19 @@ public class AdminController {
 	@RequestMapping(value="/snsTotalList", method={RequestMethod.GET})
 	public String snsTotalList(Model model, Integer post_no) {
 		try {
-			List<Integer> snsTotalList = adminService.snsTotalList();
-			model.addAttribute("snsTotalList", snsTotalList);
-			System.out.println(snsTotalList);
-			List<String> snsTotalListCarousel = adminService.snsTotalListCarousel(snsTotalList);
-			model.addAttribute("snsTotalListCarousel", snsTotalListCarousel);
+			List<Integer> snsTotalLists = adminService.snsTotalList();
+			model.addAttribute("snsTotalLists", snsTotalLists);
+			System.out.println(snsTotalLists);
+			List<MemMGMDto> snsTotalListCarousel = null;
+			List<Post_TagDto> postTagInfo = null;
+			for (Integer snsTotalList : snsTotalLists) {
+				System.out.println(snsTotalList);
+				snsTotalListCarousel = adminService.snsTotalListCarousel(snsTotalList);
+				postTagInfo = adminService.postTagInfo(snsTotalList);
+				model.addAttribute("snsTotalListCarousel"+snsTotalList, snsTotalListCarousel);
+				model.addAttribute("postTagInfo"+snsTotalList, postTagInfo);
+				System.out.println(model);
+			}
 			System.out.println(model);
 
 		

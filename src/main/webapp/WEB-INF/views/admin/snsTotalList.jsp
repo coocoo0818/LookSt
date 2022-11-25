@@ -112,26 +112,31 @@
 		<!-- sns 메인 -->
 		<!-- sns 리스트 #1 -->
 		<div class="row row-cols-1 row-cols-md-3 g-4">
-			<c:forEach var="snsTotalList" items="${snsTotalList}">
+			<c:forEach var="snsTotalLists" items="${snsTotalLists}" varStatus="total-status">
 			<div class="col">
-				<div class="card">
-					<c:forEach var="snsTotalListCarousel" items="${snsTotalListCarousel}">
-						<img src="${contextPath}/resources/img/post/${snsTotalListCarousel.post_img_img}"
-							class="card-img-top" onclick="location.href='${contextPath}/admin/mylist/?post_no=${snsTotalList.post_no}'">
-					</c:forEach>
+			${snsTotalLists}
+			<c:set var="snsTotalListCarousel" value="snsTotalListCarousel${snsTotalLists}"/>
+			<%-- <c:set id='${snsTotalListCarousel}${snsTotalLists}' /> --%>
+				<div class="card border-0">
+					<c:forEach var="snsTotalListCarousel" items="${snsTotalListCarousel3}" varStatus="img-status">
+				
+						<img src="${contextPath}/resources/img/post/${snsTotalListCarousel.post_imgDto.post_img_img} "
+							class="card-img-top rounded" onclick="location.href='${contextPath}/admin/mylist/?post_no=${snsTotalLists}'">
+							
+					
 						<div class="card-body">
 							<div class="row justify-content-start d-flex">
 							  <%-- <c:forEach var="snsComTag" items="${snsComTag}"> --%>
-								<div class="col-3">
-									<img src="${contextPath}/resources/img/profile/<%-- ${snsComTag.profile_img} --%>"
+								<div class="col-2">
+									<img src="${contextPath}/resources/img/profile/${snsTotalListCarousel.profile_img}"
 										onclick="location.href='./'" id="profile_img">
 								</div>
-								<div class="col-5 my-auto" onclick="location.href='./'"><%-- ${snsComTag.member_nick} --%></div>
-								<p class="card-text" style="margin-top:20px;"><%-- ${snsComTag.post_content} --%></p>
-								<div class="tag_link" style="margin-top: 10px; margin-bottom: 10px;">
+								<div class="col-10 my-auto" onclick="location.href='./'">${snsTotalListCarousel.member_nick}</div>
+								<p class="card-text" style="margin-top:20px;">${snsTotalListCarousel.NPostDto.post_content}</p>
+								</c:forEach>
+								<div class="tag_link" style="margin-top: 1%; margin-bottom: 1%;">
 									<p class="tag_text" onclick="location.href='./'" style="display: inline;"><b><%-- ${snsComTag.tag_content} --%></b></p>
 								</div>
-							 <%-- </c:forEach> --%>
 								<div class="like_comment">
 									<button onclick="clickBtn()" class="border border-white "
 										style="background-color: transparent;">
@@ -142,15 +147,15 @@
 										<i class="fa-regular fa-comment-dots fa-lg"></i>
 									</button>
 								</div>
-							<%-- <c:forEach var="snsPrdtImg" items="${snsPrdtImg}"> --%>
+							<c:forEach var="postTagInfo" items="${postTagInfo10}">
 								<div class="productDetail d-flex row justify-content-start ">
-									<img src="${contextPath}/resources/img/post/<%-- ${snsPrdtImg.post_tag_img} --%>"
+									<img src="${contextPath}/resources/img/post/${postTagInfo.post_tag_img}"
 										onclick="location.href='./'" id="product_img" class="col-3">
 									<span class="d-inline-block text-truncate" style="max-width: 280px; font-size: 14px; padding-top: 10px;">
-	  									<!-- Jordan 1 x Travis Scott x Fragment Retro Low OG SP Military Blue --><%-- ${snsPrdtImg.post_tag_name} --%><br><!-- 1,983,000원 --><%-- ${snsPrdtImg.post_tag_price} --%>
+	  									${postTagInfo.post_tag_name}<br>${postTagInfo.post_tag_price}
 									</span>
 								</div>
-							<%-- </c:forEach> --%>
+							</c:forEach>
 							</div>
 						</div>
 					</div>	
