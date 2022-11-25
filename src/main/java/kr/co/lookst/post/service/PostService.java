@@ -33,5 +33,7 @@ public interface PostService {
 	List<sns_com_tagDto> snsComTag(Integer post_no) throws Exception;					// sns_list페이지 닉네임 및 게실글, 태그
 
 	List<TpostDto> postTotalList() throws Exception;
+
+	
 	
 }
