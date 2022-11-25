@@ -91,6 +91,16 @@ public class PostController {
 		}
 		return "/post/orderFormpage";
 	}
+	
+	@GetMapping("/order_sheet")
+	public String order_sheet(Model m) {
+		try {
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "/post/order_sheet";
+	}
 
 
 }
