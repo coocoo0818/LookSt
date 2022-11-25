@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.lookst.admin.domain.MemMGMDto;
 import kr.co.lookst.admin.service.AdminService;
@@ -288,5 +287,24 @@ public class AdminController {
 			return new ResponseEntity<List<Prdt_Option>>(HttpStatus.BAD_REQUEST);
 		}
 		/* return "redirect:/admin/productDetail"; */
+	}
+	
+	/* sns total list */
+	@RequestMapping(value="/snsTotalList", method={RequestMethod.GET})
+	public String snsTotalList(Model model, Integer post_no) {
+		try {
+			List<Integer> snsTotalList = adminService.snsTotalList();
+			model.addAttribute("snsTotalList", snsTotalList);
+			System.out.println(snsTotalList);
+			List<String> snsTotalListCarousel = adminService.snsTotalListCarousel(snsTotalList);
+			model.addAttribute("snsTotalListCarousel", snsTotalListCarousel);
+			System.out.println(model);
+
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "/admin/snsTotalList";
 	}
 }
