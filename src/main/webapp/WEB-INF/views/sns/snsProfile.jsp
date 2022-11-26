@@ -38,9 +38,11 @@
 </style>
 
 <script type="text/javascript">
-	// 	let msg = "${msg}"\
-	// 	if (msg == "MOD_ERR")
-	// 		alert("프로필 수정에 실패하였습니다. 다시 시도해 주세요.")
+	// 	$(document).ready(function() {
+	// 		${'.follow_Btn'}.on('click', function () {
+
+	// 		})
+	// 	})
 </script>
 
 <title>snsProfile</title>
@@ -57,11 +59,11 @@
 	<!-- myProfile 끝 -->
 	<!-- 프로필 정보 -->
 	<div class="profile container justify-content-center">
-		<div class="profile-card card mb-5"
-			style="max-width: 100%; border: none;">
+		<div class="profile-card card mb-5 pb-5"
+			style="max-width: 100%; border: none; border-bottom: 1px solid #E2E2E2; ">
 			<div class="row g-0">
 				<!-- 프로필 이미지-->
-				<div class="profile_img col-sm-6">
+				<div class="profile_img col-6">
 					<div class="col-6 offset-3 ">
 						<div class="pro_img_box">
 							<img
@@ -76,7 +78,7 @@
 						<!-- nickname -->
 						<div class="nickname fw-bold fs-1 mb-md-4">${pro_info.member_nick }
 
-							<c:if test="${'@database' eq pro_info.member_id }">
+							<c:if test="${'ezen1@naver.com' eq pro_info.member_id }">
 								<!-- 프로필 수정-->
 								<button type="button"
 									class="profileEdit_Btn btn btn-primary fs-4 ms-auto"
@@ -91,10 +93,10 @@
 									&nbsp; 프로필 수정
 								</button>
 							</c:if>
-							
-							<c:if test="${'@database' ne pro_info.member_id }">
+
+							<c:if test="${'ezen1@naver.com' ne pro_info.member_id }">
 								<button type="button"
-									class="profileEdit_Btn btn btn-primary fs-4 ms-auto">팔로우</button>
+									class="follow_Btn btn btn-primary fs-4 ms-auto">팔로우</button>
 							</c:if>
 
 
@@ -131,7 +133,7 @@
 				<c:if
 					test="${fn:length(pro_feed) == null || fn:length(pro_feed) == 0 }">
 					<div class="none_feed fs-4 fw-bold"
-						style="justify-content: center;">게시물이 없습니다.</div>
+						style="justify-content: center; text-align: center;">게시물이 없습니다.</div>
 				</c:if>
 				<c:if
 					test="${fn:length(pro_feed) != null || fn:length(pro_feed) != 0 }">
@@ -172,7 +174,7 @@
 						<span class="input-group-text" id="basic-addon1">닉네임</span> <input
 							type="text" class="form-control"
 							placeholder="${pro_info.member_nick }" aria-label="Username"
-							aria-describedby="basic-addon1" readonly>
+							aria-describedby="basic-addon1">
 					</div>
 					<div class="input-group">
 						<span class="input-group-text">자기소개 글</span>
