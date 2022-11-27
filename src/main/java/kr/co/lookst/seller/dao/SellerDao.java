@@ -29,4 +29,7 @@ public interface SellerDao {
 
 	int ReqOrderStatusMod(Integer prdt_order_no, String ReqOrderStatus) throws Exception;
 
+	OrderListDto orderDetail(Integer prdt_order_no) throws Exception;
+
+
 }

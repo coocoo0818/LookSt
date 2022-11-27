@@ -2,16 +2,23 @@ package kr.co.lookst.seller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.lookst.main.domain.PageResolver;
+import kr.co.lookst.main.domain.Prdt_Option;
 import kr.co.lookst.main.domain.SearchItem;
 import kr.co.lookst.seller.domain.OrderListDto;
 import kr.co.lookst.seller.domain.PrdtListDto;
@@ -26,12 +33,19 @@ import kr.co.lookst.seller.service.SellerService;
 @RequestMapping("/seller")
 public class SellerController {
 
+	HttpSession session;
+	
 	@Autowired
 	SellerService sellerService;
 	
 	
 	@GetMapping("/prdtList")
-	public String prdtpage(SearchItem sc, Model m) {
+	public String prdtpage(SearchItem sc, Model m, HttpServletRequest request) {
+		
+		session = request.getSession();
+		System.out.println(session.getAttribute("res"));
+		session.getAttribute("res");
+		
 		try {
 			int totalCnt = sellerService.getSearchResultCntP(sc);
 			m.addAttribute("totalCnt", totalCnt);
@@ -112,7 +126,24 @@ public class SellerController {
 		return "redirect:/seller/orderList";
 	}
 	
-	
+	/* 흠냐흠냐 */
+	@RequestMapping(value="/orderDetail", method={RequestMethod.GET})
+	public String orderDetail(Model m, 
+			@RequestParam("prdt_order_no")Integer prdt_order_no) {
+		System.out.println(prdt_order_no);
+		
+		try {
+			sellerService.orderDetail(prdt_order_no);
+			OrderListDto orderDetail = sellerService.orderDetail(prdt_order_no);
+			m.addAttribute("orderDetail", orderDetail);
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+		}
+		return "redirect:/seller/orderList";
+	}
 	
 	@GetMapping("/refundList")
 	public String refundpage(SearchItem sc, Model m) {
