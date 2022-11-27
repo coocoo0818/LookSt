@@ -6,8 +6,9 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <title>LOOKST</title>
 
@@ -16,9 +17,7 @@
   box-sizing: border-box;
 }
 
-html {
-  font-size: 12px;
-}
+html {font-size: 12px;}
 
 body {
   margin: 20px 0;
@@ -33,14 +32,9 @@ img {
   border-radius: 4px;
 }
 
-a {
-  text-decoration: none;
-  color: #333333;
-}
+a {text-decoration: none; color: #333333;}
 
-a:hover {
-  color: #f58551;
-}
+a:hover {color: #f58551;}
 
 button {
   background-color: #16cc9b;
@@ -62,13 +56,9 @@ button:hover {
   border-color: #f58551;
 }
 
-button:hover::after {
-  right: -5px;
-}
+button:hover::after {right: -5px;}
 
-button:focus {
-  outline: none;
-}
+button:focus {outline: none;}
 
 ul {
   padding: 0;
@@ -76,9 +66,7 @@ ul {
   list-style-type: none;
 }
 
-input {
-  transition: all 0.25s linear;
-}
+input {transition: all 0.25s linear;}
 
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
@@ -88,9 +76,7 @@ input[type=number]::-webkit-outer-spin-button {
   margin: 0;
 }
 
-input {
-  outline: none;
-}
+input {outline: none;}
 
 .container {
   width: 90%;
@@ -99,56 +85,28 @@ input {
 }
 
 /* --- HEADER --- */
-header.container {
-  margin-bottom: 1.5rem;
-}
+header.container {margin-bottom: 1.5rem;}
 
-header .breadcrumb {
-  color: #7d7d7d;
-}
+header .breadcrumb {color: #7d7d7d;}
 
-header .breadcrumb li {
-  float: left;
-  padding: 0 6px;
-}
+header .breadcrumb li {float: left; padding: 0 6px;}
 
-header .breadcrumb li:first-child {
-  padding-left: 2px;
-}
+header .breadcrumb li:first-child {padding-left: 2px;}
 
-header .breadcrumb li:not(:last-child)::after {
-  content: " \276f";
-  padding-left: 8px;
-}
+header .breadcrumb li:not(:last-child)::after {content: " \276f"; padding-left: 8px;}
 
-header .count {
-  float: right;
-  color: #333333;
-}
+header .count {float: right; color: #333333;}
 
 /* --- PRODUCT LIST --- */
-.products {
-  border-top: 1px solid #ddd;
-}
+.products {border-top: 1px solid #ddd;}
 
-.products > li {
-  padding: 1rem 0;
-  border-bottom: 1px solid #ddd;
-}
+.products > li {padding: 1rem 0; border-bottom: 1px solid #ddd;}
 
-.row {
-  position: relative;
-  overflow: auto;
-  width: 100%;
-}
+.row {position: relative; overflow: auto; width: 100%;}
 
-.col, .quantity, .remove {
-  float: left;
-}
+.col, .quantity, .remove {float: left;}
 
-.col.left {
-  width: 70%;
-}
+.col.left {width: 70%;}
 
 .col.right {
   width: 30%;
@@ -157,33 +115,17 @@ header .count {
   top: calc(50% - 30px);
 }
 
-.detail {
-  padding: 0 0.5rem;
-  line-height: 2.2rem;
-}
+.detail {padding: 0 0.5rem; line-height: 2.2rem;}
 
-.detail .name {
-  font-size: 1.2rem;
-}
+.detail .name {font-size: 1.2rem;}
 
-.detail .description {
-  color: #7d7d7d;
-  font-size: 1rem;
-}
+.detail .description {color: #7d7d7d; font-size: 1rem;}
 
-.detail .price {
-  font-size: 1.5rem;
-}
+.detail .price {font-size: 1.5rem;}
 
-.quantity, .remove {
-  width: 50%;
-  text-align: center;
-}
+.quantity, .remove {width: 50%; text-align: center;}
 
-.remove svg {
-  width: 60px;
-  height: 60px;
-}
+.remove svg {width: 60px; height: 60px;}
 
 .quantity > input {
   display: inline-block;
@@ -198,9 +140,7 @@ header .count {
   font: 600 1.5rem Helvetica, Arial, sans-serif;
 }
 
-.quantity > input:hover, .quantity > input:focus {
-  border-color: #f58551;
-}
+.quantity > input:hover, .quantity > input:focus {border-color: #f58551;}
 
 .close {
   fill: #7d7d7d;
@@ -211,9 +151,7 @@ header .count {
   cursor: pointer;
 }
 
-.close:hover {
-  fill: #f58551;
-}
+.close:hover {fill: #f58551;}
 
 /* --- SUMMARY --- */
 .promotion, .summary, .checkout {
@@ -237,9 +175,7 @@ header .count {
   border-radius: 2rem 0 0 2rem;
 }
 
-.promotion:hover > input {
-  border-color: #f58551;
-}
+.promotion:hover > input {border-color: #f58551;}
 
 .promotion > button {
   float: left;
@@ -248,53 +184,25 @@ header .count {
   border-radius: 0 2rem 2rem 0;
 }
 
-.promotion:hover > button {
-  border-color: #f58551;
-  background-color: #f58551;
-}
+.promotion:hover > button {border-color: #f58551; background-color: #f58551;}
 
-.promotion > button::after {
-  content: "\276f";
-  font-size: 1rem;
-}
+.promotion > button::after {content: "\276f"; font-size: 1rem;}
 
-.summary {
-  font-size: 1.2rem;
-  text-align: right;
-}
+.summary {font-size: 1.2rem; text-align: right;}
 
-.summary ul li {
-  padding: 0.5rem 0;
-}
+.summary ul li {padding: 0.5rem 0;}
 
-.summary ul li span {
-  display: inline-block;
-  width: 30%;
-}
+.summary ul li span {display: inline-block; width: 30%;}
 
-.summary ul li.total {
-  font-weight: bold;
-}
+.summary ul li.total {font-weight: bold;}
 
-.checkout {
-  text-align: right;
-}
+.checkout {text-align: right;}
 
-.checkout > button {
-  font-size: 1.2rem;
-  padding: 0.8rem 2.8rem;
-  border-radius: 1.5rem;
-}
+.checkout > button {font-size: 1.2rem; padding: 0.8rem 2.8rem; border-radius: 1.5rem;}
 
-.empty-product {
-  text-align: center;
-}
+.empty-product {text-align: center;}
 
-.empty-product > button {
-  font-size: 1.3rem; 
-  padding: 10px 30px; 
-  border-radius: 5px;
-}
+.empty-product > button {font-size: 1.3rem; padding: 10px 30px; border-radius: 5px;}
 
 /* --- SMALL SCREEN --- */
 @media all and (max-width: 599px) {
@@ -302,52 +210,26 @@ header .count {
     display: none;
   }
   
-  .quantity > input {
-    width: 40px;
-    height: 40px;
-    left: calc(50% - 20px);
-  }
+  .quantity > input {width: 40px; height: 40px; left: calc(50% - 20px);}
   
-  .remove svg {
-    width: 40px;
-    height: 40px;
-  }
+  .remove svg {width: 40px; height: 40px;}
 }
 
 /* --- MEDIUM & LARGE SCREEN --- */
 @media all and (min-width: 600px) {
-  html {
-    font-size: 14px;
-  }
+  html {font-size: 14px;}
 
-  .container {
-    width: 75%;
-    max-width: 960px;
-  }
+  .container {width: 75%; max-width: 960px;}
 
-  .thumbnail, .detail {
-    float: left;
-  }
+  .thumbnail, .detail {float: left;}
 
-/*   .thumbnail {
-    width: 35%;
-  }
- */
-  .detail {
-    width: 65%;
-  }
+  .detail {width: 65%;}
 
-  .promotion, .summary {
-    width: 50%;
-  }
+  .promotion, .summary {width: 50%;}
 
-  .checkout {
-    width: 100%;
-  }
+  .checkout {idth: 100%;}
 
-  .checkout, .summary {
-    text-align: right;
-  }
+  .checkout, .summary {text-align: right;}
 }
 
 /* --- LARGE SCREEN --- */
@@ -600,8 +482,58 @@ header .count {
 		    currency: "USD"
 		  });
 		}
+		
+		
+	    function sample6_execDaumPostcode() {
+	        new daum.Postcode({
+	            oncomplete: function(data) {
+	                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
+	                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+	                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+	                var addr = ''; // 주소 변수
+	                var extraAddr = ''; // 참고항목 변수
+
+	                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+	                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+	                    addr = data.roadAddress;
+	                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+	                    addr = data.jibunAddress;
+	                }
+
+	                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+	                if(data.userSelectedType === 'R'){
+	                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+	                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+	                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+	                        extraAddr += data.bname;
+	                    }
+	                    // 건물명이 있고, 공동주택일 경우 추가한다.
+	                    if(data.buildingName !== '' && data.apartment === 'Y'){
+	                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+	                    }
+	                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+	                    if(extraAddr !== ''){
+	                        extraAddr = ' (' + extraAddr + ')';
+	                    }
+	                    // 조합된 참고항목을 해당 필드에 넣는다.
+	                    document.getElementById("sample6_extraAddress").value = extraAddr;
+	                
+	                } else {
+	                    document.getElementById("sample6_extraAddress").value = '';
+	                }
+
+	                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+	                document.getElementById('sample6_postcode').value = data.zonecode;
+	                document.getElementById("sample6_address").value = addr;
+	                // 커서를 상세주소 필드로 이동한다.
+	                document.getElementById("sample6_detailAddress").focus();
+	            }
+	        }).open();
+	    }
 	</script>
+	
+
 	<div id="app">
 
   <!-- Header -->
@@ -646,35 +578,171 @@ header .count {
     </ul>
     </div>
     <div v-else class="empty-product">
-      <h3>There are no products in your cart.</h3>
-      <button>Shopping now</button>
+      <h3>돈 더 써볼까요?</h3>
+      <button>돈쭐을 내주마!</button>
     </div>
   </section>
   <!-- End Product List -->
   
-  <!-- Summary -->
-  <section class="container" v-if="products.length > 0">
-<!--     <div class="promotion">
-      <label for="promo-code">Have A Promo Code?</label>
-      <input type="text" id="promo-code" v-model="promoCode" /> <button type="button" @click="checkPromoCode"></button>
-    </div> -->
 
-    <div class="summary">
-      <ul>
-        <li>Subtotal <span>{{ subTotal | currencyFormatted }}</span></li>
-        <li v-if="discount > 0">Discount <span>{{ discountPrice | currencyFormatted }}</span></li>
-        <li>Tax <span>{{ tax | currencyFormatted }}</span></li>
-        <li class="total">Total <span>{{ totalPrice | currencyFormatted }}</span></li>
-      </ul>
-    </div>
-
-    <div class="checkout">
-      <button type="button">Check Out</button>
-    </div>
-  </section>
   <!-- End Summary -->
-</div>
+</div><hr/>
 
+<div class="container">
+		<div class="row g-5">
+      <div class="col-md-5 col-lg-4 order-md-last">
+        <h4 class="d-flex justify-content-between align-items-center mb-3">
+          <span class="text-primary">Your cart</span>
+          <span class="badge bg-primary rounded-pill">3</span>
+        </h4>
+        <ul class="list-group mb-3">
+          <li class="list-group-item d-flex justify-content-between lh-sm">
+            <div>
+              <h6 class="my-0">금액</h6>
+              <small class="text-muted">Brief description</small>
+            </div>
+            <span class="text-muted">$12</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between lh-sm">
+            <div>
+              <h6 class="my-0">수량</h6>
+              <small class="text-muted">Brief description</small>
+            </div>
+            <span class="text-muted">$8</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between lh-sm">
+            <div>
+              <h6 class="my-0">VAT</h6>
+              <small class="text-muted">Brief description</small>
+            </div>
+            <span class="text-muted">$5</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between">
+            <span>총 결제액</span>
+            <strong>$20</strong>
+          </li>
+        </ul>
+        <button class="w-100 btn btn-primary btn-lg" type="submit">Continue to checkout</button>
+      </div>
+      <div class="col-md-7 col-lg-8">
+        <h4 class="mb-3">주문자 정보</h4>
+        <form class="needs-validation" novalidate="">
+          <div class="row g-3">
+            <div class="col-sm-6">
+              <label for="firstName" class="form-label">고객명</label>
+              <input type="text" class="form-control" id="firstName" placeholder="" value="" required="">
+              <div class="invalid-feedback">
+                Valid first name is required.
+              </div>
+            </div>
+
+            <div class="col-12">
+              <label for="phoneNum" class="form-label">연락처</label>
+              <div class="input-group has-validation">
+                <span class="input-group-text">H.P</span>
+                <input type="text" class="form-control" id="username" placeholder="연락처를 입력해주세요" required="">
+              <div class="invalid-feedback">
+                  Your username is required.
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12">
+              <label for="email" class="form-label">Email <span class="text-muted">(Optional)</span></label>
+              <input type="email" class="form-control" id="email" placeholder="you@example.com">
+              <div class="invalid-feedback">
+                Please enter a valid email address for shipping updates.
+              </div>
+            </div>
+
+            <div class="col-12">
+            	<label for="address" class="form-label">배송지</label>
+            	<input type="text" class="form-control" id="sample6_postcode" placeholder="우편번호">
+				<input type="button" class="btn btn-light" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+				<input type="text" class="form-control" id="sample6_address" placeholder="주소"><br>
+				<input type="text" class="form-control" id="sample6_detailAddress" placeholder="상세주소">
+
+				
+              <div class="invalid-feedback">
+                Please enter your shipping address.
+              </div>
+            </div>
+
+            <div class="col-12">
+              <label for="address2" class="form-label">기타메세지<span class="text-muted"></span></label>
+              <input type="text" class="form-control" id="address2" placeholder="메세지를 남겨주세요">
+            </div>
+
+            
+
+          <hr class="my-4">
+
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="same-address">
+            <label class="form-check-label" for="same-address">Shipping address is the same as my billing address</label>
+          </div>
+
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="save-info">
+            <label class="form-check-label" for="save-info">Save this information for next time</label>
+          </div>
+
+          <hr class="my-4">
+
+          <h4 class="mb-3">결제수단</h4>
+
+          <div class="my-3">
+            <div class="form-check">
+              <input id="credit" name="paymentMethod" type="radio" class="form-check-input" checked="" required="">
+              <label class="form-check-label" for="credit">체크/신용카드</label>
+            </div>
+            <div class="form-check">
+              <input id="debit" name="paymentMethod" type="radio" class="form-check-input" required="">
+              <label class="form-check-label" for="debit">무통장입금</label>
+            </div>
+          </div>
+
+          <div class="row gy-3">
+            <div class="col-md-6">
+              <label for="cc-name" class="form-label">Name on card</label>
+              <input type="text" class="form-control" id="cc-name" placeholder="" required="">
+              <small class="text-muted">Full name as displayed on card</small>
+              <div class="invalid-feedback">
+                Name on card is required
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label for="cc-number" class="form-label">Credit card number</label>
+              <input type="text" class="form-control" id="cc-number" placeholder="" required="">
+              <div class="invalid-feedback">
+                Credit card number is required
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <label for="cc-expiration" class="form-label">Expiration</label>
+              <input type="text" class="form-control" id="cc-expiration" placeholder="" required="">
+              <div class="invalid-feedback">
+                Expiration date required
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <label for="cc-cvv" class="form-label">CVV</label>
+              <input type="text" class="form-control" id="cc-cvv" placeholder="" required="">
+              <div class="invalid-feedback">
+                Security code required
+              </div>
+            </div>
+          </div>
+
+          <hr class="my-4">
+
+        </form>
+      </div>
+    </div>
+</div>
 
 
 
