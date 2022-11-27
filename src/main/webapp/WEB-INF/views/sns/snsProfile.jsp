@@ -38,11 +38,32 @@
 </style>
 
 <script type="text/javascript">
-	// 	$(document).ready(function() {
-	// 		${'.follow_Btn'}.on('click', function () {
-
-	// 		})
-	// 	})
+	// 팔로잉 프로필화면 이동
+	$(document).ready(function() {
+		$('.followingIDbox').on('click', function() {
+			let member_id = $(this).children().attr("data-member_id")
+			alert(member_nick)
+			location.href = '${contextPath}/sns/snsProfile/?member_id='+member_id;
+		});
+	});
+	
+	// 팔로워 프로필화면 이동
+	$(document).ready(function() {
+		$('.followerIDbox').on('click', function() {
+			let member_id = $(this).children().attr("data-member_id")
+			alert(member_nick)
+			location.href = '${contextPath}/sns/snsProfile/?member_id='+member_id;
+		});
+	});
+	
+	// 개인 피드 리스트 이동
+	$(document).ready(function() {
+		$('.Personal_post').on('click', function() {
+			let member_id = $(this).children().attr("data-member_id")
+			alert(member_nick)
+			location.href = '${contextPath}/sns/personalPost/?member_id='+member_id;
+		});
+	});
 </script>
 
 <title>snsProfile</title>
@@ -60,7 +81,7 @@
 	<!-- 프로필 정보 -->
 	<div class="profile container justify-content-center">
 		<div class="profile-card card mb-5 pb-5"
-			style="max-width: 100%; border: none; border-bottom: 1px solid #E2E2E2; ">
+			style="max-width: 100%; border: none; border-bottom: 1px solid #E2E2E2;">
 			<div class="row g-0">
 				<!-- 프로필 이미지-->
 				<div class="profile_img col-6">
@@ -133,7 +154,8 @@
 				<c:if
 					test="${fn:length(pro_feed) == null || fn:length(pro_feed) == 0 }">
 					<div class="none_feed fs-4 fw-bold"
-						style="justify-content: center; text-align: center;">게시물이 없습니다.</div>
+						style="justify-content: center; text-align: center;">게시물이
+						없습니다.</div>
 				</c:if>
 				<c:if
 					test="${fn:length(pro_feed) != null || fn:length(pro_feed) != 0 }">
@@ -141,9 +163,11 @@
 						<div class="col-sm-4 mb-3">
 							<div class="card" style="border: none;">
 								<div class="post_img card-body">
-									<img class="feed_img"
-										src="${pageContext.request.contextPath }/resources/img/post/${pro_feed.post_img_img}"
-										alt="...">
+									<a href="${contextPath}/sns/personalPost/?member_id=${pro_feed.member_id}" class="Personal_post">
+										<img class="feed_img"
+											src="${pageContext.request.contextPath }/resources/img/post/${pro_feed.post_img_img}"
+											alt="...">
+									</a>
 								</div>
 							</div>
 						</div>
@@ -206,13 +230,24 @@
 				</div>
 				<div class="modal-body">
 					<ul>
+						<c:if
+							test="${fn:length(pro_following) == null || fn:length(pro_following) == 0 }">
+							<br/>
+							<li class="fs-4" style="list-style: none;"><span>팔로잉이 없습니다.</span></li>
 
-						<c:forEach var="pro_following" items="${pro_following }"
-							varStatus="following_status">
-							<br />
-							<li class="fs-4" style="list-style: none;"><span>${pro_following.member_nick }</span></li>
-						</c:forEach>
-
+						</c:if>
+						<c:if
+							test="${fn:length(pro_following) != null || fn:length(pro_following) != 0 }">
+							<c:forEach var="pro_following" items="${pro_following }"
+								varStatus="following_status">
+								<br/>
+									<li class="fs-4" style="list-style: none;" data-memberID="${pro_following.member_id}">
+										<a href="${contextPath}/sns/snsProfile/?member_id=${pro_following.member_id}" class="followingIDbox">
+											<span>${pro_following.member_nick }</span>
+										</a>
+									</li>
+							</c:forEach>
+						</c:if>
 					</ul>
 				</div>
 			</div>
@@ -233,12 +268,25 @@
 				</div>
 				<div class="follower modal-body" id="followerList">
 					<ul>
+					
+						<c:if
+							test="${fn:length(pro_follower) == null || fn:length(pro_follower) == 0 }">
+							<br/>
+							<li class="fs-4" style="list-style: none;"><span>팔로워가 없습니다.</span></li>
 
+						</c:if>
+						<c:if
+							test="${fn:length(pro_follower) != null || fn:length(pro_follower) != 0 }">
 						<c:forEach var="pro_follower" items="${pro_follower }"
 							varStatus="follower_status">
-							<br />
-							<li class="fs-4" style="list-style: none;"><span>${pro_follower.member_nick }</span></li>
+							<br/>
+								<li class="fs-4" style="list-style: none;">							
+									<a href="${contextPath}/sns/snsProfile/?member_id=${pro_follower.member_id}" class="followerIDbox">
+										<span>${pro_follower.member_nick }</span>
+									</a>
+								</li>
 						</c:forEach>
+						</c:if>
 
 					</ul>
 				</div>

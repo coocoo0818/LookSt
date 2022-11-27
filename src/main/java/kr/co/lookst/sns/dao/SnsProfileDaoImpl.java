@@ -29,12 +29,39 @@ public class SnsProfileDaoImpl implements SnsProfileDao {
 
 	@Override
 	public List<FollowDto> followerList(String member_id) throws Exception {
-		return session.selectList(namespace+"followerList", member_id);
+		return session.selectList(namespace+"selectPassiveUserList", member_id);
 	}
 
 	@Override
 	public List<FollowDto> followingList(String member_id) throws Exception {
-		return session.selectList(namespace+"followingList", member_id);
+		return session.selectList(namespace+"selectActiveUserList", member_id);
 	}
+
+	@Override
+	public int follow(FollowDto fd) {
+		return session.insert(namespace+"follow", fd);
+		
+	}
+
+	@Override
+	public int unfollow(FollowDto fd) {
+		return session.delete(namespace+"unfollow", fd);
+	}
+
+	@Override
+	public int isFollow(FollowDto fd) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int deleteUserAllFollow(String member_id) {
+		// TODO Auto-generated method stub
+		return session.delete(namespace+"deleteUserAllFollow", member_id);
+	}
+
+	
+
+
 	
 }

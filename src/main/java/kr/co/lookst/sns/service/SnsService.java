@@ -15,6 +15,4 @@ public interface SnsService {
 	List<FollowDto> getFollower(String member_id) throws Exception;
 	
 	List<FollowDto> getFollowing(String member_id) throws Exception;
-
-	
 }
