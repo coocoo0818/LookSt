@@ -85,4 +85,11 @@ public class SellerDaoImpl implements SellerDao {
 		return session.update(namespace + "ReqOrderStatusMod", map);
 	}
 
+	@Override
+	public OrderListDto orderDetail(Integer prdt_order_no) throws Exception {
+		// TODO Auto-generated method stub
+		System.out.println("daoimpl:" + prdt_order_no);
+		return session.selectOne(namespace + "orderDetail", prdt_order_no);
+	}
+
 }
