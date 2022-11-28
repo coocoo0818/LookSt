@@ -46,6 +46,32 @@
 				error : function() {alert("error")}	
 			})
 		})
+		
+		
+		
+		
+		$(".myModal").on('click', function(){
+		
+	        
+			$('#prdt_order_no').text($(this).data("prdt_order_no")),
+			$('#member_name').text($(this).data("member_name")),
+			$('#product_name').text($(this).data("product_name")),
+			$('#product_no').text($(this).data("product_no")),
+			$('#payment').text($(this).data("payment")),
+			$('#prdt_order_date').text($(this).data("prdt_order_date")),
+			$('#prdt_order_type').text($(this).data("prdt_order_type")),
+			$('#prdt_order_person').text($(this).data("prdt_order_person")),
+			$('#prdt_order_addr').text($(this).data("prdt_order_addr")),
+			$('#prdt_order_addr2').text($(this).data("prdt_order_addr2")),
+			$('#prdt_order_phone').text($(this).data("prdt_order_phone")),
+			$('#prdt_order_quan').text($(this).data("prdt_order_quan")),
+			$('#product_price').text($(this).data("product_price")),
+			$('#prdt_order_way').text($(this).data("prdt_order_way"))
+			$('#prdt_order_cancel').text($(this).data("prdt_order_cancel"))
+		});
+		
+		
+		
 	})
 </script>
 
@@ -207,9 +233,24 @@
 							role="button" type="button" value="변경"
 							class="btn btn-outline-dark btn-sm ReqOrderStatusMod"
 							id="ReqOrderStatusMod" />
-						<button
-								type="button" class="btn btn-outline-dark btn-sm"
-								data-bs-toggle="modal" data-bs-target="#staticBackdrop">VIEW</button></td>
+						<button type="button" class="btn btn-outline-dark btn-sm myModal"
+								id="myModal" data-bs-toggle="modal" 
+								data-prdt_order_no="${refundListDto.prdt_order_no }"
+								data-member_name = "${refundListDto.member_name }"
+								data-product_name = "${refundListDto.product_name }"
+								data-product_no = "${refundListDto.product_no }"
+								data-payment = "${refundListDto.payment }"
+								data-prdt_order_date = "${refundListDto.prdt_order_date }"
+								data-prdt_order_type = "${refundListDto.prdt_order_type }"
+								data-prdt_order_person = "${refundListDto.prdt_order_person }"
+								data-prdt_order_addr = "${refundListDto.prdt_order_addr }"
+								data-prdt_order_addr2 = "${refundListDto.prdt_order_addr2 }"
+								data-prdt_order_phone = "${refundListDto.prdt_order_phone }"
+								data-prdt_order_quan = "${refundListDto.prdt_order_quan }"
+								data-product_price = "${refundListDto.product_price }"
+								data-prdt_order_way = "${refundListDto.prdt_order_way }"
+								data-prdt_order_cancel = "${refundListDto.prdt_order_cancel }"
+								data-bs-target="#staticBackdrop">VIEW</button></td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -274,37 +315,22 @@
 					<button type="button" class="btn-close" data-bs-dismiss="modal"
 						aria-label="Close"></button>
 				</div>
-				<div class="modal-body">
-					<div class="detail-info">
-						<span>수령인 :</span> <span text="${order.name}">박이름</span><br /> <span>수령주소
-							:</span>
-						<!--수정필요-->
-						<span text="${order.address}">서울시 00구 00동 00-00 00호</span><br />
-						<span>전화번호 :</span>
-						<!--수정필요-->
-						<span text="${order.phonenumber}">010-1234-1234</span><br /> <span>주문번호
-							:</span> <span text="${order.number}">178789</span><br /> <span>상품번호
-							:</span> <span text="${product.itemIdx}">1659826</span><br /> <span>상품명
-							:</span> <span text="${order.itemName}">예쁜 트렌치코트</span><br /> <span>상품가격
-							:</span> <span text="${order.orderPrice}">34000원</span><br /> <span>구매수량
-							:</span>
-						<!--수정필요-->
-						<span text="${order.number}">2</span><br /> <span>결제일시 :</span> <span
-							text="${order.orderedAt}">2022-10-17</span><br /> <span>결제수단
-							:</span>
-						<!--수정필요-->
-						<span text="${order.payment}">카드결제</span><br /> <span>환불금액
-							:</span>
-						<!--수정필요-->
-						<span text="${order.orderPrice}">68000원</span><br /> <span>주문상태
-							:</span>
-						<!--수정필요-->
-						<span text="${order.status}">결제완료</span><br /> <span>요청상태
-							:</span>
-						<!--수정필요-->
-						<span text="${order.reqstatus}">취소접수</span><br />
+				<div class="modal-body fs-4" style="text-align:left;">
+						  <span>주문번호 : </span><span id=prdt_order_no ></span><br/>
+						  <span>주문자 : </span><span id=member_name></span><br/>
+						  <span>상품명 : </span><span id=product_name></span><br/>
+						  <span>상품번호 : </span><span id=product_no></span><br/>
+						  <span>환불금액 : </span><span id=payment></span><span>원</span><br/>
+						  <span>주문일자 : </span><span id=prdt_order_date></span><br/>
+						  <span>주문상태 : </span><span id=prdt_order_type></span><br/>
+						  <span>수령인 : </span><span id=prdt_order_person></span><br/>
+						  <span>배송지 : </span><span id=prdt_order_addr></span>&nbsp;<span id=prdt_order_addr2></span><br/>
+						  <span>전화번호 : </span><span id=prdt_order_phone></span><br/>
+						  <span>주문수량 : </span><span id=prdt_order_quan></span><br/>
+						  <span>상품가격 : </span><span id=product_price></span><span>원</span><br/>
+						  <span>환불수단: </span><span id=prdt_order_way></span><br/>
+						  <span>취소상태: </span><span id=prdt_order_cancel></span><br/>
 					</div>
-				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-primary"
 						data-bs-dismiss="modal">Close</button>

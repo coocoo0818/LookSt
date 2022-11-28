@@ -78,11 +78,5 @@ public class SellerServiceImpl implements SellerService {
 		return sellerDao.ReqOrderStatusMod(prdt_order_no, ReqOrderStatus);
 	}
 
-	@Override
-	public OrderListDto orderDetail(Integer prdt_order_no) throws Exception {
-		// TODO Auto-generated method stub
-		System.out.println("serv" + prdt_order_no);
-		return sellerDao.orderDetail(prdt_order_no);
-	}
 
 }

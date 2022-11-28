@@ -126,24 +126,6 @@ public class SellerController {
 		return "redirect:/seller/orderList";
 	}
 	
-	/* 흠냐흠냐 */
-	@RequestMapping(value="/orderDetail", method={RequestMethod.GET})
-	public String orderDetail(Model m, 
-			@RequestParam("prdt_order_no")Integer prdt_order_no) {
-		System.out.println(prdt_order_no);
-		
-		try {
-			sellerService.orderDetail(prdt_order_no);
-			OrderListDto orderDetail = sellerService.orderDetail(prdt_order_no);
-			m.addAttribute("orderDetail", orderDetail);
-			
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-			
-		}
-		return "redirect:/seller/orderList";
-	}
 	
 	@GetMapping("/refundList")
 	public String refundpage(SearchItem sc, Model m) {
