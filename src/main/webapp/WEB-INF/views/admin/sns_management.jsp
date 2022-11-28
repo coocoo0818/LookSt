@@ -62,7 +62,7 @@
 				<div class="col">
 					<div class="card border-0">
 						<img src="${contextPath}/resources/img/post/${member_management.post_imgDto.post_img_img}" class="card-img-top rounded position-relative" onclick="location.href='${contextPath}/post/mylist'">
-						<span class="position-absolute badge rounded-pill bg-light m-1" data-postNo="${member_management.post_imgDto.post_no}">No.${member_management.post_imgDto.post_no}</span>
+						<span class="position-absolute badge rounded-pill bg-light m-1" data-postNo="${member_management.NPostDto.post_no}">No.${member_management.NPostDto.post_no}</span>
 						<div class="card-body">
 							<div class="row justify-content-start d-flex">
 								<div class="col-3">
