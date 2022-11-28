@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -75,9 +76,15 @@
 		<section class="productCard">
 			<div class="container">
 				<div class="info" data-productNo="${productInfo.product_no}">
-					<h3 class="name">${productInfo.product_kind}</h3>
+					<h3 class="name">
+							<c:if test="${productInfo.product_kind eq 'T'}">TOP</c:if>
+							<c:if test="${productInfo.product_kind eq 'B'}">PANTS</c:if>
+							<c:if test="${productInfo.product_kind eq 'S'}">SHOES</c:if>
+							<c:if test="${productInfo.product_kind eq 'A'}">ACC</c:if>
+							<c:if test="${productInfo.product_kind eq 'K'}">KNIT</c:if>
+					</h3>
 					<h1 class="slogan">${productInfo.product_name}</h1>
-					<p class="price">${productInfo.product_price}원</p>
+					<p class="price"><fmt:formatNumber value="${productInfo.product_price}" pattern="#,###"/>원</p>
 					<div class="attribs">
 						<div class="attrib size" data-productSize="${productInfo.product_kind}">
 							<p class="header">Select Size</p>
@@ -95,6 +102,19 @@
 								<div id="optionColor" name="optionColor"></div>
 						</div>
 					</div>
+					<div class="quantity attribs">
+                            <div class="form-group attrib">
+						      <label for="exampleSelect1" class="form-label mt-4 attrib"></label>
+						      <p class="header">Quantity</p>
+						      <select class="form-select" id="exampleSelect1">
+						        <option>1</option>
+						        <option>2</option>
+						        <option>3</option>
+						        <option>4</option>
+						        <option>5</option>
+						      </select>
+						    </div>
+                        </div>
 					<div class="buttons">
 						<!-- <div class="button">Add to cart</div> -->
 						<div class="button colored buyButton">Buy now</div>

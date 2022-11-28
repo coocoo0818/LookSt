@@ -114,19 +114,12 @@
 		<div class="row row-cols-1 row-cols-md-3 g-4">
 			<c:forEach var="snsTotalLists" items="${snsTotalLists}" varStatus="status">
 				<div class="col">
-					<%-- <c:set var="snsTotalListInfo_" value="snsTotalListInfo1" /> --%>
 					<div class="card border-0">
-						<c:forEach var="snsTotalListInfo" items="${snsTotalListInfo[status.count]}" varStatus="img-status">
-					<%-- ${snsTotalListInfo} --%>
-					<%-- <c:set var="snsTotalListInfo_" value="${snsTotalListInfo}" /> --%>
-					<%-- <c:out value="${snsTotalListInfo_}${status.count}"/> --%>
-					${snsTotalListInfo_.post_imgDto.post_img_img}
-					${snsTotalListInfo1.post_imgDto.post_img_img}
-					${snsTotalListInfo2[status.count].post_imgDto.post_img_img}
-					${snsTotalListInfo3[status.count].post_imgDto.post_img_img}
-					<%-- ${snsTotalListInfo1}
-					${snsTotalListInfo2} --%>
-					<%-- <c:out value="${snsTotalListInfo_}"/>${snsTotalListInfo[${status.count}].post_imgDto.post_img_img} --%>
+						<c:set var="key" value="${status.count}" />
+						<c:forEach var="snsTotalListInfo" items="${snsTotalListInfo['key']}" varStatus="img-status">
+						${snsTotalLists[key][0].post_no}
+						${snsTotalListInfo}
+						${snsTotalListInfo['key']}
 							<img src="${contextPath}/resources/img/post/${snsTotalListInfo.post_imgDto.post_img_img}" class="card-img-top rounded" onclick="location.href='${contextPath}/admin/mylist/?post_no=${snsTotalLists}'">
 							<!-- <div class="card-body"> -->
 								<div class="row justify-content-start d-flex">
