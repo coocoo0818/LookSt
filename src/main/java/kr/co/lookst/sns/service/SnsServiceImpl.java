@@ -36,4 +36,6 @@ public class SnsServiceImpl implements SnsService{
 		return snsProfileDao.followingList(member_id);
 	}
 
+
+
 }

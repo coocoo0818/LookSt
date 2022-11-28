@@ -30,32 +30,33 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import kr.co.lookst.sns.domain.FollowDto;
 import kr.co.lookst.sns.domain.ProfileFeedDto;
 import kr.co.lookst.sns.domain.SnsProfileDto;
+import kr.co.lookst.sns.service.FollowService;
 import kr.co.lookst.sns.service.SnsService;
 
 @Controller
 @RequestMapping("/sns")
 public class SnsController {
 	HttpSession session;
-	
+
 	@Autowired
 	SnsService snsService;
 
-	
+//	@Autowired
+//	FollowService followService;
+
 	@GetMapping("/snsProfile")
-	public String snsProfile(String member_id, Model m,
-			@RequestParam("member_id") String member_nick) {
-		
+	public String snsProfile(String member_id, Model m, @RequestParam("member_id") String member_nick) {
+
 		try {
-			
-			
+
 			SnsProfileDto pro_info = snsService.getinfoselect(member_id);
 			List<ProfileFeedDto> pro_feed = snsService.getProfileFeed(member_id);
 			List<FollowDto> pro_follower = snsService.getFollower(member_id);
 			List<FollowDto> pro_following = snsService.getFollowing(member_id);
-			
+
 //			String login_Id = (String)session.getAttribute("res");
 //			System.out.println(session.getAttribute("res"));
-			
+
 			m.addAttribute("pro_info", pro_info);
 			m.addAttribute("pro_feed", pro_feed);
 			m.addAttribute("pro_follower", pro_follower);
@@ -68,6 +69,16 @@ public class SnsController {
 		}
 		return "sns/snsProfile";
 	}
+
+	@GetMapping("/personalPost")
+	public String personalPost(String member_id, Model m, @RequestParam("member_id") String member_nick) {
+	
+		
+		return "sns/personalPost";
+	}
+
+	@PostMapping("/follow/")
+
 //
 //	@PostMapping("/modify")
 //	public String modify(SnsProfileDto snsProfileDto, Model model, HttpSession session, RedirectAttributes rattr) {
@@ -91,7 +102,6 @@ public class SnsController {
 //			return "/sns/snsProfile";
 //		}
 //	}
-
 
 //
 //		/* 1. 파일 한개만 업로드 하기 */
@@ -132,8 +142,6 @@ public class SnsController {
 //
 //			return "result";
 //		}
-
-	
 
 	@GetMapping("/postUpload")
 	public String postUpload() {
