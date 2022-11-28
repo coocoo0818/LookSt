@@ -2,6 +2,8 @@ package kr.co.lookst.admin;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -292,21 +294,23 @@ public class AdminController {
 	
 	/* sns total list */
 	@RequestMapping(value="/snsTotalList", method={RequestMethod.GET})
-	public String snsTotalList(Model model, Integer post_no) {
+	public String snsTotalList(Model model, Integer post_no, HttpServletRequest request) {
+		int i = 0;
 		try {
 			List<Integer> snsTotalLists = adminService.snsTotalList();
 			model.addAttribute("snsTotalLists", snsTotalLists);
 			System.out.println(snsTotalLists);
-			List<MemMGMDto> snsTotalListCarousel = null;
+			List<MemMGMDto> snsTotalListInfo = null;
 			List<Post_TagDto> postTagInfo = null;
 			for (Integer snsTotalList : snsTotalLists) {
+				i++;
 				System.out.println(snsTotalList);
 				
-				snsTotalListCarousel = adminService.snsTotalListCarousel(snsTotalList);
+				snsTotalListInfo = adminService.snsTotalListCarousel(snsTotalList);
 				postTagInfo = adminService.postTagInfo(snsTotalList);
 				
-				model.addAttribute("snsTotalListCarousel"+snsTotalList, snsTotalListCarousel);
-				model.addAttribute("postTagInfo"+snsTotalList, postTagInfo);
+				model.addAttribute("snsTotalListInfo" + i, snsTotalListInfo);
+				model.addAttribute("postTagInfo" + i, postTagInfo);
 				System.out.println(model);
 			}
 			System.out.println(model);
