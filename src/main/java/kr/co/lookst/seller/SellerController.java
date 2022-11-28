@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import kr.co.lookst.main.domain.PageResolver;
 import kr.co.lookst.main.domain.Prdt_Option;
 import kr.co.lookst.main.domain.SearchItem;
+import kr.co.lookst.seller.domain.MySalesDto;
 import kr.co.lookst.seller.domain.OrderListDto;
 import kr.co.lookst.seller.domain.PrdtListDto;
 import kr.co.lookst.seller.service.SellerService;
@@ -126,24 +127,6 @@ public class SellerController {
 		return "redirect:/seller/orderList";
 	}
 	
-	/* 흠냐흠냐 */
-	@RequestMapping(value="/orderDetail", method={RequestMethod.GET})
-	public String orderDetail(Model m, 
-			@RequestParam("prdt_order_no")Integer prdt_order_no) {
-		System.out.println(prdt_order_no);
-		
-		try {
-			sellerService.orderDetail(prdt_order_no);
-			OrderListDto orderDetail = sellerService.orderDetail(prdt_order_no);
-			m.addAttribute("orderDetail", orderDetail);
-			
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-			
-		}
-		return "redirect:/seller/orderList";
-	}
 	
 	@GetMapping("/refundList")
 	public String refundpage(SearchItem sc, Model m) {
@@ -188,7 +171,22 @@ public class SellerController {
 	}
 	
 	@GetMapping("/mySales")
-	public String adminForm5() {
+	public String mySalespage(Model m) {
+		
+		try {
+			List<MySalesDto> newSalelist = sellerService.newSale();
+			m.addAttribute("newSalelist", newSalelist);
+			List<MySalesDto> newCancellist = sellerService.newCancel();
+			m.addAttribute("newCancellist", newCancellist);
+//			MySalesDto todaySale = sellerService.todaySale();
+//			m.addAttribute("todaySale", todaySale);
+//			System.out.println(todaySale);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+			
+		
 		return "seller/mySales";
 
 	}
