@@ -13,6 +13,7 @@ import kr.co.lookst.post.domain.PostDto;
 import kr.co.lookst.post.domain.Post_imgDto;
 import kr.co.lookst.post.domain.ProdInfoDto;
 import kr.co.lookst.post.domain.TpostDto;
+import kr.co.lookst.post.domain.OrderPagePrdtDto;
 import kr.co.lookst.post.domain.post_com_tagDto;
 import kr.co.lookst.post.domain.snsPrdtImgDto;
 import kr.co.lookst.post.domain.sns_Main_ImgDto;
@@ -83,8 +84,10 @@ public class PostController {
 	}
 
 	@GetMapping("/orderFormpage")
-	public String orderFormpage(Model m) {
+	public String orderFormpage(OrderPagePrdtDto orderPagePrdtDto, Model m) {
 		try {
+			List<OrderPagePrdtDto> orderPagePrdt = postService.orderPagePrdt(null);
+			m.addAttribute("orderPagePrdt", orderPagePrdt);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -92,15 +95,6 @@ public class PostController {
 		return "/post/orderFormpage";
 	}
 	
-	@GetMapping("/order_sheet")
-	public String order_sheet(Model m) {
-		try {
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return "/post/order_sheet";
-	}
-
+	 
 
 }
