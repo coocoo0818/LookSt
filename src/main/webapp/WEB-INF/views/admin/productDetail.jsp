@@ -12,20 +12,49 @@
 <link rel="stylesheet" href="${contextPath}/resources/admin/css/productDetail.css">
 <script type="text/javascript">
 	$(document).ready(function() {
-		
-		
+	
 		$("#buyNow").click(function(){
-			var product_no1 =  $('.productSize.activ').attr('value');
-			var product_no2 =  $('.optionColor.activ').attr('value');
-			var product_no3 = $("#exampleSelect1 option:selected").val();
-			alert(product_no1)
-			alert(product_no2)
-			alert(product_no3)
-			if(product_no1 != ''){
-				alert("입력해");
+			let formData = new FormData();
+			formData.append('product_no',product_no);
+			formData.append('prdt_option_size',prdt_option_size);
+			formData.append('prdt_option_color',prdt_option_color);
+			formData.append('prdt_order_quan',prdt_order_quan);
+			
+			var product_no = ${productInfo.product_no}
+			var prdt_option_size = $('.productSize.activ').attr('value');
+			var prdt_option_color = $('.optionColor.activ').attr('value');
+			var prdt_order_quan = $("#exampleSelect1 option:selected").val();
+			/* 색상 사이즈유효성 체크 */
+			if(prdt_option_size == "undefined" || prdt_option_size == null || prdt_option_size == ""){
+				alert("사이즈를 체크해주세요.")
+			} else if (prdt_option_color == "undefined" || prdt_option_color == null || prdt_option_color == "") {
+				alert("색상을 체크해주세요.")
 			}
-			$("#frm").attr("action", "insertAf.jsp"); // attribute setting
-			$("#frm").submit();
+
+			fetch('${contextPath}/post/orderFormpage',{
+				method:'GET',
+				body : formData
+			});
+			$.ajax({
+				type: 'get',   //get방식으로 명시
+				url : '${contextPath}/post/orderFormpage',  //이동할 jsp 파일 주소
+				data:{
+						product_no : product_no,
+						prdt_option_size : prdt_option_size,
+						prdt_option_color : prdt_option_color,
+						prdt_order_quan : prdt_order_quan
+				},   
+				success: function(data){   //데이터 주고받기 성공했을 경우 실행할 결과
+		            //function(data)를 쓰게 되면 전달받은 데이터가 data안에 담아서 들어오게 된다. 
+					alert(data);   
+					location.replace('${contextPath}/post/orderFormpage') 
+				},
+				error:function(){   //데이터 주고받기가 실패했을 경우 실행할 결과
+					alert('실패');
+				}
+			})
+
+
 		})
 		
 		let toHtml = function(prdtOptions) {
