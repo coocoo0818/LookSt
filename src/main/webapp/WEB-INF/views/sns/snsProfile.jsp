@@ -10,60 +10,94 @@
 <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 
 <style type="text/css">
-.profileEdit_Btn {
-	margin-left: 100px;
-}
-
-.pro_img_box {
-	width: 300px;
-	height: 300px;
-	border-radius: 70%;
-}
-
-#profile_img {
-	width: 300px;
-	height: 300px;
-	border-radius: 70%;
-	object-fit: cover;
-}
-
-.feed_img {
-	width: 100%;
-	height: 400px;
-	object-fit: cover;
-}
-
-@media ( max-width : 576px;) {
-}
+	.profileEdit_Btn {
+		margin-left: 100px;
+	}
+	
+	.pro_img_box {
+		width: 300px;
+		height: 300px;
+		border-radius: 70%;
+	}
+	
+	#profile_img {
+		width: 300px;
+		height: 300px;
+		border-radius: 70%;
+		object-fit: cover;
+	}
+	
+	.feed_img {
+		width: 100%;
+		height: 400px;
+		object-fit: cover;
+	}
+	
+	
+	@media ( max-width : 576px;) {
+	}
+	
+	.follow_thmbnail {
+		width: 70px;
+		height: 70px;
+		object-fit: cover;
+		margin-right: 15px;
+		border: 1px solid #E2E2E2;
+		padding: 1%;
+	}
 </style>
 
 <script type="text/javascript">
-	// 팔로잉 프로필화면 이동
+	
 	$(document).ready(function() {
+		// 팔로잉 프로필화면 이동
 		$('.followingIDbox').on('click', function() {
 			let member_id = $(this).children().attr("data-member_id")
 			alert(member_nick)
 			location.href = '${contextPath}/sns/snsProfile/?member_id='+member_id;
 		});
-	});
-	
-	// 팔로워 프로필화면 이동
-	$(document).ready(function() {
+		
+		// 팔로워 프로필화면 이동
 		$('.followerIDbox').on('click', function() {
 			let member_id = $(this).children().attr("data-member_id")
 			alert(member_nick)
 			location.href = '${contextPath}/sns/snsProfile/?member_id='+member_id;
 		});
-	});
-	
-	// 개인 피드 리스트 이동
-	$(document).ready(function() {
+		
+		// 개인 피드 리스트 이동
 		$('.Personal_post').on('click', function() {
 			let member_id = $(this).children().attr("data-member_id")
 			alert(member_nick)
 			location.href = '${contextPath}/sns/personalPost/?member_id='+member_id;
 		});
+		
+		/* $('.authModify').click(function() {
+			let member_id = $(this).parent().attr("data-memberid") // <li>태그는 <button>의 부모임.
+			let index = $(this).parent().attr("data-index")
+			let auth = document.getElementById("auth_auth" + index).value;
+
+			$.ajax({
+				type : 'post',
+				url : '${contextPath}/admin/authModify',
+				data : {
+						member_id : member_id,
+						auth : auth
+				},
+				success : function(data) {
+					alert("닉네임이 수정되었습니다.")
+					location.reload()
+				},
+				error : function() {alert("error")}		//에러가 발생했을 때 호출될 함수
+			})
+		}) */
+		
+		
+		
+		
+		
 	});
+	
+	
 </script>
 
 <title>snsProfile</title>
@@ -98,8 +132,7 @@
 					<div class="card-body">
 						<!-- nickname -->
 						<div class="nickname fw-bold fs-1 mb-md-4">${pro_info.member_nick }
-
-							<c:if test="${'ezen1@naver.com' eq pro_info.member_id }">
+							<c:if test="${login_Id == pro_info.member_id }">
 								<!-- 프로필 수정-->
 								<button type="button"
 									class="profileEdit_Btn btn btn-primary fs-4 ms-auto"
@@ -115,7 +148,7 @@
 								</button>
 							</c:if>
 
-							<c:if test="${'ezen1@naver.com' ne pro_info.member_id }">
+							<c:if test="${login_Id != pro_info.member_id }">
 								<button type="button"
 									class="follow_Btn btn btn-primary fs-4 ms-auto">팔로우</button>
 							</c:if>
@@ -163,7 +196,7 @@
 						<div class="col-sm-4 mb-3">
 							<div class="card" style="border: none;">
 								<div class="post_img card-body">
-									<a href="${contextPath}/sns/personalPost/?member_id=${pro_feed.member_id}" class="Personal_post">
+									<a href="${contextPath}/sns/personalPost/?member_id=${pro_feed.member_id}" class="Personal_post" >
 										<img class="feed_img"
 											src="${pageContext.request.contextPath }/resources/img/post/${pro_feed.post_img_img}"
 											alt="...">
@@ -194,12 +227,18 @@
 						<label for="formFile" class="form-label">프로필 이미지 선택</label> <input
 							class="form-control" type="file" id="formFile">
 					</div>
+					
+					
+					<form commandName="nickMod" method="post">
 					<div class="input-group mb-3">
 						<span class="input-group-text" id="basic-addon1">닉네임</span> <input
 							type="text" class="form-control"
 							placeholder="${pro_info.member_nick }" aria-label="Username"
 							aria-describedby="basic-addon1">
 					</div>
+					</form>
+					
+					
 					<div class="input-group">
 						<span class="input-group-text">자기소개 글</span>
 						<textarea class="form-control"
@@ -208,9 +247,7 @@
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
-						data-bs-dismiss="modal">취소</button>
-					<button type="button" class="btn btn-primary">저장</button>
+					<input type="submit" class="submit btn btn-primary" value="저장">
 				</div>
 			</div>
 		</div>
@@ -241,11 +278,12 @@
 							<c:forEach var="pro_following" items="${pro_following }"
 								varStatus="following_status">
 								<br/>
-									<li class="fs-4" style="list-style: none;" data-memberID="${pro_following.member_id}">
-										<a href="${contextPath}/sns/snsProfile/?member_id=${pro_following.member_id}" class="followingIDbox">
-											<span>${pro_following.member_nick }</span>
-										</a>
-									</li>
+								<li class="fs-4" style="list-style: none;" data-memberID="${pro_following.member_id}">
+									<a href="${contextPath}/sns/snsProfile/?member_id=${pro_following.member_id}" class="followingIDbox" style="text-decoration-line: none;">
+										<img src="${pageContext.request.contextPath }/resources/img/profile/${pro_following.profile_img}" class="follow_thmbnail rounded-circle" alt="...">
+										<span>${pro_following.member_nick }</span>
+									</a>
+								</li>
 							</c:forEach>
 						</c:if>
 					</ul>
@@ -281,7 +319,8 @@
 							varStatus="follower_status">
 							<br/>
 								<li class="fs-4" style="list-style: none;">							
-									<a href="${contextPath}/sns/snsProfile/?member_id=${pro_follower.member_id}" class="followerIDbox">
+									<a href="${contextPath}/sns/snsProfile/?member_id=${pro_follower.member_id}" class="followerIDbox" style="text-decoration-line: none;">
+										<img src="${pageContext.request.contextPath }/resources/img/profile/${pro_follower.profile_img}" class="follow_thmbnail rounded-circle" alt="...">
 										<span>${pro_follower.member_nick }</span>
 									</a>
 								</li>

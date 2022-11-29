@@ -16,26 +16,43 @@ public class SnsServiceImpl implements SnsService{
 	@Autowired
 	SnsProfileDao snsProfileDao;
 	
+	//프로필정보
 	@Override
 	public SnsProfileDto getinfoselect(String member_id) throws Exception {
 		return snsProfileDao.infoselect(member_id);
 	}
-
+	// 프로필 피드
 	@Override
 	public List<ProfileFeedDto> getProfileFeed(String member_id) throws Exception {
 		return snsProfileDao.profileFeed(member_id);
 	}
-
+	// 팔로워 리스트
 	@Override
 	public List<FollowDto> getFollower(String member_id) throws Exception {
 		return snsProfileDao.followerList(member_id);
 	}
-
+	// 팔로잉 리스트
 	@Override
 	public List<FollowDto> getFollowing(String member_id) throws Exception {
 		return snsProfileDao.followingList(member_id);
 	}
+	//팔로우
+	@Override
+	public int doFollow(String member_id) throws Exception {
+		return snsProfileDao.follow(member_id);
+	}
+	//언팔로우
+	@Override
+	public int doUnFollow(String following) throws Exception {
+		return snsProfileDao.unfollow(following);
+	}
+	// 닉네임 수정
+	@Override
+	public int nickNameMod(String member_id, String member_nick) throws Exception {
+		return snsProfileDao.nickModify(member_id, member_nick);
+	}
 
+	
 
 
 }

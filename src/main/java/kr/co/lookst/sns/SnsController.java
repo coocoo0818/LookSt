@@ -19,8 +19,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -45,23 +47,24 @@ public class SnsController {
 //	FollowService followService;
 
 	@GetMapping("/snsProfile")
-	public String snsProfile(String member_id, Model m, @RequestParam("member_id") String member_nick) {
+	public String snsProfile(String member_id, Model m, @RequestParam("member_id") String member_nick,
+			HttpServletRequest request) {
 
+		HttpSession session = request.getSession(); 
+	
 		try {
-
+			String login_id = (String)session.getAttribute("res");
+			
 			SnsProfileDto pro_info = snsService.getinfoselect(member_id);
 			List<ProfileFeedDto> pro_feed = snsService.getProfileFeed(member_id);
 			List<FollowDto> pro_follower = snsService.getFollower(member_id);
 			List<FollowDto> pro_following = snsService.getFollowing(member_id);
 
-//			String login_Id = (String)session.getAttribute("res");
-//			System.out.println(session.getAttribute("res"));
-
 			m.addAttribute("pro_info", pro_info);
 			m.addAttribute("pro_feed", pro_feed);
 			m.addAttribute("pro_follower", pro_follower);
 			m.addAttribute("pro_following", pro_following);
-//			m.addAttribute("login_Id", login_Id);
+			m.addAttribute("login_Id", login_id);
 			System.out.println(m);
 
 		} catch (Exception e) {
@@ -72,12 +75,28 @@ public class SnsController {
 
 	@GetMapping("/personalPost")
 	public String personalPost(String member_id, Model m, @RequestParam("member_id") String member_nick) {
-	
-		
+
 		return "sns/personalPost";
 	}
+	
 
-	@PostMapping("/follow/")
+	
+//	// 닉네임 수정 
+//	@RequestMapping(value="/nickNameMod", method={RequestMethod.POST})
+//	public String memberNickMod(Model model,  
+//			@RequestParam("member_id") String member_id,
+//			@RequestParam("member_nick") String member_nick) {
+//		System.out.println(member_id);
+//		System.out.println(member_nick);
+//		
+//		try {
+//			snsService.nickNameMod(member_id, member_nick);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return "redirect:/sns/snsProfile/?member_id="+member_id;
+//	}
+//
 
 //
 //	@PostMapping("/modify")
