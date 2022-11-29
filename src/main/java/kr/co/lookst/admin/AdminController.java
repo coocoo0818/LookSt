@@ -305,10 +305,10 @@ public class AdminController {
 			for (Integer snsTotalList : snsTotalLists) {
 				i++;
 				System.out.println(snsTotalList);
-				
+
 				snsTotalListInfo = adminService.snsTotalListCarousel(snsTotalList);
 				postTagInfo = adminService.postTagInfo(snsTotalList);
-				
+
 				model.addAttribute("snsTotalListInfo" + i, snsTotalListInfo);
 				model.addAttribute("postTagInfo" + i, postTagInfo);
 				System.out.println(model);

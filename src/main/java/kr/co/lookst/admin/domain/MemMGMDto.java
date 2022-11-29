@@ -6,8 +6,14 @@ import kr.co.lookst.main.domain.NBoardDto;
 import kr.co.lookst.main.domain.NPostDto;
 import kr.co.lookst.main.domain.NSellerDto;
 import kr.co.lookst.post.domain.Post_imgDto;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
 public class MemMGMDto {
 
@@ -30,33 +36,5 @@ public class MemMGMDto {
 	private NSellerDto nSellerDto;
 	private NPostDto nPostDto;
 	
-	public MemMGMDto() {
-	}
-
-	public MemMGMDto(String member_id, String member_pw, String member_nick, String member_name, String member_phon,
-			String member_addr, String member_addr2, String member_zip, Date member_since, Date member_updt,
-			boolean member_check, String member_type, String profile_img, String mem_auth_auth, Post_imgDto post_imgDto,
-			NBoardDto nBoardDto, NSellerDto nSellerDto, NPostDto nPostDto) {
-		super();
-		this.member_id = member_id;
-		this.member_pw = member_pw;
-		this.member_nick = member_nick;
-		this.member_name = member_name;
-		this.member_phon = member_phon;
-		this.member_addr = member_addr;
-		this.member_addr2 = member_addr2;
-		this.member_zip = member_zip;
-		this.member_since = member_since;
-		this.member_updt = member_updt;
-		this.member_check = member_check;
-		this.member_type = member_type;
-		this.profile_img = profile_img;
-		this.mem_auth_auth = mem_auth_auth;
-		this.post_imgDto = post_imgDto;
-		this.nBoardDto = nBoardDto;
-		this.nSellerDto = nSellerDto;
-		this.nPostDto = nPostDto;
-	}
-
 	
 }

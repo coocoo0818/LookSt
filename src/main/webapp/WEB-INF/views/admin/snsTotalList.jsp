@@ -116,10 +116,9 @@
 				<div class="col">
 					<div class="card border-0">
 						<c:set var="key" value="${status.count}" />
-						<c:forEach var="snsTotalListInfo" items="${snsTotalListInfo['key']}" varStatus="img-status">
-						${snsTotalLists[key][0].post_no}
-						${snsTotalListInfo}
-						${snsTotalListInfo['key']}
+						<c:forEach var="snsTotalListInfo" items="${snsTotalListInfo2}" varStatus="img-status">
+						${snsTotalListInfo1}
+						${snsTotalListInfo.post_imgDto.post_img_img}
 							<img src="${contextPath}/resources/img/post/${snsTotalListInfo.post_imgDto.post_img_img}" class="card-img-top rounded" onclick="location.href='${contextPath}/admin/mylist/?post_no=${snsTotalLists}'">
 							<!-- <div class="card-body"> -->
 								<div class="row justify-content-start d-flex">

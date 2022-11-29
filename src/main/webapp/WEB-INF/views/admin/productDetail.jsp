@@ -8,21 +8,36 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
 <title>member management</title>
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <link rel="stylesheet" href="${contextPath}/resources/admin/css/productDetail.css">
 <script type="text/javascript">
 	$(document).ready(function() {
-
+		
+		
+		$("#buyNow").click(function(){
+			var product_no1 =  $('.productSize.activ').attr('value');
+			var product_no2 =  $('.optionColor.activ').attr('value');
+			var product_no3 = $("#exampleSelect1 option:selected").val();
+			alert(product_no1)
+			alert(product_no2)
+			alert(product_no3)
+			if(product_no1 != ''){
+				alert("입력해");
+			}
+			$("#frm").attr("action", "insertAf.jsp"); // attribute setting
+			$("#frm").submit();
+		})
+		
 		let toHtml = function(prdtOptions) {
 			let tmp = "<div class='options'>"
 			prdtOptions.forEach(function(prdtOption, index) {
-				tmp += '<div class="option" id = "color" style="width:25px; color: ' + prdtOption.prdt_option_color + ';"></div>'
+				tmp += '<div class="option optionColor" id = "color" value="'+prdtOption.prdt_option_color+'"style="width:25px; color:' + prdtOption.prdt_option_color + ';"></div>'
 			})
 
 			return tmp += "</div>"
 		}
 		$(".productSize").click(function() { 
-			var product_no = $(this).parent().prev().parent().parent().prev().prev().prev().parent().attr("data-productNo") // <li>태그는 <button>의 부모임.
+			var product_no = $(this).attr("data-productNo") // <li>태그는 <button>의 부모임.
 			var prdt_option_size = $(this).attr("data-prdt-size") // <li>태그는 <button>의 부모임.
 
 			const encoded = encodeURI("${contextPath}/admin/productColor/")
@@ -75,31 +90,30 @@
 	<div class="container">
 		<section class="productCard">
 			<div class="container">
-				<div class="info" data-productNo="${productInfo.product_no}">
-					<h3 class="name">
+				<div class="info">
+				<form action="${contextPath}/post/orderFormpage" method="post">
+				<p class="header" name="product_no">${productInfo.product_no}</p>
+					<h3 class="name" name="product_kind">
 							<c:if test="${productInfo.product_kind eq 'T'}">TOP</c:if>
 							<c:if test="${productInfo.product_kind eq 'B'}">PANTS</c:if>
 							<c:if test="${productInfo.product_kind eq 'S'}">SHOES</c:if>
 							<c:if test="${productInfo.product_kind eq 'A'}">ACC</c:if>
 							<c:if test="${productInfo.product_kind eq 'K'}">KNIT</c:if>
 					</h3>
-					<h1 class="slogan">${productInfo.product_name}</h1>
-					<p class="price"><fmt:formatNumber value="${productInfo.product_price}" pattern="#,###"/>원</p>
+					<h1 class="slogan" name="product_name">${productInfo.product_name}</h1>
+					<p class="price" name ="product_price"><fmt:formatNumber value="${productInfo.product_price}" pattern="#,###"/>원</p>
 					<div class="attribs">
-						<div class="attrib size" data-productSize="${productInfo.product_kind}">
+						<div class="attrib size" name ="product_kind">
 							<p class="header">Select Size</p>
-							<div class="options">
-								<c:forEach var="productSize" items="${productSize}">
-									<div class="option productSize" data-prdt-size="${productSize.prdt_option_size}">${productSize.prdt_option_size}</div>
+							<div class="options" id="options">
+								<c:forEach var="productSize" items="${productSize}" varStatus="sizeStatus">
+									<div class="option productSize" name="prdt_option_size" data-productNo="${productInfo.product_no}" data-prdt-size="${productSize.prdt_option_size}" id="prdt_option_size" value="${productSize.prdt_option_size}">${productSize.prdt_option_size}</div>
 								</c:forEach>
 							</div>
 						</div>
 						<div class="attrib color">
 							<p class="header">Select Color</p>
-							<!-- <div class="options">
-								<div id="optionColor" name="optionColor" class="option" style="color: #ef525e;" ></div>
-							</div> -->
-								<div id="optionColor" name="optionColor"></div>
+							<div id="optionColor" name="prdt_option_color"></div>
 						</div>
 					</div>
 					<div class="quantity attribs">
@@ -107,18 +121,19 @@
 						      <label for="exampleSelect1" class="form-label mt-4 attrib"></label>
 						      <p class="header">Quantity</p>
 						      <select class="form-select" id="exampleSelect1">
-						        <option>1</option>
-						        <option>2</option>
-						        <option>3</option>
-						        <option>4</option>
-						        <option>5</option>
+						        <option name="Quantity">1</option>
+						        <option name="Quantity">2</option>
+						        <option name="Quantity">3</option>
+						        <option name="Quantity">4</option>
+						        <option name="Quantity">5</option>
 						      </select>
 						    </div>
                         </div>
 					<div class="buttons">
 						<!-- <div class="button">Add to cart</div> -->
-						<div class="button colored buyButton">Buy now</div>
+						<div class="button colored buyButton" id="buyNow">Buy now</div>
 					</div>
+				</form>
 				</div>
 				<div class="colorLayer"></div>
 				<div class="preview">
