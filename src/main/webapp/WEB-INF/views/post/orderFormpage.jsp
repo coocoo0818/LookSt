@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
@@ -245,7 +245,24 @@ header .count {float: right; color: #333333;}
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/fix/header.jsp"%>
+	<script>
+	function quanCheck(){
+		alert(document.getElementById('quan').value())
+
+	}
+	
+	</script>
+	
 	<script type="text/javascript">
+	
+	$('#checkoutbtn').click(function(){
+		var new_form = $('<form></form>');
+		new_form.attr("firstName",$('#firstName').val());
+		new_form.attr("action","<c:url value='lookst/post/orderFormpage'></c:url>")
+		new_form.attr("method","post");
+		new_form.submit();
+	})
+	
 	function Header({ itemCount }) {
 		  return (
 		    <header className="container">
@@ -395,8 +412,7 @@ header .count {float: right; color: #333333;}
 		  const CLONE_PRODUCTS = JSON.parse(JSON.stringify(PRODUCTS));
 		  const [products, setProducts] = React.useState(CLONE_PRODUCTS);
 		  const [promoCode, setPromoCode] = React.useState("");
-		  const [discountPercent, setDiscountPercent] = React.useState(0);
-
+		  const [discountPercent, setDiscountPercent] = React.useState(0); 
 		  const itemCount = products.reduce((quantity, product) => {
 		    return quantity + +product.quantity;
 		  }, 0);
@@ -544,33 +560,38 @@ header .count {float: right; color: #333333;}
       <li>Home</li>
       <li>Shopping Cart</li>
     </ul>
-    <span class="count">{{ itemCount }} items in the bag</span>
+    <!-- <span class="count">{{ itemCount }} items in the bag</span> -->
   </header>
   <!-- End Header -->
-
+  
   <!-- Product List -->
   <section class="container">
     <div v-if="products.length > 0">
       <ul class="products">
       <li class="row" v-for="(product, index) in products">
+      
         <div class="col left">
+          <c:forEach var="orderPagePrdt" items="${orderPagePrdt}">
           <div class="thumbnail">
             <a href="#">
-             <img src="${contextPath}/resources/img/product/Jordan_1.png" style="height:150px; weight: 150px;">
+             <img src="${contextPath}/resources/img/product/${orderPagePrdt.post_tag_img}" style="height:150px; weight: 150px;">
             </a>
           </div>
-          <div class="detail">
-            <div class="name"><a href="#">Jordan 1 x Travis Scott x Fragment Retro Low OG SP Military Blue</a></div>
-            <div class="description">DM7866-140 / 270size </div>
-            <div class="price">1,983,000원</div>
-          </div>
+          </c:forEach>
+          <c:forEach var="orderPagePrdt" items="${orderPagePrdt}">
+	          <div class="detail">
+	            <div class="name"><a href="#">${orderPagePrdt.post_tag_name}</a></div>
+	            <div class="description">${orderPagePrdt.product_info}</div>
+	            <div class="price" id="prdt_price" value="${orderPagePrdt.post_tag_price}">${orderPagePrdt.post_tag_price}원</div>
+	          </div>
+          </c:forEach>
         </div>
-
+	
         <div class="col right">
-          <div class="quantity">
-            <input type="number" class="quantity" step="1" :value="product.quantity" @input="updateQuantity(index, $event)" @blur="checkQuantity(index, $event)" />
-          </div>
-          
+           <div class="quantity">
+            <input type="number" id="quan11" step="1" onkeyup="quanCheck()"/>
+           </div>
+           
           <div class="remove">
             <svg @click="removeItem(index)" version="1.1" class="close" xmlns="//www.w3.org/2000/svg" xmlns:xlink="//www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 60 60" enable-background="new 0 0 60 60" xml:space="preserve"><polygon points="38.936,23.561 36.814,21.439 30.562,27.691 24.311,21.439 22.189,23.561 28.441,29.812 22.189,36.064 24.311,38.186 30.562,31.934 36.814,38.186 38.936,36.064 32.684,29.812"></polygon></svg>
           </div>
@@ -602,29 +623,32 @@ header .count {float: right; color: #333333;}
               <h6 class="my-0">금액</h6>
               <small class="text-muted">Brief description</small>
             </div>
-            <span class="text-muted">$12</span>
+            <c:forEach var="orderPagePrdt" items="${orderPagePrdt}">
+            <span class="text-muted">${orderPagePrdt.post_tag_price}원</span>
+            </c:forEach>
           </li>
           <li class="list-group-item d-flex justify-content-between lh-sm">
             <div>
               <h6 class="my-0">수량</h6>
               <small class="text-muted">Brief description</small>
             </div>
-            <span class="text-muted">$8</span>
+            <span class="text-muted quantity">₩8</span>
           </li>
           <li class="list-group-item d-flex justify-content-between lh-sm">
             <div>
-              <h6 class="my-0">VAT</h6>
+              <h6 class="my-0">배송비</h6>
               <small class="text-muted">Brief description</small>
             </div>
-            <span class="text-muted">$5</span>
+            <span class="text-muted">₩3,000</span>
           </li>
           <li class="list-group-item d-flex justify-content-between">
             <span>총 결제액</span>
-            <strong>$20</strong>
+            <strong>₩20</strong>
           </li>
         </ul>
-        <button class="w-100 btn btn-primary btn-lg" type="submit">Continue to checkout</button>
+        <input type="button" id="checkoutbtn" class="w-100 btn btn-primary btn-lg" value="Continue to checkout"/>
       </div>
+      
       <div class="col-md-7 col-lg-8">
         <h4 class="mb-3">주문자 정보</h4>
         <form class="needs-validation" novalidate="">
@@ -655,9 +679,8 @@ header .count {float: right; color: #333333;}
                 Please enter a valid email address for shipping updates.
               </div>
             </div>
-
             <div class="col-12">
-            	<label for="address" class="form-label">배송지</label>
+            	<label for="address" class="form-label"><strong>배송지</strong></label>
             		<input type="button" class="btn btn-light" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" ><br>
             		<div>
             			<input type="text" class="form-control" id="sample6_postcode" placeholder="우편번호"><br>
@@ -677,10 +700,10 @@ header .count {float: right; color: #333333;}
             </div>
 
             <div class="col-12">
-              <label for="address2" class="form-label">배송메세지<span class="text-muted"></span></label>
+              <label for="address2" class="form-label"><strong>배송메세지</strong><span class="text-muted"></span></label>
               <input type="text" class="form-control" id="address2" placeholder="메세지를 남겨주세요">
             </div>
-
+		
             
 
           <hr class="my-4">
@@ -692,7 +715,7 @@ header .count {float: right; color: #333333;}
 
           <div class="form-check">
             <input type="checkbox" class="form-check-input" id="save-info">
-            <label class="form-check-label" for="save-info">Save this information for next time</label>
+            <label class="form-check-label" for="save-info">배송지 정보 기억하기</label>
           </div>
 
           <hr class="my-4">
@@ -709,44 +732,8 @@ header .count {float: right; color: #333333;}
               <label class="form-check-label" for="debit">무통장입금</label>
             </div>
           </div>
-
-          <div class="row gy-3">
-            <div class="col-md-6">
-              <label for="cc-name" class="form-label">Name on card</label>
-              <input type="text" class="form-control" id="cc-name" placeholder="" required="">
-              <small class="text-muted">Full name as displayed on card</small>
-              <div class="invalid-feedback">
-                Name on card is required
-              </div>
-            </div>
-
-            <div class="col-md-6">
-              <label for="cc-number" class="form-label">Credit card number</label>
-              <input type="text" class="form-control" id="cc-number" placeholder="" required="">
-              <div class="invalid-feedback">
-                Credit card number is required
-              </div>
-            </div>
-
-            <div class="col-md-3">
-              <label for="cc-expiration" class="form-label">Expiration</label>
-              <input type="text" class="form-control" id="cc-expiration" placeholder="" required="">
-              <div class="invalid-feedback">
-                Expiration date required
-              </div>
-            </div>
-
-            <div class="col-md-3">
-              <label for="cc-cvv" class="form-label">CVV</label>
-              <input type="text" class="form-control" id="cc-cvv" placeholder="" required="">
-              <div class="invalid-feedback">
-                Security code required
-              </div>
-            </div>
-          </div>
-
           <hr class="my-4">
-
+		 
         </form>
       </div>
     </div>
