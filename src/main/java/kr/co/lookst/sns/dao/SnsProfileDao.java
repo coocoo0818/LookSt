@@ -14,20 +14,20 @@ public interface SnsProfileDao {
 	// 프로필 피드
 	List<ProfileFeedDto> profileFeed(String member_id) throws Exception;
 	
-	// 팔로워 리스트
-	List<FollowDto> followerList(String member_id) throws Exception;
-	
 	// 팔로잉 리스트
 	List<FollowDto> followingList(String member_id) throws Exception;
 	
+	// 팔로워 리스트
+	List<FollowDto> followerList(String member_id) throws Exception;
+	
 	// 팔로우
-	int follow(String member_id);
+	int follow(String member_id, String following);
 	
 	// 언팔로우
-	int unfollow(String following);
+	int unfollow(String member_id, String following);
 	
 	// 팔로우 유무
-	int isFollow(FollowDto fd);
+	int isFollow(String member_id, String following);
 	
 	// 탈퇴 시 팔로우 삭제
 	int deleteUserAllFollow(String member_id);

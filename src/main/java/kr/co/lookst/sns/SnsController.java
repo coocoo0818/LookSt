@@ -29,10 +29,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import kr.co.lookst.sns.dao.SnsProfileDao;
 import kr.co.lookst.sns.domain.FollowDto;
 import kr.co.lookst.sns.domain.ProfileFeedDto;
 import kr.co.lookst.sns.domain.SnsProfileDto;
-import kr.co.lookst.sns.service.FollowService;
 import kr.co.lookst.sns.service.SnsService;
 
 @Controller
@@ -42,6 +42,9 @@ public class SnsController {
 
 	@Autowired
 	SnsService snsService;
+	
+	@Autowired
+	SnsProfileDao snsProfileDao;
 
 //	@Autowired
 //	FollowService followService;
@@ -50,21 +53,31 @@ public class SnsController {
 	public String snsProfile(String member_id, Model m, @RequestParam("member_id") String member_nick,
 			HttpServletRequest request) {
 
-		HttpSession session = request.getSession(); 
-	
+		HttpSession session = request.getSession();
+
 		try {
-			String login_id = (String)session.getAttribute("res");
-			
+			String login_id = (String) session.getAttribute("res");
+
 			SnsProfileDto pro_info = snsService.getinfoselect(member_id);
 			List<ProfileFeedDto> pro_feed = snsService.getProfileFeed(member_id);
 			List<FollowDto> pro_follower = snsService.getFollower(member_id);
 			List<FollowDto> pro_following = snsService.getFollowing(member_id);
-
+			int checkFollow = snsService.followCheck(login_id, member_id);
+			/*
+			 * int follow = snsService.doFollow(login_id, member_id); 
+			 * int unfollow = snsService.doUnFollow(login_id, member_id);
+			 */
+			
+			System.out.println(checkFollow);
+			System.out.println("로그인아이디" + login_id);
+			System.out.println("프로필아이디" + member_id);
 			m.addAttribute("pro_info", pro_info);
 			m.addAttribute("pro_feed", pro_feed);
 			m.addAttribute("pro_follower", pro_follower);
 			m.addAttribute("pro_following", pro_following);
 			m.addAttribute("login_Id", login_id);
+			m.addAttribute("checkFollow", checkFollow);
+			
 			System.out.println(m);
 
 		} catch (Exception e) {
@@ -74,13 +87,26 @@ public class SnsController {
 	}
 
 	@GetMapping("/personalPost")
-	public String personalPost(String member_id, Model m, @RequestParam("member_id") String member_nick) {
+	public String personalPost() {
 
 		return "sns/personalPost";
 	}
-	
-
-	
+	/*
+	 * @PostMapping("follow/{member_id)") public String follow(String member_id,
+	 * Model m, @RequestParam("member_id") String member_nick, HttpServletRequest
+	 * request) {
+	 * 
+	 * HttpSession session = request.getSession(); String login_id = (String)
+	 * session.getAttribute("res");
+	 * 
+	 * try { int checkFollow = snsService.followCheck(login_id, member_id);
+	 * 
+	 * m.addAttribute("checkFollow", checkFollow); int follow =
+	 * snsService.doFollow(login_id, member_id); System.out.println(checkFollow); }
+	 * catch (Exception e) { e.printStackTrace(); }
+	 * 
+	 * return "FollowOk"; }
+	 */
 //	// 닉네임 수정 
 //	@RequestMapping(value="/nickNameMod", method={RequestMethod.POST})
 //	public String memberNickMod(Model model,  
