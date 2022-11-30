@@ -306,4 +306,19 @@ public class AdminController {
 		}
 		return "/admin/snsTotalList";
 	}
+	
+	/* sns snsSelectTotalList list */
+	@RequestMapping(value="/snsSelectTotalList", method={RequestMethod.GET})
+	public String snsSelectTotalList(Model model, Integer post_no, HttpServletRequest request) {
+		try {
+			/* sns snsSelectTotalList list */
+			List<MemMGMDto> snsTopList = adminService.snsTopList();
+			model.addAttribute("snsTopList", snsTopList);
+			System.out.println(model);
+			/* sns snsSelectTotalList list */
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "/admin/snsTotalList";
+	}
 }
