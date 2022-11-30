@@ -54,7 +54,7 @@
     <div class="collapse navbar-collapse" id="navbarColor03">
 	    <ul class="navbar-nav ms-auto">
         <li class="nav-item">
-          <a class="nav-link" href="${contextPath}/post/sns_list">SNS
+          <a class="nav-link" href="${contextPath}/admin/snsTotalList">SNS
             <span class="visually-hidden">(current)</span>
           </a>
         </li>

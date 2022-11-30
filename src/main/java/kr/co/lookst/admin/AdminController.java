@@ -295,31 +295,15 @@ public class AdminController {
 	/* sns total list */
 	@RequestMapping(value="/snsTotalList", method={RequestMethod.GET})
 	public String snsTotalList(Model model, Integer post_no, HttpServletRequest request) {
-		int i = 0;
 		try {
-			List<Integer> snsTotalLists = adminService.snsTotalList();
-			model.addAttribute("snsTotalLists", snsTotalLists);
-			System.out.println(snsTotalLists);
-			List<MemMGMDto> snsTotalListInfo = null;
-			List<Post_TagDto> postTagInfo = null;
-			for (Integer snsTotalList : snsTotalLists) {
-				i++;
-				System.out.println(snsTotalList);
-
-				snsTotalListInfo = adminService.snsTotalListCarousel(snsTotalList);
-				postTagInfo = adminService.postTagInfo(snsTotalList);
-
-				model.addAttribute("snsTotalListInfo" + i, snsTotalListInfo);
-				model.addAttribute("postTagInfo" + i, postTagInfo);
-				System.out.println(model);
-			}
+			/* sns total list */
+			List<MemMGMDto> snsTopList = adminService.snsTopList();
+			model.addAttribute("snsTopList", snsTopList);
 			System.out.println(model);
-
-		
+			/* sns total list */
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 		return "/admin/snsTotalList";
 	}
 }
