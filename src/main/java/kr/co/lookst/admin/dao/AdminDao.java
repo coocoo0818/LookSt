@@ -69,6 +69,7 @@ public interface AdminDao {
 
 	/* 포스트 태그 정보 */
 	List<Post_TagDto> postTagInfo(Integer snsTotalList) throws Exception;
+	List<MemMGMDto> snsTopList() throws Exception;
 
 	
 }
