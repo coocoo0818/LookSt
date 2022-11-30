@@ -159,6 +159,10 @@ public class AdminServiceImpl implements AdminService{
 	public List<Post_TagDto> postTagInfo(Integer snsTotalList) throws Exception {
 		return adminDao.postTagInfo(snsTotalList);
 	}
+	@Override
+	public List<MemMGMDto> snsTopList() throws Exception {
+		return adminDao.snsTopList();
+	}
 
 
 }

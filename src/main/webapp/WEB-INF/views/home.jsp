@@ -12,7 +12,6 @@
 	<a href="${contextPath}/admin/member_management">admin</a>
 	<a href="${contextPath}/sns/snsProfile/?member_id=ezen1@naver.com">ezen01Profile</a>
 	<a href="${contextPath}/seller/mySales">seller</a>
-	<a href="${contextPath}/admin/snsTotalList">sns</a>
 
 <%@ include file="/WEB-INF/views/fix/mainbanner.jsp"%>
 <%@ include file="/WEB-INF/views/fix/categorygallery.jsp"%>

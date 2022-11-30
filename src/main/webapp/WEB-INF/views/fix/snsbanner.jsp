@@ -21,7 +21,7 @@
   <div class="owl-carousel">
   	<c:forEach var="stylePick" items="${stylePick}">
 	    <div class="item">
-		    <a href="#" class="card_link align-self-center">
+		    <a href="${contextPath}/sns/snsProfile/?member_id=${stylePick.member_id}" class="card_link align-self-center">
 		    	<img class="post_img_box" src="${contextPath}/resources/img/post/${stylePick.post_img_img}">
 		    	<div class="rounded-circle profile_img_box">
 		    		<img class="rounded-circle img_profile" alt="img" src="${contextPath}/resources/img/profile/${stylePick.profile_img}">
@@ -36,7 +36,6 @@
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/owl.carousel.min.js'></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/js/all.min.js" integrity="sha512-naukR7I+Nk6gp7p5TMA4ycgfxaZBJ7MO5iC3Fp6ySQyKFHOGfpkSZkYVWV5R7u7cfAicxanwYQ5D1e17EfJcMA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
 
 </body>
 <script type="text/javascript" src="${contextPath}/resources/fix/js/snsbanner.js"></script>

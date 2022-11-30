@@ -65,5 +65,6 @@ public interface AdminService {
 	List<Integer> snsTotalList() throws Exception;
 	List<MemMGMDto> snsTotalListCarousel(Integer snsTotalList) throws Exception;
 	List<Post_TagDto> postTagInfo(Integer snsTotalList) throws Exception;
+	List<MemMGMDto> snsTopList() throws Exception;
 
 }

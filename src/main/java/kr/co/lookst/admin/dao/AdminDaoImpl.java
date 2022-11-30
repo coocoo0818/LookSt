@@ -165,5 +165,9 @@ public class AdminDaoImpl implements AdminDao{
 	public List<Post_TagDto> postTagInfo(Integer snsTotalList) throws Exception {
 		return session.selectList(namespace + "postTagInfo", snsTotalList);
 	}
+	@Override
+	public List<MemMGMDto> snsTopList() throws Exception {
+		return session.selectList(namespace + "snsTopList");
+	}
 
 }
