@@ -19,41 +19,50 @@ public class SnsProfileDaoImpl implements SnsProfileDao {
 	private SqlSession session;
 	private static String namespace = "kr.co.lookst.sns.dao.snsMapper.";
 	
+	// 프로필 정보
 	@Override
 	public SnsProfileDto infoselect(String member_id) throws Exception {
 		return session.selectOne(namespace+"profileInfo", member_id);
 	}
-
+	// 프로필 피드
 	@Override
 	public List<ProfileFeedDto> profileFeed(String member_id) throws Exception {
 		return session.selectList(namespace+"profileFeed", member_id);
 	}
-
-	@Override
-	public List<FollowDto> followerList(String member_id) throws Exception {
-		return session.selectList(namespace+"selectPassiveUserList", member_id);
-	}
-
+	// 팔로잉 리스트
 	@Override
 	public List<FollowDto> followingList(String member_id) throws Exception {
 		return session.selectList(namespace+"selectActiveUserList", member_id);
 	}
-
+	// 팔로워 리스트
 	@Override
-	public int follow(String member_id) {
-		return session.insert(namespace+"follow", member_id);
-		
+	public List<FollowDto> followerList(String member_id) throws Exception {
+		return session.selectList(namespace+"selectPassiveUserList", member_id);
 	}
-
+	// 팔로우
 	@Override
-	public int unfollow(String following) {
-		return session.delete(namespace+"unfollow", following);
+	public int follow(String member_id, String following) {
+		Map map = new HashMap();
+		map.put("member_id", member_id);
+		map.put("following", following);
+		return session.insert(namespace+"follow", map);
 	}
-
+	// 언팔로우
 	@Override
-	public int isFollow(FollowDto fd) {
-		// TODO Auto-generated method stub
-		return session.selectOne(namespace+"isFollow", fd);
+	public int unfollow(String member_id, String following) {
+		Map map = new HashMap();
+		map.put("member_id", member_id);
+		map.put("following", following);
+		return session.delete(namespace+"unfollow", map);
+	}
+	// 팔로우 유무
+	@Override
+	public int isFollow(String member_id, String following) {
+		Map map = new HashMap();
+		map.put("member_id", member_id);
+		map.put("following", following);
+		/* System.out.println(map); */
+		return session.selectOne(namespace+"isFollow", map);
 	}
 
 	@Override

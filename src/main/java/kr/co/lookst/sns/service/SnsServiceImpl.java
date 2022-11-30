@@ -26,25 +26,30 @@ public class SnsServiceImpl implements SnsService{
 	public List<ProfileFeedDto> getProfileFeed(String member_id) throws Exception {
 		return snsProfileDao.profileFeed(member_id);
 	}
-	// 팔로워 리스트
-	@Override
-	public List<FollowDto> getFollower(String member_id) throws Exception {
-		return snsProfileDao.followerList(member_id);
-	}
 	// 팔로잉 리스트
 	@Override
 	public List<FollowDto> getFollowing(String member_id) throws Exception {
 		return snsProfileDao.followingList(member_id);
 	}
-	//팔로우
+	// 팔로워 리스트
 	@Override
-	public int doFollow(String member_id) throws Exception {
-		return snsProfileDao.follow(member_id);
+	public List<FollowDto> getFollower(String member_id) throws Exception {
+		return snsProfileDao.followerList(member_id);
 	}
-	//언팔로우
+	// 팔로우
 	@Override
-	public int doUnFollow(String following) throws Exception {
-		return snsProfileDao.unfollow(following);
+	public int doFollow(String member_id, String following) throws Exception {
+		return snsProfileDao.follow(member_id, following);
+	}
+	// 언팔로우
+	@Override
+	public int doUnFollow(String member_id, String following) throws Exception {
+		return snsProfileDao.unfollow(member_id, following);
+	}
+	// 팔로우 유무
+	@Override
+	public int followCheck(String member_id, String following) throws Exception {
+		return snsProfileDao.isFollow(member_id, following);
 	}
 	// 닉네임 수정
 	@Override

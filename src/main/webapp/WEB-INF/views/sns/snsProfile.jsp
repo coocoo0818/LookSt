@@ -71,26 +71,50 @@
 			location.href = '${contextPath}/sns/personalPost/?member_id='+member_id;
 		});
 		
-		/* $('.authModify').click(function() {
-			let member_id = $(this).parent().attr("data-memberid") // <li>태그는 <button>의 부모임.
-			let index = $(this).parent().attr("data-index")
-			let auth = document.getElementById("auth_auth" + index).value;
-
-			$.ajax({
-				type : 'post',
-				url : '${contextPath}/admin/authModify',
-				data : {
-						member_id : member_id,
-						auth : auth
-				},
-				success : function(data) {
-					alert("닉네임이 수정되었습니다.")
-					location.reload()
-				},
-				error : function() {alert("error")}		//에러가 발생했을 때 호출될 함수
-			})
-		}) */
 		
+		
+		$('#follow-btn').on('click', function follow() {
+			follow(true);
+		});
+
+		$('#unfollow-btn').on('click', function follow() {
+			follow(false);
+		});
+
+		function follow(check) {
+			if(check) {
+				
+				$.ajax({
+					type: "POST",
+					url: "/sns/follow/${member_id}",
+					success: function(result) {
+						alert()
+						console.log("result : " + result);
+						if(result === "FollowOK"){
+							$(".follow").html('<button class="followBtn btn btn-primary fs-4 ms-auto" id="unfollow-btn">언팔로우</button>');
+							location.href="/sns/snsProfile/?member_id="${member_id};
+						}
+					},
+					error: alert("에러")
+				});
+			} else {
+				$.ajax({
+					type: "POST",
+					url: "/sns/unfollow/${member_id.id}",
+					headers: {
+						"Content-Type": "application/json",
+						"X-HTTP-Method-Override": "POST"
+					},
+					success: function(result) {
+						console.log("result : " + result);
+						if(result === "UnFollowOK"){
+							$(".follow").html('<button class="followBtn btn btn-primary fs-4 ms-auto" id="follow-btn">팔로우</button>');
+							location.href="/sns/snsProfile/?member_id="${member_id};
+						}
+					}
+				});
+			}
+		}
 		
 		
 		
@@ -149,8 +173,9 @@
 							</c:if>
 
 							<c:if test="${login_Id != pro_info.member_id }">
-								<button type="button"
-									class="follow_Btn btn btn-primary fs-4 ms-auto">팔로우</button>
+								<!-- <button type="button"
+									class="follow_Btn btn btn-primary fs-4 ms-auto" id="follow-btn">팔로우</button> -->
+								<div class="follow"><button class="followBtn btn btn-primary fs-4 ms-auto" id="follow-btn">팔로우</button></div>
 							</c:if>
 
 
