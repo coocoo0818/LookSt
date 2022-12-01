@@ -12,56 +12,7 @@
 <title>lookst</title>
 <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 <style type="text/css">
-.container.gallery-container {
-	background-color: #fff;
-	color: #35373a;
-	min-height: 50vh;
-	padding: 30px 50px;
-}
 
-.gallery-container h1 {
-	text-align: center;
-	margin-top: 50px;
-	font-family: 'Droid Sans', sans-serif;
-	font-weight: bold;
-}
-
-.gallery-container p.page-description {
-	text-align: center;
-	margin: 25px auto;
-	font-size: 18px;
-	color: #999;
-}
-
-.tz-gallery {
-	padding: 40px;
-}
-
-/* Override bootstrap column paddings */
-.tz-gallery .row>div {
-	padding: 2px;
-}
-
-.tz-gallery .lightbox img {
-	width: 100%;
-	border-radius: 0;
-	position: relative;
-}
-
-@media ( max-width : 768px) {
-	body {
-		padding: 0;
-	}
-}
-
-/*밑단 설명 CSS*/
-div {
-	word-break: break-all;
-}
-
-img {
-	max-width: 100%;
-}
 
 a:hover {
 	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
@@ -71,15 +22,6 @@ a:hover {
 	text-decoration: none;
 }
 
-/* Page Header */
-.page-header {
-	margin: -30px 0px 0px;
-	padding: 20px 40px;
-}
-
-.page-header h3 {
-	line-height: 0.88rem;
-}
 
 /* Thumbnail Box */
 .caption {
@@ -92,34 +34,15 @@ a:hover {
 	-webkit-box-sizing: border-box;
 }
 
-.caption .span4, .caption .span8 {
-	padding: 0px 20px;
-}
 
-.caption .span4 {
-	border-right: 1px dotted #CCCCCC;
-}
 
-.caption h3 {
-	line-height: 2rem;
-	margin: 0 0 20px;
-	text-transform: uppercase;
-}
 
-.caption p {
-	font-size: 1rem;
-	line-height: 1.6rem;
-}
 
 .btn.btn-mini {
 	background: #a83b3b;
 	border-radius: 0 0 0 0;
 	font-size: 0.63rem;
 	text-shadow: none !important;
-}
-
-.carousel-control {
-	top: 33%;
 }
 </style>
 </head>
@@ -236,9 +159,9 @@ a:hover {
 /*          tmp += ' data-pcno='+comment_con.pcno+'>'*/
 			tmp += ' <span class="member_id">'+comment_con.member_id+'</span>'
             tmp += ' : <span class="comment_con">'+comment_con.comment_con+'</span><br/>'
-            tmp += ' <span class>'+comment_con.comment_date+'</span>'
-            tmp += ' <button type="button"  class="delBtn mt-1" data-comment_no='+comment_con.comment_no+'>삭제</button>'
-            tmp += ' <button type="button"  class="modBtn mt-1" data-comment_no='+comment_con.comment_no+'>수정</button>'
+            tmp += ' <span class>'+comment_con.comment_date+'</span> <br/>'
+            tmp += ' <button type="button"  class="delBtn btn btn-outline-danger btn-sm mt-2 mb-2" data-comment_no='+comment_con.comment_no+'>삭제</button>'
+            tmp += ' <button type="button"  class="modBtn btn btn-outline-primary btn-sm mt-2 mb-2" data-comment_no='+comment_con.comment_no+'>수정</button>'
             tmp += '</li>'
          })
          
@@ -287,7 +210,7 @@ a:hover {
 			<form name="comment-form">
 				<div class="form-group">
 					<textarea name="comment_con" class="form-control" rows="3"></textarea>
-					<button class= "mt-2 mb-2" id="insertBtn" type="button">작성</button>
+					<button class= "btn btn-primary mt-3 mb-2" id="insertBtn" type="button">작성</button>
 					<br/><h4 class="text-center mt-2 mb-5">COMMENTS</h4>
 					<div id="commentList"></div>
 				</div>
@@ -296,7 +219,6 @@ a:hover {
 		</div>
 	</div>
 </div>
-	
 			<div class="row mx-auto col-md-4">
 				<button type="button" class="btn btn-outline-primary my-3 mt-5 mb-5"
 					onclick="history.back(-1)">목록</button>

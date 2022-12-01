@@ -220,7 +220,7 @@
          <input type="text" name="board_title" value="${boardDto.board_title }" ${mode=="new" ? "" : "readonly='readonly'" }><br/>
          <c:if test="${mode eq 'new' }">
          <textarea class="summernote" name="board_con" ${mode=="new" ? "" : "readonly='readonly'" }>${boardDto.board_con }</textarea><br/>
-            <button type="button" id="writeBtn" class="btn btn-write"><i class="fa fa-pen"></i>등록</button>
+            <button type="button" id="writeBtn" class="btn btn-primary"><i class="fa fa-pen"></i>등록</button>
          </c:if>
          <c:if test="${mode ne 'new' }">
          <textarea class="summernote" rows="20" name="board_con" ${mode=="new" ? "" : "readonly='readonly'" }>${boardDto.board_con }</textarea><br/>
