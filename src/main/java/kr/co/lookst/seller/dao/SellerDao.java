@@ -51,8 +51,11 @@ public interface SellerDao {
 	// 나의 매출 - 취소접수
 	List<MySalesDto> newCancel() throws Exception;
 	
-	// 나의 매출 - 금액 표시 수정중
-	MySalesDto todaySale() throws Exception;
+	// 나의 매출 - 오늘 매출
+	int todaySale() throws Exception;
+
+	// 나의 매출 - 이번 달 매출
+	int monthSale() throws Exception;
 
 	
 	// 상품 등록 - 수정중

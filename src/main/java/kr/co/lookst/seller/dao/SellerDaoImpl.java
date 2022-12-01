@@ -111,11 +111,18 @@ public class SellerDaoImpl implements SellerDao {
 		return session.selectList(namespace + "NewCancel");
 	}
 
-	// 나의 매출 - 금액 표시 수정중	
+	// 나의 매출 - 오늘 매출 	
 	@Override
-	public MySalesDto todaySale() throws Exception {
+	public int todaySale() throws Exception {
 		// TODO Auto-generated method stub
 		return session.selectOne(namespace + "TodayAmt");
+	}
+
+	// 나의 매출 - 이번 달 매출
+	@Override
+	public int monthSale() throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectOne(namespace + "MonthAmt");
 	}
 
 	// 상품 등록 - 수정중
