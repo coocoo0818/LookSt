@@ -7,6 +7,6 @@ public class MySalesDto {
 
 	private int new_Sales;
 	private int new_Cancel;
-	private int todat_Amt;
+	private int today_Amt;
 	
 }
