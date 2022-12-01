@@ -3,9 +3,9 @@ package kr.co.lookst.board.service;
 import java.util.List;
 import java.util.Map;
 
-import kr.co.lookst.board.domain.SearchItem;
 import kr.co.lookst.board.domain.BoardDto;
-import kr.co.lookst.board.domain.CommentDto;
+import kr.co.lookst.board.domain.MagazineSimpleDto;
+import kr.co.lookst.board.domain.SearchItem;
 
 public interface BoardService {
 	
@@ -23,7 +23,7 @@ public interface BoardService {
 	int getsearchResultCntN(SearchItem sc) throws Exception;
 	List<BoardDto> getsearchResultPageMagazine(SearchItem sc) throws Exception;
 	int getsearchResultCntM(SearchItem sc) throws Exception;
-	List<BoardDto> boardImgList(Integer board_no) throws Exception;
+	List<MagazineSimpleDto> boardList(Integer lastIndex) throws Exception;
 	int removeM(Integer board_no, String member_id) throws Exception;
 	int getsearchResultCntR(SearchItem sc) throws Exception;
 	List<BoardDto> getsearchResultPageReview(SearchItem sc) throws Exception;
@@ -31,4 +31,9 @@ public interface BoardService {
 	BoardDto readR(Integer board_no) throws Exception;
 	int modifyR(BoardDto boardDto)throws Exception;
 	int writeR(BoardDto boardDto) throws Exception;
+	List<String> boardImgList(int board_no);
+	BoardDto movePage(int board_no) throws Exception;
+	
+	
+	
 }

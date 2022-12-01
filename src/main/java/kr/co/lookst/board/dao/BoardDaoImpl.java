@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import kr.co.lookst.board.domain.MagazineSimpleDto;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -112,8 +113,8 @@ public class BoardDaoImpl implements BoardDao {
 	}
 
 	@Override
-	public List<BoardDto> boardImgList(Integer board_no) throws Exception {
-		return session.selectList(namespace + "boardImgList", board_no);
+	public List<MagazineSimpleDto> boardList(Integer lastIndex) throws Exception {
+		return session.selectList(namespace + "boardList", lastIndex);
 	}
 
 	@Override
@@ -171,6 +172,22 @@ public class BoardDaoImpl implements BoardDao {
 		
 		return session.update(namespace + "updateCommentCnt", map);
 	}
+
+	@Override
+	public List<String> boardImgList(int board_no) {
+		return session.selectList(namespace + "boardImgList", board_no);
+	}
+
+	@Override
+	public BoardDto movePage(int board_no) throws Exception {
+		return session.selectOne(namespace + "movePage", board_no);
+	}
+
+	@Override
+	public BoardDto movePage(Integer board_no) throws Exception {
+		return session.selectOne(namespace + "movePage", board_no);
+	}
+
 }
 
 

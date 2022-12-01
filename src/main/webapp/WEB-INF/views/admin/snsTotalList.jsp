@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,8 +16,11 @@
 	<%@ include file="/WEB-INF/views/fix/header.jsp"%>
 
 	<script type="text/javascript">
-		var postNo = $('.postNo').attr('data-postNo');
+		var postNo = $('#postNo').attr('data-postNo');
 		console.log(postNo)
+		function functionName() {
+		  alert("tl")
+		}
 	    /* $(document).ready(function() {
 	    	let showList = function(bno) {
 				$.ajax({
@@ -73,13 +77,14 @@
 			<c:forEach var="snsTopList" items="${snsTopList}" varStatus="status">
 				<div class="col">
 					<div class="card border-0">
+						${fn:contains(snsTopList.NPostDto.post_no, 10)? 'functionName':'no'}
 						<img src="${contextPath}/resources/img/post/${snsTopList.post_imgDto.post_img_img}" class="card-img-top rounded position-relative" onclick="location.href='${contextPath}/admin/mylist/?post_no=${snsTotalLists}'">
 						<span class="position-absolute badge rounded-pill bg-light m-1 postNo" id="postNo" data-postNo="${snsTopList.NPostDto.post_no}">No.${snsTopList.NPostDto.post_no}</span>
 						<div class="row justify-content-start d-flex m-2">
-							<div class="col-2">
+							<div class="col-3">
 								<img src="${contextPath}/resources/img/profile/${snsTopList.profile_img}" onclick="location.href='./'" id="profile_img">
 							</div>
-							<div class="col-10 my-auto" onclick="location.href='./'">${snsTopList.member_nick}</div>
+							<div class="col-9 my-auto" onclick="location.href='./'">${snsTopList.member_nick}</div>
 						</div>
 						<p class="card-text m-2" style="margin-top: 20px;">${snsTopList.NPostDto.post_content}</p>
 						<div class="tag_link" style="margin-top: 1%; margin-bottom: 1%;">

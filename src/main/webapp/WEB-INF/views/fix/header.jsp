@@ -64,9 +64,9 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Board</a>
           <div class="dropdown-menu dropdown-menu-end dropdown-menu-xs-start">
-            <a class="dropdown-item" href="#">MAGAZIN</a>
-            <a class="dropdown-item" href="#">REVIEW</a>
-            <a class="dropdown-item" href="/lookst/board/list">NOTICE</a>
+            <a class="dropdown-item" href="${contextPath}/board/magazine">MAGAZINE</a>
+            <a class="dropdown-item" href="${contextPath}/board/review">REVIEW</a>
+            <a class="dropdown-item" href="${contextPath}/board/list">NOTICE</a>
           </div>
         </li>
         <li class="nav-item dropdown">

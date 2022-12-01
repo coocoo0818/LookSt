@@ -3,14 +3,13 @@ package kr.co.lookst.board.service;
 import java.util.List;
 import java.util.Map;
 
+import kr.co.lookst.board.domain.MagazineSimpleDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.lookst.board.domain.SearchItem;
-import kr.co.lookst.board.service.BoardService;
 import kr.co.lookst.board.dao.BoardDao;
 import kr.co.lookst.board.domain.BoardDto;
-import kr.co.lookst.board.domain.CommentDto;
 
 @Service
 public class BoardServiceImpI implements BoardService {
@@ -92,8 +91,8 @@ public class BoardServiceImpI implements BoardService {
 	}
 
 	@Override
-	public List<BoardDto> boardImgList(Integer board_no) throws Exception {
-		return boardDao.boardImgList(board_no);
+	public List<MagazineSimpleDto> boardList(Integer lastIndex) throws Exception {
+		return boardDao.boardList(lastIndex);
 	}
 
 	@Override
@@ -140,6 +139,15 @@ public class BoardServiceImpI implements BoardService {
 		return boardDao.insertR(boardDto);
 	}
 
+	@Override
+	public List<String> boardImgList(int board_no) {
+		return boardDao.boardImgList(board_no);
+	}
+
+	@Override
+	public BoardDto movePage(int board_no) throws Exception {
+		return boardDao.movePage(board_no);
+	}
 
 
 

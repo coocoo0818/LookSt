@@ -1,5 +1,7 @@
 package kr.co.lookst.board.domain;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Objects;
 
 import lombok.Getter;
@@ -104,6 +106,12 @@ public class CommentDto {
 		this.comment_date = comment_date;
 	}
 	
+	public String reg_date() {
+		SimpleDateFormat Data = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String comment_date1 = Data.format(comment_date);
+		
+		return comment_date1;
+	}
 	
 	
 	

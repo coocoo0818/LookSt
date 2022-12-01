@@ -276,7 +276,7 @@ td.title:hover {
 					<iuput type="submit" class="btn btn-primary mt-5 mb-5"
 						style="float:right;"
 						onclick="location.href='<c:url value="/board/write" />' ">
-					<i class="fa fa-pen"></i>Submit 
+					<i class="fa fa-pen"></i>submit
 				</div>
 			</div>
 		</div>

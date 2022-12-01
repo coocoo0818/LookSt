@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import kr.co.lookst.board.domain.BoardDto;
-import kr.co.lookst.board.domain.CommentDto;
+import kr.co.lookst.board.domain.MagazineSimpleDto;
 import kr.co.lookst.board.domain.SearchItem;
 
 public interface BoardDao {
@@ -37,7 +37,7 @@ public interface BoardDao {
 
 	int searchResultCntM(SearchItem sc) throws Exception;
 
-	List<BoardDto> boardImgList(Integer board_no) throws Exception;
+	List<MagazineSimpleDto> boardList(Integer lastIndex) throws Exception;
 
 	int deleteM(Integer board_no, String member_id) throws Exception;
 
@@ -54,7 +54,13 @@ public interface BoardDao {
 	int insertR(BoardDto boardDto)throws Exception;
 
 	int updateCommentCnt(Integer board_no, int cnt) throws Exception;
+	
+	List<String> boardImgList(int board_no);
+	
 
+	BoardDto movePage(Integer board_no) throws Exception;
+
+	BoardDto movePage(int board_no) throws Exception;
 
 	
 
