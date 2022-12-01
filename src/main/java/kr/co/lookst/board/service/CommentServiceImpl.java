@@ -43,8 +43,6 @@ public class CommentServiceImpl implements CommentService {
 		int rowCnt = boardDao.updateCommentCnt(board_no, -1);				// 보드에 있는 댓글 총 개수 줄이는 메서드
 		System.out.println("updateCommentCnt - rowCnt = " + rowCnt);
 //		throw new Exception("test");
-		
-		
 		rowCnt = commentDao.delete(comment_no, member_id);
 		System.out.println("rowCnt = " + rowCnt);
 		

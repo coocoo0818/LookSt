@@ -144,30 +144,33 @@ a:hover {
             return
          }
          
-         $.ajax({
-            type : 'PATCH' // 요청 메서드 
-            , url : '/lookst/comments/'+comment_no // 요청 URI
-            , headers : { "content-type" : "application/json" } // 요청 헤더
-            , data : JSON.stringify({comment_no:comment_no, comment_con:comment_con}) // 서버로 전송할 데이터. stringify()로 직렬화 필요.
-            , success : function(result) { // 서버로부터 응답이 도착하면 호출될 함수 
-                  alert(result)
-                  showList(board_no)
-            }
-            , error : function() { alert("error") } // 에러가 발생했을 때, 호출될 함수 
-         })
+
       })
       
       $("#commentList").on("click", ".modBtn", function() { // commentList 안에 있는 modBtn 버튼에다가 클릭이벤트를 등록해야함.
-         // alert("댓글수정 버튼 클릭됨")
-         let board_no = ${boardDto.board_no }
-         alert(board_no)
-         let comment_no = $(this).parent().attr("data-comment_no") // <li>태그는 <button>의 부모임.
-         let comment_con = $("span.comment_con", $(this).parent()).text() // 클릭된 수정버튼의 부모(li)의 span 태그의 텍스트만 가져옴.
+          // alert("댓글수정 버튼 클릭됨")
+          let board_no = ${boardDto.board_no }
+          alert(board_no)
+          let comment_no = $(this).data("comment_no") // comment_no의 데이터를 가져옴
+		  let comment_con = $("textarea[name=comment_con]").val();
+		  //let comment_con = $("span.comment_con", $(this).parent()).text() // 클릭된 수정버튼의 부모(li)의 span 태그의 텍스트만 가져옴.
          
          // 1. comment의 내용을 input에 출력해주기 
          $("textarea[name=comment_con]").val(comment_con)
          // 2. cno 전달하기 
          $("#modBtn").attr("data-comment_no", comment_no)
+
+		  $.ajax({
+			  type : 'PATCH' // 요청 메서드
+			  , url : '/lookst/comments/'+comment_no // 요청 URI
+			  , headers : { "content-type" : "application/json" } // 요청 헤더
+			  , data : JSON.stringify({comment_no:comment_no, comment_con:comment_con}) // 서버로 전송할 데이터. stringify()로 직렬화 필요.
+			  , success : function(result) { // 서버로부터 응답이 도착하면 호출될 함수
+				  alert(result)
+				  showList(board_no)
+			  }
+			  , error : function() { alert("error") } // 에러가 발생했을 때, 호출될 함수
+		  })
       })
       
       $("#insertBtn").click(function() {
@@ -182,7 +185,7 @@ a:hover {
          }
          
          $.ajax({
-            type : 'post' // 요청 메서드 
+            type : 'post' // 요청 메서드
             , url : '/lookst/comments?board_no='+board_no // 요청 URI
             , headers : { "content-type" : "application/json" } // 요청 헤더
             , data : JSON.stringify({board_no:board_no, comment_con:comment_con}) // 서버로 전송할 데이터. stringify()로 직렬화 필요.
@@ -196,11 +199,11 @@ a:hover {
       
       $("#commentList").on("click", ".delBtn", function() { // commentList 안에 있는 delBtn 버튼에다가 클릭이벤트를 등록해야함.
          // alert("삭제 버튼 클릭됨")
-         let comment_no = $(this).parent().attr("data-comment_no") // <li>태그는 <button>의 부모임.
-         let board_no = $(this).parent().attr("data-board_no") // attr 중 사용자 정의 attr를 선택함.
+		  let board_no = ${boardDto.board_no };
+		  let comment_no = $(this).data("comment_no") ;
          
          $.ajax({
-            type : 'DELETE' // 요청 메서드 
+            type : 'DELETE' // 요청 메서드
             , url :   '/lookst/comments/'+comment_no+'?board_no='+board_no // 요청 URI
             , success : function(result) { // 서버로부터 응답이 도착하면 호출될 함수 
                   alert(result)
@@ -213,7 +216,7 @@ a:hover {
       
       let showList = function(board_no) {
          $.ajax({
-            type : 'GET' // 요청 메서드
+            type : 'GET' // 요청 메서드'
             , url : '/lookst/comments?board_no=' + board_no // 요청 URI
             , success : function(result) { // 서버로부터 응답이 도착하면 호출될 함수 
                   $("#commentList").html(toHtml(result)) // result는 서버가 전송한 데이터 
@@ -226,15 +229,16 @@ a:hover {
       
       let toHtml = function(comments) {
          let tmp = "<ul style='display: block;'>"
-         
+                   
          comments.forEach(function(comment_con) {
-            tmp += '<li style="background-color: #f9f9fa; border-bottom: 1px solid rgb(235,236,239); color:black; width: 100%;" data-comment_no='+comment_con.commnet_no
+            tmp += '<li style="color:black; width: 100%;  list-style:none;" data-comment_no='+comment_con.comment_no
             tmp += ' data-board_no='+comment_con.board_no
 /*          tmp += ' data-pcno='+comment_con.pcno+'>'*/
-			tmp += ' member_id=<span class="member_id">'+comment_con.member_id+'</span>'
-            tmp += ' comment_con=<span class="comment_con">'+comment_con.comment_con+'</span>'
-            tmp += ' <button class="delBtn">삭제</button>'
-            tmp += ' <button class="modBtn">수정</button>'
+			tmp += ' <span class="member_id">'+comment_con.member_id+'</span>'
+            tmp += ' : <span class="comment_con">'+comment_con.comment_con+'</span><br/>'
+            tmp += ' <span class>'+comment_con.comment_date+'</span>'
+            tmp += ' <button type="button"  class="delBtn mt-1" data-comment_no='+comment_con.comment_no+'>삭제</button>'
+            tmp += ' <button type="button"  class="modBtn mt-1" data-comment_no='+comment_con.comment_no+'>수정</button>'
             tmp += '</li>'
          })
          
@@ -254,55 +258,14 @@ a:hover {
 		<input type="hidden" name="board_no" value="${boardDto.board_no }"> 
 		<div class="tz-gallery">
 			<div class="row">
-				<div class="col-sm-12 col-md-4
-                    ">
-					<a class="lightbox"
-						href="${pageContext.request.contextPath }/resources/board/img/magazine1.jpg">
-						<img
-						src="${pageContext.request.contextPath }/resources/board/img/magazine1.jpg"
-						alt="Bridge">
-					</a>
-				</div>
-				<div class="col-sm-6 col-md-4">
-					<a class="lightbox"
-						href="${pageContext.request.contextPath }/resources/board/img/magazine2.jpg">
-						<img
-						src="${pageContext.request.contextPath }/resources/board/img/magazine2.jpg"
-						alt="Park">
-					</a>
-				</div>
-				<div class="col-sm-6 col-md-4">
-					<a class="lightbox"
-						href="${pageContext.request.contextPath }/resources/board/img/magazine3.jpg">
-						<img
-						src="${pageContext.request.contextPath }/resources/board/img/magazine3.jpg"
-						alt="Tunnel">
-					</a>
-				</div>
-				<div class="col-sm-12 col-md-4">
-					<a class="lightbox"
-						href="${pageContext.request.contextPath }/resources/board/img/magazine4.jpg">
-						<img
-						src="${pageContext.request.contextPath }/resources/board/img/magazine4.jpg"
-						alt="Traffic">
-					</a>
-				</div>
-				<div class="col-sm-6 col-md-4">
-					<a class="lightbox"
-						href="${pageContext.request.contextPath }/resources/board/img/magazine5.jpg">
-						<img
-						src="${pageContext.request.contextPath }/resources/board/img/magazine5.jpg"
-						alt="Coast">
-					</a>
-				</div>
-				<div class="col-sm-6 col-md-4">
-					<a class="lightbox"
-						href="${pageContext.request.contextPath }/resources/board/img/magazine6.jpg">
-						<img
-						src="${pageContext.request.contextPath }/resources/board/img/magazine6.jpg"
-						alt="Rails">
-					</a>
-				</div>
+				<c:forEach var="list" items="${images}">
+					<div class="col-sm-6 col-md-4">
+						<a class="lightbox"
+						   href="${list}">
+							<img src="${list}">
+						</a>
+					</div>
+				</c:forEach>
 			</div>
 		</div>
 	</div>
@@ -324,8 +287,8 @@ a:hover {
 			<form name="comment-form">
 				<div class="form-group">
 					<textarea name="comment_con" class="form-control" rows="3"></textarea>
-					<button id="insertBtn" type="button">작성</button>
-					<button id="modBtn" type="button">수정</button>
+					<button class= "mt-2 mb-2" id="insertBtn" type="button">작성</button>
+					<br/><h4 class="text-center mt-2 mb-5">COMMENTS</h4>
 					<div id="commentList"></div>
 				</div>
 

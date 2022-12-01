@@ -224,14 +224,13 @@
          </c:if>
          <c:if test="${mode ne 'new' }">
          <textarea class="summernote" rows="20" name="board_con" ${mode=="new" ? "" : "readonly='readonly'" }>${boardDto.board_con }</textarea><br/>
-            <button type="button" id="writeNewBtn" class="btn btn-write" onclick="location.href = '../board/write'"><i class="fa fa-pen"></i>글쓰기</button>
          </c:if>
-         <c:if test="${boardDto.member_id eq loginId }">
-            <button type="button" id="modifyBtn" class="btn btn-modify"><i class="fa fa-edit"></i>수정</button>
-            <button type="button" id="removeBtn" class="btn btn-remove"><i class="fa fa-trash"></i>삭제</button>
+               <c:if test="${boardDto.member_id eq loginId }">
+            <button type="button" id="modifyBtn" class="btn btn-primary"><i class="fa fa-edit"></i>수정</button>
+            <button type="button" id="removeBtn" class="btn btn-danger"><i class="fa fa-trash"></i>삭제</button>
          </c:if>
          
-         <button type="button" id="listBtn" class="btn btn-list"><i class="fa fa-bars"></i>목록</button>
+         <button type="button" id="listBtn" class="btn btn-info"><i class="fa fa-bars"></i>목록</button>
       </form>
    </div>
    <%@ include file="/WEB-INF/views/fix/footer.jsp"%>

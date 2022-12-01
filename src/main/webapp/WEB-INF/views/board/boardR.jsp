@@ -29,7 +29,7 @@
       .container { width: 50%; margin: auto; }
       .writing-header { position: relative; margin: 20px 0 0 0; padding-bottom: 10px; border-bottom: 1px solid #323232; }
       .frm { width: 100%; }
-      input { width: 100%; height: 35px; margin: 5px 0px 10px 0px; border: 1px solid #e9e8e8; padding: 8px; background: #f8f8f8; outline-color: #e6e6e6; }
+      input { width: 100%; height: 35px; margin: 5px 0px 10px 0px; border: 1px solid #e9e8e8; padding: 8px;  outline-color: #e6e6e6; }
       textarea { width: 100%;  margin: 5px 0px 10px 0px; border: 1px solid #e9e8e8; resize: none; padding: 8px; outline-color: #e6e6e6; }
       .btn { background-color: rgb(236,236,236); border: none; color: black; padding: 6px 12px; font-size: 16px; cursor: pointer; border-radius: 5px; }
       .btn:hover { text-decoration: underline; }
@@ -230,11 +230,22 @@
           function showSummernote() {
               $(document).find('.note-editor').children('.note-toolbar').css("display", "block");
               $('.summernote').summernote('enable');
+              $()
           }
 
           function hideSummernote() {
               $(document).find('.note-editor').children('.note-toolbar').css("display", "none");
               $('.summernote').summernote('disable');
+              $(document).find('.container').children('.writing-header').css("border-bottom","1px solid #00000032"); 
+              /* text box */
+              $(document).find('.note-editing-area').children('.note-editable').css("height","600px");
+              $(document).find('.note-editing-area').children('.note-editable').css("background-color","white");
+              $(document).find('.note-editor').css("border","none");
+              $(document).find('.note-statusbar').children('.note-resizebar').css("display","none");
+              $(document).find('.frm').children('.mb-2').css("border", "0 solid black");
+              $(document).find('.frm').children('.mb-2').css("font-weight", "bold");
+              
+
           }
 
           if (mode == 'new') {
@@ -271,31 +282,28 @@
       if(msg == "MOD_ERR") alert("게시물 수정에 실패하였습니다. 다시 시도해주세요.")
    </script>
    
-  
-   
    <div class="container mt-5 mb-5">
-      <h2 class="writing-header ">리뷰 ${mode=="new" ? "글쓰기" : "읽기" }</h2>
+      <h2 class="writing-header ">리뷰 ${mode=="new" ? "글쓰기" : "게시판" }</h2>
       <form id="form" class="frm" action="" method="post">
          <input type="hidden" name="board_no" value="${boardDto.board_no }">
           <%--추후에 수정사항이 발생하면 나머지 것들도 변경가능하게 할수있음--%>
          <%--<input type="hidden" name="board_type" value="${boardDto.board_type }">
          <input type="hidden" name="board_kind" value="${boardDto.board_kind }">--%>
           <%--일단은 임시로넣어둠--%>
-         <input type="text" name="board_title" value="${boardDto.board_title }" ${mode=="new" ? "" : "readonly='readonly'" }><br/>
+         <input class=" mt-2 mb-2" type="text" name="board_title" value="${boardDto.board_title }" ${mode=="new" ? "" : "readonly='readonly'" }><br/>
          <c:if test="${mode eq 'new' }">
          <textarea class="summernote" name="board_con" style="height: 700px;" ${mode=="new" ? "" : "readonly='readonly'" }>${boardDto.board_con }</textarea><br/>
-            <button type="button" id="writeBtn" class="btn btn-write"><i class="fa fa-pen"></i>등록</button>
+            <button type="button" id="writeBtn" class="btn btn-primary"><i class="fa fa-pen"></i>등록</button>
          </c:if>
          <c:if test="${mode ne 'new' }">
          <textarea class="summernote" rows="20" name="board_con" ${mode=="new" ? "" : "readonly='readonly'" }>${boardDto.board_con }</textarea><br/>
-            <button type="button" id="writeNewBtn" class="btn btn-write" onclick="location.href = '../board/review/write'"><i class="fa fa-pen"></i>글쓰기</button>
          </c:if>
          <c:if test="${boardDto.member_id eq loginId }">
-            <button type="button" id="modifyBtn" class="btn btn-modify"><i class="fa fa-edit"></i>수정</button>
-            <button type="button" id="removeBtn" class="btn btn-remove"><i class="fa fa-trash"></i>삭제</button>
+            <button type="button" id="modifyBtn" class="btn btn-primary"><i class="fa fa-edit"></i>수정</button>
+            <button type="button" id="removeBtn" class="btn btn-danger"><i class="fa fa-trash"></i>삭제</button>
          </c:if>
          
-         <button type="button" id="listBtn" class="btn btn-list"><i class="fa fa-bars"></i>목록</button>
+         <button type="button" id="listBtn" class="btn btn-info"><i class="fa fa-bars"></i>목록</button>
       </form>
    </div>
    <%@ include file="/WEB-INF/views/fix/footer.jsp"%>
