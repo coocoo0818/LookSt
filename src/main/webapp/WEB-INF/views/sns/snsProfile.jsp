@@ -120,7 +120,7 @@
 	<!-- myProfile -->
 	<div class="container">
 		<div class="row justify-content-md-center">
-			<h2 class="col-auto my-5">Profile</h2>
+			<h2 class="col-auto my-5">${pro_info.member_nick}'s Profile</h2>
 		</div>
 	</div>
 	<!-- myProfile 끝 -->
