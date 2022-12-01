@@ -17,6 +17,11 @@ public class MemberServiceImpl implements MemberService{
 	public MemberDto login(MemberDto dto) throws Exception {
 		return dao.login(dto);
 	}
+	@Override
+	public int loginCheck(MemberDto dto) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.loginCheck(dto);
+	}
 
 	@Override
 	public int register(MemberDto dto) throws Exception {
@@ -70,7 +75,9 @@ public class MemberServiceImpl implements MemberService{
 	public int insertAuthInfo(String member_id) throws Exception {
 		return dao.insertAuthInfo(member_id);
 	}
-
-
+	@Override
+	public String authCheck(String member_id) throws Exception {
+		return dao.authCheck(member_id);
+	}
 
 }

@@ -9,6 +9,7 @@ public interface MemberDao {
 	String NAMESPACE = "kr.co.lookst.member.dao.MemberMapper.";
 	
 	public MemberDto login(MemberDto dto) throws Exception;
+	public int loginCheck(MemberDto dto) throws Exception;
 	public int register(MemberDto dto) throws Exception;
 	public int idCheck(String member_id) throws Exception;
 	public MemberDto selectInfo(String member_id) throws Exception;
@@ -19,5 +20,6 @@ public interface MemberDao {
 	public int insertSellerInfo(SellerDto sellDto) throws Exception;
 	public int updateSellerInfo(SellerDto sellDto) throws Exception;
 	public int insertAuthInfo(String member_id) throws Exception;
+	public String authCheck(String member_id) throws Exception;
 
 }
