@@ -43,12 +43,7 @@ public class SnsController {
 	@Autowired
 	SnsService snsService;
 
-	@Autowired
-	SnsProfileDao snsProfileDao;
-
-//	@Autowired
-//	FollowService followService;
-
+	/* 프로필 화면 */
 	@GetMapping("/snsProfile")
 	public String snsProfile(String member_id, Model m, @RequestParam("member_id") String member_nick,
 			HttpServletRequest request) {
@@ -57,27 +52,28 @@ public class SnsController {
 
 		try {
 			String login_id = (String) session.getAttribute("res");
-
+			
+			/* 프로필 정보 */
 			SnsProfileDto pro_info = snsService.getinfoselect(member_id);
+			/* 프로필 피드 */
 			List<ProfileFeedDto> pro_feed = snsService.getProfileFeed(member_id);
+			/* 팔로워 리스트*/
 			List<FollowDto> pro_follower = snsService.getFollower(member_id);
+			/* 팔로잉 리스트 */
 			List<FollowDto> pro_following = snsService.getFollowing(member_id);
+			/* 팔로우 유무 */
 			int checkFollow = snsService.followCheck(login_id, member_id);
-			/*
-			 * int follow = snsService.doFollow(login_id, member_id); int unfollow =
-			 * snsService.doUnFollow(login_id, member_id);
-			 */
 
-			System.out.println(checkFollow);
-			System.out.println("로그인아이디" + login_id);
-			System.out.println("프로필아이디" + member_id);
 			m.addAttribute("pro_info", pro_info);
 			m.addAttribute("pro_feed", pro_feed);
 			m.addAttribute("pro_follower", pro_follower);
 			m.addAttribute("pro_following", pro_following);
 			m.addAttribute("login_Id", login_id);
 			m.addAttribute("checkFollow", checkFollow);
-
+			
+			System.out.println("팔로우 유무(팔로우 중 : 1 , 아니면 0) : " + checkFollow);
+			System.out.println("로그인아이디 : " + login_id);
+			System.out.println("프로필아이디 : " + member_id);
 			System.out.println(m);
 
 		} catch (Exception e) {
@@ -86,12 +82,7 @@ public class SnsController {
 		return "sns/snsProfile";
 	}
 
-	@GetMapping("/personalPost")
-	public String personalPost() {
-
-		return "sns/personalPost";
-	}
-
+	/* 팔로우 하기 */
 	@RequestMapping(value = "/follow", method = { RequestMethod.POST })
 	public String follow(String member_id, Model m, HttpServletRequest request) {
 
@@ -100,11 +91,12 @@ public class SnsController {
 
 		try {
 			int checkFollow = snsService.followCheck(login_id, member_id);
-
 			m.addAttribute("checkFollow", checkFollow);
+			
 			int follow = snsService.doFollow(login_id, member_id);
-			System.out.println(checkFollow);
-			System.out.println("팔로우성공(컨트롤러)");
+			
+			System.out.println("팔로우 유무 :" + checkFollow);
+			System.out.println("팔로우 성공(컨트롤러)");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -112,6 +104,7 @@ public class SnsController {
 		return "sns/snsProfile";
 	}
 
+	/* 팔로우 취소하기 */
 	@RequestMapping(value = "/unfollow", method = { RequestMethod.POST })
 	public String unfollow(String member_id, Model m, HttpServletRequest request) {
 
@@ -120,11 +113,12 @@ public class SnsController {
 
 		try {
 			int checkFollow = snsService.followCheck(login_id, member_id);
-
 			m.addAttribute("checkFollow", checkFollow);
+			
 			int unfollow = snsService.doUnFollow(login_id, member_id);
-			System.out.println(checkFollow);
-			System.out.println("팔로우취소(컨트롤러)");
+			
+			System.out.println("팔로우 유무 :" + checkFollow);
+			System.out.println("팔로우 취소 성공(컨트롤러)");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -132,86 +126,45 @@ public class SnsController {
 		return "sns/snsProfile";
 	}
 
-//	// 닉네임 수정 
-//	@RequestMapping(value="/nickNameMod", method={RequestMethod.POST})
-//	public String memberNickMod(Model model,  
-//			@RequestParam("member_id") String member_id,
-//			@RequestParam("member_nick") String member_nick) {
-//		System.out.println(member_id);
-//		System.out.println(member_nick);
-//		
-//		try {
-//			snsService.nickNameMod(member_id, member_nick);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		return "redirect:/sns/snsProfile/?member_id="+member_id;
-//	}
-//
+	
+	/* 프로필 화면 */
+	@GetMapping("/personalPost")
+	public String personalPost(String member_id, Model m, @RequestParam("member_id") String member_nick,
+			HttpServletRequest request) {
 
-//
-//	@PostMapping("/modify")
-//	public String modify(SnsProfileDto snsProfileDto, Model model, HttpSession session, RedirectAttributes rattr) {
-//		String member_id = (String) session.getAttribute("member_id");
-//		snsProfileDto.setMember_id(member_id);
-//
-//		try {
-//			
-//			member_id = "@database";
-//			
-//			if (snsService.modify(snsProfileDto) != 1) {
-//				throw new Exception("Modify failed");
-//			}
-//			
-//			rattr.addFlashAttribute("msg", "MOD_OK");
-//			return "redirect:/sns/snsProfile";
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			model.addAttribute(snsProfileDto);
-//			model.addAttribute("msg", "MOD_ERR");
-//			return "/sns/snsProfile";
-//		}
-//	}
+		HttpSession session = request.getSession();
 
-//
-//		/* 1. 파일 한개만 업로드 하기 */
-//		@PostMapping("/single-file")
-//		public String singleFileUpload(@RequestParam String fileContent, @RequestParam MultipartFile singleFile,
-//				HttpServletRequest request) {
-//
-//			// 1. 전송받은 파일 및 파일설명 값 가져오기
-//			System.out.println("singleFile : " + singleFile);
-//			System.out.println("fileContent : " + fileContent);
-//
-//			// 2. 저장할 경로 가져오기
-//			String path = request.getSession().getServletContext().getRealPath("resources");
-//			System.out.println("path : " + path);
-//			String root = path + "img/uploadFiles";
-//
-//			File file = new File(root);
-//
-//			// 만약 uploadFiles 폴더가 없으면 생성해라 라는뜻
-//			if (!file.exists())
-//				file.mkdirs();
-//
-//			// 업로드할 폴더 설정
-//			String originFileName = singleFile.getOriginalFilename();
-//			String ext = originFileName.substring(originFileName.lastIndexOf("."));
-//			String ranFileName = UUID.randomUUID().toString() + ext;
-//
-//			File changeFile = new File(root + "\\" + ranFileName);
-//
-//			// 파일업로드
-//			try {
-//				singleFile.transferTo(changeFile);
-//				System.out.println("파일 업로드 성공");
-//			} catch (IllegalStateException | IOException e) {
-//				System.out.println("파일 업로드 실패");
-//				e.printStackTrace();
-//			}
-//
-//			return "result";
-//		}
+		try {
+			String login_id = (String) session.getAttribute("res");
+			
+			/* 프로필 정보 */
+			SnsProfileDto pro_info = snsService.getinfoselect(member_id);
+			/* 프로필 피드 */
+			List<ProfileFeedDto> pro_feed = snsService.getProfileFeed(member_id);
+			/* 팔로워 리스트*/
+			List<FollowDto> pro_follower = snsService.getFollower(member_id);
+			/* 팔로잉 리스트 */
+			List<FollowDto> pro_following = snsService.getFollowing(member_id);
+			/* 팔로우 유무 */
+			int checkFollow = snsService.followCheck(login_id, member_id);
+
+			m.addAttribute("pro_info", pro_info);
+			m.addAttribute("pro_feed", pro_feed);
+			m.addAttribute("pro_follower", pro_follower);
+			m.addAttribute("pro_following", pro_following);
+			m.addAttribute("login_Id", login_id);
+			m.addAttribute("checkFollow", checkFollow);
+			
+			System.out.println("팔로우 유무(팔로우 중 : 1 , 아니면 0) : " + checkFollow);
+			System.out.println("로그인아이디 : " + login_id);
+			System.out.println("프로필아이디 : " + member_id);
+			System.out.println(m);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "sns/personalPost";
+	}
 
 	@GetMapping("/postUpload")
 	public String postUpload() {

@@ -2,6 +2,9 @@ package kr.co.lookst.sns.domain;
 
 import java.util.Date;
 
+import lombok.Data;
+
+@Data
 public class ProfileFeedDto {
 	
 	private String member_id;
@@ -10,6 +13,7 @@ public class ProfileFeedDto {
 	private int post_img_seq;
 	private Date post_date;
 	private String post_type;
+	private String post_content;
 	
 	public ProfileFeedDto() {
 		// TODO Auto-generated constructor stub
