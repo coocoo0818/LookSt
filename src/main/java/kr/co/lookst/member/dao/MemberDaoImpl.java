@@ -24,6 +24,11 @@ public class MemberDaoImpl implements MemberDao {
 		}
 		return res;
 	}
+	
+	@Override
+	public int loginCheck(MemberDto dto) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "loginCheck", dto);
+	}
 
 	@Override
 	public int register(MemberDto dto) throws Exception {
@@ -75,6 +80,11 @@ public class MemberDaoImpl implements MemberDao {
 	@Override
 	public int insertAuthInfo(String member_id) throws Exception {
 		return sqlSession.insert(NAMESPACE + "insertAuthInfo", member_id);
+	}
+
+	@Override
+	public String authCheck(String member_id) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "authCheck", member_id);
 	}
 
 }

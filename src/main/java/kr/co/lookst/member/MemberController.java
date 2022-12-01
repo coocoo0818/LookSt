@@ -11,9 +11,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.co.lookst.member.domain.MemAuthDto;
 import kr.co.lookst.member.domain.MemberDto;
 import kr.co.lookst.member.service.MemberService;
 import kr.co.lookst.seller.domain.SellerDto;
@@ -35,17 +37,32 @@ public class MemberController {
 		return "member/login";
 	}
 	
+	@PostMapping("/loginCheck")
+	@ResponseBody
+	public int loginCheck(@RequestBody MemberDto dto) throws Exception {
+		logger.info("loginCheck");
+		int cnt = service.loginCheck(dto);
+		System.out.println("로그인 시도 아이디 : " + dto.getMember_id());
+		System.out.println("로그인 시도 비밀번호 : " + dto.getMember_pw());
+		System.out.println("로그인 체크 (1:성공, 0:실패) : " + cnt);
+		return cnt;
+	}
+	
 	@PostMapping("/login")
 	public String postLogin(MemberDto dto, HttpServletRequest request) throws Exception {
 		logger.info("LOGIN");
 		//세션 생성
 		HttpSession session = request.getSession();
 		MemberDto res = service.login(dto);
-
+		String member_id = res.getMember_id();
+		String auth = service.authCheck(member_id);
+		
 		if(res.getMember_id() != null) {
 			//세션 저장
 			session.setAttribute("res", res.getMember_id());
-			System.out.println(session.getAttribute("res"));
+			session.setAttribute("auth", auth);
+			System.out.println("로그인 아이디 : " + session.getAttribute("res"));
+			System.out.println("회원 권한 : " + session.getAttribute("auth"));
 			return "redirect:/";
 		} else {
 			System.out.println(res);
