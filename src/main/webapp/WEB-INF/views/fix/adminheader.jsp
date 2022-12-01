@@ -1,6 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<c:set var="auth_admin_menu" value="${auth eq 'admin' ? 'dropdown-item' : 'visually-hidden'}" />
+<c:set var="auth_seller_menu" value="${auth eq 'seller' ? 'dropdown-item' : 'visually-hidden'}" />
+<c:set var="loginout" value="${sessionScope.res==null ? 'LOGIN' : 'LOGOUT' }"/>
+<c:set var="loginhidden" value="${sessionScope.res==null ? 'dropdown-item' : 'visually-hidden' }"/>
+<c:set var="logouthidden" value="${sessionScope.res!=null ? 'dropdown-item' : 'visually-hidden' }"/>
+<c:set var="loginoutlink" value="${sessionScope.res==null ? '/lookst/login' : '/lookst/logout' }" />
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -69,9 +77,10 @@
           <div class="dropdown-menu dropdown-menu-end dropdown-menu-xs-start">
             <a class="dropdown-item text-center" href="${contextPath}/admin/magazin_request">MAGAZIN</a>
             <a class="dropdown-item text-center" href="${contextPath}/admin/seller_request">SELLER</a>
-            <a class="dropdown-item text-center" href="${contextPath}/admin/member_management">Something else here</a>
+            <a class="${logouthidden} text-center" href="/lookst/member/mypage">MY PAGE</a>
+            <a class="${logouthidden} text-center" href="/lookst/sns/snsProfile/?member_id=${res}">MY PROFILE</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item text-center" href="#">Separated link</a>
+            <a class="dropdown-item text-center" href="${loginoutlink}">${loginout}</a>
           </div>
         </li>
       </ul>
