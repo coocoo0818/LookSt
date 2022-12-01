@@ -8,5 +8,6 @@ public class MySalesDto {
 	private int new_Sales;
 	private int new_Cancel;
 	private int today_Amt;
+	private int month_Amt;
 	
 }

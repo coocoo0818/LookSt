@@ -43,4 +43,9 @@ public interface SellerService {
 	// 나의 매출 - 취소접수 수량 표시 
 	List<MySalesDto> newCancel() throws Exception;
 
+	// 나의 매출 - 오늘 매출 
+	int todaySale() throws Exception;
+
+	// 나의 매출 - 이번 달 매출
+	int monthSale() throws Exception;
 }

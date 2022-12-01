@@ -64,15 +64,15 @@
 								<h5 class="card-title">오늘 매출</h5>
 							</div>
 							<div class="col-6">
-								<p class="card-text" style="float: right">${todaySale.today_Amt }123000원</p>
+								<p class="card-text" style="float: right">${todaySale}원</p>
 							</div>
 						</div>
 						<div class="row justify-content-between pb-3">
 							<div class="col-6">
-								<h5 class="card-title">11월 총 매출</h5>
+								<h5 class="card-title">이번 달 총 매출</h5>
 							</div>
 							<div class="col-6">
-								<p class="card-text" style="float: right">12345000원</p>
+								<p class="card-text" style="float: right">${monthSale}원</p>
 							</div>
 						</div>
 					</div>

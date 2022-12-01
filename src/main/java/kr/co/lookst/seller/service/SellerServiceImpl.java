@@ -100,5 +100,19 @@ public class SellerServiceImpl implements SellerService {
 		return sellerDao.newCancel();
 	}
 
+	// 나의 매출 - 오늘 매출
+	@Override
+	public int todaySale() throws Exception {
+		// TODO Auto-generated method stub
+		return sellerDao.todaySale();
+	}
+
+	// 나의 매출 - 이번 달 매출
+	@Override
+	public int monthSale() throws Exception {
+		// TODO Auto-generated method stub
+		return sellerDao.monthSale();
+	}
+
 
 }
