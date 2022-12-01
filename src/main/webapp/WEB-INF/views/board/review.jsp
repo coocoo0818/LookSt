@@ -282,7 +282,7 @@ a { text-decoration: none !important; }
             <div class="tb-center" style="font-size: 10px">2022-11-20</div>
           </td>
           <td>
-            <div class="tb-center" style="font-size: 10px">342449</div>
+            <div class="tb-center" style="font-size: 10px">1004</div>
           </td>
         </tr>
         <!--. 공지사항 리스트 끝! -->
@@ -346,7 +346,7 @@ a { text-decoration: none !important; }
 				</nav>
   			</div>
 		<section>
-			<input type="submit" class="black_e_s mt-5 mb-5" style="margin-top: 1.5%; margin-right: 5%;"onclick="location.href='<c:url value="/board/review/write" />' ">
+			<button type="button" class="btn btn-primary mt-5 mb-5" style="margin-top: 1.5%; margin-right: 5%;"onclick="location.href='<c:url value="/board/review/write" />' "><i class="fa fa-pen"></i>submit</button>
 		</section>  		
 </div>
 <%@ include file="/WEB-INF/views/fix/footer.jsp"%>
