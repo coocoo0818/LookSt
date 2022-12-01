@@ -212,9 +212,9 @@ public class SellerController {
 			m.addAttribute("newSalelist", newSalelist);
 			List<MySalesDto> newCancellist = sellerService.newCancel();
 			m.addAttribute("newCancellist", newCancellist);
-			MySalesDto todaySale = sellerService.todaySale();
-			m.addAttribute("todaySale", todaySale);
-			System.out.println(todaySale);
+			//MySalesDto todaySale = sellerService.todaySale();
+			//m.addAttribute("todaySale", todaySale);
+			//System.out.println(todaySale);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
