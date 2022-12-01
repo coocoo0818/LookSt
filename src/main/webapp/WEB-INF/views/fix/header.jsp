@@ -57,11 +57,11 @@
 	    <ul class="navbar-nav ms-auto">
         <li class="nav-item">
           <a class="nav-link" href="${contextPath}/admin/snsTotalList">SNS
-            <span class="visually-hidden">(current)</span>
+            <!-- <span class="visually-hidden">(current)</span> -->
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">SHOP</a>
+          <a class="nav-link" href="${contextPath}/admin/productList">SHOP</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Board</a>

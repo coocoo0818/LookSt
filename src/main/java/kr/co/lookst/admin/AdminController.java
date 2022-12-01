@@ -207,6 +207,27 @@ public class AdminController {
 		return "redirect:/admin/board_management";
 	}
 	
+	/* 쇼핑리스트 페이지 이동 */
+	@RequestMapping(value="/productList", method=RequestMethod.GET)
+	public String shopFormList(SearchItem sc,Model model) {
+		try {
+			/* 쇼핑리스트 페이징 시작 */
+			int totalCnt = adminService.shopListSearchResultCnt(sc);
+			model.addAttribute("totalCnt", totalCnt);
+			PageResolver pageResolver = new PageResolver(totalCnt, sc);
+			/* 쇼핑리스트 페이징 끝 */
+			
+			/* 쇼핑리스트 리스트 출력 */
+			List<Product> shopTotalList = adminService.shopListSearchResultPage(sc);
+			model.addAttribute("shopTotalList", shopTotalList);
+			model.addAttribute("pr", pageResolver);
+			/* 쇼핑리스트 리스트 끝 */
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "admin/productList";
+	}
+	
 	/* 판매자 신청 페이지 이동 */
 	@RequestMapping(value="/seller_request", method=RequestMethod.GET)
 	public String adminFormSellerRequest(SearchItem sc,Model model) {

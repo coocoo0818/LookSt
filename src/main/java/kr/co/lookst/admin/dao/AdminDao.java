@@ -57,19 +57,26 @@ public interface AdminDao {
 	/* 판매자 거부 */
 	int sellerReject(String seller_no) throws Exception;
 	
+	/* 상품 리스트 출력 */
+	int shopListSearchResultCnt(SearchItem sc) throws Exception;
 	/* 상품 정보 */
 	Product getproductInfo(Integer product_no) throws Exception;
+	/* 상품 검색 리스트 */
+	List<Product> shopListSearchResultPage(SearchItem sc) throws Exception;
+	/* 현재 상품 재고 사이즈 출력 */
 	List<Prdt_Option> getproductSize(Integer product_no) throws Exception;
+	/* 상품 이미지 출력 */
 	List<Prdt_Img> getproductImg(Integer product_no) throws Exception;
+	/* 현재 상품 재고 컬러 출력 */
 	List<Prdt_Option> productColor(Integer product_no, String prdt_option_size) throws Exception;
 	
 	/* sns total list */
 	List<Integer> snsTotalList() throws Exception;
+	/* sns 이미지 및 정보 출력 */
 	List<MemMGMDto> snsTotalListCarousel(Integer snsTotalList) throws Exception;
-
 	/* 포스트 태그 정보 */
 	List<Post_TagDto> postTagInfo(Integer snsTotalList) throws Exception;
+	/* sns sns 상단 정보 출력 */
 	List<MemMGMDto> snsTopList() throws Exception;
-
 	
 }
