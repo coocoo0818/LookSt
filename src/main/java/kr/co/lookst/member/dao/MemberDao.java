@@ -21,5 +21,6 @@ public interface MemberDao {
 	public int updateSellerInfo(SellerDto sellDto) throws Exception;
 	public int insertAuthInfo(String member_id) throws Exception;
 	public String authCheck(String member_id) throws Exception;
+	public int insertProfile(String member_id) throws Exception;
 
 }

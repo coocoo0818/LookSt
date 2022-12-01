@@ -111,6 +111,7 @@ public class MemberController {
 		service.register(dto);
 		String member_id = dto.getMember_id();
 		service.insertAuthInfo(member_id);
+		service.insertProfile(member_id);
 		
 		return "redirect:/register/complete";
 	}
