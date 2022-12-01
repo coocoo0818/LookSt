@@ -113,6 +113,7 @@
 							<c:if test="${board_management.NBoardDto.board_kind eq 'M'}">MAGAZIN</c:if>
 							<c:if test="${board_management.NBoardDto.board_kind eq 'F'}">FAQ</c:if>
 							<c:if test="${board_management.NBoardDto.board_kind eq 'R'}">REVIEW</c:if>
+							<c:if test="${board_management.NBoardDto.board_kind eq 'Q'}">Q&A</c:if>
 						</td>
 						<td class="text-center" data-title="작성일" data-type="currency">
 							<fmt:formatDate value="${board_management.NBoardDto.board_date}" pattern="yyyy-MM-dd" type="date" />
