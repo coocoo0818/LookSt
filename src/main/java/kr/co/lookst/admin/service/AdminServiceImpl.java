@@ -124,20 +124,33 @@ public class AdminServiceImpl implements AdminService{
 	public int sellerReject(String seller_no) throws Exception {
 		return adminDao.sellerReject(seller_no);
 	}
-	
+
+	/* 상품 리스트 출력 */
+	@Override
+	public int shopListSearchResultCnt(SearchItem sc) throws Exception {
+		return adminDao.shopListSearchResultCnt(sc);
+	}
+	/* 상품 검색 리스트 */
+	@Override
+	public List<Product> shopListSearchResultPage(SearchItem sc) throws Exception {
+		return adminDao.shopListSearchResultPage(sc);
+	}
 	/* 상품 정보 */
 	@Override
 	public Product getproductInfo(Integer product_no) throws Exception {
 		return adminDao.getproductInfo(product_no);
 	}
+	/* 현재 상품 재고 사이즈 출력 */
 	@Override
 	public List<Prdt_Option> getproductSize(Integer product_no) throws Exception {
 		return adminDao.getproductSize(product_no);
 	}
+	/* 상품 이미지 출력 */
 	@Override
 	public List<Prdt_Img> getproductImg(Integer product_no) throws Exception {
 		return adminDao.getproductImg(product_no);
 	}
+	/* 현재 상품 재고 컬러 출력 */
 	@Override
 	public List<Prdt_Option> productColor(Integer product_no, String prdt_option_size) throws Exception {
 		return adminDao.productColor(product_no, prdt_option_size);
@@ -153,16 +166,15 @@ public class AdminServiceImpl implements AdminService{
 	public List<MemMGMDto> snsTotalListCarousel(Integer snsTotalList) throws Exception {
 		return adminDao.snsTotalListCarousel(snsTotalList);
 	}
-
 	/* 포스트 태그 정보 */
 	@Override
 	public List<Post_TagDto> postTagInfo(Integer snsTotalList) throws Exception {
 		return adminDao.postTagInfo(snsTotalList);
 	}
+	/* sns sns 상단 정보 출력 */
 	@Override
 	public List<MemMGMDto> snsTopList() throws Exception {
 		return adminDao.snsTopList();
 	}
-
 
 }
