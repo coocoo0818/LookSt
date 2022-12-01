@@ -11,6 +11,7 @@ import kr.co.lookst.main.domain.Prdt_Img;
 import kr.co.lookst.main.domain.Prdt_Option;
 import kr.co.lookst.main.domain.Product;
 import kr.co.lookst.main.domain.SearchItem;
+import kr.co.lookst.post.domain.Post_TagDto;
 
 @Service
 public class AdminServiceImpl implements AdminService{
@@ -140,6 +141,27 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public List<Prdt_Option> productColor(Integer product_no, String prdt_option_size) throws Exception {
 		return adminDao.productColor(product_no, prdt_option_size);
+	}
+	
+	/* sns total list */
+	@Override
+	public List<Integer> snsTotalList() throws Exception {
+		return adminDao.snsTotalList();
+	}
+	/* sns total 이미지 list */
+	@Override
+	public List<MemMGMDto> snsTotalListCarousel(Integer snsTotalList) throws Exception {
+		return adminDao.snsTotalListCarousel(snsTotalList);
+	}
+
+	/* 포스트 태그 정보 */
+	@Override
+	public List<Post_TagDto> postTagInfo(Integer snsTotalList) throws Exception {
+		return adminDao.postTagInfo(snsTotalList);
+	}
+	@Override
+	public List<MemMGMDto> snsTopList() throws Exception {
+		return adminDao.snsTopList();
 	}
 
 

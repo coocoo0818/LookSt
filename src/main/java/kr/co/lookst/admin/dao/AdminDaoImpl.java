@@ -13,6 +13,7 @@ import kr.co.lookst.main.domain.Prdt_Img;
 import kr.co.lookst.main.domain.Prdt_Option;
 import kr.co.lookst.main.domain.Product;
 import kr.co.lookst.main.domain.SearchItem;
+import kr.co.lookst.post.domain.Post_TagDto;
 
 @Repository
 public class AdminDaoImpl implements AdminDao{
@@ -116,14 +117,18 @@ public class AdminDaoImpl implements AdminDao{
 	public List<MemMGMDto> sellerApplyingsearchResultPage(SearchItem sc) throws Exception {
 		return session.selectList(namespace + "sellerApplyingsearchResultPage", sc);
 	}
+	/* 판매자 수락 */
 	@Override
 	public int sellerAgree(String seller_no) throws Exception {
 		return session.update(namespace + "sellerAgree", seller_no);
 	}
+	/* 메거진 거부 */
 	@Override
 	public int sellerReject(String seller_no) throws Exception {
 		return session.update(namespace + "sellerReject", seller_no);
 	}
+	
+	/* 상품 정보 */
 	@Override
 	public Product getproductInfo(Integer product_no) throws Exception {
 		return session.selectOne(namespace + "getproductInfo", product_no);
@@ -142,6 +147,27 @@ public class AdminDaoImpl implements AdminDao{
 		map.put("product_no", product_no);
 		map.put("prdt_option_size", prdt_option_size);
 		return session.selectList(namespace + "productColor", map);
+	}
+	
+	/* sns total list */
+	@Override
+	public List<Integer> snsTotalList() throws Exception {
+		return session.selectList(namespace + "snsTotalList");
+	}
+	
+	@Override
+	public List<MemMGMDto> snsTotalListCarousel(Integer snsTotalList) throws Exception {
+		return session.selectList(namespace + "snsTotalListCarousel", snsTotalList);
+	}
+
+	/* 포스트 태그 정보 */
+	@Override
+	public List<Post_TagDto> postTagInfo(Integer snsTotalList) throws Exception {
+		return session.selectList(namespace + "postTagInfo", snsTotalList);
+	}
+	@Override
+	public List<MemMGMDto> snsTopList() throws Exception {
+		return session.selectList(namespace + "snsTopList");
 	}
 
 }

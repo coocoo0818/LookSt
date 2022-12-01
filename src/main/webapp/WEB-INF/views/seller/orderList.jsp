@@ -45,6 +45,29 @@
 				error : function() {alert("error")}	
 			})
 		})
+		
+		 
+	
+
+		$(".myModal").on('click', function(){
+		
+	        
+			$('#prdt_order_no').text($(this).data("prdt_order_no")),
+			$('#member_name').text($(this).data("member_name")),
+			$('#product_name').text($(this).data("product_name")),
+			$('#product_no').text($(this).data("product_no")),
+			$('#payment').text($(this).data("payment")),
+			$('#prdt_order_date').text($(this).data("prdt_order_date")),
+			$('#prdt_order_type').text($(this).data("prdt_order_type")),
+			$('#prdt_order_person').text($(this).data("prdt_order_person")),
+			$('#prdt_order_addr').text($(this).data("prdt_order_addr")),
+			$('#prdt_order_addr2').text($(this).data("prdt_order_addr2")),
+			$('#prdt_order_phone').text($(this).data("prdt_order_phone")),
+			$('#prdt_order_quan').text($(this).data("prdt_order_quan")),
+			$('#product_price').text($(this).data("product_price")),
+			$('#prdt_order_way').text($(this).data("prdt_order_way"))
+		});		
+		
 	})
 </script>
 
@@ -204,7 +227,21 @@
 							class="btn btn-outline-dark btn-sm OrderStatusMod"
 							id="OrderStatusMod" />
 							<button type="button" class="btn btn-outline-dark btn-sm myModal"
-								id="myModal" data-bs-toggle="modal"
+								id="myModal" data-bs-toggle="modal" 
+								data-prdt_order_no="${orderListDto.prdt_order_no }"
+								data-member_name = "${orderListDto.member_name }"
+								data-product_name = "${orderListDto.product_name }"
+								data-product_no = "${orderListDto.product_no }"
+								data-payment = "${orderListDto.payment }"
+								data-prdt_order_date = "${orderListDto.prdt_order_date }"
+								data-prdt_order_type = "${orderListDto.prdt_order_type }"
+								data-prdt_order_person = "${orderListDto.prdt_order_person }"
+								data-prdt_order_addr = "${orderListDto.prdt_order_addr }"
+								data-prdt_order_addr2 = "${orderListDto.prdt_order_addr2 }"
+								data-prdt_order_phone = "${orderListDto.prdt_order_phone }"
+								data-prdt_order_quan = "${orderListDto.prdt_order_quan }"
+								data-product_price = "${orderListDto.product_price }"
+								data-prdt_order_way = "${orderListDto.prdt_order_way }"
 								data-bs-target="#staticBackdrop">VIEW</button></td>
 					</tr>
 				</c:forEach>
@@ -273,15 +310,21 @@
 					<button type="button" class="btn-close" data-bs-dismiss="modal"
 						aria-label="Close"></button>
 				</div>
-				<div class="modal-body">
-					<div class="detail-info">
-						<ul>
-							<br />
-							<li><span id="Context">주문번호${dto.prdt_order_no }
-									${Payment}${od }</span></li>
-						</ul>
+					<div class="modal-body fs-4" style="text-align:left;">
+						  <span>주문번호 : </span><span id=prdt_order_no ></span><br/>
+						  <span>주문자 : </span><span id=member_name></span><br/>
+						  <span>상품명 : </span><span id=product_name></span><br/>
+						  <span>상품번호 : </span><span id=product_no></span><br/>
+						  <span>결제금액 : </span><span id=payment></span><span>원</span><br/>
+						  <span>주문일자 : </span><span id=prdt_order_date></span><br/>
+						  <span>주문상태 : </span><span id=prdt_order_type></span><br/>
+						  <span>수령인 : </span><span id=prdt_order_person></span><br/>
+						  <span>배송지 : </span><span id=prdt_order_addr></span>&nbsp;<span id=prdt_order_addr2></span><br/>
+						  <span>전화번호 : </span><span id=prdt_order_phone></span><br/>
+						  <span>주문수량 : </span><span id=prdt_order_quan></span><br/>
+						  <span>상품가격 : </span><span id=product_price></span><span>원</span><br/>
+						  <span>결제수단: </span><span id=prdt_order_way></span><br/>
 					</div>
-				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-primary"
 						data-bs-dismiss="modal">Close</button>

@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<c:set var="loginout" value="${sessionScope.res==null ? 'Login' : 'Logout' }"/>
+<c:set var="loginout" value="${sessionScope.res==null ? 'LOGIN' : 'LOGOUT' }"/>
 <c:set var="loginhidden" value="${sessionScope.res==null ? 'dropdown-item' : 'visually-hidden' }"/>
+<c:set var="logouthidden" value="${sessionScope.res!=null ? 'dropdown-item' : 'visually-hidden' }"/>
 <c:set var="loginoutlink" value="${sessionScope.res==null ? '/lookst/login' : '/lookst/logout' }" />
 
 <!DOCTYPE html>
@@ -53,7 +54,7 @@
     <div class="collapse navbar-collapse" id="navbarColor03">
 	    <ul class="navbar-nav ms-auto">
         <li class="nav-item">
-          <a class="nav-link" href="${contextPath}/post/sns_list">SNS
+          <a class="nav-link" href="${contextPath}/admin/snsTotalList">SNS
             <span class="visually-hidden">(current)</span>
           </a>
         </li>
@@ -63,16 +64,17 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Board</a>
           <div class="dropdown-menu dropdown-menu-end dropdown-menu-xs-start">
-            <a class="dropdown-item" href="${contextPath}/board/magazine">MAGAZINE</a>
-            <a class="dropdown-item" href="${contextPath}/board/review">REVIEW</a>
-            <a class="dropdown-item" href="${contextPath}/board/list">NOTICE</a>
+            <a class="dropdown-item" href="#">MAGAZIN</a>
+            <a class="dropdown-item" href="#">REVIEW</a>
+            <a class="dropdown-item" href="/lookst/board/list">NOTICE</a>
           </div>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">${loginout}</a>
           <div class="dropdown-menu dropdown-menu-end dropdown-menu-xs-start">
             <a class="dropdown-item" href="${loginoutlink}">${loginout}</a>
-            <a class="${loginhidden}" href="#">Sign-Up</a>
+            <a class="${logouthidden}" href="/lookst/member/mypage">MY PAGE</a>
+            <a class="${loginhidden}" href="/lookst/register">REGISTER</a>
           </div>
         </li>
       </ul>

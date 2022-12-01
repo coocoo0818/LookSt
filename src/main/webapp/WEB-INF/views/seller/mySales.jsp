@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,7 +27,7 @@
 	<div class="container py-3 mb-5">
 
 		<button type="button" class="btn btn-primary">
-			오늘의 할 일 <span class="badge bg-danger">4</span>
+			오늘의 할 일 <span class="badge bg-danger">${fn:length(newSalelist) + fn:length(newCancellist) }</span>
 		</button>
 		<div class="row row-cols-1 row-cols-md-2">
 			<div class="col">
@@ -34,11 +36,11 @@
 					<div class="card-body">
 						<div class="row justify-content-between pb-3">
 							<div class="col-6">
-								<h5 class="card-title">신규주문</h5>
+								<h5 class="card-title">신규주문(결제완료)</h5>
 							</div>
 							<div class="col-6">
 								<a class="card-text link-danger"
-									href="<c:url value="/seller/orderList"/>" style="float: right">2건</a>
+									href="<c:url value="/seller/orderList"/>" style="float: right">${fn:length(newSalelist) }건</a>
 							</div>
 						</div>
 						<div class="row justify-content-between pb-3">
@@ -47,7 +49,7 @@
 							</div>
 							<div class="col-6">
 								<a class="card-text link-danger"
-									href="<c:url value="/seller/refundList"/>" style="float: right">2건</a>
+									href="<c:url value="/seller/refundList"/>" style="float: right">${fn:length(newCancellist) }건</a>
 							</div>
 						</div>
 					</div>

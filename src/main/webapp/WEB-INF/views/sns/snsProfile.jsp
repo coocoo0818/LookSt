@@ -10,37 +10,118 @@
 <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 
 <style type="text/css">
-.profileEdit_Btn {
-	margin-left: 100px;
-}
-
-.pro_img_box {
-	width: 300px;
-	height: 300px;
-	border-radius: 70%;
-}
-
-#profile_img {
-	width: 300px;
-	height: 300px;
-	border-radius: 70%;
-	object-fit: cover;
-}
-
-.feed_img {
-	width: 100%;
-	height: 400px;
-	object-fit: cover;
-}
-
-@media ( max-width : 576px;) {
-}
+	.profileEdit_Btn {
+		margin-left: 100px;
+	}
+	
+	.pro_img_box {
+		width: 300px;
+		height: 300px;
+		border-radius: 70%;
+	}
+	
+	#profile_img {
+		width: 300px;
+		height: 300px;
+		border-radius: 70%;
+		object-fit: cover;
+	}
+	
+	.feed_img {
+		width: 100%;
+		height: 400px;
+		object-fit: cover;
+	}
+	
+	
+	@media ( max-width : 576px;) {
+	}
+	
+	.follow_thmbnail {
+		width: 70px;
+		height: 70px;
+		object-fit: cover;
+		margin-right: 15px;
+		border: 1px solid #E2E2E2;
+		padding: 1%;
+	}
 </style>
 
 <script type="text/javascript">
-	// 	let msg = "${msg}"\
-	// 	if (msg == "MOD_ERR")
-	// 		alert("프로필 수정에 실패하였습니다. 다시 시도해 주세요.")
+	
+	$(document).ready(function() {
+		// 팔로잉 프로필화면 이동
+		$('.followingIDbox').on('click', function() {
+			let member_id = $(this).children().attr("data-member_id")
+			alert(member_nick)
+			location.href = '${contextPath}/sns/snsProfile/?member_id='+member_id;
+		});
+		
+		// 팔로워 프로필화면 이동
+		$('.followerIDbox').on('click', function() {
+			let member_id = $(this).children().attr("data-member_id")
+			alert(member_nick)
+			location.href = '${contextPath}/sns/snsProfile/?member_id='+member_id;
+		});
+		
+		// 개인 피드 리스트 이동
+		$('.Personal_post').on('click', function() {
+			let member_id = $(this).children().attr("data-member_id")
+			alert(member_nick)
+			location.href = '${contextPath}/sns/personalPost/?member_id='+member_id;
+		});
+		
+		
+		
+		$('#follow-btn').on('click', function follow() {
+			follow(true);
+		});
+
+		$('#unfollow-btn').on('click', function follow() {
+			follow(false);
+		});
+
+		function follow(check) {
+			if(check) {
+				
+				$.ajax({
+					type: "POST",
+					url: "/sns/follow/${member_id}",
+					success: function(result) {
+						alert()
+						console.log("result : " + result);
+						if(result === "FollowOK"){
+							$(".follow").html('<button class="followBtn btn btn-primary fs-4 ms-auto" id="unfollow-btn">언팔로우</button>');
+							location.href="/sns/snsProfile/?member_id="${member_id};
+						}
+					},
+					error: alert("에러")
+				});
+			} else {
+				$.ajax({
+					type: "POST",
+					url: "/sns/unfollow/${member_id.id}",
+					headers: {
+						"Content-Type": "application/json",
+						"X-HTTP-Method-Override": "POST"
+					},
+					success: function(result) {
+						console.log("result : " + result);
+						if(result === "UnFollowOK"){
+							$(".follow").html('<button class="followBtn btn btn-primary fs-4 ms-auto" id="follow-btn">팔로우</button>');
+							location.href="/sns/snsProfile/?member_id="${member_id};
+						}
+					}
+				});
+			}
+		}
+		
+		
+		
+		
+	});
+	
+	
 </script>
 
 <title>snsProfile</title>
@@ -57,11 +138,11 @@
 	<!-- myProfile 끝 -->
 	<!-- 프로필 정보 -->
 	<div class="profile container justify-content-center">
-		<div class="profile-card card mb-5"
-			style="max-width: 100%; border: none;">
+		<div class="profile-card card mb-5 pb-5"
+			style="max-width: 100%; border: none; border-bottom: 1px solid #E2E2E2;">
 			<div class="row g-0">
 				<!-- 프로필 이미지-->
-				<div class="profile_img col-sm-6">
+				<div class="profile_img col-6">
 					<div class="col-6 offset-3 ">
 						<div class="pro_img_box">
 							<img
@@ -75,8 +156,7 @@
 					<div class="card-body">
 						<!-- nickname -->
 						<div class="nickname fw-bold fs-1 mb-md-4">${pro_info.member_nick }
-
-							<c:if test="${'@database' eq pro_info.member_id }">
+							<c:if test="${login_Id == pro_info.member_id }">
 								<!-- 프로필 수정-->
 								<button type="button"
 									class="profileEdit_Btn btn btn-primary fs-4 ms-auto"
@@ -91,10 +171,11 @@
 									&nbsp; 프로필 수정
 								</button>
 							</c:if>
-							
-							<c:if test="${'@database' ne pro_info.member_id }">
-								<button type="button"
-									class="profileEdit_Btn btn btn-primary fs-4 ms-auto">팔로우</button>
+
+							<c:if test="${login_Id != pro_info.member_id }">
+								<!-- <button type="button"
+									class="follow_Btn btn btn-primary fs-4 ms-auto" id="follow-btn">팔로우</button> -->
+								<div class="follow"><button class="followBtn btn btn-primary fs-4 ms-auto" id="follow-btn">팔로우</button></div>
 							</c:if>
 
 
@@ -131,7 +212,8 @@
 				<c:if
 					test="${fn:length(pro_feed) == null || fn:length(pro_feed) == 0 }">
 					<div class="none_feed fs-4 fw-bold"
-						style="justify-content: center;">게시물이 없습니다.</div>
+						style="justify-content: center; text-align: center;">게시물이
+						없습니다.</div>
 				</c:if>
 				<c:if
 					test="${fn:length(pro_feed) != null || fn:length(pro_feed) != 0 }">
@@ -139,9 +221,11 @@
 						<div class="col-sm-4 mb-3">
 							<div class="card" style="border: none;">
 								<div class="post_img card-body">
-									<img class="feed_img"
-										src="${pageContext.request.contextPath }/resources/img/post/${pro_feed.post_img_img}"
-										alt="...">
+									<a href="${contextPath}/sns/personalPost/?member_id=${pro_feed.member_id}" class="Personal_post" >
+										<img class="feed_img"
+											src="${pageContext.request.contextPath }/resources/img/post/${pro_feed.post_img_img}"
+											alt="...">
+									</a>
 								</div>
 							</div>
 						</div>
@@ -168,12 +252,18 @@
 						<label for="formFile" class="form-label">프로필 이미지 선택</label> <input
 							class="form-control" type="file" id="formFile">
 					</div>
+					
+					
+					<form commandName="nickMod" method="post">
 					<div class="input-group mb-3">
 						<span class="input-group-text" id="basic-addon1">닉네임</span> <input
 							type="text" class="form-control"
 							placeholder="${pro_info.member_nick }" aria-label="Username"
-							aria-describedby="basic-addon1" readonly>
+							aria-describedby="basic-addon1">
 					</div>
+					</form>
+					
+					
 					<div class="input-group">
 						<span class="input-group-text">자기소개 글</span>
 						<textarea class="form-control"
@@ -182,9 +272,7 @@
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
-						data-bs-dismiss="modal">취소</button>
-					<button type="button" class="btn btn-primary">저장</button>
+					<input type="submit" class="submit btn btn-primary" value="저장">
 				</div>
 			</div>
 		</div>
@@ -204,13 +292,25 @@
 				</div>
 				<div class="modal-body">
 					<ul>
+						<c:if
+							test="${fn:length(pro_following) == null || fn:length(pro_following) == 0 }">
+							<br/>
+							<li class="fs-4" style="list-style: none;"><span>팔로잉이 없습니다.</span></li>
 
-						<c:forEach var="pro_following" items="${pro_following }"
-							varStatus="following_status">
-							<br />
-							<li class="fs-4" style="list-style: none;"><span>${pro_following.member_nick }</span></li>
-						</c:forEach>
-
+						</c:if>
+						<c:if
+							test="${fn:length(pro_following) != null || fn:length(pro_following) != 0 }">
+							<c:forEach var="pro_following" items="${pro_following }"
+								varStatus="following_status">
+								<br/>
+								<li class="fs-4" style="list-style: none;" data-memberID="${pro_following.member_id}">
+									<a href="${contextPath}/sns/snsProfile/?member_id=${pro_following.member_id}" class="followingIDbox" style="text-decoration-line: none;">
+										<img src="${pageContext.request.contextPath }/resources/img/profile/${pro_following.profile_img}" class="follow_thmbnail rounded-circle" alt="...">
+										<span>${pro_following.member_nick }</span>
+									</a>
+								</li>
+							</c:forEach>
+						</c:if>
 					</ul>
 				</div>
 			</div>
@@ -231,12 +331,26 @@
 				</div>
 				<div class="follower modal-body" id="followerList">
 					<ul>
+					
+						<c:if
+							test="${fn:length(pro_follower) == null || fn:length(pro_follower) == 0 }">
+							<br/>
+							<li class="fs-4" style="list-style: none;"><span>팔로워가 없습니다.</span></li>
 
+						</c:if>
+						<c:if
+							test="${fn:length(pro_follower) != null || fn:length(pro_follower) != 0 }">
 						<c:forEach var="pro_follower" items="${pro_follower }"
 							varStatus="follower_status">
-							<br />
-							<li class="fs-4" style="list-style: none;"><span>${pro_follower.member_nick }</span></li>
+							<br/>
+								<li class="fs-4" style="list-style: none;">							
+									<a href="${contextPath}/sns/snsProfile/?member_id=${pro_follower.member_id}" class="followerIDbox" style="text-decoration-line: none;">
+										<img src="${pageContext.request.contextPath }/resources/img/profile/${pro_follower.profile_img}" class="follow_thmbnail rounded-circle" alt="...">
+										<span>${pro_follower.member_nick }</span>
+									</a>
+								</li>
 						</c:forEach>
+						</c:if>
 
 					</ul>
 				</div>

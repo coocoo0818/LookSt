@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.co.lookst.main.domain.SearchItem;
+import kr.co.lookst.seller.domain.MySalesDto;
 import kr.co.lookst.seller.domain.OrderListDto;
 import kr.co.lookst.seller.domain.PrdtListDto;
 
@@ -84,5 +85,23 @@ public class SellerDaoImpl implements SellerDao {
 		map.put("ReqOrderStatus", ReqOrderStatus);
 		return session.update(namespace + "ReqOrderStatusMod", map);
 	}
+
+	@Override
+	public List<MySalesDto> newSale() throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectList(namespace + "NewSale");
+	}
+
+	@Override
+	public List<MySalesDto> newCancel() throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectList(namespace + "NewCancel");
+	}
+
+//	@Override
+//	public MySalesDto todaySale() throws Exception {
+//		// TODO Auto-generated method stub
+//		return session.selectOne(namespace + "TodayAmt");
+//	}
 
 }

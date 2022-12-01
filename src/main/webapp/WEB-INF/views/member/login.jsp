@@ -5,29 +5,123 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>LookSt 로그인</title>
+
+<style type="text/css">
+.google-btn {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+  background: #e34a3c;
+}
+.kakao-btn {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+  background: #f9e000;
+}
+.naver-btn {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+  background: #41c62d;
+}
+</style>
+
 </head>
 <body>
-	<h1>로그인</h1>
+	<%@ include file="/WEB-INF/views/fix/header.jsp"%>
+	
 	<form action="login" method="post">
-		<input type="hidden" value="login">
-		<table border="1">
-			<col width="100"><col width="100">
-			<tr>
-				<th>I D</th>
-				<td><input type="text" name="member_id"></td>
-			</tr>
-			<tr>
-				<th>P W</th>
-				<td><input type="text" name="member_pw"></td>
-			</tr>
-			<tr>
-				<td colspan="2" align="center">
-					<input type="submit" value="로그인">
-					<input type="button" value="회원가입" onclick="">
-				</td>			
-			</tr>
-		 </table>
+		<div class="container mt-5 mb-5">
+			<div class="container" style="width: 500px;">
+				<div class="container">
+					<h1 class="card-header">로그인</h1>
+					
+					<div class="container">
+						<div class="input-group">
+							<div>
+								<input type="text" class="form-control mb-2" name="member_id" id="member_id" placeholder="이메일 주소" required autofocus/>
+								<input type="password" class="form-control" name="member_pw" id="member_pw" placeholder="비밀번호" required/>
+							</div>
+							<button class="btn btn-primary pl-3" id="login_btn" type="submit" style="margin-left:7px;">로그인</button>
+						</div>
+					</div>
+			
+			
+				      <p>
+				        <span id="rememberMe_Check">
+				          <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe" class="check-box"> 자동 로그인
+				        </span>
+				        <span class="signup">
+				          <a href="signup_list.html" style="color: #aaaaaa;">회원가입</a>
+				          <a style="color: #aaaaaa;">|</a>
+				          <a href="#" style="color: #aaaaaa;">아이디 찾기</a>
+				          <a style="color: #aaaaaa;">|</a>
+				          <a href="#" style="color: #aaaaaa;">비밀번호 찾기</a>
+				        </span>
+				        <svg class="icon">
+				          <use xlink:href="#icon-arrow-right"></use>
+				        </svg>
+				      </p>
+			
+			
+			
+			    
+					<div class="container">
+						<a href="#" class="google-btn" id="loginWithGoogle">
+				          <svg version="1.0" xmlns="http://www.w3.org/2000/svg"  width="50" height="50" viewBox="0 0 300.000000 300.000000"  preserveAspectRatio="xMidYMid meet">
+				            <title>google 로고</title>
+				            <g transform="translate(37.5, 265) scale(0.075,-0.075)" fill="#ffffff" stroke="none">
+				              <path d="M1402 2790 c-559 -58 -1016 -462 -1144 -1012 -32 -135 -32 -421 0 -556 103 -445 431 -807 859 -950 143 -49 249 -65 413 -65 167 0 289 18 430 64 352 115 621 383 738 734 57 171 67 241 67 465 0 113 -3 213 -7 223 -7 16 -46 17 -618 17 l-610 0 0 -240 0 -240 351 0 352 0 -6 -37 c-4 -21 -25 -76 -48 -122 -79 -159 -228 -276 -425 -333 -67 -19 -102 -23 -224 -22 -130 0 -154 3 -225 27 -257 86 -442 278 -526 547 -33 106 -34 300 -1 413 79 274 273 474 542 558 108 34 312 34 420 0 94 -29 148 -57 229 -116 l64 -47 178 178 c99 99 178 183 176 189 -2 5 -42 39 -90 75 -97 74 -227 145 -335 184 -159 56 -388 83 -560 66z"/>
+				            </g>
+				          </svg>
+				        </a>
+				
+				        <a href="#" class="kakao-btn" id="loginWithKakao">
+				          <svg width="50" height="50" viewBox="0 0 29 30" fill="none" xmlns="http://www.w3.org/2000/svg" class="login-button__item__logo">
+				            <title>kakao 로고</title>
+				            <path fill-rule="evenodd" clip-rule="evenodd" d="M15 7C10.029 7 6 10.129 6 13.989C6 16.389 7.559 18.505 9.932 19.764L8.933 23.431C8.845 23.754 9.213 24.013 9.497 23.826L13.874 20.921C14.243 20.958 14.618 20.978 15 20.978C19.971 20.978 24 17.849 24 13.989C24 10.129 19.971 7 15 7Z" fill="black"></path>
+				          </svg>
+				        </a>
+				
+				        <a href="#" class="naver-btn" id="loginWithNaver">
+				          <svg version="1.0" xmlns="http://www.w3.org/2000/svg"  width="50" height="50" viewBox="0 0 168 168"  preserveAspectRatio="xMidYMid meet">
+				            <title>naver 로고</title>
+				            <g transform="translate(-1, 165) scale(0.050,-0.050)" fill="#ffffff" stroke="none">
+				              <path d="M800 1590 l0 -850 320 0 319 0 6 418 5 418 278 -407 c153 -224 292 -412 309 -419 36 -14 559 -10 597 4 21 8 26 175 26 848 l0 838 -320 0 -319 0 -6 -415 -5 -415 -280 414 -280 415 -325 0 -325 1 0 -850z"/>
+				            </g>
+				          </svg>
+				        </a>
+					</div>
+					
+				</div>
+	        </div>
+		</div>
 	</form>
+
+
+	<%@ include file="/WEB-INF/views/fix/footer.jsp"%>
 </body>
 </html>

@@ -10,6 +10,8 @@ import kr.co.lookst.post.domain.PostDto;
 import kr.co.lookst.post.domain.Post_imgDto;
 import kr.co.lookst.post.domain.ProdInfoDto;
 import kr.co.lookst.post.domain.TpostDto;
+import kr.co.lookst.post.domain.OrderFormPageDto;
+import kr.co.lookst.post.domain.OrderPagePrdtDto;
 import kr.co.lookst.post.domain.post_com_tagDto;
 import kr.co.lookst.post.domain.snsPrdtImgDto;
 import kr.co.lookst.post.domain.sns_Main_ImgDto;
@@ -81,6 +83,21 @@ public class PostServiceImpl implements PostService{
 		// TODO Auto-generated method stub
 		return postDao.postTotalList();
 	}
+
+	@Override
+	public List<OrderPagePrdtDto> orderPagePrdt(Integer product_no) throws Exception {
+		// TODO Auto-generated method stub
+		return postDao.orderPagePrdt(product_no);
+	}
+
+	/*
+	 * @Override public orderFormPageDto orderFormpage(orderFormPageDto
+	 * orderFormpage) throws Exception { // TODO Auto-generated method stub return
+	 * postDao.orderFormpage(); }
+	 */
+
+
+
 
 
 

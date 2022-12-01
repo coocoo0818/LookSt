@@ -2,10 +2,13 @@ package kr.co.lookst.post.service;
 
 import java.util.List;
 
+/*import kr.co.lookst.post.orderPagePrdtDto;*/
 import kr.co.lookst.post.domain.PostDto;
 import kr.co.lookst.post.domain.Post_imgDto;
 import kr.co.lookst.post.domain.ProdInfoDto;
 import kr.co.lookst.post.domain.TpostDto;
+import kr.co.lookst.post.domain.OrderFormPageDto;
+import kr.co.lookst.post.domain.OrderPagePrdtDto;
 import kr.co.lookst.post.domain.post_com_tagDto;
 import kr.co.lookst.post.domain.snsPrdtImgDto;
 import kr.co.lookst.post.domain.sns_Main_ImgDto;
@@ -33,5 +36,18 @@ public interface PostService {
 	List<sns_com_tagDto> snsComTag(Integer post_no) throws Exception;					// sns_list페이지 닉네임 및 게실글, 태그
 
 	List<TpostDto> postTotalList() throws Exception;
+
+	List<OrderPagePrdtDto> orderPagePrdt(Integer product_no) throws Exception;
+
+	/*
+	 * orderFormPageDto orderFormpage(orderFormPageDto orderFormpage) throws
+	 * Exception;
+	 */
+
+
+
+	
+
+	
 	
 }

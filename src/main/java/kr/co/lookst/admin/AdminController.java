@@ -2,6 +2,8 @@ package kr.co.lookst.admin;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.lookst.admin.domain.MemMGMDto;
 import kr.co.lookst.admin.service.AdminService;
@@ -20,6 +21,7 @@ import kr.co.lookst.main.domain.Prdt_Img;
 import kr.co.lookst.main.domain.Prdt_Option;
 import kr.co.lookst.main.domain.Product;
 import kr.co.lookst.main.domain.SearchItem;
+import kr.co.lookst.post.domain.Post_TagDto;
 
 @Controller
 @RequestMapping("/admin")
@@ -288,5 +290,35 @@ public class AdminController {
 			return new ResponseEntity<List<Prdt_Option>>(HttpStatus.BAD_REQUEST);
 		}
 		/* return "redirect:/admin/productDetail"; */
+	}
+	
+	/* sns total list */
+	@RequestMapping(value="/snsTotalList", method={RequestMethod.GET})
+	public String snsTotalList(Model model, Integer post_no, HttpServletRequest request) {
+		try {
+			/* sns total list */
+			List<MemMGMDto> snsTopList = adminService.snsTopList();
+			model.addAttribute("snsTopList", snsTopList);
+			System.out.println(model);
+			/* sns total list */
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "/admin/snsTotalList";
+	}
+	
+	/* sns snsSelectTotalList list */
+	@RequestMapping(value="/snsSelectTotalList", method={RequestMethod.GET})
+	public String snsSelectTotalList(Model model, Integer post_no, HttpServletRequest request) {
+		try {
+			/* sns snsSelectTotalList list */
+			List<MemMGMDto> snsTopList = adminService.snsTopList();
+			model.addAttribute("snsTopList", snsTopList);
+			System.out.println(model);
+			/* sns snsSelectTotalList list */
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "/admin/snsTotalList";
 	}
 }

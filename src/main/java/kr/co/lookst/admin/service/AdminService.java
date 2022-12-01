@@ -7,6 +7,7 @@ import kr.co.lookst.main.domain.Prdt_Img;
 import kr.co.lookst.main.domain.Prdt_Option;
 import kr.co.lookst.main.domain.Product;
 import kr.co.lookst.main.domain.SearchItem;
+import kr.co.lookst.post.domain.Post_TagDto;
 
 public interface AdminService {
 	/* 회원 리스트 */
@@ -59,7 +60,11 @@ public interface AdminService {
 	List<Prdt_Option> getproductSize(Integer product_no) throws Exception;
 	List<Prdt_Img> getproductImg(Integer product_no) throws Exception;
 	List<Prdt_Option> productColor(Integer product_no, String prdt_option_size) throws Exception;
-
 	
+	/* sns total list */
+	List<Integer> snsTotalList() throws Exception;
+	List<MemMGMDto> snsTotalListCarousel(Integer snsTotalList) throws Exception;
+	List<Post_TagDto> postTagInfo(Integer snsTotalList) throws Exception;
+	List<MemMGMDto> snsTopList() throws Exception;
 
 }

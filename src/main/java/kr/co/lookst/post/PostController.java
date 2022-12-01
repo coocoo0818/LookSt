@@ -7,11 +7,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.co.lookst.post.domain.PostDto;
 import kr.co.lookst.post.domain.Post_imgDto;
 import kr.co.lookst.post.domain.ProdInfoDto;
 import kr.co.lookst.post.domain.TpostDto;
+import kr.co.lookst.post.domain.OrderPagePrdtDto;
 import kr.co.lookst.post.domain.post_com_tagDto;
 import kr.co.lookst.post.domain.snsPrdtImgDto;
 import kr.co.lookst.post.domain.sns_Main_ImgDto;
@@ -53,20 +55,24 @@ public class PostController {
 	
 
 	@GetMapping("/sns_list")
-	public String sns_main(Model m, Integer post_no) {
+	public String sns_main(Model m) {
 		try {
-			post_no = 1;
 			List<TpostDto> postTotalList = postService.postTotalList();
 			m.addAttribute("postTotalList", postTotalList);
 			System.out.println(postTotalList);
-			List<sns_Main_ImgDto> snsmainimg = postService.snsmainimg(post_no);
-			m.addAttribute("snsmainimg", snsmainimg);
+			System.out.println(m);
 			
-			List<snsPrdtImgDto> snsPrdtImg = postService.snsPrdtImg(post_no);
-			m.addAttribute("snsPrdtImg", snsPrdtImg);
-			
-			List<sns_com_tagDto> snsComTag = postService.snsComTag(post_no);
-			m.addAttribute("snsComTag", snsComTag);
+			/*
+			 * List<sns_Main_ImgDto> snsmainimg = postService.snsmainimg(postTotalList);
+			 * m.addAttribute("snsmainimg", snsmainimg);
+			 */
+			  
+			/* List<snsPrdtImgDto> snsPrdtImg = postService.snsPrdtImg(postTotalList);
+			 * m.addAttribute("snsPrdtImg", snsPrdtImg);
+			 * 
+			 * List<sns_com_tagDto> snsComTag = postService.snsComTag(postTotalList);
+			 * m.addAttribute("snsComTag", snsComTag);
+			 */
 			 			
 			//List<Post_imgDto> post_list = postService.getpostlistimg();
 			//m.addAttribute("post_list", post_list);
@@ -77,6 +83,18 @@ public class PostController {
 		return "/post/sns_list";
 	}
 
+	@GetMapping("/orderFormpage")
+	public String orderFormpage(OrderPagePrdtDto orderPagePrdtDto, Model m) {
+		try {
+			List<OrderPagePrdtDto> orderPagePrdt = postService.orderPagePrdt(null);
+			m.addAttribute("orderPagePrdt", orderPagePrdt);
 
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "/post/orderFormpage";
+	}
+	
+	 
 
 }

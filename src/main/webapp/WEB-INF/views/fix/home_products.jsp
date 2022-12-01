@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,7 +35,7 @@
 							<div class="card-body">
 								<h5 class="card-title text-decoration-underline">${new_prdt.product_name}</h5>
 								<p class="card-text">${new_prdt.product_info}</p>
-								<p class="fw-bold">${new_prdt.product_price}</p>
+								<p class="fw-bold"><fmt:formatNumber value="${new_prdt.product_price}" pattern="#,###" />원</p>
 								<h6 class="text-muted">즉시 구매가</h6>
 							</div>
 						</div>

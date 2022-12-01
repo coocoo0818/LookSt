@@ -136,6 +136,8 @@
 					<th scope="col">상품이미지</th>
 					<th scope="col">카테고리</th>
 					<th scope="col">상품명</th>
+					<th scope="col">사이즈</th>
+					<th scope="col">색상</th>
 					<th scope="col">판매가</th>
 					<th scope="col">재고</th>
 					<th scope="col"></th>
@@ -157,6 +159,8 @@
 								test="${prdtListDto.product_kind eq 'A'}">잡화</c:if> <c:if
 								test="${prdtListDto.product_kind eq 'S'}">신발</c:if></td>
 						<td data-title="PrdtInfo">${prdtListDto.product_name }</td>
+						<td data-title="PrdtSize">${prdtListDto.prdt_option_size }</td>
+						<td data-title="PrdtColor">${prdtListDto.prdt_option_color }</td>
 						<td data-title="PrdtPrice" data-type="currency">${prdtListDto.product_price }</td>
 						<td class="stock" data-title="PtdtStock" data-type="currency"><input
 							type="number" min="0" max="100" id="upstock" name="upstock"

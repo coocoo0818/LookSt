@@ -3,8 +3,10 @@ package kr.co.lookst.seller.service;
 import java.util.List;
 
 import kr.co.lookst.main.domain.SearchItem;
+import kr.co.lookst.seller.domain.MySalesDto;
 import kr.co.lookst.seller.domain.OrderListDto;
 import kr.co.lookst.seller.domain.PrdtListDto;
+
 
 public interface SellerService {
 
@@ -27,5 +29,12 @@ public interface SellerService {
 	int OrderStatusMod(Integer prdt_order_no, String orderStatus) throws Exception;
 
 	int ReqOrderStatusMod(Integer prdt_order_no, String ReqOrderStatus) throws Exception;
+
+	List<MySalesDto> newSale() throws Exception;
+	
+	List<MySalesDto> newCancel() throws Exception;
+	
+//	MySalesDto todaySale() throws Exception;
+	
 
 }

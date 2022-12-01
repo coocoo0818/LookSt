@@ -1,6 +1,8 @@
 package kr.co.lookst.sns.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,24 +19,68 @@ public class SnsProfileDaoImpl implements SnsProfileDao {
 	private SqlSession session;
 	private static String namespace = "kr.co.lookst.sns.dao.snsMapper.";
 	
+	// 프로필 정보
 	@Override
 	public SnsProfileDto infoselect(String member_id) throws Exception {
 		return session.selectOne(namespace+"profileInfo", member_id);
 	}
-
+	// 프로필 피드
 	@Override
 	public List<ProfileFeedDto> profileFeed(String member_id) throws Exception {
 		return session.selectList(namespace+"profileFeed", member_id);
 	}
-
-	@Override
-	public List<FollowDto> followerList(String member_id) throws Exception {
-		return session.selectList(namespace+"followerList", member_id);
-	}
-
+	// 팔로잉 리스트
 	@Override
 	public List<FollowDto> followingList(String member_id) throws Exception {
-		return session.selectList(namespace+"followingList", member_id);
+		return session.selectList(namespace+"selectActiveUserList", member_id);
 	}
+	// 팔로워 리스트
+	@Override
+	public List<FollowDto> followerList(String member_id) throws Exception {
+		return session.selectList(namespace+"selectPassiveUserList", member_id);
+	}
+	// 팔로우
+	@Override
+	public int follow(String member_id, String following) {
+		Map map = new HashMap();
+		map.put("member_id", member_id);
+		map.put("following", following);
+		return session.insert(namespace+"follow", map);
+	}
+	// 언팔로우
+	@Override
+	public int unfollow(String member_id, String following) {
+		Map map = new HashMap();
+		map.put("member_id", member_id);
+		map.put("following", following);
+		return session.delete(namespace+"unfollow", map);
+	}
+	// 팔로우 유무
+	@Override
+	public int isFollow(String member_id, String following) {
+		Map map = new HashMap();
+		map.put("member_id", member_id);
+		map.put("following", following);
+		/* System.out.println(map); */
+		return session.selectOne(namespace+"isFollow", map);
+	}
+
+	@Override
+	public int deleteUserAllFollow(String member_id) {
+		// TODO Auto-generated method stub
+		return session.delete(namespace+"deleteUserAllFollow", member_id);
+	}
+
+	@Override
+	public int nickModify(String member_id, String member_nick) throws Exception {
+		Map map = new HashMap();
+		map.put("member_id", member_id);
+		map.put("member_nick", member_nick);
+		return session.update(namespace + "authModify", map);
+	}
+
+	
+
+
 	
 }

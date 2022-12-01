@@ -2,17 +2,25 @@ package kr.co.lookst.seller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.lookst.main.domain.PageResolver;
+import kr.co.lookst.main.domain.Prdt_Option;
 import kr.co.lookst.main.domain.SearchItem;
+import kr.co.lookst.seller.domain.MySalesDto;
 import kr.co.lookst.seller.domain.OrderListDto;
 import kr.co.lookst.seller.domain.PrdtListDto;
 import kr.co.lookst.seller.service.SellerService;
@@ -26,12 +34,19 @@ import kr.co.lookst.seller.service.SellerService;
 @RequestMapping("/seller")
 public class SellerController {
 
+	HttpSession session;
+	
 	@Autowired
 	SellerService sellerService;
 	
 	
 	@GetMapping("/prdtList")
-	public String prdtpage(SearchItem sc, Model m) {
+	public String prdtpage(SearchItem sc, Model m, HttpServletRequest request) {
+		
+		session = request.getSession();
+		System.out.println(session.getAttribute("res"));
+		session.getAttribute("res");
+		
 		try {
 			int totalCnt = sellerService.getSearchResultCntP(sc);
 			m.addAttribute("totalCnt", totalCnt);
@@ -113,7 +128,6 @@ public class SellerController {
 	}
 	
 	
-	
 	@GetMapping("/refundList")
 	public String refundpage(SearchItem sc, Model m) {
 		
@@ -157,7 +171,22 @@ public class SellerController {
 	}
 	
 	@GetMapping("/mySales")
-	public String adminForm5() {
+	public String mySalespage(Model m) {
+		
+		try {
+			List<MySalesDto> newSalelist = sellerService.newSale();
+			m.addAttribute("newSalelist", newSalelist);
+			List<MySalesDto> newCancellist = sellerService.newCancel();
+			m.addAttribute("newCancellist", newCancellist);
+//			MySalesDto todaySale = sellerService.todaySale();
+//			m.addAttribute("todaySale", todaySale);
+//			System.out.println(todaySale);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+			
+		
 		return "seller/mySales";
 
 	}

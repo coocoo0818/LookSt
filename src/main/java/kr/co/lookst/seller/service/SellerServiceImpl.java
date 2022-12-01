@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import kr.co.lookst.main.domain.SearchItem;
 import kr.co.lookst.seller.dao.SellerDao;
+import kr.co.lookst.seller.domain.MySalesDto;
 import kr.co.lookst.seller.domain.OrderListDto;
 import kr.co.lookst.seller.domain.PrdtListDto;
 
@@ -77,5 +78,24 @@ public class SellerServiceImpl implements SellerService {
 		// TODO Auto-generated method stub
 		return sellerDao.ReqOrderStatusMod(prdt_order_no, ReqOrderStatus);
 	}
+
+	@Override
+	public List<MySalesDto> newSale() throws Exception {
+		// TODO Auto-generated method stub
+		return sellerDao.newSale();
+	}
+
+	@Override
+	public List<MySalesDto> newCancel() throws Exception {
+		// TODO Auto-generated method stub
+		return sellerDao.newCancel();
+	}
+
+//	@Override
+//	public MySalesDto todaySale() throws Exception {
+//		// TODO Auto-generated method stub
+//		return sellerDao.todaySale();
+//	}
+
 
 }
