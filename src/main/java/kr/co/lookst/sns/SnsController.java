@@ -42,7 +42,7 @@ public class SnsController {
 
 	@Autowired
 	SnsService snsService;
-	
+
 	@Autowired
 	SnsProfileDao snsProfileDao;
 
@@ -64,10 +64,10 @@ public class SnsController {
 			List<FollowDto> pro_following = snsService.getFollowing(member_id);
 			int checkFollow = snsService.followCheck(login_id, member_id);
 			/*
-			 * int follow = snsService.doFollow(login_id, member_id); 
-			 * int unfollow = snsService.doUnFollow(login_id, member_id);
+			 * int follow = snsService.doFollow(login_id, member_id); int unfollow =
+			 * snsService.doUnFollow(login_id, member_id);
 			 */
-			
+
 			System.out.println(checkFollow);
 			System.out.println("로그인아이디" + login_id);
 			System.out.println("프로필아이디" + member_id);
@@ -77,7 +77,7 @@ public class SnsController {
 			m.addAttribute("pro_following", pro_following);
 			m.addAttribute("login_Id", login_id);
 			m.addAttribute("checkFollow", checkFollow);
-			
+
 			System.out.println(m);
 
 		} catch (Exception e) {
@@ -91,22 +91,47 @@ public class SnsController {
 
 		return "sns/personalPost";
 	}
-	/*
-	 * @PostMapping("follow/{member_id)") public String follow(String member_id,
-	 * Model m, @RequestParam("member_id") String member_nick, HttpServletRequest
-	 * request) {
-	 * 
-	 * HttpSession session = request.getSession(); String login_id = (String)
-	 * session.getAttribute("res");
-	 * 
-	 * try { int checkFollow = snsService.followCheck(login_id, member_id);
-	 * 
-	 * m.addAttribute("checkFollow", checkFollow); int follow =
-	 * snsService.doFollow(login_id, member_id); System.out.println(checkFollow); }
-	 * catch (Exception e) { e.printStackTrace(); }
-	 * 
-	 * return "FollowOk"; }
-	 */
+
+	@RequestMapping(value = "/follow", method = { RequestMethod.POST })
+	public String follow(String member_id, Model m, HttpServletRequest request) {
+
+		HttpSession session = request.getSession();
+		String login_id = (String) session.getAttribute("res");
+
+		try {
+			int checkFollow = snsService.followCheck(login_id, member_id);
+
+			m.addAttribute("checkFollow", checkFollow);
+			int follow = snsService.doFollow(login_id, member_id);
+			System.out.println(checkFollow);
+			System.out.println("팔로우성공(컨트롤러)");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return "redirect:/sns/snsProfile";
+	}
+
+	@RequestMapping(value = "/unfollow", method = { RequestMethod.POST })
+	public String unfollow(String member_id, Model m, HttpServletRequest request) {
+
+		HttpSession session = request.getSession();
+		String login_id = (String) session.getAttribute("res");
+
+		try {
+			int checkFollow = snsService.followCheck(login_id, member_id);
+
+			m.addAttribute("checkFollow", checkFollow);
+			int unfollow = snsService.doFollow(login_id, member_id);
+			System.out.println(checkFollow);
+			System.out.println("팔로우취소(컨트롤러)");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return "redirect:/sns/snsProfile";
+	}
+
 //	// 닉네임 수정 
 //	@RequestMapping(value="/nickNameMod", method={RequestMethod.POST})
 //	public String memberNickMod(Model model,  

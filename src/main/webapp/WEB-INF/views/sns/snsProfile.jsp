@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+
+<c:set var="follow_unfollow" value="${checkFollow==1 ? '팔로우 취소' : '팔로우' }"/>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,14 +57,12 @@
 		// 팔로잉 프로필화면 이동
 		$('.followingIDbox').on('click', function() {
 			let member_id = $(this).children().attr("data-member_id")
-			alert(member_nick)
 			location.href = '${contextPath}/sns/snsProfile/?member_id='+member_id;
 		});
 		
 		// 팔로워 프로필화면 이동
 		$('.followerIDbox').on('click', function() {
 			let member_id = $(this).children().attr("data-member_id")
-			alert(member_nick)
 			location.href = '${contextPath}/sns/snsProfile/?member_id='+member_id;
 		});
 		
@@ -71,55 +73,46 @@
 			location.href = '${contextPath}/sns/personalPost/?member_id='+member_id;
 		});
 		
-		
-		
-		$('#follow-btn').on('click', function follow() {
-			follow(true);
-		});
-
-		$('#unfollow-btn').on('click', function follow() {
-			follow(false);
-		});
-
-		function follow(check) {
-			if(check) {
-				
+		// 팔로우
+		$('#follow-unfollow-btn').on('click', function() {
+			let member_id = $(this).attr("data-member_id")
+			let following_id = $(this).attr("data-following_id")
+			let checkfollow = $(this).attr("data-checkfollow")
+			console.log("member_id : " + member_id);
+			console.log("following_id : " + following_id);
+			console.log("checkfollow : " + checkfollow);
+			if(checkfollow != 1){
 				$.ajax({
-					type: "POST",
-					url: "/sns/follow/${member_id}",
-					success: function(result) {
-						alert()
-						console.log("result : " + result);
-						if(result === "FollowOK"){
-							$(".follow").html('<button class="followBtn btn btn-primary fs-4 ms-auto" id="unfollow-btn">언팔로우</button>');
-							location.href="/sns/snsProfile/?member_id="${member_id};
-						}
+					type : 'post',
+					url : '${contextPath}/sns/follow',
+					data : {
+						login_id : member_id,
+						member_id : following_id
 					},
-					error: alert("에러")
-				});
-			} else {
+					success : function(data) {
+						alert("팔로잉 성공!!")
+						location.reload()
+					},
+					error : function() {alert("팔로잉 실패!!")}
+				})
+			} 
+			else {
 				$.ajax({
-					type: "POST",
-					url: "/sns/unfollow/${member_id.id}",
-					headers: {
-						"Content-Type": "application/json",
-						"X-HTTP-Method-Override": "POST"
+					type : 'post',
+					url : '${contextPath}/sns/unfollow',
+					data : {
+						member_id : member_id,
+						following : following_id
 					},
-					success: function(result) {
-						console.log("result : " + result);
-						if(result === "UnFollowOK"){
-							$(".follow").html('<button class="followBtn btn btn-primary fs-4 ms-auto" id="follow-btn">팔로우</button>');
-							location.href="/sns/snsProfile/?member_id="${member_id};
-						}
-					}
-				});
+					success : function(data) {
+						alert("팔로잉 취소!!")
+						location.reload()
+					},
+					error : function() {alert("취소 실패!!")}
+				})
 			}
-		}
-		
-		
-		
-		
-	});
+		})
+	})
 	
 	
 </script>
@@ -173,9 +166,9 @@
 							</c:if>
 
 							<c:if test="${login_Id != pro_info.member_id }">
-								<!-- <button type="button"
-									class="follow_Btn btn btn-primary fs-4 ms-auto" id="follow-btn">팔로우</button> -->
-								<div class="follow"><button class="followBtn btn btn-primary fs-4 ms-auto" id="follow-btn">팔로우</button></div>
+								<button class="followBtn btn btn-primary fs-4 ms-auto" id="follow-unfollow-btn"
+								 data-member_id = "${login_Id }" data-following_id = "${pro_info.member_id }" 
+								 data-checkfollow = "">${follow_unfollow }</button></div>
 							</c:if>
 
 
