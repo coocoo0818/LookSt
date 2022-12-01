@@ -24,7 +24,7 @@ import kr.co.lookst.board.service.CommentService;
 public class CommentController {
 
 	@Autowired
-	CommentService service;
+	CommentService service;//ds
 	
 	@PatchMapping("/comments/{comment_no}")
 	public ResponseEntity<String> modify(@PathVariable Integer comment_no, @RequestBody CommentDto dto, HttpSession session) {
