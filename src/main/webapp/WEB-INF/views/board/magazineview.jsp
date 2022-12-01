@@ -14,35 +14,55 @@
 <style type="text/css">
 
 
-a:hover {
-	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
-	/* IE 8 */
-	filter: alpha(opacity = 50); /* IE7 */
-	opacity: 0.6;
-	text-decoration: none;
+.container.gallery-container {
+	background-color: #fff;
+	color: #35373a;
+	min-height: 50vh;
+	padding: 30px 50px;
 }
 
+.gallery-container h1 {
+	text-align: center;
+	margin-top: 50px;
+	font-family: 'Droid Sans', sans-serif;
+	font-weight: bold;
+}
 
-/* Thumbnail Box */
-.caption {
-	height: 140px;
+.gallery-container p.page-description {
+	text-align: center;
+	margin: 25px auto;
+	font-size: 18px;
+	color: #999;
+}
+
+.tz-gallery {
+	padding: 40px;
+}
+
+/* Override bootstrap column paddings */
+.tz-gallery .row>div {
+	padding: 2px;
+}
+
+.tz-gallery .lightbox img {
 	width: 100%;
-	margin: 20px 0px;
-	padding: 20px;
-	box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	-webkit-box-sizing: border-box;
+	border-radius: 0;
+	position: relative;
 }
 
+@media ( max-width : 768px) {
+	body {
+		padding: 0;
+	}
+}
 
+/*밑단 설명 CSS*/
+div {
+	word-break: break-all;
+}
 
-
-
-.btn.btn-mini {
-	background: #a83b3b;
-	border-radius: 0 0 0 0;
-	font-size: 0.63rem;
-	text-shadow: none !important;
+img {
+	max-width: 100%;
 }
 </style>
 </head>
