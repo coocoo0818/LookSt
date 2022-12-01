@@ -29,18 +29,16 @@ public class CommentController {
 	@PatchMapping("/comments/{comment_no}")
 	public ResponseEntity<String> modify(@PathVariable Integer comment_no, @RequestBody CommentDto dto, HttpSession session) {
 		String member_id = (String) session.getAttribute("res");
-//		String commenter = "ezen";
 		dto.setMember_id(member_id);
 		dto.setComment_no(comment_no);
 		System.out.println("dto =" + dto);
-		
-		
+
 		try {
 			if(service.modify(dto) != 1 )
 				throw new Exception("Update failed.");
-			return new ResponseEntity<String>("MOD_OK", HttpStatus.OK);
+			return new ResponseEntity<>("MOD_OK", HttpStatus.OK);
 		} catch(Exception e) { e.printStackTrace(); 
-			return new ResponseEntity<String>("MOD_ERR", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>("MOD_ERR", HttpStatus.BAD_REQUEST);
 		}
 	}	
 	
@@ -73,18 +71,16 @@ public class CommentController {
 	// 지정된 댓글을 삭제하는 메서드
 	
 	@DeleteMapping("/comments/{cno}")
-	public ResponseEntity<String> remove(@PathVariable Integer comment_no,  Integer board_no, HttpSession session){
-		
+	public ResponseEntity<String> remove(@PathVariable Integer cno,  Integer board_no, HttpSession session){
+
 		String member_id = (String) session.getAttribute("res");
 		
 		try {
-		int rowCnt = service.remove(comment_no, board_no, member_id);
+		int rowCnt = service.remove(cno, board_no, member_id);
 		
 		if(rowCnt != 1) 
 			throw new Exception("Delete Failed");
-		
 			return new ResponseEntity<>("DEL_OK", HttpStatus.OK);
-		
 		} catch(Exception e) {
 			e.printStackTrace();
 			
