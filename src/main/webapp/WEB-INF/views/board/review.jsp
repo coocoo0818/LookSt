@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-	
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,183 +10,179 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style type="text/css">
-.re_h2 {
-	font-family: 'Open Sans', sans-serif;
-	text-align: center;
-	font-size: 22px;
-	font-weight: 700;
-	color: #1c1c1c;
-	letter-spacing: 0.5px;
-	margin-top: 60px;
-	margin-bottom: 50px;
+
+
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	font-family: "Noto Sans KR", sans = serif;
 }
 
-.bbs-table-list thead th {
-	height: 25px;
-	color: #9d9d9d;
-	/* font-size: 12px; */
-	border-bottom: 1px solid #e5e5e5;
+a {
+	text-decoration: none !important;
+	color: black;
 }
 
-.bbs-table-list thead th, .bbs-table-list tbody td {
-	padding: 6px 0;
+.hover {
+  display: inline-block;
+  transition: .3s;
+  -webkit-transform: scale(1);
+  transform: scale(1);
+}
+.hover:hover {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+
+button, input {
+	border: none;
+	outline: none;
+}
+
+.board-container {
+	width: 60%;
+	height: 1200px;
+	margin: 0 auto;
+}
+
+.search-container {
+	background-color: rgb(253, 253, 250);
+	width: 100%;
+	height: 110px;
+	border: 1px solid #ddd;
+	margin-top: 10px;
+	margin-bottom: 30px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 table {
-	font-size: 12px;
-	line-height: 1.25;
-	color: #777;
-	font-family: 'Nanum Gothic', verdana, Dotum, AppleGothic, Helvetica,
-		sans-serif;
-}
-
-.bbs-table-list {
-	text-align: -webkit-center;
-	display: grid;
-	border-top: 1px solid #333;
-}
-
-fieldset {
-	border: none;
-	text-align: end;
-}
-
-.esosub_s {
-	font-style: 10px;
-	font-size: 12px;
-	line-height: 1.25;
-	color: #777;
-	font-family: 'Nanum Gothic', verdana, Dotum, AppleGothic, Helvetica,
-		sans-serif;
 	border-collapse: collapse;
-	border-spacing: 0;
-	word-wrap: break-word;
-	word-break: keep-all;
-	text-align: center;
+	width: 100%;
+	border-top: 2px solid rgb(39, 39, 39);
 }
 
-.esosub_s_l {
-	font-family: 'Open Sans', sans-serif;
+tr:nth-child(even) {
+	background-color: #f0f0f070;
+}
+
+th, td {
+	width: 300px;
+	padding: 10px 12px;
+	border-bottom: 1px solid #ddd;
+}
+
+td {
+	color: rgb(53, 53, 53);
+}
+
+li{ list-style: none;}
+
+.no {
+	width: 150px;
+}
+
+.title {
+	width: 50%;
+}
+
+td.title {
+	text-align: left;
+}
+
+td.writer {
+	text-align: left;
+}
+
+/* td.viewcnt {
 	text-align: center;
-	font-weight: 300;
-	color: #1c1c1c;
-	letter-spacing: 0.5px;
+}
+ */
+td.title:hover {
+	text-decoration: underline;
+}
+
+/* .paging {
+	color: black;
+	width: 110%;
+	align-items: center;
 }
 
 .page {
+	color: black;
+	padding: 6px;
+	margin-right: 10px;
+}
+
+.paging-container {
+	width: 110%;
+	height: 70px;
 	display: flex;
-	font-size: 1rem;
-	color: #aaa;
-	justify-content: center; -
-	-swiper-theme-color: #007aff; -
-	-swiper-navigation-size: 44px;
-	font-family: 'Noto Sans KR', serif;
-	line-height: 1rem;
-	letter-spacing: 0.1px;
-}
+	margin-top: 50px;
+	margin: auto;
+} */
 
-.page p {
-	margin: 0 12px;
-	padding: 0 8px;
-	line-height: 2rem;
-	cursor: pointer;
-}
-
-.checkpage {
-	font-size: 26px;
-	font-weight: 700;
-	color: #222;
-	border-bottom: 4px solid #e6002d;
-}
-
-.bbs-table-list tbody td {
-	padding: 6px 0;
-}
-
-.bbs-table-list tbody td {
-	/* height: 25px; */
-	border-bottom: 1px solid #e5e5e5;
-}
-
-.tb-center {
-	text-align: center;
-}
-
-.tb-left #new {
-	width: 55px;
-}
-
-/* 여기부터! */
-.key-wrap {
-	display: inline-block;
-}
-
-.white_e_s {
-	background-color: #ffffff;
-	border: 1px solid #e1e1e1;
-	display: inline-block;
-	cursor: pointer;
-	color: #666666;
-	font-family: 'Open Sans', verdana, Dotum, AppleGothic, Helvetica,
-		sans-serif;
-	font-size: 10px;
-	letter-spacing: 0.5px;
-	font-weight: 600;
-	padding: 3px 12px;
-	text-decoration: none;
-	vertical-align: middle;
-}
-
-.MS_input_txt {
-	margin-right: 5px;
-	line-height: 20px;
-	border: 1px solid #e7e7e7;
-	height: 23px;
-	vertical-align: middle;
-}
-
-[type=checkbox], [type=radio] {
-	vertical-align: middle;
-}
-/* 여기까지 끝! */
-.bbs-tit {
-	font-size: 9px;
-}
-
-section {
-	text-align: right;
-}
-
-.black_e_s {
-	background-color: #333333;
-	border: 1px solid #1c1c1c;
-	display: inline-block;
-	cursor: pointer;
-	color: #ffffff;
-	font-family: 'Open Sans', verdana, Dotum, AppleGothic, Helvetica,
-		sans-serif;
-	font-size: 1rem;
-	letter-spacing: 0.5px;
-	font-weight: 600;
-	padding: 10px 20px;
-	text-decoration: none;
-	margin: 50px 0 30px;
-}
-
-table {
+.btn_write {
+	background-color: rgb(236, 236, 236);
+	border: none;
+	color: black;
+	padding: 6px 12px;
 	font-size: 16px;
-	line-height: 1.25;
-	color: #777;
-	font-family: 'Nanum Gothic', verdana, Dotum, AppleGothic, Helvetica,
-		sans-serif;
+	cursor: pointer;
+	border-radius: 5px;
+	margin-left: 30px;
 }
 
-.trclass {
-	text-align: center;
+.btn_write::hover {
+	text-decoration: underline;
 }
 
-.tb-left { text-decoration: none;}
-a { text-decoration: none !important; }
+.search-form {
+	height: 37px;
+	display: flex;
+}
+
+.search-option {
+	width: 100px;
+	height: 100%;
+	outline: none;
+	margin-right: 5px;
+	border: 1px solid #ccc;
+	color: gray;
+}
+
+.search-input {
+	color: gray;
+	background-color: white;
+	border: 1px solid #ccc;
+	height: 100%;
+	width: 300px;
+	font-size: 15px;
+	padding: 5px 7px;
+}
+
+.search-input::placeholder {
+	color: gray;
+}
+
+.search-button {
+	width: 20%;
+	height: 100%;
+	background-color: rgb(22, 22, 22);
+	color: rgb(209, 209, 209);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 15px;
+}
+
+.search-button::hover {
+	color: rgb(165, 165, 165);
+}
 </style>
 <title>lookst</title>
 </head>
@@ -203,152 +199,85 @@ a { text-decoration: none !important; }
 			alert("성공적으로 수정되었습니다.")
 	</script>
 	<%@ include file="/WEB-INF/views/fix/header.jsp"%>
-	<div>
-	<div class="bbs-tit mx-5">
+	<div class="container">
 		<div class="row justify-content-md-center">
 			<h2 class="col-auto my-5">REVIEW</h2>
+			<div class="tab-content" id="pills-tabContent">
+				<div class="tab-pane fade show active my-5" id="pills-home"
+					role="tabpanel" aria-labelledby="pills-home-tab">
+						<nav class="navbar navbar-expand-md navbar-dark "
+							style="float: right;">
+							<form action="<c:url value="/board/review" />"
+								class="search-form" method="get">
+								<select class="search-option" name="option"
+									style="margin-right: 2%">
+									<option value="A"
+										${prR.sc.option=='A' || prR.sc.option=='' ? "selected" : "" }>제목
+										+ 내용</option>
+									<option value="T" ${prR.sc.option=='T' ? "selected" : "" }>제목</option>
+									<option value="W" ${prR.sc.option=='W' ? "selected" : "" }>작성자</option>
+								</select> <input type="text" name="keyword" class="search-input"
+									value="${param.keyword }" placeholder="검색어를 입력해 주세요.">
+								<input type="submit" class="search-button" value="검색">
+							</form>
+						</nav>
+					</form>
+					<table>
+						<tr>
+							<th class="no">번호</th>
+							<th class="title">제목</th>
+							<th class="writer">이름</th>
+							<th class="regdate">등록일</th>
+							<th class="viewcnt">조회수</th>
+						</tr>
+						<c:forEach var="boardDtoR" items="${list4 }">
+							<tr>
+								<td class=board_no>${boardDtoR.board_no }</td>
+								<td class="board_title"><a
+									href="<c:url value="/board/read/review${prR.sc.queryString }&board_no=${boardDtoR.board_no }" />">
+										${boardDtoR.board_title } </a></td>
+								<td class="member_id">${boardDtoR.member_id }</td>
+								<%--                   <c:choose> --%>
+								<td class="board_date"><fmt:formatDate
+										value="${boardDtoR.board_date }" pattern="yyyy-MM-dd"
+										type="date" /></td>
+								<td class="board_views ">${boardDtoR.board_views }</td>
+							</tr>
+						</c:forEach>
+					</table>
+					<nav class=" mt-5 mb-5" aria-label="Page navigation example">
+						<ul class="pagination justify-content-center">
+							<li class="page-item disabled"><c:if
+									test="${totalCntR == null || totalCntR == 0}">
+									<div>게시물이 없습니다.</div>
+								</c:if> <c:if test="${totalCntR != null || totalCntR != 0}">
+									<c:if test="${prR.showPrev }">
+										<li class="page-item"><a class="page-link"
+											href="<c:url value="/board/review${prR.sc.getQueryString(pr.beginPage-1) }" />">
+												&lt; </a></li>
+									</c:if>
+									<c:forEach var="i" begin="${prR.beginPage }"
+										end="${prR.endPage }">
+										<li class="page-item"><a class="page-link"
+											href="<c:url value="/board/review${prR.sc.getQueryString(i) }" />">${i }</a>
+									</c:forEach>
+									<c:if test="${prR.showNext }">
+										<li class="page-item"><a class="page-link"
+											href="<c:url value="/board/review${prR.sc.getQueryString(pr.endPage+1) }" />">
+												&gt; </a>
+									</c:if>
+								</c:if></li>
+						</ul>
+					</nav>
+				</div>
+<iuput type="submit" class="btn btn-primary mt-5 mb-5"
+						style="float:right;"
+						onclick="location.href='<c:url value="/board/review/write" />' ">
+					<i class="fa fa-pen"></i>submit
+			</div>
 		</div>
- <form action="review.html" name="form1" class="re_form">
-      <fieldset style="margin-right: 5.5%;">
-	<nav class="navbar navbar-expand-md navbar-dark "
-		style="float: right;">
-		<form action="<c:url value="/board/review" />" class="search-form"
-			method="get">
-			<select class="search-option" name="option" style="margin-right:2%">
-				<option value="A"
-					${prR.sc.option=='A' || prR.sc.option=='' ? "selected" : "" }>제목
-					+ 내용</option>
-				<option value="T" ${prR.sc.option=='T' ? "selected" : "" }>제목</option>
-				<option value="W" ${prR.sc.option=='W' ? "selected" : "" }>작성자</option>
-			</select> <input type="text" name="keyword" class="search-input"
-				value="${param.keyword }" placeholder="검색어를 입력해 주세요."> <input
-				type="submit" class="search-button" value="검색">
-		</form>
-	</nav>
-      </fieldset>
-    </form>
-  <div class="bbs-table-list" style="margin-left: 5%; margin-right: 5%;">
-    <table summary="No, content,Name,Data,Hits">
-      <!-- 일반 게시글 -->
-      <thead>
-        <tr>
-          <th scope="col">
-            <div class="esosub_s">NO</div>
-          </th>
-          <th scope="col">
-            <div class="esosub_s"></div>
-          </th>
-          <!-- .상품정보가 있을 경우에만 나타남 -->
-          <th scope="col">
-            <div class="esosub_s"></div>
-          </th>
-          <th scope="col">
-            <div class="esosub_s">SUBJECT</div>
-          </th>
-          <th scope="col">
-            <div class="esosub_s">NAME</div>
-          </th>
-          <th scope="col">
-            <div class="esosub_s">DATE</div>
-          </th>
-          <th scope="col">
-            <div class="esosub_s">HIT</div>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- .공지사항 리스트 시작 -->
-        <tr>
-          <td>
-            <div class="tb-center"><img src="https://www.amai.co.kr/images/d3/modern_simple/common/icon_box_arrow.gif">
-            </div>
-          </td>
-          <td>
-            <div class="tb-left"><img src="https://www.amai.co.kr/board/images/neo_notice.gif"> </div>
-          </td>
-          <!-- .상품정보가 있을 경우에만 나타남 -->
-          <td colspan="2">
-            <div class="tb-left">
-              <a href="reviewNotice.html">
-                <font color="#FF600F"><b>리뷰 게시판 특성에 맞지않거나 악의성 비방글, 판매글, 타 사이트 홍보글은 삭제될 수 있습니다.</b></font>
-              </a>
-            </div>
-          </td>
-          <td>
-            <div class="tb-center">
-              운영진 </div>
-          </td>
-          <td>
-            <div class="tb-center" style="font-size: 10px">2022-11-20</div>
-          </td>
-          <td>
-            <div class="tb-center" style="font-size: 10px">1004</div>
-          </td>
-        </tr>
-        <!--. 공지사항 리스트 끝! -->
-        <!--. 게시글 리스트 시작(한페이지당 게시글 수) -->
-        <c:forEach var="boardDtoR" items="${list4 }">  
-        <tr>
-          <td>
-            <div class="tb-center" style="font-size: 10px">${boardDtoR.board_no}</div>
-          </td>
-          <td>
-            <div class="tb-left"><img src="https://www.amai.co.kr/board/images/neo_default.gif"></div>
-          </td>
-          <!-- .product image 관련 -->
-          <td>
-            <div class="tb-left">
-            </div>
-          </td>
-          <td>
-            <div class="tb-left">
-              <a href="<c:url value="/board/read/review${prR.sc.queryString }&board_no=${boardDtoR.board_no }" />">
-								${boardDtoR.board_title } </a>
-              <!--. 상품정보가 있을때 조회수가 10이상이면 hit아이콘보여주기 -->
-            </div>
-          </td>
-          <td>
-            <div class="tb-center">
-              ${boardDtoR.member_id }
-            </div>
-          </td>
-          <td>
-            <div class="tb-center" style="font-size: 10px"><fmt:formatDate	value="${boardDtoR.board_date }" pattern="yyyy-MM-dd" type="date" /></div>
-          </td>
-          <td>
-            <div class="tb-center" style="font-size: 10px">${boardDtoR.board_views }</div>
-          </td>
-        </tr>
-        </c:forEach>
-        <!--. 게시글 리스트 끝 -->
-      </tbody>
-    </table>
-    <nav class=" mt-5 mb-5" aria-label="Page navigation example">
-				  <ul class="pagination justify-content-center">
-				    <li class="page-item disabled">
-							<c:if test="${totalCntR == null || totalCntR == 0}">
-								<div>게시물이 없습니다.</div>
-							</c:if>
-							<c:if test="${totalCntR != null || totalCntR != 0}">
-								<c:if test="${prR.showPrev }">
-									<li class="page-item"><a class="page-link" href="<c:url value="/board/review${prR.sc.getQueryString(pr.beginPage-1) }" />"> &lt; </a></li>
-								</c:if>
-								<c:forEach var="i" begin="${prR.beginPage }" end="${prR.endPage }">
-									<li class="page-item"><a class="page-link" href="<c:url value="/board/review${prR.sc.getQueryString(i) }" />">${i }</a>
-								</c:forEach>
-								<c:if test="${prR.showNext }">
-									<li class="page-item"><a class="page-link" href="<c:url value="/board/review${prR.sc.getQueryString(pr.endPage+1) }" />">
-										&gt; </a>
-								</c:if>
-							</c:if>
-						</li>
-					</ul>
-				</nav>
-  			</div>
-		<section>
-			<button type="button" class="btn btn-primary mt-5 mb-5" style="margin-top: 1.5%; margin-right: 5%;"onclick="location.href='<c:url value="/board/review/write" />' "><i class="fa fa-pen"></i>submit</button>
-		</section>  		
-</div>
-<%@ include file="/WEB-INF/views/fix/footer.jsp"%>
+	</div>
+
+	<%@ include file="/WEB-INF/views/fix/footer.jsp"%>
 </body>
 </html>
