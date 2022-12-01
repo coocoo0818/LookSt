@@ -76,7 +76,7 @@
           <div class="dropdown-menu dropdown-menu-end dropdown-menu-xs-start">
             <a class="dropdown-item" href="${loginoutlink}">${loginout}</a>
             <a class="${logouthidden}" href="/lookst/member/mypage">MY PAGE</a>
-            <a class="${logouthidden}" href="/lookst/sns/snsProfile/?member_id=${auth}">MY PROFILE</a>
+            <a class="${logouthidden}" href="/lookst/sns/snsProfile/?member_id=${res}">MY PROFILE</a>
             <a class="${loginhidden}" href="/lookst/register">REGISTER</a>
             <a class="${auth_seller_menu}" href="/lookst/seller/mySales">SELLER PAGE</a>
             <a class="${auth_admin_menu}" href="/lookst/admin/member_management">ADMIN PAGE</a>

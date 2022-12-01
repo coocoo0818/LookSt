@@ -21,7 +21,6 @@ import kr.co.lookst.main.domain.Prdt_Img;
 import kr.co.lookst.main.domain.Prdt_Option;
 import kr.co.lookst.main.domain.Product;
 import kr.co.lookst.main.domain.SearchItem;
-import kr.co.lookst.post.domain.Post_TagDto;
 
 @Controller
 @RequestMapping("/admin")
@@ -38,6 +37,7 @@ public class AdminController {
 			int totalCnt = adminService.getSearchResultCnt(sc);
 			model.addAttribute("totalCnt", totalCnt);
 			PageResolver pageResolver = new PageResolver(totalCnt, sc);
+			System.out.println(sc);
 			/* 회원 페이징 끝 */
 			
 			/* 회원 리스트 출력 */
@@ -119,6 +119,7 @@ public class AdminController {
 			int totalCnt = adminService.boardSearchResultCnt(sc);
 			model.addAttribute("totalCnt", totalCnt);
 			PageResolver pageResolver = new PageResolver(totalCnt, sc);
+			System.out.println(sc);
 			/* 게시판 페이징 끝 */
 			
 			/* 게시판 리스트 출력 */
