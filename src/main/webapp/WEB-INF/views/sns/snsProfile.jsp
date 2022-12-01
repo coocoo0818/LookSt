@@ -78,10 +78,7 @@
 			let member_id = $(this).attr("data-member_id")
 			let following_id = $(this).attr("data-following_id")
 			let checkfollow = $(this).attr("data-checkfollow")
-			console.log("member_id : " + member_id);
-			console.log("following_id : " + following_id);
-			console.log("checkfollow : " + checkfollow);
-			if(checkfollow != 1){
+			if(checkfollow == 0){
 				$.ajax({
 					type : 'post',
 					url : '${contextPath}/sns/follow',
@@ -89,26 +86,24 @@
 						login_id : member_id,
 						member_id : following_id
 					},
-					success : function(data) {
-						alert("팔로잉 성공!!")
+					success : function() {
 						location.reload()
 					},
-					error : function() {alert("팔로잉 실패!!")}
+					error : function() {alert("팔로우 실패!!")}
 				})
 			} 
-			else {
+			else if(checkfollow == 1){
 				$.ajax({
 					type : 'post',
 					url : '${contextPath}/sns/unfollow',
 					data : {
-						member_id : member_id,
-						following : following_id
+						login_id : member_id,
+						member_id : following_id
 					},
-					success : function(data) {
-						alert("팔로잉 취소!!")
+					success : function() {
 						location.reload()
 					},
-					error : function() {alert("취소 실패!!")}
+					error : function() {alert("언팔로우 실패!!")}
 				})
 			}
 		})
@@ -168,7 +163,7 @@
 							<c:if test="${login_Id != pro_info.member_id }">
 								<button class="followBtn btn btn-primary fs-4 ms-auto" id="follow-unfollow-btn"
 								 data-member_id = "${login_Id }" data-following_id = "${pro_info.member_id }" 
-								 data-checkfollow = "">${follow_unfollow }</button></div>
+								 data-checkfollow = "${checkFollow }">${follow_unfollow }</button></div>
 							</c:if>
 
 
@@ -279,7 +274,7 @@
 			class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h1 class="modal-title fs-5" id="following-Modal">팔로워</h1>
+					<h1 class="modal-title fs-5" id="following-Modal">팔로잉</h1>
 					<button type="button" class="btn-close" data-bs-dismiss="modal"
 						aria-label="Close"></button>
 				</div>
@@ -296,8 +291,8 @@
 							<c:forEach var="pro_following" items="${pro_following }"
 								varStatus="following_status">
 								<br/>
-								<li class="fs-4" style="list-style: none;" data-memberID="${pro_following.member_id}">
-									<a href="${contextPath}/sns/snsProfile/?member_id=${pro_following.member_id}" class="followingIDbox" style="text-decoration-line: none;">
+								<li class="fs-4" style="list-style: none;" data-memberID="${pro_following.following}">
+									<a href="${contextPath}/sns/snsProfile/?member_id=${pro_following.following}" class="followingIDbox" style="text-decoration-line: none;">
 										<img src="${pageContext.request.contextPath }/resources/img/profile/${pro_following.profile_img}" class="follow_thmbnail rounded-circle" alt="...">
 										<span>${pro_following.member_nick }</span>
 									</a>

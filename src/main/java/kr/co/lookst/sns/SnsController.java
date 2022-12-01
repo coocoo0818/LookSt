@@ -109,7 +109,7 @@ public class SnsController {
 			e.printStackTrace();
 		}
 
-		return "redirect:/sns/snsProfile";
+		return "sns/snsProfile";
 	}
 
 	@RequestMapping(value = "/unfollow", method = { RequestMethod.POST })
@@ -122,14 +122,14 @@ public class SnsController {
 			int checkFollow = snsService.followCheck(login_id, member_id);
 
 			m.addAttribute("checkFollow", checkFollow);
-			int unfollow = snsService.doFollow(login_id, member_id);
+			int unfollow = snsService.doUnFollow(login_id, member_id);
 			System.out.println(checkFollow);
 			System.out.println("팔로우취소(컨트롤러)");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		return "redirect:/sns/snsProfile";
+		return "sns/snsProfile";
 	}
 
 //	// 닉네임 수정 
