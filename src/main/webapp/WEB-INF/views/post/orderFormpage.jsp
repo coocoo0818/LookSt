@@ -6,8 +6,9 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- <script src="http://code.jquery.com/jquery-3.4.1.js"></script> -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <title>LOOKST</title>
@@ -239,6 +240,190 @@ header .count {float: right; color: #333333;}
   }
 }
 
+
+/* 전체 가격 */
+	 table{
+	 	border-collapse: collapse;
+	 	width: 100%;
+	 }
+	 .table_text_align_center{
+				text-align: center;
+	 }	
+	 caption{
+	    visibility: hidden;
+	    width: 0;
+	    height: 0;
+	    font-size: 0;
+	    line-height: 0;
+	    overflow: hidden; 
+	 }	  
+
+	 .content_subject{
+		height: 110px;
+	    line-height: 110px;
+	    background-color: #5080bd;
+	    margin-bottom: 60px; 
+	 
+	 }
+		 .content_subject span{ 
+		    padding-left: 30 px;
+		    display: inline-block;
+		    color: white;
+		    font-size: 50px;
+		    font-weight: bolder; 
+		 }
+	 
+	 .content_totalCount_section{
+	 	margin-bottom: 12px;
+	 }
+	 .content_btn_section{
+	 	margin-top: 20px;
+	 	text-align: right;
+	 }
+	 	.content_btn_section a{
+	    color: #fefeff;
+	    background-color: #365fdd;
+	    min-width: 125px;
+	    padding: 17px 25px;
+	    display: inline-block;
+	    height: 39px;
+	    font-size: 23px;
+	    font-weight: bold;
+	    text-align: center;
+	    margin-right: 14px;
+	    line-height: 39px; 	
+	 	}
+	 
+
+	 .subject_table{
+		font-size: 14px;
+	    line-height: 20px;
+	    width: 100%;
+	    text-align: center; 	
+	 }
+
+		 th{
+		text-align: center;
+	    color: #333;
+	    border-bottom: 1px solid #e7e7e7;
+	    border-top: 1px solid #3084d9;
+	    background: #f4f9fd;
+	    padding: 2px 0;	 
+		 }
+		.td_width_1{
+			width: 5%;
+		}	 	 	 
+		.td_width_2{
+			width: 10%;
+		}	 	 
+		.td_width_3{
+			width: 25%;
+		}	 
+		.td_width_4{
+			width: 15%;
+		}	
+		.cart_table{
+			font-size: 14px;
+			line-height: 20px;
+		}  
+			.cart_table tr{
+				height: 110px;
+			}
+			.price_td{
+				padding-left: 5px;
+			}
+				.red_color{
+					color : red;
+				}
+				.green_color{
+					color : green;
+				}
+			.cart_table td{
+				border-bottom: 1px solid #e7e7e7;
+			}
+			.quantity_div{
+				position: relative;
+			    width: 42px;
+			    height: 25px;
+			    text-align: left;
+			    margin: 5px auto;		
+			}
+			.quantity_input{
+				position: absolute;
+				width: 27px;
+			    height: 23px;
+			    text-align: center;
+			    border: 1px solid #c6c6c6;
+			    border-right: 0px;
+			    line-height: 19px;
+			    font-size: 12px;
+			    color: #4c4848;	
+			    left: 0;
+			}
+			.quantity_btn{
+				position: absolute;
+			    border: 1px solid #aaa;
+			    color: #3a60df;
+			    width: 14px;
+			    height: 13px;
+			    padding: 0px;
+			    background-color: #fff;
+			    font-weight: bold;
+			    font-size: 7px;
+			    line-height: 6px;
+			    vertical-align: middle;	
+			}
+			.plus_btn{
+				top: 0;
+				right: 0
+			}
+			.minus_btn{
+				bottom: 0;
+				right: 0
+			}		
+			.quantity_modify_btn{
+				border: 1px solid #d0d0d0;
+			    height: 13px;
+			    line-height: 13px;
+			    background-color: #fff;
+			    text-align: center;
+			    width: 28px;
+			    display: inline-block;
+			    padding: 3px 6px 2px;
+			    margin-top: 3px;		
+			}
+			.table_text_align_center{
+				text-align: center;
+			}
+			.delete_btn{
+				width: 40px;		
+			}
+		
+	.content_total_section{
+		    background-color: rgb(227, 237, 247);
+	}		
+		.total_wrap{
+			width: 80%;
+		    margin: auto;
+		    padding: 10px 0 10px 0;	
+		}
+			.total_wrap td{
+				width : 50%;
+			}
+			.finalTotalPrice_span{
+				color: #854A72;
+				font-size: 17px;
+				font-weight: bold;
+			}
+			.totalPoint_span{
+				font-size: 17px;
+				font-weight: bold;		
+			}
+			.boundary_div{
+				font-size: 0;
+			    border: 1px dotted #d1c7c7;
+			    margin: 5px 0 5px 0;		
+			}
 </style>
 
 
@@ -332,172 +517,6 @@ header .count {float: right; color: #333333;}
 		    </section>
 		  );
 		}
-
-		function Summary({
-		  subTotal,
-		  discount,
-		  tax,
-		  onEnterPromoCode,
-		  checkPromoCode
-		}) {
-		  const total = subTotal - discount + tax;
-
-		  return (
-		    <section className="container">
-		      <div className="promotion">
-		        <label htmlFor="promo-code">Have A Promo Code?</label>
-		        <input type="text" onChange={onEnterPromoCode} />
-		        <button type="button" onClick={checkPromoCode} />
-		      </div>
-
-		      <div className="summary">
-		        <ul>
-		          <li>
-		            Subtotal <span>{formatCurrency(subTotal)}</span>
-		          </li>
-		          {discount > 0 && (
-		            <li>
-		              Discount <span>{formatCurrency(discount)}</span>
-		            </li>
-		          )}
-		          <li>
-		            Tax <span>{formatCurrency(tax)}</span>
-		          </li>
-		          <li className="total">
-		            Total <span>{formatCurrency(total)}</span>
-		          </li>
-		        </ul>
-		      </div>
-
-		      <div className="checkout">
-		        <button type="button">Check Out</button>
-		      </div>
-		    </section>
-		  );
-		}
-
-		const PRODUCTS = [
-		  {
-		    image: "https://via.placeholder.com/200x150",
-		    name: "PRODUCT ITEM NUMBER 1",
-		    description: "Description for product item number 1",
-		    price: 5.99,
-		    quantity: 2
-		  },
-		  {
-		    image: "https://via.placeholder.com/200x150",
-		    name: "PRODUCT ITEM NUMBER 2",
-		    description: "Description for product item number 1",
-		    price: 9.99,
-		    quantity: 1
-		  }
-		];
-		const PROMOTIONS = [
-		  {
-		    code: "SUMMER",
-		    discount: "50%"
-		  },
-		  {
-		    code: "AUTUMN",
-		    discount: "40%"
-		  },
-		  {
-		    code: "WINTER",
-		    discount: "30%"
-		  }
-		];
-		const TAX = 5;
-
-		function Page() {
-		  const CLONE_PRODUCTS = JSON.parse(JSON.stringify(PRODUCTS));
-		  const [products, setProducts] = React.useState(CLONE_PRODUCTS);
-		  const [promoCode, setPromoCode] = React.useState("");
-		  const [discountPercent, setDiscountPercent] = React.useState(0); 
-		  const itemCount = products.reduce((quantity, product) => {
-		    return quantity + +product.quantity;
-		  }, 0);
-		  const subTotal = products.reduce((total, product) => {
-		    return total + product.price * +product.quantity;
-		  }, 0);
-		  const discount = (subTotal * discountPercent) / 100;
-
-		  onChangeProductQuantity = (index, event) => {
-		    const value = event.target.value;
-		    const valueInt = parseInt(value);
-		    const cloneProducts = [...products];
-
-		    // Minimum quantity is 1, maximum quantity is 100, can left blank to input easily
-		    if (value === "") {
-		      cloneProducts[index].quantity = value;
-		    } else if (valueInt > 0 && valueInt < 100) {
-		      cloneProducts[index].quantity = valueInt;
-		    }
-
-		    setProducts(cloneProducts);
-		  };
-
-		  onRemoveProduct = (i) => {
-		    const filteredProduct = products.filter((product, index) => {
-		      return index != i;
-		    });
-
-		    setProducts(filteredProduct);
-		  };
-
-		  onEnterPromoCode = (event) => {
-		    setPromoCode(event.target.value);
-		  };
-
-		  checkPromoCode = () => {
-		    for (var i = 0; i < PROMOTIONS.length; i++) {
-		      if (promoCode === PROMOTIONS[i].code) {
-		        setDiscountPercent(parseFloat(PROMOTIONS[i].discount.replace("%", "")));
-
-		        return;
-		      }
-		    }
-
-		    alert("Sorry, the Promotional code you entered is not valid!");
-		  };
-
-		  return (
-		    <div>
-		      <Header itemCount={itemCount} />
-
-		      {products.length > 0 ? (
-		        <div>
-		          <ProductList
-		            products={products}
-		            onChangeProductQuantity={onChangeProductQuantity}
-		            onRemoveProduct={onRemoveProduct}
-		          />
-
-		          <Summary
-		            subTotal={subTotal}
-		            discount={discount}
-		            tax={TAX}
-		            onEnterPromoCode={onEnterPromoCode}
-		            checkPromoCode={checkPromoCode}
-		          />
-		        </div>
-		      ) : (
-		        <div className="empty-product">
-		          <h3>There are no products in your cart.</h3>
-		          <button onClick={() => setProducts(PRODUCTS)}>Shopping now</button>
-		        </div>
-		      )}
-		    </div>
-		  );
-		}
-
-		ReactDOM.render(<Page />, document.getElementById("root"));
-
-		function formatCurrency(value) {
-		  return Number(value).toLocaleString("en-US", {
-		    style: "currency",
-		    currency: "USD"
-		  });
-		}
 		
 
 	</script>
@@ -551,6 +570,45 @@ header .count {float: right; color: #333333;}
     }
 </script>
 
+<script type="text/javascript">
+	$(document).ready(function(){
+		let totalPrice = 0;				// 총 가격
+		let totalCount = 0;				// 총 상품 개수
+		let deliveryPrice = 0;			// 배송비
+		let finalTotalPrice = 0;		// 최종 가격
+		
+		$(".cart_info_td").each(function(index, element){
+			
+			// 총 가격
+			totalPrice += parseInt($(element).find(".individual_totalPrice_input").val());
+			// 총 개수
+			totalCount += parseInt($(element).find(".individual_bookCount_input").val());
+		});
+		
+		/* 배송비 결정 */
+		if(totalPrice >= 50000){
+			deliveryPrice = 0;
+		} else if(totalPrice == 0){
+			deliveryPrice = 0;
+		} else {
+			deliveryPrice = 3000;	
+		}
+		
+		/* 최종가격 */
+		finalTotalPrice = totalPrice + deliveryPrice;
+		
+		/* 값 삽입 */
+		// 총 가격 
+		$(".totalPrice_span").text(totalPrice.toLocaleString());
+		// 총 개수
+		$(".totalCount_span").text(totalCount);
+		// 배송비
+		$(".delivery_price").text(deliveryPrice);
+		// 최종 가격(총 가격 + 배송비)
+		$(".finalTotalPrice_span").text(finalTotalPrice.toLocaleString());
+	});
+</script>
+
 	<div id="app">
 
   <!-- Header -->
@@ -566,30 +624,108 @@ header .count {float: right; color: #333333;}
   
   <!-- Product List -->
   <section class="container">
-    <div v-if="products.length > 0">
+  			<div class="content_subject"><span>장바구니</span></div>
+			<!-- 장바구니 리스트 -->
+			<div class="content_middle_section"></div>
+			<!-- 장바구니 가격 합계 -->
+			<!-- cartInfo -->
+			<div class="content_totalCount_section">
+				
+				<table class="subject_table">
+					<caption>표 제목 부분</caption>
+					<tbody>
+
+						<tr>
+							<th class="td_width_1"></th>
+							<th class="td_width_2"></th>
+							<th class="td_width_3">상품명</th>
+							<th class="td_width_4">가격</th>
+							<th class="td_width_4">수량</th>
+							<th class="td_width_4">합계</th>
+							<th class="td_width_4">삭제</th>
+						</tr>
+					</tbody>
+				</table>
+				<table class="cart_table">
+					<caption>표 내용 부분</caption>
+					<tbody>
+						<c:forEach var="orderPagePrdt" items="${orderPagePrdt}">
+							<tr>
+								<td class="td_width_1 cart_info_td">
+									<%-- <input type="hidden" class="individual_bookPrice_input" value="${ci.bookPrice}"> --%>
+									<input type="hidden" class="individual_salePrice_input" value="${orderPagePrdt.post_tag_price}">
+									<input type="hidden" class="individual_bookCount_input" value="2">
+									<input type="hidden" class="individual_totalPrice_input" value="${orderPagePrdt.post_tag_price * 2}">
+									<%-- <input type="hidden" class="individual_point_input" value="${ci.point}"> --%>
+									<input type="hidden" class="individual_totalPoint_input" value="${orderPagePrdt.post_tag_price}">
+								</td>
+								<td class="td_width_2">
+									<div class="thumbnail">
+							            <a href="#">
+							             <img src="${contextPath}/resources/img/product/${OrderInfoDto.prdt_img_name}" style="height:150px; weight: 150px;">
+							            </a>
+							        </div>
+								</td>
+								<td class="td_width_3">${orderPagePrdt.post_tag_name}</td>
+								<td class="td_width_4 price_td">
+									<%-- <del>정가 : <fmt:formatNumber value="${orderPagePrdt.post_tag_price}" pattern="#,### 원" /></del><br> --%>
+									판매가 : <span class="red_color" <%-- value="${orderPagePrdt.post_tag_price}" --%> pattern="#,### 원" />${orderPagePrdt.post_tag_price}원</span><br>
+									<%-- 마일리지 : <span class="green_color"><fmt:formatNumber value="${ci.point}" pattern="#,###" /></span> --%>
+								</td>
+								<td class="td_width_4 table_text_align_center">
+									<div class="table_text_align_center quantity_div">
+										<input type="text" value="2<%-- ${ci.bookCount} --%>" class="quantity_input">	
+										<button class="quantity_btn plus_btn">+</button>
+										<button class="quantity_btn minus_btn">-</button>
+									</div>
+									<!-- <a class="quantity_modify_btn">변경</a> -->
+								</td>
+								<td class="td_width_4 table_text_align_center" value="${orderPagePrdt.post_tag_price}*2" pattern="#,### 원" />
+									<%-- <fmt:formatNumber value="${orderPagePrdt.post_tag_price * 2}" pattern="#,### 원" /> --%>
+								</td>z
+								<td class="td_width_4 table_text_align_center delete_btn"><button>삭제</button></td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+				<table class="list_table">
+				</table>
+			</div>
+    <%-- <div v-if="products.length > 0">
       <ul class="products">
       <li class="row" v-for="(product, index) in products">
-      
         <div class="col left">
           <c:forEach var="orderPagePrdt" items="${orderPagePrdt}">
-          <div class="thumbnail">
-            <a href="#">
-             <img src="${contextPath}/resources/img/product/${orderPagePrdt.post_tag_img}" style="height:150px; weight: 150px;">
-            </a>
-          </div>
+	          <div class="thumbnail">
+	            <a href="#">
+	             <img src="${contextPath}/resources/img/product/${product_no.prdt_img_name}" style="height:150px; weight: 150px;">
+	            </a>
+	          </div>
           </c:forEach>
           <c:forEach var="orderPagePrdt" items="${orderPagePrdt}">
-	          <div class="detail">
+	          <div class="detail cart_info_td">
 	            <div class="name"><a href="#">${orderPagePrdt.post_tag_name}</a></div>
 	            <div class="description">${orderPagePrdt.product_info}</div>
-	            <div class="price" id="prdt_price" value="${orderPagePrdt.post_tag_price}">${orderPagePrdt.post_tag_price}원</div>
+	            <div class="price individual_totalPrice_input" id="prdt_price" value="${orderPagePrdt.post_tag_price}" pattern="#,### 원">${orderPagePrdt.post_tag_price}원</div>
 	          </div>
           </c:forEach>
         </div>
 	
         <div class="col right">
            <div class="quantity">
-            <input type="number" id="quan11" step="1" onkeyup="quanCheck()"/>
+           		<tbody>
+		          	<tr>
+		          		<td class="td_width_4 table_text_align_center">
+		          			<div class="table_text_align_center quantity_div">
+								<input type="text" value="${ci.bookCount}" class="quantity_input">	
+								<button class="quantity_btn plus_btn">+</button>
+								<button class="quantity_btn minus_btn">-</button>
+							</div>
+							<a class="quantity_modify_btn">변경</a>
+		          		</td>
+          			</tr>
+          		</tbody>
+            <!-- <input type="number" class="individual_bookCount_input" id="quan11" step="1" onkeyup="quanCheck()"/> -->
            </div>
            
           <div class="remove">
@@ -598,7 +734,66 @@ header .count {float: right; color: #333333;}
         </div>
       </li>
     </ul>
+    </div> --%>
+    <!-- 전체가격기능 구현 -->
+    <div class="content_total_section">
+    	<div class="total_wrap">
+    		<table>
+    			<tr>
+    				<td>
+    					<table>
+    						<tr>
+								<td>총 상품 가격</td>
+									<td>
+										<span class="totalPrice_span">70000</span> 원
+									</td>
+							</tr>
+							<tr>
+								<td>배송비</td>
+								<td>
+									<span class="delivery_price">3000</span>원
+								</td>
+							</tr>
+							<tr>
+								<td>총 주문 상품수</td>
+								<td>
+									<span class="totalKind_span"></span>총 <span class="totalCount_span"></span>권
+								</td>
+							</tr>		
+    					</table>
+    				</td>
+    				<td>
+    					<table>
+    						<tr>
+    							<td></td>
+								<td></td>
+    						</tr>
+    					</table>
+    				</td>
+    			</tr>
+    		</table>
+    		<div class="boundary_div">구분선</div>
+    			<table>
+    				<tr>
+    					<td>
+    						<table>
+    							<tbody>
+    								<tr>
+    									<td>
+    										<strong>총 결제 예상 금액</strong>
+    									</td>
+    									<td>
+											<span class="finalTotalPrice_span">70000</span> 원
+										</td>
+    								</tr>
+    							</tbody>
+    						</table>
+    					</td>
+    				</tr>
+    			</table>
+    	</div>
     </div>
+    
     <div v-else class="empty-product">
       <h3>돈 더 써볼까요?</h3>
       <button>돈쭐을 내주마!</button>
@@ -615,7 +810,7 @@ header .count {float: right; color: #333333;}
       <div class="col-md-5 col-lg-4 order-md-last">
         <h4 class="d-flex justify-content-between align-items-center mb-3">
           <span class="text-primary">Your cart</span>
-          <span class="badge bg-primary rounded-pill">3</span>
+          <!-- <span class="badge bg-primary rounded-pill">3</span> -->
         </h4>
         <ul class="list-group mb-3">
           <li class="list-group-item d-flex justify-content-between lh-sm">
@@ -624,7 +819,7 @@ header .count {float: right; color: #333333;}
               <small class="text-muted">Brief description</small>
             </div>
             <c:forEach var="orderPagePrdt" items="${orderPagePrdt}">
-            <span class="text-muted">${orderPagePrdt.post_tag_price}원</span>
+            <span class="text-muted totalPrice_span">${orderPagePrdt.post_tag_price}원</span>
             </c:forEach>
           </li>
           <li class="list-group-item d-flex justify-content-between lh-sm">
@@ -632,18 +827,20 @@ header .count {float: right; color: #333333;}
               <h6 class="my-0">수량</h6>
               <small class="text-muted">Brief description</small>
             </div>
-            <span class="text-muted quantity">₩8</span>
+            <span class="text-muted quantity totalKind_span">2</span>
           </li>
           <li class="list-group-item d-flex justify-content-between lh-sm">
             <div>
               <h6 class="my-0">배송비</h6>
               <small class="text-muted">Brief description</small>
             </div>
-            <span class="text-muted">₩3,000</span>
+            <span class="text-muted delivery_price">₩3,000</span>
           </li>
-          <li class="list-group-item d-flex justify-content-between">
-            <span>총 결제액</span>
-            <strong>₩20</strong>
+          <li class="list-group-item d-flex justify-content-between finalTotalPrice_span">
+             <div>
+              <h6 class="my-0">총 결제액</h6>
+              <small class="text-muted">Brief description</small>
+            </div>
           </li>
         </ul>
         <input type="button" id="checkoutbtn" class="w-100 btn btn-primary btn-lg" value="Continue to checkout"/>
