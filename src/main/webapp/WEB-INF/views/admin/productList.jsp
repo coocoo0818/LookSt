@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -98,7 +99,7 @@
 									<option selected>전체</option>
 									<!--<option value="B" ${pr.sc.option=='I' || pr.sc.option=='' ? "selected" : ""}>판매자명</option>-->
 									<option value="N" ${pr.sc.option=='N'? "selected" : ""}>상품명</option>
-									<option value="A" ${pr.sc.option=='A'? "selected" : ""}>판매자명</option>
+									<option value="A" ${pr.sc.option=='A'? "selected" : ""}>상품종류</option>
 								</select>
 							</div>
 							<div class="d-flex col-md-9 mt-1">
@@ -123,30 +124,18 @@
 					</div>
 
 
-					<!-- <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-           <button type="button" class="btn btn-primary">상품정렬</button>
-           <div class="btn-group" role="group">
-             <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-             <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-               <a class="dropdown-item" href="#">최신 상품순</a>
-               <a class="dropdown-item" href="#">인기 상품순</a>
-             </div>
-           </div>
-         </div>-->
-
-
 					<div class="row">
+					<c:forEach var="shopTotalList" items="${shopTotalList}">
 						<div class="col-lg-4 col-md-6 mb-4">
 							<div class="card h-100">
-								<a href="#"><img class="card-img-top"
-									src="${contextPath}/resources/img/product/1.png" alt="" /></a>
+								<a href="${contextPath}/admin/productDetail/?product_no=${shopTotalList.product_no}"><img class="card-img-top"
+									src="${contextPath}/resources/img/product/${shopTotalList.prdt_Img.prdt_img_name}" alt="" /></a>
 								<div class="card-body">
 									<h4 class="card-title">
-										<a href="#">Nike</a>
+										<a href="${contextPath}/admin/productDetail/?product_no=${shopTotalList.product_no}">${shopTotalList.product_name}</a>
 									</h4>
-									<h5>762,000 원</h5>
-									<p class="card-text">Nike x Peaceminusone Air Force 1 Low
-										Para-Noise 2.0</p>
+									<h5><fmt:formatNumber value="${shopTotalList.product_price}" pattern="#,###" />원</h5>
+									<p class="card-text">${shopTotalList.product_info}</p>
 								</div>
 								<div class="card-footer">
 									<small class="text-muted">&#9733; &#9733; &#9733;
@@ -154,97 +143,7 @@
 								</div>
 							</div>
 						</div>
-
-						<div class="col-lg-4 col-md-6 mb-4">
-							<div class="card h-100">
-								<a href="#"><img class="card-img-top"
-									src="${contextPath}/resources/img/product/2.png" alt=""></a>
-								<div class="card-body">
-									<h4 class="card-title">
-										<a href="#">Nike</a>
-									</h4>
-									<h5>139,000 원</h5>
-									<p class="card-text">Nike Dunk Low Retro Black</p>
-								</div>
-								<div class="card-footer">
-									<small class="text-muted">&#9733; &#9733; &#9733;
-										&#9733; &#9734;</small>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-lg-4 col-md-6 mb-4">
-							<div class="card h-100">
-								<a href="#"><img class="card-img-top"
-									src="${contextPath}/resources/img/product/3.png" alt=""></a>
-								<div class="card-body">
-									<h4 class="card-title">
-										<a href="#">Nike</a>
-									</h4>
-									<h5>148,000 원</h5>
-									<p class="card-text">(W) Nike Dunk Low Black</p>
-								</div>
-								<div class="card-footer">
-									<small class="text-muted">&#9733; &#9733; &#9733;
-										&#9733; &#9734;</small>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-lg-4 col-md-6 mb-4">
-							<div class="card h-100">
-								<a href="#"><img class="card-img-top"
-									src="${contextPath}/resources/img/product/nike.jpg" alt=""></a>
-								<div class="card-body">
-									<h4 class="card-title">
-										<a href="#">Nike</a>
-									</h4>
-									<h5>280,000 원</h5>
-									<p class="card-text">Nike x HUF SB Dunk Low San Francisco</p>
-								</div>
-								<div class="card-footer">
-									<small class="text-muted">&#9733; &#9733; &#9733;
-										&#9733; &#9734;</small>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-lg-4 col-md-6 mb-4">
-							<div class="card h-100">
-								<a href="#"><img class="card-img-top"
-									src="${contextPath}/resources/img/product/Jordan_1.png" alt=""></a>
-								<div class="card-body">
-									<h4 class="card-title">
-										<a href="#">Jordan</a>
-									</h4>
-									<h5>270,000 원</h5>
-									<p class="card-text">(GS) Jordan 1 Retro High OG Chicago
-										2022</p>
-								</div>
-								<div class="card-footer">
-									<small class="text-muted">&#9733; &#9733; &#9733;
-										&#9733; &#9734;</small>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-lg-4 col-md-6 mb-4">
-							<div class="card h-100">
-								<a href="#"><img class="card-img-top"
-									src="${contextPath}/resources/img/product/converse.png" alt=""></a>
-								<div class="card-body">
-									<h4 class="card-title">
-										<a href="#">Converse</a>
-									</h4>
-									<h5>63,000 원</h5>
-									<p class="card-text">Converse Chuck 70 Hi Black</p>
-								</div>
-								<div class="card-footer">
-									<small class="text-muted">&#9733; &#9733; &#9733;
-										&#9733; &#9734;</small>
-								</div>
-							</div>
-						</div>
+					</c:forEach>		
 
 					</div>
 				</div>
