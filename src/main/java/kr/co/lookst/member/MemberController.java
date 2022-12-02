@@ -98,6 +98,7 @@ public class MemberController {
 	
 	@PostMapping("/register")
 	public String postRegister(MemberDto dto) throws Exception {
+		service.register(dto);
 		logger.info("REGISTER - 회원 가입 완료");
 		logger.info("이메일 : " + dto.getMember_id());
 		logger.info("비밀번호 : " + dto.getMember_pw());
@@ -108,7 +109,6 @@ public class MemberController {
 		logger.info("상세 주소 : " + dto.getMember_addr2());
 		logger.info("이메일 수신 동의 여부 : " + dto.isMember_check());
 		logger.info("문자 메시지 수신 동의 여부 : " + dto.isMember_smscheck());
-		service.register(dto);
 		String member_id = dto.getMember_id();
 		service.insertAuthInfo(member_id);
 		service.insertProfile(member_id);

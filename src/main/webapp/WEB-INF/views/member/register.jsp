@@ -14,6 +14,7 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
+
 //이메일 정규표현식을 이용한 유효성 체크
 function checkId(){
 	var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
@@ -240,15 +241,30 @@ function checkName(){
 
 //회원가입 빈칸 체크
 function registerSuccess() {
-/* 		let a = new checkId();
-		let b = new checkPw();
-		let c = new checkNick();
-		let d = new checkName();
-		a.checkId();
-		b.checkPw();
-		c.checkNick();
-		d.checkName(); */
+	var regIdCheck = $('#email_feedback').attr('class');
+	var regPwCheck = $('#member_pw_re').attr('class');
+	var regNickCheck = $('#nick_feedback').attr('class');
+	var regNameCheck = $('#name_feedback').attr('class');
+	
+	if(regIdCheck != 'valid-feedback'){
+		document.getElementById("email_id").focus();
+		return false;
+	}
+	else if(regPwCheck != 'form-control is-valid'){
+		document.getElementById("member_pw").focus();
+		return false;
+	}
+	else if(regNickCheck != 'valid-feedback'){
+		document.getElementById("member_nick").focus();
+		return false;
+	}
+	else if(regNameCheck != 'valid-feedback'){
+		document.getElementById("member_name").focus();
+		return false;
+	}
+	else{
 		document.getElementById('frm').submit();
+	}
 }
 </script>
 
@@ -338,7 +354,7 @@ function sample6_execDaumPostcode() {
 						<input class="form-control" placeholder="인증번호 6자리를 입력해주세요." maxlength="6">
 						<button type="button" class="btn btn-dark" style="width:20%; height:50px;" id="mail-Check-Btn2">인증확인</button>
 					</div> -->
-					<div class="valid-feedback" id="email_feedback" style="margin-left:2px; display:none;"></div>
+					<div class="invalid-feedback" id="email_feedback" style="margin-left:2px; display:none;"></div>
 					<div class="valid-feedback" style="color:gray; margin-left:2px; display:inline-block;">로그인 시 사용할 이메일을 입력해 주세요.</div>
 				  </fieldset>
 				</div>
@@ -352,7 +368,7 @@ function sample6_execDaumPostcode() {
 				        <input type="password" class="form-control" name="member_pw" id="member_pw" placeholder="비밀번호를 입력해 주세요." onkeyup="checkPw()" required/>
 				        <input type="password" class="form-control" name="member_pw_re" id="member_pw_re" placeholder="비밀번호를 재입력해 주세요." onkeyup="checkPw()" disabled="true" required/>
 					</div>
-					<div class="valid-feedback" id="pw_feedback" style="margin-left:2px; display:none;"></div>
+					<div class="invalid-feedback" id="pw_feedback" style="margin-left:2px; display:none;"></div>
 					<div class="valid-feedback" style="color:gray; margin-left:2px; display:inline-block;">비밀번호는 영문, 숫자, 특수문자로 조합하여 8-20자로 입력이 가능합니다.</div>
 				</div>
 		
@@ -364,7 +380,7 @@ function sample6_execDaumPostcode() {
 					<div class="input-group">
 						<input type="text" class="form-control" name="member_nick" id="member_nick" placeholder="닉네임을 입력해 주세요." onkeyup="checkNick()" required/>
 					</div>
-					<div class="valid-feedback" id="nick_feedback" style="margin-left:2px; display:none;"></div>
+					<div class="invalid-feedback" id="nick_feedback" style="margin-left:2px; display:none;"></div>
 					<div class="valid-feedback" style="color:gray; margin-left:2px; display:inline-block;">닉네임은 영문, 숫자, 밑줄, 마침표를 조합하여 6-16자로 입력이 가능합니다.</div>
 				</div>
 		
@@ -377,7 +393,7 @@ function sample6_execDaumPostcode() {
 					<div class="input-group">
 						<input type="text" class="form-control" name="member_name" id="member_name" placeholder="이름을 입력해 주세요." onkeyup="checkName()" required/>
 					</div>
-					<div class="valid-feedback" id="name_feedback" style="margin-left:2px; display:none;"></div>
+					<div class="invalid-feedback" id="name_feedback" style="margin-left:2px; display:none;"></div>
 					<div class="valid-feedback" style="color:gray; margin-left:2px; display:inline-block;">이름은 한글 혹은 영문으로 입력이 가능합니다.</div>
 				</div>
 		
