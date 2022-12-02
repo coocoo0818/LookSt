@@ -668,9 +668,9 @@ header .count {float: right; color: #333333;}
 								</td>
 								<td class="td_width_3">${orderInfo.product_name}</td>
 								<td class="td_width_4 price_td">
-									<%-- <del>정가 : <fmt:formatNumber value="${orderPagePrdt.post_tag_price}" pattern="#,### 원" /></del><br> --%>
-									판매가 : <span class="red_color" <%-- value="${orderPagePrdt.post_tag_price}" --%> pattern="#,### 원" />${orderInfo.product_price}원</span><br>
-									<%-- 마일리지 : <span class="green_color"><fmt:formatNumber value="${ci.point}" pattern="#,###" /></span> --%>
+									
+									판매가 : <span class="red_color" value="${orderInfo.product_price}" pattern="#,### 원" />${orderInfo.product_price}원</span><br>
+									
 								</td>
 								<td class="td_width_4 table_text_align_center">
 									<div class="table_text_align_center quantity_div">

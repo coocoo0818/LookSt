@@ -2,6 +2,7 @@ package kr.co.lookst.post;
 
 import java.util.List;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,13 +85,14 @@ public class PostController {
    }
 
    @GetMapping("/orderFormpage")
-	public String orderFormpage(Model m, HttpServletRequest req, @RequestParam(value="product_no", required=false) Integer product_no ) {
+	public String orderFormpage(Model m, @RequestParam(value="product_no", required=false) Integer product_no, @RequestParam(value="prdt_option_size", required=false) String prdt_option_size
+					, @RequestParam(value="prdt_option_color", required=false) String prdt_option_color, @RequestParam(value="prdt_order_quan", required=false) Integer prdt_order_quan, ServletRequest req) {
       try {
 
     	 System.out.println(product_no);
-         String prdt_option_size = req.getParameter("prdt_option_size");
-         String prdt_option_color = req.getParameter("prdt_option_color");
-         String prdt_order_quan = req.getParameter("prdt_order_quan");
+         String prdt_option_size1 = req.getParameter("prdt_option_size");
+         String prdt_option_color1 = req.getParameter("prdt_option_color");
+         String prdt_order_quan1 = req.getParameter("prdt_order_quan");
          
          List<OrderInfoDto> orderInfo = postService.orderInfo(product_no);
          m.addAttribute("orderInfo", orderInfo);
