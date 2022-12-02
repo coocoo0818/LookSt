@@ -104,7 +104,7 @@ public class PostDaoImpl implements PostDao{
 	 @Override 
 	 public List<OrderInfoDto> orderInfo(Integer product_no) throws Exception { 
 		 // TODO Auto-generated method stub return
-		 return session.selectList(namespace + "orderInfo");
+		 return session.selectList(namespace + "orderInfo", product_no);
 	 }
 
 

@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.lookst.post.domain.OrderInfoDto;
 /*import kr.co.lookst.post.domain.OrderPagePrdtDto;*/
@@ -82,32 +84,17 @@ public class PostController {
    }
 
    @GetMapping("/orderFormpage")
-	public String orderFormpage(/* OrderPagePrdtDto orderPagePrdtDto, */OrderInfoDto orderInfoDto, Model m, HttpServletRequest req) {
+	public String orderFormpage(Model m, HttpServletRequest req, @RequestParam(value="product_no", required=false) Integer product_no ) {
       try {
 
-    	 Integer product_no = Integer.parseInt(req.getParameter("product_no"));
-         System.out.println("product_no" + product_no);
-         
+    	 System.out.println(product_no);
          String prdt_option_size = req.getParameter("prdt_option_size");
-         System.out.println("prdt_option_size" + prdt_option_size);
-         
          String prdt_option_color = req.getParameter("prdt_option_color");
-         System.out.println("prdt_option_color" + prdt_option_color);
-         
          String prdt_order_quan = req.getParameter("prdt_order_quan");
-         System.out.println("prdt_order_quan" + prdt_order_quan);
          
-         List<OrderInfoDto> orderInfo = postService.orderInfo(null);
+         List<OrderInfoDto> orderInfo = postService.orderInfo(product_no);
          m.addAttribute("orderInfo", orderInfo);
          System.out.println(m);
-         
-			/*
-			 * List<OrderPagePrdtDto> orderPagePrdt = postService.orderPagePrdt(product_no);
-			 * m.addAttribute("orderPagePrdt", orderPagePrdt);
-			 * System.out.println(orderPagePrdt);
-			 */
-         
-         
       } catch (Exception e) {
          e.printStackTrace();
       }

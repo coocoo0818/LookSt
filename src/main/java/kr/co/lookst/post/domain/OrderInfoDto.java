@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class OrderInfoDto {
 
 	private String prdt_img_name;
-	private int product_no;
+	private Integer product_no;
 	private String product_name;
 	private int product_price;
 	private String product_kind;
