@@ -27,5 +27,6 @@ public class MemberDto {
 	private boolean member_smscheck;	//문자 수신여부
 	private String member_type;			//가입 타입
 	
+	
 }
 

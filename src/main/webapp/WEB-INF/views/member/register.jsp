@@ -325,6 +325,7 @@ function sample6_execDaumPostcode() {
 <body>
 	<%@ include file="/WEB-INF/views/fix/header.jsp"%>
 	
+	
 	<div class="container w-75 mt-5 mb-5">
 	<!-- Content here -->
 		<form action="./register" method="post" id="frm">

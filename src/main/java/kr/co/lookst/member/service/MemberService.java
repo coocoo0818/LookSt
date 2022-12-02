@@ -20,4 +20,5 @@ public interface MemberService {
 	public String authCheck(String member_id) throws Exception;
 	public int insertProfile(String member_id) throws Exception;
 	
+	
 }

@@ -92,4 +92,5 @@ public class MemberDaoImpl implements MemberDao {
 		return sqlSession.insert(NAMESPACE + "insertProfile", member_id);
 	}
 
+	
 }

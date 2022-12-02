@@ -20,7 +20,6 @@
 				<button type="button" class="btn btn-outline-primary" onclick="location.href = '/lookst'">홈으로</button>
 				<button type="button" class="btn btn-primary" onclick="location.href = '/lookst/login'">로그인</button>
 		</div>
-		
 
 	</div>
 
