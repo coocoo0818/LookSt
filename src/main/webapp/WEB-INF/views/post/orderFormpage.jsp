@@ -649,27 +649,27 @@ header .count {float: right; color: #333333;}
 				<table class="cart_table">
 					<caption>표 내용 부분</caption>
 					<tbody>
-						<c:forEach var="orderPagePrdt" items="${orderPagePrdt}">
+						<c:forEach var="orderInfo" items="${orderInfo}">
 							<tr>
 								<td class="td_width_1 cart_info_td">
 									<%-- <input type="hidden" class="individual_bookPrice_input" value="${ci.bookPrice}"> --%>
-									<input type="hidden" class="individual_salePrice_input" value="${orderPagePrdt.post_tag_price}">
+									<input type="hidden" class="individual_salePrice_input" value="${orderInfo.product_price}">
 									<input type="hidden" class="individual_bookCount_input" value="2">
-									<input type="hidden" class="individual_totalPrice_input" value="${orderPagePrdt.post_tag_price * 2}">
+									<input type="hidden" class="individual_totalPrice_input" value="${orderInfo.product_price * 2}">
 									<%-- <input type="hidden" class="individual_point_input" value="${ci.point}"> --%>
-									<input type="hidden" class="individual_totalPoint_input" value="${orderPagePrdt.post_tag_price}">
+									<input type="hidden" class="individual_totalPoint_input" value="${orderInfo.product_price}">
 								</td>
 								<td class="td_width_2">
 									<div class="thumbnail">
 							            <a href="#">
-							             <img src="${contextPath}/resources/img/product/${OrderInfoDto.prdt_img_name}" style="height:150px; weight: 150px;">
+							             <img src="${contextPath}/resources/img/product/${orderInfo.prdt_img_name}" style="height:150px; weight: 150px;">
 							            </a>
 							        </div>
 								</td>
-								<td class="td_width_3">${orderPagePrdt.post_tag_name}</td>
+								<td class="td_width_3">${orderInfo.product_name}</td>
 								<td class="td_width_4 price_td">
 									<%-- <del>정가 : <fmt:formatNumber value="${orderPagePrdt.post_tag_price}" pattern="#,### 원" /></del><br> --%>
-									판매가 : <span class="red_color" <%-- value="${orderPagePrdt.post_tag_price}" --%> pattern="#,### 원" />${orderPagePrdt.post_tag_price}원</span><br>
+									판매가 : <span class="red_color" <%-- value="${orderPagePrdt.post_tag_price}" --%> pattern="#,### 원" />${orderInfo.product_price}원</span><br>
 									<%-- 마일리지 : <span class="green_color"><fmt:formatNumber value="${ci.point}" pattern="#,###" /></span> --%>
 								</td>
 								<td class="td_width_4 table_text_align_center">
@@ -680,9 +680,9 @@ header .count {float: right; color: #333333;}
 									</div>
 									<!-- <a class="quantity_modify_btn">변경</a> -->
 								</td>
-								<td class="td_width_4 table_text_align_center" value="${orderPagePrdt.post_tag_price}*2" pattern="#,### 원" />
+								<td class="td_width_4 table_text_align_center" value="${orderInfo.product_price}*2" pattern="#,### 원" />
 									<%-- <fmt:formatNumber value="${orderPagePrdt.post_tag_price * 2}" pattern="#,### 원" /> --%>
-								</td>z
+								</td>
 								<td class="td_width_4 table_text_align_center delete_btn"><button>삭제</button></td>
 							</tr>
 						</c:forEach>
