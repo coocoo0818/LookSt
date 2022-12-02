@@ -1,6 +1,5 @@
 package kr.co.lookst.member.service;
 
-import kr.co.lookst.member.domain.MemAuthDto;
 import kr.co.lookst.member.domain.MemberDto;
 import kr.co.lookst.seller.domain.SellerDto;
 
