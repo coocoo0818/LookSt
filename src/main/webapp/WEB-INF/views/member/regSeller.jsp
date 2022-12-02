@@ -17,14 +17,7 @@ body {
   text-align: center;
 }
 .signup-box {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 600px;
-  height: 700px;
   padding: 40px;
-  transform: translate(-50%, -50%);
-  box-sizing: border-box;
   background-color: #ffffff;
 }
 .signup-user-box input {
@@ -139,38 +132,46 @@ a {
 
 </head>
 <body>
-
-	<form action="./mypage" method="post">
-		<div class="signup-box" style="height: 500px">
-		  <form class="signup-user-box">
-		    <h2 class="form-signup-heading">판매자 등록 정보</h2>
-		    <div class="signup-input" style="line-height:110%">
-		      <a style="color: #000000; font-weight: bold;">사업자 번호</a>
-		      <a style="color: #ff0000; font-weight: bold;"> *</a>
-		      <input type="text" class="form-control" name="seller_no" value="${selectSellerInfo.seller_no}" placeholder="123-45-6789" required="" />
-		      <br/><br/>
-		      <a style="color: #000000; font-weight: bold;">회사명</a>
-		      <a style="color: #ff0000; font-weight: bold;"> *</a>
-		      <input type="text" class="form-control" name="seller_name" value="${selectSellerInfo.seller_name}" placeholder="EZEN" required="" />
-		      <br/><br/>
-		      <a style="color: #000000; font-weight: bold;">우편 번호</a>
-		      <a style="color: #ff0000; font-weight: bold;"> *</a>
-		      <input type="text" class="form-control" name="seller_zip" value="${selectSellerInfo.seller_zip}" placeholder="12345" required="" />
-		      <br/><br/>
-		      <a style="color: #000000; font-weight: bold;">회사 주소</a>
-		      <a style="color: #ff0000; font-weight: bold;"> *</a>
-		      <input type="text" class="form-control" name="seller_addr" value="${selectSellerInfo.seller_addr}" placeholder="사랑시 고백구 행복동 " required="" />
-		      <br/><br/>
-		      <input type="text" class="form-control" name="seller_addr2" value="${selectSellerInfo.seller_addr2}" placeholder="회사 주소 입력란" required="" />
-		      <br/><br/>
-		      <a style="color: #000000; font-weight: bold;">대표 번호</a>
-		      <a style="color: #ff0000; font-weight: bold;"> *</a>
-		      <input type="text" class="form-control" name="seller_number" value="${selectSellerInfo.seller_number}" placeholder="010-0000-0000" required="" />
-		      <br/><br/>
-		      <input type="hidden" name="member_id" id="member_id" value="${res}"/>
-		  </form>
-		  <button class="signup-btn" type="submit" onclick="location.href='../index.html'">판매자 등록하기</button>
-		</div>
-	</form>
+	<%@ include file="/WEB-INF/views/fix/header.jsp"%>
+	
+	<div class="container w-75 mt-5 mb-5">
+		<form action="./mypage" method="post">
+			<div class="signup-box">
+				<div class="container">
+					  <form class="signup-user-box">
+					    <h2 class="form-signup-heading">판매자 등록 정보</h2>
+					    <div class="signup-input" style="line-height:110%">
+					      <a style="color: #000000; font-weight: bold;">사업자 번호</a>
+					      <a style="color: #ff0000; font-weight: bold;"> *</a>
+					      <input type="text" class="form-control" name="seller_no" value="${selectSellerInfo.seller_no}" placeholder="123-45-6789" required="" />
+					      <br/><br/>
+					      <a style="color: #000000; font-weight: bold;">회사명</a>
+					      <a style="color: #ff0000; font-weight: bold;"> *</a>
+					      <input type="text" class="form-control" name="seller_name" value="${selectSellerInfo.seller_name}" placeholder="EZEN" required="" />
+					      <br/><br/>
+					      <a style="color: #000000; font-weight: bold;">우편 번호</a>
+					      <a style="color: #ff0000; font-weight: bold;"> *</a>
+					      <input type="text" class="form-control" name="seller_zip" value="${selectSellerInfo.seller_zip}" placeholder="12345" required="" />
+					      <br/><br/>
+					      <a style="color: #000000; font-weight: bold;">회사 주소</a>
+					      <a style="color: #ff0000; font-weight: bold;"> *</a>
+					      <input type="text" class="form-control" name="seller_addr" value="${selectSellerInfo.seller_addr}" placeholder="사랑시 고백구 행복동 " required="" />
+					      <br/><br/>
+					      <input type="text" class="form-control" name="seller_addr2" value="${selectSellerInfo.seller_addr2}" placeholder="회사 주소 입력란" required="" />
+					      <br/><br/>
+					      <a style="color: #000000; font-weight: bold;">대표 번호</a>
+					      <a style="color: #ff0000; font-weight: bold;"> *</a>
+					      <input type="text" class="form-control" name="seller_number" value="${selectSellerInfo.seller_number}" placeholder="010-0000-0000" required="" />
+					      <br/><br/>
+					      <input type="hidden" name="member_id" id="member_id" value="${res}"/>
+					      <button class="container btn btn-primary" type="submit" onclick="location.href='../index.html'">판매자 등록하기</button>
+					  	</div>
+					  </form>
+  				</div>
+			</div>
+		</form>
+	</div>
+	
+	<%@ include file="/WEB-INF/views/fix/footer.jsp"%>
 </body>
 </html>

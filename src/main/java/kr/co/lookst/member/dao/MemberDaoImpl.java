@@ -87,4 +87,9 @@ public class MemberDaoImpl implements MemberDao {
 		return sqlSession.selectOne(NAMESPACE + "authCheck", member_id);
 	}
 
+	@Override
+	public int insertProfile(String member_id) throws Exception {
+		return sqlSession.insert(NAMESPACE + "insertProfile" + member_id);
+	}
+
 }

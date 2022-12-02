@@ -79,5 +79,9 @@ public class MemberServiceImpl implements MemberService{
 	public String authCheck(String member_id) throws Exception {
 		return dao.authCheck(member_id);
 	}
+	@Override
+	public int insertProfile(String member_id) throws Exception {
+		return dao.insertProfile(member_id);
+	}
 
 }
