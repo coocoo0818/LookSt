@@ -42,6 +42,8 @@ public interface PostService {
 
 	List<OrderInfoDto> orderInfo(Integer product_no) throws Exception;
 
+	
+
 
 	/*
 	 * orderFormPageDto orderFormpage(orderFormPageDto orderFormpage) throws
