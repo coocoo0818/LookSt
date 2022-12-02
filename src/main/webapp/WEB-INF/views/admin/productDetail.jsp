@@ -27,8 +27,10 @@
 			/* 색상 사이즈유효성 체크 */
 			if(prdt_option_size == "undefined" || prdt_option_size == null || prdt_option_size == ""){
 				alert("사이즈를 체크해주세요.")
+				return false;
 			} else if (prdt_option_color == "undefined" || prdt_option_color == null || prdt_option_color == "") {
 				alert("색상을 체크해주세요.")
+				return false;
 			}
 
 			fetch('${contextPath}/post/orderFormpage',{
@@ -45,8 +47,7 @@
 						prdt_order_quan : prdt_order_quan
 				},   
 				success: function(data){   //데이터 주고받기 성공했을 경우 실행할 결과
-		            //function(data)를 쓰게 되면 전달받은 데이터가 data안에 담아서 들어오게 된다. 
-					alert(data);   
+		            //function(data)를 쓰게 되면 전달받은 데이터가 data안에 담아서 들어오게 된다.    
 					location.replace('${contextPath}/post/orderFormpage') 
 				},
 				error:function(){   //데이터 주고받기가 실패했을 경우 실행할 결과
