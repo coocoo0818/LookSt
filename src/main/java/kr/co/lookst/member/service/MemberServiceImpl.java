@@ -83,4 +83,5 @@ public class MemberServiceImpl implements MemberService{
 		return dao.insertProfile(member_id);
 	}
 
+	
 }

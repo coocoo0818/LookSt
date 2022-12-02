@@ -53,7 +53,6 @@ function login() {
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/fix/header.jsp"%>
-	
 	<form action="login" method="post" id="frm">
 		<div class="container mt-5 mb-5">
 			<div class="container" style="width: 500px;">

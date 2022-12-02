@@ -112,7 +112,6 @@ public class MemberController {
 		String member_id = dto.getMember_id();
 		service.insertAuthInfo(member_id);
 		service.insertProfile(member_id);
-		
 		return "redirect:/register/complete";
 	}
 	//회원가입 완료

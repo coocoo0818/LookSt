@@ -242,7 +242,6 @@ button:disabled {
 
 <div class="container w-75 mt-5 mb-5" style="width: 720px;">
 
-		
 		<div class="container w-75 mt-5 mb-5" style="width: 720px;">
 		<form action="./mypage" method="post">
 			<div class="edit_member_box">
