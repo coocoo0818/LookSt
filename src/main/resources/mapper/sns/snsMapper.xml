@@ -5,23 +5,85 @@
 
 <mapper namespace="kr.co.lookst.sns.dao.snsMapper">
 
+   <!-- 프로필 정보 -->
    <select id="profileInfo" resultType="SnsProfileDto">
-      select * from profileInfo where member_id = #{member_id}
+      SELECT * FROM profileInfo
+      WHERE member_id = #{member_id}
    </select>
-   
+
+   <!-- 프로필 피드 -->
    <select id="profileFeed" resultType="ProfileFeedDto">
-      select * from profileFeed where member_id = #{member_id}
+      SELECT * FROM profileFeed
+      WHERE member_id = #{member_id}
    </select>
    
-<!--    <select id="feedCnt" resultType="ProfileFeedDto"> -->
-<!--       select * from feed_cnt  -->
-<!--    </select> -->
+   <resultMap type="FollowDto" id="FollowDto">
+      <result column="member_id" property="member_id"/>
+      <result column="member_nick" property="member_nick"/>
+      <result column="following" property="following"/>
+      <result column="follow_no" property="follow_no"/>
+   </resultMap>
    
-   <select id="followerList" resultType="FollowDto">
-      select * from follower_list where member_id = #{member_id}
+   <!-- 팔로우 -->
+   <insert id="follow">
+      insert into follow(member_id, following)
+      values(#{member_id}, #{following})
+   </insert>
+   
+   <!-- 언팔로우 -->
+   <delete id="unfollow">
+      delete from follow
+      where member_id = #{member_id} and following = #{following}
+   </delete>
+   
+   <!-- 팔로우 유무 -->
+   <select id="isFollow" resultType = "int">
+      select count(*) from follow
+      where member_id = #{member_id} and following = #{following}
    </select>
    
-   <select id="followingList" resultType="FollowDto">
-      select * from following_list where member_id = #{member_id}
+   <!-- 팔로우 리스트 -->
+   <select id="selectActiveUserList" resultMap = "FollowDto">
+      select m.member_id, member_nick , p.profile_img 
+      from "member" m , profile p  
+      where m.member_id = p.member_id 
+      and m.member_id in (select following  
+                   from follow 
+                   where member_id = #{member_id})
    </select>
+   
+   <!-- 팔로워 리스트 -->
+   <select id="selectPassiveUserList" resultMap="FollowDto">
+      select m.member_id, member_nick , p.profile_img 
+      from "member" m , profile p  
+      where m.member_id = p.member_id 
+      and m.member_id in (select member_id  
+                       from follow 
+                      where following = #{member_id})
+   </select>
+
+   <!-- 탈퇴시 팔로우 삭제 -->
+   <delete id="deleteUserAllFollow">
+      delete from follow
+      where member_id = #{member_id})
+   </delete>
+   
+   
+   
+<!--    
+   <update id="mod_nickname" parameterType="SnsProfileDto">
+      UPDATE member
+      SET member_nick = #{member_nick}, member_updt = now()
+      WHERE member_id = #{member_id}
+   </update>
+ -->
+<!-- 
+    <update id="mod_profile" parameterType="SnsProfileDto">
+      UPDATE profile
+      SET profile_img = #{profile_img}, profile_uuid = #{profile_uuid},
+          profile_date = now(), profile_intro = #{profile_intro}
+      WHERE member_id = #{member_id}
+   </update>
+ -->
+
 </mapper>

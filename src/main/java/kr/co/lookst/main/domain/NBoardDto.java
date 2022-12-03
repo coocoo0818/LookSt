@@ -2,9 +2,15 @@ package kr.co.lookst.main.domain;
 
 import java.util.Date;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Builder
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class NBoardDto {
 	private String member_id;
 	private Integer board_no;
@@ -16,24 +22,6 @@ public class NBoardDto {
     private int board_views;
     private String board_kind;
     private int board_com_cnt;
-
-    public NBoardDto() {
-	}
-    
-    public NBoardDto(String member_id, Integer board_no, String board_title, Date board_date, String board_con,
-			boolean board_secret, String board_type, int board_views, String board_kind, int board_com_cnt) {
-		super();
-		this.member_id = member_id;
-		this.board_no = board_no;
-		this.board_title = board_title;
-		this.board_date = board_date;
-		this.board_con = board_con;
-		this.board_secret = board_secret;
-		this.board_type = board_type;
-		this.board_views = board_views;
-		this.board_kind = board_kind;
-		this.board_com_cnt = board_com_cnt;
-	}
 
     
 }

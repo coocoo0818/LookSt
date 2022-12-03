@@ -23,10 +23,23 @@
       <typeAlias alias="Post_imgDto" type="kr.co.lookst.post.domain.Post_imgDto"/>
       <typeAlias alias="MemMGMDto" type="kr.co.lookst.admin.domain.MemMGMDto"/>
       <typeAlias alias="ProdInfoDto" type="kr.co.lookst.post.domain.ProdInfoDto"/>
+      <typeAlias alias="snslist_infoDto" type="kr.co.lookst.post.domain.snslist_infoDto"/>
       <typeAlias alias="PageResolver" type="kr.co.lookst.main.domain.PageResolver"/>
       <typeAlias alias="SearchItem" type="kr.co.lookst.main.domain.SearchItem"/>
       <typeAlias alias="snslist_infoDto" type="kr.co.lookst.post.domain.snslist_infoDto"/>
       <typeAlias alias="NBoardDto" type="kr.co.lookst.main.domain.NBoardDto"/>
       <typeAlias alias="NSellerDto" type="kr.co.lookst.main.domain.NSellerDto"/>
+      <typeAlias alias="post_com_tagDto" type="kr.co.lookst.post.domain.post_com_tagDto"/>
+      <typeAlias alias="sns_Main_ImgDto" type="kr.co.lookst.post.domain.sns_Main_ImgDto"/>
+      <typeAlias alias="snsPrdtImgDto" type="kr.co.lookst.post.domain.snsPrdtImgDto"/>
+      <typeAlias alias="BoardDto" type="kr.co.lookst.board.domain.BoardDto"/>
+      <typeAlias alias="NPostDto" type="kr.co.lookst.main.domain.NPostDto"/>
+      <typeAlias alias="Post_TagDto" type="kr.co.lookst.post.domain.Post_TagDto"/>
+      <typeAlias alias="MagazineSimpleDto" type="kr.co.lookst.board.domain.MagazineSimpleDto"/>
+      <typeAlias alias="CommentDto" type="kr.co.lookst.board.domain.CommentDto"/>
+      <typeAlias alias="MySalesDto" type="kr.co.lookst.seller.domain.MySalesDto"/>
+      <typeAlias alias="sns_com_tagDto" type="kr.co.lookst.post.domain.sns_com_tagDto"/>
+      <typeAlias alias="TpostDto" type="kr.co.lookst.post.domain.TpostDto"/>
+      <typeAlias alias="OrderInfoDto" type="kr.co.lookst.post.domain.OrderInfoDto"/>
    </typeAliases>
 </configuration>

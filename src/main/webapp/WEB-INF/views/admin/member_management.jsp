@@ -108,7 +108,7 @@
 								<img class="rounded-circle profile-result" src="${contextPath}/resources/img/profile/${member_management.profile_img}" alt="" />
 							</th>
 								<td class="text-center" data-title="profile">
-									<a href="#" id="member_id${status.index}" name="member_id">${member_management.member_id}</a>
+									<a href="${contextPath}/sns/snsProfile/?member_id=${member_management.member_id}" id="member_id${status.index}" name="member_id">${member_management.member_id}</a>
 								</td>
 							<td class="text-center" data-title="name"">${member_management.member_name}</td>
 							<td class="text-center" data-title="since" data-type="currency"><fmt:formatDate value="${member_management.member_since}" pattern="yyyy-MM-dd" type="date" /></td>
