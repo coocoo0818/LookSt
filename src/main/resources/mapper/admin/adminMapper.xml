@@ -15,12 +15,24 @@
         </select>
         <!-- 메인 스타일 리스트 -->
         <select id="stylePick" resultType="StylePickDto">
-                select * from stylePick
+           select member.member_id, post.post_no,profile.profile_img ,member.member_nick, post_img.post_img_img
+			from member member, profile profile, post_img post_img, post post
+			where member.member_id = profile.member_id
+			and member.member_id = post.member_id 
+			and post.post_no = post_img.post_no 
+			and post.post_type = 'Y'
+			and post_img.post_img_seq = 1
+			order by post.post_date desc
+			limit 10;
         </select>
 
         <resultMap type="Post_imgDto" id="post_imgDto">
-                <result column="post_no" property="post_no" />
                 <result column="post_img_img" property="post_img_img" />
+        </resultMap>
+        
+        <resultMap type="NPostDto" id="nPostDto">
+        		<result column="post_no" property="post_no" />
+                <result column="post_content" property="post_content" />
         </resultMap>
 
         <resultMap type="NBoardDto" id="nBoardDto">
@@ -45,6 +57,24 @@
                 <collection property="post_imgDto" resultMap="post_imgDto" />
                 <collection property="nBoardDto" resultMap="nBoardDto" />
                 <collection property="nSellerDto" resultMap="nSellerDto" />
+                <collection property="nPostDto" resultMap="nPostDto" />
+        </resultMap>
+        
+        
+        <resultMap type="Prdt_Img" id="prdt_Img">
+                <result column="prdt_img_no" property="prdt_img_no" />
+                <result column="prdt_img_seq" property="prdt_img_seq" />
+                <result column="prdt_img_name" property="prdt_img_name" />
+        </resultMap>
+        <resultMap type="Product" id="Product">
+                <result column="product_no" property="product_no" />
+                <result column="product_kind" property="product_kind" />
+                <result column="product_price" property="product_price" />
+                <result column="product_date" property="product_date" />
+                <result column="product_name" property="product_name" />
+                <result column="product_type" property="product_type" />
+                <result column="product_info" property="product_info" />
+                <collection property="prdt_Img" resultMap="prdt_Img" />
         </resultMap>
 
         <!-- 어드민 회원 리스트 sql -->
@@ -238,8 +268,7 @@
                 parameterType="SearchItem" resultType="int">
                 select count(*)
                 from member member, board board
-                where member.member_id =
-                board.member_id
+                where member.member_id = board.member_id
                 and board.board_type = 'A'
                 and board.board_kind = 'M'
                 and true
@@ -300,8 +329,7 @@
                 <include refid="searchSellerCondition" />
         </select>
         <!-- 판매자 신청 서치 출력 -->
-        <select id="sellerApplyingsearchResultPage"
-                parameterType="SearchItem" resultMap="MemMGMDto">
+        <select id="sellerApplyingsearchResultPage" parameterType="SearchItem" resultMap="MemMGMDto">
                 <include refid="selectFromSellerManagement" />
                 and true
                 <include refid="searchSellerCondition" />
@@ -320,21 +348,103 @@
                 SET seller_type = 'N'
                 WHERE seller_no = #{seller_no}
         </update>
-        
-        <!-- 상품 정보 -->
+      
+      <!-- 상품 리스트 sql -->
+      <sql id="selectFromShopList">
+        select product.product_no, product.product_kind, product.product_price, product.product_name, product.product_info, prdt_img.prdt_img_name
+		from product product, prdt_img prdt_img
+		where product.product_no = prdt_img.product_no
+		and product.product_type = 'Y'
+		and prdt_img.prdt_img_seq = 1
+      </sql>
+      <!-- 상품 리스트 검색 리스트 sql -->
+      <sql id="searchShopCondition">
+           <choose>
+                   <when test='option=="N"'>
+                           AND product.product_name LIKE concat('%', #{keyword},'%')
+                   </when>
+                   <when test='option=="S"'>
+                           AND product.product_kind LIKE concat('%', #{keyword},'%')
+                   </when>
+                   <when test='option=="T"'>
+                           AND product.product_kind LIKE concat('%', #{keyword},'%')
+                   </when>
+           </choose>
+      </sql>
+      <!-- 상품 리스트 토탈 출력 -->
+      <select id="shopListSearchResultCnt" parameterType="SearchItem" resultType="int">
+              select count(*)
+			  from product product, prdt_img prdt_img
+			  where product.product_no = prdt_img.product_no
+		      and product.product_type = 'Y'
+			  and prdt_img.prdt_img_seq = 1
+              and true
+              <include refid="searchShopCondition" />
+      </select>
+      <!-- 상품 리스트 서치 출력 -->
+      <select id="shopListSearchResultPage" parameterType="SearchItem" resultMap="Product">
+              <include refid="selectFromShopList" />
+              and true
+              <include refid="searchShopCondition" />
+              order by product.product_date desc
+              limit #{pageSize} offset #{offset}
+      </select>
+      <!-- 상품 정보 -->
       <select id="getproductInfo" parameterType="integer" resultType="product">
          select * from product
          where product_no = #{product_no}
       </select>
+      <!-- 현재 상품 재고 사이즈 출력 -->
       <select id="getproductSize" parameterType="integer" resultType="Prdt_Option">
          select distinct prdt_option_size from prdt_option
          where product_no = #{product_no}
          order by prdt_option_size DESC
       </select>
+      <!-- 상품 이미지 출력 -->
       <select id="getproductImg" parameterType="integer" resultType="Prdt_Img">
          select * from prdt_img
          where product_no = #{product_no}
          order by prdt_img_seq asc
       </select>
-      
+      <!-- 상품 재고 색상 출력 -->
+      <select id="productColor" parameterType="map" resultType="Prdt_Option">
+         select prdt_option_color, prdt_option_stock  from prdt_option
+                 where product_no = #{product_no}
+                 and prdt_option_size = #{prdt_option_size}
+                 and prdt_option_stock > 0
+     </select>
+     
+     <!-- sns total 리스트 출력 -->
+     <select id="snsTotalList" resultType="integer">
+             select post.post_no  from post post 
+             where post.post_type = 'Y'
+             order by post.post_date desc
+     </select>
+     <!-- sns 이미지 및 정보 출력 -->
+     <select id="snsTotalListCarousel" parameterType="Integer" resultMap="MemMGMDto">
+     	 select member.member_id, post.post_no, post.post_content, post_img.post_img_img, profile.profile_img, member.member_nick  from post post,post_img post_img,member member, profile profile
+		 where post.member_id = member.member_id
+		 and member.member_id = profile.member_id 
+		 and post.post_no = post_img.post_no
+		 and post.post_type = 'Y'
+		 and post_img.post_img_seq = 1
+		 and post.post_no = #{post_no}
+		 order by post.post_date desc
+     </select>
+     <!-- sns sns 상단 정보 출력 -->
+     <select id="snsTopList" resultMap="MemMGMDto">
+     	 select member.member_id, post.post_no, post.post_content, post_img.post_img_img, profile.profile_img, member.member_nick  from post post,post_img post_img,member member, profile profile
+		 where post.member_id = member.member_id
+		 and member.member_id = profile.member_id 
+		 and post.post_no = post_img.post_no
+		 and post.post_type = 'Y'
+		 and post_img.post_img_seq = 1
+		 order by post.post_date desc
+     </select>
+     <!-- 포스트 태그 정보 -->
+     <select id="postTagInfo" parameterType="Integer" resultType="Post_TagDto">
+     	select * from post_tag
+		where post_no = #{post_no}
+		order by post_tag_no
+     </select>
 </mapper>

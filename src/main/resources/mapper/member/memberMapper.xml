@@ -11,19 +11,119 @@
       WHERE member_id = #{member_id}
       AND member_pw = #{member_pw}
    </select>
-
+   
+   <select id="loginCheck" parameterType="memberDto" resultType="int">
+      SELECT count (member_id)
+      FROM MEMBER
+      WHERE member_id = #{member_id}
+      AND member_pw = #{member_pw}
+   </select>
+   
    <insert id="register">
       INSERT INTO member (
          member_id, member_pw, member_nick,
-         member_name, member_since, member_check,
-         member_smscheck, member_type
+         member_name, member_addr, member_addr2,
+         member_zip, member_since,
+         member_check, member_smscheck, member_type
       )
       VALUES (
          #{member_id}, #{member_pw}, #{member_nick},
-         #{member_name}, now(), #{member_check},
-         #{member_smscheck}, #{member_type}
+         #{member_name}, #{member_addr}, #{member_addr2},
+         #{member_zip}, now(),
+         #{member_check}, #{member_smscheck}, 'm'
+      )
+   </insert>
+   
+   <select id="idCheck" parameterType="String" resultType="int">
+      SELECT COUNT (member_id)
+      FROM member
+      WHERE member_id = #{member_id}
+   </select>
+   
+   <select id="selectInfo" parameterType="memberDto" resultType="memberDto">
+      SELECT *
+      FROM member
+      WHERE member_id = #{member_id}
+   </select>
+   
+   <update id="updateInfo">
+      UPDATE member
+      SET (
+         member_id, member_pw, member_nick, member_name,
+          member_phon, member_addr, member_addr2, member_zip,
+          member_updt, member_check, member_smscheck
+      ) = (
+         #{member_id}, #{member_pw}, #{member_nick}, #{member_name},
+          #{member_phon}, #{member_addr}, #{member_addr2}, #{member_zip},
+          now(), #{member_check}, #{member_smscheck}
+      )
+      WHERE member_id = #{member_id}
+   </update>
+   
+   <delete id="deleteMember" parameterType="String">
+      DELETE
+      FROM member
+      WHERE member_id = #{member_id}
+   </delete>
+   
+   <select id="checkSellerInfo" parameterType="String" resultType="int">
+      SELECT COUNT (member_id)
+      FROM seller
+      WHERE member_id = #{member_id}
+   </select>
+   
+   
+   <select id="selectSellerInfo" parameterType="SellerDto" resultType="SellerDto">
+      SELECT *
+      FROM seller
+      WHERE member_id = #{member_id}
+   </select>
+
+   <insert id="insertSellerInfo">
+      INSERT into seller (
+         seller_no, seller_name, seller_type,
+         seller_addr, seller_addr2, seller_zip,
+         seller_number, member_id
+      )
+      VALUES (
+         #{seller_no}, #{seller_name}, 'y',
+         #{seller_addr}, #{seller_addr2}, #{seller_zip},
+         #{seller_number}, #{member_id}
       )
    </insert>
 
-
+   <update id="updateSellerInfo">
+      UPDATE seller
+      SET (
+         seller_no, seller_name, seller_type,
+         seller_addr, seller_addr2, seller_zip,
+         seller_number, member_id
+      ) = (
+         #{seller_no}, #{seller_name}, 'y',
+         #{seller_addr}, #{seller_addr2}, #{seller_zip},
+         #{seller_number}, #{member_id}
+      )
+      WHERE member_id = #{member_id}
+   </update>
+   
+   <insert id="insertAuthInfo" parameterType="String">
+      INSERT into mem_auth
+         (member_id, mem_auth_auth, mem_auth_key)
+      VALUES
+         (#{member_id}, 'MEMBER', 'key')
+   </insert>
+   
+   <select id="authCheck" parameterType="String" resultType="String">
+      SELECT mem_auth_auth
+      FROM mem_auth
+      WHERE member_id = #{member_id}
+   </select>
+   
+   <insert id="insertProfile" parameterType="String">
+      INSERT INTO profile
+         (member_id, profile_img, profile_uuid, profile_type, profile_date, profile_intro)
+      VALUES
+         (#{member_id}, 'default.jpg', ' ', 'N', now(), ' ')
+   </insert>
+   
 </mapper>

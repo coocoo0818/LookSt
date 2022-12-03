@@ -68,7 +68,7 @@
 								<div class="col-3">
 									<img class="rounded-circle" style="width: 40px; height: 40px;" src="${contextPath}/resources/img/profile/${member_management.profile_img}" onclick="location.href='./'" id="profile_img">
 								</div>
-								<div class="col-6 my-auto" onclick="location.href='./'">${member_management.member_nick}</div>
+								<div class="col-6 my-auto" onclick="location.href='${contextPath}/sns/personalPost/?member_id=${member_management.member_id}'">${member_management.member_nick}</div>
 								<button class="col-3 btn btn-outline-danger btn-sm rounded postDelete" id="postDelete">삭제</button>
 							</div>
 						</div>

@@ -3,6 +3,126 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="수정">
-	
+<mapper namespace="kr.co.lookst.post.dao.PostMapper">
+   
+   
+   
+<!--    <select id="prod_info_list" parameterType="int" resultType="ProdInfoDto">
+      select post_tag_img, post_tag_name, post_tag_price
+      from post_tag
+      where post_no = #{post_no}
+   </select> -->
+<!-- <select id="prod_info_list" resultType="ProdInfoDto">
+      select pi2.post_img_img, p.post_content, pt.post_tag_img , pt.post_tag_name, pt.post_tag_price 
+      from post p , "member" m ,post_tag pt ,profile p2, post_img pi2  
+      where p.post_no = pt.post_no 
+      and p.member_id = m.member_id 
+      and m.member_id = p2.member_id 
+      and pi2.post_no = p.post_no 
+      and p.post_type = 'Y'
+   </select> -->   
+   <select id="post_img_list" resultType="Post_imgDto">
+      select * from post_img pi2 
+      order by post_img_no asc
+   </select>
+   
+   <select id="postImgListCarousel" parameterType="Integer" resultType="Post_imgDto">
+      select post_img.post_img_img  from post post, post_img post_img  
+      where post.post_no = post_img.post_no  
+      and post.post_type = 'Y'
+      and post.post_no = #{post_no}
+      order by post_img.post_img_seq;
+   </select>
+      
+   <select id="postImgListPrdt" parameterType="Integer" resultType="snslist_infoDto">
+      select post_tag_img , post_tag_name ,post_tag_price  from post_tag post_tag, post post 
+      where post.post_no = post_tag.post_no 
+      and post_tag.post_no = #{post_no}
+      and post.post_type = 'Y'
+      order by post_tag_no
+   </select>
+   
+   <select id="snscommentlist" parameterType="Integer" resultType="PostDto">
+      select profile.profile_img , member.member_nick , sns_comment.sns_comment_con , sns_comment.sns_comment_date 
+      from member member, sns_comment sns_comment, profile profile , post post
+      where profile.member_id = member.member_id 
+      and member.member_id = sns_comment.member_id 
+      and sns_comment.post_no = post.post_no  
+      and sns_comment.post_no = #{post_no}
+      and post.post_type = 'Y'
+      order by sns_comment_seq;
+   </select>
+   
+   <select id="postComTaglist" parameterType="Integer" resultType="post_com_tagDto">
+         select profile.profile_img , member.member_nick , post.post_content , tag.tag_content, member.member_id
+       from post post, tag tag, member member, profile profile
+       where post.post_no = tag.post_no 
+       and profile.member_id = member.member_id 
+       and post.member_id = member.member_id 
+       and post.post_no = #{post_no}
+       and post.post_type = 'Y';
+   </select>
+   
+   <select id="snsmainimg" parameterType="Integer" resultType="sns_Main_ImgDto">
+      select post_img.post_img_img  
+      from post post, post_img post_img  
+      where post.post_no = post_img.post_no  
+      <!-- and post.post_no = #{post_no} -->
+      and post_img.post_img_seq = 1
+      and post_type = 'Y'
+      order by post_date desc;
+   </select>
+   
+   <select id="snsPrdtImg" parameterType="Integer" resultType="snsPrdtImgDto">
+      select post_tag_img , post_tag_name ,post_tag_price  
+      from post_tag post_tag, post post 
+      where post.post_no = post_tag.post_no 
+      <!--and post_tag.post_no = 1 -->
+      and post.post_type = 'Y'
+      order by post_tag_no;
+   </select>
+   
+   <select id="snsComTag" parameterType="Integer" resultType="sns_com_tagDto">
+      select profile.profile_img , member.member_nick , post.post_content , tag.tag_content 
+      from post post, tag tag, member member, profile profile
+      where post.post_no = tag.post_no 
+      and profile.member_id = member.member_id 
+      and post.member_id = member.member_id 
+      <!--and post.post_no = 1 -->
+      and post.post_type = 'Y'
+   </select>
+   
+   <select id="postTotalList" resultType="TpostDto">
+      select post_no from post
+      where post_type = 'Y'
+      order by post_date desc
+   </select>
+   
+<!--    <select id="orderPagePrdt" parameterType="Integer" resultType="OrderPagePrdtDto">
+      select pt.post_tag_img , pt.post_tag_name ,pt.post_tag_price, p.product_info 
+      from post_tag pt , product p
+      where pt.product_no = p.product_no
+      and pt.product_no = 1
+   </select> -->
+   
+<!--    <insert id="orderFormpage" parameterType="orderFormPageDto">
+      INSERT INTO prdt_order
+         (prdt_order_person, prdt_order_phone, member_id, prdt_order_addr, prdt_order_addr2, prdt_order_quan)
+      VALUES
+         (#{prdt_order_person}, #{prdt_order_phone}, #{member_id},#{prdt_order_addr},#{prdt_order_addr2},#{prdt_order_quan})
+   </insert> -->
+   
+<!--    <select id="orderFormList" resultType="orderFormPageDto">
+      select po.prdt_order_person , po.prdt_order_phone , po.member_id
+      from prdt_order po 
+      where po.prdt_order_type = 'Y';
+   </select> -->
+   
+   <select id="orderInfo" parameterType="Integer" resultType="OrderInfoDto">
+      select prdt_img.prdt_img_name, product.product_no, product.product_name,product.product_price,product.product_kind,product.product_info
+      from product product, prdt_img prdt_img 
+      where product.product_no = prdt_img.product_no
+      and product.product_no = #{product_no}
+      and prdt_img.prdt_img_seq = 1;
+   </select>
 </mapper>
