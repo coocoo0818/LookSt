@@ -77,7 +77,7 @@
 			<c:forEach var="snsTopList" items="${snsTopList}" varStatus="status">
 				<div class="col">
 					<div class="card border-0">
-						<%-- ${fn:contains(snsTopList.NPostDto.post_no, 10)? 'functionName':'no'} --%>
+						${fn:contains(snsTopList.NPostDto.post_no, snsTopList.NPostDto.post_no)? snsTopList.NPostDto.post_no:'no'}
 						<img src="${contextPath}/resources/img/post/${snsTopList.post_imgDto.post_img_img}" class="card-img-top rounded position-relative" onclick="location.href='${contextPath}/admin/mylist/?post_no=${snsTotalLists}'">
 						<span class="position-absolute badge rounded-pill bg-light m-1 postNo" id="postNo" data-postNo="${snsTopList.NPostDto.post_no}">No.${snsTopList.NPostDto.post_no}</span>
 						<div class="row justify-content-start d-flex m-2">
