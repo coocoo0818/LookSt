@@ -321,7 +321,7 @@ public class AdminController {
 			/* sns total list */
 			List<MemMGMDto> snsTopList = adminService.snsTopList();
 			model.addAttribute("snsTopList", snsTopList);
-			System.out.println(model);
+			/* System.out.println(model); */
 			/* sns total list */
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -337,6 +337,22 @@ public class AdminController {
 			List<MemMGMDto> snsTopList = adminService.snsTopList();
 			model.addAttribute("snsTopList", snsTopList);
 			System.out.println(model);
+			/* sns snsSelectTotalList list */
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "/admin/snsTotalList";
+	}
+	
+	/* sns tagInfo list */
+	@RequestMapping(value="/tagInfoList", method={RequestMethod.GET})
+	public String tagInfoList(Model model, @RequestParam(value="post_no",required=false) Integer post_no) {
+		try {
+			System.out.println(post_no);
+			/* sns snsSelectTotalList list */
+			List<MemMGMDto> snsTopList = adminService.snsTopList();
+			model.addAttribute("snsTopList", snsTopList);
+			/* System.out.println(model); */
 			/* sns snsSelectTotalList list */
 		} catch (Exception e) {
 			e.printStackTrace();
