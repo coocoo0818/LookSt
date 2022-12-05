@@ -13,14 +13,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.lookst.admin.domain.MemMGMDto;
 import kr.co.lookst.admin.service.AdminService;
+import kr.co.lookst.board.domain.CommentDto;
 import kr.co.lookst.main.domain.PageResolver;
 import kr.co.lookst.main.domain.Prdt_Img;
 import kr.co.lookst.main.domain.Prdt_Option;
 import kr.co.lookst.main.domain.Product;
 import kr.co.lookst.main.domain.SearchItem;
+import kr.co.lookst.post.domain.Post_TagDto;
+import kr.co.lookst.post.domain.post_com_tagDto;
 
 @Controller
 @RequestMapping("/admin")
@@ -346,17 +350,40 @@ public class AdminController {
 	
 	/* sns tagInfo list */
 	@RequestMapping(value="/tagInfoList", method={RequestMethod.GET})
-	public String tagInfoList(Model model, @RequestParam(value="post_no",required=false) Integer post_no) {
+	@ResponseBody
+	public ResponseEntity<List<post_com_tagDto>> tagInfoList(Model model, Integer post_no) {
+		List<post_com_tagDto> tagInfoList = null;
 		try {
 			System.out.println(post_no);
-			/* sns snsSelectTotalList list */
-			List<MemMGMDto> snsTopList = adminService.snsTopList();
-			model.addAttribute("snsTopList", snsTopList);
-			/* System.out.println(model); */
-			/* sns snsSelectTotalList list */
+			/* sns tagInfo list */
+			tagInfoList = adminService.tagInfoList(post_no);
+			model.addAttribute("tagInfoList", tagInfoList);
+			return new ResponseEntity<List<post_com_tagDto>>(tagInfoList, HttpStatus.OK); // 200
+			/* sns tagInfo list */
 		} catch (Exception e) {
 			e.printStackTrace();
+			return new ResponseEntity<List<post_com_tagDto>>(HttpStatus.BAD_REQUEST); // 400
 		}
-		return "/admin/snsTotalList";
+		/* return "/admin/tagInfoList"; */
+	}
+	
+	/* sns PrdtTagInfo list */
+	@RequestMapping(value="/postTagInfo", method={RequestMethod.GET})
+	@ResponseBody
+	public ResponseEntity<List<Post_TagDto>> postTagInfo(Model model, Integer post_no) {
+		List<Post_TagDto> postTagInfo = null;
+		try {
+			System.out.println(post_no);
+			/* sns PrdtTagInfo list */
+			postTagInfo = adminService.postTagInfo(post_no);
+			model.addAttribute("postTagInfo", postTagInfo);
+			System.out.println(postTagInfo);
+			return new ResponseEntity<List<Post_TagDto>>(postTagInfo, HttpStatus.OK); // 200
+			/* sns PrdtTagInfo list */
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<List<Post_TagDto>>(HttpStatus.BAD_REQUEST); // 400
+		}
+		/* return "/admin/tagInfoList"; */
 	}
 }

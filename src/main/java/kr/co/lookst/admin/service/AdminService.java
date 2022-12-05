@@ -8,6 +8,7 @@ import kr.co.lookst.main.domain.Prdt_Option;
 import kr.co.lookst.main.domain.Product;
 import kr.co.lookst.main.domain.SearchItem;
 import kr.co.lookst.post.domain.Post_TagDto;
+import kr.co.lookst.post.domain.post_com_tagDto;
 
 public interface AdminService {
 	/* 회원 리스트 */
@@ -76,6 +77,8 @@ public interface AdminService {
 	List<Post_TagDto> postTagInfo(Integer snsTotalList) throws Exception;
 	/* sns sns 상단 정보 출력 */
 	List<MemMGMDto> snsTopList() throws Exception;
+	/* sns 태그정보 출력 */
+	List<post_com_tagDto> tagInfoList(Integer post_no) throws Exception;
 
 
 }
