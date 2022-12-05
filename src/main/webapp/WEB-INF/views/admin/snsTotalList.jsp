@@ -16,37 +16,31 @@
 	<%@ include file="/WEB-INF/views/fix/header.jsp"%>
 
 	<script type="text/javascript">
-		var postNo = $('#postNo').attr('data-postNo');
-		console.log(postNo)
-		function functionName() {
-		  alert("tl")
-		}
-	    /* $(document).ready(function() {
-	    	let showList = function(bno) {
+		$(document).ready(function(){
+			let post_no = $('#postNo').attr('data-postNo')
+		    alert(post_no)
+		    
+	    	let showList = function(post_no) {
+	    		alert(post_no)
 				$.ajax({
 					type : 'GET',		//요청 메서드
-					url : '/heart/comments?bno='+bno,		// 요청 URI
+					url : '${contextPath}/admin/tagInfoList',		// 요청 URI
 					success : function(result) {			// 서버로부터 응답이 도착하면 호출될 함수
-						$("#commentList").html(toHtml(result))		// result는 서버가 전송한 데이터
+						$("#tagInfoList").html(/* toHtml(result) */)		// result는 서버가 전송한 데이터
 					},
 					error : function() { alert("error")}	// 에러가 발생할 때, 호출될 함수
 				})
 			}
+			showList(post_no)
 		
-			let toHtml = function(comments) {
-				let tmp = "<ul style= 'display: block;'>"
-				comments.forEach(function(comment) {
-					tmp += '<li style="background-color:#f9f9fa; border-bottom:1px solid rgb(235,236,239); color:black;" data-cno=' + comment.cno
-					tmp += ' data-bno=' + comment.bno
-					tmp += ' data-pcno=' + comment.pcno + '>'
-					tmp += ' commenter=<span class="commenter">' + comment.commenter + '</span>'
-					tmp += ' comment=<span class="comment">' + comment.comment + '</span>'
-					tmp += ' <button class="delBtn">삭제</button>'
-					tmp += ' <button class="modBtn">수정</button>'
-					tmp += '</li>'
+			/* let toHtml = function(tags) {
+				let tmp = null
+				tags.forEach(function(tag) {
+					tmp += '<b>' + tag.tag_content + '</b>'
 				})
-				return tmp += "</ul>"
+				return tmp
 			} */
+		})
 
 	</script>
 
@@ -77,7 +71,7 @@
 			<c:forEach var="snsTopList" items="${snsTopList}" varStatus="status">
 				<div class="col">
 					<div class="card border-0">
-						${fn:contains(snsTopList.NPostDto.post_no, snsTopList.NPostDto.post_no)? snsTopList.NPostDto.post_no:'no'}
+						<%-- ${(fn:contains(snsTopList.NPostDto.post_no, snsTopList.NPostDto.post_no)) ? functionName() :'no'} --%>
 						<img src="${contextPath}/resources/img/post/${snsTopList.post_imgDto.post_img_img}" class="card-img-top rounded position-relative" onclick="location.href='${contextPath}/admin/mylist/?post_no=${snsTotalLists}'">
 						<span class="position-absolute badge rounded-pill bg-light m-1 postNo" id="postNo" data-postNo="${snsTopList.NPostDto.post_no}">No.${snsTopList.NPostDto.post_no}</span>
 						<div class="row justify-content-start d-flex m-2">
@@ -88,8 +82,8 @@
 						</div>
 						<p class="card-text m-2" style="margin-top: 20px;">${snsTopList.NPostDto.post_content}</p>
 						<div class="tag_link" style="margin-top: 1%; margin-bottom: 1%;">
-							<p class="tag_text" onclick="location.href='./'" style="display: inline;">
-								<b> <%-- ${snsComTag.tag_content} --%></b>
+							<p class="tag_text" onclick="location.href='./'" style="display: inline;" id="tagInfoList">
+								<%-- <b> ${snsComTag.tag_content}</b> --%>
 							</p>
 						</div>
 
