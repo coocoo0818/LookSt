@@ -14,6 +14,7 @@ import kr.co.lookst.main.domain.Prdt_Option;
 import kr.co.lookst.main.domain.Product;
 import kr.co.lookst.main.domain.SearchItem;
 import kr.co.lookst.post.domain.Post_TagDto;
+import kr.co.lookst.post.domain.post_com_tagDto;
 
 @Repository
 public class AdminDaoImpl implements AdminDao{
@@ -181,6 +182,11 @@ public class AdminDaoImpl implements AdminDao{
 	@Override
 	public List<Post_TagDto> postTagInfo(Integer snsTotalList) throws Exception {
 		return session.selectList(namespace + "postTagInfo", snsTotalList);
+	}
+	/* sns 태그정보 출력 */
+	@Override
+	public List<post_com_tagDto> tagInfoList(Integer post_no) throws Exception {
+		return session.selectList(namespace + "tagInfoList", post_no);
 	}
 
 }
