@@ -32,12 +32,15 @@
 				alert("색상을 체크해주세요.")
 				return false;
 			}
+			
+			return location.href='${contextPath}/post/orderFormpage';
+
 
 			//fetch('${contextPath}/post/orderFormpage',{
 				//method:'GET',
 				//body : formData
 			//});
-			$.ajax({
+			/* $.ajax({
 				type: 'get',   //get방식으로 명시
 				url : '${contextPath}/post/orderFormpage',  //이동할 jsp 파일 주소
 				data:{
@@ -54,7 +57,7 @@
 					alert('실패');
 				}
 			})
-
+ */
 
 		})
 		
