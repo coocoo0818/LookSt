@@ -650,7 +650,7 @@ header .count {float: right; color: #333333;}
 					<caption>표 내용 부분</caption>
 					<tbody>
 						<c:forEach var="orderInfo" items="${orderInfo}">
-							<tr>
+							<tr>${orderInfo}
 								<td class="td_width_1 cart_info_td">
 									<%-- <input type="hidden" class="individual_bookPrice_input" value="${ci.bookPrice}"> --%>
 									<input type="hidden" class="individual_salePrice_input" value="${orderInfo.product_price}">

@@ -96,7 +96,8 @@ public class PostController {
          
          List<OrderInfoDto> orderInfo = postService.orderInfo(product_no);
          m.addAttribute("orderInfo", orderInfo);
-         System.out.println(m);
+         System.out.println("test" + m);
+         return "/post/orderFormpage";
       } catch (Exception e) {
          e.printStackTrace();
       }
