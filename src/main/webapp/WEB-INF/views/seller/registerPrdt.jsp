@@ -108,8 +108,7 @@ img {
 
    <div class="container">
       <div class="border border-3 p-sm-5">
-         <form action="/seller/register" method="POST"
-            enctype="multipart/form-data" onsubmit="return sendToServer()">
+         <form name="fileForm" action="registerPrdt" method="post" enctype="multipart/form-data">
             <div class="item-content">
 
                <div class="input-group input-group-sm mb-4">
@@ -145,8 +144,7 @@ img {
                      <div class="discription-box">
                         <div class="discription-blue">파일 저장시 상품내용 저장 후 적용됩니다</div>
                      </div>
-                     <input type="file" name="upload_image" for="upload_image"
-                        id="upload_image" multiple="multiple">
+                     <input multiple="multiple" type="file" name="file" id="upload_image">
                   </div>
                   <div class="img-box"></div>
                </div>
@@ -177,21 +175,22 @@ img {
                   <span class="input-group-text text-white bg-dark"
                      id="inputGroup-sizing-default">상세 설명</span>
                   <div class="input-group input-group">
-<!--                      <textarea class="form-control" name="info" style="height: 300px;"></textarea> -->
+                  <!-- <textarea class="form-control" name="info" style="height: 300px;"></textarea>  -->
 
 			<!-- summernote -->
 			   <main role="main" class="container">
-			      <form name="form" method="POST" action="/bulletin_wr01">
+			   <form name="form" method="POST" action="/bulletin_wr01">
 			   <div class="pt-1">
-			      <textarea id="summernote" name="contents"></textarea>
-			   </div>
-			
-			   <div class="pt-1 text-right">
+			      <textarea id="summernote" name="contents"></textarea> 
+-			   </div>
+				
+ 			   <div class="pt-1 text-right">
 			      <button class="btn btn btn-outline-dark" type="submit"
-			         style="width: 10%; padding: 10px;">제출</button>
+			         style="width: 10%; padding: 10px;">제출</button> 
 			   </div>
-			   </form>
-			   </main>
+			   
+ 			   </form> 
+ 			   </main> 
 		   <!-- summernote 끝 -->
 		                   
                 
@@ -211,9 +210,12 @@ img {
 
    </div>
 
-
-
-
+<!-- <form name="fileForm" action="requestupload2" method="post" enctype="multipart/form-data"> -->
+<!-- 		<input multiple="multiple" type="file" name="file" /> -->
+<!-- 		<input type="text" name="src" /> -->
+<!-- 		<input type="submit" value="전송" /> -->
+<!-- </form> -->
+	
    <script>
       $('#summernote').summernote({
          placeholder : '내용을 입력해주세요',
