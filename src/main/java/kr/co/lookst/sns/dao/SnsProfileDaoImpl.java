@@ -76,7 +76,7 @@ public class SnsProfileDaoImpl implements SnsProfileDao {
 		Map map = new HashMap();
 		map.put("member_id", member_id);
 		map.put("member_nick", member_nick);
-		return session.update(namespace + "authModify", map);
+		return session.update(namespace + "nickModify", map);
 	}
 
 	
