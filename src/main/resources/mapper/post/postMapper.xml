@@ -119,10 +119,60 @@
    </select> -->
    
    <select id="orderInfo" parameterType="Integer" resultType="OrderInfoDto">
-      select prdt_img.prdt_img_name, product.product_no, product.product_name,product.product_price,product.product_kind,product.product_info
+	  select *
       from product product, prdt_img prdt_img 
       where product.product_no = prdt_img.product_no
       and product.product_no = #{product_no}
       and prdt_img.prdt_img_seq = 1;
    </select>
+   <!-- <select>
+	  select pi2.prdt_img_name , p.product_name , p.product_price , p.product_info 
+	  from product p , prdt_img pi2 
+	  where p.product_no = pi2.product_no 
+	  and p.product_no = #{product_no}
+	  and p.product_type = 'Y';
+   </select> -->
+   
+    <!-- 상품 리스트 sql -->
+      <sql id="selectFromShopList">
+        select product.product_no, product.product_kind, product.product_price, product.product_name, product.product_info, prdt_img.prdt_img_name
+		from product product, prdt_img prdt_img
+		where product.product_no = prdt_img.product_no
+		and product.product_type = 'Y'
+		and product.product_kind = 'T'
+		and prdt_img.prdt_img_seq = 1
+      </sql>
+      <!-- 상품 리스트 검색 리스트 sql -->
+      <sql id="searchShopCondition">
+           <choose>
+                   <when test='option=="N"'>
+                           AND product.product_name LIKE concat('%', #{keyword},'%')
+                   </when>
+                   <when test='option=="S"'>
+                           AND product.product_kind LIKE concat('%', #{keyword},'%')
+                   </when>
+                   <when test='option=="T"'>
+                           AND product.product_kind LIKE concat('%', #{keyword},'%')
+                   </when>
+           </choose>
+      </sql>
+      <!-- 상품 리스트 토탈 출력 -->
+      <select id="shopListSearchResultCnt" parameterType="SearchItem" resultType="int">
+              select count(*)
+			  from product product, prdt_img prdt_img
+			  where product.product_no = prdt_img.product_no
+		      and product.product_type = 'Y'
+			  and prdt_img.prdt_img_seq = 1
+              and true
+              <include refid="searchShopCondition" />
+      </select>
+      <!-- 상품 리스트 서치 출력 -->
+      <select id="shopListSearchResultPage" parameterType="SearchItem" resultMap="Product">
+              <include refid="selectFromShopList" />
+              and true
+              <include refid="searchShopCondition" />
+              order by product.product_date desc
+              limit #{pageSize} offset #{offset}
+      </select>
+   
 </mapper>
