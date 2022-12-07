@@ -21,16 +21,16 @@ public interface SnsProfileDao {
 	List<FollowDto> followerList(String member_id) throws Exception;
 	
 	// 팔로우
-	int follow(String member_id, String following);
+	int follow(String member_id, String following) throws Exception;
 	
 	// 언팔로우
-	int unfollow(String member_id, String following);
+	int unfollow(String member_id, String following) throws Exception;
 	
 	// 팔로우 유무
-	int isFollow(String member_id, String following);
+	int isFollow(String member_id, String following) throws Exception;
 	
 	// 탈퇴 시 팔로우 삭제
-	int deleteUserAllFollow(String member_id);
+	int deleteUserAllFollow(String member_id) throws Exception;
 	
 	// 닉네임 수정
 	int nickModify(String member_id, String member_nick) throws Exception;
