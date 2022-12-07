@@ -15,18 +15,55 @@
 
 	<!-- Page Content -->
 	<div class="container">
+		<h2 class="col-auto my-5" style="text-align:center;">SHOP</h2>
+		<div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+			<div class="carousel-inner">
+				<div class="carousel-item active">
+					<img src="${contextPath}/resources/fix/img/banner1.jpg" class="d-block w-100" alt="...">
+					<div class="carousel-caption d-none d-md-block">
+						<h6>겨울 필수 액세서리 셀렉션</h6>
+					</div>
+				</div>
+				<div class="carousel-item">
+					<img src="${contextPath}/resources/fix/img/banner2.jpg"class="d-block w-100" alt="...">
+					<div class="carousel-caption d-none d-md-block">
+						<h6>런업이 추천하는 브랜드관 컬렉션</h6>
+					</div>
+				</div>
+				<div class="carousel-item">
+					<img src="${contextPath}/resources/fix/img/banner3.jpg"class="d-block w-100" alt="...">
+					<div class="carousel-caption d-none d-md-block">
+						<h6>Tag Your Style</h6>
+					</div>
+				</div>
+				<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					<span class="visually-hidden">Previous</span>
+				</button>
+				<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+					<span class="visually-hidden">Next</span>
+				</button>
+			</div>
+		</div>
 		<div class="row">
 			<div class="col-lg-3">
 				<h2 id="orderpagetitle" class="disply-2 text-center py-4">상의</h2>
-
-				<div class="list-group">
+				<!-- <div class="list-group">
 					<button onclick="location.href='#'" type="button"
 						class="btn btn-outline-primary">상의</button>
 					<button onclick="location.href='#'" type="button"
 						class="btn btn-outline-primary">하의</button>
 					<button onclick="location.href='#'" type="button"
 						class="btn btn-outline-primary">신발</button>
-					<!--<a href="#" class="list-group-item">신발</a>-->
+					<a href="#" class="list-group-item">신발</a>
+				</div> -->
+				<div class="d-grid gap-2 col-6 mx-auto">
+				  <button class="btn btn-light border border-2" type="button">TOP</button>
+				  <button class="btn btn-light border border-2" type="button">PANTS</button>
+				  <button class="btn btn-light border border-2" type="button">SHOES</button>
+				  <button class="btn btn-light border border-2" type="button">BAG</button>
+				  <button class="btn btn-light border border-2" type="button">ACC</button>
 				</div>
 			</div>
 			<!-- <h2 id="orderpagetitle" class="disply-2 text-center py-4">상의</h2>  -->
@@ -48,47 +85,10 @@
 	display: block;
 	width: 100%;
 	height: 200px;
-	padding: 20px;
+	padding: 20px 0 20px 0;
 }
 </style>
 
-			<div class="col-lg-9">
-				<div id="carouselExampleFade" class="carousel slide carousel-fade"
-					data-bs-ride="carousel">
-					<div class="carousel-inner">
-						<div class="carousel-item active">
-							<img src="${contextPath}/resources/fix/img/banner1.jpg"
-								class="d-block w-100" alt="...">
-							<div class="carousel-caption d-none d-md-block">
-								<h6>겨울 필수 액세서리 셀렉션</h6>
-							</div>
-						</div>
-						<div class="carousel-item">
-							<img src="${contextPath}/resources/fix/img/banner2.jpg"
-								class="d-block w-100" alt="...">
-							<div class="carousel-caption d-none d-md-block">
-								<h6>런업이 추천하는 브랜드관 컬렉션</h6>
-							</div>
-						</div>
-						<div class="carousel-item">
-							<img src="${contextPath}/resources/fix/img/banner3.jpg"
-								class="d-block w-100" alt="...">
-							<div class="carousel-caption d-none d-md-block">
-								<h6>Tag Your Style</h6>
-							</div>
-						</div>
-
-						<button class="carousel-control-prev" type="button"
-							data-bs-target="#carouselExampleFade" data-bs-slide="prev">
-							<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-							<span class="visually-hidden">Previous</span>
-						</button>
-						<button class="carousel-control-next" type="button"
-							data-bs-target="#carouselExampleFade" data-bs-slide="next">
-							<span class="carousel-control-next-icon" aria-hidden="true"></span>
-							<span class="visually-hidden">Next</span>
-						</button>
-					</div>
 					<!-- 검색 시작 -->
 					<div>
 						<form class="d-flex row py-3"
