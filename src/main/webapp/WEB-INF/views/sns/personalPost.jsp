@@ -57,38 +57,7 @@ input {
 	<%@ include file="/WEB-INF/views/fix/header.jsp"%>
 
 	<script type="text/javascript">
-	/* 		var postNo = $('#postNo').attr('data-postNo');
-	console.log(postNo)
-	function functionName() {
-	  alert("tl")
-	} */
-    /* $(document).ready(function() {
-    	let showList = function(bno) {
-			$.ajax({
-				type : 'GET',		//요청 메서드
-				url : '/heart/comments?bno='+bno,		// 요청 URI
-				success : function(result) {			// 서버로부터 응답이 도착하면 호출될 함수
-					$("#commentList").html(toHtml(result))		// result는 서버가 전송한 데이터
-				},
-				error : function() { alert("error")}	// 에러가 발생할 때, 호출될 함수
-			})
-		}
-	
-		let toHtml = function(comments) {
-			let tmp = "<ul style= 'display: block;'>"
-			comments.forEach(function(comment) {
-				tmp += '<li style="background-color:#f9f9fa; border-bottom:1px solid rgb(235,236,239); color:black;" data-cno=' + comment.cno
-				tmp += ' data-bno=' + comment.bno
-				tmp += ' data-pcno=' + comment.pcno + '>'
-				tmp += ' commenter=<span class="commenter">' + comment.commenter + '</span>'
-				tmp += ' comment=<span class="comment">' + comment.comment + '</span>'
-				tmp += ' <button class="delBtn">삭제</button>'
-				tmp += ' <button class="modBtn">수정</button>'
-				tmp += '</li>'
-			})
-			return tmp += "</ul>"
-		} */
-	
+
 	// 프로필화면 이동
 	$(document).ready(function() {
 		$('.IDbox').on('click', function() {
