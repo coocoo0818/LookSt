@@ -1,6 +1,11 @@
 package kr.co.lookst.seller;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -18,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -38,7 +44,8 @@ import kr.co.lookst.seller.service.SellerService;
 @RequestMapping("/seller")
 public class SellerController {
 
-	//private Logger logger = LoggerFactory.getLogger(SellerController.class);
+	private static final Logger logger = LoggerFactory.getLogger(SellerController.class);
+
 	
 	HttpSession session;
 	
@@ -178,30 +185,12 @@ public class SellerController {
 	
 	// 상품 등록 페이지
 	@GetMapping("/registerPrdt")
-	public String adminForm4() {
+	public String registerpage() {
 		return "seller/registerPrdt";
 
 	}
 
 	
-	// 상품 등록 기능 수정중
-//	@PostMapping("/Register")
-//	public String adminForm7(Product product, RedirectAttributes rttr) {
-//		
-//		
-//		try {
-//			//logger.info("Register");
-//			sellerService.ProductRegister(product);
-//			System.out.print(product);
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
-//		rttr.addFlashAttribute("enroll_result", product.getProduct_name());
-//		
-//		return "redirect:/seller/prdtList";
-//	}	
 
 	// 나의 매출 {오늘의 할일 - 신규주문(결제완료), 취소접수 수량 표시}
 	@GetMapping("/mySales")
@@ -227,13 +216,35 @@ public class SellerController {
 
 	}
 	
-	
-	@GetMapping("/test")
-	public String adminForm6() {
-		return "seller/test";
 
+	@RequestMapping(value = "registerPrdt")
+	public String registerproduct(MultipartHttpServletRequest mtfRequest) {
+		List<MultipartFile> fileList = mtfRequest.getFiles("file");
+		String src = mtfRequest.getParameter("src");
+		System.out.println("src value : " + src);
+
+		String path = "C:\\workspace-spring\\LookSt\\src\\main\\webapp\\resources\\img\\product\\";
+
+		for (MultipartFile mf : fileList) {
+			String originFileName = mf.getOriginalFilename(); // 원본 파일 명
+			long fileSize = mf.getSize(); // 파일 사이즈
+
+			System.out.println("originFileName : " + originFileName);
+			System.out.println("fileSize : " + fileSize);
+
+			String safeFile = path + originFileName;
+			try {
+				mf.transferTo(new File(safeFile));
+			} catch (IllegalStateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		return "redirect:/";
 	}
-	
-
 	
 }
