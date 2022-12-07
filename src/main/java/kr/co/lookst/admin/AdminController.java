@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.lookst.admin.domain.MemMGMDto;
 import kr.co.lookst.admin.service.AdminService;
-import kr.co.lookst.board.domain.CommentDto;
 import kr.co.lookst.main.domain.PageResolver;
 import kr.co.lookst.main.domain.Prdt_Img;
 import kr.co.lookst.main.domain.Prdt_Option;
@@ -29,13 +28,13 @@ import kr.co.lookst.post.domain.post_com_tagDto;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
-	
+
 	@Autowired
 	AdminService adminService;
-	
+
 	/* 회원 리스트 */
 	@GetMapping("/member_management")
-	public String adminFormMember(SearchItem sc,Model model) {
+	public String adminFormMember(SearchItem sc, Model model) {
 		try {
 			/* 회원 페이징 시작 */
 			int totalCnt = adminService.getSearchResultCnt(sc);
@@ -43,7 +42,7 @@ public class AdminController {
 			PageResolver pageResolver = new PageResolver(totalCnt, sc);
 			System.out.println(sc);
 			/* 회원 페이징 끝 */
-			
+
 			/* 회원 리스트 출력 */
 			List<MemMGMDto> member_management = adminService.getsearchResultPage(sc);
 			model.addAttribute("member_management", member_management);
@@ -54,14 +53,14 @@ public class AdminController {
 		}
 		return "admin/member_management";
 	}
+
 	/* 회원 권한 변경 */
-	@RequestMapping(value="/authModify", method={RequestMethod.POST})
-	public String adminFormMemberModify(Model model,  
-			@RequestParam("member_id") String member_id,
+	@RequestMapping(value = "/authModify", method = { RequestMethod.POST })
+	public String adminFormMemberModify(Model model, @RequestParam("member_id") String member_id,
 			@RequestParam("auth") String Auth) {
 		System.out.println(member_id);
 		System.out.println(Auth);
-		
+
 		try {
 			adminService.authModify(member_id, Auth);
 		} catch (Exception e) {
@@ -69,12 +68,12 @@ public class AdminController {
 		}
 		return "redirect:/admin/member_management";
 	}
+
 	/* 회원 강퇴 */
-	@RequestMapping(value="/memberKickOut", method={RequestMethod.POST})
-	public String adminFormMemberKickOut(Model model,  
-			@RequestParam("member_id") String member_id) {
+	@RequestMapping(value = "/memberKickOut", method = { RequestMethod.POST })
+	public String adminFormMemberKickOut(Model model, @RequestParam("member_id") String member_id) {
 		System.out.println(member_id);
-		
+
 		try {
 			adminService.memberKickOut(member_id);
 		} catch (Exception e) {
@@ -82,17 +81,17 @@ public class AdminController {
 		}
 		return "redirect:/admin/member_management";
 	}
-	
+
 	/* SNS 관리 페이지 이동 */
-	@RequestMapping(value="/sns_management", method=RequestMethod.GET)
-	public String adminFormSns(SearchItem sc,Model model) {
+	@RequestMapping(value = "/sns_management", method = RequestMethod.GET)
+	public String adminFormSns(SearchItem sc, Model model) {
 		try {
 			/* 포스트 페이징 시작 */
 			int totalCnt = adminService.getPostSearchResultCnt(sc);
 			model.addAttribute("totalCnt", totalCnt);
 			PageResolver pageResolver = new PageResolver(totalCnt, sc);
 			/* 포스트 페이징 끝 */
-			
+
 			/* 포스트 리스트 출력 */
 			List<MemMGMDto> member_management = adminService.getPostsearchResultPage(sc);
 			model.addAttribute("member_management", member_management);
@@ -103,10 +102,10 @@ public class AdminController {
 		}
 		return "admin/sns_management";
 	}
+
 	/* SNS 관리 강제 삭제 */
-	@RequestMapping(value="/postDelete", method={RequestMethod.POST})
-	public String adminFormPostDelete(Model model,  
-			@RequestParam("post_no") int post_no) {
+	@RequestMapping(value = "/postDelete", method = { RequestMethod.POST })
+	public String adminFormPostDelete(Model model, @RequestParam("post_no") int post_no) {
 		try {
 			adminService.postDelete(post_no);
 		} catch (Exception e) {
@@ -114,10 +113,10 @@ public class AdminController {
 		}
 		return "redirect:/admin/sns_management";
 	}
-	
+
 	/* 게시판 관리 페이지 이동 */
-	@RequestMapping(value="/board_management", method=RequestMethod.GET)
-	public String adminFormBoard(SearchItem sc,Model model) {
+	@RequestMapping(value = "/board_management", method = RequestMethod.GET)
+	public String adminFormBoard(SearchItem sc, Model model) {
 		try {
 			/* 게시판 페이징 시작 */
 			int totalCnt = adminService.boardSearchResultCnt(sc);
@@ -125,7 +124,7 @@ public class AdminController {
 			PageResolver pageResolver = new PageResolver(totalCnt, sc);
 			System.out.println(sc);
 			/* 게시판 페이징 끝 */
-			
+
 			/* 게시판 리스트 출력 */
 			List<MemMGMDto> board_management = adminService.boardSearchResultPage(sc);
 			model.addAttribute("board_management", board_management);
@@ -136,10 +135,10 @@ public class AdminController {
 		}
 		return "admin/board_management";
 	}
+
 	/* 게시글 상태 변경 */
-	@RequestMapping(value="/boardModify", method={RequestMethod.POST})
-	public String adminBoardModify(Model model,  
-			@RequestParam("board_no") Integer board_no,
+	@RequestMapping(value = "/boardModify", method = { RequestMethod.POST })
+	public String adminBoardModify(Model model, @RequestParam("board_no") Integer board_no,
 			@RequestParam("board_type") String board_type) {
 		System.out.println(board_no);
 		System.out.println(board_type);
@@ -150,12 +149,12 @@ public class AdminController {
 		}
 		return "redirect:/admin/board_management";
 	}
+
 	/* 게시글 삭제 */
-	@RequestMapping(value="/boardDelete", method={RequestMethod.POST})
-	public String boardDelete(Model model,  
-			@RequestParam("board_no") Integer board_no) {
+	@RequestMapping(value = "/boardDelete", method = { RequestMethod.POST })
+	public String boardDelete(Model model, @RequestParam("board_no") Integer board_no) {
 		System.out.println(board_no);
-		
+
 		try {
 			adminService.boardDelete(board_no);
 		} catch (Exception e) {
@@ -163,17 +162,17 @@ public class AdminController {
 		}
 		return "redirect:/admin/board_management";
 	}
-		
+
 	/* 매거진 신청 페이지 이동 */
-	@RequestMapping(value="/magazin_request", method=RequestMethod.GET)
-	public String adminFormMagazinRequest(SearchItem sc,Model model) {
+	@RequestMapping(value = "/magazin_request", method = RequestMethod.GET)
+	public String adminFormMagazinRequest(SearchItem sc, Model model) {
 		try {
 			/* 메거진 신청 페이징 시작 */
 			int totalCnt = adminService.boardApplyingSearchResultCnt(sc);
 			model.addAttribute("totalCnt", totalCnt);
 			PageResolver pageResolver = new PageResolver(totalCnt, sc);
 			/* 메거진 신청 페이징 끝 */
-			
+
 			/* 메거진 신청 리스트 출력 */
 			List<MemMGMDto> magazin_management = adminService.boardApplyingsearchResultPage(sc);
 			model.addAttribute("magazin_management", magazin_management);
@@ -184,12 +183,12 @@ public class AdminController {
 		}
 		return "admin/magazin_request";
 	}
+
 	/* 메거진 수락 */
-	@RequestMapping(value="/magazinAgree", method={RequestMethod.POST})
-	public String magazinAgree(Model model,  
-			@RequestParam("board_no") Integer board_no) {
+	@RequestMapping(value = "/magazinAgree", method = { RequestMethod.POST })
+	public String magazinAgree(Model model, @RequestParam("board_no") Integer board_no) {
 		System.out.println(board_no);
-		
+
 		try {
 			adminService.magazinAgree(board_no);
 		} catch (Exception e) {
@@ -197,12 +196,12 @@ public class AdminController {
 		}
 		return "redirect:/admin/board_management";
 	}
+
 	/* 메거진 거부 */
-	@RequestMapping(value="/magazinReject", method={RequestMethod.POST})
-	public String magazinReject(Model model,  
-			@RequestParam("board_no") Integer board_no) {
+	@RequestMapping(value = "/magazinReject", method = { RequestMethod.POST })
+	public String magazinReject(Model model, @RequestParam("board_no") Integer board_no) {
 		System.out.println(board_no);
-		
+
 		try {
 			adminService.magazinReject(board_no);
 		} catch (Exception e) {
@@ -210,17 +209,17 @@ public class AdminController {
 		}
 		return "redirect:/admin/board_management";
 	}
-	
+
 	/* 쇼핑리스트 페이지 이동 */
-	@RequestMapping(value="/productList", method=RequestMethod.GET)
-	public String shopFormList(SearchItem sc,Model model) {
+	@RequestMapping(value = "/productList", method = RequestMethod.GET)
+	public String shopFormList(SearchItem sc, Model model) {
 		try {
 			/* 쇼핑리스트 페이징 시작 */
 			int totalCnt = adminService.shopListSearchResultCnt(sc);
 			model.addAttribute("totalCnt", totalCnt);
 			PageResolver pageResolver = new PageResolver(totalCnt, sc);
 			/* 쇼핑리스트 페이징 끝 */
-			
+
 			/* 쇼핑리스트 리스트 출력 */
 			List<Product> shopTotalList = adminService.shopListSearchResultPage(sc);
 			model.addAttribute("shopTotalList", shopTotalList);
@@ -231,17 +230,17 @@ public class AdminController {
 		}
 		return "admin/productList";
 	}
-	
+
 	/* 판매자 신청 페이지 이동 */
-	@RequestMapping(value="/seller_request", method=RequestMethod.GET)
-	public String adminFormSellerRequest(SearchItem sc,Model model) {
+	@RequestMapping(value = "/seller_request", method = RequestMethod.GET)
+	public String adminFormSellerRequest(SearchItem sc, Model model) {
 		try {
 			/* 판매자 신청 페이징 시작 */
 			int totalCnt = adminService.sellerApplyingSearchResultCnt(sc);
 			model.addAttribute("totalCnt", totalCnt);
 			PageResolver pageResolver = new PageResolver(totalCnt, sc);
 			/* 판매자 신청 페이징 끝 */
-			
+
 			/* 판매자 신청 리스트 출력 */
 			List<MemMGMDto> seller_management = adminService.sellerApplyingsearchResultPage(sc);
 			model.addAttribute("seller_management", seller_management);
@@ -252,12 +251,12 @@ public class AdminController {
 		}
 		return "admin/seller_request";
 	}
+
 	/* 판매자 수락 */
-	@RequestMapping(value="/sellerAgree", method={RequestMethod.POST})
-	public String sellerAgree(Model model,  
-			@RequestParam("seller_no") String seller_no) {
+	@RequestMapping(value = "/sellerAgree", method = { RequestMethod.POST })
+	public String sellerAgree(Model model, @RequestParam("seller_no") String seller_no) {
 		System.out.println(seller_no);
-		
+
 		try {
 			adminService.sellerAgree(seller_no);
 		} catch (Exception e) {
@@ -265,13 +264,12 @@ public class AdminController {
 		}
 		return "redirect:/admin/board_management";
 	}
-	
+
 	/* 판매자 거부 */
-	@RequestMapping(value="/sellerReject", method={RequestMethod.POST})
-	public String sellerReject(Model model,  
-			@RequestParam("seller_no") String seller_no) {
+	@RequestMapping(value = "/sellerReject", method = { RequestMethod.POST })
+	public String sellerReject(Model model, @RequestParam("seller_no") String seller_no) {
 		System.out.println(seller_no);
-		
+
 		try {
 			adminService.sellerReject(seller_no);
 		} catch (Exception e) {
@@ -279,34 +277,34 @@ public class AdminController {
 		}
 		return "redirect:/admin/board_management";
 	}
-	
-	/* 상품 상세 페이지 이동 */
-	@RequestMapping(value="/productDetail", method={RequestMethod.POST, RequestMethod.GET})
-	public String productDetailPage(Model model,  
-			@RequestParam("product_no") Integer product_no) {
-			try {
-				/* 상품 상세페이지 이동 */
-				Product productInfo = adminService.getproductInfo(product_no);
-				List<Prdt_Option> productSize = adminService.getproductSize(product_no);
-				List<Prdt_Img> productImg = adminService.getproductImg(product_no);
-				
-				model.addAttribute("productInfo", productInfo);
-				model.addAttribute("productSize", productSize);
-				model.addAttribute("productImg", productImg);
 
-				/* 상품 상세페이지 이동 끝 */
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+	/* 상품 상세 페이지 이동 */
+	@RequestMapping(value = "/productDetail", method = { RequestMethod.POST, RequestMethod.GET })
+	public String productDetailPage(Model model, @RequestParam("product_no") Integer product_no) {
+		try {
+			/* 상품 상세페이지 이동 */
+			Product productInfo = adminService.getproductInfo(product_no);
+			List<Prdt_Option> productSize = adminService.getproductSize(product_no);
+			List<Prdt_Img> productImg = adminService.getproductImg(product_no);
+
+			model.addAttribute("productInfo", productInfo);
+			model.addAttribute("productSize", productSize);
+			model.addAttribute("productImg", productImg);
+
+			/* 상품 상세페이지 이동 끝 */
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return "/admin/productDetail";
 	}
+
 	/* 상품 컬러 출력 */
-	@RequestMapping(value="/productColor", method={RequestMethod.GET})
-	public ResponseEntity<List<Prdt_Option>> productColor(Model model, 
-			@RequestParam("product_no")Integer product_no, @RequestParam("prdt_option_size")String prdt_option_size) {
+	@RequestMapping(value = "/productColor", method = { RequestMethod.GET })
+	public ResponseEntity<List<Prdt_Option>> productColor(Model model, @RequestParam("product_no") Integer product_no,
+			@RequestParam("prdt_option_size") String prdt_option_size) {
 		System.out.println(product_no);
 		System.out.println(prdt_option_size);
-		
+
 		try {
 			List<Prdt_Option> productColor = adminService.productColor(product_no, prdt_option_size);
 			System.out.println(productColor);
@@ -317,14 +315,39 @@ public class AdminController {
 		}
 		/* return "redirect:/admin/productDetail"; */
 	}
-	
+
 	/* sns total list */
-	@RequestMapping(value="/snsTotalList", method={RequestMethod.GET})
-	public String snsTotalList(Model model, Integer post_no, HttpServletRequest request) {
+	/*
+	 * @RequestMapping(value="/snsTotalCount", method={RequestMethod.GET}) public
+	 * String snsTotalCount(Model model, Integer post_no, HttpServletRequest
+	 * request) { try { sns total list List<Integer> snsTotalList =
+	 * adminService.snsTotalList(); model.addAttribute("snsTotalList",
+	 * snsTotalList); System.out.println(model); sns total list } catch (Exception
+	 * e) { e.printStackTrace(); } return "/admin/snsTotalList"; }
+	 */
+
+	/* sns total list */
+	@RequestMapping(value = "/snsTotalList", method = { RequestMethod.GET })
+	public String snsTotalList(Model model/* , Integer post_no */, HttpServletRequest request) {
 		try {
 			/* sns total list */
 			List<MemMGMDto> snsTopList = adminService.snsTopList();
 			model.addAttribute("snsTopList", snsTopList);
+
+			List<Integer> snsTotalList = adminService.snsTotalList();
+			model.addAttribute("snsTotalList", snsTotalList);
+			
+			
+			List<post_com_tagDto> tagInfoList = null;
+			List<Post_TagDto> postTagInfo = null;
+			for (Integer post_no : snsTotalList) {
+				System.out.println(post_no);
+				tagInfoList = adminService.tagInfoList(post_no);
+				model.addAttribute("tagInfoList", tagInfoList);
+				System.out.println(tagInfoList);
+				postTagInfo = adminService.postTagInfo(post_no);
+				model.addAttribute("postTagInfo", postTagInfo);
+			}
 			/* System.out.println(model); */
 			/* sns total list */
 		} catch (Exception e) {
@@ -332,24 +355,24 @@ public class AdminController {
 		}
 		return "/admin/snsTotalList";
 	}
-	
+
 	/* sns snsSelectTotalList list */
-	@RequestMapping(value="/snsSelectTotalList", method={RequestMethod.GET})
-	public String snsSelectTotalList(Model model, Integer post_no, HttpServletRequest request) {
-		try {
-			/* sns snsSelectTotalList list */
-			List<MemMGMDto> snsTopList = adminService.snsTopList();
-			model.addAttribute("snsTopList", snsTopList);
-			System.out.println(model);
-			/* sns snsSelectTotalList list */
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return "/admin/snsTotalList";
-	}
-	
+//	@RequestMapping(value = "/snsSelectTotalList", method = { RequestMethod.GET })
+//	public String snsSelectTotalList(Model model, Integer post_no, HttpServletRequest request) {
+//		try {
+//			/* sns snsSelectTotalList list */
+//			List<MemMGMDto> snsTopList = adminService.snsTopList();
+//			model.addAttribute("snsTopList", snsTopList);
+//			System.out.println(model);
+//			/* sns snsSelectTotalList list */
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return "/admin/snsTotalList";
+//	}
+
 	/* sns tagInfo list */
-	@RequestMapping(value="/tagInfoList", method={RequestMethod.GET})
+	@RequestMapping(value = "/tagInfoList", method = { RequestMethod.GET })
 	@ResponseBody
 	public ResponseEntity<List<post_com_tagDto>> tagInfoList(Model model, Integer post_no) {
 		List<post_com_tagDto> tagInfoList = null;
@@ -366,9 +389,9 @@ public class AdminController {
 		}
 		/* return "/admin/tagInfoList"; */
 	}
-	
+
 	/* sns PrdtTagInfo list */
-	@RequestMapping(value="/postTagInfo", method={RequestMethod.GET})
+	@RequestMapping(value = "/postTagInfo", method = { RequestMethod.GET })
 	@ResponseBody
 	public ResponseEntity<List<Post_TagDto>> postTagInfo(Model model, Integer post_no) {
 		List<Post_TagDto> postTagInfo = null;
