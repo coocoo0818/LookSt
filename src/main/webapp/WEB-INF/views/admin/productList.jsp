@@ -13,6 +13,27 @@
 <body>
 <%@ include file="/WEB-INF/views/fix/header.jsp"%>
 
+<style>
+/* 캐러셀(이미지슬라이드) 이미지 크기변경 */
+.carousel-inner {
+	width: 100%;
+	height: 200px; /* 이미지 높이 변경 */
+}
+
+.carousel-item {
+	width: 100%;
+	height: 200px;
+}
+
+.d-block {
+	display: block;
+	width: 100%;
+	height: 200px;
+	padding: 20px 0 20px 0;
+}
+</style>
+
+
 	<!-- Page Content -->
 	<div class="container">
 		<h2 class="col-auto my-5" style="text-align:center;">SHOP</h2>
@@ -48,16 +69,8 @@
 		</div>
 		<div class="row">
 			<div class="col-lg-3">
-				<h2 id="orderpagetitle" class="disply-2 text-center py-4">상의</h2>
-				<!-- <div class="list-group">
-					<button onclick="location.href='#'" type="button"
-						class="btn btn-outline-primary">상의</button>
-					<button onclick="location.href='#'" type="button"
-						class="btn btn-outline-primary">하의</button>
-					<button onclick="location.href='#'" type="button"
-						class="btn btn-outline-primary">신발</button>
-					<a href="#" class="list-group-item">신발</a>
-				</div> -->
+				<h2 id="orderpagetitle" class="disply-2 text-center py-4">TOP</h2>
+				
 				<div class="d-grid gap-2 col-6 mx-auto">
 				  <button class="btn btn-light border border-2" type="button">TOP</button>
 				  <button class="btn btn-light border border-2" type="button">PANTS</button>
@@ -66,65 +79,44 @@
 				  <button class="btn btn-light border border-2" type="button">ACC</button>
 				</div>
 			</div>
-			<!-- <h2 id="orderpagetitle" class="disply-2 text-center py-4">상의</h2>  -->
-			<!-- /.col-lg-3 -->
+			
 
-			<style>
-/* 캐러셀(이미지슬라이드) 이미지 크기변경 */
-.carousel-inner {
-	width: 100%;
-	height: 200px; /* 이미지 높이 변경 */
-}
+			
 
-.carousel-item {
-	width: 100%;
-	height: 200px;
-}
+			<div class="col-lg-9">
+				<!-- 검색 시작 -->
+				<div>
+					<form class="d-flex row py-3"
+						action="${contextPath}/admin/seller_request/" method="get">
+						<div class="col mt-1">
+							<select id="inputState" class="form-select form-select-md"
+								name="option">
+								<option selected>전체</option>
+								<!--<option value="B" ${pr.sc.option=='I' || pr.sc.option=='' ? "selected" : ""}>판매자명</option>-->
+								<option value="N" ${pr.sc.option=='N'? "selected" : ""}>상품명</option>
+								<option value="A" ${pr.sc.option=='A'? "selected" : ""}>상품종류</option>
+							</select>
+						</div>
+						<div class="d-flex col-md-9 mt-1">
+							<input class="form-control form-control me-1" type="text"
+								placeholder="Search" style="float: right;" name="keyword"
+								value="${param.keywork}">
+							<button class="btn btn-secondary" type="submit">
+								<i class="d-flex fa fa-search"></i>
+							</button>
+						</div>
+					</form>
+				</div>
+				<!-- 검색 끝 -->
+				<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"
+					style="text-align: right;">상품정렬방식</a>
+				<div class="dropdown-menu dropdown-menu-end dropdown-menu-xs-start"
+					style="">
+					<a class="dropdown-item" href="#">최신 상품순</a> 
+					<a class="dropdown-item" href="#">인기 상품순</a>
+				</div>
 
-.d-block {
-	display: block;
-	width: 100%;
-	height: 200px;
-	padding: 20px 0 20px 0;
-}
-</style>
-
-					<!-- 검색 시작 -->
-					<div>
-						<form class="d-flex row py-3"
-							action="${contextPath}/admin/seller_request/" method="get">
-							<div class="col mt-1">
-								<select id="inputState" class="form-select form-select-md"
-									name="option">
-									<option selected>전체</option>
-									<!--<option value="B" ${pr.sc.option=='I' || pr.sc.option=='' ? "selected" : ""}>판매자명</option>-->
-									<option value="N" ${pr.sc.option=='N'? "selected" : ""}>상품명</option>
-									<option value="A" ${pr.sc.option=='A'? "selected" : ""}>상품종류</option>
-								</select>
-							</div>
-							<div class="d-flex col-md-9 mt-1">
-								<input class="form-control form-control me-1" type="text"
-									placeholder="Search" style="float: right;" name="keyword"
-									value="${param.keywork}">
-								<button class="btn btn-secondary" type="submit">
-									<i class="d-flex fa fa-search"></i>
-								</button>
-							</div>
-						</form>
-					</div>
-					<!-- 검색 끝 -->
-
-					<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
-						href="#" role="button" aria-haspopup="true" aria-expanded="false"
-						style="text-align: right;">상품정렬방식</a>
-					<div class="dropdown-menu dropdown-menu-end dropdown-menu-xs-start"
-						style="">
-						<a class="dropdown-item" href="#">최신 상품순</a> <a
-							class="dropdown-item" href="#">인기 상품순</a>
-					</div>
-
-
-					<div class="row">
+				<div class="row">
 					<c:forEach var="shopTotalList" items="${shopTotalList}">
 						<div class="col-lg-4 col-md-6 mb-4">
 							<div class="card h-100">
@@ -144,8 +136,7 @@
 							</div>
 						</div>
 					</c:forEach>		
-
-					</div>
+				</div>
 				</div>
 				<!-- /.row -->
 			</div>
