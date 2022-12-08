@@ -106,7 +106,7 @@ img {
    <h2 id="orderpagetitle" class="disply-2 text-center py-4">REGISTER
       PRODUCT</h2>
 
-   <div class="container">
+   <div class="container mb-5 pb-5">
       <div class="border border-3 p-sm-5">
          <form name="fileForm" action="registerPrdt" method="post" enctype="multipart/form-data">
             <div class="item-content">
@@ -185,8 +185,10 @@ img {
 -			   </div>
 				
  			   <div class="pt-1 text-right">
-			      <button class="btn btn btn-outline-dark" type="submit"
-			         style="width: 10%; padding: 10px;">제출</button> 
+			            <div class="bottombtn pt-5 pb-5">
+					         <input type="button" class="btn btn-outline-dark" value="목록">
+					         <input type="submit" class="btn btn-outline-danger" value="등록">
+					      </div>
 			   </div>
 			   
  			   </form> 
@@ -200,13 +202,12 @@ img {
 
 
             </div>
+            </form>
       </div>
-      <div class="bottombtn pt-5 pb-5">
-         <input type="button" class="btn btn-outline-dark" value="목록">
-         <input type="submit" class="btn btn-outline-danger" value="등록">
-      </div>
-      </form>
-
+<!--       <div class="bottombtn pt-5 pb-5"> -->
+<!--          <input type="button" class="btn btn-outline-dark" value="목록"> -->
+<!--          <input type="submit" class="btn btn-outline-danger" value="등록"> -->
+<!--       </div> -->
 
    </div>
 
