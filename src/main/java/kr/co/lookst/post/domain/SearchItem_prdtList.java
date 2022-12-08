@@ -5,9 +5,9 @@ import static java.util.Objects.requireNonNullElse;
 import static java.lang.Math.*;
 public class SearchItem_prdtList {
 
-	public static final int DEFAULT_PAGE_SIZE = 10;
-	public static final int MIN_DEFAULT_PAGE_SIZE = 5;
-	public static final int MAX_DEFAULT_PAGE_SIZE = 50;
+	public static final int DEFAULT_PAGE_SIZE = 6;
+	public static final int MIN_DEFAULT_PAGE_SIZE = 1;
+	public static final int MAX_DEFAULT_PAGE_SIZE = 30;
 	
 	private Integer page = 1;							//현재 페이지
 	private	Integer pageSize = DEFAULT_PAGE_SIZE;		//한 페이지당 게시물 갯수
