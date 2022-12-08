@@ -13,19 +13,20 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 	
-		$("#buyNow").click(function(){
+		 $("#buyNow").click(function(){
+			var product_no = ${productInfo.product_no}
+			var prdt_option_size = $('.productSize.activ').attr('value');
+			var prdt_option_color = $('.optionColor.activ').attr('value');
+			var prdt_order_quan = $("#exampleSelect1 option:selected").val();
+			
 			let formData = new FormData();
 			formData.append('product_no',product_no);
 			formData.append('prdt_option_size',prdt_option_size);
 			formData.append('prdt_option_color',prdt_option_color);
 			formData.append('prdt_order_quan',prdt_order_quan);
 			
-			var product_no = ${productInfo.product_no}
-			var prdt_option_size = $('.productSize.activ').attr('value');
-			var prdt_option_color = $('.optionColor.activ').attr('value');
-			var prdt_order_quan = $("#exampleSelect1 option:selected").val();
-			/* 색상 사이즈유효성 체크 */
-			if(prdt_option_size == "undefined" || prdt_option_size == null || prdt_option_size == ""){
+			 색상 사이즈유효성 체크 
+			 if(prdt_option_size == "undefined" || prdt_option_size == null || prdt_option_size == ""){
 				alert("사이즈를 체크해주세요.")
 				return false;
 			} else if (prdt_option_color == "undefined" || prdt_option_color == null || prdt_option_color == "") {
@@ -33,14 +34,14 @@
 				return false;
 			}
 			
-			return location.href='${contextPath}/post/orderFormpage';
-
-
-			//fetch('${contextPath}/post/orderFormpage',{
-				//method:'GET',
-				//body : formData
-			//});
-			/* $.ajax({
+			return location.href='${contextPath}/post/orderFormpage'; 
+			
+			
+			fetch('${contextPath}/post/orderFormpage',{
+				method:'GET',
+				body : formData
+			});
+			 $.ajax({
 				type: 'get',   //get방식으로 명시
 				url : '${contextPath}/post/orderFormpage',  //이동할 jsp 파일 주소
 				data:{
@@ -57,9 +58,10 @@
 					alert('실패');
 				}
 			})
- */
+			
+		 })
 
-		})
+
 		
 		let toHtml = function(prdtOptions) {
 			let tmp = "<div class='options'>"
@@ -124,48 +126,48 @@
 		<section class="productCard">
 			<div class="container">
 				<div class="info">
-				<form action="${contextPath}/post/orderFormpage" method="post">
-				<p class="header" name="product_no">${productInfo.product_no}</p>
-					<h3 class="name" name="product_kind">
-							<c:if test="${productInfo.product_kind eq 'T'}">TOP</c:if>
-							<c:if test="${productInfo.product_kind eq 'B'}">PANTS</c:if>
-							<c:if test="${productInfo.product_kind eq 'S'}">SHOES</c:if>
-							<c:if test="${productInfo.product_kind eq 'A'}">ACC</c:if>
-							<c:if test="${productInfo.product_kind eq 'K'}">KNIT</c:if>
-					</h3>
-					<h1 class="slogan" name="product_name">${productInfo.product_name}</h1>
-					<p class="price" name ="product_price"><fmt:formatNumber value="${productInfo.product_price}" pattern="#,###"/>원</p>
-					<div class="attribs">
-						<div class="attrib size" name ="product_kind">
-							<p class="header">Select Size</p>
-							<div class="options" id="options">
-								<c:forEach var="productSize" items="${productSize}" varStatus="sizeStatus">
-									<div class="option productSize" name="prdt_option_size" data-productNo="${productInfo.product_no}" data-prdt-size="${productSize.prdt_option_size}" id="prdt_option_size" value="${productSize.prdt_option_size}">${productSize.prdt_option_size}</div>
-								</c:forEach>
+				<form name = "orderform" action="${contextPath}/post/orderFormpage" method="get">
+					<p class="header" name="product_no">${productInfo.product_no}</p>
+						<h3 class="name" name="product_kind">
+								<c:if test="${productInfo.product_kind eq 'T'}">TOP</c:if>
+								<c:if test="${productInfo.product_kind eq 'B'}">PANTS</c:if>
+								<c:if test="${productInfo.product_kind eq 'S'}">SHOES</c:if>
+								<c:if test="${productInfo.product_kind eq 'A'}">ACC</c:if>
+								<c:if test="${productInfo.product_kind eq 'K'}">KNIT</c:if>
+						</h3>
+						<h1 class="slogan" name="product_name">${productInfo.product_name}</h1>
+						<p class="price" name ="product_price"><fmt:formatNumber value="${productInfo.product_price}" pattern="#,###"/>원</p>
+						<div class="attribs">
+							<div class="attrib size" name ="product_kind">
+								<p class="header">Select Size</p>
+								<div class="options" id="options">
+									<c:forEach var="productSize" items="${productSize}" varStatus="sizeStatus">
+										<div class="option productSize" name="prdt_option_size" data-productNo="${productInfo.product_no}" data-prdt-size="${productSize.prdt_option_size}" id="prdt_option_size" value="${productSize.prdt_option_size}">${productSize.prdt_option_size}</div>
+									</c:forEach>
+								</div>
+							</div>
+							<div class="attrib color">
+								<p class="header">Select Color</p>
+								<div id="optionColor" name="prdt_option_color"></div>
 							</div>
 						</div>
-						<div class="attrib color">
-							<p class="header">Select Color</p>
-							<div id="optionColor" name="prdt_option_color"></div>
+						<div class="quantity attribs">
+	                            <div class="form-group attrib">
+							      <label for="exampleSelect1" class="form-label mt-4 attrib"></label>
+							      <p class="header">Quantity</p>
+							      <select class="form-select" id="exampleSelect1">
+							        <option name="Quantity">1</option>
+							        <option name="Quantity">2</option>
+							        <option name="Quantity">3</option>
+							        <option name="Quantity">4</option>
+							        <option name="Quantity">5</option>
+							      </select>
+							    </div>
+	                        </div>
+						<div class="buttons">
+							<!-- <div class="button">Add to cart</div> -->
+							<div class="button colored buyButton" id="buyNow">Buy now</div>
 						</div>
-					</div>
-					<div class="quantity attribs">
-                            <div class="form-group attrib">
-						      <label for="exampleSelect1" class="form-label mt-4 attrib"></label>
-						      <p class="header">Quantity</p>
-						      <select class="form-select" id="exampleSelect1">
-						        <option name="Quantity">1</option>
-						        <option name="Quantity">2</option>
-						        <option name="Quantity">3</option>
-						        <option name="Quantity">4</option>
-						        <option name="Quantity">5</option>
-						      </select>
-						    </div>
-                        </div>
-					<div class="buttons">
-						<!-- <div class="button">Add to cart</div> -->
-						<div class="button colored buyButton" id="buyNow">Buy now</div>
-					</div>
 				</form>
 				</div>
 				<div class="colorLayer"></div>

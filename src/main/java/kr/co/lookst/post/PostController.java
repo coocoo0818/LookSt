@@ -2,18 +2,14 @@ package kr.co.lookst.post;
 
 import java.util.List;
 
-import javax.servlet.ServletRequest;
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import kr.co.lookst.post.domain.OrderInfoDto;
 /*import kr.co.lookst.post.domain.OrderPagePrdtDto;*/
 import kr.co.lookst.post.domain.PostDto;
 import kr.co.lookst.post.domain.ProdInfoDto;
@@ -84,26 +80,38 @@ public class PostController {
       return "/post/sns_list";
    }
 
-   @GetMapping("/orderFormpage")
-	public String orderFormpage(Model m, @RequestParam(value="product_no", required=false) Integer product_no, @RequestParam(value="prdt_option_size", required=false) String prdt_option_size
-					, @RequestParam(value="prdt_option_color", required=false) String prdt_option_color, @RequestParam(value="prdt_order_quan", required=false) Integer prdt_order_quan, ServletRequest req) {
-      try {
-
-    	 System.out.println(product_no);
-         String prdt_option_size1 = req.getParameter("prdt_option_size");
-         String prdt_option_color1 = req.getParameter("prdt_option_color");
-         String prdt_order_quan1 = req.getParameter("prdt_order_quan");
-         
-         List<OrderInfoDto> orderInfo = postService.orderInfo(product_no);
-         m.addAttribute("orderInfo", orderInfo);
-         System.out.println("test" + m);
-         return "/post/orderFormpage";
-      } catch (Exception e) {
-         e.printStackTrace();
-      }
-      return "/post/orderFormpage";
+//   @GetMapping("/orderFormpage")
+//	public String orderFormpage(Model m, @RequestParam(value="product_no", required=false) Integer product_no, @RequestParam(value="prdt_option_size", required=false) String prdt_option_size
+//					, @RequestParam(value="prdt_option_color", required=false) String prdt_option_color, @RequestParam(value="prdt_order_quan", required=false) Integer prdt_order_quan, ServletRequest req) {
+//	   System.out.println("data" + product_no);
+//      try {
+//
+//    	 System.out.println("data" + product_no);
+//         String prdt_option_size1 = req.getParameter("prdt_option_size");
+//         String prdt_option_color1 = req.getParameter("prdt_option_color");
+//         String prdt_order_quan1 = req.getParameter("prdt_order_quan");
+//         
+//         System.out.println();
+//         List<OrderInfoDto> orderInfo = postService.orderInfo(product_no);
+//         m.addAttribute("orderInfo", orderInfo);
+//         System.out.println("test" + m);
+//         return "/post/orderFormpage";
+//      } catch (Exception e) {
+//         e.printStackTrace();
+//      }
+//      return "/post/orderFormpage";
+//   }
+   
+   
+   @RequestMapping(value="${contextPath}/post/orderFormpage", method= {RequestMethod.GET})
+   public void orderPageTest(@RequestParam("product_no") Integer product_no, @RequestParam("prdt_option_size") String prdt_option_size
+		   				, @RequestParam("prdt_option_color") String prdt_option_color, @RequestParam("prdt_order_quan") Integer prdt_order_quan) {
+	   System.out.println(product_no);
+	   System.out.println(prdt_option_size);
+	   System.out.println(prdt_option_color);
+	   System.out.println(prdt_order_quan);
+//	   return "/orderFormpage";
    }
    
-    
-
+   
 }

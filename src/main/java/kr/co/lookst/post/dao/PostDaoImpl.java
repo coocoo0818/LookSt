@@ -6,12 +6,11 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.co.lookst.post.domain.OrderInfoDto;
 import kr.co.lookst.post.domain.PostDto;
 import kr.co.lookst.post.domain.Post_imgDto;
 import kr.co.lookst.post.domain.ProdInfoDto;
 import kr.co.lookst.post.domain.TpostDto;
-import kr.co.lookst.post.domain.OrderFormPageDto;
-import kr.co.lookst.post.domain.OrderInfoDto;
 /*import kr.co.lookst.post.domain.OrderPagePrdtDto;*/
 import kr.co.lookst.post.domain.post_com_tagDto;
 import kr.co.lookst.post.domain.snsPrdtImgDto;
@@ -104,7 +103,9 @@ public class PostDaoImpl implements PostDao{
 	 @Override 
 	 public List<OrderInfoDto> orderInfo(Integer product_no) throws Exception { 
 		 // TODO Auto-generated method stub return
+		 System.out.println("dao :" + session.selectOne(namespace + "orderInfo", product_no));
 		 return session.selectList(namespace + "orderInfo", product_no);
+		 
 	 }
 
 
