@@ -6,6 +6,7 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -222,7 +223,7 @@ public class SellerController {
 		List<MultipartFile> fileList = mtfRequest.getFiles("file");
 		String src = mtfRequest.getParameter("src");
 		System.out.println("src value : " + src);
-
+		UUID uuid = UUID.randomUUID();
 		String path = "C:\\workspace-spring\\LookSt\\src\\main\\webapp\\resources\\img\\product\\";
 
 		for (MultipartFile mf : fileList) {
@@ -232,7 +233,7 @@ public class SellerController {
 			System.out.println("originFileName : " + originFileName);
 			System.out.println("fileSize : " + fileSize);
 
-			String safeFile = path + originFileName;
+			String safeFile = path + uuid + "_" + originFileName;
 			try {
 				mf.transferTo(new File(safeFile));
 			} catch (IllegalStateException e) {
