@@ -45,7 +45,8 @@ public class SnsController {
 
 	/* 프로필 화면 */
 	@GetMapping("/snsProfile")
-	public String snsProfile(@RequestParam("member_id") String member_id, Model m, HttpServletRequest request) {
+	public String snsProfile(String member_id, @RequestParam("member_id") String member_nick, Model m,
+			HttpServletRequest request) {
 
 		HttpSession session = request.getSession();
 
@@ -143,102 +144,80 @@ public class SnsController {
 //
 //		return "sns/snsProfile";
 //	}
+	/*
+	 * @RequestMapping(value = "requestupload1") public String
+	 * requestupload1(MultipartHttpServletRequest mtfRequest) { String src =
+	 * mtfRequest.getParameter("src"); System.out.println("src value : " + src);
+	 * MultipartFile mf = mtfRequest.getFile("file");
+	 * 
+	 * String path = "C:\\image\\";
+	 * 
+	 * String originFileName = mf.getOriginalFilename(); // 원본 파일 명 long fileSize =
+	 * mf.getSize(); // 파일 사이즈
+	 * 
+	 * System.out.println("originFileName : " + originFileName);
+	 * System.out.println("fileSize : " + fileSize);
+	 * 
+	 * String safeFile = path + System.currentTimeMillis() + originFileName;
+	 * 
+	 * try { mf.transferTo(new File(safeFile)); } catch (IllegalStateException e) {
+	 * e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
+	 * 
+	 * return "redirect:/"; }
+	 * 
+	 * 포스트 이미지 업로드
+	 * 
+	 * @RequestMapping(value = "postUpload", method = { RequestMethod.POST }) public
+	 * String postUpload(String member_id, Model m, MultipartHttpServletRequest
+	 * mtfRequest, HttpServletRequest request) { List<MultipartFile> fileList =
+	 * mtfRequest.getFiles("file");
+	 * 
+	 * HttpSession session = request.getSession(); String login_id = (String)
+	 * session.getAttribute("res");
+	 * 
+	 * String path =
+	 * "C:\\workspace-spring\\LookSt\\src\\main\\webapp\\resources\\img\\post\\";
+	 * 
+	 * for (MultipartFile mf : fileList) { String originFileName =
+	 * mf.getOriginalFilename(); // 원본 파일 명 long fileSize = mf.getSize(); // 파일 사이즈
+	 * 
+	 * System.out.println("원본 파일명 : " + originFileName);
+	 * System.out.println("파일 사이즈 : " + fileSize); System.out.println("작성자 아이디 : " +
+	 * login_id); String safeFile = path + originFileName; try { mf.transferTo(new
+	 * File(safeFile)); } catch (IllegalStateException e) { e.printStackTrace(); }
+	 * catch (IOException e) { e.printStackTrace(); } }
+	 * 
+	 * return "sns/snsProfile"; }
+	 */
 
-	@RequestMapping(value = "requestupload1")
-	public String requestupload1(MultipartHttpServletRequest mtfRequest) {
-		String src = mtfRequest.getParameter("src");
-		System.out.println("src value : " + src);
-		MultipartFile mf = mtfRequest.getFile("file");
-
-		String path = "C:\\image\\";
-
-		String originFileName = mf.getOriginalFilename(); // 원본 파일 명
-		long fileSize = mf.getSize(); // 파일 사이즈
-
-		System.out.println("originFileName : " + originFileName);
-		System.out.println("fileSize : " + fileSize);
-
-		String safeFile = path + System.currentTimeMillis() + originFileName;
-
-		try {
-			mf.transferTo(new File(safeFile));
-		} catch (IllegalStateException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		return "redirect:/";
-	}
-
-	/* 포스트 이미지 업로드 */
-	@RequestMapping(value = "postUpload", method = { RequestMethod.POST })
-	public String postUpload(String member_id, Model m,MultipartHttpServletRequest mtfRequest, HttpServletRequest request) {
-		List<MultipartFile> fileList = mtfRequest.getFiles("file");
-
-		HttpSession session = request.getSession();
-		String login_id = (String) session.getAttribute("res");
-
-		String path = "C:\\workspace-spring\\LookSt\\src\\main\\webapp\\resources\\img\\post\\";
-
-		for (MultipartFile mf : fileList) {
-			String originFileName = mf.getOriginalFilename(); // 원본 파일 명
-			long fileSize = mf.getSize(); // 파일 사이즈
-
-			System.out.println("원본 파일명 : " + originFileName);
-			System.out.println("파일 사이즈 : " + fileSize);
-			System.out.println("작성자 아이디 : " + login_id);
-			String safeFile = path + originFileName;
-			try {
-				mf.transferTo(new File(safeFile));
-			} catch (IllegalStateException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-
-		return "sns/snsProfile";
-	}
-
-	/* 피드 리스트 */
-	@GetMapping("/personalPost")
-	public String personalPost(String member_id, Model m, @RequestParam("member_id") String member_nick,
-			HttpServletRequest request) {
-
-		HttpSession session = request.getSession();
-
-		try {
-			String login_id = (String) session.getAttribute("res");
-
-			/* 프로필 정보 */
-			SnsProfileDto pro_info = snsService.getinfoselect(member_id);
-			/* 프로필 피드 */
-			List<ProfileFeedDto> pro_feed = snsService.getProfileFeed(member_id);
-			/* 팔로워 리스트 */
-			List<FollowDto> pro_follower = snsService.getFollower(member_id);
-			/* 팔로잉 리스트 */
-			List<FollowDto> pro_following = snsService.getFollowing(member_id);
-			/* 팔로우 유무 */
-			int checkFollow = snsService.followCheck(login_id, member_id);
-
-			m.addAttribute("pro_info", pro_info);
-			m.addAttribute("pro_feed", pro_feed);
-			m.addAttribute("pro_follower", pro_follower);
-			m.addAttribute("pro_following", pro_following);
-			m.addAttribute("login_Id", login_id);
-			m.addAttribute("checkFollow", checkFollow);
-
-			System.out.println("팔로우 유무(팔로우 중 : 1 , 아니면 0) : " + checkFollow);
-			System.out.println("로그인아이디 : " + login_id);
-			System.out.println("프로필아이디 : " + member_id);
-			System.out.println(m);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return "sns/personalPost";
-	}
+	/*
+	 * 피드 리스트
+	 * 
+	 * @GetMapping("/personalPost") public String personalPost(String member_id,
+	 * Model m, @RequestParam("member_id") String member_nick, HttpServletRequest
+	 * request) {
+	 * 
+	 * HttpSession session = request.getSession();
+	 * 
+	 * try { String login_id = (String) session.getAttribute("res");
+	 * 
+	 * 프로필 정보 SnsProfileDto pro_info = snsService.getinfoselect(member_id); 프로필 피드
+	 * List<ProfileFeedDto> pro_feed = snsService.getProfileFeed(member_id); 팔로워 리스트
+	 * List<FollowDto> pro_follower = snsService.getFollower(member_id); 팔로잉 리스트
+	 * List<FollowDto> pro_following = snsService.getFollowing(member_id); 팔로우 유무
+	 * int checkFollow = snsService.followCheck(login_id, member_id);
+	 * 
+	 * m.addAttribute("pro_info", pro_info); m.addAttribute("pro_feed", pro_feed);
+	 * m.addAttribute("pro_follower", pro_follower); m.addAttribute("pro_following",
+	 * pro_following); m.addAttribute("login_Id", login_id);
+	 * m.addAttribute("checkFollow", checkFollow);
+	 * 
+	 * System.out.println("팔로우 유무(팔로우 중 : 1 , 아니면 0) : " + checkFollow);
+	 * System.out.println("로그인아이디 : " + login_id); System.out.println("프로필아이디 : " +
+	 * member_id); System.out.println(m);
+	 * 
+	 * } catch (Exception e) { e.printStackTrace(); } return "sns/personalPost"; }
+	 */
 
 	@GetMapping("/postUpload")
 	public String postUpload() {

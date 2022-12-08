@@ -1,11 +1,18 @@
 package kr.co.lookst.sns.domain;
 
+import java.util.Date;
+
+import lombok.Data;
+
+@Data
 public class SnsProfileDto {
 
 	private String member_id;
 	private String member_nick;
 	private String profile_img;
 	private String profile_intro;
+	private String profile_uuid;
+	private Date profile_date;
 	
 	public SnsProfileDto() {
 		// TODO Auto-generated constructor stub
