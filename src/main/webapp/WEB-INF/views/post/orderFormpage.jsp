@@ -636,13 +636,10 @@ header .count {float: right; color: #333333;}
 					<tbody>
 
 						<tr>
-							<th class="td_width_1"></th>
-							<th class="td_width_2"></th>
-							<th class="td_width_3">상품명</th>
-							<th class="td_width_4">가격</th>
-							<th class="td_width_4">수량</th>
-							<th class="td_width_4">합계</th>
-							<th class="td_width_4">삭제</th>
+							<th class="td_width_5">상품명</th>
+							<th class="td_width_3">가격</th>
+							<th class="td_width_1">수량</th>
+							<th class="td_width_3">합계</th>
 						</tr>
 					</tbody>
 				</table>
@@ -650,40 +647,35 @@ header .count {float: right; color: #333333;}
 					<caption>표 내용 부분</caption>
 					<tbody>
 						<c:forEach var="orderInfo" items="${orderInfo}">
-							<tr>${orderInfo}
-								<td class="td_width_1 cart_info_td">
+							<tr>
+								<!-- <td class="td_width_1 cart_info_td">
+								</td> -->
 									<%-- <input type="hidden" class="individual_bookPrice_input" value="${ci.bookPrice}"> --%>
-									<input type="hidden" class="individual_salePrice_input" value="${orderInfo.product_price}">
+									<%-- <input type="hidden" class="individual_salePrice_input" value="${orderInfo.product_price}">
 									<input type="hidden" class="individual_bookCount_input" value="2">
-									<input type="hidden" class="individual_totalPrice_input" value="${orderInfo.product_price * 2}">
+									<input type="hidden" class="individual_totalPrice_input" value="${orderInfo.product_price * 2}"> --%>
 									<%-- <input type="hidden" class="individual_point_input" value="${ci.point}"> --%>
-									<input type="hidden" class="individual_totalPoint_input" value="${orderInfo.product_price}">
-								</td>
+									<%-- <input type="hidden" class="individual_totalPoint_input" value="${orderInfo.product_price}"> --%>
 								<td class="td_width_2">
-									<div class="thumbnail">
-							            <a href="#">
+									<!-- <div class="thumbnail"> -->
 							             <img src="${contextPath}/resources/img/product/${orderInfo.prdt_img_name}" style="height:150px; weight: 150px;">
-							            </a>
-							        </div>
+							        <!-- </div> -->
 								</td>
-								<td class="td_width_3">${orderInfo.product_name}</td>
-								<td class="td_width_4 price_td">
-									
-									판매가 : <span class="red_color" value="${orderInfo.product_price}" pattern="#,### 원" />${orderInfo.product_price}원</span><br>
-									
+								<td class="td_width_5">${orderInfo.product_name}</td>
+								<td class="td_width_2 price_td">
+									${orderInfo.product_price}원
 								</td>
-								<td class="td_width_4 table_text_align_center">
+								<td class="td_width_1 table_text_align_center">
 									<div class="table_text_align_center quantity_div">
-										<input type="text" value="2<%-- ${ci.bookCount} --%>" class="quantity_input">	
+										<input type="text" value="${prdt_order_quan}" class="quantity_input">	${prdt_order_quan}
 										<button class="quantity_btn plus_btn">+</button>
 										<button class="quantity_btn minus_btn">-</button>
 									</div>
 									<!-- <a class="quantity_modify_btn">변경</a> -->
 								</td>
-								<td class="td_width_4 table_text_align_center" value="${orderInfo.product_price}*2" pattern="#,### 원" />
+								<td class="td_width_2 table_text_align_center" value="${orderInfo.product_price}*2" pattern="#,### 원" />
 									<%-- <fmt:formatNumber value="${orderPagePrdt.post_tag_price * 2}" pattern="#,### 원" /> --%>
-								</td>
-								<td class="td_width_4 table_text_align_center delete_btn"><button>삭제</button></td>
+								<!-- <td class="td_width_4 table_text_align_center delete_btn"><button>삭제</button></td> -->
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -736,7 +728,7 @@ header .count {float: right; color: #333333;}
     </ul>
     </div> --%>
     <!-- 전체가격기능 구현 -->
-    <div class="content_total_section">
+    <!-- <div class="content_total_section">
     	<div class="total_wrap">
     		<table>
     			<tr>
@@ -792,7 +784,7 @@ header .count {float: right; color: #333333;}
     				</tr>
     			</table>
     	</div>
-    </div>
+    </div> -->
     
     <div v-else class="empty-product">
       <h3>돈 더 써볼까요?</h3>
@@ -903,19 +895,19 @@ header .count {float: right; color: #333333;}
 		
             
 
-          <hr class="my-4">
+          <!-- <hr class="my-4"> -->
 
-          <div class="form-check">
+<!--           <div class="form-check">
             <input type="checkbox" class="form-check-input" id="same-address">
             <label class="form-check-label" for="same-address">Shipping address is the same as my billing address</label>
-          </div>
+          </div> -->
 
-          <div class="form-check">
+<!--           <div class="form-check">
             <input type="checkbox" class="form-check-input" id="save-info">
             <label class="form-check-label" for="save-info">배송지 정보 기억하기</label>
-          </div>
+          </div> -->
 
-          <hr class="my-4">
+         <!--  <hr class="my-4"> -->
 
           <h4 class="mb-3">결제수단</h4>
 
@@ -930,18 +922,12 @@ header .count {float: right; color: #333333;}
             </div>
           </div>
           <hr class="my-4">
-		 
+		 </div>
         </form>
       </div>
     </div>
 </div>
 
-
-
-
-
-
-		<a href="<c:url value="/admin/memberlist"/>">admin</a>
 		<%@ include file="/WEB-INF/views/fix/footer.jsp"%>
 </body>
 </html>
