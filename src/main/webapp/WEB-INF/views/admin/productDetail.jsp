@@ -18,14 +18,14 @@
 			var prdt_option_size = $('.productSize.activ').attr('value');
 			var prdt_option_color = $('.optionColor.activ').attr('value');
 			var prdt_order_quan = $("#exampleSelect1 option:selected").val();
-			
+			alert(product_no)
 			let formData = new FormData();
 			formData.append('product_no',product_no);
 			formData.append('prdt_option_size',prdt_option_size);
 			formData.append('prdt_option_color',prdt_option_color);
 			formData.append('prdt_order_quan',prdt_order_quan);
 			
-			 색상 사이즈유효성 체크 
+			/* 색상 사이즈유효성 체크  */
 			 if(prdt_option_size == "undefined" || prdt_option_size == null || prdt_option_size == ""){
 				alert("사이즈를 체크해주세요.")
 				return false;
@@ -34,15 +34,15 @@
 				return false;
 			}
 			
-			return location.href='${contextPath}/post/orderFormpage'; 
+			/* return location.href='${contextPath}/post/orderFormpage';  */
 			
 			
-			fetch('${contextPath}/post/orderFormpage',{
+			/* fetch('${contextPath}/post/orderFormpage',{
 				method:'GET',
 				body : formData
-			});
+			}); */
 			 $.ajax({
-				type: 'get',   //get방식으로 명시
+				type: 'GET',   //get방식으로 명시
 				url : '${contextPath}/post/orderFormpage',  //이동할 jsp 파일 주소
 				data:{
 						product_no : product_no,
@@ -53,6 +53,7 @@
 				success: function(data){   //데이터 주고받기 성공했을 경우 실행할 결과
 		            //function(data)를 쓰게 되면 전달받은 데이터가 data안에 담아서 들어오게 된다.    
 					//location.replace('${contextPath}/post/orderFormpage') 
+					 window.location.href = "http://localhost:8080/lookst/post/orderFormpage"
 				},
 				error:function(){   //데이터 주고받기가 실패했을 경우 실행할 결과
 					alert('실패');
@@ -126,8 +127,9 @@
 		<section class="productCard">
 			<div class="container">
 				<div class="info">
-				<form name = "orderform" action="${contextPath}/post/orderFormpage" method="get">
+				<form id="orderform" name = "orderform" action="${contextPath}/post/orderFormpage" method="get">
 					<p class="header" name="product_no">${productInfo.product_no}</p>
+					<input hidden name="product_no" value="${productInfo.product_no}">
 						<h3 class="name" name="product_kind">
 								<c:if test="${productInfo.product_kind eq 'T'}">TOP</c:if>
 								<c:if test="${productInfo.product_kind eq 'B'}">PANTS</c:if>
@@ -165,8 +167,9 @@
 							    </div>
 	                        </div>
 						<div class="buttons">
-							<!-- <div class="button">Add to cart</div> -->
-							<div class="button colored buyButton" id="buyNow">Buy now</div>
+							<!-- <div class="button">Add to cart</div> --><!-- id="buyNow" -->
+							<input class="button colored buyButton"  type="submit" value="Buy now">
+							<!-- <div class="button colored buyButton" id="buyNow" type="submit">Buy now</div> -->
 						</div>
 				</form>
 				</div>

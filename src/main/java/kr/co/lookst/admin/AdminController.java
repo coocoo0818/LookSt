@@ -336,18 +336,7 @@ public class AdminController {
 
 			List<Integer> snsTotalList = adminService.snsTotalList();
 			model.addAttribute("snsTotalList", snsTotalList);
-			
-			
-			List<post_com_tagDto> tagInfoList = null;
-			List<Post_TagDto> postTagInfo = null;
-			for (Integer post_no : snsTotalList) {
-				System.out.println(post_no);
-				tagInfoList = adminService.tagInfoList(post_no);
-				model.addAttribute("tagInfoList", tagInfoList);
-				System.out.println(tagInfoList);
-				postTagInfo = adminService.postTagInfo(post_no);
-				model.addAttribute("postTagInfo", postTagInfo);
-			}
+
 			/* System.out.println(model); */
 			/* sns total list */
 		} catch (Exception e) {
