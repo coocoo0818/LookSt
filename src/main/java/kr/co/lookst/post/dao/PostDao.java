@@ -41,7 +41,6 @@ public interface PostDao {
 	List<OrderInfoDto> orderInfo(Integer product_no) throws Exception;
 
 
-
 	
 
 
