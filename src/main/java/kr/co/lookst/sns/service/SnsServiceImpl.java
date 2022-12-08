@@ -56,6 +56,11 @@ public class SnsServiceImpl implements SnsService{
 	public int nickNameMod(String member_id, String member_nick) throws Exception {
 		return snsProfileDao.nickModify(member_id, member_nick);
 	}
+	// 프로필 사진 변경
+	@Override
+	public int profileImgModify(String member_id, String profile_img, String profile_uuid) throws Exception {
+		return snsProfileDao.profileImg_Mod(member_id, profile_img, profile_uuid);
+	}
 
 	
 

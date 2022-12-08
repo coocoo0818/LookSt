@@ -31,4 +31,7 @@ public interface SnsService {
 	
 	// 닉네임 수정
 	int nickNameMod(String member_id, String member_nick) throws Exception;
+	
+	// 프로필 이미지 변경
+	int profileImgModify(String member_id, String profile_img,String profile_uuid) throws Exception;
 }

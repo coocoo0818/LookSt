@@ -70,13 +70,22 @@ public class SnsProfileDaoImpl implements SnsProfileDao {
 		// TODO Auto-generated method stub
 		return session.delete(namespace+"deleteUserAllFollow", member_id);
 	}
-
+	// 닉네임 수정
 	@Override
 	public int nickModify(String member_id, String member_nick) throws Exception {
 		Map map = new HashMap();
 		map.put("member_id", member_id);
 		map.put("member_nick", member_nick);
 		return session.update(namespace + "nickModify", map);
+	}
+	// 프로필 사진 변경
+	@Override
+	public int profileImg_Mod(String member_id, String profile_img, String profile_uuid) throws Exception {
+		Map map = new HashMap();
+		map.put("member_id", member_id);
+		map.put("profile_img", profile_img);
+		map.put("profile_uuid", profile_uuid);
+		return session.update(namespace + "profileImg_Mod", map);
 	}
 
 	
