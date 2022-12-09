@@ -12,7 +12,8 @@
 <link rel="stylesheet" href="${contextPath}/resources/admin/css/productDetail.css">
 <script type="text/javascript">
 	$(document).ready(function() {
-	
+		/* var prdt_option_color = $('.optionColor.activ').attr('value'); */
+		/* alert(prdt_option_color) */
 		 $("#buyNow").click(function(){
 			var product_no = ${productInfo.product_no}
 			var prdt_option_size = $('.productSize.activ').attr('value');
@@ -24,24 +25,8 @@
 			formData.append('prdt_option_size',prdt_option_size);
 			formData.append('prdt_option_color',prdt_option_color);
 			formData.append('prdt_order_quan',prdt_order_quan);
-			
-			/* 색상 사이즈유효성 체크  */
-			 if(prdt_option_size == "undefined" || prdt_option_size == null || prdt_option_size == ""){
-				alert("사이즈를 체크해주세요.")
-				return false;
-			} else if (prdt_option_color == "undefined" || prdt_option_color == null || prdt_option_color == "") {
-				alert("색상을 체크해주세요.")
-				return false;
-			}
-			
-			/* return location.href='${contextPath}/post/orderFormpage';  */
-			
-			
-			/* fetch('${contextPath}/post/orderFormpage',{
-				method:'GET',
-				body : formData
-			}); */
-			 $.ajax({
+
+			 /* $.ajax({
 				type: 'GET',   //get방식으로 명시
 				url : '${contextPath}/post/orderFormpage',  //이동할 jsp 파일 주소
 				data:{
@@ -58,18 +43,15 @@
 				error:function(){   //데이터 주고받기가 실패했을 경우 실행할 결과
 					alert('실패');
 				}
-			})
+			}) */
 			
 		 })
-
-
 		
 		let toHtml = function(prdtOptions) {
 			let tmp = "<div class='options'>"
 			prdtOptions.forEach(function(prdtOption, index) {
 				tmp += '<div class="option optionColor" id = "color" value="'+prdtOption.prdt_option_color+'"style="width:25px; color:' + prdtOption.prdt_option_color + ';"></div>'
 			})
-
 			return tmp += "</div>"
 		}
 		$(".productSize").click(function() { 
@@ -144,32 +126,31 @@
 								<p class="header">Select Size</p>
 								<div class="options" id="options">
 									<c:forEach var="productSize" items="${productSize}" varStatus="sizeStatus">
-										<div class="option productSize" name="prdt_option_size" data-productNo="${productInfo.product_no}" data-prdt-size="${productSize.prdt_option_size}" id="prdt_option_size" value="${productSize.prdt_option_size}">${productSize.prdt_option_size}</div>
+										<div class="option productSize" data-productNo="${productInfo.product_no}" data-prdt-size="${productSize.prdt_option_size}" id="prdt_option_size" value="${productSize.prdt_option_size}">${productSize.prdt_option_size}</div>
 									</c:forEach>
 								</div>
 							</div>
 							<div class="attrib color">
 								<p class="header">Select Color</p>
-								<div id="optionColor" name="prdt_option_color"></div>
+								<div id="optionColor"></div>
 							</div>
 						</div>
 						<div class="quantity attribs">
 	                            <div class="form-group attrib">
 							      <label for="exampleSelect1" class="form-label mt-4 attrib"></label>
 							      <p class="header">Quantity</p>
-							      <select class="form-select" id="exampleSelect1">
-							        <option name="Quantity">1</option>
-							        <option name="Quantity">2</option>
-							        <option name="Quantity">3</option>
-							        <option name="Quantity">4</option>
-							        <option name="Quantity">5</option>
+							      <select class="form-select" id="exampleSelect1" name="prdt_order_quan" form="orderform">
+							        <option value="1">1</option>
+							        <option value="2">2</option>
+							        <option value="3">3</option>
+							        <option value="4">4</option>
+							        <option value="5">5</option>
 							      </select>
 							    </div>
 	                        </div>
+						<div id="toSizeColor"></div>
 						<div class="buttons">
-							<!-- <div class="button">Add to cart</div> --><!-- id="buyNow" -->
-							<input class="button colored buyButton"  type="submit" value="Buy now">
-							<!-- <div class="button colored buyButton" id="buyNow" type="submit">Buy now</div> -->
+							<input class="button colored buyButton"  type="button" value="Buy now" onclick="go_pay();">
 						</div>
 				</form>
 				</div>
@@ -180,9 +161,6 @@
 						<c:forEach var="productImg"  items="${productImg}" varStatus="status">	
 							<img class="<c:if test='${status.index == 1}'>activ</c:if>" src="${contextPath}/resources/img/product/${productImg.prdt_img_name}" alt="img ${status.index + 1}"> 
 						</c:forEach>
-						
-						<!-- <img src="https://firebasestorage.googleapis.com/v0/b/fotos-3cba1.appspot.com/o/tenis%2Ffila%2Ft3.png?alt=media&token=b2352ce3-be90-411d-b112-cfc6453760a0" alt="img 2"> 
-						<img src="https://firebasestorage.googleapis.com/v0/b/fotos-3cba1.appspot.com/o/tenis%2Ffila%2Ft1.png?alt=media&token=9b161cad-8068-418e-a0d3-ee2e0975e6f4" alt="img 3"> -->
 					</div>
 					<div class="zoomControl"></div>
 					<div class="closePreview"></div>
@@ -195,6 +173,31 @@
 		</section>
 	</div>
 	<!-- partial -->
+	<script type="text/javascript">
+	function go_pay() {
+		var product_no = ${productInfo.product_no}
+		var prdt_option_size = $('.productSize.activ').attr('value');
+		var prdt_option_color = $('.optionColor.activ').attr('value');
+		var prdt_order_quan = $("#exampleSelect1 option:selected").val();
+		alert(prdt_option_size)
+		let toSizeColor = function(prdt_option_size, prdt_option_color) {
+			let tmp = "<input name='" + prdt_option_size + "' value='" + prdt_option_size + "'>"
+			return tmp += "<input hidden='hidden' name='" + prdt_option_color + "' value='" + prdt_option_color + "'>"
+		}
+		$("#toSizeColor").html(toSizeColor())
+		/* 색상 사이즈유효성 체크  */
+		 if(prdt_option_size == "undefined" || prdt_option_size == null || prdt_option_size == ""){
+			alert("사이즈를 체크해주세요.")
+			return false;
+		} else if (prdt_option_color == "undefined" || prdt_option_color == null || prdt_option_color == "") {
+			alert("색상을 체크해주세요.")
+			return false;
+		} else {
+			/* document.orderform.action = "lookst/post/orderFormpage/"; */
+			document.orderform.submit();
+		}
+	}
+	</script>
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
 	<script type="text/javascript" src="${contextPath}/resources/admin/js/productDetail.js"></script>
 	<%@ include file="/WEB-INF/views/fix/footer.jsp"%>
