@@ -164,31 +164,45 @@ public class SnsController {
 	 * e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
 	 * 
 	 * return "redirect:/"; }
-	 * 
-	 * 포스트 이미지 업로드
-	 * 
-	 * @RequestMapping(value = "postUpload", method = { RequestMethod.POST }) public
-	 * String postUpload(String member_id, Model m, MultipartHttpServletRequest
-	 * mtfRequest, HttpServletRequest request) { List<MultipartFile> fileList =
-	 * mtfRequest.getFiles("file");
-	 * 
-	 * HttpSession session = request.getSession(); String login_id = (String)
-	 * session.getAttribute("res");
-	 * 
-	 * String path =
-	 * "C:\\workspace-spring\\LookSt\\src\\main\\webapp\\resources\\img\\post\\";
-	 * 
-	 * for (MultipartFile mf : fileList) { String originFileName =
-	 * mf.getOriginalFilename(); // 원본 파일 명 long fileSize = mf.getSize(); // 파일 사이즈
-	 * 
-	 * System.out.println("원본 파일명 : " + originFileName);
-	 * System.out.println("파일 사이즈 : " + fileSize); System.out.println("작성자 아이디 : " +
-	 * login_id); String safeFile = path + originFileName; try { mf.transferTo(new
-	 * File(safeFile)); } catch (IllegalStateException e) { e.printStackTrace(); }
-	 * catch (IOException e) { e.printStackTrace(); } }
-	 * 
-	 * return "sns/snsProfile"; }
 	 */
+
+	/* 포스트 이미지 업로드 */
+
+	@RequestMapping(value = "postUpload", method = { RequestMethod.POST })
+	public String postUpload(String member_id, Model m, MultipartHttpServletRequest mtfRequest,
+			HttpServletRequest request) {
+		List<MultipartFile> fileList = mtfRequest.getFiles("file");
+		
+
+		HttpSession session = request.getSession();
+		String login_id = (String) session.getAttribute("res");
+		String path = "C:\\workspace-spring\\LookSt\\src\\main\\webapp\\resources\\img\\post\\";
+		member_id = login_id;
+
+		for (MultipartFile mf : fileList) {
+			String originFileName = mf.getOriginalFilename(); // 원본 파일 명 
+			long fileSize = mf.getSize(); // 파일 사이즈
+			UUID uuid = UUID.randomUUID(); //uuid
+
+			System.out.println("원본 파일명 : " + originFileName);
+			System.out.println("파일 사이즈 : " + fileSize);
+			System.out.println("작성자 아이디 : " + member_id);
+			String safeFile = path + uuid + "_" + originFileName;
+			try {
+				m.addAttribute("member_id", member_id);
+				m.addAttribute("originFileName", originFileName);
+				m.addAttribute("uuid", uuid);
+				mf.transferTo(new File(safeFile));
+				System.out.println(m);
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return "sns/snsProfile";
+	}
 
 	/*
 	 * 피드 리스트
