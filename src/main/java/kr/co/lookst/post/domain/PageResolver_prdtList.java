@@ -6,7 +6,7 @@ public class PageResolver_prdtList {
 	
 	private int totalCnt;				//게시물 총 갯수
 	//private int pageSize = 10;		//한 페이지당 게시물 갯수
-	private final int NAV_SIZE = 10;	//page navigation size
+	private final int NAV_SIZE = 5;	//page navigation size
 	private int totalPage;				//전체 페이지 갯수
 	//private int page;					//현재 페이지
 	private int beginPage;				//화면에 보여줄 첫 페이지
@@ -15,7 +15,7 @@ public class PageResolver_prdtList {
 	private boolean showPrev = false;	//이전을 보여줄 지 여부(beginPage==1이 아니면 showPrev는 true)
 	
 	public PageResolver_prdtList(int totalCnt, Integer page) {
-		this(totalCnt, new SearchItem_prdtList(page, 10));
+		this(totalCnt, new SearchItem_prdtList(page, 5));
 	}
 	
 	public PageResolver_prdtList(int totalCnt, Integer page, Integer pageSize) {
