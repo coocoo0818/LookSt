@@ -6,6 +6,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.co.lookst.main.domain.Product;
+import kr.co.lookst.main.domain.SearchItem;
 import kr.co.lookst.post.domain.OrderInfoDto;
 import kr.co.lookst.post.domain.PostDto;
 import kr.co.lookst.post.domain.Post_imgDto;
@@ -107,6 +109,13 @@ public class PostDaoImpl implements PostDao{
 		 return session.selectList(namespace + "orderInfo", product_no);
 		 
 	 }
+
+
+	@Override
+	public List<Product> shopListSearchResultPage(SearchItem sc) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectList(namespace + " shopListSearchResultPage", sc);
+	}
 
 
 	/*

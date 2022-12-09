@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import kr.co.lookst.main.domain.PageResolver;
+import kr.co.lookst.main.domain.Product;
+import kr.co.lookst.main.domain.SearchItem;
 /*import kr.co.lookst.post.domain.OrderPagePrdtDto;*/
 import kr.co.lookst.post.domain.PostDto;
 import kr.co.lookst.post.domain.ProdInfoDto;
@@ -112,6 +115,27 @@ public class PostController {
 	   System.out.println(prdt_order_quan);
 //	   return "/orderFormpage";
    }
+   
+	/* 쇼핑리스트 페이지 이동!!! */ /*Dao, Service 등 등록했고 컨트롤러수정중*/
+	@RequestMapping(value = "/productList", method = RequestMethod.GET)
+	public String shopFormList(SearchItem sc, Model model) {
+		try {
+			/* 쇼핑리스트 페이징 시작 */
+			int totalCnt = postService.shopListSearchResultCnt(sc);
+			model.addAttribute("totalCnt", totalCnt);
+			PageResolver pageResolver = new PageResolver(totalCnt, sc);
+			/* 쇼핑리스트 페이징 끝 */
+
+			/* 쇼핑리스트 리스트 출력 */
+			List<Product> shopTotalList = postService.shopListSearchResultPage(sc);
+			model.addAttribute("shopTotalList", shopTotalList);
+			model.addAttribute("pr", pageResolver);
+			/* 쇼핑리스트 리스트 끝 */
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "post/productList";
+	}
    
    
 }

@@ -2,6 +2,8 @@ package kr.co.lookst.post.dao;
 
 import java.util.List;
 
+import kr.co.lookst.main.domain.Product;
+import kr.co.lookst.main.domain.SearchItem;
 import kr.co.lookst.post.domain.OrderInfoDto;
 import kr.co.lookst.post.domain.PostDto;
 import kr.co.lookst.post.domain.Post_imgDto;
@@ -40,6 +42,7 @@ public interface PostDao {
 
 	List<OrderInfoDto> orderInfo(Integer product_no) throws Exception;
 
+	List<Product> shopListSearchResultPage(SearchItem sc) throws Exception;
 
 	
 
