@@ -7,110 +7,20 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script type="text/javascript"
-	src="http://code.jquery.com/jquery-3.4.1.js"></script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+ <!-- jQuery -->
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.4.1.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <!-- <script src="http://code.jquery.com/jquery-3.4.1.js"></script> -->
-<script
-	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<!-- iamport.payment.js -->
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
 
 <title>LOOKST</title>
-<link rel="stylesheet"
-	href="${contextPath}/resources/admin/css/orderFormpage.css">
+<link rel="stylesheet" href="${contextPath}/resources/admin/css/orderFormpage.css">
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/fix/header.jsp"%>
-	<script>
-	function quanCheck(){
-		alert(document.getElementById('quan').value())
-
-	}
-	</script>
-
 	<script type="text/javascript">
-	
-	$('#checkoutbtn').click(function(){
-		var new_form = $('<form></form>');
-		new_form.attr("firstName",$('#firstName').val());
-		new_form.attr("action","<c:url value='lookst/post/orderFormpage'></c:url>")
-		new_form.attr("method","post");
-		new_form.submit();
-	})
-	
-	function Header({ itemCount }) {
-		  return (
-		    <header className="container">
-		      <h1>Shopping Cart</h1>
-
-		      <ul className="breadcrumb">
-		        <li>Home</li>
-		        <li>Shopping Cart</li>
-		      </ul>
-
-		      <span className="count">{itemCount} items in the bag</span>
-		    </header>
-		  );
-		}
-
-		function ProductList({ products, onChangeProductQuantity, onRemoveProduct }) {
-		  return (
-		    <section className="container">
-		      <ul className="products">
-		        {products.map((product, index) => {
-		          return (
-		            <li className="row" key={index}>
-		              <div className="col left">
-		                <div className="thumbnail">
-		                  <a href="#">
-		                    <img src={product.image} alt={product.name} />
-		                  </a>
-		                </div>
-		                <div className="detail">
-		                  <div className="name">
-		                    <a href="#">{product.name}</a>
-		                  </div>
-		                  <div className="description">{product.description}</div>
-		                  <div className="price">{formatCurrency(product.price)}</div>
-		                </div>
-		              </div>
-
-		              <div className="col right">
-		                <div className="quantity">
-		                  <input
-		                    type="text"
-		                    className="quantity"
-		                    step="1"
-		                    value={product.quantity}
-		                    onChange={(event) => onChangeProductQuantity(index, event)}
-		                  />
-		                </div>
-
-		                <div className="remove">
-		                  <svg
-		                    onClick={() => onRemoveProduct(index)}
-		                    version="1.1"
-		                    className="close"
-		                    x="0px"
-		                    y="0px"
-		                    viewBox="0 0 60 60"
-		                    enableBackground="new 0 0 60 60"
-		                  >
-		                    <polygon points="38.936,23.561 36.814,21.439 30.562,27.691 24.311,21.439 22.189,23.561 28.441,29.812 22.189,36.064 24.311,38.186 30.562,31.934 36.814,38.186 38.936,36.064 32.684,29.812" />
-		                  </svg>
-		                </div>
-		              </div>
-		            </li>
-		          );
-		        })}
-		      </ul>
-		    </section>
-		  );
-		}
-		
-
-	</script>
-	<script>
     function sample6_execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {
@@ -161,61 +71,49 @@
 </script>
 
 	<script type="text/javascript">
+	var IMP = window.IMP; // 생략 가능
+    IMP.init("imp42155271"); // 예: imp00000000
+    
+    function requestPay() {
+        // IMP.request_pay(param, callback) 결제창 호출
+        IMP.request_pay({ // param
+            pg: "html5_inicis",
+            pay_method: "card",
+            merchant_uid: "ORD20180131-0000011",
+            name: "진현이 멘탈",
+            amount: 12464900,
+            buyer_email: "gildong@gmail.com",
+            buyer_name: "홍길동",
+            buyer_tel: "010-4242-4242",
+            buyer_addr: "서울특별시 강남구 신사동",
+            buyer_postcode: "01181"
+        }, function (rsp) { // callback
+            if (rsp.success) {
+                alert("성공")
+                // 결제 성공 시 로직,
+            } else {
+            	alert("실패")
+                // 결제 실패 시 로직,
+            }
+        });
+      }
 	$(document).ready(function(){
-		let totalPrice = 0;				// 총 가격
-		let totalCount = 0;				// 총 상품 개수
-		let deliveryPrice = 0;			// 배송비
-		let finalTotalPrice = 0;		// 최종 가격
-		
-		$(".cart_info_td").each(function(index, element){
-			
-			// 총 가격
-			totalPrice += parseInt($(element).find(".individual_totalPrice_input").val());
-			// 총 개수
-			totalCount += parseInt($(element).find(".individual_bookCount_input").val());
-		});
-		
-		/* 배송비 결정 */
-		if(totalPrice >= 50000){
-			deliveryPrice = 0;
-		} else if(totalPrice == 0){
-			deliveryPrice = 0;
-		} else {
-			deliveryPrice = 3000;	
-		}
-		
-		/* 최종가격 */
-		finalTotalPrice = totalPrice + deliveryPrice;
-		
-		/* 값 삽입 */
-		// 총 가격 
-		$(".totalPrice_span").text(totalPrice.toLocaleString());
-		// 총 개수
-		$(".totalCount_span").text(totalCount);
-		// 배송비
-		$(".delivery_price").text(deliveryPrice);
-		// 최종 가격(총 가격 + 배송비)
-		$(".finalTotalPrice_span").text(finalTotalPrice.toLocaleString());
+	    
 	});
 </script>
 
 	<div id="app">
-
 		<!-- Header -->
 		<header class="container">
 			<h1>Order List</h1>
-			<ul class="breadcrumb">
-				<li>Home</li>
-				<li>Shopping Cart</li>
-			</ul>
 		</header>
 		<!-- End Header -->
 
 		<!-- Product List -->
 		<section class="container">
-			<div class="content_subject">
+			<!-- <div class="content_subject">
 				<span>장바구니</span>
-			</div>
+			</div> -->
 			<!-- 장바구니 리스트 -->
 			<div class="content_middle_section"></div>
 			<!-- 장바구니 가격 합계 -->
@@ -243,7 +141,10 @@
 								<td class="td_width_2">
 									<img src="${contextPath}/resources/img/product/${orderInfo.prdt_img_name}" style="height: 150px; weight: 150px;"> 
 								</td>
-								<td class="td_width_3">${orderInfo.product_name}</td>
+								<td class="td_width_3">
+									<div>${orderInfo.product_name}</div>
+									<div>사이즈 : ${prdt_option_size} 색상 : ${prdt_option_color}</div>
+								</td>
 								<td class="td_width_3 price_td table_text_align_center"><fmt:formatNumber
 										value="${orderInfo.product_price}" pattern="#,###" /></td>
 								<td class="td_width_1 table_text_align_center">
@@ -259,7 +160,7 @@
 				<table class="list_table">
 				</table>
 			</div>
-
+			
 			<div v-else class="empty-product">
 				<h3>돈 더 써볼까요?</h3>
 				<button>돈쭐을 내주마!</button>
@@ -275,7 +176,7 @@
 		<div class="row g-5">
 			<div class="col-md-5 col-lg-4 order-md-last">
 				<input type="button" id="checkoutbtn"
-					class="w-100 btn btn-primary btn-lg" value="Continue to checkout" />
+					class="w-100 btn btn-primary btn-lg" value="Continue to checkout" onclick="requestPay();"/>
 			</div>
 
 			<div class="col-md-7 col-lg-8">

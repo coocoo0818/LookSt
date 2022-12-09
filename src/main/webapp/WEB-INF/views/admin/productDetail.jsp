@@ -179,10 +179,10 @@
 		var prdt_option_size = $('.productSize.activ').attr('value');
 		var prdt_option_color = $('.optionColor.activ').attr('value');
 		var prdt_order_quan = $("#exampleSelect1 option:selected").val();
-		alert(prdt_option_size)
-		let toSizeColor = function(prdt_option_size, prdt_option_color) {
-			let tmp = "<input name='" + prdt_option_size + "' value='" + prdt_option_size + "'>"
-			return tmp += "<input hidden='hidden' name='" + prdt_option_color + "' value='" + prdt_option_color + "'>"
+
+		let toSizeColor = function() {
+			let tmp = "<input hidden='hidden' name='prdt_option_size' value='" + prdt_option_size + "'>"
+			return tmp += "<input hidden='hidden' name='prdt_option_color' value='" + prdt_option_color + "'>"
 		}
 		$("#toSizeColor").html(toSizeColor())
 		/* 색상 사이즈유효성 체크  */
