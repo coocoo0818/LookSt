@@ -7,6 +7,8 @@ import kr.co.lookst.post.domain.PostDto;
 import kr.co.lookst.post.domain.Post_imgDto;
 import kr.co.lookst.post.domain.ProdInfoDto;
 import kr.co.lookst.post.domain.TpostDto;
+import kr.co.lookst.main.domain.Product;
+import kr.co.lookst.main.domain.SearchItem;
 import kr.co.lookst.post.domain.OrderFormPageDto;
 import kr.co.lookst.post.domain.OrderInfoDto;
 /*import kr.co.lookst.post.domain.OrderPagePrdtDto;*/
@@ -41,6 +43,10 @@ public interface PostService {
 	/* List<OrderPagePrdtDto> orderPagePrdt(Integer product_no) throws Exception; */
 
 	List<OrderInfoDto> orderInfo(Integer product_no) throws Exception;
+
+	int shopListSearchResultCnt(SearchItem sc) throws Exception;
+
+	List<Product> shopListSearchResultPage(SearchItem sc) throws Exception;
 
 	
 

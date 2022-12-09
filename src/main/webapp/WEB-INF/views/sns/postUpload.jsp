@@ -20,28 +20,28 @@ img {
 </style>
 
 <script type="text/javascript">
-	// 이미지 업로드 썸네일
-	$(function() {
-		//파일업로드시 썸네일
-		$('#upload_image').change(function(e) {
-			const images = e.target.files
-			$('.img-box').empty();
-			for (let i = 0; i < images.length; i++) {
-				const Reader = new FileReader();
-				Reader.readAsDataURL(images[i]);
-				Reader.onload = function() {
-					const img = '<img src="'+ Reader.result +'" alt="사진">';
-					$('.img-box').append(img);
-				}
+//이미지 업로드 썸네일
+$(function() {
+	//파일업로드시 썸네일
+	$('#upload_image').change(function(e) {
+		const images = e.target.files
+		$('.img-box').empty();
+		for (let i = 0; i < images.length; i++) {
+			const Reader = new FileReader();
+			Reader.readAsDataURL(images[i]);
+			Reader.onload = function() {
+				const img = '<img src="'+ Reader.result +'" alt="사진">';
+				$('.img-box').append(img);
 			}
-		})
+		}
 	})
+})
 
-	// 팔로워 프로필화면 이동
-	$('.uploadbutton').on('click', function() {
-		let member_id = $(login_id)
-		location.href = '${contextPath}/sns/snsProfile/?member_id='+ member_id;
-	});
+// 팔로워 프로필화면 이동
+$('.uploadbutton').on('click', function() {
+	let member_id = $(login_id)
+	location.href = '${contextPath}/sns/snsProfile/?member_id='+ member_id;
+});			
 </script>
 
 </head>
@@ -58,13 +58,20 @@ img {
 		enctype="multipart/form-data">
 		<div class="upload container mb-5">
 			<div class="line border border-4 p-sm-5">
+
 				<!-- 이미지 첨부-->
 				<div class="img container">
 					<div class="imgupload">
-						<input multiple="multiple" type="file" name="file"
-							id="upload_image" />
+						<button type="button" class=" btn btn-outline-dark mb-3">
+							<label class="prdtTag-icon" for="upload_image"><i class="bi bi-camera fs-2"></i>&nbsp;이미지
+								선택</label><input multiple="multiple" type="file" name="file"
+								id="upload_image" style="display: none;"/>
+						</button>
+
+
 					</div>
 				</div>
+
 				<div class="img-box mb-5"></div>
 				<!-- 이미지 첨부 끝-->
 				<!-- 상품 태그-->

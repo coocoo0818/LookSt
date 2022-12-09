@@ -4,7 +4,22 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="kr.co.lookst.post.dao.PostMapper">
-   
+  		
+  		<resultMap type="Prdt_Img" id="prdt_Img">
+                <result column="prdt_img_no" property="prdt_img_no" />
+                <result column="prdt_img_seq" property="prdt_img_seq" />
+                <result column="prdt_img_name" property="prdt_img_name" />
+        </resultMap>
+        <resultMap type="Product" id="Product">
+                <result column="product_no" property="product_no" />
+                <result column="product_kind" property="product_kind" />
+                <result column="product_price" property="product_price" />
+                <result column="product_date" property="product_date" />
+                <result column="product_name" property="product_name" />
+                <result column="product_type" property="product_type" />
+                <result column="product_info" property="product_info" />
+                <collection property="prdt_Img" resultMap="prdt_Img" />
+        </resultMap>
    
    
 <!--    <select id="prod_info_list" parameterType="int" resultType="ProdInfoDto">

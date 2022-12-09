@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kr.co.lookst.main.domain.Product;
+import kr.co.lookst.main.domain.SearchItem;
 import kr.co.lookst.post.dao.PostDao;
 import kr.co.lookst.post.domain.PostDto;
 import kr.co.lookst.post.domain.Post_imgDto;
@@ -95,6 +97,18 @@ public class PostServiceImpl implements PostService{
 	public List<OrderInfoDto> orderInfo(Integer product_no) throws Exception {
 		// TODO Auto-generated method stub
 		return postDao.orderInfo(product_no);
+	}
+
+	@Override
+	public int shopListSearchResultCnt(SearchItem sc) throws Exception {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public List<Product> shopListSearchResultPage(SearchItem sc) throws Exception {
+		// TODO Auto-generated method stub
+		return postDao.shopListSearchResultPage(sc);
 	}
 
 	/*
