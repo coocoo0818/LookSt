@@ -13,6 +13,7 @@ import kr.co.lookst.main.domain.Prdt_Img;
 import kr.co.lookst.main.domain.Prdt_Option;
 import kr.co.lookst.main.domain.Product;
 import kr.co.lookst.main.domain.SearchItem;
+import kr.co.lookst.post.domain.OrderInfoDto;
 import kr.co.lookst.post.domain.Post_TagDto;
 import kr.co.lookst.post.domain.post_com_tagDto;
 
@@ -161,6 +162,11 @@ public class AdminDaoImpl implements AdminDao{
 		map.put("product_no", product_no);
 		map.put("prdt_option_size", prdt_option_size);
 		return session.selectList(namespace + "productColor", map);
+	}
+	/* 오더 페이지 이동 */
+	@Override
+	public List<OrderInfoDto> orderInfo(Integer product_no) throws Exception {
+		 return session.selectList(namespace + "orderInfo", product_no);
 	}
 	
 	/* sns total list */

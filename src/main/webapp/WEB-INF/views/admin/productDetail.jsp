@@ -109,7 +109,7 @@
 		<section class="productCard">
 			<div class="container">
 				<div class="info">
-				<form id="orderform" name = "orderform" action="${contextPath}/post/orderFormpage" method="get">
+				<form id="orderform" name = "orderform" action="${contextPath}/admin/orderFormpage" method="get">
 					<p class="header" name="product_no">${productInfo.product_no}</p>
 					<input hidden name="product_no" value="${productInfo.product_no}">
 						<h3 class="name" name="product_kind">
