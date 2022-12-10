@@ -3,6 +3,7 @@ package kr.co.lookst.admin;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,6 +23,8 @@ import kr.co.lookst.main.domain.Prdt_Img;
 import kr.co.lookst.main.domain.Prdt_Option;
 import kr.co.lookst.main.domain.Product;
 import kr.co.lookst.main.domain.SearchItem;
+import kr.co.lookst.member.domain.MemberDto;
+import kr.co.lookst.post.domain.OrderInfoDto;
 import kr.co.lookst.post.domain.Post_TagDto;
 import kr.co.lookst.post.domain.post_com_tagDto;
 
@@ -297,6 +300,26 @@ public class AdminController {
 		}
 		return "/admin/productDetail";
 	}
+	
+  @GetMapping("/orderFormpage")
+	public String orderFormpage(Model m, MemberDto dto, @RequestParam(value="product_no", required=false) Integer product_no, @RequestParam(value="prdt_option_size", required=false) String prdt_option_size
+					, @RequestParam(value="prdt_option_color", required=false) String prdt_option_color, @RequestParam(value="prdt_order_quan", required=false) Integer prdt_order_quan, HttpServletRequest request) {
+	  HttpSession session = request.getSession();
+	  try {		
+		String login_id = (String) session.getAttribute("res");
+        List<OrderInfoDto> orderInfo = adminService.orderInfo(product_no);
+        m.addAttribute("orderInfo", orderInfo);
+        m.addAttribute("prdt_option_size", prdt_option_size);
+        m.addAttribute("prdt_option_color", prdt_option_color);
+        m.addAttribute("prdt_order_quan", prdt_order_quan);
+        m.addAttribute("member_id", login_id);
+        System.out.println("test" + m);
+        return "/post/orderFormpage";
+     } catch (Exception e) {
+        e.printStackTrace();
+     }
+     return "/post/orderFormpage";
+  }
 
 	/* 상품 컬러 출력 */
 	@RequestMapping(value = "/productColor", method = { RequestMethod.GET })
