@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <c:set var="follow_unfollow" value="${checkFollow==1 ? '팔로우 취소' : '팔로우' }"/>
@@ -65,7 +64,6 @@
 		// 개인 피드 리스트 이동
 		$('.Personal_post').on('click', function() {
 			let member_id = $(this).children().attr("data-member_id")
-			alert(member_nick)
 			location.href = '${contextPath}/sns/personalPost/?member_id='+member_id;
 		});
 		

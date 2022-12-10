@@ -172,7 +172,6 @@ public class SnsController {
 	public String postUpload(String member_id, Model m, MultipartHttpServletRequest mtfRequest,
 			HttpServletRequest request) {
 		List<MultipartFile> fileList = mtfRequest.getFiles("file");
-		
 
 		HttpSession session = request.getSession();
 		String login_id = (String) session.getAttribute("res");
@@ -180,9 +179,9 @@ public class SnsController {
 		member_id = login_id;
 
 		for (MultipartFile mf : fileList) {
-			String originFileName = mf.getOriginalFilename(); // 원본 파일 명 
+			String originFileName = mf.getOriginalFilename(); // 원본 파일 명
 			long fileSize = mf.getSize(); // 파일 사이즈
-			UUID uuid = UUID.randomUUID(); //uuid
+			UUID uuid = UUID.randomUUID(); // uuid
 
 			System.out.println("원본 파일명 : " + originFileName);
 			System.out.println("파일 사이즈 : " + fileSize);
@@ -201,37 +200,49 @@ public class SnsController {
 			}
 		}
 
-		return "sns/snsProfile";
+		return "redirect:/sns/snsProfile";
 	}
 
 	/*
 	 * 피드 리스트
-	 * 
-	 * @GetMapping("/personalPost") public String personalPost(String member_id,
-	 * Model m, @RequestParam("member_id") String member_nick, HttpServletRequest
-	 * request) {
-	 * 
-	 * HttpSession session = request.getSession();
-	 * 
-	 * try { String login_id = (String) session.getAttribute("res");
-	 * 
-	 * 프로필 정보 SnsProfileDto pro_info = snsService.getinfoselect(member_id); 프로필 피드
-	 * List<ProfileFeedDto> pro_feed = snsService.getProfileFeed(member_id); 팔로워 리스트
-	 * List<FollowDto> pro_follower = snsService.getFollower(member_id); 팔로잉 리스트
-	 * List<FollowDto> pro_following = snsService.getFollowing(member_id); 팔로우 유무
-	 * int checkFollow = snsService.followCheck(login_id, member_id);
-	 * 
-	 * m.addAttribute("pro_info", pro_info); m.addAttribute("pro_feed", pro_feed);
-	 * m.addAttribute("pro_follower", pro_follower); m.addAttribute("pro_following",
-	 * pro_following); m.addAttribute("login_Id", login_id);
-	 * m.addAttribute("checkFollow", checkFollow);
-	 * 
-	 * System.out.println("팔로우 유무(팔로우 중 : 1 , 아니면 0) : " + checkFollow);
-	 * System.out.println("로그인아이디 : " + login_id); System.out.println("프로필아이디 : " +
-	 * member_id); System.out.println(m);
-	 * 
-	 * } catch (Exception e) { e.printStackTrace(); } return "sns/personalPost"; }
 	 */
+	@GetMapping("/personalPost")
+	public String personalPost(String member_id, Model m, @RequestParam("member_id") String member_nick,
+			HttpServletRequest request) {
+
+		HttpSession session = request.getSession();
+
+		try {
+			String login_id = (String) session.getAttribute("res");
+
+			/* 프로필 정보 */
+			SnsProfileDto pro_info = snsService.getinfoselect(member_id);
+			/* 프로필 피드 */
+			List<ProfileFeedDto> pro_feed = snsService.getProfileFeed(member_id);
+			/* 팔로워 리스트 */
+			List<FollowDto> pro_follower = snsService.getFollower(member_id);
+			/* 팔로잉 리스트 */
+			List<FollowDto> pro_following = snsService.getFollowing(member_id);
+			/* 팔로우 유무 */
+			int checkFollow = snsService.followCheck(login_id, member_id);
+
+			m.addAttribute("pro_info", pro_info);
+			m.addAttribute("pro_feed", pro_feed);
+			m.addAttribute("pro_follower", pro_follower);
+			m.addAttribute("pro_following", pro_following);
+			m.addAttribute("login_Id", login_id);
+			m.addAttribute("checkFollow", checkFollow);
+
+			System.out.println("팔로우 유무(팔로우 중 : 1 , 아니면 0) : " + checkFollow);
+			System.out.println("로그인아이디 : " + login_id);
+			System.out.println("프로필아이디 : " + member_id);
+			System.out.println(m);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "sns/personalPost";
+	}
 
 	@GetMapping("/postUpload")
 	public String postUpload() {

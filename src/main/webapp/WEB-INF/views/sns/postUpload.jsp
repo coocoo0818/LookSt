@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,28 +22,23 @@ img {
 </style>
 
 <script type="text/javascript">
-//이미지 업로드 썸네일
-$(function() {
-	//파일업로드시 썸네일
-	$('#upload_image').change(function(e) {
-		const images = e.target.files
-		$('.img-box').empty();
-		for (let i = 0; i < images.length; i++) {
-			const Reader = new FileReader();
-			Reader.readAsDataURL(images[i]);
-			Reader.onload = function() {
-				const img = '<img src="'+ Reader.result +'" alt="사진">';
-				$('.img-box').append(img);
+	//이미지 업로드 썸네일
+	$(function() {
+		//파일업로드시 썸네일
+		$('#upload_image').change(function(e) {
+			const images = e.target.files
+			$('.img-box').empty();
+			for (let i = 0; i < images.length; i++) {
+				const Reader = new FileReader();
+				Reader.readAsDataURL(images[i]);
+				Reader.onload = function() {
+					const img = '<img src="'+ Reader.result +'" alt="사진">';
+					$('.img-box').append(img);
+				}
 			}
-		}
-	})
-})
+		})
 
-// 팔로워 프로필화면 이동
-$('.uploadbutton').on('click', function() {
-	let member_id = $(login_id)
-	location.href = '${contextPath}/sns/snsProfile/?member_id='+ member_id;
-});			
+	})
 </script>
 
 </head>
@@ -63,9 +60,10 @@ $('.uploadbutton').on('click', function() {
 				<div class="img container">
 					<div class="imgupload">
 						<button type="button" class=" btn btn-outline-dark mb-3">
-							<label class="prdtTag-icon" for="upload_image"><i class="bi bi-camera fs-2"></i>&nbsp;이미지
-								선택</label><input multiple="multiple" type="file" name="file"
-								id="upload_image" style="display: none;"/>
+							<label class="select_img" for="upload_image"><i
+								class="bi bi-camera fs-2"></i>&nbsp;이미지 선택</label><input
+								multiple="multiple" type="file" name="file" id="upload_image"
+								style="display: none;" />
 						</button>
 
 
@@ -101,18 +99,25 @@ $('.uploadbutton').on('click', function() {
 					</div>
 				</div>
 				<!-- 글 작성 끝-->
+
+
+				<!-- 업로드버튼 -->
 				<div class="upload-btn row">
-					<div>
-						<a href="${contextPath}/sns/snsProfile/?member_id=${login_id}"
-							class="followerIDbox" style="text-decoration-line: none;">
-							<button type="submit" class="uploadbutton btn btn-primary mt-5"
-								style="float: right;">
-								<input class="btn btn-primary" type="submit" value="업로드" />
-							</button>
-						</a>
+					<div<%--  data-member_id="${login_id}" --%>>
+
+						<%-- <a href="${contextPath}/sns/snsProfile/?member_id=${login_id}"
+							class="go_profile" style="text-decoration-line: none;" ></a> --%>
+						<button type="button" class="uploadbutton btn btn-primary mt-5"
+							style="float: right;">
+							<label class="uploadLabel" for="savepost">업로드</label> <input
+								id="savepost" class="btn btn-primary" type="submit"
+								style="display: none;" />
+						</button>
 
 					</div>
 				</div>
+
+
 			</div>
 		</div>
 	</form>

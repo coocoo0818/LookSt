@@ -14,6 +14,7 @@ public class ProfileFeedDto {
 	private Date post_date;
 	private String post_type;
 	private String post_content;
+	private String post_img_uuid;
 	
 	public ProfileFeedDto() {
 		// TODO Auto-generated constructor stub
