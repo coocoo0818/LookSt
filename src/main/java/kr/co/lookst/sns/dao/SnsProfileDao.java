@@ -37,5 +37,11 @@ public interface SnsProfileDao {
 	
 	// 프로필 이미지 변경
 	int profileImg_Mod(String member_id, String profile_img,String profile_uuid) throws Exception;
+	/*
+	// 포스트 컨텐트 업로드(member_id, post_content, post_date, post_type)
+	int postCon_up(String member_id, String post_content) throws Exception;
 	
+	// 포스트 이미지 업로드(post_no, post_img_img, post_img_seq, post_img_uuid)
+	int postImg_up(String post_img_img, Integer post_img_seq, String post_img_uuid) throws Exception;
+	*/
 }

@@ -57,20 +57,12 @@ input {
 	<%@ include file="/WEB-INF/views/fix/header.jsp"%>
 
 	<script type="text/javascript">
-
-	// 프로필화면 이동
-	$(document).ready(function() {
-		$('.IDbox').on('click', function() {
-			let member_id = $(this).children().attr("data-member_id")
-			alert(member_nick)
-			location.href = '${contextPath}/sns/snsProfile/?member_id='+member_id;
-		});
-	});		
+				
 	</script>
 	<!-- Feed -->
 	<div class="container">
 		<div class="row justify-content-md-center">
-			<h2 class="col-auto my-5">${pro_info.member_nick}'s Feed</h2>
+			<h2 class="col-auto my-5">${pro_info.member_nick}'sFeed</h2>
 		</div>
 	</div>
 
@@ -90,9 +82,9 @@ input {
 							<div class="col-3">
 								<img
 									src="${contextPath}/resources/img/profile/${pro_info.profile_img}"
-									onclick="location.href='./'" id="profile_img">
+									 onclick="location.href='${contextPath}/sns/snsProfile/?member_id=${pro_info.member_id}'" id="profile_img">
 							</div>
-							<div class="col-9 my-auto" onclick="location.href='./'">${pro_info.member_nick}</div>
+							<div class="col-9 my-auto" onclick="location.href='${contextPath}/sns/snsProfile/?member_id=${pro_info.member_id}'">${pro_info.member_nick}</div>
 						</div>
 						<p class="card-text m-2" style="margin-top: 20px;">${pro_feed.post_content}</p>
 						<div class="tag_link" style="margin-top: 1%; margin-bottom: 1%;">

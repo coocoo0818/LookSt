@@ -34,4 +34,11 @@ public interface SnsService {
 	
 	// 프로필 이미지 변경
 	int profileImgModify(String member_id, String profile_img,String profile_uuid) throws Exception;
+	/*
+	// 포스트 컨텐트 업로드
+	int contentUp(String member_id, String post_content) throws Exception;
+	
+	// 포스트 이미지 업로드
+	int imgUp(String post_img_img, Integer post_img_seq, String post_img_uuid) throws Exception;
+	*/
 }

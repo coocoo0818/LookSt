@@ -61,7 +61,16 @@ public class SnsServiceImpl implements SnsService{
 	public int profileImgModify(String member_id, String profile_img, String profile_uuid) throws Exception {
 		return snsProfileDao.profileImg_Mod(member_id, profile_img, profile_uuid);
 	}
-
+/*	
+	@Override
+	public int contentUp(String member_id, String post_content) throws Exception {
+		return snsProfileDao.postCon_up(member_id, post_content);
+	}
+	@Override
+	public int imgUp(String post_img_img, Integer post_img_seq, String post_img_uuid) throws Exception {
+		return snsProfileDao.postImg_up(post_img_img, post_img_seq, post_img_uuid);
+	}
+*/
 	
 
 
