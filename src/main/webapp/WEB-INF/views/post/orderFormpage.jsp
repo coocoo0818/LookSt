@@ -147,6 +147,7 @@
 				// 결제 성공 시 로직,
 			} else {
 				alert("실패")
+				alert(data.product_no)
 				// 결제 실패 시 로직,
 			}
 		});
