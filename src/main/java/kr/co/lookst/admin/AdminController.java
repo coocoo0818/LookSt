@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,6 +22,7 @@ import kr.co.lookst.admin.service.AdminService;
 import kr.co.lookst.main.domain.PageResolver;
 import kr.co.lookst.main.domain.Prdt_Img;
 import kr.co.lookst.main.domain.Prdt_Option;
+import kr.co.lookst.main.domain.PrdtOrderDto;
 import kr.co.lookst.main.domain.Product;
 import kr.co.lookst.main.domain.SearchItem;
 import kr.co.lookst.member.domain.MemberDto;
@@ -301,25 +303,39 @@ public class AdminController {
 		return "/admin/productDetail";
 	}
 	
-  @GetMapping("/orderFormpage")
-	public String orderFormpage(Model m, MemberDto dto, @RequestParam(value="product_no", required=false) Integer product_no, @RequestParam(value="prdt_option_size", required=false) String prdt_option_size
+	/* 오더 페이지 이동 */
+    @GetMapping("/orderFormpage")
+	  public String orderFormpage(Model m, MemberDto dto, @RequestParam(value="product_no", required=false) Integer product_no, @RequestParam(value="prdt_option_size", required=false) String prdt_option_size
 					, @RequestParam(value="prdt_option_color", required=false) String prdt_option_color, @RequestParam(value="prdt_order_quan", required=false) Integer prdt_order_quan, HttpServletRequest request) {
-	  HttpSession session = request.getSession();
-	  try {		
-		String login_id = (String) session.getAttribute("res");
-        List<OrderInfoDto> orderInfo = adminService.orderInfo(product_no);
-        m.addAttribute("orderInfo", orderInfo);
-        m.addAttribute("prdt_option_size", prdt_option_size);
-        m.addAttribute("prdt_option_color", prdt_option_color);
-        m.addAttribute("prdt_order_quan", prdt_order_quan);
-        m.addAttribute("member_id", login_id);
-        System.out.println("test" + m);
-        return "/post/orderFormpage";
-     } catch (Exception e) {
-        e.printStackTrace();
-     }
-     return "/post/orderFormpage";
-  }
+	    HttpSession session = request.getSession();
+	    try {		
+	  	  String login_id = (String) session.getAttribute("res");
+          List<OrderInfoDto> orderInfo = adminService.orderInfo(product_no);
+          m.addAttribute("orderInfo", orderInfo);
+          m.addAttribute("prdt_option_size", prdt_option_size);
+          m.addAttribute("prdt_option_color", prdt_option_color);
+          m.addAttribute("prdt_order_quan", prdt_order_quan);
+          m.addAttribute("member_id", login_id);
+          System.out.println("test" + m);
+          return "/post/orderFormpage";
+       } catch (Exception e) {
+          e.printStackTrace();
+       }
+       return "/post/orderFormpage";
+    }
+    
+	/* 주문 인설트 */
+	@RequestMapping(value = "/orderInsert", method = { RequestMethod.POST })
+	@ResponseBody
+	public String orderInsert(Model model, @RequestBody PrdtOrderDto prdtOrderDto) {
+
+		try {
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:/admin/orderFormpage";
+	}
 
 	/* 상품 컬러 출력 */
 	@RequestMapping(value = "/productColor", method = { RequestMethod.GET })
