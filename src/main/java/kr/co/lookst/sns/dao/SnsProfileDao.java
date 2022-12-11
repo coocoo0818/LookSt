@@ -33,7 +33,7 @@ public interface SnsProfileDao {
 	int deleteUserAllFollow(String member_id) throws Exception;
 	
 	// 닉네임 수정
-	int nickModify(String member_id, String member_nick) throws Exception;
+	int update(SnsProfileDto spd) throws Exception;
 	
 	// 프로필 이미지 변경
 	int profileImg_Mod(String member_id, String profile_img,String profile_uuid) throws Exception;

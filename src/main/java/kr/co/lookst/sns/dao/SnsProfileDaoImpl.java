@@ -72,11 +72,8 @@ public class SnsProfileDaoImpl implements SnsProfileDao {
 	}
 	// 닉네임 수정
 	@Override
-	public int nickModify(String member_id, String member_nick) throws Exception {
-		Map map = new HashMap();
-		map.put("member_id", member_id);
-		map.put("member_nick", member_nick);
-		return session.update(namespace + "nickModify", map);
+	public int update(SnsProfileDto spd) throws Exception {
+		return session.update(namespace + "update", spd);
 	}
 	// 프로필 사진 변경
 	@Override
