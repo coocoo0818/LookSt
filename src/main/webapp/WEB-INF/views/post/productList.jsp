@@ -78,10 +78,55 @@
 				  <button class="btn btn-light border border-2" type="button">BAG</button>
 				  <button class="btn btn-light border border-2" type="button">ACC</button>
 				</div>
+				
+				<div id="carouselExampleIndicators" class="carousel slide d-grid gap-2 col-6 mx-auto" data-bs-ride="true">
+				  <div class="carousel-indicators">
+				    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+				    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+				  </div>
+				  <div class="carousel-inner">
+				    <div class="carousel-item active">
+				      <img src="${contextPath}/resources/img/product/float_banner01.jpg" class="d-block w-100" alt="...">
+				    </div>
+				    <div class="carousel-item">
+				      <img src="${contextPath}/resources/img/product/float_banner02.jpg" class="d-block w-100" alt="...">
+				    </div>
+				  </div>
+				  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+				    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				    <span class="visually-hidden">Previous</span>
+				  </button>
+				  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+				    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+				    <span class="visually-hidden">Next</span>
+				  </button>
+				</div>
+				
+				<div id="carouselExampleIndicators" class="carousel slide d-grid gap-2 col-6 mx-auto" data-bs-ride="true">
+				  <div class="carousel-indicators">
+				    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+				    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+				  </div>
+				  <div class="carousel-inner">
+				    <div class="carousel-item active">
+				      <img src="${contextPath}/resources/img/product/card_event.jpg" class="d-block w-100" alt="...">
+				    </div>
+				    <div class="carousel-item">
+				      <img src="${contextPath}/resources/img/product/img.jpg" class="d-block w-100" alt="...">
+				    </div>
+				  </div>
+				  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+				    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				    <span class="visually-hidden">Previous</span>
+				  </button>
+				  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+				    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+				    <span class="visually-hidden">Next</span>
+				  </button>
+				</div>
+				
 			</div>
-			
-
-			
+		
 
 			<div class="col-lg-9">
 				<!-- 검색 시작 -->
@@ -156,26 +201,26 @@
 		<c:if test="${totalCnt != null || totalCnt != 0}">
 			<c:if test="${pr.showPrev}">
 				<li class="page-item disabled"><a class="page-link"
-					href="${contextPath}/admin/productList${pr.sc.getQueryString(pr.beginPage-1)}">&laquo;</a></li>
+					href="${contextPath}/post/productList${pr.sc.getQueryString(pr.beginPage-1)}">&laquo;</a></li>
 			</c:if>
 
 			<c:forEach var="i" begin="${pr.beginPage}" end="${pr.endPage}">
 				<c:if test="${pr.sc.page == i }">
 					<c:if test="${pr.sc.page > 0 }">
 						<li class="page-item active"><a class="page-link"
-							href="${contextPath}/admin/productList${pr.sc.getQueryString(i)}">${i}</a></li>
+							href="${contextPath}/post/productList${pr.sc.getQueryString(i)}">${i}</a></li>
 					</c:if>
 				</c:if>
 				<c:if test="${pr.sc.page != i }">
 					<c:if test="${pr.sc.page > 0 }">
 						<li class="page-item"><a class="page-link"
-							href="${contextPath}/admin/productList${pr.sc.getQueryString(i)}">${i}</a></li>
+							href="${contextPath}/post/productList${pr.sc.getQueryString(i)}">${i}</a></li>
 					</c:if>
 				</c:if>
 			</c:forEach>
 			<c:if test="${pr.showNext}">
 				<li class="page-item"><a class="page-link"
-					href="${contextPath}/admin/productList${pr.sc.getQueryString(pr.endPage+1)}">&raquo;</a></li>
+					href="${contextPath}/post/productList${pr.sc.getQueryString(pr.endPage+1)}">&raquo;</a></li>
 			</c:if>
 		</c:if>
 	</ul>
