@@ -6,6 +6,7 @@ import java.util.List;
 import kr.co.lookst.post.domain.PostDto;
 import kr.co.lookst.post.domain.Post_imgDto;
 import kr.co.lookst.post.domain.ProdInfoDto;
+import kr.co.lookst.post.domain.SearchItem_prdtList;
 import kr.co.lookst.post.domain.TpostDto;
 import kr.co.lookst.main.domain.Product;
 import kr.co.lookst.main.domain.SearchItem;
@@ -44,9 +45,16 @@ public interface PostService {
 
 	List<OrderInfoDto> orderInfo(Integer product_no) throws Exception;
 
-	int shopListSearchResultCnt(SearchItem sc) throws Exception;
+//	List<Product> shopListSearchResultPage(SearchItem_prdtList sc) throws Exception;
 
-	List<Product> shopListSearchResultPage(SearchItem sc) throws Exception;
+//	int shopListSearchResultCnt(SearchItem sc) throws Exception;
+
+//	List<Product> shopListSearchResultPage(SearchItem sc) throws Exception;
+
+	/* 상품 리스트 */
+	int shopListCnt(SearchItem_prdtList sc) throws Exception;
+	/* 상품 검색 리스트 */
+	List<Product> shopListPage(SearchItem_prdtList sc) throws Exception;
 
 	
 

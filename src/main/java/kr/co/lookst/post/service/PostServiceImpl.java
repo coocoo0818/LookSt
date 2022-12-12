@@ -11,6 +11,7 @@ import kr.co.lookst.post.dao.PostDao;
 import kr.co.lookst.post.domain.PostDto;
 import kr.co.lookst.post.domain.Post_imgDto;
 import kr.co.lookst.post.domain.ProdInfoDto;
+import kr.co.lookst.post.domain.SearchItem_prdtList;
 import kr.co.lookst.post.domain.TpostDto;
 import kr.co.lookst.post.domain.OrderFormPageDto;
 import kr.co.lookst.post.domain.OrderInfoDto;
@@ -99,16 +100,40 @@ public class PostServiceImpl implements PostService{
 		return postDao.orderInfo(product_no);
 	}
 
-	@Override
+	/* @Override
 	public int shopListSearchResultCnt(SearchItem sc) throws Exception {
 		// TODO Auto-generated method stub
-		return 0;
+		return postDao.shopListSearchResultCnt(sc);
+	} */
+
+	/* public List<Product> shopListSearchResultPage(SearchItem sc) throws Exception {
+		// TODO Auto-generated method stub
+		return postDao.shopListSearchResultPage(sc);
+	} */
+
+
+//	@Override
+//	public List<Product> shopListSearchResultPage(SearchItem_prdtList sc) throws Exception {
+//		// TODO Auto-generated method stub
+//		return postDao.shopListSearchResultPage(sc);
+//	}
+//
+//	@Override
+//	public int shopListSearchResultCnt(SearchItem_prdtList sc) throws Exception {
+//		// TODO Auto-generated method stub
+//		return postDao.shopListSearchResultCnt(sc);
+//	}
+	/* 상품 리스트 출력 */
+	@Override
+	public int shopListCnt(SearchItem_prdtList sc) throws Exception {
+		// TODO Auto-generated method stub
+		return postDao.shopListCnt(sc);
 	}
 
 	@Override
-	public List<Product> shopListSearchResultPage(SearchItem sc) throws Exception {
+	public List<Product> shopListPage(SearchItem_prdtList sc) throws Exception {
 		// TODO Auto-generated method stub
-		return postDao.shopListSearchResultPage(sc);
+		return postDao.shopListPage(sc);
 	}
 
 	/*

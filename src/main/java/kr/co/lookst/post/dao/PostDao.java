@@ -8,6 +8,7 @@ import kr.co.lookst.post.domain.OrderInfoDto;
 import kr.co.lookst.post.domain.PostDto;
 import kr.co.lookst.post.domain.Post_imgDto;
 import kr.co.lookst.post.domain.ProdInfoDto;
+import kr.co.lookst.post.domain.SearchItem_prdtList;
 import kr.co.lookst.post.domain.TpostDto;
 /*import kr.co.lookst.post.domain.OrderPagePrdtDto;*/
 import kr.co.lookst.post.domain.post_com_tagDto;
@@ -17,6 +18,8 @@ import kr.co.lookst.post.domain.sns_com_tagDto;
 import kr.co.lookst.post.domain.snslist_infoDto;
 
 public interface PostDao {
+
+	/* int shopListSearchResultCnt(SearchItem sc) throws Exception; */
 
 	List<Post_imgDto> post_listimg() throws Exception;
 
@@ -42,7 +45,15 @@ public interface PostDao {
 
 	List<OrderInfoDto> orderInfo(Integer product_no) throws Exception;
 
-	List<Product> shopListSearchResultPage(SearchItem sc) throws Exception;
+	/* List<Product> shopListSearchResultPage(SearchItem sc) throws Exception; */
+
+	/* int shopListSearchResultCnt(SearchItem_prdtList sc)throws Exception; */
+
+	/* List<Product> shopListSearchResultPage(SearchItem_prdtList sc)throws Exception; */
+
+	int shopListCnt(SearchItem_prdtList sc) throws Exception;
+
+	List<Product> shopListPage(SearchItem_prdtList sc) throws Exception;
 
 	
 
