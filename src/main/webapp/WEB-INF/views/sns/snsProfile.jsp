@@ -48,87 +48,84 @@
 }
 </style>
 <script type="text/javascript">
-	$(document).ready(function() {
-		// 팔로잉 프로필화면 이동
-		$('.followingIDbox').on('click', function() {
-			let member_id = $(this).children().attr("data-member_id")
-			location.href = '${contextPath}/sns/snsProfile/?member_id='+member_id;
-		});
-		
-		// 팔로워 프로필화면 이동
-		$('.followerIDbox').on('click', function() {
-			let member_id = $(this).children().attr("data-member_id")
-			location.href = '${contextPath}/sns/snsProfile/?member_id='+member_id;
-		});
-		
-		// 개인 피드 리스트 이동
-		$('.Personal_post').on('click', function() {
-			let member_id = $(this).children().attr("data-member_id")
-			location.href = '${contextPath}/sns/personalPost/?member_id='+member_id;
-		});
-		
-		// 팔로우
-		$('#follow-unfollow-btn').on('click', function() {
-			let member_id = $(this).attr("data-member_id")
-			let following_id = $(this).attr("data-following_id")
-			let checkfollow = $(this).attr("data-checkfollow")
-			if(checkfollow == 0){
-				$.ajax({
-					type : 'post',
-					url : '${contextPath}/sns/follow',
-					data : {
-						login_id : member_id,
-						member_id : following_id
-					},
-					success : function() {
-						location.reload()
-					},
-					error : function() {alert("팔로우 실패!!")}
-				})
-			} 
-			else if(checkfollow == 1){
-				$.ajax({
-					type : 'post',
-					url : '${contextPath}/sns/unfollow',
-					data : {
-						login_id : member_id,
-						member_id : following_id
-					},
-					success : function() {
-						location.reload()
-					},
-					error : function() {alert("언팔로우 실패!!")}
-				})
-			}
-		})
-		
-		// 프로필정보 수정
-		$("#modifyBtn").on("click", function() {
-				let form = $("#nickname_intro")
-				let isReadonly = $("input[name=nick]").attr('readonly')
-				
-				//1. 읽기 상태이면 수정상태로 변경
-				if(isReadonly=='readonly') {
-					$("input[name=nick]").attr('readonly', false)
-					$("textarea").attr('readonly', false)
-					$("#modifyBtn").html("저장")
-					return;
-				}
-				//2. 수정상태이면 수정된 내용을 서버로 전송
-				form.attr("action", "<c:url value='${contextPath}/sns/modify' />")
-				form.attr("method", "post") 
-				
-				if(formCheck())
-					form.submit();
-				
-		})
+$(document).ready(function() {
+	// 팔로잉 프로필화면 이동
+	$('.followingIDbox').on('click', function() {
+		let member_id = $(this).children().attr("data-member_id")
+		location.href = '${contextPath}/sns/snsProfile/?member_id='+member_id;
+	});
 	
-			
+	// 팔로워 프로필화면 이동
+	$('.followerIDbox').on('click', function() {
+		let member_id = $(this).children().attr("data-member_id")
+		location.href = '${contextPath}/sns/snsProfile/?member_id='+member_id;
+	});
+	
+	// 개인 피드 리스트 이동
+	$('.Personal_post').on('click', function() {
+		let member_id = $(this).children().attr("data-member_id")
+		location.href = '${contextPath}/sns/personalPost/?member_id='+member_id;
+	});
+	
+	// 팔로우
+	$('#follow-unfollow-btn').on('click', function() {
+		let member_id = $(this).attr("data-member_id")
+		let following_id = $(this).attr("data-following_id")
+		let checkfollow = $(this).attr("data-checkfollow")
+		if(checkfollow == 0){
+			$.ajax({
+				type : 'post',
+				url : '${contextPath}/sns/follow',
+				data : {
+					login_id : member_id,
+					member_id : following_id
+				},
+				success : function() {
+					location.reload()
+				},
+				error : function() {alert("팔로우 실패!!")}
+			})
+		} 
+		else if(checkfollow == 1){
+			$.ajax({
+				type : 'post',
+				url : '${contextPath}/sns/unfollow',
+				data : {
+					login_id : member_id,
+					member_id : following_id
+				},
+				success : function() {
+					location.reload()
+				},
+				error : function() {alert("언팔로우 실패!!")}
+			})
+		}
 	})
 	
-	let msg = "${msg}"
-	if(msg == "MOD_ERR") alert("프로필 수정에 실패하였습니다. 다시 시도해 주세요.")
-			
+	/* 닉네임 수정 */
+	$('.nickmod').click(function() {
+		let member_nick = $('input[name=nick]').val();
+		let member_id = $(this).parent().attr("data-member_id")
+		console.log(member_nick ,member_id)
+		
+		$.ajax({
+			type : 'post',
+			url : '${contextPath}/sns/nickmodify',
+			data : {
+					member_id : member_id, 
+					member_nick : member_nick
+					},
+			success : function(result) {
+				alert("닉네임 변경되었습니다.")
+				location.reload()
+			},
+			error : function() {alert("에러")}		
+		})
+	})	
+	
+		
+})
+
 </script>
 <title>snsProfile</title>
 </head>
@@ -258,31 +255,33 @@
 						<label for="formFile" class="form-label">프로필 이미지 선택</label> <input
 							class="form-control" type="file" id="formFile">
 					</div>
-					<form id="nickname_intro" class="nickname_intro" action="" method="post">
-
-						<div class="input-group mb-3">
-							<span class="input-group-text" id="basic-addon1">닉네임</span> <input
-								type="text" name="nick" class="form-control"
-								value="${pro_info.member_nick }"
-								placeholder="${pro_info.member_nick }" aria-label="Username"
-								aria-describedby="basic-addon1"
-								${mode=="new" ? "" : "readonly='readonly'" }>
-						</div>
 
 
-						<div class="input-group">
-							<span class="input-group-text">자기소개 글</span>
-							<textarea class="form-control"
-								placeholder="${pro_info.profile_intro }"
-								aria-label="With textarea" name="content"
-								${mode=="new" ? "" : "readonly='readonly'" }>${pro_info.profile_intro }</textarea>
-						</div>
-						<button type="button" id="modifyBtn" class="btn btn-primary">수정</button>
+					<div class="input-group mb-3">
+						<span class="input-group-text" id="basic-addon1">닉네임</span> <input
+							type="text" name="nick" class="form-control"
+							value="${pro_info.member_nick }"
+							placeholder="${pro_info.member_nick }" aria-label="Username"
+							aria-describedby="basic-addon1">
+					</div>
 
-					</form>
+
+
+					<div class="input-group">
+						<span class="input-group-text">자기소개 글</span>
+						<textarea class="form-control"
+							placeholder="${pro_info.profile_intro }"
+							aria-label="With textarea" name="content"
+							>${pro_info.profile_intro }</textarea>
+					</div>
+
 
 				</div>
-				<div class="modal-footer"></div>
+				<div class="modal-footer" data-member_id="${pro_info.member_id}">
+					<input
+							tabindex="-1" role="button" type="button" value="저장"
+							class="btn btn-dark btn-sm save" id="nickmod" /> 
+				</div>
 			</div>
 		</div>
 	</div>

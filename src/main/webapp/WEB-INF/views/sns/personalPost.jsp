@@ -52,13 +52,33 @@ input {
 }
 </style>
 
+<script type="text/javascript">
+	$(document).ready(function() {
+		
+		$('.deleteP').click(function() {
+			let post_no = $(this).attr("data-post_no")
+			alert(post_no)
+			$.ajax({
+				type : 'post',
+				url : '${contextPath}/sns/postDelete',
+				data : {
+					post_no : post_no
+				},
+				success : function(data) {
+					alert("게시물이 삭제되었습니다.")
+					location.reload()
+				},
+				error : function() {alert("error")}
+			})
+		})	
+	})
+</script>
+
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/fix/header.jsp"%>
 
-	<script type="text/javascript">
-				
-	</script>
+
 	<!-- Feed -->
 	<div class="container">
 		<div class="row justify-content-md-center">
@@ -72,19 +92,29 @@ input {
 			<div class="row g-4 my-2">
 				<div class="col-md-6 offset-md-3">
 					<div class="card border-0">
+
 						<%-- ${fn:contains(snsTopList.NPostDto.post_no, 10)? 'functionName':'no'} --%>
 						<img
 							src="${contextPath}/resources/img/post/${pro_feed.post_img_img}"
 							class="card-img-top rounded position-relative"> <span
 							class="position-absolute badge rounded-pill bg-light m-1 postNo"
 							id="postNo" data-postNo="${pro_feed.post_no}">No.${pro_feed.post_no}</span>
+
 						<div class="row justify-content-start d-flex m-2">
 							<div class="col-3">
 								<img
 									src="${contextPath}/resources/img/profile/${pro_info.profile_img}"
-									 onclick="location.href='${contextPath}/sns/snsProfile/?member_id=${pro_info.member_id}'" id="profile_img">
+									onclick="location.href='${contextPath}/sns/snsProfile/?member_id=${pro_info.member_id}'"
+									id="profile_img">
 							</div>
-							<div class="col-9 my-auto" onclick="location.href='${contextPath}/sns/snsProfile/?member_id=${pro_info.member_id}'">${pro_info.member_nick}</div>
+							<div class="col-6 my-auto"
+								onclick="location.href='${contextPath}/sns/snsProfile/?member_id=${pro_info.member_id}'">${pro_info.member_nick}</div>
+							<div class="col-3" >
+								<c:if test="${login_Id == pro_info.member_id }">
+									<input tabindex="-1" role="button" type="button" value="삭제"
+										class="deleteP btn btn-dark btn-sm" id="delPost" data-post_no="${pro_feed.post_no}"/>
+								</c:if>
+							</div>
 						</div>
 						<p class="card-text m-2" style="margin-top: 20px;">${pro_feed.post_content}</p>
 						<div class="tag_link" style="margin-top: 1%; margin-bottom: 1%;">

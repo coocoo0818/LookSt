@@ -53,8 +53,8 @@ public class SnsServiceImpl implements SnsService{
 	}
 	// 닉네임 수정
 	@Override
-	public int nickNameMod(SnsProfileDto spd) throws Exception {
-		return snsProfileDao.update(spd);
+	public int nickNameMod(String member_id, String member_nick) throws Exception {
+		return snsProfileDao.update(member_id, member_nick);
 	}
 	// 프로필 사진 변경
 	@Override
@@ -71,6 +71,11 @@ public class SnsServiceImpl implements SnsService{
 		return snsProfileDao.postImg_up(post_img_img, post_img_seq, post_img_uuid);
 	}
 */
+	// 게시물 삭제
+	@Override
+	public int deletePost(Integer post_no) throws Exception {
+		return snsProfileDao.deletePost(post_no);
+	}
 	
 
 

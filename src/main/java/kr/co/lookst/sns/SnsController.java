@@ -148,7 +148,6 @@ public class SnsController {
 	 * return "redirect:/"; }
 	 */
 
-	
 	/* 포스트 이미지 업로드 */
 	@RequestMapping(value = "postUpload", method = { RequestMethod.POST })
 	public String postUpload(String member_id, Model m, MultipartHttpServletRequest mtfRequest,
@@ -226,25 +225,32 @@ public class SnsController {
 		return "sns/personalPost";
 	}
 
-	@PostMapping("/modify")
-	public String modify(SnsProfileDto spd, RedirectAttributes rattr, Model m, HttpSession session) {
-		String member_id = (String) session.getAttribute("res");
-		spd.setMember_id(member_id);
+	// 닉네임 수정
+	@RequestMapping(value = "/nickmodify", method = { RequestMethod.POST })
+	public String nickmodify(Model model, @RequestParam(value = "member_id") String member_id,
+			@RequestParam(value = "member_nick") String member_nick) {
+		System.out.println(member_id);
+		System.out.println(member_nick);
 
 		try {
-			if (snsService.nickNameMod(spd) != 1) {
-				throw new Exception("Modify failed");
-			}
-			m.addAttribute(spd);
-			System.out.println(m);
-			rattr.addFlashAttribute("msg", "MOD_OK");
-			return "redirect:/sns/snsProfile";
+			snsService.nickNameMod(member_id, member_nick);
 		} catch (Exception e) {
 			e.printStackTrace();
-			m.addAttribute(spd);
-			m.addAttribute("msg", "MOD_ERR");
-			return "sns/snsProfile";
 		}
+		return "redirect:/sns/snsProfile";
+	}
+
+	// 게시물 삭제
+	@RequestMapping(value = "/postDelete", method = { RequestMethod.POST })
+	public String postDelete(Model m, Integer post_no) {
+		System.out.println("삭제된 게시물 : " + post_no);
+
+		try {
+			snsService.deletePost(post_no);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "sns/personalPost";
 	}
 
 	@GetMapping("/postUpload")
