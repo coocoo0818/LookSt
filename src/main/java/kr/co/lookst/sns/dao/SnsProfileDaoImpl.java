@@ -72,8 +72,11 @@ public class SnsProfileDaoImpl implements SnsProfileDao {
 	}
 	// 닉네임 수정
 	@Override
-	public int update(SnsProfileDto spd) throws Exception {
-		return session.update(namespace + "update", spd);
+	public int update(String member_id, String member_nick) throws Exception {
+		Map map = new HashMap();
+		map.put("member_nick", member_nick);
+		map.put("member_id", member_id);
+		return session.update(namespace + "nickmodify", map);
 	}
 	// 프로필 사진 변경
 	@Override
@@ -103,6 +106,11 @@ public class SnsProfileDaoImpl implements SnsProfileDao {
 		return session.insert(namespace + "postImg_up", map);
 	}
 	*/
+	// 게시물 삭제
+	@Override
+	public int deletePost(Integer post_no) throws Exception {
+		return session.update(namespace+"postDelete", post_no);
+	}
 	
 
 
