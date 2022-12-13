@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.co.lookst.admin.domain.MemMGMDto;
+import kr.co.lookst.main.domain.PrdtOrderDto;
 import kr.co.lookst.main.domain.Prdt_Img;
 import kr.co.lookst.main.domain.Prdt_Option;
 import kr.co.lookst.main.domain.Product;
@@ -167,6 +168,12 @@ public class AdminDaoImpl implements AdminDao{
 	@Override
 	public List<OrderInfoDto> orderInfo(Integer product_no) throws Exception {
 		 return session.selectList(namespace + "orderInfo", product_no);
+	}
+	/* 주문 내용 삽입 */
+	@Override
+	public int orderInsert(PrdtOrderDto prdt_order) throws Exception {
+		System.out.println(prdt_order);
+		return session.insert(namespace + "orderInsert", prdt_order);
 	}
 	
 	/* sns total list */

@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,9 +19,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import kr.co.lookst.admin.domain.MemMGMDto;
 import kr.co.lookst.admin.service.AdminService;
 import kr.co.lookst.main.domain.PageResolver;
+import kr.co.lookst.main.domain.PrdtOrderDto;
 import kr.co.lookst.main.domain.Prdt_Img;
 import kr.co.lookst.main.domain.Prdt_Option;
-import kr.co.lookst.main.domain.PrdtOrderDto;
 import kr.co.lookst.main.domain.Product;
 import kr.co.lookst.main.domain.SearchItem;
 import kr.co.lookst.member.domain.MemberDto;
@@ -326,15 +325,49 @@ public class AdminController {
     
 	/* 주문 인설트 */
 	@RequestMapping(value = "/orderInsert", method = { RequestMethod.POST })
-	@ResponseBody
-	public String orderInsert(Model model, @RequestBody PrdtOrderDto prdtOrderDto) {
-
+	/* @ResponseBody */
+	public String orderInsert(Model model, @RequestParam(value="prdt_order_no", required=false) Integer prdt_order_no, @RequestParam(value="product_no", required=false) Integer product_no, String member_id, 
+			 String prdt_order_way, String prdt_order_phone, 
+			String prdt_order_addr, String prdt_order_addr2, String prdt_order_person, 
+			String prdt_option_size, String prdt_option_color, Integer prdt_order_price, Integer prdt_order_quan) {
+		System.out.println("진입");
+		PrdtOrderDto prdt_order = new PrdtOrderDto();
+		
+		System.out.println(prdt_order_no);
+		prdt_order.setPrdt_order_no(prdt_order_no);		
+		System.out.println(prdt_order.getPrdt_order_no());
+		
+		System.out.println(product_no);
+		prdt_order.setProduct_no(product_no);
+		System.out.println(prdt_order.getProduct_no());
+		
+		prdt_order.setMember_id(member_id);
+		System.out.println(prdt_order.getMember_id());
+		prdt_order.setPrdt_order_quan(prdt_order_quan);
+		System.out.println(prdt_order.getPrdt_order_quan());
+		prdt_order.setPrdt_order_way(prdt_order_way);
+		System.out.println(prdt_order.getPrdt_order_way());
+		prdt_order.setPrdt_order_phone(prdt_order_phone);
+		System.out.println(prdt_order.getPrdt_order_phone());
+		prdt_order.setPrdt_order_addr(prdt_order_addr);
+		System.out.println(prdt_order.getPrdt_order_addr());
+		prdt_order.setPrdt_order_addr2(prdt_order_addr2);
+		System.out.println(prdt_order.getPrdt_order_addr2());
+		prdt_order.setPrdt_order_person(prdt_order_person);
+		System.out.println(prdt_order.getPrdt_order_person());
+		prdt_order.setPrdt_order_size(prdt_option_size);
+		System.out.println(prdt_order.getPrdt_order_size());
+		prdt_order.setPrdt_order_color(prdt_option_color);
+		System.out.println(prdt_order.getPrdt_order_color());
+		prdt_order.setPrdt_order_price(prdt_order_price);
+		System.out.println(prdt_order.getPrdt_order_price());
+		System.out.println(prdt_order);
 		try {
-			
+			adminService.orderInsert(prdt_order);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "redirect:/admin/orderFormpage";
+		return "/";
 	}
 
 	/* 상품 컬러 출력 */
