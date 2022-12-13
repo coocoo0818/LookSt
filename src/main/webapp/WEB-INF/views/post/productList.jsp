@@ -124,7 +124,6 @@
 				    <span class="visually-hidden">Next</span>
 				  </button>
 				</div>
-				
 			</div>
 		
 
@@ -132,12 +131,13 @@
 				<!-- 검색 시작 -->
 				<div>
 					<form class="d-flex row py-3"
-						action="${contextPath}/admin/seller_request/" method="get">
+						action="${contextPath}/post/productList" method="get">
 						<div class="col mt-1">
 							<select id="inputState" class="form-select form-select-md"
 								name="option">
 								<option selected>전체</option>
 								<!--<option value="B" ${pr.sc.option=='I' || pr.sc.option=='' ? "selected" : ""}>판매자명</option>-->
+								<option value="T" ${pr.sc.option=='T'? "selected" : ""}>전체</option>
 								<option value="N" ${pr.sc.option=='N'? "selected" : ""}>상품명</option>
 								<option value="A" ${pr.sc.option=='A'? "selected" : ""}>상품종류</option>
 							</select>
