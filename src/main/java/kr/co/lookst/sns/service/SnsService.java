@@ -30,7 +30,7 @@ public interface SnsService {
 	int followCheck(String member_id, String following) throws Exception;
 	
 	// 닉네임 수정
-	int nickNameMod(SnsProfileDto spd) throws Exception;
+	int nickNameMod(String member_id, String member_nick) throws Exception;
 	
 	// 프로필 이미지 변경
 	int profileImgModify(String member_id, String profile_img,String profile_uuid) throws Exception;
@@ -41,4 +41,6 @@ public interface SnsService {
 	// 포스트 이미지 업로드
 	int imgUp(String post_img_img, Integer post_img_seq, String post_img_uuid) throws Exception;
 	*/
+	// 게시물 삭제
+	int deletePost(Integer post_no) throws Exception;
 }

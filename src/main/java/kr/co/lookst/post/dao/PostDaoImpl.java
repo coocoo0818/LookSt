@@ -12,6 +12,7 @@ import kr.co.lookst.post.domain.OrderInfoDto;
 import kr.co.lookst.post.domain.PostDto;
 import kr.co.lookst.post.domain.Post_imgDto;
 import kr.co.lookst.post.domain.ProdInfoDto;
+import kr.co.lookst.post.domain.SearchItem_prdtList;
 import kr.co.lookst.post.domain.TpostDto;
 /*import kr.co.lookst.post.domain.OrderPagePrdtDto;*/
 import kr.co.lookst.post.domain.post_com_tagDto;
@@ -111,11 +112,45 @@ public class PostDaoImpl implements PostDao{
 	 }
 
 
-	@Override
+/*	@Override
 	public List<Product> shopListSearchResultPage(SearchItem sc) throws Exception {
 		// TODO Auto-generated method stub
 		return session.selectList(namespace + " shopListSearchResultPage", sc);
+	} */
+
+
+/*	@Override
+	public int shopListSearchResultCnt(SearchItem_prdtList sc) throws Exception {
+		return session.selectOne(namespace + "shopListSearchResultCnt", sc);
+	} */
+
+/*	@Override
+	public List<Product> shopListSearchResultPage(SearchItem_prdtList sc) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	} */
+
+
+/*	@Override
+	public int shopListSearchResultCnt(SearchItem sc) throws Exception {
+		// TODO Auto-generated method stub
+		return 0;
+	} */
+
+
+	@Override
+	public int shopListCnt(SearchItem_prdtList sc) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectOne(namespace + "shopListCnt", sc);
 	}
+
+
+	@Override
+	public List<Product> shopListPage(SearchItem_prdtList sc) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectList(namespace + "shopListPage", sc);
+	}
+
 
 
 	/*
