@@ -126,24 +126,6 @@ public class SnsController {
 		return "sns/snsProfile";
 	}
 
-//	/* 닉네임 수정 */
-//	@RequestMapping(value = "/nickModify", method = { RequestMethod.POST })
-//	public String nickModify(String member_id, String member_nickname, Model m, HttpServletRequest request) {
-//
-//		HttpSession session = request.getSession();
-//
-//		try {
-//			int nickModify = snsService.nickNameMod(member_id, member_nickname);
-//			m.addAttribute("nickModify", nickModify);
-//
-//			System.out.println(m);
-//			System.out.println("닉네임변경 성공(컨트롤러)");
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//
-//		return "sns/snsProfile";
-//	}
 	/*
 	 * @RequestMapping(value = "requestupload1") public String
 	 * requestupload1(MultipartHttpServletRequest mtfRequest) { String src =
@@ -166,8 +148,8 @@ public class SnsController {
 	 * return "redirect:/"; }
 	 */
 
+	
 	/* 포스트 이미지 업로드 */
-
 	@RequestMapping(value = "postUpload", method = { RequestMethod.POST })
 	public String postUpload(String member_id, Model m, MultipartHttpServletRequest mtfRequest,
 			HttpServletRequest request) {
@@ -242,6 +224,27 @@ public class SnsController {
 			e.printStackTrace();
 		}
 		return "sns/personalPost";
+	}
+
+	@PostMapping("/modify")
+	public String modify(SnsProfileDto spd, RedirectAttributes rattr, Model m, HttpSession session) {
+		String member_id = (String) session.getAttribute("res");
+		spd.setMember_id(member_id);
+
+		try {
+			if (snsService.nickNameMod(spd) != 1) {
+				throw new Exception("Modify failed");
+			}
+			m.addAttribute(spd);
+			System.out.println(m);
+			rattr.addFlashAttribute("msg", "MOD_OK");
+			return "redirect:/sns/snsProfile";
+		} catch (Exception e) {
+			e.printStackTrace();
+			m.addAttribute(spd);
+			m.addAttribute("msg", "MOD_ERR");
+			return "sns/snsProfile";
+		}
 	}
 
 	@GetMapping("/postUpload")
