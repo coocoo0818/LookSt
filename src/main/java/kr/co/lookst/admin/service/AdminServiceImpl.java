@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import kr.co.lookst.admin.dao.AdminDao;
 import kr.co.lookst.admin.domain.MemMGMDto;
+import kr.co.lookst.main.domain.PrdtOrderDto;
 import kr.co.lookst.main.domain.Prdt_Img;
 import kr.co.lookst.main.domain.Prdt_Option;
 import kr.co.lookst.main.domain.Product;
@@ -157,12 +158,16 @@ public class AdminServiceImpl implements AdminService{
 	public List<Prdt_Option> productColor(Integer product_no, String prdt_option_size) throws Exception {
 		return adminDao.productColor(product_no, prdt_option_size);
 	}
-
 	/* 오더 페이지 이동 */
 	@Override
 	public List<OrderInfoDto> orderInfo(Integer product_no) throws Exception {
 		// TODO Auto-generated method stub
 		return adminDao.orderInfo(product_no);
+	}
+	/* 주문 내용 삽입 */
+	@Override
+	public int orderInsert(PrdtOrderDto prdt_order) throws Exception {
+		return adminDao.orderInsert(prdt_order);
 	}
 	
 	/* sns total list */

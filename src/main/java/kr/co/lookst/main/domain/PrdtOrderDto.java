@@ -19,7 +19,7 @@ public class PrdtOrderDto {
 	private int prdt_order_quan;
 	private Date prdt_order_date;
 	private String prdt_order_way;
-	private String member_phon;
+	private String prdt_order_phone;
 	private String prdt_order_addr;
 	private String prdt_order_addr2;
 	private String prdt_order_person;

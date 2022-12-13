@@ -3,6 +3,7 @@ package kr.co.lookst.admin.service;
 import java.util.List;
 
 import kr.co.lookst.admin.domain.MemMGMDto;
+import kr.co.lookst.main.domain.PrdtOrderDto;
 import kr.co.lookst.main.domain.Prdt_Img;
 import kr.co.lookst.main.domain.Prdt_Option;
 import kr.co.lookst.main.domain.Product;
@@ -71,6 +72,8 @@ public interface AdminService {
 	List<Prdt_Option> productColor(Integer product_no, String prdt_option_size) throws Exception;
 	/* 오더 페이지 이동 */
 	List<OrderInfoDto> orderInfo(Integer product_no) throws Exception;
+	/* 주문 내용 삽입 */
+	int orderInsert(PrdtOrderDto prdt_order) throws Exception;
 	
 	/* sns total list */
 	List<Integer> snsTotalList() throws Exception;
@@ -82,6 +85,5 @@ public interface AdminService {
 	List<MemMGMDto> snsTopList() throws Exception;
 	/* sns 태그정보 출력 */
 	List<post_com_tagDto> tagInfoList(Integer post_no) throws Exception;
-
 
 }

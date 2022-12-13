@@ -8,15 +8,20 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- jQuery -->
-<script type="text/javascript" src="http://code.jquery.com/jquery-3.4.1.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript"
+	src="http://code.jquery.com/jquery-3.4.1.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <!-- <script src="http://code.jquery.com/jquery-3.4.1.js"></script> -->
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script
+	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <!-- iamport.payment.js -->
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
+<script type="text/javascript"
+	src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
 
 <title>LOOKST</title>
-<link rel="stylesheet" href="${contextPath}/resources/admin/css/orderFormpage.css">
+<link rel="stylesheet"
+	href="${contextPath}/resources/admin/css/orderFormpage.css">
 <script type="text/javascript">
 	function sample6_execDaumPostcode() {
 		new daum.Postcode(
@@ -73,96 +78,145 @@
 </script>
 
 <script type="text/javascript">
-	var IMP = window.IMP; // 생략 가능
-	IMP.init("imp42155271"); // 예: imp00000000
-	
-	// 주문번호 만들기
-	function createOrderNum(){
-		const date = new Date();
-		const year = date.getFullYear();
-		const month = String(date.getMonth() + 1).padStart(2, "0");
-		const day = String(date.getDate()).padStart(2, "0");
-		
-		let orderNum = year + month + day;
-		for(let i=0;i<2;i++) {
-			orderNum += Math.floor(Math.random() * 8);	
-		}
-		return orderNum;
-	}
-	
-	function payment() {
-		const data = {
-			payMethod : $('input[name="paymentMethod"]:checked').val(),
-			prdt_option_size : $('#prdt_option_size').attr('value'),
-			product_name : $('#product_name').attr('value'),
-			prdt_option_color : $('#prdt_option_color').attr('value'),
-			prdt_order_quan : $('#prdt_order_quan').attr('value'),
-			product_no : $("input[name='product_no']").val(),
-			prdt_order_person : $("input[name='prdt_order_person']").val(),
-			prdt_order_phone : $("input[name='prdt_order_phone']").val(),
-			prdt_order_addr : $("input[name='prdt_order_addr']").val(),
-			prdt_order_addr2 : $("input[name='prdt_order_addr2']").val(),
-			member_id : $("input[name='member_id']").val(),
-			prdt_order_price : $("input[name='prdt_order_price']").val(),
-			prdt_order_postcode : $("input[name='prdt_order_postcode']").val(),
-			orderNum : createOrderNum()
-		}
-		
-		if(data.prdt_order_person == "undefined" || data.prdt_order_person == null || data.prdt_order_person == ""){
-			alert("배송지 이름을 입력해주세요.")
-			return false;
-		} else if (data.prdt_order_phone == "undefined" || data.prdt_order_phone == null || data.prdt_order_phone == "") {
-			alert("배송지 전화번호를 입력해주세요.")
-			return false;
-		} else if (data.prdt_order_addr == "undefined" || data.prdt_order_addr == null || data.prdt_order_addr == "") {
-			alert("주소를 입력해주세요.")
-			return false;
-		}  else if (data.prdt_order_addr2 == "undefined" || data.prdt_order_addr2 == null || data.prdt_order_addr2 == "") {
-			alert("상세주소를 입력해주세요.")
-			return false;
-		} 
-		
-		if(data.payMethod == "online") {
-			paymentCash(data)
-		} else if(data.payMethod == "payment"){
-			paymentCard(data)
-		}
-	}
-	function paymentCard(data) {
-		// IMP.request_pay(param, callback) 결제창 호출
-		IMP.request_pay({ // param
-			pg : "html5_inicis",
-			pay_method : data.payMethod,
-			merchant_uid : data.orderNum,
-			name : data.product_name,
-			amount : data.prdt_order_price,
-			buyer_email : data.product_no,
-			buyer_name : data.prdt_order_person,
-			buyer_tel : data.prdt_order_phone,
-			buyer_addr : data.prdt_order_addr + " " + data.prdt_order_addr2,
-			buyer_postcode : data.prdt_order_postcode
-		}, function(rsp) { // callback
-			if (rsp.success) {
-				alert("성공")
-				// 결제 성공 시 로직,
-			} else {
-				alert("실패")
-				alert(data.product_no)
-				// 결제 실패 시 로직,
-			}
-		});
-	}
-	$(document).ready(function() {
+	/* $(document).ready(function() { */
+		var IMP = window.IMP; // 생략 가능
+		IMP.init("imp42155271"); // 예: imp00000000
 
-	});
+		// 주문번호 만들기
+		function createOrderNum() {
+			const date = new Date();
+			const year = date.getFullYear();
+			const month = String(date.getMonth() + 1).padStart(
+					2, "0");
+			const day = String(date.getDate()).padStart(2, "0");
+
+			let orderNum = year + month + day;
+			for (let i = 0; i < 2; i++) {
+				orderNum += Math.floor(Math.random() * 8);
+			}
+			return orderNum;
+		}
+
+		function payment() {
+			const data = {
+				payMethod : $(
+						'input[name="paymentMethod"]:checked')
+						.val(),
+				prdt_option_size : $('#prdt_option_size').attr(
+						'value'),
+				product_name : $('#product_name').attr('value'),
+				prdt_option_color : $('#prdt_option_color')
+						.attr('value'),
+				prdt_order_quan : $('#prdt_order_quan').attr(
+						'value'),
+				product_no : $("input[name='product_no']")
+						.val(),
+				prdt_order_person : $(
+						"input[name='prdt_order_person']")
+						.val(),
+				prdt_order_phone : $(
+						"input[name='prdt_order_phone']").val(),
+				prdt_order_addr : $(
+						"input[name='prdt_order_addr']").val(),
+				prdt_order_addr2 : $(
+						"input[name='prdt_order_addr2']").val(),
+				member_id : $("input[name='member_id']").val(),
+				prdt_order_price : $(
+						"input[name='prdt_order_price']").val(),
+				prdt_order_postcode : $(
+						"input[name='prdt_order_postcode']")
+						.val(),
+				orderNum : createOrderNum()
+			}
+
+			if (data.prdt_order_person == "undefined"
+					|| data.prdt_order_person == null
+					|| data.prdt_order_person == "") {
+				alert("배송지 이름을 입력해주세요.")
+				return false;
+			} else if (data.prdt_order_phone == "undefined"
+					|| data.prdt_order_phone == null
+					|| data.prdt_order_phone == "") {
+				alert("배송지 전화번호를 입력해주세요.")
+				return false;
+			} else if (data.prdt_order_addr == "undefined"
+					|| data.prdt_order_addr == null
+					|| data.prdt_order_addr == "") {
+				alert("주소를 입력해주세요.")
+				return false;
+			} else if (data.prdt_order_addr2 == "undefined"
+					|| data.prdt_order_addr2 == null
+					|| data.prdt_order_addr2 == "") {
+				alert("상세주소를 입력해주세요.")
+				return false;
+			}
+			alert(data.payMethod)
+			if (data.payMethod == "o_payment") {
+				paymentCard(data)
+			} else if (data.payMethod == "payment") {
+				paymentCash(data)
+			}
+		}
+
+		function paymentCard(data) {
+			// IMP.request_pay(param, callback) 결제창 호출
+			IMP.request_pay(
+			{ // param
+				pg : "html5_inicis.INIpayTest",
+				pay_method : data.payMethod,
+				merchant_uid : data.orderNum,
+				name : data.product_name,
+				amount : data.prdt_order_price,
+				buyer_email : data.member_id,
+				buyer_name : data.prdt_order_person,
+				buyer_tel : data.prdt_order_phone,
+				buyer_addr : data.prdt_order_addr
+						+ " "
+						+ data.prdt_order_addr2,
+				buyer_postcode : data.prdt_order_postcode
+			},
+			function(rsp) { // callback
+				if (rsp.success) {
+					/* alert("성공") */
+					// jQuery로 HTTP 요청
+					$.ajax({
+						url : '${contextPath}/admin/orderInsert', // 예: https://www.myservice.com/payments/complete
+						method : "POST",
+						data : {
+							prdt_order_no : data.orderNum,
+							product_no : data.product_no,
+							member_id : data.member_id,
+							prdt_order_quan : data.prdt_order_quan,
+							prdt_order_way : data.payMethod,
+							prdt_order_phone : data.prdt_order_phone,
+							prdt_order_addr : data.prdt_order_addr,
+							prdt_order_addr2 : data.prdt_order_addr2,
+							prdt_order_person : data.prdt_order_person,
+							prdt_option_size : data.prdt_option_size,
+							prdt_option_color : data.prdt_option_color,
+							prdt_order_price : data.prdt_order_price,
+							imp_uid : rsp.imp_uid,
+							merchant_uid : rsp.merchant_uid
+						}
+					}).done(function(data) {
+						// 가맹점 서버 결제 API 성공시 로직
+						/* alert(data) */
+					})
+				} else {
+					alert("결제에 실패했습니다. 에러 내용 : "+ rsp.error_msg)
+					// 결제 실패 시 로직,
+				}
+			})
+		}
+	/* }) */
 </script>
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/fix/header.jsp"%>
 
 	<div class="container">
-	<h1>Order List</h1>
-		<form action="" method="post">
+		<h1>Order List</h1>
+		<form action="${contextPath}/admin/orderInsert" method="post">
 			<div id="app">
 				<!-- Product List -->
 				<section class="container">
@@ -189,22 +243,31 @@
 							<caption>표 내용 부분</caption>
 							<tbody>
 								<c:forEach var="orderInfo" items="${orderInfo}">
-								<input hidden="hidden" name="member_id" id="member_id" value="${member_id}"/>
-								<input hidden="hidden" name="product_no" id="product_no" value="${orderInfo.product_no}"/>
-								<input hidden="hidden" name="prdt_order_price" id="prdt_order_price" value="${orderInfo.product_price * prdt_order_quan}"/>
+									<input hidden="hidden" name="member_id" id="member_id"
+										value="${member_id}" />
+									<input hidden="hidden" name="product_no" id="product_no"
+										value="${orderInfo.product_no}" />
+									<input hidden="hidden" name="prdt_order_quan"
+										id="prdt_order_quan"
+										value="${prdt_order_quan}" />
+									<input hidden="hidden" name="prdt_order_price"
+										id="prdt_order_price"
+										value="${orderInfo.product_price * prdt_order_quan}" />
 									<tr>
 										<td class="td_width_2"><img
 											src="${contextPath}/resources/img/product/${orderInfo.prdt_img_name}"
 											style="height: 150px; weight: 150px;"></td>
 										<td class="td_width_3">
 											<div id="product_name" value="${orderInfo.product_name}">${orderInfo.product_name}</div>
-											<span id="prdt_option_size" value="${prdt_option_size}">사이즈 : ${prdt_option_size}</span> 
-											<span id="prdt_option_color" value="${prdt_option_color}">색상 : ${prdt_option_color}</span>
+											<span id="prdt_option_size" value="${prdt_option_size}">사이즈
+												: ${prdt_option_size}</span> <span id="prdt_option_color"
+											value="${prdt_option_color}">색상 : ${prdt_option_color}</span>
 										</td>
 										<td class="td_width_3 price_td table_text_align_center"><fmt:formatNumber
 												value="${orderInfo.product_price}" pattern="#,###" /></td>
 										<td class="td_width_1 table_text_align_center">
-											<div class="table_text_align_center quantity_div" id="prdt_order_quan" value="${prdt_order_quan}">
+											<div class="table_text_align_center quantity_div"
+												id="prdt_order_quan" value="${prdt_order_quan}">
 												${prdt_order_quan}</div>
 										</td>
 										<td class="td_width_3 table_text_align_center"><fmt:formatNumber
@@ -233,7 +296,7 @@
 					<div class="col-md-5 col-lg-4 order-md-last">
 						<input type="button" id="checkoutbtn"
 							class="w-100 btn btn-primary btn-lg" value="Continue to checkout"
-							onclick="payment();" />
+							onclick="payment()" />
 					</div>
 
 					<div class="col-md-7 col-lg-8">
@@ -251,8 +314,8 @@
 								<label for="phoneNum" class="form-label"><strong>연락처</strong></label>
 								<div class="input-group has-validation">
 									<span class="input-group-text">H.P</span> <input type="text"
-										class="form-control" id="prdt_order_phone" placeholder="연락처를 입력해주세요"
-										required="" name="prdt_order_phone">
+										class="form-control" id="prdt_order_phone"
+										placeholder="연락처를 입력해주세요" required="" name="prdt_order_phone">
 									<div class="invalid-feedback">Your username is required.</div>
 								</div>
 							</div>
@@ -271,7 +334,8 @@
 								</div>
 								<div>
 									<input type="text" class="form-control"
-										id="sample6_detailAddress" placeholder="상세주소" name="prdt_order_addr2"><br>
+										id="sample6_detailAddress" placeholder="상세주소"
+										name="prdt_order_addr2"><br>
 								</div>
 								<div>
 									<input hidden="hidden" type="text" class="form-control"
@@ -287,12 +351,12 @@
 							<div class="my-3">
 								<div class="form-check">
 									<input id="credit" name="paymentMethod" type="radio"
-										class="form-check-input" required="" value="payment" checked> <label
-										class="form-check-label" for="credit">온라인결제</label>
+										class="form-check-input" required="" value="o_payment" checked>
+									<label class="form-check-label" for="credit">온라인결제</label>
 								</div>
 								<div class="form-check">
 									<input id="debit" name="paymentMethod" type="radio"
-										class="form-check-input" required="" value="online"> <label
+										class="form-check-input" required="" value="payment"> <label
 										class="form-check-label" for="debit">무통장입금</label>
 								</div>
 							</div>

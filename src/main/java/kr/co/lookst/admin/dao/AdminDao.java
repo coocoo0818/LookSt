@@ -3,6 +3,7 @@ package kr.co.lookst.admin.dao;
 import java.util.List;
 
 import kr.co.lookst.admin.domain.MemMGMDto;
+import kr.co.lookst.main.domain.PrdtOrderDto;
 import kr.co.lookst.main.domain.Prdt_Img;
 import kr.co.lookst.main.domain.Prdt_Option;
 import kr.co.lookst.main.domain.Product;
@@ -73,6 +74,8 @@ public interface AdminDao {
 	List<Prdt_Option> productColor(Integer product_no, String prdt_option_size) throws Exception;
 	/* 오더 페이지 이동 */
 	List<OrderInfoDto> orderInfo(Integer product_no) throws Exception;
+	/* 주문 내용 삽입 */
+	int orderInsert(PrdtOrderDto prdt_order) throws Exception;
 	
 	/* sns total list */
 	List<Integer> snsTotalList() throws Exception;
