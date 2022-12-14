@@ -284,9 +284,11 @@ public class AdminController {
 
 	/* 상품 상세 페이지 이동 */
 	@RequestMapping(value = "/productDetail", method = { RequestMethod.POST, RequestMethod.GET })
-	public String productDetailPage(Model model, @RequestParam("product_no") Integer product_no) {
+	public String productDetailPage(Model model, @RequestParam("product_no") Integer product_no, HttpServletRequest request) {
+		HttpSession session = request.getSession();
 		try {
 			/* 상품 상세페이지 이동 */
+			String login_id = (String) session.getAttribute("res");
 			Product productInfo = adminService.getproductInfo(product_no);
 			List<Prdt_Option> productSize = adminService.getproductSize(product_no);
 			List<Prdt_Img> productImg = adminService.getproductImg(product_no);
@@ -294,7 +296,7 @@ public class AdminController {
 			model.addAttribute("productInfo", productInfo);
 			model.addAttribute("productSize", productSize);
 			model.addAttribute("productImg", productImg);
-
+			model.addAttribute("member_id", login_id);
 			/* 상품 상세페이지 이동 끝 */
 		} catch (Exception e) {
 			e.printStackTrace();

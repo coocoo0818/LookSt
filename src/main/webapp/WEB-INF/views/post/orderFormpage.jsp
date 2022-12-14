@@ -150,7 +150,7 @@
 				alert("상세주소를 입력해주세요.")
 				return false;
 			}
-			alert(data.payMethod)
+			
 			if (data.payMethod == "o_payment") {
 				paymentCard(data)
 			} else if (data.payMethod == "payment") {

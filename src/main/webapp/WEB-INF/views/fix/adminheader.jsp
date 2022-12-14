@@ -77,8 +77,8 @@
           <div class="dropdown-menu dropdown-menu-end dropdown-menu-xs-start">
             <a class="dropdown-item text-center" href="${contextPath}/admin/magazin_request">MAGAZIN</a>
             <a class="dropdown-item text-center" href="${contextPath}/admin/seller_request">SELLER</a>
-            <a class="${logouthidden} text-center" href="/lookst/member/mypage">MY PAGE</a>
-            <a class="${logouthidden} text-center" href="/lookst/sns/snsProfile/?member_id=${res}">MY PROFILE</a>
+            <a class="${logouthidden} text-center" href="${contextPath}/member/mypage">MY PAGE</a>
+            <a class="${logouthidden} text-center" href="${contextPath}/sns/snsProfile/?member_id=${res}">MY PROFILE</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item text-center" href="${loginoutlink}">${loginout}</a>
           </div>
