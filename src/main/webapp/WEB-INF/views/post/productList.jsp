@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -72,18 +73,15 @@
 				<h2 id="orderpagetitle" class="disply-2 text-center py-4">TOP</h2>
 				
 				<div class="d-grid gap-2 col-6 mx-auto">
-				  <button class="btn btn-light border border-2" type="button">TOP</button>
-				  <button class="btn btn-light border border-2" type="button">PANTS</button>
-				  <button class="btn btn-light border border-2" type="button">SHOES</button>
-				  <button class="btn btn-light border border-2" type="button">BAG</button>
-				  <button class="btn btn-light border border-2" type="button">ACC</button>
+				  <button class="btn btn-light border border-2" onclick="location.href='<c:url value="/post/productList?kind=T"/>'" >TOP</button>
+				  <button id="pantsBtn" class="btn btn-light border border-2" onclick="location.href='<c:url value="/post/productList?kind=P"/>'">PANTS </button>
+				  <button class="btn btn-light border border-2" onclick="location.href='<c:url value="/post/productList?kind=S"/>'">SHOES</button>
+				  <button class="btn btn-light border border-2" onclick="location.href='<c:url value="/post/productList?kind=B"/>'">BAG</button>
+				  <button class="btn btn-light border border-2" onclick="location.href='<c:url value="/post/productList?kind=AC"/>'">ACC</button>
 				</div>
+			
 				
-				<div id="carouselExampleIndicators" class="carousel slide d-grid gap-2 col-6 mx-auto" data-bs-ride="true">
-				  <div class="carousel-indicators">
-				    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-				    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-				  </div>
+				<div id="carouselExampleControls" class="carousel slide d-grid gap-2 col-6 mx-auto" data-bs-ride="carousel">
 				  <div class="carousel-inner">
 				    <div class="carousel-item active">
 				      <img src="${contextPath}/resources/img/product/float_banner01.jpg" class="d-block w-100" alt="...">
@@ -92,34 +90,11 @@
 				      <img src="${contextPath}/resources/img/product/float_banner02.jpg" class="d-block w-100" alt="...">
 				    </div>
 				  </div>
-				  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+				  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
 				    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
 				    <span class="visually-hidden">Previous</span>
 				  </button>
-				  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-				    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-				    <span class="visually-hidden">Next</span>
-				  </button>
-				</div>
-				
-				<div id="carouselExampleIndicators" class="carousel slide d-grid gap-2 col-6 mx-auto" data-bs-ride="true">
-				  <div class="carousel-indicators">
-				    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-				    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-				  </div>
-				  <div class="carousel-inner">
-				    <div class="carousel-item active">
-				      <img src="${contextPath}/resources/img/product/card_event.jpg" class="d-block w-100" alt="...">
-				    </div>
-				    <div class="carousel-item">
-				      <img src="${contextPath}/resources/img/product/img.jpg" class="d-block w-100" alt="...">
-				    </div>
-				  </div>
-				  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-				    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-				    <span class="visually-hidden">Previous</span>
-				  </button>
-				  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+				  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
 				    <span class="carousel-control-next-icon" aria-hidden="true"></span>
 				    <span class="visually-hidden">Next</span>
 				  </button>
@@ -129,9 +104,8 @@
 
 			<div class="col-lg-9">
 				<!-- 검색 시작 -->
-				<div>
-					<form class="d-flex row py-3"
-						action="${contextPath}/post/productList" method="get">
+				<form class="d-flex row py-3" action="${contextPath}/post/productList" method="get">
+					<div>
 						<div class="col mt-1">
 							<select id="inputState" class="form-select form-select-md"
 								name="option">
@@ -139,28 +113,33 @@
 								<!--<option value="B" ${pr.sc.option=='I' || pr.sc.option=='' ? "selected" : ""}>판매자명</option>-->
 								<option value="T" ${pr.sc.option=='T'? "selected" : ""}>전체</option>
 								<option value="N" ${pr.sc.option=='N'? "selected" : ""}>상품명</option>
-								<option value="A" ${pr.sc.option=='A'? "selected" : ""}>상품종류</option>
 							</select>
 						</div>
 						<div class="d-flex col-md-9 mt-1">
+							<input type="hidden" name="kind" value="${param.kind }"/>
 							<input class="form-control form-control me-1" type="text"
 								placeholder="Search" style="float: right;" name="keyword"
-								value="${param.keywork}">
+								value="${param.keyword}">
 							<button class="btn btn-secondary" type="submit">
 								<i class="d-flex fa fa-search"></i>
 							</button>
 						</div>
-					</form>
-				</div>
-				<!-- 검색 끝 -->
-				<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"
-					style="text-align: right;">상품정렬방식</a>
-				<div class="dropdown-menu dropdown-menu-end dropdown-menu-xs-start"
-					style="">
-					<a class="dropdown-item" href="#">최신 상품순</a> 
-					<a class="dropdown-item" href="#">인기 상품순</a>
-				</div>
-
+					</div>
+					<!-- 검색 끝 -->
+					<div class="col mt-1">
+						<select class="form-select form-select-md" name="sort">
+							<option value="R" ${pr.sc.sort=='R'? "selected" : ""}>최신 상품순</option>
+							<option value="U" ${pr.sc.sort=='U'? "selected" : ""}>낮은 가격순</option>
+							<option value="D" ${pr.sc.sort=='D'? "selected" : ""}>높은 가격순</option>
+						</select>
+					</div>
+					
+					<div class="d-flex col-md-9 mt-1">
+						<button class="btn btn-secondary" type="submit">
+							<i class="d-flex fa fa-search"></i>
+						</button>
+					</div>
+				</form>
 				<div class="row">
 					<c:forEach var="shopTotalList" items="${shopTotalList}">
 						<div class="col-lg-4 col-md-6 mb-4">

@@ -106,15 +106,18 @@ public class PostController {
 	/* 쇼핑리스트 페이지 이동!!! */ /*Dao, Service 등 등록했고 컨트롤러수정중*/
 	@RequestMapping(value = "/productList", method = RequestMethod.GET)
 	public String shopFormList(SearchItem_prdtList sc, Model model) {
+		System.out.println(sc);
 		try {
 			/* 쇼핑리스트 페이징 시작 */
 			int totalCnt = postService.shopListCnt(sc);
+			System.out.println(totalCnt);
 			model.addAttribute("totalCnt", totalCnt);
 			PageResolver_prdtList pageResolver_prdtList = new PageResolver_prdtList(totalCnt, sc);
 			/* 쇼핑리스트 페이징 끝 */
 
 			/* 쇼핑리스트 리스트 출력 */
 			List<Product> shopTotalList = postService.shopListPage(sc);
+			System.out.println(shopTotalList);
 			model.addAttribute("shopTotalList", shopTotalList);
 			model.addAttribute("pr", pageResolver_prdtList);
 			/* 쇼핑리스트 리스트 끝 */
