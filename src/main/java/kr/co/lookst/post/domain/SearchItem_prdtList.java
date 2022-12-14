@@ -13,6 +13,7 @@ public class SearchItem_prdtList {
 	private	Integer pageSize = DEFAULT_PAGE_SIZE;		//한 페이지당 게시물 갯수
 	private String option = "";							//검색 옵션
 	private String keyword = "";						//검색어
+	private String kind = "";							//상품종류
 	private Integer offset;								//페이지 시작
 	
 	public SearchItem_prdtList() {
@@ -20,15 +21,16 @@ public class SearchItem_prdtList {
 	}
 	
 	public SearchItem_prdtList(Integer page, Integer pageSize) {
-		this(page, pageSize, "", "");
+		this(page, pageSize, "", "", "");
 	}
 	
-	public SearchItem_prdtList(Integer page, Integer pageSize, String option, String keyword) {
+	public SearchItem_prdtList(Integer page, Integer pageSize, String option, String keyword,String kind) {
 		//super();
 		this.page = page;
 		this.pageSize = pageSize;
 		this.option = option;
 		this.keyword = keyword;
+		this.kind = kind;
 	}
 	
 	public String getQueryString() {
@@ -42,6 +44,7 @@ public class SearchItem_prdtList {
 				.queryParam("pageSize", pageSize)
 				.queryParam("option", option)
 				.queryParam("keyword", keyword)
+				.queryParam("kind", kind)
 				.build().toString();
 	}
 
@@ -86,10 +89,20 @@ public class SearchItem_prdtList {
 		return result;
 	}
 
+	public String getKind() {
+		return kind;
+	}
+
+	public void setKind(String kind) {
+		this.kind = kind;
+	}
+
 	@Override
 	public String toString() {
-		return "SearchItem [page=" + page + ", pageSize=" + pageSize + ", option=" + option + ", keyword=" + keyword
-				+ ", offset=" + offset + "]";
+		return "SearchItem_prdtList [page=" + page + ", pageSize=" + pageSize + ", option=" + option + ", keyword="
+				+ keyword + ", kind=" + kind + ", offset=" + offset + "]";
 	}
+
+	
 	
 }
