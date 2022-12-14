@@ -77,7 +77,6 @@
 		<!-- 검색 끝 -->
 
 		<table class="responsive-table">
-			<%-- <caption>Top 10 Grossing Animated Films of All Time</caption> --%>
 			<thead>
 				<tr class="table-dark">
 					<th scope="col">글번호</th>
@@ -88,9 +87,7 @@
 				</tr>
 			</thead>
 			<tfoot>
-				<!-- <tr>
-        <td colspan="7">Sources: <a href="http://en.wikipedia.org/wiki/List_of_highest-grossing_animated_films" rel="external">Wikipedia</a> &amp; <a href="http://www.boxofficemojo.com/genres/chart/?id=animation.htm" rel="external">Box Office Mojo</a>. Data is current as of March 31, 2021.</td>
-      </tr> -->
+
 			</tfoot>
 			<tbody>
 				<c:forEach var="magazin_management" items="${magazin_management}">

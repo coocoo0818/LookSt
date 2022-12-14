@@ -112,6 +112,7 @@
 				<form id="orderform" name = "orderform" action="${contextPath}/admin/orderFormpage" method="get">
 					<p class="header" name="product_no">${productInfo.product_no}</p>
 					<input hidden name="product_no" value="${productInfo.product_no}">
+					<input hidden="hidden" name="member_id" id="member_id" value="${member_id}" />
 						<h3 class="name" name="product_kind">
 								<c:if test="${productInfo.product_kind eq 'T'}">TOP</c:if>
 								<c:if test="${productInfo.product_kind eq 'B'}">PANTS</c:if>
@@ -175,6 +176,7 @@
 	<!-- partial -->
 	<script type="text/javascript">
 	function go_pay() {
+		var member_id = $("input[name='member_id']").val()
 		var product_no = ${productInfo.product_no}
 		var prdt_option_size = $('.productSize.activ').attr('value');
 		var prdt_option_color = $('.optionColor.activ').attr('value');
@@ -186,7 +188,10 @@
 		}
 		$("#toSizeColor").html(toSizeColor())
 		/* 색상 사이즈유효성 체크  */
-		 if(prdt_option_size == "undefined" || prdt_option_size == null || prdt_option_size == ""){
+		if (member_id == "undefined" || member_id == null || member_id == ""){			
+			alert("로그인을 해주세요.")
+			return false;
+		} else if(prdt_option_size == "undefined" || prdt_option_size == null || prdt_option_size == ""){
 			alert("사이즈를 체크해주세요.")
 			return false;
 		} else if (prdt_option_color == "undefined" || prdt_option_color == null || prdt_option_color == "") {

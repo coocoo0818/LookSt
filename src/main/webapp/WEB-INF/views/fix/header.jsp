@@ -75,11 +75,11 @@
           <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">${loginout}</a>
           <div class="dropdown-menu dropdown-menu-end dropdown-menu-xs-start">
             <a class="dropdown-item" href="${loginoutlink}">${loginout}</a>
-            <a class="${logouthidden}" href="/lookst/member/mypage">MY PAGE</a>
-            <a class="${logouthidden}" href="/lookst/sns/snsProfile/?member_id=${res}">MY PROFILE</a>
-            <a class="${loginhidden}" href="/lookst/register">REGISTER</a>
-            <a class="${auth_seller_menu}" href="/lookst/seller/mySales">SELLER PAGE</a>
-            <a class="${auth_admin_menu}" href="/lookst/admin/member_management">ADMIN PAGE</a>
+            <a class="${logouthidden}" href="${contextPath}/member/mypage">MY PAGE</a>
+            <a class="${logouthidden}" href="${contextPath}/sns/snsProfile/?member_id=${res}">MY PROFILE</a>
+            <a class="${loginhidden}" href="${contextPath}/register">REGISTER</a>
+            <a class="${auth_seller_menu}" href="${contextPath}/seller/mySales">SELLER PAGE</a>
+            <a class="${auth_admin_menu}" href="${contextPath}/admin/member_management">ADMIN PAGE</a>
           </div>
         </li>
       </ul>
