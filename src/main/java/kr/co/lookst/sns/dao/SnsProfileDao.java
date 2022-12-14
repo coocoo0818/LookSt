@@ -32,8 +32,11 @@ public interface SnsProfileDao {
 	// 탈퇴 시 팔로우 삭제
 	int deleteUserAllFollow(String member_id) throws Exception;
 	
+	// 게시물 삭제
+	int deletePost(Integer post_no) throws Exception;
+	
 	// 닉네임 수정
-	int update(SnsProfileDto spd) throws Exception;
+	int update(String member_id, String member_nick) throws Exception;
 	
 	// 프로필 이미지 변경
 	int profileImg_Mod(String member_id, String profile_img,String profile_uuid) throws Exception;

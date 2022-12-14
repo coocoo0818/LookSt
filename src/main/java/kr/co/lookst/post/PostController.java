@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import kr.co.lookst.main.domain.PageResolver;
 import kr.co.lookst.main.domain.Product;
 import kr.co.lookst.main.domain.SearchItem;
+import kr.co.lookst.post.domain.PageResolver_prdtList;
 /*import kr.co.lookst.post.domain.OrderPagePrdtDto;*/
 import kr.co.lookst.post.domain.PostDto;
 import kr.co.lookst.post.domain.ProdInfoDto;
+import kr.co.lookst.post.domain.SearchItem_prdtList;
 import kr.co.lookst.post.domain.TpostDto;
 import kr.co.lookst.post.domain.post_com_tagDto;
 import kr.co.lookst.post.domain.snslist_infoDto;
@@ -62,21 +64,6 @@ public class PostController {
          System.out.println(postTotalList);
          System.out.println(m);
          
-         /*
-          * List<sns_Main_ImgDto> snsmainimg = postService.snsmainimg(postTotalList);
-          * m.addAttribute("snsmainimg", snsmainimg);
-          */
-           
-         /* List<snsPrdtImgDto> snsPrdtImg = postService.snsPrdtImg(postTotalList);
-          * m.addAttribute("snsPrdtImg", snsPrdtImg);
-          * 
-          * List<sns_com_tagDto> snsComTag = postService.snsComTag(postTotalList);
-          * m.addAttribute("snsComTag", snsComTag);
-          */
-                   
-         //List<Post_imgDto> post_list = postService.getpostlistimg();
-         //m.addAttribute("post_list", post_list);
-         
       } catch (Exception e) {
          e.printStackTrace();
       }
@@ -118,18 +105,18 @@ public class PostController {
    
 	/* 쇼핑리스트 페이지 이동!!! */ /*Dao, Service 등 등록했고 컨트롤러수정중*/
 	@RequestMapping(value = "/productList", method = RequestMethod.GET)
-	public String shopFormList(SearchItem sc, Model model) {
+	public String shopFormList(SearchItem_prdtList sc, Model model) {
 		try {
 			/* 쇼핑리스트 페이징 시작 */
-			int totalCnt = postService.shopListSearchResultCnt(sc);
+			int totalCnt = postService.shopListCnt(sc);
 			model.addAttribute("totalCnt", totalCnt);
-			PageResolver pageResolver = new PageResolver(totalCnt, sc);
+			PageResolver_prdtList pageResolver_prdtList = new PageResolver_prdtList(totalCnt, sc);
 			/* 쇼핑리스트 페이징 끝 */
 
 			/* 쇼핑리스트 리스트 출력 */
-			List<Product> shopTotalList = postService.shopListSearchResultPage(sc);
+			List<Product> shopTotalList = postService.shopListPage(sc);
 			model.addAttribute("shopTotalList", shopTotalList);
-			model.addAttribute("pr", pageResolver);
+			model.addAttribute("pr", pageResolver_prdtList);
 			/* 쇼핑리스트 리스트 끝 */
 		} catch (Exception e) {
 			e.printStackTrace();
