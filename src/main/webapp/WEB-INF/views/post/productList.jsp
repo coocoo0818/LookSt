@@ -74,7 +74,7 @@
 				
 				<div class="d-grid gap-2 col-6 mx-auto">
 				  <button class="btn btn-light border border-2" onclick="location.href='<c:url value="/post/productList?kind=T"/>'" >TOP</button>
-				  <button id="pantsBtn" class="btn btn-light border border-2" onclick="location.href='<c:url value="/post/productList?kind=P"/>'">  PANTS </button>
+				  <button id="pantsBtn" class="btn btn-light border border-2" onclick="location.href='<c:url value="/post/productList?kind=P"/>'">PANTS </button>
 				  <button class="btn btn-light border border-2" onclick="location.href='<c:url value="/post/productList?kind=S"/>'">SHOES</button>
 				  <button class="btn btn-light border border-2" onclick="location.href='<c:url value="/post/productList?kind=B"/>'">BAG</button>
 				  <button class="btn btn-light border border-2" onclick="location.href='<c:url value="/post/productList?kind=AC"/>'">ACC</button>
@@ -104,9 +104,8 @@
 
 			<div class="col-lg-9">
 				<!-- 검색 시작 -->
-				<div>
-					<form class="d-flex row py-3"
-						action="${contextPath}/post/productList" method="get">
+				<form class="d-flex row py-3" action="${contextPath}/post/productList" method="get">
+					<div>
 						<div class="col mt-1">
 							<select id="inputState" class="form-select form-select-md"
 								name="option">
@@ -125,17 +124,22 @@
 								<i class="d-flex fa fa-search"></i>
 							</button>
 						</div>
-					</form>
-				</div>
-				<!-- 검색 끝 -->
-				<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"
-					style="text-align: right;">상품정렬방식</a>
-				<div class="dropdown-menu dropdown-menu-end dropdown-menu-xs-start"
-					style="">
-					<a class="dropdown-item" href="#">최신 상품순</a> 
-					<a class="dropdown-item" href="#">인기 상품순</a>
-				</div>
-
+					</div>
+					<!-- 검색 끝 -->
+					<div class="col mt-1">
+						<select class="form-select form-select-md" name="sort">
+							<option value="R" ${pr.sc.sort=='R'? "selected" : ""}>최신 상품순</option>
+							<option value="U" ${pr.sc.sort=='U'? "selected" : ""}>낮은 가격순</option>
+							<option value="D" ${pr.sc.sort=='D'? "selected" : ""}>높은 가격순</option>
+						</select>
+					</div>
+					
+					<div class="d-flex col-md-9 mt-1">
+						<button class="btn btn-secondary" type="submit">
+							<i class="d-flex fa fa-search"></i>
+						</button>
+					</div>
+				</form>
 				<div class="row">
 					<c:forEach var="shopTotalList" items="${shopTotalList}">
 						<div class="col-lg-4 col-md-6 mb-4">
