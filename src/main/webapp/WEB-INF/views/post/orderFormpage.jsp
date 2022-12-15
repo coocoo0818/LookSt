@@ -74,7 +74,7 @@
 								.focus();
 					}
 				}).open();
-	}
+			}
 </script>
 
 <script type="text/javascript">
@@ -86,8 +86,7 @@
 		function createOrderNum() {
 			const date = new Date();
 			const year = date.getFullYear();
-			const month = String(date.getMonth() + 1).padStart(
-					2, "0");
+			const month = String(date.getMonth() + 1).padStart(2, "0");
 			const day = String(date.getDate()).padStart(2, "0");
 
 			let orderNum = year + month + day;
@@ -99,33 +98,19 @@
 
 		function payment() {
 			const data = {
-				payMethod : $(
-						'input[name="paymentMethod"]:checked')
-						.val(),
-				prdt_option_size : $('#prdt_option_size').attr(
-						'value'),
+				payMethod : $('input[name="paymentMethod"]:checked').val(),
+				prdt_option_size : $('#prdt_option_size').attr('value'),
 				product_name : $('#product_name').attr('value'),
-				prdt_option_color : $('#prdt_option_color')
-						.attr('value'),
-				prdt_order_quan : $('#prdt_order_quan').attr(
-						'value'),
-				product_no : $("input[name='product_no']")
-						.val(),
-				prdt_order_person : $(
-						"input[name='prdt_order_person']")
-						.val(),
-				prdt_order_phone : $(
-						"input[name='prdt_order_phone']").val(),
-				prdt_order_addr : $(
-						"input[name='prdt_order_addr']").val(),
-				prdt_order_addr2 : $(
-						"input[name='prdt_order_addr2']").val(),
+				prdt_option_color : $('#prdt_option_color').attr('value'),
+				prdt_order_quan : $('#prdt_order_quan').attr('value'),
+				product_no : $("input[name='product_no']").val(),
+				prdt_order_person : $("input[name='prdt_order_person']").val(),
+				prdt_order_phone : $("input[name='prdt_order_phone']").val(),
+				prdt_order_addr : $("input[name='prdt_order_addr']").val(),
+				prdt_order_addr2 : $("input[name='prdt_order_addr2']").val(),
 				member_id : $("input[name='member_id']").val(),
-				prdt_order_price : $(
-						"input[name='prdt_order_price']").val(),
-				prdt_order_postcode : $(
-						"input[name='prdt_order_postcode']")
-						.val(),
+				prdt_order_price : $("input[name='prdt_order_price']").val(),
+				prdt_order_postcode : $("input[name='prdt_order_postcode']").val(),
 				orderNum : createOrderNum()
 			}
 
@@ -160,6 +145,10 @@
 
 		function paymentCard(data) {
 			// IMP.request_pay(param, callback) 결제창 호출
+			if(data.statusCode == 200){ // 200 은 성공하였다는 것
+				alert(data.statusCode); // 경고창을 띄우고 
+				location.href = '${contextPath}/admin/orderComplete'; // 페이지를 이동하겠습니당. 
+			}
 			IMP.request_pay(
 			{ // param
 				pg : "html5_inicis.INIpayTest",
@@ -170,9 +159,7 @@
 				buyer_email : data.member_id,
 				buyer_name : data.prdt_order_person,
 				buyer_tel : data.prdt_order_phone,
-				buyer_addr : data.prdt_order_addr
-						+ " "
-						+ data.prdt_order_addr2,
+				buyer_addr : data.prdt_order_addr + " " + data.prdt_order_addr2,
 				buyer_postcode : data.prdt_order_postcode
 			},
 			function(rsp) { // callback
@@ -197,18 +184,28 @@
 							prdt_order_price : data.prdt_order_price,
 							imp_uid : rsp.imp_uid,
 							merchant_uid : rsp.merchant_uid
-						}
-					}).done(function(data) {
-						// 가맹점 서버 결제 API 성공시 로직
-						/* alert(data) */
-					})
-				} else {
-					alert("결제에 실패했습니다. 에러 내용 : "+ rsp.error_msg)
-					// 결제 실패 시 로직,
-				}
-			})
-		}
-	/* }) */
+						}, //서버에서 보내줄 데이터 타입
+				        success: function(res){        	
+					          if(res == 1){
+								 console.log("추가성공");	
+								 window.location.href = "${contextPath}/admin/orderComplete";
+					          }else{
+					             console.log("Insert Fail!!!");
+					          }
+					        },
+					        error:function(){
+					          console.log("Insert ajax 통신 실패!!!");
+					        }
+						}) //ajax
+						
+					}
+					else{//결제 실패시
+						var msg = '결제에 실패했습니다';
+						msg += '에러 : ' + rsp.error_msg
+					}
+					console.log(msg);
+				});//pay
+			}
 </script>
 </head>
 <body>

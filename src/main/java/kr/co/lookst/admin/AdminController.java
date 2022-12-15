@@ -327,12 +327,12 @@ public class AdminController {
     
 	/* 주문 인설트 */
 	@RequestMapping(value = "/orderInsert", method = { RequestMethod.POST })
-	/* @ResponseBody */
-	public String orderInsert(Model model, @RequestParam(value="prdt_order_no", required=false) Integer prdt_order_no, @RequestParam(value="product_no", required=false) Integer product_no, String member_id, 
+	@ResponseBody
+	public int orderInsert(Model model, @RequestParam(value="prdt_order_no", required=false) Integer prdt_order_no, @RequestParam(value="product_no", required=false) Integer product_no, String member_id, 
 			 String prdt_order_way, String prdt_order_phone, 
 			String prdt_order_addr, String prdt_order_addr2, String prdt_order_person, 
 			String prdt_option_size, String prdt_option_color, Integer prdt_order_price, Integer prdt_order_quan) {
-		System.out.println("진입");
+		int mvc = 0;
 		PrdtOrderDto prdt_order = new PrdtOrderDto();
 		
 		System.out.println(prdt_order_no);
@@ -365,11 +365,22 @@ public class AdminController {
 		System.out.println(prdt_order.getPrdt_order_price());
 		System.out.println(prdt_order);
 		try {
-			adminService.orderInsert(prdt_order);
+			mvc = adminService.orderInsert(prdt_order);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "/";
+		return mvc;
+	}
+	
+	/* 결제 완료 페이지 */
+	@RequestMapping(value = "/orderComplete", method = { RequestMethod.GET })
+	public String orderComplete() {
+		try {
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "/admin/orderComplete";
 	}
 
 	/* 상품 컬러 출력 */
