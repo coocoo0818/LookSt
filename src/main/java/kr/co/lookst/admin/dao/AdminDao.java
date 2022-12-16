@@ -8,6 +8,7 @@ import kr.co.lookst.main.domain.Prdt_Img;
 import kr.co.lookst.main.domain.Prdt_Option;
 import kr.co.lookst.main.domain.Product;
 import kr.co.lookst.main.domain.SearchItem;
+import kr.co.lookst.main.domain.SnsHeartDto;
 import kr.co.lookst.post.domain.OrderInfoDto;
 import kr.co.lookst.post.domain.Post_TagDto;
 import kr.co.lookst.post.domain.post_com_tagDto;
@@ -87,5 +88,7 @@ public interface AdminDao {
 	List<MemMGMDto> snsTopList() throws Exception;
 	/* sns 태그정보 출력 */
 	List<post_com_tagDto> tagInfoList(Integer post_no) throws Exception;
+	/* 좋아요 체크 */
+	int postLikeInsert(SnsHeartDto snsHeartDto) throws Exception;
 	
 }

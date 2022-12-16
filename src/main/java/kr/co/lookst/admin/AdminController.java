@@ -24,6 +24,7 @@ import kr.co.lookst.main.domain.Prdt_Img;
 import kr.co.lookst.main.domain.Prdt_Option;
 import kr.co.lookst.main.domain.Product;
 import kr.co.lookst.main.domain.SearchItem;
+import kr.co.lookst.main.domain.SnsHeartDto;
 import kr.co.lookst.member.domain.MemberDto;
 import kr.co.lookst.post.domain.OrderInfoDto;
 import kr.co.lookst.post.domain.Post_TagDto;
@@ -335,35 +336,18 @@ public class AdminController {
 		int mvc = 0;
 		PrdtOrderDto prdt_order = new PrdtOrderDto();
 		
-		System.out.println(prdt_order_no);
 		prdt_order.setPrdt_order_no(prdt_order_no);		
-		System.out.println(prdt_order.getPrdt_order_no());
-		
-		System.out.println(product_no);
 		prdt_order.setProduct_no(product_no);
-		System.out.println(prdt_order.getProduct_no());
-		
 		prdt_order.setMember_id(member_id);
-		System.out.println(prdt_order.getMember_id());
 		prdt_order.setPrdt_order_quan(prdt_order_quan);
-		System.out.println(prdt_order.getPrdt_order_quan());
 		prdt_order.setPrdt_order_way(prdt_order_way);
-		System.out.println(prdt_order.getPrdt_order_way());
 		prdt_order.setPrdt_order_phone(prdt_order_phone);
-		System.out.println(prdt_order.getPrdt_order_phone());
 		prdt_order.setPrdt_order_addr(prdt_order_addr);
-		System.out.println(prdt_order.getPrdt_order_addr());
 		prdt_order.setPrdt_order_addr2(prdt_order_addr2);
-		System.out.println(prdt_order.getPrdt_order_addr2());
 		prdt_order.setPrdt_order_person(prdt_order_person);
-		System.out.println(prdt_order.getPrdt_order_person());
 		prdt_order.setPrdt_order_size(prdt_option_size);
-		System.out.println(prdt_order.getPrdt_order_size());
 		prdt_order.setPrdt_order_color(prdt_option_color);
-		System.out.println(prdt_order.getPrdt_order_color());
 		prdt_order.setPrdt_order_price(prdt_order_price);
-		System.out.println(prdt_order.getPrdt_order_price());
-		System.out.println(prdt_order);
 		try {
 			mvc = adminService.orderInsert(prdt_order);
 		} catch (Exception e) {
@@ -402,16 +386,6 @@ public class AdminController {
 	}
 
 	/* sns total list */
-	/*
-	 * @RequestMapping(value="/snsTotalCount", method={RequestMethod.GET}) public
-	 * String snsTotalCount(Model model, Integer post_no, HttpServletRequest
-	 * request) { try { sns total list List<Integer> snsTotalList =
-	 * adminService.snsTotalList(); model.addAttribute("snsTotalList",
-	 * snsTotalList); System.out.println(model); sns total list } catch (Exception
-	 * e) { e.printStackTrace(); } return "/admin/snsTotalList"; }
-	 */
-
-	/* sns total list */
 	@RequestMapping(value = "/snsTotalList", method = { RequestMethod.GET })
 	public String snsTotalList(Model model/* , Integer post_no */, HttpServletRequest request) {
 		try {
@@ -430,21 +404,6 @@ public class AdminController {
 		return "/admin/snsTotalList";
 	}
 
-	/* sns snsSelectTotalList list */
-//	@RequestMapping(value = "/snsSelectTotalList", method = { RequestMethod.GET })
-//	public String snsSelectTotalList(Model model, Integer post_no, HttpServletRequest request) {
-//		try {
-//			/* sns snsSelectTotalList list */
-//			List<MemMGMDto> snsTopList = adminService.snsTopList();
-//			model.addAttribute("snsTopList", snsTopList);
-//			System.out.println(model);
-//			/* sns snsSelectTotalList list */
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		return "/admin/snsTotalList";
-//	}
-
 	/* sns tagInfo list */
 	@RequestMapping(value = "/tagInfoList", method = { RequestMethod.GET })
 	@ResponseBody
@@ -455,6 +414,7 @@ public class AdminController {
 			/* sns tagInfo list */
 			tagInfoList = adminService.tagInfoList(post_no);
 			model.addAttribute("tagInfoList", tagInfoList);
+			System.out.println(model);
 			return new ResponseEntity<List<post_com_tagDto>>(tagInfoList, HttpStatus.OK); // 200
 			/* sns tagInfo list */
 		} catch (Exception e) {
@@ -482,5 +442,26 @@ public class AdminController {
 			return new ResponseEntity<List<Post_TagDto>>(HttpStatus.BAD_REQUEST); // 400
 		}
 		/* return "/admin/tagInfoList"; */
+	}
+	
+	/* 좋아요 체크 */
+	@RequestMapping(value = "/postLikeInsert", method = { RequestMethod.POST })
+	@ResponseBody
+	public int postLikeInsert(Model model, @RequestParam(value="member_id", required=false) String member_id, 
+							@RequestParam(value="post_no", required=false) Integer post_no, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		int mvc = 0;
+		String login_id = (String) session.getAttribute("res");
+		SnsHeartDto snsHeartDto = new SnsHeartDto();
+			
+		snsHeartDto.setPost_no(post_no);
+		snsHeartDto.setMember_id(member_id);
+		try {
+			mvc = adminService.postLikeInsert(snsHeartDto);
+			model.addAttribute("member_id", login_id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return mvc;
 	}
 }

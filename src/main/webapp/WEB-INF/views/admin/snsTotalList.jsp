@@ -10,68 +10,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link href="${contextPath}/resources/admin/css/snsTotalList.css" rel="stylesheet">
 <title>LOOKST</title>
-		<script type="text/javascript">
-		$(document).ready(function(){
-			var arr = ${snsTotalList}
-			/* for (var i = 0; i < arr.length; i++) { */
-				/* var post_no = $('#postNo').attr('data-postNo') */
-			for (var i = 0; i < arr.length; i++) {
-				var post_no = arr[i]
-				/* alert(post_no) */
-			    var tagInfoList = '#tagInfoList' + i
-			    var PrdtTags = '#PrdtTags' + i
-			    
-				var toHtml = function(tags) {
-					let tmp = ''
-					tags.forEach(function(tag) {
-						tmp += '<b>#' + tag.tag_content + '</b>'
-					})
-					return tmp
-				}
-			    
-			   	var toPrdtTag = function(prdttags) {
-					let tmp = ''
-					prdttags.forEach(function(prdttag) {
-						tmp += '<div>'
-						tmp += '<img src="${contextPath}/resources/img/product/' + prdttag.post_tag_img + '" onclick='
-						tmp += '"location.href="${contextPath}/resources/img/product/' + prdttag.product_no + '" id="product_img" class="col-3">'
-						tmp += '<span class="d-inline-block text-truncate" style="max-width: 280px; font-size: 14px; padding-top: 10px;">' + prdttag.post_tag_name + '<br>' + prdttag.post_tag_price + '</span>'
-						tmp += '</div>'
-					})
-					return tmp
-				}
-			   	
-			    var showList = function(post_no) {
-					$.ajax({
-						type : 'GET',		//요청 메서드
-						url : '${contextPath}/admin/tagInfoList',		// 요청 URI
-						data: { post_no : post_no },
-						success : function(result) {			// 서버로부터 응답이 도착하면 호출될 함수
-							$(tagInfoList).html(toHtml(result))		// result는 서버가 전송한 데이터
-							/* $("#PrdtTags").html(toPrdtTag(result)) */
-						},
-						error : function() { alert("error")}	// 에러가 발생할 때, 호출될 함수
-					})
-				}
-			    
-				var postTagList = function(post_no) {
-					$.ajax({
-						type : 'GET',		//요청 메서드
-						url : '${contextPath}/admin/postTagInfo',		// 요청 URI
-						data: { post_no : post_no },
-						success : function(result) {			// 서버로부터 응답이 도착하면 호출될 함수
-							$(PrdtTags).html(toPrdtTag(result))		// result는 서버가 전송한 데이터
-						},
-						error : function() { alert("error")}	// 에러가 발생할 때, 호출될 함수
-					})
-				}
-
-				showList(post_no)
-		    	postTagList(post_no)
-			}
-		})
-
-	</script>
 </head>
 
 <body>
@@ -127,75 +65,69 @@
 								<i class="fa-regular fa-comment-dots fa-lg"></i>
 							</button>
 						</div>
-						<%-- <c:forEach var="postTagInfo" items="${postTagInfo}"> --%>
-							<div class="productDetail d-flex row justify-content-start" id="PrdtTags${status.index}">
-								<%-- <img src="${contextPath}/resources/img/post/${postTagInfo.post_tag_img}" onclick="location.href='./'" id="product_img" class="col-3">
-								<span class="d-inline-block text-truncate" style="max-width: 280px; font-size: 14px; padding-top: 10px;">
-									${postTagInfo.post_tag_name}<br>${postTagInfo.post_tag_price}
-								</span> --%>
-							</div>
-						<%-- </c:forEach> --%>
+							<div class="productDetail d-flex row justify-content-start" id="PrdtTags${status.index}"></div>
 					</div>
 				</div>
-				<c:if test="${snsTopList.NPostDto.post_no eq snsTopList.NPostDto.post_no }"> 
-					<!-- <script type="text/javascript">
-						/* $(document).ready(function(){ */
-							var arr = ${snsTotalList}
-							
-							/* let post_no = ${snsTopList.NPostDto.post_no} */
-						    /* alert(post_no) */
-					    	var showList = function(post_no) {
-								$.ajax({
-									type : 'GET',		//요청 메서드
-									url : '${contextPath}/admin/tagInfoList',		// 요청 URI
-									data: { post_no : post_no },
-									success : function(result) {			// 서버로부터 응답이 도착하면 호출될 함수
-										$("#tagInfoList").html(toHtml(result))		// result는 서버가 전송한 데이터
-									},
-									error : function() { alert("error")}	// 에러가 발생할 때, 호출될 함수
-								})
-							}
-					    	var postTagList = function(post_no) {
-								$.ajax({
-									type : 'GET',		//요청 메서드
-									url : '${contextPath}/admin/postTagInfo',		// 요청 URI
-									data: { post_no : post_no },
-									success : function(result) {			// 서버로부터 응답이 도착하면 호출될 함수
-										$("#PrdtTags").html(toPrdtTag(result))		// result는 서버가 전송한 데이터
-									},
-									error : function() { alert("error")}	// 에러가 발생할 때, 호출될 함수
-								})
-							}
-						    /* showList(post_no)
-						    postTagList(post_no) */
-						    arr.forEach(
-						    	post_no => postTagList(post_no)
-							    /* postTagList(post_no) */
-						    )
-							var toHtml = function(tags) {
-								let tmp = ''
-								tags.forEach(function(tag) {
-									tmp += '<b>#' + tag.tag_content + '</b>'
-								})
-								return tmp
-							}
-						    
-						    var toPrdtTag = function(prdttags) {
-								let tmp = ''
-								prdttags.forEach(function(prdttag) {
-									tmp += '<div>'
-									tmp += '<img src="${contextPath}/resources/img/product/' + prdttag.post_tag_img + '" onclick='
-									tmp += '"location.href="${contextPath}/resources/img/product/' + prdttag.product_no + '" id="product_img" class="col-3">'
-									tmp += '<span class="d-inline-block text-truncate" style="max-width: 280px; font-size: 14px; padding-top: 10px;">' + prdttag.post_tag_name + '<br>' + prdttag.post_tag_price + '</span>'
-									tmp += '</div>'
-								})
-								return tmp
-							}
-						    
-						    
-						/* }) */
-				
-					</script> -->
+				<c:if test="${status.last eq true}"> 
+					<script type="text/javascript">
+							$(document).ready(function(){
+								var arr = ${snsTotalList}
+								var toHtml = function(tags) {
+									let tmp = ''
+									tags.forEach(function(tag) {
+										tmp += '<b>#' + tag + '</b>'
+									})
+									return tmp
+								}
+								var showList = function(post_no) {
+									$.ajax({
+										type : 'GET',		//요청 메서드
+										url : '${contextPath}/admin/tagInfoList',		// 요청 URI
+										data: { post_no : post_no },
+										async : false,
+										success : function(result) {			// 서버로부터 응답이 도착하면 호출될 함수
+												$(tagInfoList).html(toHtml(result))		// result는 서버가 전송한 데이터											
+												/* $("#PrdtTags").html(toPrdtTag(result)) */
+										},
+										error : function() { alert("error")}	// 에러가 발생할 때, 호출될 함수
+									})
+								}
+								
+								var toPrdtTag = function(prdttags) {
+									let tmp = ''
+									prdttags.forEach(function(prdttag) {
+										tmp += '<div>'
+										tmp += '<img src="${contextPath}/resources/img/product/' + prdttag.post_tag_img + '" onclick='
+										tmp += '"location.href="${contextPath}/resources/img/product/' + prdttag.product_no + '" id="product_img" class="col-3">'
+										tmp += '<span class="d-inline-block text-truncate" style="max-width: 280px; font-size: 14px; padding-top: 10px;">' + prdttag.post_tag_name + '<br>' + prdttag.post_tag_price + '</span>'
+										tmp += '</div>'
+									})
+									return tmp
+								}
+								var postTagList = function(post_no) {
+									$.ajax({
+										type : 'GET',		//요청 메서드
+										url : '${contextPath}/admin/postTagInfo',		// 요청 URI
+										data: { post_no : post_no },
+										async : false,
+										success : function(result) {			// 서버로부터 응답이 도착하면 호출될 함수
+											$(PrdtTags).html(toPrdtTag(result))		// result는 서버가 전송한 데이터
+										},
+										error : function() { alert("error")}	// 에러가 발생할 때, 호출될 함수
+									})
+								}
+								
+								for (var i = 0; i < arr.length; i++) {
+									var post_no = arr[i]
+									console.log(post_no)
+								    var tagInfoList = '#tagInfoList' + i
+								    var PrdtTags = '#PrdtTags' + i
+
+									showList(post_no)
+							    	postTagList(post_no)
+								}
+							})
+					</script>
 		        </c:if>
 			</c:forEach>
 		</div>

@@ -14,6 +14,7 @@ import kr.co.lookst.main.domain.Prdt_Img;
 import kr.co.lookst.main.domain.Prdt_Option;
 import kr.co.lookst.main.domain.Product;
 import kr.co.lookst.main.domain.SearchItem;
+import kr.co.lookst.main.domain.SnsHeartDto;
 import kr.co.lookst.post.domain.OrderInfoDto;
 import kr.co.lookst.post.domain.Post_TagDto;
 import kr.co.lookst.post.domain.post_com_tagDto;
@@ -200,6 +201,11 @@ public class AdminDaoImpl implements AdminDao{
 	@Override
 	public List<post_com_tagDto> tagInfoList(Integer post_no) throws Exception {
 		return session.selectList(namespace + "tagInfoList", post_no);
+	}
+	/* 좋아요 체크 */
+	@Override
+	public int postLikeInsert(SnsHeartDto snsHeartDto) throws Exception {
+		return session.insert(namespace + "postLikeInsert", snsHeartDto);
 	}
 
 }
