@@ -11,6 +11,7 @@ import kr.co.lookst.post.domain.TpostDto;
 import kr.co.lookst.main.domain.Product;
 import kr.co.lookst.main.domain.SearchItem;
 import kr.co.lookst.post.domain.OrderFormPageDto;
+import kr.co.lookst.post.domain.OrderHistoryDto;
 import kr.co.lookst.post.domain.OrderInfoDto;
 /*import kr.co.lookst.post.domain.OrderPagePrdtDto;*/
 import kr.co.lookst.post.domain.post_com_tagDto;
@@ -55,6 +56,8 @@ public interface PostService {
 	int shopListCnt(SearchItem_prdtList sc) throws Exception;
 	/* 상품 검색 리스트 */
 	List<Product> shopListPage(SearchItem_prdtList sc) throws Exception;
+
+	List<OrderHistoryDto> orderHistory(Integer product_no) throws Exception;
 
 	
 

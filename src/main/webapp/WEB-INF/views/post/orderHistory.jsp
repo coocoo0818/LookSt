@@ -42,15 +42,17 @@
 								<th class="td_width_3">주문일자</th>
 							</tr>
 						</thead>
-						<tbody>
-							<tr>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-						</tbody>
+						<c:foreach>
+							<tbody class="zebra-striping">
+								<tr> 
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+							</tbody>
+						</c:foreach>
 					</table>
 				</div>
 			</section>
