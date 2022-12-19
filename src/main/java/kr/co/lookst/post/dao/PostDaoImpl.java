@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.co.lookst.main.domain.Product;
 import kr.co.lookst.main.domain.SearchItem;
+import kr.co.lookst.post.domain.OrderHistoryDto;
 import kr.co.lookst.post.domain.OrderInfoDto;
 import kr.co.lookst.post.domain.PostDto;
 import kr.co.lookst.post.domain.Post_imgDto;
@@ -149,6 +150,13 @@ public class PostDaoImpl implements PostDao{
 	public List<Product> shopListPage(SearchItem_prdtList sc) throws Exception {
 		// TODO Auto-generated method stub
 		return session.selectList(namespace + "shopListPage", sc);
+	}
+
+
+	@Override
+	public List<OrderHistoryDto> orderHistory(Integer product_no) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectList(namespace + "orderHistory", product_no);
 	}
 
 

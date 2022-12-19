@@ -4,6 +4,7 @@ import java.util.List;
 
 import kr.co.lookst.main.domain.Product;
 import kr.co.lookst.main.domain.SearchItem;
+import kr.co.lookst.post.domain.OrderHistoryDto;
 import kr.co.lookst.post.domain.OrderInfoDto;
 import kr.co.lookst.post.domain.PostDto;
 import kr.co.lookst.post.domain.Post_imgDto;
@@ -54,6 +55,10 @@ public interface PostDao {
 	int shopListCnt(SearchItem_prdtList sc) throws Exception;
 
 	List<Product> shopListPage(SearchItem_prdtList sc) throws Exception;
+
+	List<OrderHistoryDto> orderHistory(Integer product_no) throws Exception;
+	
+	
 
 	
 

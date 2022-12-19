@@ -212,11 +212,11 @@
 	<%@ include file="/WEB-INF/views/fix/header.jsp"%>
 
 	<div class="container">
-		<h1>Order List</h1>
+		<h1>Order Info</h1>
 		<form action="${contextPath}/admin/orderInsert" method="post">
 			<div id="app">
 				<!-- Product List -->
-				<section class="container">
+				<section class="container" style="padding: 20px">
 					<!-- 장바구니 리스트 -->
 					<div class="content_middle_section"></div>
 					<!-- 장바구니 가격 합계 -->
@@ -351,11 +351,11 @@
 										class="form-check-input" required="" value="o_payment" checked>
 									<label class="form-check-label" for="credit">온라인결제</label>
 								</div>
-								<div class="form-check">
+								<!-- <div class="form-check">
 									<input id="debit" name="paymentMethod" type="radio"
 										class="form-check-input" required="" value="payment"> <label
 										class="form-check-label" for="debit">무통장입금</label>
-								</div>
+								</div> -->
 							</div>
 							<hr class="my-4">
 						</div>

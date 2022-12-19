@@ -14,6 +14,7 @@ import kr.co.lookst.post.domain.ProdInfoDto;
 import kr.co.lookst.post.domain.SearchItem_prdtList;
 import kr.co.lookst.post.domain.TpostDto;
 import kr.co.lookst.post.domain.OrderFormPageDto;
+import kr.co.lookst.post.domain.OrderHistoryDto;
 import kr.co.lookst.post.domain.OrderInfoDto;
 /*import kr.co.lookst.post.domain.OrderPagePrdtDto;*/
 import kr.co.lookst.post.domain.post_com_tagDto;
@@ -134,6 +135,12 @@ public class PostServiceImpl implements PostService{
 	public List<Product> shopListPage(SearchItem_prdtList sc) throws Exception {
 		// TODO Auto-generated method stub
 		return postDao.shopListPage(sc);
+	}
+
+	@Override
+	public List<OrderHistoryDto> orderHistory(Integer product_no) throws Exception {
+		// TODO Auto-generated method stub
+		return postDao.orderHistory(product_no);
 	}
 
 	/*

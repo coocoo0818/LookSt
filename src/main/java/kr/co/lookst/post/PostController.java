@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import kr.co.lookst.main.domain.PageResolver;
 import kr.co.lookst.main.domain.Product;
 import kr.co.lookst.main.domain.SearchItem;
+import kr.co.lookst.post.domain.OrderHistoryDto;
 import kr.co.lookst.post.domain.PageResolver_prdtList;
 /*import kr.co.lookst.post.domain.OrderPagePrdtDto;*/
 import kr.co.lookst.post.domain.PostDto;
@@ -125,6 +126,17 @@ public class PostController {
 			e.printStackTrace();
 		}
 		return "post/productList";
+	}
+	/* 주문내역조회 */
+	@GetMapping("/orderHistory") 
+	public String orderHistory(Model m, Integer product_no) {
+		try {
+			List<OrderHistoryDto> orderHistory = postService.orderHistory(product_no);
+			m.addAttribute("orderHistory", orderHistory);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "/post/orderHistory";
 	}
    
    

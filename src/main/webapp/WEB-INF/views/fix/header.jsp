@@ -77,7 +77,7 @@
             <a class="dropdown-item" href="${loginoutlink}">${loginout}</a>
             <a class="${logouthidden}" href="${contextPath}/member/mypage">MY PAGE</a>
             <a class="${logouthidden}" href="${contextPath}/sns/snsProfile/?member_id=${res}">MY PROFILE</a>
-            <a class="${logouthidden}" href="${contextPath}/post/orderHistory">ORDER/a>
+            <a class="${logouthidden}" href="${contextPath}/post/orderHistory">ORDER</a>
             <a class="${loginhidden}" href="${contextPath}/register">REGISTER</a>
             <a class="${auth_seller_menu}" href="${contextPath}/seller/mySales">SELLER PAGE</a>
             <a class="${auth_admin_menu}" href="${contextPath}/admin/member_management">ADMIN PAGE</a>
