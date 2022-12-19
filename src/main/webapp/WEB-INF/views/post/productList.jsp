@@ -153,10 +153,10 @@
 									<h5><fmt:formatNumber value="${shopTotalList.product_price}" pattern="#,###" />원</h5>
 									<p class="card-text">${shopTotalList.product_info}</p>
 								</div>
-								<div class="card-footer">
+<!-- 								<div class="card-footer">
 									<small class="text-muted">&#9733; &#9733; &#9733;
 										&#9733; &#9734;</small>
-								</div>
+								</div> -->
 							</div>
 						</div>
 					</c:forEach>		

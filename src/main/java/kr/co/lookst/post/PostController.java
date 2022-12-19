@@ -126,6 +126,16 @@ public class PostController {
 		}
 		return "post/productList";
 	}
+	/* 주문내역조회 */
+	@GetMapping("/orderHistory") 
+	public String orderHistory(Model m) {
+		try {
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "/post/orderHistory";
+	}
    
    
 }
