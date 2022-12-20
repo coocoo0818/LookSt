@@ -2,6 +2,9 @@ package kr.co.lookst.post;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -129,10 +132,15 @@ public class PostController {
 	}
 	/* 주문내역조회 */
 	@GetMapping("/orderHistory") 
-	public String orderHistory(Model m, Integer product_no) {
+	public String orderHistory(Model m, HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
 		try {
-			List<OrderHistoryDto> orderHistory = postService.orderHistory(product_no);
+			String member_id = (String) session.getAttribute("res");
+			List<OrderHistoryDto> orderHistory = postService.orderHistory(member_id);
 			m.addAttribute("orderHistory", orderHistory);
+			m.addAttribute("member_id", member_id);
+			System.out.println(orderHistory);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

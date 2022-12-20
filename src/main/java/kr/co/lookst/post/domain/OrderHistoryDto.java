@@ -16,7 +16,9 @@ public class OrderHistoryDto {
 	private Integer prdt_order_no;
 	private String prdt_img_name;
 	private String product_name;
-	private Integer product_price;
+	private String prdt_order_size;
+	private String prdt_order_color;
+	private Integer prdt_order_price;
 	private Integer prdt_order_quan;
 	private Date prdt_order_date;
 	
