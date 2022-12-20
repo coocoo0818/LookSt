@@ -201,5 +201,15 @@ public class AdminServiceImpl implements AdminService{
 	public int postLikeInsert(SnsHeartDto snsHeartDto) throws Exception {
 		return adminDao.postLikeInsert(snsHeartDto);
 	}
+	/* 좋아요 취소 */
+	@Override
+	public int postLikeDelete(SnsHeartDto snsHeartDto) throws Exception {
+		return adminDao.postLikeDelete(snsHeartDto);
+	}
+	/* 좋아요 출력 */
+	@Override
+	public List<Integer> postLikeCheck(String login_id) throws Exception {
+		return adminDao.postLikeCheck(login_id);
+	}
 
 }

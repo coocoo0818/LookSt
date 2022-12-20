@@ -1,12 +1,14 @@
 function clickBtn() {
+	
 	let _buttonI = event.target;
 	const childElement = _buttonI.firstChild;
-
+	
 	if (_buttonI.classList.contains("likeBtn")) {
 		if (childElement.classList.contains("far")) {
 			childElement.classList.add("fas");
 			childElement.classList.add("active");
 			childElement.classList.remove("far");
+			
 		} else {
 			childElement.classList.remove("fas");
 			childElement.classList.remove("active");

@@ -387,7 +387,9 @@ public class AdminController {
 
 	/* sns total list */
 	@RequestMapping(value = "/snsTotalList", method = { RequestMethod.GET })
-	public String snsTotalList(Model model/* , Integer post_no */, HttpServletRequest request) {
+	public String snsTotalList(Model model, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String login_id = (String) session.getAttribute("res");
 		try {
 			/* sns total list */
 			List<MemMGMDto> snsTopList = adminService.snsTopList();
@@ -395,7 +397,10 @@ public class AdminController {
 
 			List<Integer> snsTotalList = adminService.snsTotalList();
 			model.addAttribute("snsTotalList", snsTotalList);
-
+			model.addAttribute("member_id", login_id);
+			
+			List<Integer> postLikeCheck = adminService.postLikeCheck(login_id);
+			model.addAttribute("postLikeCheck", postLikeCheck);
 			/* System.out.println(model); */
 			/* sns total list */
 		} catch (Exception e) {
@@ -455,7 +460,7 @@ public class AdminController {
 		SnsHeartDto snsHeartDto = new SnsHeartDto();
 			
 		snsHeartDto.setPost_no(post_no);
-		snsHeartDto.setMember_id(member_id);
+		snsHeartDto.setMember_id(login_id);
 		try {
 			mvc = adminService.postLikeInsert(snsHeartDto);
 			model.addAttribute("member_id", login_id);
@@ -464,4 +469,26 @@ public class AdminController {
 		}
 		return mvc;
 	}
+	
+	/* 좋아요 취소 */
+	@RequestMapping(value = "/postLikeDelete", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public int postLikeDelete(Model model, @RequestParam(value="member_id", required=false) String member_id, 
+							@RequestParam(value="post_no", required=false) Integer post_no, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		int mvc = 0;
+		String login_id = (String) session.getAttribute("res");
+		SnsHeartDto snsHeartDto = new SnsHeartDto();
+			
+		snsHeartDto.setPost_no(post_no);
+		snsHeartDto.setMember_id(login_id);
+		try {
+			mvc = adminService.postLikeDelete(snsHeartDto);
+			model.addAttribute("member_id", login_id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return mvc;
+	}
+	
 }

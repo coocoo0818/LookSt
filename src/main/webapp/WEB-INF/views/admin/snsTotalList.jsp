@@ -10,6 +10,18 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link href="${contextPath}/resources/admin/css/snsTotalList.css" rel="stylesheet">
 <title>LOOKST</title>
+<script type="text/javascript">
+	$(document).ready(function() {
+		var likeArr = ${postLikeCheck}
+		for (var i = 0; i < likeArr.length; i++) {
+			var likedPost_no = likeArr[i]
+			$("#heart"+likedPost_no).removeClass("far");
+			$("#heart"+likedPost_no).addClass("fas");
+			$("#heart"+likedPost_no).addClass("active");
+		}
+	})
+</script>
+
 </head>
 
 <body>
@@ -42,7 +54,7 @@
 				<div class="col">
 					<div class="card border-0">
 						<%-- ${(fn:contains(snsTopList.NPostDto.post_no, snsTopList.NPostDto.post_no)) ? functionName() :'no'} --%>
-						<img src="${contextPath}/resources/img/post/${snsTopList.post_imgDto.post_img_img}" class="card-img-top rounded position-relative" onclick="location.href='${contextPath}/admin/mylist/?post_no=${snsTotalLists}'">
+						<img src="${contextPath}/resources/img/post/${snsTopList.post_imgDto.post_img_img}" class="card-img-top rounded position-relative" onclick="location.href='${contextPath}/admin/mylist/?post_no=${snsTotalLists.NPostDto.post_no}'">
 						<span class="position-absolute badge rounded-pill bg-light m-1 postNo" id="postNo" data-postNo="${snsTopList.NPostDto.post_no}">No.${snsTopList.NPostDto.post_no}</span>
 						<div class="row justify-content-start d-flex m-2">
 							<div class="col-3">
@@ -58,8 +70,8 @@
 						</div>
 
 						<div class="like_comment">
-							<button onclick="clickBtn()" class="border border-white" style="background-color: transparent;">
-								<i class="far fa-heart fa-lg"></i>
+							<button onclick="clickBtn(this)" class="border border-white" style="background-color: transparent;">
+								<i class="far fa-heart fa-lg" data-productNo="${snsTopList.NPostDto.post_no}" id="heart${snsTopList.NPostDto.post_no}"></i>
 							</button>
 							<button onclick="clickBtn()" class="border border-white" style="background-color: transparent;">
 								<i class="fa-regular fa-comment-dots fa-lg"></i>
@@ -72,6 +84,7 @@
 					<script type="text/javascript">
 							$(document).ready(function(){
 								var arr = ${snsTotalList}
+								
 								var toHtml = function(tags) {
 									let tmp = ''
 									tags.forEach(function(tag) {
@@ -79,6 +92,7 @@
 									})
 									return tmp
 								}
+								
 								var showList = function(post_no) {
 									$.ajax({
 										type : 'GET',		//요청 메서드
@@ -97,13 +111,14 @@
 									let tmp = ''
 									prdttags.forEach(function(prdttag) {
 										tmp += '<div>'
-										tmp += '<img src="${contextPath}/resources/img/product/' + prdttag.post_tag_img + '" onclick='
-										tmp += '"location.href="${contextPath}/resources/img/product/' + prdttag.product_no + '" id="product_img" class="col-3">'
+										tmp += '<img src="${contextPath}/resources/img/product/' + prdttag.post_tag_img
+										tmp += '" onclick=location.href="${contextPath}/admin/productDetail/?product_no='+ prdttag.product_no + '" id="product_img" class="col-3">'
 										tmp += '<span class="d-inline-block text-truncate" style="max-width: 280px; font-size: 14px; padding-top: 10px;">' + prdttag.post_tag_name + '<br>' + prdttag.post_tag_price + '</span>'
 										tmp += '</div>'
 									})
 									return tmp
 								}
+								
 								var postTagList = function(post_no) {
 									$.ajax({
 										type : 'GET',		//요청 메서드
@@ -126,13 +141,95 @@
 									showList(post_no)
 							    	postTagList(post_no)
 								}
+								
 							})
+							
+							function clickBtn(e) {
+								var post_no = $(e).children().attr("data-productNo");
+								
+								let _buttonI = event.target;
+								const childElement = _buttonI.firstChild;
+								
+								if (_buttonI.classList.contains("likeBtn")) {
+									if (childElement.classList.contains("far")) {
+										childElement.classList.add("fas");
+										childElement.classList.add("active");
+										childElement.classList.remove("far");
+										$.ajax({
+											type: 'POST',   //get방식으로 명시
+											url : '${contextPath}/admin/postLikeInsert',  //이동할 jsp 파일 주소
+											data:{
+													post_no : post_no,
+											},   
+											success: function(data){   //데이터 주고받기 성공했을 경우 실행할 결과
+												
+											},
+											error:function(){   //데이터 주고받기가 실패했을 경우 실행할 결과
+												alert('실패');
+											}
+										})
+									} else {
+										childElement.classList.remove("fas");
+										childElement.classList.remove("active");
+										childElement.classList.add("far");
+										$.ajax({
+											type: 'POST',   //get방식으로 명시
+											url : '${contextPath}/admin/postLikeDelete',  //이동할 jsp 파일 주소
+											data:{
+													post_no : post_no,
+											},   
+											success: function(data){   //데이터 주고받기 성공했을 경우 실행할 결과
+												
+											},
+											error:function(){   //데이터 주고받기가 실패했을 경우 실행할 결과
+												alert('실패');
+											}
+										})
+									}
+								} else {
+									if (_buttonI.classList.contains("far")) {
+										_buttonI.classList.add("fas");
+										_buttonI.classList.add("active");
+										_buttonI.classList.remove("far");
+										$.ajax({
+											type: 'POST',   //get방식으로 명시
+											url : '${contextPath}/admin/postLikeInsert',  //이동할 jsp 파일 주소
+											data:{
+													post_no : post_no,
+											},   
+											success: function(data){   //데이터 주고받기 성공했을 경우 실행할 결과
+												
+											},
+											error:function(){   //데이터 주고받기가 실패했을 경우 실행할 결과
+												alert('실패');
+											}
+										})
+									} else {
+										_buttonI.classList.remove("fas");
+										_buttonI.classList.remove("active");
+										_buttonI.classList.add("far");
+										$.ajax({
+											type: 'POST',   //get방식으로 명시
+											url : '${contextPath}/admin/postLikeDelete',  //이동할 jsp 파일 주소
+											data:{
+													post_no : post_no,
+											},   
+											success: function(data){   //데이터 주고받기 성공했을 경우 실행할 결과
+												
+											},
+											error:function(){   //데이터 주고받기가 실패했을 경우 실행할 결과
+												alert('실패');
+											}
+										})
+									}
+								}
+							}
 					</script>
 		        </c:if>
 			</c:forEach>
 		</div>
 	</div>
-	<script type="text/javascript" src="${contextPath}/resources/admin/js/snsTotalList.js"></script>
+	<%-- <script type="text/javascript" src="${contextPath}/resources/admin/js/snsTotalList.js"></script> --%>
 	<%@ include file="/WEB-INF/views/fix/footer.jsp"%>
 </body>
 </html>
