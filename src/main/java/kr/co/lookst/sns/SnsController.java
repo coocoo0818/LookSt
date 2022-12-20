@@ -150,15 +150,24 @@ public class SnsController {
 
 	/* 포스트 이미지 업로드 */
 	@RequestMapping(value = "postUpload", method = { RequestMethod.POST })
-	public String postUpload(String member_id, Model m, MultipartHttpServletRequest mtfRequest,
+	public String postUpload(ProfileFeedDto pfd, Model m, MultipartHttpServletRequest mtfRequest,
 			HttpServletRequest request) {
-		List<MultipartFile> fileList = mtfRequest.getFiles("file");
-
 		HttpSession session = request.getSession();
-		String login_id = (String) session.getAttribute("res");
+		String member_id = (String) session.getAttribute("res");
+		pfd.setMember_id(member_id);
+		
+	
+		List<MultipartFile> fileList = mtfRequest.getFiles("file");
 		String path = "C:\\workspace-spring\\LookSt\\src\\main\\webapp\\resources\\img\\post\\";
-		member_id = login_id;
-
+		// 포스트 insert & select => post_no => 이미지 반복업로드
+		try {
+			int uploadpost = snsService.contentUp(pfd);
+			
+			System.out.println(uploadpost);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+		
 		for (MultipartFile mf : fileList) {
 			String originFileName = mf.getOriginalFilename(); // 원본 파일 명
 			long fileSize = mf.getSize(); // 파일 사이즈
@@ -168,11 +177,12 @@ public class SnsController {
 			System.out.println("파일 사이즈 : " + fileSize);
 			System.out.println("작성자 아이디 : " + member_id);
 			String safeFile = path + uuid + "_" + originFileName;
+			
 			try {
 				m.addAttribute("member_id", member_id);
 				m.addAttribute("originFileName", originFileName);
 				m.addAttribute("uuid", uuid);
-				mf.transferTo(new File(safeFile));
+				mf.transferTo(new File(safeFile)); // insert 이미지 반복
 				System.out.println(m);
 			} catch (IllegalStateException e) {
 				e.printStackTrace();
