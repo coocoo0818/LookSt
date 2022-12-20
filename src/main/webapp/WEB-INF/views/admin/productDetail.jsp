@@ -19,7 +19,7 @@
 			var prdt_option_size = $('.productSize.activ').attr('value');
 			var prdt_option_color = $('.optionColor.activ').attr('value');
 			var prdt_order_quan = $("#exampleSelect1 option:selected").val();
-			alert(product_no)
+			
 			let formData = new FormData();
 			formData.append('product_no',product_no);
 			formData.append('prdt_option_size',prdt_option_size);

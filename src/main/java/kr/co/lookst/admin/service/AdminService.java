@@ -88,5 +88,9 @@ public interface AdminService {
 	List<post_com_tagDto> tagInfoList(Integer post_no) throws Exception;
 	/* 좋아요 체크 */
 	int postLikeInsert(SnsHeartDto snsHeartDto) throws Exception;
+	/* 좋아요 취소 */
+	int postLikeDelete(SnsHeartDto snsHeartDto) throws Exception;
+	/* 좋아요 출력 */
+	List<Integer> postLikeCheck(String login_id) throws Exception;
 
 }

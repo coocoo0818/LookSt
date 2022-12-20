@@ -207,5 +207,15 @@ public class AdminDaoImpl implements AdminDao{
 	public int postLikeInsert(SnsHeartDto snsHeartDto) throws Exception {
 		return session.insert(namespace + "postLikeInsert", snsHeartDto);
 	}
+	/* 좋아요 취소 */
+	@Override
+	public int postLikeDelete(SnsHeartDto snsHeartDto) throws Exception {
+		return session.delete(namespace + "postLikeDelete", snsHeartDto);
+	}
+	/* 좋아요 출력 */
+	@Override
+	public List<Integer> postLikeCheck(String login_id) throws Exception {
+		return session.selectList(namespace + "postLikeCheck", login_id);
+	}
 
 }
