@@ -138,9 +138,9 @@ public class PostServiceImpl implements PostService{
 	}
 
 	@Override
-	public List<OrderHistoryDto> orderHistory(Integer product_no) throws Exception {
+	public List<OrderHistoryDto> orderHistory(String member_id) throws Exception {
 		// TODO Auto-generated method stub
-		return postDao.orderHistory(product_no);
+		return postDao.orderHistory(member_id);
 	}
 
 	/*

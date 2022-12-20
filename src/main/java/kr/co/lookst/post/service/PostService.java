@@ -57,7 +57,7 @@ public interface PostService {
 	/* 상품 검색 리스트 */
 	List<Product> shopListPage(SearchItem_prdtList sc) throws Exception;
 
-	List<OrderHistoryDto> orderHistory(Integer product_no) throws Exception;
+	List<OrderHistoryDto> orderHistory(String member_id) throws Exception;
 
 	
 

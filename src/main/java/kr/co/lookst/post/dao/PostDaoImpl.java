@@ -154,9 +154,10 @@ public class PostDaoImpl implements PostDao{
 
 
 	@Override
-	public List<OrderHistoryDto> orderHistory(Integer product_no) throws Exception {
+	public List<OrderHistoryDto> orderHistory(String member_id) throws Exception {
+		System.out.println(member_id);
 		// TODO Auto-generated method stub
-		return session.selectList(namespace + "orderHistory", product_no);
+		return session.selectList(namespace + "orderHistory", member_id);
 	}
 
 
