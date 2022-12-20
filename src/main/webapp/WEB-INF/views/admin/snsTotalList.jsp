@@ -54,7 +54,7 @@
 				<div class="col">
 					<div class="card border-0">
 						<%-- ${(fn:contains(snsTopList.NPostDto.post_no, snsTopList.NPostDto.post_no)) ? functionName() :'no'} --%>
-						<img src="${contextPath}/resources/img/post/${snsTopList.post_imgDto.post_img_img}" class="card-img-top rounded position-relative" onclick="location.href='${contextPath}/admin/mylist/?post_no=${snsTotalLists.NPostDto.post_no}'">
+						<img src="${contextPath}/resources/img/post/${snsTopList.post_imgDto.post_img_img}" class="card-img-top rounded position-relative" onclick="location.href='${contextPath}/admin/snsDetailList/?post_no='${snsTopList.NPostDto.post_no}'">
 						<span class="position-absolute badge rounded-pill bg-light m-1 postNo" id="postNo" data-postNo="${snsTopList.NPostDto.post_no}">No.${snsTopList.NPostDto.post_no}</span>
 						<div class="row justify-content-start d-flex m-2">
 							<div class="col-3">
@@ -144,86 +144,95 @@
 								
 							})
 							
+							
 							function clickBtn(e) {
 								var post_no = $(e).children().attr("data-productNo");
+								var login_id = "${sessionScope.res}"
 								
 								let _buttonI = event.target;
 								const childElement = _buttonI.firstChild;
 								
-								if (_buttonI.classList.contains("likeBtn")) {
-									if (childElement.classList.contains("far")) {
-										childElement.classList.add("fas");
-										childElement.classList.add("active");
-										childElement.classList.remove("far");
-										$.ajax({
-											type: 'POST',   //get방식으로 명시
-											url : '${contextPath}/admin/postLikeInsert',  //이동할 jsp 파일 주소
-											data:{
-													post_no : post_no,
-											},   
-											success: function(data){   //데이터 주고받기 성공했을 경우 실행할 결과
-												
-											},
-											error:function(){   //데이터 주고받기가 실패했을 경우 실행할 결과
-												alert('실패');
-											}
-										})
+								if(login_id == "undefined"|| login_id == null|| login_id == ""){
+									alert("로그인 해주세요.")
+									return false;
+								}
+									else if (login_id != "undefined"|| login_id != null|| login_id != "") {
+									if (_buttonI.classList.contains("likeBtn")) {
+										if (childElement.classList.contains("far")) {
+											childElement.classList.add("fas");
+											childElement.classList.add("active");
+											childElement.classList.remove("far");
+											$.ajax({
+												type: 'POST',   //get방식으로 명시
+												url : '${contextPath}/admin/postLikeInsert',  //이동할 jsp 파일 주소
+												data:{
+														post_no : post_no,
+												},   
+												success: function(data){   //데이터 주고받기 성공했을 경우 실행할 결과
+													
+												},
+												error:function(){   //데이터 주고받기가 실패했을 경우 실행할 결과
+													alert('실패');
+												}
+											})
+										} else {
+											childElement.classList.remove("fas");
+											childElement.classList.remove("active");
+											childElement.classList.add("far");
+											$.ajax({
+												type: 'POST',   //get방식으로 명시
+												url : '${contextPath}/admin/postLikeDelete',  //이동할 jsp 파일 주소
+												data:{
+														post_no : post_no,
+												},   
+												success: function(data){   //데이터 주고받기 성공했을 경우 실행할 결과
+													
+												},
+												error:function(){   //데이터 주고받기가 실패했을 경우 실행할 결과
+													alert('실패');
+												}
+											})
+										}
 									} else {
-										childElement.classList.remove("fas");
-										childElement.classList.remove("active");
-										childElement.classList.add("far");
-										$.ajax({
-											type: 'POST',   //get방식으로 명시
-											url : '${contextPath}/admin/postLikeDelete',  //이동할 jsp 파일 주소
-											data:{
-													post_no : post_no,
-											},   
-											success: function(data){   //데이터 주고받기 성공했을 경우 실행할 결과
-												
-											},
-											error:function(){   //데이터 주고받기가 실패했을 경우 실행할 결과
-												alert('실패');
-											}
-										})
-									}
-								} else {
-									if (_buttonI.classList.contains("far")) {
-										_buttonI.classList.add("fas");
-										_buttonI.classList.add("active");
-										_buttonI.classList.remove("far");
-										$.ajax({
-											type: 'POST',   //get방식으로 명시
-											url : '${contextPath}/admin/postLikeInsert',  //이동할 jsp 파일 주소
-											data:{
-													post_no : post_no,
-											},   
-											success: function(data){   //데이터 주고받기 성공했을 경우 실행할 결과
-												
-											},
-											error:function(){   //데이터 주고받기가 실패했을 경우 실행할 결과
-												alert('실패');
-											}
-										})
-									} else {
-										_buttonI.classList.remove("fas");
-										_buttonI.classList.remove("active");
-										_buttonI.classList.add("far");
-										$.ajax({
-											type: 'POST',   //get방식으로 명시
-											url : '${contextPath}/admin/postLikeDelete',  //이동할 jsp 파일 주소
-											data:{
-													post_no : post_no,
-											},   
-											success: function(data){   //데이터 주고받기 성공했을 경우 실행할 결과
-												
-											},
-											error:function(){   //데이터 주고받기가 실패했을 경우 실행할 결과
-												alert('실패');
-											}
-										})
+										if (_buttonI.classList.contains("far")) {
+											_buttonI.classList.add("fas");
+											_buttonI.classList.add("active");
+											_buttonI.classList.remove("far");
+											$.ajax({
+												type: 'POST',   //get방식으로 명시
+												url : '${contextPath}/admin/postLikeInsert',  //이동할 jsp 파일 주소
+												data:{
+														post_no : post_no,
+												},   
+												success: function(data){   //데이터 주고받기 성공했을 경우 실행할 결과
+													
+												},
+												error:function(){   //데이터 주고받기가 실패했을 경우 실행할 결과
+													alert('실패');
+												}
+											})
+										} else {
+											_buttonI.classList.remove("fas");
+											_buttonI.classList.remove("active");
+											_buttonI.classList.add("far");
+											$.ajax({
+												type: 'POST',   //get방식으로 명시
+												url : '${contextPath}/admin/postLikeDelete',  //이동할 jsp 파일 주소
+												data:{
+														post_no : post_no,
+												},   
+												success: function(data){   //데이터 주고받기 성공했을 경우 실행할 결과
+													
+												},
+												error:function(){   //데이터 주고받기가 실패했을 경우 실행할 결과
+													alert('실패');
+												}
+											})
+										}
 									}
 								}
 							}
+							
 					</script>
 		        </c:if>
 			</c:forEach>

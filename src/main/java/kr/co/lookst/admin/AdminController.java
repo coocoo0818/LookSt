@@ -491,4 +491,18 @@ public class AdminController {
 		return mvc;
 	}
 	
+	/* sns Detail List */
+	@RequestMapping(value = "/snsDetailList", method = { RequestMethod.GET })
+	public String snsDetailList(Model model, HttpServletRequest request, Integer post_no) {
+		System.out.println(post_no);
+		HttpSession session = request.getSession();
+		String login_id = (String) session.getAttribute("res");
+		try {
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "/admin/snsDetailList";
+	}
+	
 }
