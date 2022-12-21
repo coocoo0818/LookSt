@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -17,6 +18,7 @@ import kr.co.lookst.main.domain.SearchItem;
 import kr.co.lookst.main.domain.SnsHeartDto;
 import kr.co.lookst.post.domain.OrderInfoDto;
 import kr.co.lookst.post.domain.Post_TagDto;
+import kr.co.lookst.post.domain.Post_imgDto;
 import kr.co.lookst.post.domain.post_com_tagDto;
 
 @Repository
@@ -216,6 +218,31 @@ public class AdminDaoImpl implements AdminDao{
 	@Override
 	public List<Integer> postLikeCheck(String login_id) throws Exception {
 		return session.selectList(namespace + "postLikeCheck", login_id);
+	}
+	/* sns 클릭 한 상세 포스트 */
+	@Override
+	public MemMGMDto snsDetailClick(Integer post_no) throws Exception {
+		return session.selectOne(namespace + "snsDetailClick", post_no);
+	}
+	/* sns 클릭 한 이미지 */
+	@Override
+	public List<Post_imgDto> snsDetailClickImg(Integer post_no) throws Exception {
+		return session.selectList(namespace + "snsDetailClickImg", post_no);
+	}
+	/* sns 디테일 페이지 상품 태그 갯수 */
+	@Override
+	public int postTagInfoCnt(Integer post_no) throws Exception {
+		return session.selectOne(namespace + "postTagInfoCnt", post_no);
+	}
+	/* sns 디테일 페이지 좋아요 갯수 */
+	@Override
+	public int postLikedCnt(Integer post_no) throws Exception {
+		return session.selectOne(namespace + "postLikedCnt", post_no);
+	}
+	/* sns 디테일 페이지 좋아요 체크 */
+	@Override
+	public int postLikedCheck(String login_id) throws Exception {
+		return session.selectOne(namespace + "postLikedCheck", login_id);
 	}
 
 }

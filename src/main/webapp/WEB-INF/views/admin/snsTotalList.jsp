@@ -54,7 +54,7 @@
 				<div class="col">
 					<div class="card border-0">
 						<%-- ${(fn:contains(snsTopList.NPostDto.post_no, snsTopList.NPostDto.post_no)) ? functionName() :'no'} --%>
-						<img src="${contextPath}/resources/img/post/${snsTopList.post_imgDto.post_img_img}" class="card-img-top rounded position-relative" onclick="location.href='${contextPath}/admin/snsDetailList/?post_no='${snsTopList.NPostDto.post_no}'">
+						<img src="${contextPath}/resources/img/post/${snsTopList.post_imgDto.post_img_img}" class="card-img-top rounded position-relative" onclick="location.href='${contextPath}/admin/snsDetailList/?post_no=${snsTopList.NPostDto.post_no}'">
 						<span class="position-absolute badge rounded-pill bg-light m-1 postNo" id="postNo" data-postNo="${snsTopList.NPostDto.post_no}">No.${snsTopList.NPostDto.post_no}</span>
 						<div class="row justify-content-start d-flex m-2">
 							<div class="col-3">

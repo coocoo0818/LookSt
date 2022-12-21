@@ -28,6 +28,7 @@ import kr.co.lookst.main.domain.SnsHeartDto;
 import kr.co.lookst.member.domain.MemberDto;
 import kr.co.lookst.post.domain.OrderInfoDto;
 import kr.co.lookst.post.domain.Post_TagDto;
+import kr.co.lookst.post.domain.Post_imgDto;
 import kr.co.lookst.post.domain.post_com_tagDto;
 
 @Controller
@@ -498,7 +499,30 @@ public class AdminController {
 		HttpSession session = request.getSession();
 		String login_id = (String) session.getAttribute("res");
 		try {
+			/* sns 클릭된 포스트 정보 */
+			MemMGMDto snsDetailClick = adminService.snsDetailClick(post_no);
+			/* sns 디테일 페이지 캐러셀 */
+			List<Post_imgDto> snsDetailClickImg = adminService.snsDetailClickImg(post_no);
+			/* sns 디테일 페이지 상품 태그 */
+			List<Post_TagDto> postTagInfo = adminService.postTagInfo(post_no);
+			/* sns 디테일 페이지 상품 태그 갯수 */
+			int postTagInfoCnt = adminService.postTagInfoCnt(post_no);
+			/* sns 디테일 페이지 좋아요 갯수 */
+			int postLikedCnt = adminService.postLikedCnt(post_no);
+			/* sns 디테일 페이지 일반 태그 태그 */
+			List<post_com_tagDto> tagInfoList = adminService.tagInfoList(post_no);
+			/* sns 디테일 페이지 좋아요 체크 */
+			int postLikedCheck = adminService.postLikedCheck(login_id);
 			
+			System.out.println(snsDetailClick);
+			model.addAttribute("member_id", login_id);
+			model.addAttribute("postTagInfo", postTagInfo);
+			model.addAttribute("snsDetailClick", snsDetailClick);
+			model.addAttribute("snsDetailClickImg", snsDetailClickImg);
+			model.addAttribute("postTagInfoCnt", postTagInfoCnt);
+			model.addAttribute("postLikedCnt", postLikedCnt);
+			model.addAttribute("tagInfoList", tagInfoList);
+			model.addAttribute("postLikedCheck", postLikedCheck);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
