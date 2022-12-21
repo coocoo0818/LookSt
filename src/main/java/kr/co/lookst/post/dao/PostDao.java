@@ -56,7 +56,9 @@ public interface PostDao {
 
 	List<Product> shopListPage(SearchItem_prdtList sc) throws Exception;
 
-	List<OrderHistoryDto> orderHistory(Integer product_no) throws Exception;
+	List<OrderHistoryDto> orderHistory(String member_id) throws Exception;
+
+	int prdtOrderDel(Integer prdt_order_no, String member_id) throws Exception;
 	
 	
 

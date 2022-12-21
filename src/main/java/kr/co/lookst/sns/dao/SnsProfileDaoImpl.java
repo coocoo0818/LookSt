@@ -87,25 +87,18 @@ public class SnsProfileDaoImpl implements SnsProfileDao {
 		map.put("profile_uuid", profile_uuid);
 		return session.update(namespace + "profileImg_Mod", map);
 	}
-	/*
+
 	// 포스트 컨텐트 업로드
 	@Override
-	public int postCon_up(String member_id, String post_content) throws Exception {
-		Map map = new HashMap();
-		map.put("member_id", member_id);
-		map.put("post_content", post_content);
-		return session.insert(namespace + "postCon_up", map);
+	public int postCon_up(ProfileFeedDto pfd) throws Exception {
+		return session.insert(namespace + "postCon_up", pfd);
 	}
 	// 포스트 이미지 업로드
 	@Override
-	public int postImg_up(String post_img_img, Integer post_img_seq, String post_img_uuid) throws Exception {
-		Map map = new HashMap();
-		map.put("post_img_img", post_img_img);
-		map.put("post_img_seq", post_img_seq);
-		map.put("post_img_uuid", post_img_uuid);
-		return session.insert(namespace + "postImg_up", map);
+	public int postImg_up(ProfileFeedDto pfd) throws Exception {
+		return session.insert(namespace + "postImg_up", pfd);
 	}
-	*/
+
 	// 게시물 삭제
 	@Override
 	public int deletePost(Integer post_no) throws Exception {

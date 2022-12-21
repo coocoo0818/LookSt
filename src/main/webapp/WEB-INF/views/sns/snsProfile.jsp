@@ -10,8 +10,15 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
 <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 <style type="text/css">
+
+.btn {
+	border-radius: 13px;
+}
+
 .profileEdit_Btn {
 	margin-left: 100px;
 }
@@ -136,6 +143,11 @@ $(document).ready(function() {
 	<div class="container">
 		<div class="row justify-content-md-center">
 			<h2 class="col-auto my-5">${pro_info.member_nick}'sProfile</h2>
+		</div>
+		<div class="col-1 offset-11 row justify-content-end">
+			<a href="${contextPath}/sns/postUpload">
+			<button type="button" class="upload_Btn btn btn-light ms-auto "><i class="bi fs-2 bi-capslock"></i></button>
+			</a>
 		</div>
 	</div>
 	<!-- myProfile 끝 -->
