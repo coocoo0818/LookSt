@@ -136,11 +136,17 @@ public class PostServiceImpl implements PostService{
 		// TODO Auto-generated method stub
 		return postDao.shopListPage(sc);
 	}
-
+	/* 주문 상품 조회 */
 	@Override
 	public List<OrderHistoryDto> orderHistory(String member_id) throws Exception {
 		// TODO Auto-generated method stub
 		return postDao.orderHistory(member_id);
+	}
+	/* 주문 상품 취소 */
+	@Override
+	public int prdtOrderDel(Integer prdt_order_no, String member_id) throws Exception {
+		// TODO Auto-generated method stub
+		return postDao.prdtOrderDel(prdt_order_no, member_id);
 	}
 
 	/*

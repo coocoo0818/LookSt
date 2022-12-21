@@ -21,5 +21,7 @@ public class OrderHistoryDto {
 	private Integer prdt_order_price;
 	private Integer prdt_order_quan;
 	private Date prdt_order_date;
+	private String prdt_order_type;
+	private String prdt_order_cancel;
 	
 }

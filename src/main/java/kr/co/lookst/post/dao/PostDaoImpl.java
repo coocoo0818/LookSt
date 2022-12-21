@@ -1,6 +1,8 @@
 package kr.co.lookst.post.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -158,6 +160,15 @@ public class PostDaoImpl implements PostDao{
 		System.out.println(member_id);
 		// TODO Auto-generated method stub
 		return session.selectList(namespace + "orderHistory", member_id);
+	}
+
+
+	@Override
+	public int prdtOrderDel(Integer prdt_order_no, String member_id) throws Exception {
+		Map map = new HashMap();
+		map.put("prdt_order_no", prdt_order_no);
+		map.put("member_id", member_id);
+		return session.delete(namespace + "prdtOrderDel", map);
 	}
 
 

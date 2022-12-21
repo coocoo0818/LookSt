@@ -27,6 +27,20 @@
 <body>
 	<%@ include file="/WEB-INF/views/fix/header.jsp"%>
 
+	<script type="text/javascript">
+	
+		$("#removeBtn").on("click", function() {
+			if(!confirm("정말로 취소하시겠습니까?")) return;
+			
+			let form = $("#form")
+			form.attr("action","<c:url value='/post/prdtOrderDel${searchItem.queryString}' />")
+			form.attr("method", "post")
+			form.submit()
+		})
+	
+	</script>
+
+
 	<div class="container">
 		<h1>Order List</h1>
 		<form>
@@ -38,8 +52,9 @@
 								<th class="td_width_3 text-center">상품정보</th>
 								<th class="td_width_2 text-center">주문번호</th>
 								<th class="td_width_2 text-center">주문금액</th>
-								<th class="td_width_2 text-center">주문수량</th>
-								<th class="td_width_3 text-center">주문일자</th>
+								<th class="td_width_1 text-center">수량</th>
+								<th class="td_width_2 text-center">주문일자</th>
+								<th class="td_width_2 text-center">주문취소</th>
 							</tr>
 						</tbody>
 					</table>
@@ -60,12 +75,17 @@
 											<div class="order_no"><span id="prdt_order_no" value="${orderHistory.prdt_order_no }">${orderHistory.prdt_order_no }</span></div></td>
 										<td class="td_width_2 text-center">
 											<fmt:formatNumber value="${orderHistory.prdt_order_price }" pattern="#,###" />원</td>
-										<td class="td_width_2 text-center">
+										<td class="td_width_1 text-center">
 											<div class="table_text_align_center quantity_div"
 												id="prdt_order_quan" value="${orderHistory.prdt_order_quan}">${orderHistory.prdt_order_quan}</div> </td>
-										<td class="td_width_3 text-center">
+										<td class="td_width_2 text-center">
 											<fmt:formatDate value="${orderHistory.prdt_order_date }" /></td>
 											<%-- <div class="order_date"><span id="prdt_order_date" value="${orderHistory.prdt_order_date }">${orderHistory.prdt_order_date }</span></div> --%>
+										<td class="td_width_2 text-center">
+											<form id="form" class="frm" action="" method="post">
+												<button type="button" id="removeBtn" class="btn btn-light">취소</button>
+											</form>
+										</td>
 									</tr>
 							</c:forEach>
 						</tbody>
