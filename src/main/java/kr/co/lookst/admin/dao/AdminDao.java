@@ -11,6 +11,7 @@ import kr.co.lookst.main.domain.SearchItem;
 import kr.co.lookst.main.domain.SnsHeartDto;
 import kr.co.lookst.post.domain.OrderInfoDto;
 import kr.co.lookst.post.domain.Post_TagDto;
+import kr.co.lookst.post.domain.Post_imgDto;
 import kr.co.lookst.post.domain.post_com_tagDto;
 
 public interface AdminDao {
@@ -94,5 +95,15 @@ public interface AdminDao {
 	int postLikeDelete(SnsHeartDto snsHeartDto) throws Exception;
 	/* 좋아요 출력 */
 	List<Integer> postLikeCheck(String login_id) throws Exception;
+	/* sns 클릭 한 상세 포스트 */
+	MemMGMDto snsDetailClick(Integer post_no) throws Exception;
+	/* sns 클릭 한 이미지 */
+	List<Post_imgDto> snsDetailClickImg(Integer post_no) throws Exception;
+	/* sns 디테일 페이지 상품 태그 갯수 */
+	int postTagInfoCnt(Integer post_no) throws Exception;
+	/* sns 디테일 페이지 좋아요 갯수 */
+	int postLikedCnt(Integer post_no) throws Exception;
+	/* sns 디테일 페이지 좋아요 체크 */
+	int postLikedCheck(String login_id) throws Exception;
 	
 }
