@@ -69,10 +69,6 @@ public interface PostDao {
 
 	
 
-	/*
-	 * orderFormPageDto orderFormpage(orderFormPageDto orderFormpage) throws
-	 * Exception;
-	 */
 
 
 

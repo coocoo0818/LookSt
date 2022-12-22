@@ -28,26 +28,25 @@
 	<%@ include file="/WEB-INF/views/fix/header.jsp"%>
 
 	<script type="text/javascript">
-		$(document).ready(function() {
+	
+	function cancel_Btn(element){
+		let order_no = element.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.firstElementChild.firstElementChild.innerHTML
+		/* let a = $(element).parent().parent().children('#orderNotd').children().children().html() */ /*JQuery 상속*/
+		$('#order_no').val(order_no)
+		if (!confirm("정말로 취소하시겠습니까?"))
+			return;
+	
+		let form = $("#form")
+		
+		form.attr("action", "<c:url value='/post/orderCancel'/>")
+		form.attr("method", "post")
 
-			/* $("#modifyBtn").on("click", function() {
-				if(!confirm("정말로 취소하시겠습니까?")) return;
-				
-				let form = $("#form")
-				form.attr("action","<c:url value='/post/prdtOrderDel${searchItem.queryString}' />")
-				form.attr("method", "post")
-				form.submit()
-			}) */
-			$("#modifyBtn").on("click", function() {
-				if (!confirm("정말로 취소하시겠습니까?"))
-					return;
-
-				let form = $("#form")
-				form.attr("action", "<c:url value='/post/orderCancel'/>")
-				form.attr("method", "post")
-				form.submit()
-			})
-		})
+        form.submit()
+		
+	}
+		/* $(document).ready(function() {
+			
+		}) */
 	</script>
 
 
@@ -69,11 +68,11 @@
 				</table>
 				<form id="form" class="frm">
 					<table class="zebra-striping">
+						<input hidden="hidden" name="order_no" id="order_no"
+								<%-- value="${orderHistory.prdt_order_no}" --%> />
 						<c:forEach var="orderHistory" items="${orderHistory}">
 							<input hidden="hidden" name="member_id" id="member_id"
 								value="${member_id}" />
-							<input hidden="hidden" name="prdt_order_no" id="prdt_order_no"
-								value="${orderHistory.prdt_order_no}" />
 							<tr>
 								<td class="td_width_3 text-center"><img
 									src="${contextPath}/resources/img/product/${orderHistory.prdt_img_name}"
@@ -84,10 +83,9 @@
 										${orderHistory.prdt_order_size}</span> <span id="prdt_option_color"
 									value="${orderHistory.prdt_order_color}">색상 :
 										${orderHistory.prdt_order_color}</span></td>
-								<td class="td_width_2 text-center">
+								<td class="td_width_2 text-center" id="orderNotd">
 									<div class="order_no">
-										<span id="prdt_order_no"
-											value="${orderHistory.prdt_order_no }">${orderHistory.prdt_order_no }</span>
+										<span id="prdt_order_no">${orderHistory.prdt_order_no }</span>
 									</div>
 								</td>
 								<td class="td_width_2 text-center"><fmt:formatNumber
@@ -105,8 +103,8 @@
 									</c:if><br /> <c:if test="${orderHistory.prdt_order_cancel eq 'D' }">
 										<a>취소접수</a>
 									</c:if><br />
-
-									<button type="button" id="modifyBtn" class="btn btn-light">취소</button>
+									<button type="button" class="btn btn-light modifyBtn" onclick="cancel_Btn(this)">취소</button>
+									
 								</td>
 							</tr>
 						</c:forEach>
