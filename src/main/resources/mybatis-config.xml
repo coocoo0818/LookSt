@@ -41,5 +41,9 @@
       <typeAlias alias="sns_com_tagDto" type="kr.co.lookst.post.domain.sns_com_tagDto"/>
       <typeAlias alias="TpostDto" type="kr.co.lookst.post.domain.TpostDto"/>
       <typeAlias alias="OrderInfoDto" type="kr.co.lookst.post.domain.OrderInfoDto"/>
+      <typeAlias alias="PrdtOrderDto" type="kr.co.lookst.main.domain.PrdtOrderDto"/>
+      <typeAlias alias="SearchItem_prdtlist" type="kr.co.lookst.post.domain.SearchItem_prdtList"/>
+      <typeAlias alias="PrdtOrderDto" type="kr.co.lookst.main.domain.PrdtOrderDto"/>
+      <typeAlias alias="OrderHistoryDto" type="kr.co.lookst.post.domain.OrderHistoryDto"/>
    </typeAliases>
 </configuration>

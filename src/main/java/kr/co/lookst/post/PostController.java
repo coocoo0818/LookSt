@@ -150,15 +150,18 @@ public class PostController {
 	}
 
 	/* 주문내역취소 */
-	@PostMapping("/prdtOrderDel")
-	public String prdtOrderDel(Integer prdt_order_no, RedirectAttributes rattr, HttpSession session) {
+	@PostMapping("/orderCancel")
+	public String orderCancel(Integer prdt_order_no, RedirectAttributes rattr, HttpSession session) {
 		
 		String member_id = (String) session.getAttribute("res");
 		String msg = "DEL_OK";
 		
 		try {
-			if (postService.prdtOrderDel(prdt_order_no, member_id) != 1)
-				throw new Exception("Delete failed.");
+			postService.orderCancel(prdt_order_no);
+			System.out.println("prdt_order_no" + prdt_order_no);
+			
+//			if (postService.orderCancel(prdt_order_no) != 1)
+//				throw new Exception("Delete failed.");
 			
 		} catch(Exception e) {
 			e.printStackTrace();

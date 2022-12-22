@@ -58,7 +58,7 @@ public interface PostDao {
 
 	List<OrderHistoryDto> orderHistory(String member_id) throws Exception;
 
-	int prdtOrderDel(Integer prdt_order_no, String member_id) throws Exception;
+	int prdtOrderUpdate(Integer prdt_order_no) throws Exception;
 	
 	
 
