@@ -144,9 +144,9 @@ public class PostServiceImpl implements PostService{
 	}
 	/* 주문 상품 취소 */
 	@Override
-	public int prdtOrderDel(Integer prdt_order_no, String member_id) throws Exception {
+	public int orderCancel(Integer prdt_order_no) throws Exception {
 		// TODO Auto-generated method stub
-		return postDao.prdtOrderDel(prdt_order_no, member_id);
+		return postDao.prdtOrderUpdate(prdt_order_no);
 	}
 
 	/*

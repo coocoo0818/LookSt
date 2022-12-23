@@ -59,7 +59,7 @@ public interface PostService {
 
 	List<OrderHistoryDto> orderHistory(String member_id) throws Exception;
 
-	int prdtOrderDel(Integer prdt_order_no, String member_id) throws Exception;
+	int orderCancel(Integer prdt_order_no) throws Exception;
 
 	
 
