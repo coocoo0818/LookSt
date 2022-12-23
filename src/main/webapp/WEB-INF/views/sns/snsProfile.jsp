@@ -142,13 +142,15 @@ $(document).ready(function() {
 	<!-- myProfile -->
 	<div class="container">
 		<div class="row justify-content-md-center">
-			<h2 class="col-auto my-5">${pro_info.member_nick}'sProfile</h2>
+			<h2 class="col-auto my-5">${pro_info.member_nick}'s Profile</h2>
 		</div>
-		<div class="col-1 offset-11 row justify-content-end">
-			<a href="${contextPath}/sns/postUpload">
-			<button type="button" class="upload_Btn btn btn-light ms-auto "><i class="bi fs-2 bi-capslock"></i></button>
-			</a>
-		</div>
+		<c:if test="${login_Id == pro_info.member_id }">
+			<div class="col-1 offset-11 row justify-content-end">
+				<a href="${contextPath}/sns/postUpload">
+				<button type="button" class="upload_Btn btn btn-light ms-auto "><i class="bi fs-2 bi-capslock"></i></button>
+				</a>
+			</div>
+		</c:if>
 	</div>
 	<!-- myProfile 끝 -->
 	<!-- 프로필 정보 -->
