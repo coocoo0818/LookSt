@@ -55,6 +55,10 @@ input {
 <%@ include file="/WEB-INF/views/fix/header.jsp"%>
 
 	<script type="text/javascript">
+	function modalclick() {
+		$('#exampleModal').modal('show')
+	}
+		
 		function clickBtn(e) {
 			var post_no = $(e).children().children().attr("data-productNo");
 			alert(post_no)
@@ -244,7 +248,7 @@ input {
 					<p class="card-text">${snsDetailClick.NPostDto.post_content}</p>
 					<div class="tag_link">
 						<c:forEach items="${tagInfoList}" var="tagInfoList">
-							<p class="tag_text" onclick="location.href='./'" style="display: inline;">
+							<p class="tag_text" onclick="location.href='./'" style="display: inline; color: #297dcb;">
 								<b>#${tagInfoList}</b>
 							</p>
 						</c:forEach>
@@ -283,7 +287,38 @@ input {
 			</div>
 		</div>
 	</div>
+	<!-- 모달 창 -->
+<button type="button" class="btn btn-primary" onclick="modalclick()" data-whatever="@mdo">Open modal for @mdo</button>
 
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Recipient:</label>
+            <input type="text" class="form-control" id="recipient-name">
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Message:</label>
+            <textarea class="form-control" id="message-text"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Send message</button>
+      </div>
+    </div>
+  </div>
+</div>
+	
 <%@ include file="/WEB-INF/views/fix/footer.jsp"%>
 </body>
 </html>

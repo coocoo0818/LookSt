@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -88,7 +88,7 @@
 								var toHtml = function(tags) {
 									let tmp = ''
 									tags.forEach(function(tag) {
-										tmp += '<b>#' + tag + '</b>'
+										tmp += '<b style="color: #297dcb;">#' + tag + '</b>'
 									})
 									return tmp
 								}
@@ -113,7 +113,7 @@
 										tmp += '<div>'
 										tmp += '<img src="${contextPath}/resources/img/product/' + prdttag.post_tag_img
 										tmp += '" onclick=location.href="${contextPath}/admin/productDetail/?product_no='+ prdttag.product_no + '" id="product_img" class="col-3">'
-										tmp += '<span class="d-inline-block text-truncate" style="max-width: 280px; font-size: 14px; padding-top: 10px;">' + prdttag.post_tag_name + '<br>' + prdttag.post_tag_price + '</span>'
+										tmp += '<span class="d-inline-block text-truncate" style="max-width: 280px; font-size: 14px; padding-top: 10px;">' + prdttag.post_tag_name + '<br>' + prdttag.post_tag_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g,",") + '원</span>'
 										tmp += '</div>'
 									})
 									return tmp
