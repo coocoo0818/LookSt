@@ -16,14 +16,14 @@
         <!-- 메인 스타일 리스트 -->
         <select id="stylePick" resultType="StylePickDto">
            select member.member_id, post.post_no,profile.profile_img ,member.member_nick, post_img.post_img_img
-			from member member, profile profile, post_img post_img, post post
-			where member.member_id = profile.member_id
-			and member.member_id = post.member_id 
-			and post.post_no = post_img.post_no 
-			and post.post_type = 'Y'
-			and post_img.post_img_seq = 1
-			order by post.post_date desc
-			limit 10;
+         from member member, profile profile, post_img post_img, post post
+         where member.member_id = profile.member_id
+         and member.member_id = post.member_id 
+         and post.post_no = post_img.post_no 
+         and post.post_type = 'Y'
+         and post_img.post_img_seq = 1
+         order by post.post_date desc
+         limit 10;
         </select>
 
         <resultMap type="Post_imgDto" id="post_imgDto">
@@ -31,7 +31,7 @@
         </resultMap>
         
         <resultMap type="NPostDto" id="nPostDto">
-        		<result column="post_no" property="post_no" />
+              <result column="post_no" property="post_no" />
                 <result column="post_content" property="post_content" />
         </resultMap>
 
@@ -352,10 +352,10 @@
       <!-- 상품 리스트 sql -->
       <sql id="selectFromShopList">
         select product.product_no, product.product_kind, product.product_price, product.product_name, product.product_info, prdt_img.prdt_img_name
-		from product product, prdt_img prdt_img
-		where product.product_no = prdt_img.product_no
-		and product.product_type = 'Y'
-		and prdt_img.prdt_img_seq = 1
+      from product product, prdt_img prdt_img
+      where product.product_no = prdt_img.product_no
+      and product.product_type = 'Y'
+      and prdt_img.prdt_img_seq = 1
       </sql>
       <!-- 상품 리스트 검색 리스트 sql -->
       <sql id="searchShopCondition">
@@ -374,10 +374,10 @@
       <!-- 상품 리스트 토탈 출력 -->
       <select id="shopListSearchResultCnt" parameterType="SearchItem" resultType="int">
               select count(*)
-			  from product product, prdt_img prdt_img
-			  where product.product_no = prdt_img.product_no
-		      and product.product_type = 'Y'
-			  and prdt_img.prdt_img_seq = 1
+           from product product, prdt_img prdt_img
+           where product.product_no = prdt_img.product_no
+            and product.product_type = 'Y'
+           and prdt_img.prdt_img_seq = 1
               and true
               <include refid="searchShopCondition" />
       </select>
@@ -413,6 +413,19 @@
                  and prdt_option_size = #{prdt_option_size}
                  and prdt_option_stock > 0
      </select>
+     <!-- 오더 페이지 이동 -->
+     <select id="orderInfo" parameterType="Integer" resultType="OrderInfoDto">
+        select *
+         from product product, prdt_img prdt_img 
+         where product.product_no = prdt_img.product_no
+         and product.product_no = #{product_no}
+         and prdt_img.prdt_img_seq = 1;
+   </select>
+   <!-- 주문 내용 삽입 -->
+   <insert id="orderInsert" parameterType="PrdtOrderDto">
+           INSERT INTO prdt_order(prdt_order_no,product_no, member_id, prdt_order_quan, prdt_order_date, prdt_order_way, prdt_order_phone, prdt_order_addr, prdt_order_addr2, prdt_order_person, prdt_order_type, prdt_order_cancel, prdt_order_size, prdt_order_color, prdt_order_price)
+        VALUES(#{prdt_order_no}, #{product_no}, #{member_id}, #{prdt_order_quan}, 'now()', #{prdt_order_way}, #{prdt_order_phone}, #{prdt_order_addr}, #{prdt_order_addr2}, #{prdt_order_person}, 'P', 'N', #{prdt_order_size}, #{prdt_order_color}, #{prdt_order_price})
+   </insert>
      
      <!-- sns total 리스트 출력 -->
      <select id="snsTotalList" resultType="integer">
@@ -422,29 +435,29 @@
      </select>
      <!-- sns 이미지 및 정보 출력 -->
      <select id="snsTotalListCarousel" parameterType="Integer" resultMap="MemMGMDto">
-     	 select member.member_id, post.post_no, post.post_content, post_img.post_img_img, profile.profile_img, member.member_nick  from post post,post_img post_img,member member, profile profile
-		 where post.member_id = member.member_id
-		 and member.member_id = profile.member_id 
-		 and post.post_no = post_img.post_no
-		 and post.post_type = 'Y'
-		 and post_img.post_img_seq = 1
-		 and post.post_no = #{post_no}
-		 order by post.post_date desc
+         select member.member_id, post.post_no, post.post_content, post_img.post_img_img, profile.profile_img, member.member_nick  from post post,post_img post_img,member member, profile profile
+       where post.member_id = member.member_id
+       and member.member_id = profile.member_id 
+       and post.post_no = post_img.post_no
+       and post.post_type = 'Y'
+       and post_img.post_img_seq = 1
+       and post.post_no = #{post_no}
+       order by post.post_date desc
      </select>
      <!-- sns sns 상단 정보 출력 -->
      <select id="snsTopList" resultMap="MemMGMDto">
-     	 select member.member_id, post.post_no, post.post_content, post_img.post_img_img, profile.profile_img, member.member_nick  from post post,post_img post_img,member member, profile profile
-		 where post.member_id = member.member_id
-		 and member.member_id = profile.member_id 
-		 and post.post_no = post_img.post_no
-		 and post.post_type = 'Y'
-		 and post_img.post_img_seq = 1
-		 order by post.post_date desc
+         select member.member_id, post.post_no, post.post_content, post_img.post_img_img, profile.profile_img, member.member_nick  from post post,post_img post_img,member member, profile profile
+       where post.member_id = member.member_id
+       and member.member_id = profile.member_id 
+       and post.post_no = post_img.post_no
+       and post.post_type = 'Y'
+       and post_img.post_img_seq = 1
+       order by post.post_date desc
      </select>
      <!-- 포스트 태그 정보 -->
      <select id="postTagInfo" parameterType="Integer" resultType="Post_TagDto">
-     	select * from post_tag
-		where post_no = #{post_no}
-		order by post_tag_no
+        select * from post_tag
+      where post_no = #{post_no}
+      order by post_tag_no
      </select>
 </mapper>

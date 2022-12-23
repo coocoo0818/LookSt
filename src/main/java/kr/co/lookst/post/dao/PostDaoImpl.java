@@ -164,11 +164,11 @@ public class PostDaoImpl implements PostDao{
 
 
 	@Override
-	public int prdtOrderDel(Integer prdt_order_no, String member_id) throws Exception {
+	public int prdtOrderUpdate(Integer prdt_order_no) throws Exception {
 		Map map = new HashMap();
 		map.put("prdt_order_no", prdt_order_no);
-		map.put("member_id", member_id);
-		return session.delete(namespace + "prdtOrderDel", map);
+		/* map.put("member_id", member_id); */
+		return session.delete(namespace + "prdtOrderUpdate", map);
 	}
 
 
