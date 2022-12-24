@@ -12,6 +12,7 @@ import kr.co.lookst.main.domain.Prdt_Img;
 import kr.co.lookst.main.domain.Prdt_Option;
 import kr.co.lookst.main.domain.Product;
 import kr.co.lookst.main.domain.SearchItem;
+import kr.co.lookst.main.domain.SnsCommentDto;
 import kr.co.lookst.main.domain.SnsHeartDto;
 import kr.co.lookst.post.domain.OrderInfoDto;
 import kr.co.lookst.post.domain.Post_TagDto;
@@ -236,6 +237,16 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public int postLikedCheck(String login_id) throws Exception {
 		return adminDao.postLikedCheck(login_id);
+	}
+	/* sns 댓글 리스트 */
+	@Override
+	public List<SnsCommentDto> snsReplyList(Integer post_no) throws Exception {
+		return adminDao.snsReplyList(post_no);
+	}
+	/* 개인 프로필, 닉네임 호출 */
+	@Override
+	public MemMGMDto myNickProfile(String login_id) throws Exception {
+		return adminDao.myNickProfile(login_id);
 	}
 
 }

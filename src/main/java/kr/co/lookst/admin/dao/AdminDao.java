@@ -8,6 +8,7 @@ import kr.co.lookst.main.domain.Prdt_Img;
 import kr.co.lookst.main.domain.Prdt_Option;
 import kr.co.lookst.main.domain.Product;
 import kr.co.lookst.main.domain.SearchItem;
+import kr.co.lookst.main.domain.SnsCommentDto;
 import kr.co.lookst.main.domain.SnsHeartDto;
 import kr.co.lookst.post.domain.OrderInfoDto;
 import kr.co.lookst.post.domain.Post_TagDto;
@@ -105,5 +106,9 @@ public interface AdminDao {
 	int postLikedCnt(Integer post_no) throws Exception;
 	/* sns 디테일 페이지 좋아요 체크 */
 	int postLikedCheck(String login_id) throws Exception;
+	/* sns 댓글 리스트 */
+	List<SnsCommentDto> snsReplyList(Integer post_no) throws Exception;
+	/* 개인 프로필, 닉네임 호출 */
+	MemMGMDto myNickProfile(String login_id) throws Exception;
 	
 }

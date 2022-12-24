@@ -1,5 +1,6 @@
 package kr.co.lookst.admin;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,6 +25,7 @@ import kr.co.lookst.main.domain.Prdt_Img;
 import kr.co.lookst.main.domain.Prdt_Option;
 import kr.co.lookst.main.domain.Product;
 import kr.co.lookst.main.domain.SearchItem;
+import kr.co.lookst.main.domain.SnsCommentDto;
 import kr.co.lookst.main.domain.SnsHeartDto;
 import kr.co.lookst.member.domain.MemberDto;
 import kr.co.lookst.post.domain.OrderInfoDto;
@@ -499,6 +501,8 @@ public class AdminController {
 		HttpSession session = request.getSession();
 		String login_id = (String) session.getAttribute("res");
 		try {
+			/* 개인 프로필, 닉네임 호출 */
+			MemMGMDto myNickProfile = adminService.myNickProfile(login_id);
 			/* sns 클릭된 포스트 정보 */
 			MemMGMDto snsDetailClick = adminService.snsDetailClick(post_no);
 			/* sns 디테일 페이지 캐러셀 */
@@ -515,6 +519,7 @@ public class AdminController {
 			int postLikedCheck = adminService.postLikedCheck(login_id);
 			
 			System.out.println(snsDetailClick);
+			model.addAttribute("myNickProfile", myNickProfile);
 			model.addAttribute("member_id", login_id);
 			model.addAttribute("postTagInfo", postTagInfo);
 			model.addAttribute("snsDetailClick", snsDetailClick);
@@ -527,6 +532,29 @@ public class AdminController {
 			e.printStackTrace();
 		}
 		return "/admin/snsDetailList";
+	}
+	
+	/* sns 댓글 리스트 */
+	@RequestMapping(value = "/snsReplyList", method = { RequestMethod.GET })
+	@ResponseBody
+	public ResponseEntity<List<SnsCommentDto>> snsReplyList(Model model, Integer post_no, HttpServletRequest request) {
+		List<SnsCommentDto> snsReplyList = null;
+		/*
+		 * HttpSession session = request.getSession(); String login_id = (String)
+		 * session.getAttribute("res");
+		 */
+		try {
+			System.out.println(post_no);
+			snsReplyList = adminService.snsReplyList(post_no);
+			
+			model.addAttribute("snsReplyList", snsReplyList);
+			System.out.println(model);
+			return new ResponseEntity<List<SnsCommentDto>>(snsReplyList, HttpStatus.OK); // 200
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<List<SnsCommentDto>>(HttpStatus.BAD_REQUEST); // 400
+		}
+		/* return "/admin/snsReplyList"; */
 	}
 	
 }
