@@ -54,14 +54,10 @@ input {
 <body>
 <%@ include file="/WEB-INF/views/fix/header.jsp"%>
 
-	<script type="text/javascript">
-	function modalclick() {
-		$('#exampleModal').modal('show')
-	}
-		
+	<script type="text/javascript">	
 		function clickBtn(e) {
-			var post_no = $(e).children().children().attr("data-productNo");
-			alert(post_no)
+			var post_no = $(e).children().attr("data-postNo");
+			alert("${sessionScope.res}")
 			var login_id = "${sessionScope.res}"
 			
 			let _buttonI = event.target;
@@ -225,16 +221,16 @@ input {
 					<div class="like_comment">
 						<button onclick="clickBtn(this)" class="border border-white" style="background-color: transparent;">
 							<c:if test="${member_id eq null || member_id eq ''}">
-								<i class="far fa-heart fa-2x" data-productNo="${snsDetailClick.post_no}" id="heart${snsTopList.NPostDto.post_no}"></i>${snsDetailClick.post_no}
+								<i class="far fa-heart fa-2x" data-postNo="${snsDetailClick.NPostDto.post_no}" id="heart${snsTopList.NPostDto.post_no}"></i>
 							</c:if>
 							<c:if test="${member_id ne null || member_id ne ''}">
 								<c:if test="${postLikedCheck ne 0}">
-									<i class="fa-heart fa-2x fas active"></i>
+									<i class="fa-heart fa-2x fas active" data-postNo="${snsDetailClick.NPostDto.post_no}" id="heart${snsTopList.NPostDto.post_no}"></i>
 								</c:if>
 							</c:if>
 						</button>
-						<button onclick="clickBtn()" class="border border-white" style="background-color: transparent;">
-							<i class="fa-regular fa-comment-dots fa-2x"></i>
+						<button onclick="modalclick(this)" class="border border-white" style="background-color: transparent;">
+							<i class="fa-regular fa-comment-dots fa-2x" data-postNo="${snsDetailClick.NPostDto.post_no}" ></i>
 						</button>
 						<!-- <button onclick="clickBtn()" class="border border-white position-absolute end-0" style="background-color: transparent; margin-right: 20px;">
 							<i class="fa-regular fa-bookmark fa-2x"></i>
@@ -253,71 +249,12 @@ input {
 							</p>
 						</c:forEach>
 					</div>
-					<!-- 댓글 -->
-					<div class="comment_box" style="display: inline;">
-						<div class="profile_info" style="display: flex;">
-							<img
-								src="${pageContext.request.contextPath }/resources/img/post/프사2.jpg"
-								id="profile_img">
-							<div class="comment_detail" style="margin-left: 10px;">
-								<div class="comment_main">
-									<span class="user_nm">ezen_0111</span> <span class="comment_txt">감망이감망이감망이</span>
-								</div>
-								<div class="sub">
-									<span class="upload-time">8분전</span>
-								</div>
-							</div>
-						</div>
-						<div class="profile_info" style="display: flex;">
-							<img
-								src="${pageContext.request.contextPath }/resources/img/post/프사2.jpg"
-								id="profile_img">
-							<div class="comment_detail" style="margin-left: 10px;">
-								<div class="comment_main">
-									<span class="user_nm">ezen_0111</span> <span class="comment_txt">감망이감망이감망이</span>
-								</div>
-								<div class="sub">
-									<span class="upload-time">8분전</span>
-								</div>
-							</div>
-						</div>
-					</div>
-					<button type="button" class="btn btn-secondary">댓글 더보기...</button>
 				</div>
 			</div>
 		</div>
 	</div>
 	<!-- 모달 창 -->
-<button type="button" class="btn btn-primary" onclick="modalclick()" data-whatever="@mdo">Open modal for @mdo</button>
-
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Recipient:</label>
-            <input type="text" class="form-control" id="recipient-name">
-          </div>
-          <div class="form-group">
-            <label for="message-text" class="col-form-label">Message:</label>
-            <textarea class="form-control" id="message-text"></textarea>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Send message</button>
-      </div>
-    </div>
-  </div>
-</div>
+	<%@ include file="/WEB-INF/views/admin/CommentModal.jsp"%>
 	
 <%@ include file="/WEB-INF/views/fix/footer.jsp"%>
 </body>
