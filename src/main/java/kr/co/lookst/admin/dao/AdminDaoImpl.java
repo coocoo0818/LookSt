@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.co.lookst.admin.domain.MemMGMDto;
+import kr.co.lookst.main.domain.NPostDto;
 import kr.co.lookst.main.domain.PrdtOrderDto;
 import kr.co.lookst.main.domain.Prdt_Img;
 import kr.co.lookst.main.domain.Prdt_Option;
@@ -254,6 +255,134 @@ public class AdminDaoImpl implements AdminDao{
 	@Override
 	public MemMGMDto myNickProfile(String login_id) throws Exception {
 		return session.selectOne(namespace + "myNickProfile", login_id);
+	}
+	/* sns 모댓글 작성 */
+	@Override
+	public NPostDto postWriteReply(SnsCommentDto snsCommentDto) {
+		// p_board 테이블에 해당 게시물의 reply수를 +1 하기위한 to세팅
+		NPostDto postDto = new NPostDto();
+		postDto.setPost_no(snsCommentDto.getPost_no());
+		
+		// 해당 게시물의 reply를 +1 한다.
+		session.update(namespace + "postReplyUp", postDto);
+		
+		// 현재 sns_comment 테이블의 가장 큰 no값을 가져온다.
+		Integer replyMaxNo = session.selectOne(namespace + "postReplyMaxNo", postDto);
+
+		int sns_comment_group = 0;
+		 
+		if (replyMaxNo == null) {
+			sns_comment_group = 0;
+		} else {
+			sns_comment_group = (int)replyMaxNo;
+		}
+		// sns_comment_group 세팅
+		snsCommentDto.setSns_comment_group(sns_comment_group + 1);
+
+		int result = session.insert(namespace + "postReplyWrite", snsCommentDto);
+
+		if (result == 1) {	// p_reply 테이블에 새로운 댓글 추가가 성공한다면..
+			// 갱신된 댓글 갯수를 가져옴
+			postDto = session.selectOne(namespace + "postReplyCount", postDto);
+		}
+		return postDto;
+	}
+	/* sns 답글 댓글 작성 */
+	@Override
+	public NPostDto postWriteRereply(SnsCommentDto snsCommentDto) {
+		// p_board 테이블에 해당 게시물의 reply수를 +1 하기위한 to세팅
+		NPostDto postDto = new NPostDto();
+		postDto.setPost_reply(snsCommentDto.getPost_no());
+		
+		// 해당 게시물의 reply를 +1 한다.
+		session.update(namespace + "postReplyUp", postDto);
+		System.out.println("업데이트 전" + snsCommentDto);
+		// 현재 sns_comment 테이블의 가장 큰 no값을 가져온다.
+		Integer replySeqMaxNo = session.selectOne(namespace + "replySeqMaxNo", snsCommentDto);
+		System.out.println("최고값 " + replySeqMaxNo);
+		int sns_comment_seq = 0;
+		 
+		if (replySeqMaxNo == null) {
+			sns_comment_seq = 0;
+		} else {
+			sns_comment_seq = (int)replySeqMaxNo;
+		}
+		// sns_comment_group 세팅
+		snsCommentDto.setSns_comment_seq(sns_comment_seq + 1);
+		System.out.println("업데이트 후 " + snsCommentDto);
+		// p_reply 테이블에 추가 (댓글 작성과 동일)
+		int result = session.insert(namespace + "postRereplyWrite", snsCommentDto);
+		
+		if (result == 1) {	// p_reply 테이블에 새로운 댓글 추가가 성공한다면..
+			// 갱신된 댓글 갯수를 가져옴
+			postDto = session.selectOne(namespace + "postReplyCount", postDto);
+		}
+		return postDto;
+	}
+	/* 모댓글 삭제 */
+	@Override
+	public NPostDto postDeleteReply(SnsCommentDto snsCommentDto) {
+		// post 테이블에 해당 게시물의 reply수를 -1 하기위한 to세팅
+		NPostDto postDto = new NPostDto();
+		postDto.setPost_no(snsCommentDto.getPost_no());
+		
+		// grp가 reply의 no와 일치하는 댓글이 몇갠지 카운트한다. 모댓글에 딸린 답글이 몇갠지 카운트하기 위함
+		System.out.println("댓글 카운트 확인" + snsCommentDto);
+		Integer rereplyCount = session.selectOne(namespace + "postCountRereply", snsCommentDto);
+		int count_rereply = 0;
+		if (rereplyCount == null) {
+			count_rereply = 0;
+		} else {
+			count_rereply = (int)count_rereply;
+		}
+		
+		int result = 0;
+		
+		// 해당 게시물의 reply를 -1 한다.
+		session.update(namespace + "postReplyDown", postDto);
+		
+		if(count_rereply==0) {	// 답글이 없을 때 - 그냥 삭제
+			// p_reply 테이블에서 삭제
+			result = session.delete(namespace + "postReplyDelete", snsCommentDto);
+		}else {					// 답글이 있을 때 - content에 공백을 넣음 ("삭제된 게시물입니다" 라고 표기하기 위함)
+			// p_reply 테이블에서 삭제하지 않고 content에 공백을 넣음 
+			result = session.update(namespace + "postReplyNotDelete", snsCommentDto);
+			System.out.println("업데이트 성공");
+		}
+		
+		if (result == 1) {	// p_reply 테이블에서 댓글삭제가 성공한다면..
+			// 갱신된 댓글 갯수를 가져옴
+			postDto = session.selectOne(namespace + "postReplyCount", postDto);
+		}
+		return postDto;
+	}
+	/* 답글 삭제 */
+	@Override
+	public NPostDto postDeleteRereply(SnsCommentDto snsCommentDto) {
+		// p_board 테이블에 해당 게시물의 reply수를 -1 하기위한 to세팅
+		NPostDto postDto = new NPostDto();
+		postDto.setPost_no(snsCommentDto.getPost_no());
+			
+		// 해당 게시물의 reply를 -1 한다.
+		session.update(namespace + "postReplyDown", postDto);
+				
+		// p_reply 테이블에서 삭제
+		int result = session.delete(namespace + "postReplyDelete", snsCommentDto);
+		
+		// grp가  일치하는 답글이 몇갠지 카운트 한다. 없고 모댓글의 content가 ""이면 모댓글을 삭제하기 위함.
+		int count_rereply = session.selectOne(namespace + "postCountRereplyFromrereply", snsCommentDto);
+		
+		
+		System.out.println("count_rereply = " + count_rereply);
+		if(count_rereply == 0) {
+			session.delete(namespace + "postReplyDeleteAfterRereplyDelete", snsCommentDto);
+		}
+		
+		if (result == 1) {	// p_reply 테이블에서 댓글삭제가 성공한다면..
+			// 갱신된 댓글 갯수를 가져옴
+			postDto = session.selectOne(namespace + "postReplyCount", postDto);
+		}
+		return postDto;
 	}
 
 }

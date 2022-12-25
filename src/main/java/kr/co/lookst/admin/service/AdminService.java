@@ -3,6 +3,7 @@ package kr.co.lookst.admin.service;
 import java.util.List;
 
 import kr.co.lookst.admin.domain.MemMGMDto;
+import kr.co.lookst.main.domain.NPostDto;
 import kr.co.lookst.main.domain.PrdtOrderDto;
 import kr.co.lookst.main.domain.Prdt_Img;
 import kr.co.lookst.main.domain.Prdt_Option;
@@ -108,5 +109,13 @@ public interface AdminService {
 	List<SnsCommentDto> snsReplyList(Integer post_no) throws Exception;
 	/* 개인 프로필, 닉네임 호출 */
 	MemMGMDto myNickProfile(String login_id) throws Exception;
+	/* sns 모댓글 작성 */
+	NPostDto postWriteReply(SnsCommentDto snsCommentDto);
+	/* sns 답글 댓글 작성 */
+	NPostDto postWriteRereply(SnsCommentDto snsCommentDto);
+	/* 모댓글 삭제 */
+	NPostDto postDeleteReply(SnsCommentDto snsCommentDto);
+	/* 답글 삭제 */
+	NPostDto postDeleteRereply(SnsCommentDto snsCommentDto);
 
 }

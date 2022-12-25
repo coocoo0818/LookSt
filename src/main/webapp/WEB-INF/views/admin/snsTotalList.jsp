@@ -74,7 +74,7 @@
 								<i class="far fa-heart fa-lg" data-productNo="${snsTopList.NPostDto.post_no}" id="heart${snsTopList.NPostDto.post_no}"></i>
 							</button>
 							<button onclick="clickBtn()" class="border border-white" style="background-color: transparent;">
-								<i class="fa-regular fa-comment-dots fa-lg"></i>
+								<i class="fa-regular fa-comment-dots fa-lg"> ${snsTopList.NPostDto.post_reply}</i>
 							</button>
 						</div>
 							<div class="productDetail d-flex row justify-content-start" id="PrdtTags${status.index}"></div>

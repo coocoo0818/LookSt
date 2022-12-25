@@ -220,17 +220,17 @@ input {
 					<!-- 좋아요 / 댓글 / 공유 버튼 -->
 					<div class="like_comment">
 						<button onclick="clickBtn(this)" class="border border-white" style="background-color: transparent;">
-							<c:if test="${member_id eq null || member_id eq ''}">
+							<%-- <c:if test="${member_id eq null || member_id eq ''}"> --%>
 								<i class="far fa-heart fa-2x" data-postNo="${snsDetailClick.NPostDto.post_no}" id="heart${snsTopList.NPostDto.post_no}"></i>
-							</c:if>
-							<c:if test="${member_id ne null || member_id ne ''}">
+							<%-- </c:if> --%>
+							<%-- <c:if test="${member_id ne null || member_id ne ''}">
 								<c:if test="${postLikedCheck ne 0}">
 									<i class="fa-heart fa-2x fas active" data-postNo="${snsDetailClick.NPostDto.post_no}" id="heart${snsTopList.NPostDto.post_no}"></i>
 								</c:if>
-							</c:if>
+							</c:if> --%>
 						</button>
 						<button onclick="modalclick(this)" class="border border-white" style="background-color: transparent;">
-							<i class="fa-regular fa-comment-dots fa-2x" data-postNo="${snsDetailClick.NPostDto.post_no}" ></i>
+							<i class="fa-regular fa-comment-dots fa-2x" data-postNo="${snsDetailClick.NPostDto.post_no}" >  ${snsDetailClick.NPostDto.post_reply}</i>
 						</button>
 						<!-- <button onclick="clickBtn()" class="border border-white position-absolute end-0" style="background-color: transparent; margin-right: 20px;">
 							<i class="fa-regular fa-bookmark fa-2x"></i>

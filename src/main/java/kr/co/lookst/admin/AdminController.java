@@ -1,6 +1,5 @@
 package kr.co.lookst.admin;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.lookst.admin.domain.MemMGMDto;
 import kr.co.lookst.admin.service.AdminService;
+import kr.co.lookst.main.domain.NPostDto;
 import kr.co.lookst.main.domain.PageResolver;
 import kr.co.lookst.main.domain.PrdtOrderDto;
 import kr.co.lookst.main.domain.Prdt_Img;
@@ -516,7 +516,10 @@ public class AdminController {
 			/* sns 디테일 페이지 일반 태그 태그 */
 			List<post_com_tagDto> tagInfoList = adminService.tagInfoList(post_no);
 			/* sns 디테일 페이지 좋아요 체크 */
-			int postLikedCheck = adminService.postLikedCheck(login_id);
+			if (login_id != null) {
+				int postLikedCheck = adminService.postLikedCheck(login_id);
+				model.addAttribute("postLikedCheck", postLikedCheck);
+			}
 			
 			System.out.println(snsDetailClick);
 			model.addAttribute("myNickProfile", myNickProfile);
@@ -527,7 +530,7 @@ public class AdminController {
 			model.addAttribute("postTagInfoCnt", postTagInfoCnt);
 			model.addAttribute("postLikedCnt", postLikedCnt);
 			model.addAttribute("tagInfoList", tagInfoList);
-			model.addAttribute("postLikedCheck", postLikedCheck);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -557,4 +560,118 @@ public class AdminController {
 		/* return "/admin/snsReplyList"; */
 	}
 	
+	// sns 모댓글 작성
+	@ResponseBody
+	@RequestMapping(value = "/PostWriteReply")
+	public NPostDto postWriteReply(@RequestParam Integer post_no, @RequestParam String sns_comment_con, 
+			@RequestParam String sns_comment_nick, @RequestParam String sns_comment_profile, HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		String login_id = (String) session.getAttribute("res");
+		SnsCommentDto snsCommentDto = new SnsCommentDto();
+
+		// 작성 아이디 세팅
+		snsCommentDto.setMember_id(login_id);
+		
+	    // 게시물 번호 세팅
+		snsCommentDto.setPost_no(post_no);
+
+	    // 댓글 내용 세팅
+	    snsCommentDto.setSns_comment_con(sns_comment_con);
+	    
+	    // 댓글작성자 nick을 writer로 세팅
+	    snsCommentDto.setSns_comment_nick(sns_comment_nick);
+	    
+	    // 답글작성자 프로필 세팅
+	 	snsCommentDto.setSns_comment_profile(sns_comment_profile);
+	 	System.out.println(snsCommentDto);
+	    // +1된 댓글 갯수를 담아오기 위함
+	    NPostDto snsConCnt = adminService.postWriteReply(snsCommentDto);
+
+	    return snsConCnt;
+	}
+	
+	// 답글 작성
+	@ResponseBody
+	@RequestMapping(value = "/PostWriteRereply")
+	public NPostDto postWriteRereply(@RequestParam Integer post_no, @RequestParam Integer sns_comment_no, 
+			@RequestParam String sns_comment_con, @RequestParam String sns_comment_profile
+			, @RequestParam String sns_comment_nick, @RequestParam int sns_comment_group, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String login_id = (String) session.getAttribute("res");
+		SnsCommentDto snsCommentDto = new SnsCommentDto();
+		
+		// 작성 아이디 세팅
+		snsCommentDto.setMember_id(login_id);
+		
+	    // 게시물 번호 세팅
+		snsCommentDto.setPost_no(post_no);
+
+	    // grp, grps, grpl 은 ReplyTO에 int로 정의되어 있기 때문에 String인 no를 int로 변환해서 넣어준다.
+	    // 모댓글 번호 no를 grp으로 세팅한다.
+		/* snsCommentDto.setSns_comment_group(Integer.parseInt(sns_comment_no)); */
+
+	    // 답글은 깊이가 1이되어야 하므로 Sns_comment_class을 1로 세팅한다.
+		snsCommentDto.setSns_comment_class(1);
+
+	    // 답글 내용 세팅
+		snsCommentDto.setSns_comment_con(sns_comment_con);
+
+	    // 답글작성자 nick을 writer로 세팅
+		snsCommentDto.setSns_comment_nick(sns_comment_nick);
+		
+		// 답글 그룹 누른 그룹으로 세팅
+		snsCommentDto.setSns_comment_group(sns_comment_group);
+				
+		// 답글작성자 프로필 세팅
+		snsCommentDto.setSns_comment_profile(sns_comment_profile);
+		System.out.println(snsCommentDto);
+	    // +1된 댓글 갯수를 담아오기 위함
+		NPostDto nPostDto = adminService.postWriteRereply(snsCommentDto);
+
+	    return nPostDto;
+	}
+	
+	// 모댓글 삭제
+	@ResponseBody
+	@RequestMapping(value = "/postDeleteReply")
+	public NPostDto postDeleteReply(@RequestParam Integer sns_comment_no, @RequestParam Integer post_no ) {
+
+		SnsCommentDto snsCommentDto = new SnsCommentDto();
+
+	    // 모댓글 번호 세팅
+		snsCommentDto.setSns_comment_no(sns_comment_no);
+
+	    // 게시물 번호 세팅
+		snsCommentDto.setPost_no(post_no);
+
+	    // 갱신된 댓글 갯수를 담아오기 위함
+	    NPostDto nPostDto = adminService.postDeleteReply(snsCommentDto);
+
+	    return nPostDto;
+	}
+
+	// 답글 삭제
+	@ResponseBody
+	@RequestMapping(value = "/postDeleteRereply")
+	public NPostDto postDeleteRereply(@RequestParam Integer sns_comment_no, @RequestParam Integer post_no, 
+			@RequestParam int sns_comment_group) {
+
+		SnsCommentDto snsCommentDto = new SnsCommentDto();
+
+	    // 답글 번호 세팅 - 답글 삭제하기 위해서 필요함
+		snsCommentDto.setSns_comment_no(sns_comment_no);
+
+	    // 게시물 번호 세팅 - p_board 의 reply+1하기 위해 필요함
+		snsCommentDto.setPost_no(post_no);
+
+	    // grp 세팅(모댓글이 뭔지) - 모댓글은 삭제를 해도 답글이 있으면 남아있게 되는데 답글이 모두 삭제되었을 때 모댓글도 삭제하기 위해
+	    // 필요함
+		snsCommentDto.setSns_comment_group(sns_comment_group);
+
+	    // 갱신된 댓글 갯수를 담아오기 위함
+	    NPostDto nPostDto = adminService.postDeleteRereply(snsCommentDto);
+
+	    return nPostDto;
+	}
 }

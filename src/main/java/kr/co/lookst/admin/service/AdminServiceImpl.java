@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import kr.co.lookst.admin.dao.AdminDao;
 import kr.co.lookst.admin.domain.MemMGMDto;
+import kr.co.lookst.main.domain.NPostDto;
 import kr.co.lookst.main.domain.PrdtOrderDto;
 import kr.co.lookst.main.domain.Prdt_Img;
 import kr.co.lookst.main.domain.Prdt_Option;
@@ -247,6 +248,26 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public MemMGMDto myNickProfile(String login_id) throws Exception {
 		return adminDao.myNickProfile(login_id);
+	}
+	/* sns 모댓글 작성 */
+	@Override
+	public NPostDto postWriteReply(SnsCommentDto snsCommentDto) {
+		return adminDao.postWriteReply(snsCommentDto);
+	}
+	/* sns 답글 댓글 작성 */
+	@Override
+	public NPostDto postWriteRereply(SnsCommentDto snsCommentDto) {
+		return adminDao.postWriteRereply(snsCommentDto);
+	}
+	/* 모댓글 삭제 */
+	@Override
+	public NPostDto postDeleteReply(SnsCommentDto snsCommentDto) {
+		return adminDao.postDeleteReply(snsCommentDto);
+	}
+	/* 답글 삭제 */
+	@Override
+	public NPostDto postDeleteRereply(SnsCommentDto snsCommentDto) {
+		return adminDao.postDeleteRereply(snsCommentDto);
 	}
 
 }
