@@ -18,7 +18,6 @@ public class NPostDto {
 	private String post_content;
 	private Date post_date;
 	private String post_type;
-	
-	
+	private int post_reply;
 	
 }
