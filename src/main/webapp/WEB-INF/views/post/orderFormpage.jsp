@@ -240,36 +240,28 @@
 							<caption>표 내용 부분</caption>
 							<tbody>
 								<c:forEach var="orderInfo" items="${orderInfo}">
-									<input hidden="hidden" name="member_id" id="member_id"
-										value="${member_id}" />
-									<input hidden="hidden" name="product_no" id="product_no"
-										value="${orderInfo.product_no}" />
-									<input hidden="hidden" name="prdt_order_quan"
-										id="prdt_order_quan"
-										value="${prdt_order_quan}" />
-									<input hidden="hidden" name="prdt_order_price"
-										id="prdt_order_price"
-										value="${orderInfo.product_price * prdt_order_quan}" />
+									<input hidden="hidden" name="member_id" id="member_id" value="${member_id}" />
+									<input hidden="hidden" name="product_no" id="product_no" value="${orderInfo.product_no}" />
+									<input hidden="hidden" name="prdt_order_quan" id="prdt_order_quan" value="${prdt_order_quan}" />
+									<input hidden="hidden" name="prdt_order_price" id="prdt_order_price" value="${orderInfo.product_price * prdt_order_quan}" />
 									<tr>
-										<td class="td_width_2"><img
-											src="${contextPath}/resources/img/product/${orderInfo.prdt_img_name}"
-											style="height: 150px; weight: 150px;"></td>
+										<td class="td_width_2">
+											<img src="${contextPath}/resources/img/product/${orderInfo.prdt_img_name}" style="height: 150px; weight: 150px;">
+										</td>
 										<td class="td_width_3">
 											<div id="product_name" value="${orderInfo.product_name}">${orderInfo.product_name}</div>
-											<span id="prdt_option_size" value="${prdt_option_size}">사이즈
-												: ${prdt_option_size}</span> <span id="prdt_option_color"
-											value="${prdt_option_color}">색상 : ${prdt_option_color}</span>
+											<span id="prdt_option_size" value="${prdt_option_size}">사이즈 : ${prdt_option_size}</span> 
+											<span id="prdt_option_color" value="${prdt_option_color}">색상 : ${prdt_option_color}</span>
 										</td>
-										<td class="td_width_3 price_td table_text_align_center"><fmt:formatNumber
-												value="${orderInfo.product_price}" pattern="#,###" /></td>
+										<td class="td_width_3 price_td table_text_align_center">
+											<fmt:formatNumber value="${orderInfo.product_price}" pattern="#,###" />
+										</td>
 										<td class="td_width_1 table_text_align_center">
-											<div class="table_text_align_center quantity_div"
-												id="prdt_order_quan" value="${prdt_order_quan}">
-												${prdt_order_quan}</div>
+											<div class="table_text_align_center quantity_div" id="prdt_order_quan" value="${prdt_order_quan}"> ${prdt_order_quan} </div>
 										</td>
-										<td class="td_width_3 table_text_align_center"><fmt:formatNumber
-												value="${orderInfo.product_price * prdt_order_quan}"
-												pattern="#,###" /></td>
+										<td class="td_width_3 table_text_align_center">
+											<fmt:formatNumber value="${orderInfo.product_price * prdt_order_quan}" pattern="#,###" />
+										</td>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -291,9 +283,7 @@
 			<div class="container">
 				<div class="row g-5">
 					<div class="col-md-5 col-lg-4 order-md-last">
-						<input type="button" id="checkoutbtn"
-							class="w-100 btn btn-primary btn-lg" value="Continue to checkout"
-							onclick="payment()" />
+						<input type="button" id="checkoutbtn" class="w-100 btn btn-primary btn-lg" value="Continue to checkout" onclick="payment()" />
 					</div>
 
 					<div class="col-md-7 col-lg-8">
@@ -301,17 +291,14 @@
 						<div class="row g-3">
 							<div class="col-12">
 								<label for="firstName" class="form-label"><strong>고객명</strong></label>
-								<input type="text" class="form-control" id="prdt_order_person"
-									placeholder="" value="" required="" name="prdt_order_person">
-								<div class="invalid-feedback">Valid first name is
-									required.</div>
+								<input type="text" class="form-control" id="prdt_order_person" placeholder="" value="" required="" name="prdt_order_person">
+								<div class="invalid-feedback">Valid first name is required.</div>
 							</div>
 
 							<div class="col-12">
 								<label for="phoneNum" class="form-label"><strong>연락처</strong></label>
 								<div class="input-group has-validation">
-									<span class="input-group-text">H.P</span> <input type="text"
-										class="form-control" id="prdt_order_phone"
+									<span class="input-group-text">H.P</span> <input type="text" class="form-control" id="prdt_order_phone"
 										placeholder="연락처를 입력해주세요" required="" name="prdt_order_phone">
 									<div class="invalid-feedback">Your username is required.</div>
 								</div>
@@ -319,27 +306,20 @@
 
 							<div class="col-12">
 								<label for="address" class="form-label"><strong>배송지</strong></label>
-								<input type="button" class="btn btn-light"
-									onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+								<input type="button" class="btn btn-light" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
 								<div>
-									<input type="text" class="form-control" id="sample6_postcode"
-										placeholder="우편번호" name="prdt_order_postcode"><br>
+									<input type="text" class="form-control" id="sample6_postcode" placeholder="우편번호" name="prdt_order_postcode"><br>
 								</div>
 								<div>
-									<input type="text" class="form-control" id="sample6_address"
-										placeholder="주소" name="prdt_order_addr"><br>
+									<input type="text" class="form-control" id="sample6_address" placeholder="주소" name="prdt_order_addr"><br>
 								</div>
 								<div>
-									<input type="text" class="form-control"
-										id="sample6_detailAddress" placeholder="상세주소"
-										name="prdt_order_addr2"><br>
+									<input type="text" class="form-control" id="sample6_detailAddress" placeholder="상세주소" name="prdt_order_addr2"><br>
 								</div>
 								<div>
-									<input hidden="hidden" type="text" class="form-control"
-										id="sample6_extraAddress" placeholder="참고항목">
+									<input hidden="hidden" type="text" class="form-control" id="sample6_extraAddress" placeholder="참고항목">
 								</div>
-								<div class="invalid-feedback">Please enter your shipping
-									address.</div>
+								<div class="invalid-feedback">Please enter your shipping address.</div>
 							</div>
 
 							<hr class="my-4">
@@ -347,8 +327,7 @@
 
 							<div class="my-3">
 								<div class="form-check">
-									<input id="credit" name="paymentMethod" type="radio"
-										class="form-check-input" required="" value="o_payment" checked>
+									<input id="credit" name="paymentMethod" type="radio" class="form-check-input" required="" value="o_payment" checked>
 									<label class="form-check-label" for="credit">온라인결제</label>
 								</div>
 								<!-- <div class="form-check">
