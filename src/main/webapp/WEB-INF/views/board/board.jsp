@@ -225,11 +225,10 @@
          <c:if test="${mode ne 'new' }">
          <textarea class="summernote" rows="20" name="board_con" ${mode=="new" ? "" : "readonly='readonly'" }>${boardDto.board_con }</textarea><br/>
          </c:if>
-               <c:if test="${boardDto.member_id eq loginId }">
+         <c:if test="${boardDto.member_id eq loginId }">
             <button type="button" id="modifyBtn" class="btn btn-primary"><i class="fa fa-edit"></i>수정</button>
             <button type="button" id="removeBtn" class="btn btn-danger"><i class="fa fa-trash"></i>삭제</button>
          </c:if>
-         
          <button type="button" id="listBtn" class="btn btn-info"><i class="fa fa-bars"></i>목록</button>
       </form>
    </div>

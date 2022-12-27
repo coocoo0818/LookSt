@@ -12,9 +12,15 @@ public class Board_imgDto {
 	}
 
 	public Board_imgDto(int board_no, int board_img_no, String board_img_img, int board_img_seq) {
-		super();
+
 		this.board_no = board_no;
 		this.board_img_no = board_img_no;
+		this.board_img_img = board_img_img;
+		this.board_img_seq = board_img_seq;
+	}
+
+	public Board_imgDto(int board_no, String board_img_img, int board_img_seq) {
+		this.board_no = board_no;
 		this.board_img_img = board_img_img;
 		this.board_img_seq = board_img_seq;
 	}

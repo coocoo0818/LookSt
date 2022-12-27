@@ -2,18 +2,23 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<c:set var="loginId" value="${sessionScope.res }" />
+<c:set var="loginout" value="${loginId==null ? 'Login' : 'Logout' }" />
+<c:set var="loginoutlink"
+	value="${loginId==null ? '/login/login' : '/login/logout' }" />
+
+
 <!DOCTYPE html>
 <html>
 <head>
 <link rel="stylesheet"
 	href="https://rawgit.com/LeshikJanz/libraries/master/Bootstrap/baguetteBox.min.css">
-	
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <meta charset="UTF-8">
 <title>lookst</title>
 <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 <style type="text/css">
-
-
 .container.gallery-container {
 	background-color: #fff;
 	color: #35373a;
@@ -64,13 +69,33 @@ div {
 img {
 	max-width: 100%;
 }
+td {
+	
+}
 </style>
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/fix/header.jsp"%>
-<script type="text/javascript">
+	<script type="text/javascript">
    	$(document).ready(function() {   /* main() */
         
+   	 $("#modifyBtn").on("click", function() {
+         let form = $("#form")
+         form.attr("action", "<c:url value='/board/magazine/modify${searchItem.queryString}&board_no=${boardDto.board_no}' />")
+         form.attr("method", "post")
+         if (formCheck())
+            form.submit();
+      })	
+   	
+      $("#removeBtn").on("click", function() {
+            if(!confirm("정말로 삭제하시겠습니까?")) return;
+            let form = $("#form")
+            form.attr("action","<c:url value='/board/magazine/remove${searchItem.queryString}&board_no=${boardDto.board_no}'/>")
+            form.attr("method", "post")
+            form.submit()
+         })
+   		
+   		
          
       // let bno = 307
       let board_no = $("input[name=board_no]").val();
@@ -180,8 +205,8 @@ img {
 			tmp += ' <span class="member_id">'+comment_con.member_id+'</span>'
             tmp += ' : <span class="comment_con">'+comment_con.comment_con+'</span><br/>'
             tmp += ' <span class>'+comment_con.comment_date+'</span> <br/>'
-            tmp += ' <button type="button"  class="delBtn btn btn-outline-danger btn-sm mt-2 mb-2" data-comment_no='+comment_con.comment_no+'>삭제</button>'
             tmp += ' <button type="button"  class="modBtn btn btn-outline-primary btn-sm mt-2 mb-2" data-comment_no='+comment_con.comment_no+'>수정</button>'
+            tmp += ' <button type="button"  class="delBtn btn btn-outline-danger btn-sm mt-2 mb-2" data-comment_no='+comment_con.comment_no+'>삭제</button>'
             tmp += '</li>'
          })
          
@@ -192,20 +217,24 @@ img {
          
   
 </script>
-
+	<script type="text/javascript">
+      let msg = "${msg}"
+      if(msg == "WRT_ERR") alert("게시물 등록에 실패하였습니다. 다시 시도해주세요.")
+      if(msg == "MOD_ERR") alert("게시물 수정에 실패하였습니다. 다시 시도해주세요.")
+   </script>
 	<div class="container gallery-container">
-
 		<div class="text-center">
-			<h2 class="my-5">MAGAZINE</h2>
+			<h2 class="my-5">
+				<a href="${contextPath}/board/magazine"
+					style="text-decoration: none;">MAGAZINE
+			</h2>
 		</div>
-		<input type="hidden" name="board_no" value="${boardDto.board_no }"> 
+		<input type="hidden" name="board_no" value="${boardDto.board_no }">
 		<div class="tz-gallery">
 			<div class="row">
 				<c:forEach var="list" items="${images}">
 					<div class="col-sm-6 col-md-4">
-						<a class="lightbox"
-						   href="${list}">
-							<img src="${list}">
+						<a class="lightbox" href="${list}"> <img src="${list}">
 						</a>
 					</div>
 				</c:forEach>
@@ -215,40 +244,74 @@ img {
 	<div class="container mt-3">
 		<div class="">
 			<div class="span12">
-					<h3 class="mt-3 mb-5">${boardDto.board_title }</h3>
-					<p>${boardDto.board_con }</p>
-								</div>
-						</div>
-					</div>
-				</div>
+				<h3 class="mt-3 mb-5">${boardDto.board_title }</h3>
+				<p>${boardDto.board_con }</p>
 			</div>
 		</div>
 		<!-- Comments Form -->
-	<div class="card my-4">
-		<h5 class="card-header">Leave a Comment:</h5>
-		<div class="card-body">
-			<form name="comment-form">
-				<div class="form-group">
-					<textarea name="comment_con" class="form-control" rows="3"></textarea>
-					<button class= "btn btn-primary mt-3 mb-2" id="insertBtn" type="button">작성</button>
-					<br/><h4 class="text-center mt-2 mb-5">COMMENTS</h4>
-					<div id="commentList"></div>
-				</div>
+		<div class="card my-4">
+			<h5 class="card-header">Leave a Comment:</h5>
+			<div class="card-body">
+				<form name="comment-form">
+					<div class="form-group">
+						<textarea name="comment_con" class="form-control" rows="3"></textarea>
+						<button class="btn btn-primary mt-3 mb-2" id="insertBtn"
+							type="button">작성</button>
+						<br />
+						<h4 class="text-center mt-2 mb-5">COMMENTS</h4>
+						<div id="commentList"></div>
+					</div>
 
-			</form>
+				</form>
+			</div>
+		</div>
+		<form id="form" class="frm" action="" method="post">
+			<c:if test="${boardDto.member_id eq loginId }">
+				<button type="button" id="modifyBtn" class="btn btn-outline-primary">
+					<a
+						href="/lookst/board/magazine/modify?board_no=${boardDto.board_no}">수정</a>
+				</button>
+				<button type="button" id="removeBtn" class="btn btn-outline-danger">삭제</button>
+			</c:if>
+		</form>
+		<div class="container">
+			<div class="table project-table table-centered table-nowrap table-hover mb-4">
+				<table class="table sm_list_01 mt-2 mb-2">
+					<tbody class=" justify-content-center">
+						<tr>
+							<th scope="row" class="text-left" style="width: 16.66%;">이전 페이지</th>
+							<td class="pre text-left" id="lastTitle"><c:if test="${moveM.last != null}">
+									<a style="text-decoration: none; color: black;" href="<c:url value="/board/read/magazine?board_no=${moveM.last}"/>">${moveM.lastTitle}</a>
+								</c:if> <c:if test="${moveM.last == 0}">
+									<div class="fs-6">이전글이 없습니다.</div>
+								</c:if></td>
+						</tr>
+						<tr>
+							<th scope="row" class="text-left">다음 페이지</th>
+							<td class="next text-left " id="nextTitle"><c:if
+									test="${moveM.next != null}">
+									<a style="text-decoration: none; color: black;"
+										href="<c:url value="/board/read/magazine?board_no=${moveM.next}"/>">${moveM.nextTitle}</a>
+								</c:if> <c:if test="${moveM.next == 0}">
+									<div class="fs-6">다음글이 없습니다.</div>
+								</c:if></td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="row mx-auto col-md-4">
+					<button type="button"
+						class="btn btn-outline-primary my-3 mt-5 mb-5"
+						onclick="location.href='/lookst/board/magazine' ">목록</button>
+				</div>
+			</div>
 		</div>
 	</div>
-</div>
-			<div class="row mx-auto col-md-4">
-				<button type="button" class="btn btn-outline-primary my-3 mt-5 mb-5"
-					onclick="history.back(-1)">목록</button>
-			</div>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
-	<script>
+
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
+		<script>
 		baguetteBox.run('.tz-gallery');
 	</script>
-
-	<%@ include file="/WEB-INF/views/fix/footer.jsp"%>
+		<%@ include file="/WEB-INF/views/fix/footer.jsp"%>
 </body>
 </html>

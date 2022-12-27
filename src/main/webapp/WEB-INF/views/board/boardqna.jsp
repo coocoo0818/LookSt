@@ -2,19 +2,38 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
-
-
-
 <!DOCTYPE html>
 <html>
 <head>
-
 <meta charset="UTF-8">
 <title>Lookst</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <style type="text/css">
+@media ( min-width : 768px) .container , . container-md , . container-sm
+	{
+	max-width
+	:
+	 
+	none
+	 
+	!
+	important
+	;
+	
 
+}
 
+@media ( max-width : 360px) {
+	.div_1, .search-form, .search-input, .navbar {
+		width: 100%;
+	}
+	.search-form {
+		margin-bottom: 50px;
+	}
+	.search-option {
+		margin-bottom: 10px;
+	}
+}
 
 * {
 	box-sizing: border-box;
@@ -29,16 +48,16 @@ a {
 }
 
 .hover {
-  display: inline-block;
-  transition: .3s;
-  -webkit-transform: scale(1);
-  transform: scale(1);
-}
-.hover:hover {
-  -webkit-transform: scale(1.1);
-  transform: scale(1.1);
+	display: inline-block;
+	transition: .3s;
+	-webkit-transform: scale(1);
+	transform: scale(1);
 }
 
+.hover:hover {
+	-webkit-transform: scale(1.1);
+	transform: scale(1.1);
+}
 
 button, input {
 	border: none;
@@ -83,7 +102,9 @@ td {
 	color: rgb(53, 53, 53);
 }
 
-li{ list-style: none;}
+li {
+	list-style: none;
+}
 
 .no {
 	width: 150px;
@@ -128,7 +149,6 @@ td.title:hover {
 	margin-top: 50px;
 	margin: auto;
 } */
-
 .btn_write {
 	background-color: rgb(236, 236, 236);
 	border: none;
@@ -147,6 +167,7 @@ td.title:hover {
 .search-form {
 	height: 37px;
 	display: flex;
+	flex-wrap: wrap;
 }
 
 .search-option {
@@ -186,6 +207,10 @@ td.title:hover {
 .search-button::hover {
 	color: rgb(165, 165, 165);
 }
+
+.div_1 {
+	display: flex;
+}
 </style>
 </head>
 <body>
@@ -207,11 +232,12 @@ td.title:hover {
 			<div class="tab-content" id="pills-tabContent">
 				<div class="tab-pane fade show active my-5" id="pills-home"
 					role="tabpanel" aria-labelledby="pills-home-tab">
-					     <li class="notice1">
-					     	 <a class="hover"  href="${contextPath}/board/list" style="font-weight: 900; font-size: x-large;">Q&A &nbsp;</a>
-						     <a class="hover"  href="${contextPath}/board/list/notice">NOTICE &nbsp;&nbsp;</a>
-					     	 <a class="hover"  href="${contextPath}/board/list/faq"> FAQ &nbsp;</a>
-					     </li>
+					<li class="notice1"><a class="hover"
+						href="${contextPath}/board/list"
+						style="font-weight: 900; font-size: x-large;">Q&A &nbsp;</a> <a
+						class="hover" href="${contextPath}/board/list/notice">NOTICE
+							&nbsp;&nbsp;</a> <a class="hover"
+						href="${contextPath}/board/list/faq"> FAQ &nbsp;</a></li>
 					<!-- QNA -->
 					<nav class="navbar navbar-expand-md navbar-dark "
 						style="float: right;">
@@ -223,9 +249,12 @@ td.title:hover {
 									+ 내용</option>
 								<option value="T" ${pr.sc.option=='T' ? "selected" : "" }>제목</option>
 								<option value="W" ${pr.sc.option=='W' ? "selected" : "" }>작성자</option>
-							</select> <input type="text" name="keyword" class="search-input"
-								value="${param.keyword }" placeholder="검색어를 입력해 주세요."> <input
-								type="submit" class="search-button" value="검색">
+							</select>
+							<div class="div_1">
+								<input type="text" name="keyword" class="search-input"
+									value="${param.keyword }" placeholder="검색어를 입력해 주세요.">
+								<input type="submit" class="search-button" value="검색">
+							</div>
 						</form>
 					</nav>
 					<table>
@@ -252,31 +281,34 @@ td.title:hover {
 						</c:forEach>
 					</table>
 					<br>
-		<nav aria-label="Page navigation example">
-				  <ul class="pagination justify-content-center">
-				    <li class="page-item disabled">
-							<c:if test="${totalCnt == null || totalCnt == 0}">
-								<div>게시물이 없습니다.</div>
-							</c:if>
-							<c:if test="${totalCnt != null || totalCnt != 0}">
-								<c:if test="${pr.showPrev }">
-									<li class="page-item"><a class="page-link" href="<c:url value="/board/list${pr.sc.getQueryString(pr.beginPage-1) }" />"> &lt; </a></li>
-								</c:if>
-								<c:forEach var="i" begin="${pr.beginPage }" end="${pr.endPage }">
-									<li class="page-item"><a class="page-link" href="<c:url value="/board/list${pr.sc.getQueryString(i) }" />">${i }</a>
-								</c:forEach>
-								<c:if test="${pr.showNext }">
-									<li class="page-item"><a class="page-link" href="<c:url value="/board/list${pr.sc.getQueryString(pr.endPage+1) }" />">
-										&gt; </a>
-								</c:if>
-							</c:if>
-						</li>
-					</ul>
-				</nav>
+					<nav aria-label="Page navigation example">
+						<ul class="pagination justify-content-center">
+							<li class="page-item disabled"><c:if
+									test="${totalCnt == null || totalCnt == 0}">
+									<div>게시물이 없습니다.</div>
+								</c:if> <c:if test="${totalCnt != null || totalCnt != 0}">
+									<c:if test="${pr.showPrev }">
+										<li class="page-item"><a class="page-link"
+											href="<c:url value="/board/list${pr.sc.getQueryString(pr.beginPage-1) }" />">
+												&lt; </a></li>
+									</c:if>
+									<c:forEach var="i" begin="${pr.beginPage }"
+										end="${pr.endPage }">
+										<li class="page-item"><a class="page-link"
+											href="<c:url value="/board/list${pr.sc.getQueryString(i) }" />">${i }</a>
+									</c:forEach>
+									<c:if test="${pr.showNext }">
+										<li class="page-item"><a class="page-link"
+											href="<c:url value="/board/list${pr.sc.getQueryString(pr.endPage+1) }" />">
+												&gt; </a>
+									</c:if>
+								</c:if></li>
+						</ul>
+					</nav>
 					<iuput type="submit" class="btn btn-primary mt-5 mb-5"
 						style="float:right;"
 						onclick="location.href='<c:url value="/board/write" />' ">
-					<i class="fa fa-pen"></i>submit
+					<i class="fa fa-pen"></i>submit 
 				</div>
 			</div>
 		</div>

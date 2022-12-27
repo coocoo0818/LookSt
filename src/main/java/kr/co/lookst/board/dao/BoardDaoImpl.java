@@ -4,13 +4,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import kr.co.lookst.board.domain.Board_imgDto;
 import kr.co.lookst.board.domain.MagazineSimpleDto;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.co.lookst.board.domain.BoardDto;
-import kr.co.lookst.board.domain.CommentDto;
+import kr.co.lookst.board.domain.PrevAndNextDto;
 import kr.co.lookst.board.domain.SearchItem;
 
 @Repository
@@ -186,6 +187,34 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public BoardDto movePage(Integer board_no) throws Exception {
 		return session.selectOne(namespace + "movePage", board_no);
+	}
+
+	@Override
+	public int insertM(BoardDto boardDto) throws Exception {
+		// TODO Auto-generated method stub
+		return session.insert(namespace + "insertM", boardDto);
+	}
+
+	@Override
+	public int updateM(BoardDto boardDto) throws Exception {
+		// TODO Auto-generated method stub
+		return session.update(namespace + "updateM", boardDto);
+	}
+
+	@Override
+	public void insertBoardImages(List<Board_imgDto> board_imgDtos) {
+		session.insert(namespace + "insertBoardImages", board_imgDtos);
+	}
+
+	@Override
+	public void deleteImage(int board_no) {
+		session.delete(namespace + "deleteImage",board_no);
+	}
+
+	@Override
+	public BoardDto movePageM(int board_no) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectOne(namespace + "movePageM" , board_no);
 	}
 
 }

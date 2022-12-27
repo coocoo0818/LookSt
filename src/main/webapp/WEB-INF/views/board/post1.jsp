@@ -12,7 +12,6 @@
 .sm_list_01 {
 	width: 100%;
 }
-
 </style>
 
 </head>
@@ -54,28 +53,60 @@
 						<tr>
 							<th scope="row" class="text-left">이전 페이지</th>
 							<td class="pre text-left" id="lastTitle"><c:if
-									test="${move.last != 9999}">
+									test="${move.last != null}">
 									<a style="text-decoration: none; color: black;"
-										href="<c:url value="/board/read/notice?board_no=${move.last}"/>">${move.lastTitle }</a>
-								</c:if> <c:if test="${move.last == 9999}">
+										href="<c:url value="/board/read/notice?board_no=${move.last}"/>">${move.lastTitle}</a>
+								</c:if> <c:if test="${move.last == 0}">
 									<div class="fs-6">이전글이 없습니다.</div>
 								</c:if></td>
 						</tr>
 						<tr>
 							<th scope="row" class="text-left">다음 페이지</th>
-							<td class="next text-left " id="nextTitle"><c:if
-									test="${move.next != 9999}">
+							<td class="next text-left " id="nextTitle">
+							   <c:if
+									test="${move.next != null}">
 									<a style="text-decoration: none; color: black;"
-										href="<c:url value="/board/read/notice?board_no=${move.next}"/>">${move.nextTitle }</a>
-								</c:if> <c:if test="${move.next == 9999}">
+										href="<c:url value="/board/read/notice?board_no=${move.next}"/>">${move.nextTitle}</a>
+								</c:if> 
+								<c:if test="${move.next == 0}">
 									<div class="fs-6">다음글이 없습니다.</div>
-								</c:if></td>
+								</c:if>
+							</td>
 						</tr>
 					</tbody>
 				</table>
+
+				<%-- 				controller에서 다음 글과 이전값이 있는지 확인해서 보내준후 view에서 ru
+				<c:choose>
+					<c:when test="${prevAndNext.next_board_no != null and prevAndNext.next_board_no != ''}">
+
+						<button type="button" class="btn btn-warning mr-3 mb-3"
+								onclick="location.href='/lookst/board/read/notice?board_no=${prevAndNext.next_board_no}'"><span
+								class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>다음글
+						</button>
+					</c:when>
+
+					<c:when test="${prevAndNext.next_board_no == null or  prevAndNext.next_board_no == ''}">
+						<button type="button" class="btn btn-warning mr-3 mb-3" disabled>다음글이 없습니다</button>
+					</c:when>
+				</c:choose>
+				<br/>
+				<c:choose>
+					<c:when test="${prevAndNext.prev_board_no != null and prevAndNext.prev_board_no != ''}">
+						<button type="button" class="btn btn-info mr-3 "
+								onclick="location.href='/lookst/board/read/notice?board_no=${prevAndNext.prev_board_no}'"><span
+								class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>이전글
+						</button>
+					</c:when>
+
+					<c:when test="${prevAndNext.prev_board_no == null or prevAndNext.prev_board_no == ''}">
+						<button type="button" class="btn btn-info mr-3" disabled>이전글이 없습니다</button>
+					</c:when>
+				</c:choose> --%>
 				<div class="row mx-auto col-md-4">
 					<button type="button"
-						class="btn btn-outline-primary my-3 mt-5 mb-5" onclick="location.href='<c:url value="/board/list/notice" />' ">목록</button>
+						class="btn btn-outline-primary my-3 mt-5 mb-5"
+						onclick="location.href='/lookst/board/list/notice' ">목록</button>
 				</div>
 			</div>
 		</div>

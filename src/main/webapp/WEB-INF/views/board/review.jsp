@@ -10,8 +10,32 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style type="text/css">
+@media ( min-width : 768px) .container , . container-md , . container-sm
+	{
+	max-width
+	:
+	 
+	none
+	 
+	!
+	important
+	;
+	
 
+}
 
+@media ( max-width : 360px) {
+	.div_1, .search-form, .search-input, .navbar {
+		width: 100%;
+	}
+	.search-form {
+		margin-bottom: 50px;
+		flex-wrap: wrap;
+	}
+	.search-option {
+		margin-bottom: 10px;
+	}
+}
 
 * {
 	box-sizing: border-box;
@@ -20,22 +44,22 @@
 	font-family: "Noto Sans KR", sans = serif;
 }
 
+.hover {
+	display: inline-block;
+	transition: .3s;
+	-webkit-transform: scale(1);
+	transform: scale(1);
+}
+
+.hover:hover {
+	-webkit-transform: scale(1.1);
+	transform: scale(1.1);
+}
+
 a {
 	text-decoration: none !important;
 	color: black;
 }
-
-.hover {
-  display: inline-block;
-  transition: .3s;
-  -webkit-transform: scale(1);
-  transform: scale(1);
-}
-.hover:hover {
-  -webkit-transform: scale(1.1);
-  transform: scale(1.1);
-}
-
 
 button, input {
 	border: none;
@@ -80,7 +104,9 @@ td {
 	color: rgb(53, 53, 53);
 }
 
-li{ list-style: none;}
+li {
+	list-style: none;
+}
 
 .no {
 	width: 150px;
@@ -98,10 +124,10 @@ td.writer {
 	text-align: left;
 }
 
-/* td.viewcnt {
+td.viewcnt {
 	text-align: center;
 }
- */
+
 td.title:hover {
 	text-decoration: underline;
 }
@@ -125,7 +151,6 @@ td.title:hover {
 	margin-top: 50px;
 	margin: auto;
 } */
-
 .btn_write {
 	background-color: rgb(236, 236, 236);
 	border: none;
@@ -183,6 +208,10 @@ td.title:hover {
 .search-button::hover {
 	color: rgb(165, 165, 165);
 }
+
+.div_1 {
+	display: flex;
+}
 </style>
 <title>lookst</title>
 </head>
@@ -205,23 +234,24 @@ td.title:hover {
 			<div class="tab-content" id="pills-tabContent">
 				<div class="tab-pane fade show active my-5" id="pills-home"
 					role="tabpanel" aria-labelledby="pills-home-tab">
-						<nav class="navbar navbar-expand-md navbar-dark "
-							style="float: right;">
-							<form action="<c:url value="/board/review" />"
-								class="search-form" method="get">
-								<select class="search-option" name="option"
-									style="margin-right: 2%">
-									<option value="A"
-										${prR.sc.option=='A' || prR.sc.option=='' ? "selected" : "" }>제목
-										+ 내용</option>
-									<option value="T" ${prR.sc.option=='T' ? "selected" : "" }>제목</option>
-									<option value="W" ${prR.sc.option=='W' ? "selected" : "" }>작성자</option>
-								</select> <input type="text" name="keyword" class="search-input"
+					<nav class="navbar navbar-expand-md navbar-dark "
+						style="float: right;">
+						<form action="<c:url value="/board/review" />" class="search-form"
+							method="get">
+							<select class="search-option" name="option">
+								<option value="A"
+									${pr.sc.option=='A' || pr.sc.option=='' ? "selected" : "" }>제목
+									+ 내용</option>
+								<option value="T" ${pr.sc.option=='T' ? "selected" : "" }>제목</option>
+								<option value="W" ${pr.sc.option=='W' ? "selected" : "" }>작성자</option>
+							</select>
+							<div class="div_1">
+								<input type="text" name="keyword" class="search-input"
 									value="${param.keyword }" placeholder="검색어를 입력해 주세요.">
 								<input type="submit" class="search-button" value="검색">
-							</form>
-						</nav>
-					</form>
+							</div>
+						</form>
+					</nav>
 					<table>
 						<tr>
 							<th class="no">번호</th>
@@ -245,7 +275,7 @@ td.title:hover {
 							</tr>
 						</c:forEach>
 					</table>
-					<nav class=" mt-5 mb-5" aria-label="Page navigation example">
+					<nav aria-label="Page navigation example">
 						<ul class="pagination justify-content-center">
 							<li class="page-item disabled"><c:if
 									test="${totalCntR == null || totalCntR == 0}">
@@ -270,10 +300,10 @@ td.title:hover {
 						</ul>
 					</nav>
 				</div>
-<iuput type="submit" class="btn btn-primary mt-5 mb-5"
-						style="float:right;"
-						onclick="location.href='<c:url value="/board/review/write" />' ">
-					<i class="fa fa-pen"></i>submit
+				<iuput type="submit" class="btn btn-primary mt-5 mb-5"
+					style="float:right;"
+					onclick="location.href='<c:url value="/board/review/write" />' ">
+				<i class="fa fa-pen"></i>submit 
 			</div>
 		</div>
 	</div>

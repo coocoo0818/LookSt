@@ -3,6 +3,7 @@ package kr.co.lookst.board.service;
 import java.util.List;
 import java.util.Map;
 
+import kr.co.lookst.board.domain.Board_imgDto;
 import kr.co.lookst.board.domain.MagazineSimpleDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -149,7 +150,32 @@ public class BoardServiceImpI implements BoardService {
 		return boardDao.movePage(board_no);
 	}
 
+	@Override
+	public int wirteM(BoardDto boardDto) throws Exception {
+		// TODO Auto-generated method stub
+		return boardDao.insertM(boardDto);
+	}
 
+	@Override
+	public int modifyM(BoardDto boardDto) throws Exception {
+		// TODO Auto-generated method stub
+		return boardDao.updateM(boardDto);
+	}
 
+	@Override
+	public void insertBoardImages(List<Board_imgDto> board_imgDtos) {
+		 boardDao.insertBoardImages(board_imgDtos);
+	}
+
+	@Override
+	public void deleteImage(int board_no) {
+			boardDao.deleteImage(board_no);
+	}
+
+	@Override
+	public BoardDto movePageM(int board_no) throws Exception {
+		// TODO Auto-generated method stub
+		return boardDao.movePageM(board_no);
+	}
 
 }
