@@ -83,7 +83,7 @@ input {
 								
 							},
 							error:function(){   //데이터 주고받기가 실패했을 경우 실행할 결과
-								alert('실패');
+								console.log('실패');
 							}
 						})
 					} else {
@@ -100,7 +100,7 @@ input {
 								
 							},
 							error:function(){   //데이터 주고받기가 실패했을 경우 실행할 결과
-								alert('실패');
+								console.log('실패');
 							}
 						})
 					}
@@ -119,7 +119,7 @@ input {
 								
 							},
 							error:function(){   //데이터 주고받기가 실패했을 경우 실행할 결과
-								alert('실패');
+								console.log('실패');
 							}
 						})
 					} else {
@@ -136,7 +136,7 @@ input {
 								
 							},
 							error:function(){   //데이터 주고받기가 실패했을 경우 실행할 결과
-								alert('실패');
+								console.log('실패');
 							}
 						})
 					}
