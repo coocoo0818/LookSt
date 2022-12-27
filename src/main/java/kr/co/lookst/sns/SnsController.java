@@ -31,6 +31,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.co.lookst.sns.dao.SnsProfileDao;
 import kr.co.lookst.sns.domain.FollowDto;
+import kr.co.lookst.sns.domain.PostUpload;
 import kr.co.lookst.sns.domain.ProfileFeedDto;
 import kr.co.lookst.sns.domain.SnsProfileDto;
 import kr.co.lookst.sns.service.SnsService;
@@ -150,16 +151,16 @@ public class SnsController {
 
 	/* 포스트 이미지 업로드 */
 	@RequestMapping(value = "postUpload", method = { RequestMethod.POST })
-	public String postUpload(ProfileFeedDto pfd, Model m, MultipartHttpServletRequest mtfRequest,
+	public String postUpload(PostUpload pu, MultipartHttpServletRequest mtfRequest,
 			HttpServletRequest request) {
+		List<MultipartFile> fileList = mtfRequest.getFiles("file");
+		
 		HttpSession session = request.getSession();
 		String member_id = (String) session.getAttribute("res");
-		pfd.setMember_id(member_id);
 		
-	
-		List<MultipartFile> fileList = mtfRequest.getFiles("file");
 		String path = "C:\\workspace-spring\\LookSt\\src\\main\\webapp\\resources\\img\\post\\";
 		// 포스트 insert & select => post_no => 이미지 반복업로드
+		/*
 		try {
 			int uploadpost = snsService.contentUp(pfd);
 			
@@ -167,23 +168,40 @@ public class SnsController {
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
+		*/
+		
+		int seq = 1;
+		int post_no = 22;
+		String content = "어캐하냐고!!";
 		
 		for (MultipartFile mf : fileList) {
 			String originFileName = mf.getOriginalFilename(); // 원본 파일 명
 			long fileSize = mf.getSize(); // 파일 사이즈
 			UUID uuid = UUID.randomUUID(); // uuid
-
+			
+			
 			System.out.println("원본 파일명 : " + originFileName);
 			System.out.println("파일 사이즈 : " + fileSize);
 			System.out.println("작성자 아이디 : " + member_id);
-			String safeFile = path + uuid + "_" + originFileName;
 			
+			String safeFile = uuid + "_" + originFileName;
 			try {
-				m.addAttribute("member_id", member_id);
-				m.addAttribute("originFileName", originFileName);
-				m.addAttribute("uuid", uuid);
+				pu.setMember_id(member_id);
+				pu.setPost_no(post_no);
+				pu.setPost_img_img(safeFile);
+				pu.setPost_img_seq(seq);
+				pu.setPost_content(content);
+				
 				mf.transferTo(new File(safeFile)); // insert 이미지 반복
-				System.out.println(m);
+				
+				System.out.println("작성자 아이디 : " + member_id);
+				System.out.println("포스트 넘버 : " + post_no);
+				System.out.println("저장된 파일명 : " + safeFile);
+				System.out.println("시퀀스넘버 : " + seq);
+				System.out.println("게시물 내용 : " + content);
+				
+				seq += 1;
+				System.out.println();
 			} catch (IllegalStateException e) {
 				e.printStackTrace();
 			} catch (IOException e) {

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kr.co.lookst.sns.domain.PostUpload;
 import kr.co.lookst.sns.dao.SnsProfileDao;
 import kr.co.lookst.sns.domain.FollowDto;
 import kr.co.lookst.sns.domain.ProfileFeedDto;
@@ -63,20 +64,28 @@ public class SnsServiceImpl implements SnsService{
 	}
 	// 포스트 컨텐트 업로드
 	@Override
-	public int contentUp(ProfileFeedDto pfd) throws Exception {
-		return snsProfileDao.postCon_up(pfd);
+	public int contentUp(PostUpload pu) throws Exception {
+		return snsProfileDao.postCon_up(pu);
 	}
 	// 포스트 이미지 업로드
 	@Override
-	public int imgUp(ProfileFeedDto pfd) throws Exception {
-		return snsProfileDao.postImg_up(pfd);
+	public int imgUp(PostUpload pu) throws Exception {
+		return snsProfileDao.postImg_up(pu);
 	}
-
+	
+	// 포스트번호 가져오기
+	/*
+	@Override
+	public int max_post_no() throws Exception {
+		return snsProfileDao.max_post_no();
+	}
+	*/
 	// 게시물 삭제
 	@Override
 	public int deletePost(Integer post_no) throws Exception {
 		return snsProfileDao.deletePost(post_no);
 	}
+	
 	
 
 

@@ -10,7 +10,7 @@ public class ProfileFeedDto {
 	private String member_id;
 	private Integer post_no;
 	private String post_img_img;
-	private int post_img_seq;
+	private Integer post_img_seq;
 	private Date post_date;
 	private String post_type;
 	private String post_content;
@@ -25,8 +25,16 @@ public class ProfileFeedDto {
 		this.post_no = post_no;
 	}
 
-
-
+	public ProfileFeedDto(String member_id, Integer post_no, String post_img_img, int post_img_seq,
+			String post_content) {
+		//super();
+		this.member_id = member_id;
+		this.post_no = post_no;
+		this.post_img_img = post_img_img;
+		this.post_img_seq = post_img_seq;
+		this.post_content = post_content;
+	}
+/*
 	public ProfileFeedDto(String member_id, Integer post_no, String post_img_img, 
 							int post_img_seq, Date post_date, String post_type) {
 		//super();
@@ -37,7 +45,7 @@ public class ProfileFeedDto {
 		this.post_date = post_date;
 		this.post_type = post_type;
 	}
-
+*/
 	public String getMember_id() {
 		return member_id;
 	}
@@ -91,6 +99,8 @@ public class ProfileFeedDto {
 		return "ProfileFeedDto [member_id=" + member_id + ", post_no=" + post_no + ", post_img_img=" + post_img_img
 				+ ", post_img_seq=" + post_img_seq + ", post_date=" + post_date + ", post_type=" + post_type + "]";
 	}
+
+
 	
 	
 }
