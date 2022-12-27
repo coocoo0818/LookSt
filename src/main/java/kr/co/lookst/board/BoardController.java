@@ -344,7 +344,7 @@ public class BoardController {
             if (boardService.wirteM(boardDto) != 1)
                 throw new Exception("Write failed");
             // 매거진에서 작성할 글 중 이미지 첨부 파일을 6개 이하로 지정
-            if (files.size() > 7) {					
+            if (files.size() > 6) {					
                 m.addAttribute("mode", "new");
                 m.addAttribute("boardDto", boardDto);
                 m.addAttribute("msg", "사진은 6개 이하만 업로드 가능합니다.");
@@ -366,14 +366,6 @@ public class BoardController {
             return "board/boardM";
         }
     }
-
-
-
-
-
-
-
-
 
     @GetMapping("/magazine/write")
     public String writeM(Model m) {
