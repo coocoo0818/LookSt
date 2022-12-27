@@ -106,7 +106,7 @@ public interface AdminDao {
 	/* sns 디테일 페이지 좋아요 갯수 */
 	int postLikedCnt(Integer post_no) throws Exception;
 	/* sns 디테일 페이지 좋아요 체크 */
-	int postLikedCheck(String login_id) throws Exception;
+	int postLikedCheck(SnsHeartDto snsHeartDto) throws Exception;
 	/* sns 댓글 리스트 */
 	List<SnsCommentDto> snsReplyList(Integer post_no) throws Exception;
 	/* 개인 프로필, 닉네임 호출 */

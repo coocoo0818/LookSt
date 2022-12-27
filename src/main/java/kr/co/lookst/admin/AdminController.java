@@ -517,7 +517,11 @@ public class AdminController {
 			List<post_com_tagDto> tagInfoList = adminService.tagInfoList(post_no);
 			/* sns 디테일 페이지 좋아요 체크 */
 			if (login_id != null) {
-				int postLikedCheck = adminService.postLikedCheck(login_id);
+				SnsHeartDto snsHeartDto = new SnsHeartDto();
+				snsHeartDto.setPost_no(post_no);
+				snsHeartDto.setMember_id(login_id);
+				int postLikedCheck = adminService.postLikedCheck(snsHeartDto);
+				System.out.println("qq"+postLikedCheck);
 				model.addAttribute("postLikedCheck", postLikedCheck);
 			}
 			

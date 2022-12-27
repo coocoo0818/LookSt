@@ -243,8 +243,8 @@ public class AdminDaoImpl implements AdminDao{
 	}
 	/* sns 디테일 페이지 좋아요 체크 */
 	@Override
-	public int postLikedCheck(String login_id) throws Exception {
-		return session.selectOne(namespace + "postLikedCheck", login_id);
+	public int postLikedCheck(SnsHeartDto snsHeartDto) throws Exception {
+		return session.selectOne(namespace + "postLikedCheck", snsHeartDto);
 	}
 	/* sns 댓글 리스트 */
 	@Override
