@@ -103,7 +103,7 @@
 												$(tagInfoList).html(toHtml(result))		// result는 서버가 전송한 데이터											
 												/* $("#PrdtTags").html(toPrdtTag(result)) */
 										},
-										error : function() { alert("error")}	// 에러가 발생할 때, 호출될 함수
+										error : function() { console.log("error")}	// 에러가 발생할 때, 호출될 함수
 									})
 								}
 								
@@ -128,7 +128,7 @@
 										success : function(result) {			// 서버로부터 응답이 도착하면 호출될 함수
 											$(PrdtTags).html(toPrdtTag(result))		// result는 서버가 전송한 데이터
 										},
-										error : function() { alert("error")}	// 에러가 발생할 때, 호출될 함수
+										error : function() { console.log("error")}	// 에러가 발생할 때, 호출될 함수
 									})
 								}
 								
@@ -172,7 +172,7 @@
 													
 												},
 												error:function(){   //데이터 주고받기가 실패했을 경우 실행할 결과
-													alert('실패');
+													console.log('실패');
 												}
 											})
 										} else {
@@ -189,7 +189,7 @@
 													
 												},
 												error:function(){   //데이터 주고받기가 실패했을 경우 실행할 결과
-													alert('실패');
+													console.log('실패');
 												}
 											})
 										}
@@ -208,7 +208,7 @@
 													
 												},
 												error:function(){   //데이터 주고받기가 실패했을 경우 실행할 결과
-													alert('실패');
+													console.log('실패');
 												}
 											})
 										} else {
@@ -225,7 +225,7 @@
 													
 												},
 												error:function(){   //데이터 주고받기가 실패했을 경우 실행할 결과
-													alert('실패');
+													console.log('실패');
 												}
 											})
 										}

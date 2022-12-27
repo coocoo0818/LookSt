@@ -74,28 +74,26 @@
 							<input hidden="hidden" name="member_id" id="member_id"
 								value="${member_id}" />
 							<tr>
-								<td class="td_width_3 text-center"><img
-									src="${contextPath}/resources/img/product/${orderHistory.prdt_img_name}"
-									style="height: 150px; weight: 150px;">
-									<div id="product_name" value="${orderHistory.product_name}">${orderHistory.product_name}</div>
-									<span id="prdt_option_size"
-									value="${orderHistory.prdt_order_size}">사이즈 :
-										${orderHistory.prdt_order_size}</span> <span id="prdt_option_color"
-									value="${orderHistory.prdt_order_color}">색상 :
-										${orderHistory.prdt_order_color}</span></td>
+								<td class="td_width_3 text-center">
+									<a href=""><img src="${contextPath}/resources/img/product/${orderHistory.prdt_img_name}" style="height: 150px; weight: 150px;"></a>
+									<div id="product_name" value ="${orderHistory.product_name}">${orderHistory.product_name}</div>
+									<span id="prdt_option_size" value="${orderHistory.prdt_order_size}">사이즈 : ${orderHistory.prdt_order_size}</span> 
+									<span id="prdt_option_color" value="${orderHistory.prdt_order_color}">색상 : ${orderHistory.prdt_order_color}</span>
+								</td>
 								<td class="td_width_2 text-center" id="orderNotd">
 									<div class="order_no">
 										<span id="prdt_order_no">${orderHistory.prdt_order_no }</span>
 									</div>
 								</td>
-								<td class="td_width_2 text-center"><fmt:formatNumber
-										value="${orderHistory.prdt_order_price }" pattern="#,###" />원</td>
-								<td class="td_width_1 text-center">
-									<div class="table_text_align_center quantity_div"
-										id="prdt_order_quan" value="${orderHistory.prdt_order_quan}">${orderHistory.prdt_order_quan}</div>
+								<td class="td_width_2 text-center">
+									<fmt:formatNumber value="${orderHistory.prdt_order_price }" pattern="#,###" />원
 								</td>
-								<td class="td_width_2 text-center"><fmt:formatDate
-										value="${orderHistory.prdt_order_date }" /></td>
+								<td class="td_width_1 text-center">
+									<div class="table_text_align_center quantity_div" id="prdt_order_quan" value="${orderHistory.prdt_order_quan}">${orderHistory.prdt_order_quan}</div>
+								</td>
+								<td class="td_width_2 text-center">
+									<fmt:formatDate value="${orderHistory.prdt_order_date }" />
+								</td>
 								<%-- <div class="order_date"><span id="prdt_order_date" value="${orderHistory.prdt_order_date }">${orderHistory.prdt_order_date }</span></div> --%>
 								<td class="td_width_2 text-center"><c:if
 										test="${orderHistory.prdt_order_type eq 'P' && orderHistory.prdt_order_cancel ne 'D'}">

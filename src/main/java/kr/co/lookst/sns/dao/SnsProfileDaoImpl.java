@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.co.lookst.sns.domain.FollowDto;
+import kr.co.lookst.sns.domain.PostUpload;
 import kr.co.lookst.sns.domain.ProfileFeedDto;
 import kr.co.lookst.sns.domain.SnsProfileDto;
 
@@ -90,20 +91,28 @@ public class SnsProfileDaoImpl implements SnsProfileDao {
 
 	// 포스트 컨텐트 업로드
 	@Override
-	public int postCon_up(ProfileFeedDto pfd) throws Exception {
-		return session.insert(namespace + "postCon_up", pfd);
+	public int postCon_up(PostUpload pu) throws Exception {
+		return session.insert(namespace + "postCon_up", pu);
 	}
 	// 포스트 이미지 업로드
 	@Override
-	public int postImg_up(ProfileFeedDto pfd) throws Exception {
-		return session.insert(namespace + "postImg_up", pfd);
+	public int postImg_up(PostUpload pu) throws Exception {
+		return session.insert(namespace + "postImg_up", pu);
 	}
-
+	// 포스트 번호 가져오기
+	/*
+	@Override
+	public int max_post_no() throws Exception {
+		return session.selectOne(namespace+"max_post_no");
+	}
+	*/
 	// 게시물 삭제
 	@Override
 	public int deletePost(Integer post_no) throws Exception {
 		return session.update(namespace+"postDelete", post_no);
 	}
+	
+	
 	
 
 
