@@ -24,7 +24,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.net.MalformedURLException;
 
 @RestController
+// @RestController는 @Controller에 @ResponseBody가 추가된 것입니다. 당연하게도 RestController의 주용도는 Json 형태로 객체 데이터를 반환함. 
+// 최근에 데이터를 응답으로 제공하는 REST API를 개발할 때 주로 사용하며 객체를 ResponseEntity로 감싸서 반환함.
+// 이러한 이유로 동작 과정 역시 @Controller에 @ReponseBody를 붙인 것과 완벽히 동일함.
 @RequiredArgsConstructor
+//이 어노테이션은 초기화 되지않은 final 필드나, @NonNull 이 붙은 필드에 대해 생성자를 생성해 줌. 주로 의존성 주입(Dependency Injection) 편의성을 위해서 사용된다.
 public class ImageController {
 
     private final ImageService service;
