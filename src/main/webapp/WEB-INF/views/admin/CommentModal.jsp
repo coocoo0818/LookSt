@@ -70,6 +70,7 @@
 	                let sns_comment_con = data[i].sns_comment_con;
 	                let sns_comment_date = formatDate(data[i].sns_comment_date);
 	                
+	                console.log(data[i].sns_comment_con);
 		            console.log(sns_comment_class);	// 모댓글일땐 0, 답글일땐 1
 		            
 		            listHtml += "<div class='row replyrow reply" + sns_comment_no + "'>";
@@ -100,7 +101,7 @@
 	                            // 함수에 게시글번호(bno), 모댓글번호(no), 모댓글 작성자(writer)를 인자로 담아서 넘긴다.
 	                            // 이때 모댓글 작성자 writer는 string인데 string을 인자에 넣기 위해선''나""로 감싸줘야한다.
 	                            // 여기선 ''와 ""가 이미 둘다 쓰이고 있는데  href를 감싸고 있는 ''와 겹치지 않는 ""를 \" 처리해서 넣어줬다.
-	                            listHtml += "			<a href='#' class='write_reply_start text-decoration-none' style='display: inline; color: #297dcb;' data-bs-toggle='collapse' data-bs-target='#re_reply"+ sns_comment_no +"' aria-expanded='false' aria-controls='collapseExample' sns_comment_group='"+sns_comment_group+"'>답글&nbsp;달기</a>";
+	                            listHtml += "			<a href='#' class='write_reply_start text-decoration-none rounded' style='display: inline; color: #297dcb;' data-bs-toggle='collapse' data-bs-target='#re_reply"+ sns_comment_no +"' aria-expanded='false' aria-controls='collapseExample' sns_comment_group='"+sns_comment_group+"'>답글&nbsp;달기</a>";
 	                            listHtml += "		</div>";
 	                        }
 	                        listHtml += "	</div>";
@@ -170,7 +171,7 @@
 	                    // listHtml += "			<button onclick='javascript:WriteReReply("+ no +","+ bno +")' type='button' class='btn btn-success mb-1 write_rereply' >답글&nbsp;달기</button>"
 	                    // 위 코드는 클릭되어도 값이 넘겨지지 않는다. 값이 undefined가 된다.
 	                    // 아래코드처럼 짜야한다. click이벤트를 처리하지 않고 데이터(no, bno)만 속성으로 넘겨주도록 작성한다.
-	                    listHtml += "			<button type='button' class='btn btn-primary mb-1 write_rereply' sns_comment_no='" + sns_comment_no + "' post_no='" + post_no + "' sns_comment_nick='" + sns_comment_nick + "' sns_comment_profile='" + sns_comment_profile + "' sns_comment_group='"+ sns_comment_group +"'>답글&nbsp;달기</button>"
+	                    listHtml += "			<button type='button' class='btn btn-primary mb-1 write_rereply rounded' sns_comment_no='" + sns_comment_no + "' post_no='" + post_no + "' sns_comment_nick='" + sns_comment_nick + "' sns_comment_profile='" + sns_comment_profile + "' sns_comment_group='"+ sns_comment_group +"'>답글&nbsp;달기</button>"
 	                    listHtml += "		</div>";
 	                    listHtml += "	</div>";
 	                    // ---- 답글입력란 끝
@@ -425,7 +426,7 @@
 			                        <input class="w-100 form-control" id="input_reply${snsDetailClick.NPostDto.post_no}" type="text" placeholder="댓글입력...">
 			                    </div>
 			                    <div class="col-3 ">
-			                        <button type="button" idx="${snsDetailClick.NPostDto.post_no}" data-postNo="${snsDetailClick.NPostDto.post_no}" class="btn btn-primary mb-1 write_reply">게시</button>
+			                        <button type="button" idx="${snsDetailClick.NPostDto.post_no}" data-postNo="${snsDetailClick.NPostDto.post_no}" class="btn btn-primary mb-1 write_reply rounded">게시</button>
 			                    </div>
 			                </div>
 			            </c:if>

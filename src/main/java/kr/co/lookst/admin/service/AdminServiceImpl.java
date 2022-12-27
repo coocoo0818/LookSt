@@ -236,8 +236,8 @@ public class AdminServiceImpl implements AdminService{
 	}
 	/* sns 디테일 페이지 좋아요 체크 */
 	@Override
-	public int postLikedCheck(String login_id) throws Exception {
-		return adminDao.postLikedCheck(login_id);
+	public int postLikedCheck(SnsHeartDto snsHeartDto) throws Exception {
+		return adminDao.postLikedCheck(snsHeartDto);
 	}
 	/* sns 댓글 리스트 */
 	@Override
