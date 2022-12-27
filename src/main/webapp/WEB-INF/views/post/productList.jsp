@@ -105,8 +105,8 @@
 			<div class="col-lg-9">
 				<!-- 검색 시작 -->
 				<form class="d-flex row py-3" action="${contextPath}/post/productList" method="get">
-					<div>
-						<div class="col mt-1">
+					<div class="d-flex justify-content-between">
+						<div class="col mt-1 me-3">
 							<select id="inputState" class="form-select form-select-md"
 								name="option">
 								<option selected>전체</option>
@@ -126,18 +126,19 @@
 						</div>
 					</div>
 					<!-- 검색 끝 -->
-					<div class="col mt-1">
-						<select class="form-select form-select-md" name="sort">
-							<option value="R" ${pr.sc.sort=='R'? "selected" : ""}>최신 상품순</option>
-							<option value="U" ${pr.sc.sort=='U'? "selected" : ""}>낮은 가격순</option>
-							<option value="D" ${pr.sc.sort=='D'? "selected" : ""}>높은 가격순</option>
-						</select>
-					</div>
-					
-					<div class="d-flex col-md-9 mt-1">
-						<button class="btn btn-secondary" type="submit">
-							<i class="d-flex fa fa-search"></i>
-						</button>
+					<div class="mt-1 d-flex justify-content-end">
+						<div>
+							<select class="form-select form-select-md col-3" name="sort">
+								<option value="R" ${pr.sc.sort=='R'? "selected" : ""}>최신 상품순</option>
+								<option value="U" ${pr.sc.sort=='U'? "selected" : ""}>낮은 가격순</option>
+								<option value="D" ${pr.sc.sort=='D'? "selected" : ""}>높은 가격순</option>
+							</select>
+						</div>
+						<div class="mt-1" >
+							<button class="btn btn-secondary" type="submit">
+								<i class="d-flex fa fa-search"></i>
+							</button>
+						</div>
 					</div>
 				</form>
 				<div class="row">
