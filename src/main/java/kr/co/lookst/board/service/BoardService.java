@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.Map;
 
 import kr.co.lookst.board.domain.BoardDto;
+import kr.co.lookst.board.domain.Board_imgDto;
 import kr.co.lookst.board.domain.MagazineSimpleDto;
+import kr.co.lookst.board.domain.PrevAndNextDto;
 import kr.co.lookst.board.domain.SearchItem;
 
 public interface BoardService {
@@ -32,8 +34,13 @@ public interface BoardService {
 	int modifyR(BoardDto boardDto)throws Exception;
 	int writeR(BoardDto boardDto) throws Exception;
 	List<String> boardImgList(int board_no);
+	int wirteM(BoardDto boardDto) throws Exception;
 	BoardDto movePage(int board_no) throws Exception;
-	
-	
-	
+	int modifyM(BoardDto boardDto)throws Exception;
+
+	void insertBoardImages(List<Board_imgDto> board_imgDtos);
+
+	void deleteImage(int board_no);
+	BoardDto movePageM(int board_no) throws Exception;
+
 }

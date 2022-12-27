@@ -10,7 +10,19 @@
 
 <meta charset="UTF-8">
 <title>Lookst</title>
+ <meta name="viewport" content="width=device-width, initial-scale=1">
 <style type="text/css">
+@media (min-width: 768px)
+.container, .container-md, .container-sm {
+    max-width: none !important;
+}
+
+@media (max-width: 360px){
+	.div_1, .search-form, .search-input, .navbar {width:100%;}
+	.search-form {margin-bottom:50px;}
+	.search-option {margin-bottom:10px;}
+}
+
 * {
 	box-sizing: border-box;
 	margin: 0;
@@ -143,6 +155,7 @@ td.title:hover {
 .search-form {
 	height: 37px;
 	display: flex;
+	flex-wrap: wrap;
 }
 
 .search-option {
@@ -183,6 +196,9 @@ td.title:hover {
 	color: rgb(165, 165, 165);
 }
 
+.div_1{
+	display: flex;
+}
 
 </style>
 </head>
@@ -222,9 +238,12 @@ td.title:hover {
 									${prN.sc.option=='A' || prN.sc.option=='' ? "selected" : "" }>제목
 									+ 내용</option>
 								<option value="T" ${prN.sc.option=='T' ? "selected" : "" }>제목</option>
-							</select> <input type="text" name="keyword" class="search-input"
+							</select> 
+						<div class="div_1">
+							<input type="text" name="keyword" class="search-input"
 								value="${param.keyword }" placeholder="검색어를 입력해 주세요."> <input
 								type="submit" class="search-button" value="검색">
+						</div>		
 						</form>
 					</nav>
 					<table>

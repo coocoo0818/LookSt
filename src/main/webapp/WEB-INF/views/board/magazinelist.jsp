@@ -213,8 +213,10 @@
 <%@ include file="/WEB-INF/views/fix/header.jsp" %>
 
 <div class="d-grid gap-2 col-2 mx-auto mt-5 mb-5">
-    <%-- <input type="submit" class="btn btn-outline-secondary" value="SUBMIT" onclick="location.href='<c:url value="/board/magazine/writer" />' "> --%>
+    <input type="submit" class="btn btn-outline-secondary" value="SUBMIT" onclick="location.href='<c:url value="/board/magazine/write" />' ">
+
 </div>
+
 <article class="bd-list list mb-5">
     <h3>Magazine List</h3>
     <div id="section">

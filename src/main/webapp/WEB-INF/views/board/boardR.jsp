@@ -27,13 +27,44 @@
    <style type="text/css">
       * { box-sizing: border-box; margin: 0; padding: 0; font-family: "Noto Sans KR", sans=serif; }
       .container { width: 50%; margin: auto; }
-      .writing-header { position: relative; margin: 20px 0 0 0; padding-bottom: 10px; border-bottom: 1px solid #323232; }
+      .titleArea { position: relative; margin: 20px 0 0 0; padding-bottom: 10px; border-bottom: 1px solid #e8e8e8; }
+      .titleArea p { display: inline-block; position: relative; margin: 0 0 0 6px; padding: 0 0 0 10px; color: #939393; border-left: 1px solid #d9d9d9; }
+      .titleArea h2 { display: inline-block; color: #2e2e2e; font-size: 17px;}
       .frm { width: 100%; }
       input { width: 100%; height: 35px; margin: 5px 0px 10px 0px; border: 1px solid #e9e8e8; padding: 8px;  outline-color: #e6e6e6; }
       textarea { width: 100%;  margin: 5px 0px 10px 0px; border: 1px solid #e9e8e8; resize: none; padding: 8px; outline-color: #e6e6e6; }
       .btn { background-color: rgb(236,236,236); border: none; color: black; padding: 6px 12px; font-size: 16px; cursor: pointer; border-radius: 5px; }
       .btn:hover { text-decoration: underline; }
       .note-editable { height: 700px;  }
+      .kboard-detail {
+	    clear: both;
+	    float: left;
+	    width: 100%;
+	    border-top: 1px solid #e3e3e3;
+	    border-bottom: 1px solid #e3e3e3;
+	    background-color: #f4f4f4;
+	    font-size: 12px;
+	    text-align: left;
+}
+	.kboard-detail .detail-attr .detail-name {
+    float: left;
+    font-weight: bold;
+    color: #545861;
+    text-align: right;
+    }
+    .kboard-detail .detail-attr .detail-value {
+    float: left;
+    padding-left: 20px;
+    color: #545861;}
+    
+    .kboard-detail .detail-attr {
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+    float: left;
+    margin: 0;
+    padding: 12px 35px 12px 22px;
+    }
    </style>
 </head>
 <body>
@@ -80,96 +111,6 @@
     	       $summernote.summernote('insertNode', imgNode);
     	     });
     	
-      
-      
-      
-      
-    	     function uploadImageFile(file, el) {
-    	 		data = new FormData();
-    	 		data.append("file",file);
-    	 		const directory = "productInfo";
-    	 		
-    	 		$.ajax({
-    	 			data : data,
-    	 			type : "POST",
-    	 			url : "uploadImage",
-    	 			contentType : false,
-    	 			enctype : 'multipart/form-data',
-    	 			processData : false,
-    	 			success : function(data) {
-    	 				$(el).summernote('editor.insertImage', data.url);
-    	 			}
-    	 		});
-    	 }
-      
-      
-         $("#listBtn").on("click", function() {
-            location.href = "<c:url value='/board/list${searchItem.queryString}' />";
-         })
-         
-       	$("#commentlist").on("click", ".delBtn", function() {		// coomentlist안에 있는 delBtn버튼에다가 클릭 이벤트를 등록해야한다.
-				alert("삭제 버튼 클릭됨")
-			
-				let cno = $(this).parent().attr("data-cno")				// <li>태그는 <button>의 부모다.
-				let bno = $(this).parent().attr("data-bno")				// attr중 사용자 정의 attr를 선택한다.
-				
-				$.ajax({
-					
-					type: 'DELETE',										// 요청 메서드
-					url: '/heart/comments/'+cno+'?bno='+bno,				// 요청 URI
-					success: function(result) {							// 서버로부터 응답이 도착하면 호출될 함수
-						alert(result)									// result 서버가 전송한 데이터
-						showList(bno)
-					},
-					error: function() { alert("error")}					// 에러가 발생했을 때 호출될 함수
-					
-				
-				})
-				
-				
-			
-		})
-    	  
-    	  
-    	  
-    	  let showList = function(bno) {
-  			$.ajax({
-  				type: 'GET',												// 요청 메서드
-  				url: '/heart/comments?bno='+bno,							// 요청 URI
-  				success: function(result) {									// 서버로부터 응답이 도착하면 호출될 함수
-  					$("#commentlist").html(toHtml(result))							// result는 서버가 전송한 데이터
-  				},
-  				error: function() { alert("error")},						// 에러가 발생할 때, 호출될 함수
-  			})
-  		}
-    	  
-    	  let toHtml = function(comments) {
-  			let tmp = "<ul style= 'display: block; '>"
-  			
-  			comments.forEach(function(comment) {
-  				tmp += '<li style="background-color: #f9f9fa; border-bottom: 1px solid rgb(235, 236, 239); color: black;" data-cno=' + comment.cno
-  				tmp += ' data-bno =' + comment.bno
-  				tmp += ' data-pcno =' + comment.pcno + '>'
-  				tmp += ' commenter=<span class="commenter">' + comment.commenter + '</span>'
-  				tmp += ' comment=<span class="comment">' + comment.comment + '</span>'
-  				tmp += ' <button class="delBtn">삭제</button>'
-  				
-  				tmp += '</li>'
-  				
-  			})
-  			
-  			return tmp += "</ul>"
-  		}  
-      
-			$("#sendBtn").click(function() {
-				showList(bno)
-			})	
-
-    	  
-    	  
-         $("#listBtn").on("click", function() {
-            location.href = "<c:url value='/board/review${searchItem.queryString}' />";
-         })
          
          $("#removeBtn").on("click", function() {
             if(!confirm("정말로 삭제하시겠습니까?")) return;
@@ -214,6 +155,8 @@
                $(".writing-header").html("리뷰 수정")
                $("input[name=board_title]").attr('readonly', false)
                $("textarea").attr('readonly', false)
+               $(".pclass").css("display", "none")
+               $(".user_info").css("display", "none")
                $("#modifyBtn").html("<i class='fa fa-pen'></i>등록");
                //수정시 서머노트 활성화
                 showSummernote();
@@ -230,13 +173,12 @@
           function showSummernote() {
               $(document).find('.note-editor').children('.note-toolbar').css("display", "block");
               $('.summernote').summernote('enable');
-              $()
+              $(".user_info").css("display", "none")
           }
 
           function hideSummernote() {
               $(document).find('.note-editor').children('.note-toolbar').css("display", "none");
               $('.summernote').summernote('disable');
-              $(document).find('.container').children('.writing-header').css("border-bottom","1px solid #00000032"); 
               /* text box */
               $(document).find('.note-editing-area').children('.note-editable').css("height","600px");
               $(document).find('.note-editing-area').children('.note-editable').css("background-color","white");
@@ -283,9 +225,28 @@
    </script>
    
    <div class="container mt-5 mb-5">
+   	<div class="titleArea">
       <h2 class="writing-header ">리뷰 ${mode=="new" ? "글쓰기" : "게시판" }</h2>
+      <p class="pclass">${mode=="new" ? " 작성 페이지입니다. " : "상품 사용후기입니다."}</p>
+    </div>
       <form id="form" class="frm" action="" method="post">
-         <input type="hidden" name="board_no" value="${boardDto.board_no }">
+      <input type="hidden" name="board_no" value="${boardDto.board_no }">
+         <div class="user_info">
+         	<div class="kboard-detail">
+				<div class="detail-attr detail-writer">
+					<div class="detail-name">작성자</div>
+					<div class="detail-value">${boardDto.member_id }</div>
+				</div>
+				<div class="detail-attr detail-date">
+					<div class="detail-name">작성일</div>
+					<div class="detail-value">${boardDto.reg_date() }</div>
+				</div>
+				<div class="detail-attr detail-view">
+					<div class="detail-name">조회</div>
+					<div class="detail-value">${boardDto.board_views }</div>
+				</div>
+			</div>
+         </div>
           <%--추후에 수정사항이 발생하면 나머지 것들도 변경가능하게 할수있음--%>
          <%--<input type="hidden" name="board_type" value="${boardDto.board_type }">
          <input type="hidden" name="board_kind" value="${boardDto.board_kind }">--%>
