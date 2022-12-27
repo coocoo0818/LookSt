@@ -2,6 +2,7 @@ package kr.co.lookst.sns.service;
 
 import java.util.List;
 
+import kr.co.lookst.sns.domain.PostUpload;
 import kr.co.lookst.sns.domain.FollowDto;
 import kr.co.lookst.sns.domain.ProfileFeedDto;
 import kr.co.lookst.sns.domain.SnsProfileDto;
@@ -36,10 +37,13 @@ public interface SnsService {
 	int profileImgModify(String member_id, String profile_img,String profile_uuid) throws Exception;
 
 	// 포스트 컨텐트 업로드
-	int contentUp(ProfileFeedDto pfd) throws Exception;
+	int contentUp(PostUpload pu) throws Exception;
 	
 	// 포스트 이미지 업로드
-	int imgUp(ProfileFeedDto pfd) throws Exception;
+	int imgUp(PostUpload pu) throws Exception;
+	
+	// 포스트 번호 가져오기
+	//int max_post_no() throws Exception;
 
 	// 게시물 삭제
 	int deletePost(Integer post_no) throws Exception;
