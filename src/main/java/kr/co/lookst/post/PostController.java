@@ -126,6 +126,7 @@ public class PostController {
 			System.out.println(shopTotalList);
 			model.addAttribute("shopTotalList", shopTotalList);
 			model.addAttribute("pr", pageResolver_prdtList);
+				System.out.println(pageResolver_prdtList);
 			/* 쇼핑리스트 리스트 끝 */
 		} catch (Exception e) {
 			e.printStackTrace();
