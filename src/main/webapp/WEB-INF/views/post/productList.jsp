@@ -70,7 +70,15 @@
 		</div>
 		<div class="row">
 			<div class="col-lg-3">
-				<h2 id="orderpagetitle" class="disply-2 text-center py-4">TOP</h2>
+				<h2 id="orderpagetitle" class="disply-2 text-center py-4">
+					<c:choose>
+						<c:when test="${param.kind=='T' }">TOP</c:when>
+						<c:when test="${param.kind=='P' }">PANTS</c:when>
+						<c:when test="${param.kind=='S' }">SHOES</c:when>
+						<c:when test="${param.kind=='B'}">BAG</c:when>
+						<c:otherwise>ACC</c:otherwise>
+					</c:choose>
+				</h2>
 				
 				<div class="d-grid gap-2 col-6 mx-auto">
 				  <button class="btn btn-light border border-2" onclick="location.href='<c:url value="/post/productList?kind=T"/>'" >TOP</button>
@@ -180,8 +188,7 @@
 		</c:if>
 		<c:if test="${totalCnt != null || totalCnt != 0}">
 			<c:if test="${pr.showPrev}">
-				<li class="page-item disabled"><a class="page-link"
-					href="${contextPath}/post/productList${pr.sc.getQueryString(pr.beginPage-1)}">&laquo;</a></li>
+				<li class="page-item"><a class="page-link" href="${contextPath}/post/productList${pr.sc.getQueryString(pr.beginPage-1)}">&laquo;</a></li>
 			</c:if>
 
 			<c:forEach var="i" begin="${pr.beginPage}" end="${pr.endPage}">
