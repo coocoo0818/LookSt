@@ -356,6 +356,7 @@ button:disabled {
 			        </div>
 			    </div>
 			  </div>
+			  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 			  <button class="container btn btn-primary" type="submit">회원 정보 수정</button>
 			  </form>
 			  
@@ -373,6 +374,7 @@ button:disabled {
 			    <h2 class="edit_title">회원 탈퇴</h2>
 			    <div style="line-height:80%">
 		            <form action="./delete" method="post">
+       					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 						<button class="container btn btn-primary" type="submit">회원 탈퇴 하기</button>
 					</form>
 			    </div>

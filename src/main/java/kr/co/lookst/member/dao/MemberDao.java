@@ -20,8 +20,8 @@ public interface MemberDao {
 	public int insertSellerInfo(SellerDto sellDto) throws Exception;
 	public int updateSellerInfo(SellerDto sellDto) throws Exception;
 	public int insertAuthInfo(String member_id) throws Exception;
-	public String authCheck(String member_id) throws Exception;
+	public MemAuthDto authCheck(String member_id) throws Exception;
 	public int insertProfile(String member_id) throws Exception;
-
+	public MemberDto read(String member_id);
 	
 }

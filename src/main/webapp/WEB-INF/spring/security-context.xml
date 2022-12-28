@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+						http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+<bean id="customUserDetailsService" class="kr.co.lookst.member.CustomUserDetailsService" />
+<bean id="loginSuccess" class="kr.co.lookst.member.LoginSuccessHandler" />
+
+<bean id="grantedAuthorityDefaults" class="org.springframework.security.config.core.GrantedAuthorityDefaults">
+    <constructor-arg value="" />
+</bean>
+  
+	<security:http auto-config="true" use-expressions="true">
+		<!-- <security:intercept-url pattern="/member/*" access="hasRole('ROLE_MEMBER')"/> -->
+		<security:intercept-url pattern="/member/login" access="permitAll"/>
+		<security:intercept-url pattern="/member/loginCheck" access="permitAll"/>
+		<security:intercept-url pattern="/member/register" access="permitAll"/>
+		<security:intercept-url pattern="/member/idCheck" access="permitAll"/>
+		<security:intercept-url pattern="/member/**" access="hasAnyRole('member', 'seller', 'admin')"/>
+		<security:intercept-url pattern="/partner/**" access="hasAnyRole('member', 'seller', 'admin')"/>
+		<security:intercept-url pattern="/**/write" access="hasAnyRole('member', 'seller', 'admin')"/>
+		<security:intercept-url pattern="/seller/**" access="hasRole('seller')"/>
+		<security:intercept-url pattern="/admin/**" access="hasRole('admin')"/>
+		
+		<security:form-login login-page="/member/login"
+							 login-processing-url="/member/login"
+							 username-parameter="member_id"
+							 password-parameter="member_pw"
+							 authentication-success-handler-ref="loginSuccess"
+							 />
+		
+		<security:csrf disabled="false" />
+		<security:access-denied-handler error-page="/member/accessError" />
+		<security:logout logout-url="/member/logout"
+						 logout-success-url="/" />
+	</security:http>
+	
+		
+	<security:authentication-manager>
+		<security:authentication-provider user-service-ref="customUserDetailsService">
+			<security:password-encoder ref="bcryptPasswordEncoder"/>
+		</security:authentication-provider>
+	</security:authentication-manager>
+
+</beans>

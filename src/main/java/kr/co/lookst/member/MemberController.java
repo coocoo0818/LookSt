@@ -1,35 +1,40 @@
 package kr.co.lookst.member;
 
+import java.security.Principal;
+
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.log.LogFormatUtils;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import kr.co.lookst.member.domain.MemAuthDto;
 import kr.co.lookst.member.domain.MemberDto;
 import kr.co.lookst.member.service.MemberService;
-import kr.co.lookst.seller.domain.SellerDto;
 
 @Controller
+@RequestMapping("/member")
 public class MemberController {	
 	
 	private Logger logger = LoggerFactory.getLogger(MemberController.class);
-	
-	LogFormatUtils formatUtils;
-	
+
 	@Autowired
 	private MemberService service;
 	
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	
+
 	//로그인
 	@GetMapping("/login")
 	public String getLogin() throws Exception {
@@ -37,53 +42,77 @@ public class MemberController {
 		return "member/login";
 	}
 	
+	//시큐리티 미적용 로그인
+//	@PostMapping("/login")
+//	public String postLogin(MemberDto dto, MemAuthDto authdto, HttpServletRequest request) throws Exception {
+//		logger.info("LOGIN");
+//		//세션 생성
+//		HttpSession session = request.getSession();
+//		MemberDto res = service.login(dto);
+//		String member_id = res.getMember_id();
+//		MemAuthDto auth = service.authCheck(member_id);
+//		
+//		if(res.getMember_id() != null) {
+//			//세션 저장
+//			session.setAttribute("res", res.getMember_id());
+//			session.setAttribute("auth", auth);
+//			System.out.println("로그인 아이디 : " + session.getAttribute("res"));
+//			System.out.println("회원 권한 : " + session.getAttribute("auth"));
+//			return "redirect:/";
+//		} else {
+//			System.out.println(res);
+//			return "redirect:/login";
+//		}
+//	}
+
 	@PostMapping("/loginCheck")
 	@ResponseBody
 	public int loginCheck(@RequestBody MemberDto dto) throws Exception {
 		logger.info("loginCheck");
-		int cnt = service.loginCheck(dto);
+		String inputPw = dto.getMember_pw();
 		System.out.println("로그인 시도 아이디 : " + dto.getMember_id());
-		System.out.println("로그인 시도 비밀번호 : " + dto.getMember_pw());
-		System.out.println("로그인 체크 (1:성공, 0:실패) : " + cnt);
-		return cnt;
-	}
-	
-	@PostMapping("/login")
-	public String postLogin(MemberDto dto, HttpServletRequest request) throws Exception {
-		logger.info("LOGIN");
-		//세션 생성
-		HttpSession session = request.getSession();
-		MemberDto res = service.login(dto);
-		String member_id = res.getMember_id();
-		String auth = service.authCheck(member_id);
+		System.out.println("로그인 시도 비밀번호 : " + inputPw);
+		MemberDto memberDto = service.login(dto);
+		System.out.println(memberDto);
 		
-		if(res.getMember_id() != null) {
-			//세션 저장
-			session.setAttribute("res", res.getMember_id());
-			session.setAttribute("auth", auth);
-			System.out.println("로그인 아이디 : " + session.getAttribute("res"));
-			System.out.println("회원 권한 : " + session.getAttribute("auth"));
-			return "redirect:/";
-		} else {
-			System.out.println(res);
-			return "redirect:/login";
+		//로그인 체크 (1:성공, 0:실패)
+		if(memberDto != null) {
+			System.out.println("DB에 저장된 비밀번호 : " + memberDto.getMember_pw());
+			boolean pwCheck = bCryptPasswordEncoder.matches(inputPw, memberDto.getMember_pw());
+			if(pwCheck == true) {
+				return 1;
+			}
+			else {
+				return 0;
+			}
+		}
+		else {
+			return 0;	
 		}
 	}
 	
-	//로그아웃
-	@GetMapping("/logout")
-    public String logout(HttpSession session) throws Exception {
-		logger.info("LOGOUT");
-        session.invalidate();
-        return "redirect:/";
-    }
-	
+	//권한이 없는 경우 노출될 에러 페이지 (403에러 대신 노출)
+	@GetMapping("/accessError")
+	public void accessDenied(Authentication auth, Model model) {
+		System.out.println("access Denied : " + auth);
+		model.addAttribute("msg", "Access Denied");
+	}
+		
+//	//로그아웃
+//	@GetMapping("/logout")
+//    public String getLogout(HttpSession session) throws Exception {
+//		logger.info("LOGOUT");
+//        session.invalidate();
+//        return "redirect:/";
+//    }
+//	
 	//아이디 중복체크
 	@PostMapping("/idCheck")
 	@ResponseBody
 	public int idCheck(@RequestParam("member_id") String member_id) throws Exception {
 		logger.info("idCheck");
 		logger.info(member_id);
+		System.out.println(member_id);
 		int cnt = service.idCheck(member_id);
 		logger.info("cnt : " + cnt);
 		return cnt;
@@ -98,10 +127,12 @@ public class MemberController {
 	
 	@PostMapping("/register")
 	public String postRegister(MemberDto dto) throws Exception {
-		service.register(dto);
 		logger.info("REGISTER - 회원 가입 완료");
 		logger.info("이메일 : " + dto.getMember_id());
 		logger.info("비밀번호 : " + dto.getMember_pw());
+		String encodePw = bCryptPasswordEncoder.encode(dto.getMember_pw());
+		dto.setMember_pw(encodePw);
+		logger.info("암호화 된 비밀 번호 : " + dto.getMember_pw());
 		logger.info("닉네임 : " + dto.getMember_nick());
 		logger.info("이름 : " + dto.getMember_name());
 		logger.info("우편번호 : " + dto.getMember_zip());
@@ -110,13 +141,9 @@ public class MemberController {
 		logger.info("이메일 수신 동의 여부 : " + dto.isMember_check());
 		logger.info("문자 메시지 수신 동의 여부 : " + dto.isMember_smscheck());
 		String member_id = dto.getMember_id();
+		service.register(dto);
 		service.insertAuthInfo(member_id);
 		service.insertProfile(member_id);
-		return "redirect:/register/complete";
-	}
-	//회원가입 완료
-	@GetMapping("/register/complete")
-	public String regComplete() throws Exception {
 		logger.info("REGISTER COMPLETE PAGE");
 		return "member/complete";
 	}
@@ -141,31 +168,20 @@ public class MemberController {
 	}
 
 	//회원 정보 확인
-	@GetMapping("/member/mypage")
-	public String mypage(MemberDto dto, HttpServletRequest request, Model m) throws Exception {
-		HttpSession session = request.getSession();
+	@GetMapping("/mypage")
+	public String mypage(MemberDto dto, Model m, Principal principal) throws Exception {
+		logger.info("MY PAGE");
+		String member_id = principal.getName();
+		MemberDto selectInfo = service.selectInfo(member_id);
+		m.addAttribute("selectInfo",selectInfo);
 
-		if(session.getAttribute("res") != null) {
-			//로그인 상태일 때
-			logger.info("MY PAGE");
-			System.out.println(session.getAttribute("res"));
-			String member_id = (String)session.getAttribute("res");
-			MemberDto selectInfo = service.selectInfo(member_id);
-			m.addAttribute("selectInfo",selectInfo);
-			return "member/mypage";
-		} else {
-			//로그아웃 상태일 때
-			logger.info("LOGIN PAGE");
-			System.out.println(session.getAttribute("res"));
-			return "redirect:/login";
-		}
+		return "member/mypage";
 	}
 	
-	//회원 정보 수정
-	@PostMapping("/member/mypage")
-	public String updateMember(MemberDto dto, HttpServletRequest request) throws Exception {
-		HttpSession session = request.getSession();
-		logger.info("updateMember - " + session.getAttribute("res"));
+	//회원 정보 수정)
+	@PostMapping("/mypage")
+	public String updateMember(MemberDto dto, Principal principal) throws Exception {
+		logger.info("updateMember - " + principal.getName());
 
 		service.updateMember(dto);
 		System.out.println(dto.getMember_id());
@@ -182,74 +198,15 @@ public class MemberController {
 	}
 	
 	//회원 삭제
-	@PostMapping("/member/delete")
-	public String memberDelete(HttpServletRequest request) throws Exception {
-		HttpSession session = request.getSession();
-
-		if(session.getAttribute("res") != null) {
-			//로그인 상태일 때
-			logger.info("MEMBER DELETE - " + session.getAttribute("res"));
-			String member_id = (String)session.getAttribute("res");
-			service.deleteMember(member_id);
-	        session.invalidate();
-			return "redirect:/";
-		} else {
-			//로그아웃 상태일 때
-			logger.info("LOGIN PAGE");
-			System.out.println(session.getAttribute("res"));
-			return "redirect:/";
-		}
+	@PostMapping("/delete")
+	public String memberDelete(Principal principal) throws Exception {
+		String member_id = principal.getName();
+		logger.info("MEMBER DELETE - " + member_id);
+		service.deleteMember(member_id);
+        return "redirect:/member/logout";
 	}
-	
-	//판매자 정보 확인
-	@GetMapping("/partner/mypage")
-	public String memberAuth(SellerDto sellDto, HttpServletRequest request, Model m) throws Exception {
-		HttpSession session = request.getSession();
 
-		if(session.getAttribute("res") != null) {
-			//로그인 상태일 때
-			logger.info("MY PAGE - REG SELLER");
-			System.out.println(session.getAttribute("res"));
-			String member_id = (String)session.getAttribute("res");
-			
-			int cnt = service.checkSellerInfo(member_id);
-			logger.info("cnt : " + cnt);
-			
-			if(cnt == 1) {
-				SellerDto selectSellerInfo = service.selectSellerInfo(member_id);
-				m.addAttribute("selectSellerInfo",selectSellerInfo);
-				return "member/regSeller";
-			}
-		} else {
-			//로그아웃 상태일 때
-			logger.info("LOGIN PAGE");
-			System.out.println(session.getAttribute("res"));
-			return "redirect:/login";
-		}
-		return "member/regSeller";
-	}
-	
-	//판매자 정보 등록
-	@PostMapping("/partner/mypage")
-	public String updateMember(SellerDto sellDto, HttpServletRequest request, Model m) throws Exception {
-		HttpSession session = request.getSession();
-		logger.info("updateMember - " + session.getAttribute("res"));
-
-		String member_id = (String)session.getAttribute("res");
-		int cnt = service.checkSellerInfo(member_id);
-		logger.info("cnt : " + cnt);
-		
-		if(cnt == 1) {
-			service.updateSellerInfo(sellDto);
-			return "redirect:/partner/mypage";
-		}	
-		else {
-			service.insertSellerInfo(sellDto);
-			return "redirect:/partner/mypage";			
-		}
-	}
-	
-	
+//	
 //	//이메일 인증
 //	@Autowired
 //	private MailSendService mailService;

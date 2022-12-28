@@ -1,5 +1,6 @@
 package kr.co.lookst.member.service;
 
+import kr.co.lookst.member.domain.MemAuthDto;
 import kr.co.lookst.member.domain.MemberDto;
 import kr.co.lookst.seller.domain.SellerDto;
 
@@ -17,8 +18,8 @@ public interface MemberService {
 	public int insertSellerInfo(SellerDto sellDto) throws Exception;
 	public int updateSellerInfo(SellerDto sellDto) throws Exception;
 	public int insertAuthInfo(String member_id) throws Exception;
-	public String authCheck(String member_id) throws Exception;
+	public MemAuthDto authCheck(String member_id) throws Exception;
 	public int insertProfile(String member_id) throws Exception;
-	
+	public MemberDto read(String member_id);
 	
 }

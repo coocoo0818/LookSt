@@ -157,6 +157,9 @@ td {
             , url : '/lookst/comments?board_no='+board_no // 요청 URI
             , headers : { "content-type" : "application/json" } // 요청 헤더
             , data : JSON.stringify({board_no:board_no, comment_con:comment_con}) // 서버로 전송할 데이터. stringify()로 직렬화 필요.
+            , beforeSend : function(xhr){
+            	xhr.setRequestHeader(($("meta[name='_csrf_header']").attr("content")), ($("meta[name='_csrf']").attr("content")));
+            }
             , success : function(result) { // 서버로부터 응답이 도착하면 호출될 함수 
                   alert(result)
                   showList(board_no)
@@ -266,6 +269,7 @@ td {
 			</div>
 		</div>
 		<form id="form" class="frm" action="" method="post">
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 			<c:if test="${boardDto.member_id eq loginId }">
 				<button type="button" id="modifyBtn" class="btn btn-outline-primary">
 					<a

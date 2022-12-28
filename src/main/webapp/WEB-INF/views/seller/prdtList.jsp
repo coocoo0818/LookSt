@@ -58,6 +58,9 @@
 						product_no : product_no, 
 						stock : stock
 						},
+				beforeSend : function(xhr){
+					xhr.setRequestHeader(($("meta[name='_csrf_header']").attr("content")), ($("meta[name='_csrf']").attr("content")));
+				},
 				success : function(result) {
 					alert("재고수량이 변경되었습니다.")
 					location.reload()
@@ -76,6 +79,9 @@
 				url : '${contextPath}/seller/productDelete',
 				data : {
 					product_no : product_no
+				},
+				beforeSend : function(xhr){
+					xhr.setRequestHeader(($("meta[name='_csrf_header']").attr("content")), ($("meta[name='_csrf']").attr("content")));
 				},
 				success : function(data) {
 					alert("상품이 삭제되었습니다.")

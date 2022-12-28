@@ -1,6 +1,7 @@
 package kr.co.lookst.member.domain;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,7 +27,7 @@ public class MemberDto {
 	private boolean member_check;		//메일 수신여부
 	private boolean member_smscheck;	//문자 수신여부
 	private String member_type;			//가입 타입
-	
+	private List<MemAuthDto> authList;	//멤버 권한
 	
 }
 

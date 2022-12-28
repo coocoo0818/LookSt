@@ -162,7 +162,7 @@ a {
 					      <a style="color: #ff0000; font-weight: bold;"> *</a>
 					      <input type="text" class="form-control" name="seller_number" value="${selectSellerInfo.seller_number}" placeholder="010-0000-0000" required="" />
 					      <br/><br/>
-					      <input type="hidden" name="member_id" id="member_id" value="${res}"/>
+					      <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 					      <button class="container btn btn-primary" type="submit" onclick="location.href='../index.html'">판매자 등록하기</button>
 					  	</div>
 					  </form>

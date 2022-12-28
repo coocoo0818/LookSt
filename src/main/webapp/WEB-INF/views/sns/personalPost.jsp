@@ -64,6 +64,9 @@ input {
 				data : {
 					post_no : post_no
 				},
+				beforeSend : function(xhr){
+					xhr.setRequestHeader(($("meta[name='_csrf_header']").attr("content")), ($("meta[name='_csrf']").attr("content")));
+				},
 				success : function(data) {
 					alert("게시물이 삭제되었습니다.")
 					location.reload()

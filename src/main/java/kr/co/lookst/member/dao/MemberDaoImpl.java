@@ -83,13 +83,18 @@ public class MemberDaoImpl implements MemberDao {
 	}
 
 	@Override
-	public String authCheck(String member_id) throws Exception {
+	public MemAuthDto authCheck(String member_id) throws Exception {
 		return sqlSession.selectOne(NAMESPACE + "authCheck", member_id);
 	}
 
 	@Override
 	public int insertProfile(String member_id) throws Exception {
 		return sqlSession.insert(NAMESPACE + "insertProfile", member_id);
+	}
+
+	@Override
+	public MemberDto read(String member_id) {
+		return sqlSession.selectOne(NAMESPACE + "read", member_id);
 	}
 
 	

@@ -3,6 +3,7 @@ package kr.co.lookst.member.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import kr.co.lookst.member.dao.MemberDao;
+import kr.co.lookst.member.domain.MemAuthDto;
 import kr.co.lookst.member.domain.MemberDto;
 import kr.co.lookst.seller.domain.SellerDto;
 
@@ -75,12 +76,16 @@ public class MemberServiceImpl implements MemberService{
 		return dao.insertAuthInfo(member_id);
 	}
 	@Override
-	public String authCheck(String member_id) throws Exception {
+	public MemAuthDto authCheck(String member_id) throws Exception {
 		return dao.authCheck(member_id);
 	}
 	@Override
 	public int insertProfile(String member_id) throws Exception {
 		return dao.insertProfile(member_id);
+	}
+	@Override
+	public MemberDto read(String member_id) {
+		return dao.read(member_id);
 	}
 
 	

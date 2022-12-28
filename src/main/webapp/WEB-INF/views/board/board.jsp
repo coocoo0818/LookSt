@@ -2,11 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-
-<c:set var="loginId" value="${sessionScope.res }" />
-<c:set var="loginout" value="${loginId==null ? 'Login' : 'Logout' }" />
-<c:set var="loginoutlink" value="${loginId==null ? '/login/login' : '/login/logout' }" />
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -212,6 +207,7 @@
    <div class="container mt-5 mb-5">
       <h2 class="writing-header ">Q&A ${mode=="new" ? "글쓰기" : "읽기" }</h2>
       <form id="form" class="frm" action="" method="post">
+	     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
          <input type="hidden" name="board_no" value="${boardDto.board_no }">
           <%--추후에 수정사항이 발생하면 나머지 것들도 변경가능하게 할수있음--%>
          <%--<input type="hidden" name="board_type" value="${boardDto.board_type }">
