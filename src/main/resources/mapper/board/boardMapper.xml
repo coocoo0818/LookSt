@@ -72,12 +72,28 @@
 
 	<insert id="insertM" parameterType="BoardDto"
 		useGeneratedKeys="true" keyProperty="board_no">
+		<!-- useGeneratedKeys : (insert, update에만 적용) 자동생성 키를 받을 때 true로 설정한다. (default: 
+			false) -->
+		<!-- keyProperty : 리턴 될 key property 설정. 여러개를 사용한다면 ,(콤마)를 구분자로 나열한다.
+						    keyProperty는 리턴이 된 키 값들을 어느 필드에 set 할 건지를 나타냄. -->
 		INSERT INTO board
 		(member_id, board_title, board_con, board_type,
 		board_kind)
 		VALUES
 		(#{member_id}, #{board_title}, #{board_con},'Y', 'M')
 		<!--이부분 따로 kind랑 type을 어떻게 넣을건지 정해서 구현하면 됨 -->
+	</insert>
+
+	<insert id="insertBoardImages" parameterType="Board_imgDto">
+		INSERT INTO board_img
+		(board_no, board_img_seq, board_img_img)
+		VALUES
+		<foreach collection="list" item="item" separator=" , ">
+			(#{item.board_no}, #{item.board_img_seq}, #{item.board_img_img})
+		</foreach>
+		<!-- Mybatis 부분에서 foreach 문을 사용하는 이유는 동일한 구문으로 이루어진 다수의 쿼리문을 보다 빠르게 쿼리문을 진행할 수 있기 때문에 -->
+		<!-- collection : 전달 받는 list를 속성 값으로 삽입. 반드시 Array 또는 List 값이여야 함. -->
+		<!-- item : collection 속성에서 전달 받은 list 값을 대체할 이름(item)을 속성 값으로 삽입. -->
 	</insert>
 
 
@@ -266,26 +282,25 @@
 
 	<select id="boardList" parameterType="Integer"
 		resultType="MagazineSimpleDto">
-
 		SELECT b.board_no, b.member_id, b.board_date, b.board_title,
 		bi.board_img_img
 		FROM board b left join
 		(SELECT distinct on (board_no) *
-		FROM board_img ) bi                     
-		<!-- 썸네일에서 출력되는 이미지 값들의 중복 방지를 위해서 DISTINCT를 사용하면 쿼리문을 분석할 때 중복을 제거한 결과가 반환된다는 것을 직관적으로 파악이 가능하다. -->
-		on b.board_no = bi.board_no                                        
+		FROM board_img ) bi
+		<!-- 썸네일에서 출력되는 이미지 값들의 중복 방지를 위해서 DISTINCT를 사용하면 쿼리문을 분석할 때 중복을 제거한 결과가 
+			반환된다는 것을 직관적으로 파악이 가능하다. -->
+		on b.board_no = bi.board_no
 		<!-- boadr_img 에서 board_no 를 기준으로 가장 작은 값들 select 후 board 테이블과 join -->
-		where b.board_no > #{lastIndex}                                        
+		where b.board_no > #{lastIndex}
 		<!-- 이전데이터의 마지막인덱스 보다 큰값을 가져옴 -->
-		and b.board_type = 'Y' and b.board_kind = 'M'                            
-		<!-- join한 테이블에서 마지막 인덱스를 기준으로 5개가져옴 -->
-		order by b.board_no asc limit 5
-		<!-- order by b.board_no bi.board_img_no desc limit 5; -->
+		and b.board_type = 'Y' and b.board_kind = 'M'
+		order by b.board_no asc limit 4
+		<!-- join한 테이블에서 마지막 인덱스를 기준으로 4개가져옴 -->
 	</select>
 
 	<select id="boardImgList" parameterType="Integer"
 		resultType="String">
-		SELECT board_img_img FROM board_img where board_no =#{board_no};                
+		SELECT board_img_img FROM board_img where board_no =#{board_no};
 		<!--board_no 를 기준으로 image 경로 select -->
 	</select>
 
@@ -374,15 +389,14 @@
         ]]>
 	</select>
 
-	<insert id="insertBoardImages" parameterType="Board_imgDto">
-		INSERT INTO board_img
-		(board_no, board_img_seq, board_img_img)
-		VALUES
-		<foreach collection="list" item="item" separator=" , ">
-			(#{item.board_no}, #{item.board_img_seq}, #{item.board_img_img})
-		</foreach>
-		<!-- collection : 전달 받는 list를 속성 값으로 삽입. 반드시 Array 또는 List 값이여야 함. -->
-		<!-- item : collection 속성에서 전달 받은 list 값을 대체할 이름(item)을 속성 값으로 삽입. -->
-	</insert>
+
+
+	<!-- 댓글 매퍼 -->
+
+	<update id="updateCommentCnt" parameterType="map">
+		update board
+		set comment_cnt = comment_cnt + #{cnt}
+		where board_no = #{board_no}
+	</update>
 
 </mapper>

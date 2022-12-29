@@ -263,11 +263,12 @@ public class BoardController {
     public String magazinelist(Model m, HttpServletRequest request) {
         try {
 
-            // 인덱스가 0이상인것부터 5개 select
+            // 인덱스가 0이상인것부터 4개 select
             List<MagazineSimpleDto> boardImgList = boardService.boardList(0);
             // 그 중 가장 마지막 index 반환
-            Integer index = boardImgList.stream().max(Comparator.comparingInt(MagazineSimpleDto::getBoard_no))
-                .map(MagazineSimpleDto::getBoard_no).get();
+            Integer index = boardImgList.stream()
+            		.max(Comparator.comparingInt(MagazineSimpleDto::getBoard_no))
+            		.map(MagazineSimpleDto::getBoard_no).get();
             // Stream.max 함수를 이용하고, 이 함수는 인자로 전달한 comparator 즉 객체를 비교할 수 있도록 만들어주는 인터페이스로,
             // 스트림의 데이터를 모두 비교하여 최대 값 1개를 리턴하는 방식을 가지고 있는 함수다.
             m.addAttribute("boardImgList", boardImgList);
@@ -281,8 +282,8 @@ public class BoardController {
 
     @ResponseBody
     @RequestMapping(value ="/magazine/scroll", method = RequestMethod.GET)
-    public ResponseEntity<Map<String, Object>> magazinelistScroll(@RequestParam(defaultValue = "0") int lastIndex)
-        throws Exception {
+    public ResponseEntity<Map<String, Object>> magazinelistScroll(
+    	@RequestParam(defaultValue = "0") int lastIndex)throws Exception {
         // @RequestParam(defultValue = "0") - Http 요청 파라미터를 메서드의 파라미터로 전달 받을 때 사용한다.
         // defaultValue 속성을 이용해서 파라미터가 없을 경우 기본 값으로 설정하기 위해 0으로 사용함.
         // 개발시 url로 호출하여 json 객체로 원하는 정보(목록, 상세정보)받는 경우가 있다.(GET방식)
@@ -353,7 +354,8 @@ public class BoardController {
             // 첨부 파일(이미지)이 없을 경우에는 저장하지 않는다.
             if (files.size() > 0) {
                 // 파일(이미지)이 있을 경우에만 저장함
-                List<Board_imgDto> board_imgDtos = imageService.storeFile(files, boardDto.getBoard_no());
+                List<Board_imgDto> board_imgDtos = imageService
+                .storeFile(files, boardDto.getBoard_no());
                 boardService.insertBoardImages(board_imgDtos);
             }
             rattr.addFlashAttribute("msg", "WRT_OK");
@@ -394,7 +396,7 @@ public class BoardController {
         try {
             System.out.println(boardDto);
             boardService.modifyM(boardDto);
-            if (files.size() > 7) {
+            if (files.size() > 6) {
                 m.addAttribute("mode", "new");
                 m.addAttribute("boardDto", boardDto);
                 m.addAttribute("msg", "사진은 6개 이하만 업로드 가능합니다.");
