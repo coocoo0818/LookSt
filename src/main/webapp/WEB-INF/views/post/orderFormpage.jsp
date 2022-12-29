@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
@@ -8,20 +7,15 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- jQuery -->
-<script type="text/javascript"
-	src="http://code.jquery.com/jquery-3.4.1.js"></script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.4.1.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <!-- <script src="http://code.jquery.com/jquery-3.4.1.js"></script> -->
-<script
-	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <!-- iamport.payment.js -->
-<script type="text/javascript"
-	src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
 
 <title>LOOKST</title>
-<link rel="stylesheet"
-	href="${contextPath}/resources/admin/css/orderFormpage.css">
+<link rel="stylesheet" href="${contextPath}/resources/admin/css/orderFormpage.css">
 <script type="text/javascript">
 	function sample6_execDaumPostcode() {
 		new daum.Postcode(
@@ -165,15 +159,14 @@
 			},
 			function(rsp) { // callback
 				if (rsp.success) {
+					var token = $("meta[name='_csrf']").attr("content");
+					var header = $("meta[name='_csrf_header']").attr("content");
 					/* alert("성공") */
 					// jQuery로 HTTP 요청
 					$.ajax({
 						url : '${contextPath}/admin/orderInsert', // 예: https://www.myservice.com/payments/complete
 						method : "POST",
 						/*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
-						beforeSend : function(xhr){
-							xhr.setRequestHeader(header, token)
-						},
 						data : {
 							prdt_order_no : data.orderNum,
 							product_no : data.product_no,
@@ -190,6 +183,9 @@
 							imp_uid : rsp.imp_uid,
 							merchant_uid : rsp.merchant_uid
 						}, //서버에서 보내줄 데이터 타입
+						beforeSend : function(xhr){
+							xhr.setRequestHeader(header, token);
+						},
 				        success: function(res){        	
 					          if(res == 1){
 								 console.log("추가성공");	
