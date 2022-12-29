@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<sec:authentication property="principal" var="prc"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -96,7 +98,7 @@
 	                        listHtml += "			</span>";
 	                        listHtml += "		</div>";
 	                        // 현재 로그인 상태일때 답글작성 버튼이 나온다.
-	                        if("${sessionScope.res}" != ""){
+	                        if("${prc.username}" != ""){
 	                            listHtml += "		<div>";
 	                            // 함수에 게시글번호(bno), 모댓글번호(no), 모댓글 작성자(writer)를 인자로 담아서 넘긴다.
 	                            // 이때 모댓글 작성자 writer는 string인데 string을 인자에 넣기 위해선''나""로 감싸줘야한다.
@@ -133,10 +135,10 @@
 	                    listHtml += "		</div>";
 	                    // 책갈피
 	                    // 현재 로그인 상태이고..
-	                    if("${sessionScope.res}" != ""){
+	                    if("${prc.username}" != ""){
 	
 	                        //현재 사용자가 이 댓글의 작성자일때 삭제 버튼이 나온다.
-	                        if("${sessionScope.res}" == member_id){
+	                        if("${prc.username}" == member_id){
 	                            listHtml += "		<div>";
 	                            // 수정할 댓글의 no를 grpl과 함께 넘긴다. 
 	                            // 모댓글 수정칸과 답글 수정칸을 화면에 다르게 나타내야하기 때문에 모댓글과 답글을 구분하는 grpl을 함께 넘겨주어야한다.
@@ -208,7 +210,7 @@
 	            $('.reply_delete').on('click', function(){
 	                // 모댓글 삭제일때
 	                if($(this).attr('sns_comment_class') == 0){	
-	                    DeleteReply($(this).attr('sns_comment_no'), $(this).attr('post_no'));
+	                    DeleteReply($(this).attr('sns_comment_no'), $(this).attr('post_no'), $(this).attr('sns_comment_group'));
 
 	                // 답글 삭제일때
 	                }else{
@@ -330,7 +332,7 @@
 	};
 
 	// 모댓글 삭제일때
-	const DeleteReply = function(sns_comment_no, post_no){
+	const DeleteReply = function(sns_comment_no, post_no, sns_comment_group){
 		
 		console.log("sns_comment_no : " + sns_comment_no);
 	    // grp이 no인 댓글이 있는 경우 content에 null을 넣고 없으면 삭제한다.
@@ -339,7 +341,8 @@
 	        type : 'get',
 	        data : {
 	        	sns_comment_no : sns_comment_no,
-	        	post_no : post_no
+	        	post_no : post_no,
+	        	sns_comment_group : sns_comment_group
 	        },
 	        success : function(pto) {
 
@@ -415,10 +418,10 @@
 					
 					<div class="card card-body">
 			            <!-- 댓글 작성 => 로그인한 상태여야만 댓글작성 칸이 나온다. -->
-			            <c:if test="${not empty sessionScope.res}">
+			            <c:if test="${not empty prc.username}">
 			                <div class="row reply_write">
 			                    <div class="col-1">
-			                        <a href="${contextPath}/sns/snsProfile/?member_id=${sessionScope.res}">
+			                        <a href="${contextPath}/sns/snsProfile/?member_id=${prc.username}">
 			                            <img class="rounded-circle" id="write_reply_profileImage"  style="width: 36px; height: 36px;" src="${contextPath}/resources/img/profile/${myNickProfile.profile_img}" />
 			                        </a>
 			                    </div>

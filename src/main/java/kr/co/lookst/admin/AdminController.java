@@ -1,5 +1,6 @@
 package kr.co.lookst.admin;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -288,11 +289,11 @@ public class AdminController {
 
 	/* 상품 상세 페이지 이동 */
 	@RequestMapping(value = "/productDetail", method = { RequestMethod.POST, RequestMethod.GET })
-	public String productDetailPage(Model model, @RequestParam("product_no") Integer product_no, HttpServletRequest request) {
-		HttpSession session = request.getSession();
+	public String productDetailPage(Model model, @RequestParam("product_no") Integer product_no, HttpServletRequest request, Principal principal) {
+
 		try {
 			/* 상품 상세페이지 이동 */
-			String login_id = (String) session.getAttribute("res");
+			String login_id = principal.getName();
 			Product productInfo = adminService.getproductInfo(product_no);
 			List<Prdt_Option> productSize = adminService.getproductSize(product_no);
 			List<Prdt_Img> productImg = adminService.getproductImg(product_no);
@@ -311,10 +312,10 @@ public class AdminController {
 	/* 오더 페이지 이동 */
     @GetMapping("/orderFormpage")
 	  public String orderFormpage(Model m, MemberDto dto, @RequestParam(value="product_no", required=false) Integer product_no, @RequestParam(value="prdt_option_size", required=false) String prdt_option_size
-					, @RequestParam(value="prdt_option_color", required=false) String prdt_option_color, @RequestParam(value="prdt_order_quan", required=false) Integer prdt_order_quan, HttpServletRequest request) {
-	    HttpSession session = request.getSession();
+					, @RequestParam(value="prdt_option_color", required=false) String prdt_option_color, @RequestParam(value="prdt_order_quan", required=false) Integer prdt_order_quan, HttpServletRequest request, Principal principal) {
+
 	    try {		
-	  	  String login_id = (String) session.getAttribute("res");
+	  	  String login_id = principal.getName();
           List<OrderInfoDto> orderInfo = adminService.orderInfo(product_no);
           m.addAttribute("orderInfo", orderInfo);
           m.addAttribute("prdt_option_size", prdt_option_size);
@@ -390,9 +391,9 @@ public class AdminController {
 
 	/* sns total list */
 	@RequestMapping(value = "/snsTotalList", method = { RequestMethod.GET })
-	public String snsTotalList(Model model, HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		String login_id = (String) session.getAttribute("res");
+	public String snsTotalList(Model model, HttpServletRequest request, Principal principal) {
+		MemMGMDto memMGMDto = new MemMGMDto();
+		String login_id = principal.getName();
 		try {
 			/* sns total list */
 			List<MemMGMDto> snsTopList = adminService.snsTopList();
@@ -456,14 +457,15 @@ public class AdminController {
 	@RequestMapping(value = "/postLikeInsert", method = { RequestMethod.POST })
 	@ResponseBody
 	public int postLikeInsert(Model model, @RequestParam(value="member_id", required=false) String member_id, 
-							@RequestParam(value="post_no", required=false) Integer post_no, HttpServletRequest request) {
-		HttpSession session = request.getSession();
+							@RequestParam(value="post_no", required=false) Integer post_no, HttpServletRequest request, Principal principal) {
+
 		int mvc = 0;
-		String login_id = (String) session.getAttribute("res");
+		String login_id = principal.getName();
 		SnsHeartDto snsHeartDto = new SnsHeartDto();
 			
-		snsHeartDto.setPost_no(post_no);
 		snsHeartDto.setMember_id(login_id);
+		snsHeartDto.setPost_no(post_no);
+		
 		try {
 			mvc = adminService.postLikeInsert(snsHeartDto);
 			model.addAttribute("member_id", login_id);
@@ -477,14 +479,15 @@ public class AdminController {
 	@RequestMapping(value = "/postLikeDelete", method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
 	public int postLikeDelete(Model model, @RequestParam(value="member_id", required=false) String member_id, 
-							@RequestParam(value="post_no", required=false) Integer post_no, HttpServletRequest request) {
-		HttpSession session = request.getSession();
+							@RequestParam(value="post_no", required=false) Integer post_no, HttpServletRequest request, Principal principal) {
+
 		int mvc = 0;
-		String login_id = (String) session.getAttribute("res");
+		String login_id = principal.getName();
 		SnsHeartDto snsHeartDto = new SnsHeartDto();
-			
-		snsHeartDto.setPost_no(post_no);
+		
 		snsHeartDto.setMember_id(login_id);
+		snsHeartDto.setPost_no(post_no);
+		
 		try {
 			mvc = adminService.postLikeDelete(snsHeartDto);
 			model.addAttribute("member_id", login_id);
@@ -496,13 +499,22 @@ public class AdminController {
 	
 	/* sns Detail List */
 	@RequestMapping(value = "/snsDetailList", method = { RequestMethod.GET })
-	public String snsDetailList(Model model, HttpServletRequest request, Integer post_no) {
-		System.out.println(post_no);
-		HttpSession session = request.getSession();
-		String login_id = (String) session.getAttribute("res");
+	public String snsDetailList(Model model, HttpServletRequest request, Integer post_no, Principal principal) {
+		String login_id = principal.getName();			
+
+		MemMGMDto myNickProfile = new MemMGMDto();
 		try {
+			/* sns 디테일 페이지 좋아요 체크 */
+			if (login_id != null) {
+				SnsHeartDto snsHeartDto = new SnsHeartDto();
+				snsHeartDto.setPost_no(post_no);
+				snsHeartDto.setMember_id(login_id);
+				System.out.println(snsHeartDto);
+				int postLikedCheck = adminService.postLikedCheck(snsHeartDto);
+				model.addAttribute("postLikedCheck", postLikedCheck);
+			}
 			/* 개인 프로필, 닉네임 호출 */
-			MemMGMDto myNickProfile = adminService.myNickProfile(login_id);
+			myNickProfile = adminService.myNickProfile(login_id);
 			/* sns 클릭된 포스트 정보 */
 			MemMGMDto snsDetailClick = adminService.snsDetailClick(post_no);
 			/* sns 디테일 페이지 캐러셀 */
@@ -515,17 +527,9 @@ public class AdminController {
 			int postLikedCnt = adminService.postLikedCnt(post_no);
 			/* sns 디테일 페이지 일반 태그 태그 */
 			List<post_com_tagDto> tagInfoList = adminService.tagInfoList(post_no);
-			/* sns 디테일 페이지 좋아요 체크 */
-			if (login_id != null) {
-				SnsHeartDto snsHeartDto = new SnsHeartDto();
-				snsHeartDto.setPost_no(post_no);
-				snsHeartDto.setMember_id(login_id);
-				int postLikedCheck = adminService.postLikedCheck(snsHeartDto);
-				System.out.println("qq"+postLikedCheck);
-				model.addAttribute("postLikedCheck", postLikedCheck);
-			}
 			
-			System.out.println(snsDetailClick);
+			System.out.println("snsDetailClick" + snsDetailClick);
+			System.out.println("myNickProfile = " + myNickProfile);
 			model.addAttribute("myNickProfile", myNickProfile);
 			model.addAttribute("member_id", login_id);
 			model.addAttribute("postTagInfo", postTagInfo);
@@ -534,7 +538,6 @@ public class AdminController {
 			model.addAttribute("postTagInfoCnt", postTagInfoCnt);
 			model.addAttribute("postLikedCnt", postLikedCnt);
 			model.addAttribute("tagInfoList", tagInfoList);
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -568,10 +571,9 @@ public class AdminController {
 	@ResponseBody
 	@RequestMapping(value = "/PostWriteReply")
 	public NPostDto postWriteReply(@RequestParam Integer post_no, @RequestParam String sns_comment_con, 
-			@RequestParam String sns_comment_nick, @RequestParam String sns_comment_profile, HttpServletRequest request) {
+			@RequestParam String sns_comment_nick, @RequestParam String sns_comment_profile, HttpServletRequest request, Principal principal) {
 		
-		HttpSession session = request.getSession();
-		String login_id = (String) session.getAttribute("res");
+		String login_id = principal.getName();
 		SnsCommentDto snsCommentDto = new SnsCommentDto();
 
 		// 작성 아이디 세팅
@@ -600,9 +602,9 @@ public class AdminController {
 	@RequestMapping(value = "/PostWriteRereply")
 	public NPostDto postWriteRereply(@RequestParam Integer post_no, @RequestParam Integer sns_comment_no, 
 			@RequestParam String sns_comment_con, @RequestParam String sns_comment_profile
-			, @RequestParam String sns_comment_nick, @RequestParam int sns_comment_group, HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		String login_id = (String) session.getAttribute("res");
+			, @RequestParam String sns_comment_nick, @RequestParam int sns_comment_group, HttpServletRequest request, Principal principal) {
+		
+		String login_id = principal.getName();
 		SnsCommentDto snsCommentDto = new SnsCommentDto();
 		
 		// 작성 아이디 세팅
@@ -639,13 +641,18 @@ public class AdminController {
 	// 모댓글 삭제
 	@ResponseBody
 	@RequestMapping(value = "/postDeleteReply")
-	public NPostDto postDeleteReply(@RequestParam Integer sns_comment_no, @RequestParam Integer post_no ) {
+	public NPostDto postDeleteReply(@RequestParam Integer sns_comment_no, @RequestParam Integer post_no,
+			@RequestParam int sns_comment_group) {
 
 		SnsCommentDto snsCommentDto = new SnsCommentDto();
 
 	    // 모댓글 번호 세팅
 		snsCommentDto.setSns_comment_no(sns_comment_no);
 
+		// grp 세팅(모댓글이 뭔지) - 모댓글은 삭제를 해도 답글이 있으면 남아있게 되는데 답글이 모두 삭제되었을 때 모댓글도 삭제하기 위해
+	    // 필요함
+		snsCommentDto.setSns_comment_group(sns_comment_group);
+		
 	    // 게시물 번호 세팅
 		snsCommentDto.setPost_no(post_no);
 

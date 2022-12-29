@@ -329,11 +329,12 @@ public class AdminDaoImpl implements AdminDao{
 		// grp가 reply의 no와 일치하는 댓글이 몇갠지 카운트한다. 모댓글에 딸린 답글이 몇갠지 카운트하기 위함
 		System.out.println("댓글 카운트 확인" + snsCommentDto);
 		Integer rereplyCount = session.selectOne(namespace + "postCountRereply", snsCommentDto);
+		System.out.println("rereplyCount" + rereplyCount);
 		int count_rereply = 0;
 		if (rereplyCount == null) {
 			count_rereply = 0;
 		} else {
-			count_rereply = (int)count_rereply;
+			count_rereply = (int)rereplyCount;
 		}
 		
 		int result = 0;
@@ -369,12 +370,12 @@ public class AdminDaoImpl implements AdminDao{
 		// p_reply 테이블에서 삭제
 		int result = session.delete(namespace + "postReplyDelete", snsCommentDto);
 		
-		// grp가  일치하는 답글이 몇갠지 카운트 한다. 없고 모댓글의 content가 ""이면 모댓글을 삭제하기 위함.
+		// group이 일치하는 답글이 몇갠지 카운트 한다. 카운트가 없고 모댓글의 content가 ""이면 모댓글을 삭제하기 위함.
 		int count_rereply = session.selectOne(namespace + "postCountRereplyFromrereply", snsCommentDto);
 		
 		
 		System.out.println("count_rereply = " + count_rereply);
-		if(count_rereply == 0) {
+		if(count_rereply == 1) {
 			session.delete(namespace + "postReplyDeleteAfterRereplyDelete", snsCommentDto);
 		}
 		

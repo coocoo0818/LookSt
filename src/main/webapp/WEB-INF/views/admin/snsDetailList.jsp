@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<sec:authentication property="principal" var="prc"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -55,10 +57,12 @@ input {
 <%@ include file="/WEB-INF/views/fix/header.jsp"%>
 
 	<script type="text/javascript">	
+	var csrfHeaderName = "${_csrf.headerName}";
+    var csrfTokenValue= "${_csrf.token}";
+    
 		function clickBtn(e) {
 			var post_no = $(e).children().attr("data-postNo");
-			alert("${sessionScope.res}")
-			var login_id = "${sessionScope.res}"
+			var login_id = "${prc.username}"
 			
 			let _buttonI = event.target;
 			const childElement = _buttonI.firstChild;
@@ -73,8 +77,6 @@ input {
 						childElement.classList.add("fas");
 						childElement.classList.add("active");
 						childElement.classList.remove("far");
-						var token = $("meta[name='_csrf']").attr("content");
-						var header = $("meta[name='_csrf_header']").attr("content");
 						
 						$.ajax({
 							type: 'POST',   //get방식으로 명시

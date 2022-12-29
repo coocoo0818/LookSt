@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<sec:authentication property="principal" var="prc"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -147,8 +149,7 @@
 							
 							function clickBtn(e) {
 								var post_no = $(e).children().attr("data-productNo");
-								var login_id = "${sessionScope.res}"
-								
+								var login_id = "${prc.username}"
 								let _buttonI = event.target;
 								const childElement = _buttonI.firstChild;
 								
@@ -255,7 +256,6 @@
 									}
 								}
 							}
-							
 					</script>
 		        </c:if>
 			</c:forEach>
