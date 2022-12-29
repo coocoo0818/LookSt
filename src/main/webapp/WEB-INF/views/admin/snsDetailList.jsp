@@ -73,12 +73,18 @@ input {
 						childElement.classList.add("fas");
 						childElement.classList.add("active");
 						childElement.classList.remove("far");
+						var token = $("meta[name='_csrf']").attr("content");
+						var header = $("meta[name='_csrf_header']").attr("content");
+						
 						$.ajax({
 							type: 'POST',   //get방식으로 명시
 							url : '${contextPath}/admin/postLikeInsert',  //이동할 jsp 파일 주소
 							data:{
 									post_no : post_no,
-							},   
+							},
+							beforeSend : function(xhr){
+								xhr.setRequestHeader(header, token);
+							},
 							success: function(data){   //데이터 주고받기 성공했을 경우 실행할 결과
 								
 							},
@@ -90,12 +96,18 @@ input {
 						childElement.classList.remove("fas");
 						childElement.classList.remove("active");
 						childElement.classList.add("far");
+						var token = $("meta[name='_csrf']").attr("content");
+						var header = $("meta[name='_csrf_header']").attr("content");
+
 						$.ajax({
 							type: 'POST',   //get방식으로 명시
 							url : '${contextPath}/admin/postLikeDelete',  //이동할 jsp 파일 주소
 							data:{
 									post_no : post_no,
-							},   
+							},
+							beforeSend : function(xhr){
+								xhr.setRequestHeader(header, token);
+							},
 							success: function(data){   //데이터 주고받기 성공했을 경우 실행할 결과
 								
 							},
@@ -109,12 +121,18 @@ input {
 						_buttonI.classList.add("fas");
 						_buttonI.classList.add("active");
 						_buttonI.classList.remove("far");
+						var token = $("meta[name='_csrf']").attr("content");
+						var header = $("meta[name='_csrf_header']").attr("content");
+
 						$.ajax({
 							type: 'POST',   //get방식으로 명시
 							url : '${contextPath}/admin/postLikeInsert',  //이동할 jsp 파일 주소
 							data:{
 									post_no : post_no,
 							},   
+							beforeSend : function(xhr){
+								xhr.setRequestHeader(header, token);
+							},
 							success: function(data){   //데이터 주고받기 성공했을 경우 실행할 결과
 								
 							},
@@ -126,12 +144,17 @@ input {
 						_buttonI.classList.remove("fas");
 						_buttonI.classList.remove("active");
 						_buttonI.classList.add("far");
+						var token = $("meta[name='_csrf']").attr("content");
+						var header = $("meta[name='_csrf_header']").attr("content");
 						$.ajax({
 							type: 'POST',   //get방식으로 명시
 							url : '${contextPath}/admin/postLikeDelete',  //이동할 jsp 파일 주소
 							data:{
 									post_no : post_no,
 							},   
+							beforeSend : function(xhr){
+								xhr.setRequestHeader(header, token);
+							},
 							success: function(data){   //데이터 주고받기 성공했을 경우 실행할 결과
 								
 							},

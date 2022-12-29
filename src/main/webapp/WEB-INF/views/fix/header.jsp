@@ -1,12 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<c:set var="auth_admin_menu" value="${auth eq 'admin' ? 'dropdown-item' : 'visually-hidden'}" />
-<c:set var="auth_seller_menu" value="${auth eq 'seller' ? 'dropdown-item' : 'visually-hidden'}" />
-<c:set var="loginout" value="${sessionScope.res==null ? 'LOGIN' : 'LOGOUT' }"/>
-<c:set var="loginhidden" value="${sessionScope.res==null ? 'dropdown-item' : 'visually-hidden' }"/>
-<c:set var="logouthidden" value="${sessionScope.res!=null ? 'dropdown-item' : 'visually-hidden' }"/>
-<c:set var="loginoutlink" value="${sessionScope.res==null ? '/lookst/login' : '/lookst/logout' }" />
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
 <!DOCTYPE html>
 <html>
@@ -43,7 +37,6 @@
   	<link href="${pageContext.request.contextPath }/resources/_vendor/bootstrap/dist/css/bootstrap.rtl.css" rel="stylesheet">
   	<link href="${pageContext.request.contextPath }/resources/_vendor/bootstrap/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
   	<link href="${pageContext.request.contextPath }/resources/_vendor/prismjs/themes/prism-okaidia.css" rel="stylesheet"> --%>
-
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -61,7 +54,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="${contextPath}/post/productList?kind=T">SHOP</a>
+          <a class="nav-link" href="${contextPath}/admin/productList">SHOP</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Board</a>
@@ -72,16 +65,34 @@
           </div>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">${loginout}</a>
-          <div class="dropdown-menu dropdown-menu-end dropdown-menu-xs-start">
-            <a class="dropdown-item" href="${loginoutlink}">${loginout}</a>
-            <a class="${logouthidden}" href="${contextPath}/member/mypage">MY PAGE</a>
-            <a class="${logouthidden}" href="${contextPath}/sns/snsProfile/?member_id=${res}">MY PROFILE</a>
-            <a class="${logouthidden}" href="${contextPath}/post/orderHistory">ORDER</a>
-            <a class="${loginhidden}" href="${contextPath}/register">REGISTER</a>
-            <a class="${auth_seller_menu}" href="${contextPath}/seller/mySales">SELLER PAGE</a>
-            <a class="${auth_admin_menu}" href="${contextPath}/admin/member_management">ADMIN PAGE</a>
-          </div>
+        
+       		<sec:authorize access="isAnonymous()">
+				<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">LOGIN</a>
+			</sec:authorize>
+       		<sec:authorize access="isAuthenticated()">
+				<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">LOGOUT</a>
+			</sec:authorize>
+			<div class="dropdown-menu dropdown-menu-end dropdown-menu-xs-start">
+				<sec:authorize access="isAnonymous()">
+					<a class="dropdown-item" href="${contextPath}/member/login">LOGIN</a>
+					<a class="dropdown-item" href="${contextPath}/member/register">REGISTER</a>
+            	</sec:authorize>
+				<sec:authorize access="isAuthenticated()">
+            		<form action="${contextPath}/member/logout" method="post" id="logout">
+	            		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+            			<a class="dropdown-item" type="submit" onclick="document.getElementById('logout').submit();">LOGOUT</a>
+            		</form>
+            		<a class="dropdown-item" href="${contextPath}/member/mypage">MY PAGE</a>
+		            <a class="dropdown-item" href="${contextPath}/sns/snsProfile/?member_id=${res}">MY PROFILE</a>            		
+					<a class="dropdown-item" href="${contextPath}/post/orderHistory">ORDER</a>
+				</sec:authorize>
+				<sec:authorize access="hasRole('seller')">
+					<a class="dropdown-item" href="${contextPath}/seller/mySales">SELLER PAGE</a>
+				</sec:authorize>
+				<sec:authorize access="hasRole('admin')">
+					<a class="dropdown-item" href="${contextPath}/admin/member_management">ADMIN PAGE</a>
+				</sec:authorize>
+			</div>
         </li>
       </ul>
     </div>

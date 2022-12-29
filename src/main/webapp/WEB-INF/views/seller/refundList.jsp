@@ -39,6 +39,9 @@
 						prdt_order_no : prdt_order_no,
 						ReqOrderStatus : ReqOrderStatus
 				},
+				beforeSend : function(xhr){
+					xhr.setRequestHeader(($("meta[name='_csrf_header']").attr("content")), ($("meta[name='_csrf']").attr("content")));
+				},
 				success : function(data) {
 					alert("취소상태가 변경되었습니다.")
 					location.reload()

@@ -53,6 +53,7 @@ img {
 	<!-- Upload 끝 -->
 	<form name="fileForm" action="postUpload" method="post"
 		enctype="multipart/form-data">
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 		<div class="upload container mb-5">
 			<div class="line border border-4 p-sm-5">
 

@@ -16,11 +16,17 @@
 		
 		$('.sellerAgree').click(function() {
 			let seller_no = $(this).parent().prev().prev().prev().prev().attr("data-sellerNo") // <li>태그는 <button>의 부모임.
+			var token = $("meta[name='_csrf']").attr("content");
+			var header = $("meta[name='_csrf_header']").attr("content");
+			
 			$.ajax({
 				type : 'post',
 				url : '${contextPath}/admin/sellerAgree',
 				data : {
 						seller_no : seller_no
+				},
+				beforeSend : function(xhr){
+					xhr.setRequestHeader(header, token);
 				},
 				success : function(data) {
 					alert("판매 자격이 수락되었습니다.")
@@ -32,11 +38,17 @@
 		
 		$('.sellerReject').click(function() {
 			let seller_no = $(this).parent().prev().prev().prev().prev().attr("data-sellerNo") // <li>태그는 <button>의 부모임.
+			var token = $("meta[name='_csrf']").attr("content");
+			var header = $("meta[name='_csrf_header']").attr("content");
+
 			$.ajax({
 				type : 'post',
 				url : '${contextPath}/admin/sellerReject',
 				data : {
 						seller_no : seller_no
+				},
+				beforeSend : function(xhr){
+					xhr.setRequestHeader(header, token);
 				},
 				success : function(data) {
 					alert("판매자 자격이 거부 처리되었습니다.")

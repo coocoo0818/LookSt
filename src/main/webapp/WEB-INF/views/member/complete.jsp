@@ -18,7 +18,7 @@
 				<li>일반 회원 가입 후 LookSt에 입점을 희망하는 회원은 [마이페이지 > 회원정보] 메뉴에서 [판매자 등록] 서비스를 이용해 주세요.</li>
 			</div>
 				<button type="button" class="btn btn-outline-primary" onclick="location.href = '/lookst'">홈으로</button>
-				<button type="button" class="btn btn-primary" onclick="location.href = '/lookst/login'">로그인</button>
+				<button type="button" class="btn btn-primary" onclick="location.href = '/lookst/member/login'">로그인</button>
 		</div>
 
 	</div>

@@ -15,11 +15,17 @@
 	$(document).ready(function() {
 		$('.postDelete').click(function() {
 			let post_no = $(this).parent().parent().prev("span").attr("data-postNo") // <li>태그는 <button>의 부모임.
+			var token = $("meta[name='_csrf']").attr("content");
+			var header = $("meta[name='_csrf_header']").attr("content");
+			
 			$.ajax({
 				type : 'post',
 				url : '${contextPath}/admin/postDelete',
 				data : {
 					post_no : post_no
+				},
+				beforeSend : function(xhr){
+					xhr.setRequestHeader(header, token);
 				},
 				success : function(data) {
 					alert("포스트가 삭제되었습니다.")

@@ -38,6 +38,9 @@
 						prdt_order_no : prdt_order_no,
 						orderStatus : orderStatus
 				},
+				beforeSend : function(xhr){
+					xhr.setRequestHeader(($("meta[name='_csrf_header']").attr("content")), ($("meta[name='_csrf']").attr("content")));
+				},
 				success : function(data) {
 					alert("주문상태가 변경되었습니다.")
 					location.reload()
