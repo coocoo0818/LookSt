@@ -20,6 +20,7 @@
 		<security:intercept-url pattern="/member/idCheck" access="permitAll"/>
 		<security:intercept-url pattern="/member/**" access="hasAnyRole('member', 'seller', 'admin')"/>
 		<security:intercept-url pattern="/partner/**" access="hasAnyRole('member', 'seller', 'admin')"/>
+        <security:intercept-url pattern="/board/read/magazine" access="hasAnyRole('member', 'seller', 'admin')"/>
 		<security:intercept-url pattern="/**/write" access="hasAnyRole('member', 'seller', 'admin')"/>
 		<security:intercept-url pattern="/seller/**" access="hasRole('seller')"/>
 		<security:intercept-url pattern="/admin/**" access="hasRole('admin')"/>

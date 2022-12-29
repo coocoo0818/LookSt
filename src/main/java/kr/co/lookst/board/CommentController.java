@@ -1,5 +1,6 @@
 package kr.co.lookst.board;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -27,11 +28,12 @@ public class CommentController {
 	CommentService service;//ds
 	
 	@PatchMapping("/comments/{comment_no}")
-	public ResponseEntity<String> modify(@PathVariable Integer comment_no, @RequestBody CommentDto dto, HttpSession session) {
-		String member_id = (String) session.getAttribute("res");
+	public ResponseEntity<String> modify(@PathVariable Integer comment_no, @RequestBody CommentDto dto, HttpSession session, Principal principal) {
+		String member_id = principal.getName();
 		dto.setMember_id(member_id);
 		dto.setComment_no(comment_no);
 		System.out.println("dto =" + dto);
+		System.out.println(member_id);
 
 		try {
 			if(service.modify(dto) != 1 )
@@ -45,10 +47,9 @@ public class CommentController {
 	
 	// 댓글을 등록하는 메서드 
 	@PostMapping("/comments")
-	public ResponseEntity<String> write(@RequestBody CommentDto dto, Integer board_no, HttpSession session){
+	public ResponseEntity<String> write(@RequestBody CommentDto dto, Integer board_no, HttpSession session, Principal principal){
 		// 로그인을 안하고 commenter 정보를 입력해줘야한다.
-		String member_id = (String) session.getAttribute("res");
-		
+		String member_id = principal.getName();
 		dto.setMember_id(member_id);
 		dto.setBoard_no(board_no);
 		System.out.println("dto = " + dto);
