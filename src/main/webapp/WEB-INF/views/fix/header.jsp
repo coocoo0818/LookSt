@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
-
+<sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal.username" var="loginId" />
+</sec:authorize>
 <!DOCTYPE html>
 <html>
 <head>
@@ -83,7 +85,7 @@
             			<a class="dropdown-item" type="submit" onclick="document.getElementById('logout').submit();">LOGOUT</a>
             		</form>
             		<a class="dropdown-item" href="${contextPath}/member/mypage">MY PAGE</a>
-		            <a class="dropdown-item" href="${contextPath}/sns/snsProfile/?member_id=${res}">MY PROFILE</a>            		
+		            <a class="dropdown-item" href="${contextPath}/sns/snsProfile/?member_id=${loginId}">MY PROFILE</a>            		
 					<a class="dropdown-item" href="${contextPath}/post/orderHistory">ORDER</a>
 				</sec:authorize>
 				<sec:authorize access="hasRole('seller')">

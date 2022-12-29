@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
+<sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal.username" var="loginId" />
+</sec:authorize>
 <c:set var="auth_admin_menu" value="${auth eq 'admin' ? 'dropdown-item' : 'visually-hidden'}" />
 <c:set var="auth_seller_menu" value="${auth eq 'seller' ? 'dropdown-item' : 'visually-hidden'}" />
 <c:set var="loginout" value="${sessionScope.res==null ? 'LOGIN' : 'LOGOUT' }"/>

@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -47,12 +48,11 @@ public class SnsController {
 	/* 프로필 화면 */
 	@GetMapping("/snsProfile")
 	public String snsProfile(String member_id, @RequestParam("member_id") String member_nick, Model m,
-			HttpServletRequest request) {
+			HttpServletRequest request, Principal principal) {
 
-		HttpSession session = request.getSession();
 
 		try {
-			String login_id = (String) session.getAttribute("res");
+			String login_id = principal.getName();
 
 			/* 프로필 정보 */
 			SnsProfileDto pro_info = snsService.getinfoselect(member_id);
@@ -85,10 +85,9 @@ public class SnsController {
 
 	/* 팔로우 하기 */
 	@RequestMapping(value = "/follow", method = { RequestMethod.POST })
-	public String follow(String member_id, Model m, HttpServletRequest request) {
+	public String follow(String member_id, Model m, HttpServletRequest request, Principal principal) {
 
-		HttpSession session = request.getSession();
-		String login_id = (String) session.getAttribute("res");
+		String login_id = principal.getName();
 
 		try {
 			int checkFollow = snsService.followCheck(login_id, member_id);
@@ -107,10 +106,9 @@ public class SnsController {
 
 	/* 팔로우 취소하기 */
 	@RequestMapping(value = "/unfollow", method = { RequestMethod.POST })
-	public String unfollow(String member_id, Model m, HttpServletRequest request) {
+	public String unfollow(String member_id, Model m, HttpServletRequest request, Principal principal) {
 
-		HttpSession session = request.getSession();
-		String login_id = (String) session.getAttribute("res");
+		String login_id = principal.getName();
 
 		try {
 			int checkFollow = snsService.followCheck(login_id, member_id);
