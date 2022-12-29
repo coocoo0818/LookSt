@@ -606,29 +606,21 @@ public class AdminController {
 		
 		String login_id = principal.getName();
 		SnsCommentDto snsCommentDto = new SnsCommentDto();
-		
 		// 작성 아이디 세팅
 		snsCommentDto.setMember_id(login_id);
-		
 	    // 게시물 번호 세팅
 		snsCommentDto.setPost_no(post_no);
-
 	    // grp, grps, grpl 은 ReplyTO에 int로 정의되어 있기 때문에 String인 no를 int로 변환해서 넣어준다.
 	    // 모댓글 번호 no를 grp으로 세팅한다.
 		/* snsCommentDto.setSns_comment_group(Integer.parseInt(sns_comment_no)); */
-
 	    // 답글은 깊이가 1이되어야 하므로 Sns_comment_class을 1로 세팅한다.
 		snsCommentDto.setSns_comment_class(1);
-
 	    // 답글 내용 세팅
 		snsCommentDto.setSns_comment_con(sns_comment_con);
-
 	    // 답글작성자 nick을 writer로 세팅
 		snsCommentDto.setSns_comment_nick(sns_comment_nick);
-		
 		// 답글 그룹 누른 그룹으로 세팅
-		snsCommentDto.setSns_comment_group(sns_comment_group);
-				
+		snsCommentDto.setSns_comment_group(sns_comment_group);	
 		// 답글작성자 프로필 세팅
 		snsCommentDto.setSns_comment_profile(sns_comment_profile);
 		System.out.println(snsCommentDto);
