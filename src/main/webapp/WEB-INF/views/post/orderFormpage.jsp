@@ -78,6 +78,7 @@
 </script>
 
 <script type="text/javascript">
+
 	/* $(document).ready(function() { */
 		var IMP = window.IMP; // 생략 가능
 		IMP.init("imp42155271"); // 예: imp00000000
@@ -169,6 +170,10 @@
 					$.ajax({
 						url : '${contextPath}/admin/orderInsert', // 예: https://www.myservice.com/payments/complete
 						method : "POST",
+						/*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
+						beforeSend : function(xhr){
+							xhr.setRequestHeader(header, token)
+						},
 						data : {
 							prdt_order_no : data.orderNum,
 							product_no : data.product_no,
