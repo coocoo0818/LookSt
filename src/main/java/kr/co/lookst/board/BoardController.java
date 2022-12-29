@@ -2,6 +2,7 @@ package kr.co.lookst.board;
 
 import static org.springframework.http.HttpStatus.OK;
 
+import java.security.Principal;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -47,8 +48,8 @@ public class BoardController {
 
     @PostMapping("/modify")
     public String modify(BoardDto boardDto, Integer page, Integer pageSize, RedirectAttributes rattr, Model m,
-        HttpSession session) {
-        String member_id = (String)session.getAttribute("res");
+        HttpSession session, Principal principal) {
+    	String member_id = principal.getName();
         boardDto.setMember_id(member_id);
         System.out.println(member_id);
         System.out.println(boardDto);
@@ -74,8 +75,8 @@ public class BoardController {
     }
 
     @PostMapping("/write")
-    public String write(BoardDto boardDto, RedirectAttributes rattr, Model m, HttpSession session) {
-        String member_id = (String)session.getAttribute("res");
+    public String write(BoardDto boardDto, RedirectAttributes rattr, Model m, HttpSession session, Principal principal) {
+    	String member_id = principal.getName();
         System.out.println("member_id = " + member_id);
         boardDto.setMember_id(member_id);
 
@@ -110,8 +111,8 @@ public class BoardController {
 
     @PostMapping("/remove")
     public String remove(Integer board_no, Integer page, Integer pageSize, RedirectAttributes rattr,
-        HttpSession session) {
-        String member_id = (String)session.getAttribute("res");
+        HttpSession session, Principal principal) {
+    	String member_id = principal.getName();
         String msg = "DEL_OK";
 
         try {
@@ -313,24 +314,25 @@ public class BoardController {
     }
 
     @GetMapping("/read/magazine")
-    public String readMagazine(Integer board_no, SearchItem sc, Model m) {
+    public String readMagazine(Integer board_no, SearchItem sc, Model m, Principal principal, BoardDto dto) {
+    	
+        	try {
+                BoardDto boardDtoM = boardService.read(board_no);
+                List<String> images = boardService.boardImgList(board_no); // 해당 board_no 이미지 데이터 select
+                m.addAttribute(boardDtoM);
+                // Collection 객체(List, Map) images 이미지 데이터를 불러온다.
+                m.addAttribute("images", images);
+                // 매거진 이전 글, 다음 글 버튼
+                BoardDto dtoM = boardService.movePageM((board_no));
+                System.out.println("o = " + dtoM);
+                m.addAttribute("moveM", dtoM);
 
-        try {
-            BoardDto boardDtoM = boardService.read(board_no);
-            List<String> images = boardService.boardImgList(board_no); // 해당 board_no 이미지 데이터 select
-            m.addAttribute(boardDtoM);
-            // Collection 객체(List, Map) images 이미지 데이터를 불러온다.
-            m.addAttribute("images", images);
-            // 매거진 이전 글, 다음 글 버튼
-            BoardDto dtoM = boardService.movePageM((board_no));
-            System.out.println("o = " + dtoM);
-            m.addAttribute("moveM", dtoM);
+            } catch (Exception e) {
+                e.printStackTrace();
+                return "redirect:/board/magazine/";
+            }
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "redirect:/board/magazine/";
-        }
-
+    	
         return "board/magazineview";
     }
 
