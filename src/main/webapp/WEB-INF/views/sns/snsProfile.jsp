@@ -87,6 +87,9 @@ $(document).ready(function() {
 					login_id : member_id,
 					member_id : following_id
 				},
+				beforeSend : function(xhr){
+					xhr.setRequestHeader(($("meta[name='_csrf_header']").attr("content")), ($("meta[name='_csrf']").attr("content")));
+				},
 				success : function() {
 					location.reload()
 				},
@@ -100,6 +103,9 @@ $(document).ready(function() {
 				data : {
 					login_id : member_id,
 					member_id : following_id
+				},
+				beforeSend : function(xhr){
+					xhr.setRequestHeader(($("meta[name='_csrf_header']").attr("content")), ($("meta[name='_csrf']").attr("content")));
 				},
 				success : function() {
 					location.reload()
@@ -122,6 +128,9 @@ $(document).ready(function() {
 					member_id : member_id, 
 					member_nick : member_nick
 					},
+			beforeSend : function(xhr){
+				xhr.setRequestHeader(($("meta[name='_csrf_header']").attr("content")), ($("meta[name='_csrf']").attr("content")));
+			},
 			success : function(result) {
 				alert("닉네임 변경되었습니다.")
 				location.reload()

@@ -214,6 +214,7 @@
 	<div class="container">
 		<h1>Order Info</h1>
 		<form action="${contextPath}/admin/orderInsert" method="post">
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 			<div id="app">
 				<!-- Product List -->
 				<section class="container" style="padding: 20px">

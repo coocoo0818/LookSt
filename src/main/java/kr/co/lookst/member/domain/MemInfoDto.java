@@ -19,6 +19,5 @@ public class MemInfoDto {
 	private String mem_info_bank;
 	private String mem_info_account;
 	private String mem_info_reci;
-	
-	
+		
 }

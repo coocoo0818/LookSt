@@ -20,13 +20,18 @@
 			let board_no = $(this).parent().prev().prev().prev().prev().prev().prev().attr("data-boardNo") // <li>태그는 <button>의 부모임.
 			let index = $(this).parent().attr("data-index")
 			let board_type = document.getElementById("board_type"+index).value;
-
+			var token = $("meta[name='_csrf']").attr("content");
+			var header = $("meta[name='_csrf_header']").attr("content");
+			
 			$.ajax({
 				type : 'post',
 				url : '${contextPath}/admin/boardModify',
 				data : {
 						board_no : board_no,
 						board_type : board_type
+				},
+				beforeSend : function(xhr){
+					xhr.setRequestHeader(header, token);
 				},
 				success : function(data) {
 					alert("게시글 상태가 수정되었습니다.")
@@ -38,12 +43,17 @@
 		
 		$('.boardDelete').click(function() {
 			let board_no = $(this).parent().prev().prev().prev().prev().prev().prev().attr("data-boardNo") // <li>태그는 <button>의 부모임.
-
+			var token = $("meta[name='_csrf']").attr("content");
+			var header = $("meta[name='_csrf_header']").attr("content");
+			
 			$.ajax({
 				type : 'post',
 				url : '${contextPath}/admin/boardDelete',
 				data : {
 						board_no : board_no
+				},
+				beforeSend : function(xhr){
+					xhr.setRequestHeader(header, token);
 				},
 				success : function(data) {
 					alert("게시글 삭제했습니다.")

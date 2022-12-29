@@ -15,5 +15,4 @@ public class MemAuthDto {
 	private String mem_auth_auth;
 	private String mem_auth_key;
 	
-	
 }

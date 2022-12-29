@@ -325,6 +325,7 @@ input[type=checkbox] {
 		<h1>매거진 업로드</h1>
 		<section class="contents">
 			<form id="form" enctype="multipart/form-data" class="txt" action="" method="post">
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 				<input type="hidden" name="board_no" value="${boardDto.board_no }">
 				<input type="text" name="board_title" value="${boardDto.board_title }" placeholder="제목을 입력하세요.">
 				<textarea name="board_con" style="resize: none;" id="textarea" value="${boardDto.board_con }" placeholder="내용을 입력하세요."></textarea>

@@ -67,6 +67,7 @@
 					</tbody>
 				</table>
 				<form id="form" class="frm">
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 					<table class="zebra-striping">
 						<input hidden="hidden" name="order_no" id="order_no"
 								<%-- value="${orderHistory.prdt_order_no}" --%> />

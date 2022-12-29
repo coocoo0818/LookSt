@@ -20,13 +20,18 @@
 			let member_id = $(this).parent().attr("data-memberid") // <li>태그는 <button>의 부모임.
 			let index = $(this).parent().attr("data-index")
 			let auth = document.getElementById("auth_auth" + index).value;
-
+			var token = $("meta[name='_csrf']").attr("content");
+			var header = $("meta[name='_csrf_header']").attr("content");
+			
 			$.ajax({
 				type : 'post',
 				url : '${contextPath}/admin/authModify',
 				data : {
 						member_id : member_id,
 						auth : auth
+				},
+				beforeSend : function(xhr){
+					xhr.setRequestHeader(header, token);
 				},
 				success : function(data) {
 					alert("회원권한이 수정되었습니다.")
@@ -38,12 +43,17 @@
 		
 		$('.kickOut').click(function() {
 			let member_id = $(this).parent().attr("data-memberid") // <li>태그는 <button>의 부모임.
-
+			var token = $("meta[name='_csrf']").attr("content");
+			var header = $("meta[name='_csrf_header']").attr("content");
+			
 			$.ajax({
 				type : 'post',
 				url : '${contextPath}/admin/memberKickOut',
 				data : {
 						member_id : member_id
+				},
+				beforeSend : function(xhr){
+					xhr.setRequestHeader(header, token);
 				},
 				success : function(data) {
 					alert("탈퇴시켰습니다.")
@@ -82,6 +92,7 @@
 		<!-- 검색 끝 -->
 
 		<form name="form" class="frm" action="${contextPath}/admin/authModify" method="post">
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 			<table class="responsive-table">
 				<%-- <caption>Top 10 Grossing Animated Films of All Time</caption> --%>
 				<thead>

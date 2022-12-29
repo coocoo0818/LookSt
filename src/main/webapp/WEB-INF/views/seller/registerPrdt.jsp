@@ -71,6 +71,9 @@
 // 	              type : "POST",
 // 	              contentType : false,
 // 	              processData : false,
+// 	              beforeSend : function(xhr){
+// 	                  xhr.setRequestHeader(($("meta[name='_csrf_header']").attr("content")), ($("meta[name='_csrf']").attr("content")));
+// 	              },
 // 	              success : function(data) {
 // 	                  //항상 업로드된 파일의 url이 있어야 한다.
 // 	                  $(editor).summernote('insertImage', contextPath+data.url);
@@ -105,6 +108,7 @@ img {
 
 <div align="center">
 <form name="frm" id="frm" modelAttribute="product" enctype="multipart/form-data" action="registerPrdt" method="post">
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 		<table>
 				<tr>
 					<th class="input-group-text mb-1">카테고리</th>

@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="UTF-8">
 <title>LookSt 로그인</title>
 
@@ -30,6 +30,9 @@ function login() {
 			url:'./loginCheck',
 			type:'post',
 			data:JSON.stringify(param),
+			beforeSend : function(xhr){
+				xhr.setRequestHeader(($("meta[name='_csrf_header']").attr("content")), ($("meta[name='_csrf']").attr("content")));
+			},
 			contentType: 'application/json',
 			success:function(cnt){
 				if (cnt == 0){
@@ -52,8 +55,9 @@ function login() {
 
 </head>
 <body>
+
 	<%@ include file="/WEB-INF/views/fix/header.jsp"%>
-	<form action="login" method="post" id="frm">
+	<form action="${contextPath}/member/login" method="post" id="frm">
 		<div class="container mt-5 mb-5">
 			<div class="container" style="width: 500px;">
 				<div class="container">
@@ -65,6 +69,7 @@ function login() {
 								<input type="text" class="form-control mb-2" name="member_id" id="member_id" placeholder="이메일 주소" required autofocus/>
 								<input type="password" class="form-control" name="member_pw" id="member_pw" placeholder="비밀번호" required/>
 							</div>
+							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 							<input type="button" class="btn btn-primary pl-3" id="btn" value="로그인" onclick="login()"></input>
 						</div>
 						
@@ -76,7 +81,7 @@ function login() {
 							<div class="invalid-feedback" id="login_feedback" style="margin-left:2px; display:none;"></div>
 							<div class="invalid-feedback" id="login_feedback2" style="margin-left:2px; display:none;">입력하신 내용을 다시 확인해주세요.</div>
 						</div>
-						
+						               	
 					</div>
 			
    						

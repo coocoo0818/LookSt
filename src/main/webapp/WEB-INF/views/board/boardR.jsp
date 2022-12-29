@@ -2,11 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-
-<c:set var="loginId" value="${sessionScope.res }" />
-<c:set var="loginout" value="${loginId==null ? 'Login' : 'Logout' }" />
-<c:set var="loginoutlink" value="${loginId==null ? '/login/login' : '/login/logout' }" />
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -208,6 +203,9 @@
 			data : data,
 			type : "POST",
 			url : "/uploadSummernoteImageFile",
+			beforeSend : function(xhr){
+				xhr.setRequestHeader(($("meta[name='_csrf_header']").attr("content")), ($("meta[name='_csrf']").attr("content")));
+			},
 			contentType : false,
 			processData : false,
 			success : function(data) {
@@ -230,6 +228,7 @@
       <p class="pclass">${mode=="new" ? " 작성 페이지입니다. " : "상품 사용후기입니다."}</p>
     </div>
       <form id="form" class="frm" action="" method="post">
+      <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
       <input type="hidden" name="board_no" value="${boardDto.board_no }">
          <div class="user_info">
          	<div class="kboard-detail">

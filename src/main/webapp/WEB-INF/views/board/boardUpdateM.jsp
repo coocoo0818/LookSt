@@ -324,6 +324,7 @@ input[type=checkbox] {
 		<section class="contents">
 			<form id="form" class="txt" method="post"
 				enctype="multipart/form-data">
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 				<input type="hidden" name="board_no" value="${boardDto.board_no }">
 				<input type="text" name="board_title"
 					value="${boardDto.board_title }" placeholder="제목을 입력하세요.">

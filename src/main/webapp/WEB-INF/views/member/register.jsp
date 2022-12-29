@@ -30,10 +30,15 @@ function checkId(){
 	}
 	if (($('#email_host').val()) == ""){
 		if (regExp.test($('#email_id').val())) {
+			var token = $("meta[name='_csrf']").attr("content");
+			var header = $("meta[name='_csrf_header']").attr("content");
 			const member_id = $('#email_id').val();
 			$.ajax({
 				url:'./idCheck?member_id=' + member_id, //Controller에서 요청 받을 주소
 				type:'post', //POST 방식으로 전달
+				beforeSend : function(xhr){
+					xhr.setRequestHeader(header, token);
+				},
 				success:function(cnt){ //컨트롤러에서 넘어온 cnt값을 받는다.
 					if (cnt == 0){ //cnt가 1이 아니면(=0일 경우) -> 사용 가능한 계정
 						$('#email_id').attr('class','form-control w-25 is-valid');
@@ -71,9 +76,14 @@ function checkId(){
 	else {
 		const member_id = $('#email_id').val()+$('#email_host').val();	//이메일 주소값 얻기
 		if (regExp.test($('#email_id').val()+$('#email_host').val())){
+			var token = $("meta[name='_csrf']").attr("content");
+			var header = $("meta[name='_csrf_header']").attr("content");
 			$.ajax({
 				url:'./idCheck?member_id=' + member_id, //Controller에서 요청 받을 주소
 				type:'post', //POST 방식으로 전달
+				beforeSend : function(xhr){
+					xhr.setRequestHeader(header, token);
+				},
 				success:function(cnt){ //컨트롤러에서 넘어온 cnt값을 받는다.
 					if (cnt == 0){ //cnt가 1이 아니면(=0일 경우) -> 사용 가능한 계정
 						$('#email_id').attr('class','form-control w-25');
@@ -328,7 +338,7 @@ function sample6_execDaumPostcode() {
 	
 	<div class="container w-75 mt-5 mb-5">
 	<!-- Content here -->
-		<form action="./register" method="post" id="frm">
+		<form action="${contextPath}/member/register" method="post" id="frm">
 			<div class="container w-75 pt-2">
 				<h2 class="my-3 pt-5">회원가입
 				</h2>
@@ -439,6 +449,7 @@ function sample6_execDaumPostcode() {
 				  </label>
 				</div>
 				<div class="d-grid gap-2 pt-4 pb-5 mb-5">
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 					<input class="btn btn-primary" type="button" style="height:60px;" id="btn" value="가입하기" onclick="registerSuccess();"/>
 				</div>
 			</div>
