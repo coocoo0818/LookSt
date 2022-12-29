@@ -31,7 +31,7 @@ public class ImageService {
     // FilePath는 현재 읽고 있는(이미지 파일) 테이블 파일에 대한 전체 경로가 포함된 문자열을 반환하는 함수  
     // File.pathSeparator파일 경로 목록에서 개별 파일 경로를 구분하는 데 사용된다. 
     // Windows에서는 파일 경로를 구분하기 위해 File.pathSeparator 사용한다.
-    private final static String serverPath = "/lookst/images/";
+    private final static String serverPath = "/lookst/images/";	
     
     /**
      * 이미지 전체 path 리턴
@@ -44,7 +44,7 @@ public class ImageService {
     }
 
 
-    public List<Board_imgDto> storeFile(List<MultipartFile> files,int board_num) throws IOException {
+    public List<Board_imgDto> storeFile(List<MultipartFile> files,int board_no) throws IOException {
         File folder =new File(filePath);
         List<Board_imgDto> result = new ArrayList<>();
  
@@ -77,7 +77,7 @@ public class ImageService {
             // transferTo()의 파라미터로는 java.io.File의 객체를 지정하기 때문에
             // 업로드 되는 원래 파일의 이름을 C/upload/temp 로 임시로 지정 후 
             // 기존 이미지 파일로 지정해 둔 C/file로 저장 후 파일 정보 리스트를 리턴함
-            result.add (new Board_imgDto(board_num, serverPath +filename,count++));
+            result.add (new Board_imgDto(board_no, serverPath +filename,count++));
             // serverPath = "/lookst/images/";
         }
         return result;
