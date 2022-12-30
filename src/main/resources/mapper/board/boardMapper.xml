@@ -76,6 +76,7 @@
 			false) -->
 		<!-- keyProperty : 리턴 될 key property 설정. 여러개를 사용한다면 ,(콤마)를 구분자로 나열한다.
 						    keyProperty는 리턴이 된 키 값들을 어느 필드에 set 할 건지를 나타냄. -->
+						    <!--  board_no 시퀀스를 사용하면 그 값울 dto에 매핑해주는 것 -->
 		INSERT INTO board
 		(member_id, board_title, board_con, board_type,
 		board_kind)

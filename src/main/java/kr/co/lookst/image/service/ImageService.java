@@ -59,6 +59,9 @@ public class ImageService {
         for (MultipartFile file : files) {
         	// MultipartFile는 사용자가 업로드한 File을
         	// 핸들러에서 손쉽게 다룰 수 있게 도와주는 매개변수 중 하나이다.
+        	//MultipartFile 인터페이스는 스프링에서 업로드 한 파일을 표현할 때 사용되는 인터페이스.
+        	//MultipartFile 인터페이스를 이용해서 업로드한 파일의 이름, 실제 데이터, 파일 크기 등을 구할 수 있다.
+        	 
     
             if (file.isEmpty()) {
             // isEmpty는 해당 문자열이 빈 문자열이면 true를 반환한다. (null체크도 해주고, 길이가 0이 아닌지 체크)
@@ -69,6 +72,7 @@ public class ImageService {
             // 보통 다운로드 기능을 추가한다면 원본 name은 따로 저장해 uuid가 필요함.
             
             String uuid = createUUIDName();
+            //uuid 같은경우는 path에 함께있어서 필요없음.
             String filenameExtension = StringUtils.getFilenameExtension(file.getOriginalFilename());
             // StringUtils : StringUtils 클래스만으로 거의 대부분의 문자열 처리를 수행하고 파라미터 값으로 null을 주더라도 절대 NullPointException을 발생시키지 않는다.
             // getFilenameExtension : 주어진 path로 부터 파일 확장자를 추출한다.
@@ -88,6 +92,7 @@ public class ImageService {
     	// 생성 후 반한ㄷ뇌는 객체가 uuid 객체이므로 문자열 표현을 얻기 위해 toString() 메소드를 출력.
         return UUID.randomUUID().toString();
     }
+    //
 
 
 
