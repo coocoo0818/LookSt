@@ -292,7 +292,7 @@ public class AdminDaoImpl implements AdminDao{
 	public NPostDto postWriteRereply(SnsCommentDto snsCommentDto) {
 		// p_board 테이블에 해당 게시물의 reply수를 +1 하기위한 to세팅
 		NPostDto postDto = new NPostDto();
-		postDto.setPost_reply(snsCommentDto.getPost_no());
+		postDto.setPost_no(snsCommentDto.getPost_no());
 		
 		// 해당 게시물의 reply를 +1 한다.
 		session.update(namespace + "postReplyUp", postDto);
