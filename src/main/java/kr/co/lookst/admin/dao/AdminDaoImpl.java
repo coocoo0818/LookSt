@@ -259,14 +259,14 @@ public class AdminDaoImpl implements AdminDao{
 	/* sns 모댓글 작성 */
 	@Override
 	public NPostDto postWriteReply(SnsCommentDto snsCommentDto) {
-		// p_board 테이블에 해당 게시물의 reply수를 +1 하기위한 to세팅
+		// post 테이블에 해당 게시물의 post_reply수를 +1 하기위한 dto세팅
 		NPostDto postDto = new NPostDto();
 		postDto.setPost_no(snsCommentDto.getPost_no());
 		
-		// 해당 게시물의 reply를 +1 한다.
+		// 해당 게시물의 post_reply를 +1 한다.
 		session.update(namespace + "postReplyUp", postDto);
 		
-		// 현재 sns_comment 테이블의 가장 큰 no값을 가져온다.
+		// 현재 sns_comment 테이블의 가장 큰 Group값을 가져온다.
 		Integer replyMaxNo = session.selectOne(namespace + "postReplyMaxNo", postDto);
 
 		int sns_comment_group = 0;
@@ -278,10 +278,10 @@ public class AdminDaoImpl implements AdminDao{
 		}
 		// sns_comment_group 세팅
 		snsCommentDto.setSns_comment_group(sns_comment_group + 1);
-
+		// sns_comment_dto에 담은 값을 snsComment테이블에 추가
 		int result = session.insert(namespace + "postReplyWrite", snsCommentDto);
 
-		if (result == 1) {	// p_reply 테이블에 새로운 댓글 추가가 성공한다면..
+		if (result == 1) {	// snsComment테이블에 새로운 댓글 추가가 성공한다면..
 			// 갱신된 댓글 갯수를 가져옴
 			postDto = session.selectOne(namespace + "postReplyCount", postDto);
 		}

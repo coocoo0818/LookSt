@@ -393,7 +393,7 @@ public class AdminController {
 	@RequestMapping(value = "/snsTotalList", method = { RequestMethod.GET })
 	public String snsTotalList(Model model, HttpServletRequest request, Principal principal) {
 		MemMGMDto memMGMDto = new MemMGMDto();
-		String login_id = principal.getName();
+		
 		try {
 			/* sns total list */
 			List<MemMGMDto> snsTopList = adminService.snsTopList();
@@ -401,10 +401,18 @@ public class AdminController {
 
 			List<Integer> snsTotalList = adminService.snsTotalList();
 			model.addAttribute("snsTotalList", snsTotalList);
-			model.addAttribute("member_id", login_id);
 			
-			List<Integer> postLikeCheck = adminService.postLikeCheck(login_id);
-			model.addAttribute("postLikeCheck", postLikeCheck);
+			if (principal.getName() != null) {
+				String login_id = principal.getName();
+				model.addAttribute("member_id", login_id);
+				List<Integer> postLikeCheck = adminService.postLikeCheck(login_id);
+				model.addAttribute("postLikeCheck", postLikeCheck);				
+			} else {
+				String login_id = "null@naver.com";
+				model.addAttribute("member_id", login_id);
+				List<Integer> postLikeCheck = adminService.postLikeCheck(login_id);
+				model.addAttribute("postLikeCheck", postLikeCheck);	
+			}
 			/* System.out.println(model); */
 			/* sns total list */
 		} catch (Exception e) {
