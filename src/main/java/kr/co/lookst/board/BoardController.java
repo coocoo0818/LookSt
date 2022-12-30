@@ -1,3 +1,4 @@
+
 package kr.co.lookst.board;
 
 import static org.springframework.http.HttpStatus.OK;
@@ -339,8 +340,8 @@ public class BoardController {
     @PostMapping("/magazine/write")
     // RequestParam으로 files value(String) 값으로 http 요청 파라미터를 매핑함
     public String writeM(BoardDto boardDto, @RequestParam(value = "files") List<MultipartFile> files,
-        RedirectAttributes rattr, Model m, HttpSession session) {
-        String member_id = (String)session.getAttribute("res");
+        RedirectAttributes rattr, Model m, HttpSession session, Principal principal) {
+    	String member_id = principal.getName();
         System.out.println("member_id = " + member_id);
         boardDto.setMember_id(member_id);
         try {
@@ -392,8 +393,8 @@ public class BoardController {
 
     // 게시글 수정 post
     @RequestMapping(value = "/magazine/modify", method = RequestMethod.POST)
-    public String postmodifyM(BoardDto boardDto,@RequestParam(value = "files") List<MultipartFile> files, Model m,HttpSession session) throws Exception {
-        String member_id = (String)session.getAttribute("res");
+    public String postmodifyM(BoardDto boardDto,@RequestParam(value = "files") List<MultipartFile> files, Principal principal, Model m, HttpSession session) throws Exception {
+        String member_id = principal.getName();
         boardDto.setMember_id(member_id);
         try {
             System.out.println(boardDto);
@@ -425,8 +426,8 @@ public class BoardController {
 
     @PostMapping("/magazine/remove")
     public String removeM1(Integer board_no, Integer page, Integer pageSize, RedirectAttributes rattr,
-        HttpSession session) {
-        String member_id = (String)session.getAttribute("res");
+        HttpSession session, Principal principal) {
+        String member_id = principal.getName();
         String msg = "DEL_OK";
 
         try {
@@ -491,8 +492,8 @@ public class BoardController {
 
     @PostMapping("/review/modify")
     public String modifyR(BoardDto boardDto, Integer page, Integer pageSize, RedirectAttributes rattr, Model m,
-        HttpSession session) {
-        String member_id = (String)session.getAttribute("res");
+        HttpSession session, Principal principal) {
+        String member_id = principal.getName();
         boardDto.setMember_id(member_id);
         System.out.println(member_id);
         System.out.println(boardDto);
@@ -517,8 +518,8 @@ public class BoardController {
     }
 
     @PostMapping("/review/write")
-    public String writeR(BoardDto boardDto, RedirectAttributes rattr, Model m, HttpSession session) {
-        String member_id = (String)session.getAttribute("res");
+    public String writeR(BoardDto boardDto, RedirectAttributes rattr, Model m, HttpSession session, Principal principal) {
+        String member_id = principal.getName();
         System.out.println("member_id = " + member_id);
         boardDto.setMember_id(member_id);
 
@@ -546,8 +547,8 @@ public class BoardController {
 
     @PostMapping("/review/remove")
     public String removeR(Integer board_no, Integer page, Integer pageSize, RedirectAttributes rattr,
-        HttpSession session) {
-        String member_id = (String)session.getAttribute("res");
+        HttpSession session, Principal principal) {
+        String member_id = principal.getName();
         String msg = "DEL_OK";
 
         try {
