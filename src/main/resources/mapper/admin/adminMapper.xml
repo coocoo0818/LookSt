@@ -32,7 +32,8 @@
         
         <resultMap type="NPostDto" id="nPostDto">
               <result column="post_no" property="post_no" />
-                <result column="post_content" property="post_content" />
+              <result column="post_content" property="post_content" />
+              <result column="post_reply" property="post_reply" />
         </resultMap>
 
         <resultMap type="NBoardDto" id="nBoardDto">
@@ -102,8 +103,7 @@
                 </choose>
         </sql>
         <!-- 어드민 토탈 회원 출력 -->
-        <select id="searchResultCnt" parameterType="SearchItem"
-                resultType="int">
+        <select id="searchResultCnt" parameterType="SearchItem" resultType="int">
                 select count(*)
                 from member member, profile profile, mem_auth mem_auth
                 where member.member_id = profile.member_id
@@ -351,11 +351,11 @@
       
       <!-- 상품 리스트 sql -->
       <sql id="selectFromShopList">
-        select product.product_no, product.product_kind, product.product_price, product.product_name, product.product_info, prdt_img.prdt_img_name
-      from product product, prdt_img prdt_img
-      where product.product_no = prdt_img.product_no
-      and product.product_type = 'Y'
-      and prdt_img.prdt_img_seq = 1
+	      select product.product_no, product.product_kind, product.product_price, product.product_name, product.product_info, prdt_img.prdt_img_name
+	      from product product, prdt_img prdt_img
+	      where product.product_no = prdt_img.product_no
+	      and product.product_type = 'Y'
+	      and prdt_img.prdt_img_seq = 1
       </sql>
       <!-- 상품 리스트 검색 리스트 sql -->
       <sql id="searchShopCondition">
@@ -373,13 +373,13 @@
       </sql>
       <!-- 상품 리스트 토탈 출력 -->
       <select id="shopListSearchResultCnt" parameterType="SearchItem" resultType="int">
-              select count(*)
-           from product product, prdt_img prdt_img
-           where product.product_no = prdt_img.product_no
-            and product.product_type = 'Y'
-           and prdt_img.prdt_img_seq = 1
-              and true
-              <include refid="searchShopCondition" />
+	      select count(*)
+	      from product product, prdt_img prdt_img
+	      where product.product_no = prdt_img.product_no
+	      and product.product_type = 'Y'
+	      and prdt_img.prdt_img_seq = 1
+	      and true
+	      <include refid="searchShopCondition" />
       </select>
       <!-- 상품 리스트 서치 출력 -->
       <select id="shopListSearchResultPage" parameterType="SearchItem" resultMap="Product">
@@ -423,7 +423,7 @@
    </select>
    <!-- 주문 내용 삽입 -->
    <insert id="orderInsert" parameterType="PrdtOrderDto">
-           INSERT INTO prdt_order(prdt_order_no,product_no, member_id, prdt_order_quan, prdt_order_date, prdt_order_way, prdt_order_phone, prdt_order_addr, prdt_order_addr2, prdt_order_person, prdt_order_type, prdt_order_cancel, prdt_order_size, prdt_order_color, prdt_order_price)
+        INSERT INTO prdt_order(prdt_order_no,product_no, member_id, prdt_order_quan, prdt_order_date, prdt_order_way, prdt_order_phone, prdt_order_addr, prdt_order_addr2, prdt_order_person, prdt_order_type, prdt_order_cancel, prdt_order_size, prdt_order_color, prdt_order_price)
         VALUES(#{prdt_order_no}, #{product_no}, #{member_id}, #{prdt_order_quan}, 'now()', #{prdt_order_way}, #{prdt_order_phone}, #{prdt_order_addr}, #{prdt_order_addr2}, #{prdt_order_person}, 'P', 'N', #{prdt_order_size}, #{prdt_order_color}, #{prdt_order_price})
    </insert>
      
@@ -446,7 +446,7 @@
      </select>
      <!-- sns sns 상단 정보 출력 -->
      <select id="snsTopList" resultMap="MemMGMDto">
-         select member.member_id, post.post_no, post.post_content, post_img.post_img_img, profile.profile_img, member.member_nick  from post post,post_img post_img,member member, profile profile
+       select member.member_id, post.post_no, post.post_content, post_img.post_img_img, post.post_reply, profile.profile_img, member.member_nick  from post post,post_img post_img,member member, profile profile
        where post.member_id = member.member_id
        and member.member_id = profile.member_id 
        and post.post_no = post_img.post_no
@@ -456,8 +456,148 @@
      </select>
      <!-- 포스트 태그 정보 -->
      <select id="postTagInfo" parameterType="Integer" resultType="Post_TagDto">
-        select * from post_tag
+      select * from post_tag
       where post_no = #{post_no}
       order by post_tag_no
      </select>
+     <!-- sns 태그정보 출력 -->
+     <select id="tagInfoList" parameterType="Integer" resultType="String">
+     	select tag_content from tag
+		where post_no = #{post_no}
+		order by tag_no
+     </select>
+     <!-- 좋아요 체크 -->
+     <insert id="postLikeInsert" parameterType="snsHeartDto">
+     	INSERT INTO public.sns_heart
+		(member_id, post_no, sns_heart_bool)
+		VALUES(#{member_id}, #{post_no}, True)
+     </insert>
+     <!-- 좋아요 취소 -->
+     <delete id="postLikeDelete" parameterType="snsHeartDto">
+     	DELETE FROM sns_heart
+		WHERE member_id = #{member_id}
+		and post_no = #{post_no}
+     </delete>
+     <!-- 좋아요 출력 -->
+     <select id="postLikeCheck" parameterType="String" resultType="Integer">
+     	select post_no from sns_heart
+     	where member_id = #{member_id}
+		order by post_no desc
+     </select>
+     <!-- sns 클릭 한 상세 포스트 -->
+     <select id="snsDetailClick" parameterType="Integer" resultMap="MemMGMDto">
+     	select member.member_id, post.post_no, post.post_content, post.post_reply, post.post_date, member.member_nick, profile.profile_img from post post, member member, profile profile
+		where member.member_id = post.member_id
+		and member.member_id = profile.member_id
+		and post.post_type = 'Y'
+		and post.post_no = #{post_no}
+     </select>
+     <!-- sns 클릭 한 이미지 -->
+     <select id="snsDetailClickImg" parameterType="Integer" resultType="Post_imgDto">
+     	select post_img.post_img_img from post post, post_img post_img
+		where post.post_no = post_img.post_no 
+		and post.post_type = 'Y'
+		and post.post_no = #{post_no}
+		order by post_img.post_img_seq
+     </select>
+     <!-- sns 디테일 페이지 상품 태그 갯수 -->
+     <select id="postTagInfoCnt" parameterType="Integer" resultType="Integer">
+     	select count(*) from post_tag
+		where post_no = #{post_no}
+     </select>
+     <!-- sns 디테일 페이지 좋아요 갯수 -->
+     <select id="postLikedCnt" parameterType="Integer" resultType="Integer">
+     	select count(*)  from sns_heart
+		where post_no = #{post_no}
+     </select>
+     <!-- sns 디테일 페이지 좋아요 체크 -->
+     <select id="postLikedCheck" parameterType="SnsHeartDto" resultType="Integer">
+     	select post_no from sns_heart
+		where member_id = #{member_id}
+		and post_no = #{post_no}
+		and sns_heart_bool = True
+     </select>
+     <!-- sns 댓글 리스트 -->
+     <select id="snsReplyList" parameterType="Integer" resultType="SnsCommentDto">
+     	select * from sns_comment sc
+		where post_no = #{post_no}
+		order by sns_comment_group desc, sns_comment_seq asc
+     </select>
+     <!-- 개인 프로필, 닉네임 호출 -->
+     <select id="myNickProfile" parameterType="String" resultMap="MemMGMDto">
+     	select member.member_nick, profile.profile_img  from member member, profile profile
+		where member.member_id = profile.member_id
+		and member.member_id = #{member_id}
+     </select>
+     <!-- post에 댓글수 증가 -->
+	<update id="postReplyUp" parameterType="NPostDto">
+	    update post set post_reply = post_reply + 1 
+	    where post_no = #{post_no}
+	</update>
+	<!-- sns_comment 가장 큰 댓글 값 가져오기 -->
+	<select id="postReplyMaxNo" parameterType="NPostDto" resultType="int">
+	    select max("sns_comment_group") from sns_comment
+	    where post_no = #{post_no}
+	</select>
+	<!-- 모댓글 쓰기 -->
+	<insert id="postReplyWrite" parameterType="SnsCommentDto">
+	    insert into sns_comment
+	    (member_id, post_no, sns_comment_con, sns_comment_date, sns_comment_seq, sns_comment_class, sns_comment_group, sns_comment_nick, sns_comment_profile)
+		VALUES(#{member_id}, #{post_no}, #{sns_comment_con}, now(), 0, 0, #{sns_comment_group}, #{sns_comment_nick}, #{sns_comment_profile});
+	</insert>
+	<!-- 모댓글일경우 no, grp 일치하게 함 -->
+	<update id="postReplyCheck" parameterType="SnsCommentDto">
+	    update sns_comment set sns_comment_group = #{sns_comment_group}
+	    where sns_comment_no != sns_comment_group
+	</update>
+	<!-- 답글 쓰기 -->
+	<insert id="postRereplyWrite" parameterType="SnsCommentDto">
+	    insert into sns_comment
+	    (member_id, post_no, sns_comment_con, sns_comment_date, sns_comment_seq, sns_comment_class, sns_comment_group, sns_comment_nick, sns_comment_profile)
+		VALUES(#{member_id}, #{post_no}, #{sns_comment_con}, now(), #{sns_comment_seq}, #{sns_comment_class}, #{sns_comment_group}, #{sns_comment_nick}, #{sns_comment_profile});
+	</insert>
+	<!-- sns_comment 순서 가장 큰 댓글 값 가져오기 -->
+	<select id="replySeqMaxNo" parameterType="SnsCommentDto" resultType="int">
+	    select max("sns_comment_seq") from sns_comment
+	    where post_no = #{post_no}
+	    and sns_comment_group = #{sns_comment_group}
+	</select>
+	<!-- 댓글 추가/삭제시 댓글 갯수 가져오기 -->
+	<select id="postReplyCount" parameterType="NPostDto" resultType="NPostDto">
+	    select post_reply 
+	    from post
+	    where post_no = #{post_no}
+	</select>
+	<!-- 모댓글의 답글수를 카운트 -->
+	<select id="postCountRereply" parameterType="SnsCommentDto" resultType="int">
+	    select count(sns_comment_no)
+	    from sns_comment
+	    where sns_comment_no != #{sns_comment_no} and sns_comment_group = #{sns_comment_group}
+	</select>
+	<!-- post에 댓글수 감소 -->
+	<update id="postReplyDown" parameterType="NPostDto">
+	    update post set post_reply = post_reply - 1
+	    where post_no = #{post_no}
+	</update>
+	<!-- 모댓글 삭제 - 답글 없음 -->
+	<delete id="postReplyDelete" parameterType="SnsCommentDto">
+	    delete from sns_comment
+	    where sns_comment_no = #{sns_comment_no}
+	</delete>
+	<!-- 모댓글 삭제 - 답글 있음 -->
+	<update id="postReplyNotDelete" parameterType="SnsCommentDto">
+	    update sns_comment set sns_comment_con=''
+	    where sns_comment_no = #{sns_comment_no}
+	</update>
+	<!-- 답글수를 카운트 -->
+	<select id="postCountRereplyFromrereply" parameterType="SnsCommentDto" resultType="int">
+	    select count(sns_comment_no)
+	    from sns_comment
+	    where sns_comment_no != #{sns_comment_no} and sns_comment_group = #{sns_comment_group}
+	</select>
+	<!-- 모댓글이 삭제된 댓글일때 그에 딸린 답글들이 모두삭제되면 테이블에서 완전히 삭제한다 -->
+	<delete id="postReplyDeleteAfterRereplyDelete" parameterType="SnsCommentDto">
+	    delete from sns_comment
+	    where sns_comment_con='' and sns_comment_group = #{sns_comment_group}
+	</delete>
 </mapper>
