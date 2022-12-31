@@ -151,10 +151,8 @@
 								var post_no = $(e).children().attr("data-productNo");
 								if ("${prc.username}" == "undefined"|| "${prc.username}" == null|| "${prc.username}" == "") {
 									var login_id = "${prc.username}"
-									alert("진입1")
 								} else {
 									var login_id = "null@naver.com"
-										alert("진입2")
 								}
 								
 								let _buttonI = event.target;
