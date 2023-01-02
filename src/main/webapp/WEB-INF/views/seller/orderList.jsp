@@ -8,7 +8,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=dege">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <title>ORDER LIST</title>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"
@@ -24,7 +24,6 @@
 	$(document).ready(function() {
 		let page = ${pr.sc.page}
 		let pageSize = ${pr.sc.pageSize}
-		
 		
 		$('.OrderStatusMod').click(function() {
 			let prdt_order_no = $(this).parent().attr("data-prdt_order_no")
@@ -48,13 +47,9 @@
 				error : function() {alert("error")}	
 			})
 		})
-		
-		 
-	
 
 		$(".myModal").on('click', function(){
-		
-	        
+		   
 			$('#prdt_order_no').text($(this).data("prdt_order_no")),
 			$('#member_name').text($(this).data("member_name")),
 			$('#product_name').text($(this).data("product_name")),
@@ -72,9 +67,9 @@
 		});		
 		
 	})
+	
+
 </script>
-
-
 
 <style type="text/css">
 #orderpagetitle {
@@ -86,6 +81,18 @@
 .pagination {
 	justify-content: center;
 }
+table {table-layout: fixed;}
+
+td.a {
+  white-space: nowrap;  
+  overflow: hidden;
+  text-overflow: ellipsis; 
+}
+
+th.b {
+  width: 100px;
+}
+
 </style>
 </head>
 <body>
@@ -129,7 +136,7 @@
 
 			<thead>
 				<tr>
-					<th scope="col">주문번호</th>
+					<th class="b" scope="col">주문번호</th>
 					<th scope="col">구매자</th>
 					<th scope="col">상품정보</th>
 					<th scope="col">결제금액</th>
@@ -147,7 +154,7 @@
 					<tr>
 						<th scope="row" data-title="OrderNum">${orderListDto.prdt_order_no }</th>
 						<td data-title="Buyer">${orderListDto.member_name }</td>
-						<td data-title="PrdtInfo">${orderListDto.product_name }[${orderListDto.product_no }]</td>
+						<td class="a" data-title="PrdtInfo">${orderListDto.product_name }[${orderListDto.product_no }]</td>
 						<td data-title="TotalPay" data-type="currency">${orderListDto.payment }</td>
 						<td data-title="PayDate" data-type="currency"><fmt:formatDate
 								value="${orderListDto.prdt_order_date }" pattern="yyyy-MM-dd"
