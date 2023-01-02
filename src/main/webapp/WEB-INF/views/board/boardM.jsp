@@ -324,16 +324,24 @@ input[type=checkbox] {
    <div class="container">
       <h1>매거진 업로드</h1>
       <section class="contents">
+      
          <form id="form" enctype="multipart/form-data" class="txt" action="" method="post">
+         
+         
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
             <input type="hidden" name="board_no" value="${boardDto.board_no }">
             <input type="text" name="board_title" value="${boardDto.board_title }" placeholder="제목을 입력하세요.">
             <textarea name="board_con" style="resize: none;" id="textarea" value="${boardDto.board_con }" placeholder="내용을 입력하세요."></textarea>
             <div class="input_wrap">
                <h3 class="mt-4 mb-4">이미지 미리보기</h3>
+               
                <input type="file" class="hidden_input" id="input_imgs" name="files" multiple />        
+                  
+                  
+                  
                   <div id="preview"></div> 
-                  <a href="javascript:void(0);" class="dellink">썸네일삭제</a>
+                  <a href="javascript:void(0);" class="dellink"></a>
+                  
             </div>
          
          <div class="btn1">
@@ -350,11 +358,10 @@ input[type=checkbox] {
 /*    input type은 file인 것을 찾아 change 옵션을 주었다.
 
    첨부파일을 등록할 때마다 div#preview의 내용을 비워주고, 업로드 가능한 파일인지 체크 후 jQuery로 이미지 미리보기를 만들어 준다.
-
+S
    이미지 파일일 때는 이미지를 보여주고, 이미지 파일이 아닐 때는 파일 이미지를 보여주도록 만들었다. */
    
-      $(document)
-            .ready(
+      $(document).ready(
                   function(e) {
                      $("input[type='file']").change(
                            function(e) {
@@ -402,8 +409,7 @@ input[type=checkbox] {
                      }
 
                      function preview(arr) {
-                        arr
-                              .forEach(function(f) {
+                        arr.forEach(function(f) {
 
                                  //파일명이 길면 파일명...으로 처리
                                  var fileName = f.name;

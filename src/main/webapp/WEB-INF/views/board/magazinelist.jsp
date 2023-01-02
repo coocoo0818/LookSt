@@ -239,6 +239,7 @@
         <button type="button" name="more" id="more">더 보기 +</button>
     </div>
 </article>
+
 <script>
     var lastIndex= ${lastIndex};
     $("#more").click(function () {
@@ -267,6 +268,7 @@
 		})
     })
 </script>
+
 <%@ include file="/WEB-INF/views/fix/footer.jsp" %>
 </body>
 </html>
