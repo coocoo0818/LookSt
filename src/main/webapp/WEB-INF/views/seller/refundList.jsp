@@ -91,6 +91,19 @@
 .pagination {
 	justify-content: center;
 }
+
+table {table-layout: fixed;}
+
+td.a {
+  white-space: nowrap;  
+  overflow: hidden;
+  text-overflow: ellipsis; 
+}
+
+th.b {
+  width: 100px;
+}
+
 </style>
 
 </head>
@@ -133,7 +146,7 @@
 
 			<thead>
 				<tr>
-					<th scope="col">주문번호</th>
+					<th class="b" scope="col">주문번호</th>
 					<th scope="col">구매자</th>
 					<th scope="col">상품정보</th>
 					<th scope="col">결제금액</th>
@@ -151,7 +164,7 @@
 					<tr>
 						<th scope="row" data-title="Ordernum">${refundListDto.prdt_order_no }</th>
 						<td data-title="Buyer">${refundListDto.member_name }</td>
-						<td data-title="PrdtInfo">${refundListDto.product_name }[${refundListDto.product_no }]</td>
+						<td class="a" data-title="PrdtInfo">${refundListDto.product_name }[${refundListDto.product_no }]</td>
 						<td data-title="TotalPay" data-type="currency">${refundListDto.payment }</td>
 						<td data-title="OrderStaus" data-type="currency">
 						<c:if test="${refundListDto.prdt_order_type eq 'W'}">결제대기</c:if>
