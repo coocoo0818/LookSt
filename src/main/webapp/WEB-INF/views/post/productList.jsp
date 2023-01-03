@@ -164,6 +164,7 @@
 									</h4>
 									<h5><fmt:formatNumber value="${shopTotalList.product_price}" pattern="#,###" />원</h5>
 									<p class="card-text">${shopTotalList.product_info}</p>
+									<button type="button" class="btn btn-primary btn-sm ">ADD CART</button>
 								</div>
 <!-- 								<div class="card-footer">
 									<small class="text-muted">&#9733; &#9733; &#9733;

@@ -15,7 +15,20 @@
 
 	<div class="container">
 		<h1>CART</h1>
-
+		<section class="container" style="padding: 20px">
+			<div class="shoppingBag">
+				<table class="table table-striped">
+					<tbody>
+						<tr>
+							<th class="td_width_4 text-center">상품정보</th>
+							<th class="td_width_2 text-center">수량</th>
+							<th class="td_width_3 text-center">상품금액</th>
+							<th class="td_width_3 text-center">바로구매</th>
+						</tr>
+					</tbody>
+				</table>
+				
+			</div>
 
 </body>
 </html>
