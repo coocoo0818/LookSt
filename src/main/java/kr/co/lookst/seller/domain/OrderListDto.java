@@ -22,7 +22,7 @@ public class OrderListDto {
 	private String prdt_order_person;
 	private String prdt_order_addr;
 	private String prdt_order_addr2;
-	private int prdt_order_phone;
+	private String prdt_order_phone;
 	private int prdt_order_quan;
 	private int product_price;
 	private String prdt_order_way;
