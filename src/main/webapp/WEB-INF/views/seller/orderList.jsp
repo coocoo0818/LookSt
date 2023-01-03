@@ -54,7 +54,9 @@
 			$('#member_name').text($(this).data("member_name")),
 			$('#product_name').text($(this).data("product_name")),
 			$('#product_no').text($(this).data("product_no")),
-			$('#payment').text($(this).data("payment")),
+			$('#prdt_order_price').text($(this).data("prdt_order_price")),
+			$('#prdt_order_size').text($(this).data("prdt_order_size")),
+			$('#prdt_order_color').text($(this).data("prdt_order_color")),
 			$('#prdt_order_date').text($(this).data("prdt_order_date")),
 			$('#prdt_order_type').text($(this).data("prdt_order_type")),
 			$('#prdt_order_person').text($(this).data("prdt_order_person")),
@@ -155,7 +157,7 @@ th.b {
 						<th scope="row" data-title="OrderNum">${orderListDto.prdt_order_no }</th>
 						<td data-title="Buyer">${orderListDto.member_name }</td>
 						<td class="a" data-title="PrdtInfo">${orderListDto.product_name }[${orderListDto.product_no }]</td>
-						<td data-title="TotalPay" data-type="currency">${orderListDto.payment }</td>
+						<td data-title="TotalPay" data-type="currency">${orderListDto.prdt_order_price }</td>
 						<td data-title="PayDate" data-type="currency"><fmt:formatDate
 								value="${orderListDto.prdt_order_date }" pattern="yyyy-MM-dd"
 								type="date" /></td>
@@ -242,7 +244,9 @@ th.b {
 								data-member_name = "${orderListDto.member_name }"
 								data-product_name = "${orderListDto.product_name }"
 								data-product_no = "${orderListDto.product_no }"
-								data-payment = "${orderListDto.payment }"
+								data-prdt_order_price = "${orderListDto.prdt_order_price }"
+								data-prdt_order_size = "${orderListDto.prdt_order_size }"
+								data-prdt_order_color = "${orderListDto.prdt_order_color }"
 								data-prdt_order_date = "${orderListDto.prdt_order_date }"
 								data-prdt_order_type = "${orderListDto.prdt_order_type }"
 								data-prdt_order_person = "${orderListDto.prdt_order_person }"
@@ -325,7 +329,9 @@ th.b {
 						  <span>주문자 : </span><span id=member_name></span><br/>
 						  <span>상품명 : </span><span id=product_name></span><br/>
 						  <span>상품번호 : </span><span id=product_no></span><br/>
-						  <span>결제금액 : </span><span id=payment></span><span>원</span><br/>
+						  <span>결제금액 : </span><span id=prdt_order_price></span><span>원</span><br/>
+						  <span>상품사이즈 : </span><span id=prdt_order_size></span><br/>
+						  <span>상품색상 : </span><span id=prdt_order_color></span><br/>
 						  <span>주문일자 : </span><span id=prdt_order_date></span><br/>
 						  <span>주문상태 : </span><span id=prdt_order_type></span><br/>
 						  <span>수령인 : </span><span id=prdt_order_person></span><br/>

@@ -60,7 +60,9 @@
 			$('#member_name').text($(this).data("member_name")),
 			$('#product_name').text($(this).data("product_name")),
 			$('#product_no').text($(this).data("product_no")),
-			$('#payment').text($(this).data("payment")),
+			$('#prdt_order_price').text($(this).data("prdt_order_price")),
+			$('#prdt_order_size').text($(this).data("prdt_order_size")),
+			$('#prdt_order_color').text($(this).data("prdt_order_color")),
 			$('#prdt_order_date').text($(this).data("prdt_order_date")),
 			$('#prdt_order_type').text($(this).data("prdt_order_type")),
 			$('#prdt_order_person').text($(this).data("prdt_order_person")),
@@ -165,7 +167,7 @@ th.b {
 						<th scope="row" data-title="Ordernum">${refundListDto.prdt_order_no }</th>
 						<td data-title="Buyer">${refundListDto.member_name }</td>
 						<td class="a" data-title="PrdtInfo">${refundListDto.product_name }[${refundListDto.product_no }]</td>
-						<td data-title="TotalPay" data-type="currency">${refundListDto.payment }</td>
+						<td data-title="TotalPay" data-type="currency">${refundListDto.prdt_order_price }</td>
 						<td data-title="OrderStaus" data-type="currency">
 						<c:if test="${refundListDto.prdt_order_type eq 'W'}">결제대기</c:if>
 						<c:if test="${refundListDto.prdt_order_type eq 'C'}">결제완료</c:if>
@@ -255,7 +257,9 @@ th.b {
 								data-member_name = "${refundListDto.member_name }"
 								data-product_name = "${refundListDto.product_name }"
 								data-product_no = "${refundListDto.product_no }"
-								data-payment = "${refundListDto.payment }"
+								data-prdt_order_price = "${refundListDto.prdt_order_price }"
+								data-prdt_order_size = "${refundListDto.prdt_order_size }"
+								data-prdt_order_color = "${refundListDto.prdt_order_color }"
 								data-prdt_order_date = "${refundListDto.prdt_order_date }"
 								data-prdt_order_type = "${refundListDto.prdt_order_type }"
 								data-prdt_order_person = "${refundListDto.prdt_order_person }"
@@ -337,6 +341,8 @@ th.b {
 						  <span>상품명 : </span><span id=product_name></span><br/>
 						  <span>상품번호 : </span><span id=product_no></span><br/>
 						  <span>환불금액 : </span><span id=payment></span><span>원</span><br/>
+						  <span>상품사이즈 : </span><span id=prdt_order_size></span><br/>
+						  <span>상품색상 : </span><span id=prdt_order_color></span><br/>
 						  <span>주문일자 : </span><span id=prdt_order_date></span><br/>
 						  <span>주문상태 : </span><span id=prdt_order_type></span><br/>
 						  <span>수령인 : </span><span id=prdt_order_person></span><br/>
