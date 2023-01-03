@@ -18,7 +18,7 @@ public class OrderFormPageDto {
 	private String prdt_order_cancel;
 	
 	public OrderFormPageDto() {
-		
+		 
 	}
 
 	public int getPrdt_order_no() {

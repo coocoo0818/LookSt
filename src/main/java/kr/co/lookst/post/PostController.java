@@ -1,5 +1,6 @@
 package kr.co.lookst.post;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -111,20 +112,20 @@ public class PostController {
    
 	/* 쇼핑리스트 페이지 이동!!! */ /*Dao, Service 등 등록했고 컨트롤러수정중*/
 	@RequestMapping(value = "/productList", method = RequestMethod.GET)
-	public String shopFormList(SearchItem_prdtList sc, Model model) {
+	public String shopFormList(SearchItem_prdtList sc, Model model) {	/* SearchItem_prdtList 안에 String kind = "" */
 		System.out.println(sc);
 		try {
 			/* 쇼핑리스트 페이징 시작 */
-			int totalCnt = postService.shopListCnt(sc);
+			int totalCnt = postService.shopListCnt(sc); /* sc에 담겨있는 kind의 값인 T에 해당하는 데이터의 총 개수를 DB에서 가져와 totalCnt에 저장  */
 			System.out.println(totalCnt);
 			model.addAttribute("totalCnt", totalCnt);
-			PageResolver_prdtList pageResolver_prdtList = new PageResolver_prdtList(totalCnt, sc);
+			PageResolver_prdtList pageResolver_prdtList = new PageResolver_prdtList(totalCnt, sc); /* totalCnt를 이용하여 페이지의 개수를 정하여준다.*/
 			/* 쇼핑리스트 페이징 끝 */
 
 			/* 쇼핑리스트 리스트 출력 */
-			List<Product> shopTotalList = postService.shopListPage(sc);
+			List<Product> shopTotalList = postService.shopListPage(sc);/* sc에 담겨있는 내용을 기준으로 상품을 리스트형식으로 가져온다 */
 			System.out.println(shopTotalList);
-			model.addAttribute("shopTotalList", shopTotalList);
+			model.addAttribute("shopTotalList", shopTotalList); /* shopTotalList를 화면단에 보여주기 위해 model에 담아주고 "post/productList"로 보내준다. */
 			model.addAttribute("pr", pageResolver_prdtList);
 				System.out.println(pageResolver_prdtList);
 			/* 쇼핑리스트 리스트 끝 */
@@ -135,11 +136,12 @@ public class PostController {
 	}
 	/* 주문내역조회 */
 	@GetMapping("/orderHistory") 
-	public String orderHistory(Model m, HttpServletRequest request) {
+	public String orderHistory(Model m, HttpServletRequest request, Principal principal ) {
 		
-		HttpSession session = request.getSession();
+		/* HttpSession session = request.getSession(); */
 		try {
-			String member_id = (String) session.getAttribute("res");
+			/* String member_id = (String) session.getAttribute("res"); */
+			String member_id = principal.getName();
 			List<OrderHistoryDto> orderHistory = postService.orderHistory(member_id);
 			m.addAttribute("orderHistory", orderHistory);
 			m.addAttribute("member_id", member_id);
@@ -168,6 +170,17 @@ public class PostController {
 			e.printStackTrace();
 		}
 		return "redirect:/post/orderHistory";
+	}
+	/* 장바구니 페이지 */
+	@GetMapping("/ShoppingBag") 
+	public String ShoppingBag(Model m) {
+		
+		try {
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "post/ShoppingBag";
 	}
    
    

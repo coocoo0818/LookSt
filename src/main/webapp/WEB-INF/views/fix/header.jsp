@@ -56,7 +56,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="${contextPath}/post/productList">SHOP</a>
+          <a class="nav-link" href="${contextPath}/post/productList?kind=T">SHOP</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Board</a>
@@ -87,6 +87,7 @@
             		<a class="dropdown-item" href="${contextPath}/member/mypage">MY PAGE</a>
 		            <a class="dropdown-item" href="${contextPath}/sns/snsProfile/?member_id=${loginId}">MY PROFILE</a>            		
 					<a class="dropdown-item" href="${contextPath}/post/orderHistory">ORDER</a>
+					<a class="dropdown-item" href="${contextPath}/post/ShoppingBag">CART</a>
 				</sec:authorize>
 				<sec:authorize access="hasRole('seller')">
 					<a class="dropdown-item" href="${contextPath}/seller/mySales">SELLER PAGE</a>
