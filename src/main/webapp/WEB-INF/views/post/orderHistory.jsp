@@ -69,8 +69,7 @@
 				<form id="form" class="frm">
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 					<table class="zebra-striping">
-						<input hidden="hidden" name="order_no" id="order_no"
-								<%-- value="${orderHistory.prdt_order_no}" --%> />
+						<input hidden="hidden" name="order_no" id="order_no"/>
 						<c:forEach var="orderHistory" items="${orderHistory}">
 							<input hidden="hidden" name="member_id" id="member_id"
 								value="${member_id}" />

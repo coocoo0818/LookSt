@@ -16,7 +16,6 @@
 	<div class="container">
 		<h1>CART</h1>
 		<section class="container" style="padding: 20px">
-			<div class="shoppingBag">
 				<table class="table table-striped">
 					<tbody>
 						<tr>
@@ -27,8 +26,7 @@
 						</tr>
 					</tbody>
 				</table>
-				
-			</div>
-
+		</section>		
+	</div>
 </body>
 </html>

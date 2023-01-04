@@ -13,7 +13,7 @@
 
 <body>
 <%@ include file="/WEB-INF/views/fix/header.jsp"%>
-
+<style> @import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap'); </style>
 <style>
 /* 캐러셀(이미지슬라이드) 이미지 크기변경 */
 .carousel-inner {
@@ -32,7 +32,9 @@
 	height: 200px;
 	padding: 20px 0 20px 0;
 }
-
+h4 {
+	font-family: '도현', 산세리프;
+}
 
 </style>
 
@@ -160,12 +162,13 @@
 									src="${contextPath}/resources/img/product/${shopTotalList.prdt_Img.prdt_img_name}" alt="" /></a>
 								<div class="card-body">
 									<h4 class="card-title">
-										<a href="${contextPath}/admin/productDetail/?product_no=${shopTotalList.product_no}">${shopTotalList.product_name}</a>
+										<a href="${contextPath}/admin/productDetail/?product_no=${shopTotalList.product_no}" style="text-decoration:none;">${shopTotalList.product_name}</a>
 									</h4>
 									<h5><fmt:formatNumber value="${shopTotalList.product_price}" pattern="#,###" />원</h5>
 									<p class="card-text">${shopTotalList.product_info}</p>
-									<button type="button" class="btn btn-primary btn-sm ">ADD CART</button>
+									<button type="button" class="btn btn-primary btn-sm" style="float:left; bottom:0;" onclick="location.href='${contextPath}/post/shoppingBag'">ADD CART</button>
 								</div>
+								
 <!-- 								<div class="card-footer">
 									<small class="text-muted">&#9733; &#9733; &#9733;
 										&#9733; &#9734;</small>

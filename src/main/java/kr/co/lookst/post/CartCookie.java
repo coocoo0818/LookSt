@@ -35,7 +35,7 @@ import kr.co.lookst.post.service.PostService;
 
 @Controller
 @RequestMapping("/post")
-public class PostController {
+public class CartCookie {
 
    @Autowired
    PostService postService;
