@@ -115,29 +115,6 @@ $(document).ready(function() {
 		}
 	})
 	
-	/* 닉네임 수정 */
-	$('.nickmod').click(function() {
-		let member_nick = $('input[name=nick]').val();
-		let member_id = $(this).parent().attr("data-member_id")
-		console.log(member_nick ,member_id)
-		
-		$.ajax({
-			type : 'post',
-			url : '${contextPath}/sns/nickmodify',
-			data : {
-					member_id : member_id, 
-					member_nick : member_nick
-					},
-			beforeSend : function(xhr){
-				xhr.setRequestHeader(($("meta[name='_csrf_header']").attr("content")), ($("meta[name='_csrf']").attr("content")));
-			},
-			success : function(result) {
-				alert("닉네임 변경되었습니다.")
-				location.reload()
-			},
-			error : function() {alert("에러")}		
-		})
-	})	
 	
 		
 })
@@ -172,8 +149,8 @@ $(document).ready(function() {
 					<div class="col-6 offset-3 ">
 						<div class="pro_img_box">
 							<img
-								src="${pageContext.request.contextPath }/resources/img/profile/${pro_info.profile_img}"
-								id="profile_img" class="" alt="...">
+								src="${pro_info.profile_img}"
+								id="profile_img">
 						</div>
 					</div>
 				</div>
@@ -246,11 +223,9 @@ $(document).ready(function() {
 					<div class="col-sm-4 mb-3">
 						<div class="card" style="border: none;">
 							<div class="post_img card-body">
-								<a
-									href="${contextPath}/sns/personalPost/?member_id=${pro_feed.member_id}"
-									class="Personal_post"> <img class="feed_img"
-									src="${pageContext.request.contextPath }/resources/img/post/${pro_feed.post_img_img}"
-									alt="...">
+								<a href="${contextPath}/sns/personalPost/?member_id=${pro_feed.member_id}"
+									class="Personal_post">
+									<img class="feed_img" src="${pro_feed.post_img_img}">
 								</a>
 							</div>
 						</div>

@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.UUID;
 
 import kr.co.lookst.board.domain.Board_imgDto;
+import kr.co.lookst.sns.domain.Post_imgDto;
 
 
 @Service
@@ -32,6 +33,14 @@ public class ImageService {
     // File.pathSeparator파일 경로 목록에서 개별 파일 경로를 구분하는 데 사용된다. 
     // Windows에서는 파일 경로를 구분하기 위해 File.pathSeparator 사용한다.
     private final static String serverPath = "/lookst/images/";	
+    
+    private final static String postserverPath = "/lookst/images/";	
+
+	/*
+	 * private final static String postfilePath="C:"+ File.separator+"postImg"+
+	 * File.separator; private final static String postserverPath =
+	 * "lookst/img/post/";
+	 */
     
     /**
      * 이미지 전체 path 리턴
@@ -83,6 +92,36 @@ public class ImageService {
             // 기존 이미지 파일로 지정해 둔 C/file로 저장 후 파일 정보 리스트를 리턴함
             result.add (new Board_imgDto(board_no, serverPath +filename,count++));
             // serverPath = "/lookst/images/";
+        }
+        return result;
+    }
+    
+    public List<Post_imgDto> storepostImg(List<MultipartFile> files,int post_no) throws IOException {
+        File folder =new File(filePath);
+        List<Post_imgDto> result = new ArrayList<>();
+ 
+        if (!folder.exists()) {
+        	
+            folder.mkdirs();
+        }
+
+        int count=1;
+        for (MultipartFile file : files) {
+    
+            if (file.isEmpty()) {
+                return null;
+            }
+            
+            String uuid = createUUIDName();
+
+            String filenameExtension = StringUtils.getFilenameExtension(file.getOriginalFilename());
+
+            String filename =uuid+"."+filenameExtension;
+            file.transferTo(new File(getPath(filename)));
+
+            System.out.println(filename);
+            result.add (new Post_imgDto(post_no, postserverPath +filename,count++));
+
         }
         return result;
     }
