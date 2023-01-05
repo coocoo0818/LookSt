@@ -176,14 +176,13 @@ public class PostController {
 	}
 	/* 장바구니 페이지 */
 	@GetMapping("/shoppingBag") 
-	public String shoppingBag(Model m, HttpServletResponse response, HttpServletRequest request ) {
-		
+	public String shoppingBag(Model m, HttpServletResponse response, HttpServletRequest request,String product_no ) {
+		System.out.println(product_no);
 		try {
-			
-			
-			 Cookie cookie = new Cookie("id", "123"); 
+			 Cookie cookie = new Cookie("id", product_no); 
 			 response.addCookie(cookie);
-			System.out.println(cookie);
+			
+			 System.out.println(cookie);
 			
 		} catch (Exception e) {
 			e.printStackTrace();

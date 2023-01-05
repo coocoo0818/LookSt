@@ -11,7 +11,7 @@
 	<title>ShoppingBag</title>
 </head>
 <body>
-<%@ include file="/WEB-INF/views/fix/header.jsp"%>
+	<%@ include file="/WEB-INF/views/fix/header.jsp"%>
 
 	<div class="container">
 		<h1>CART</h1>
@@ -28,5 +28,8 @@
 				</table>
 		</section>		
 	</div>
+	
+	
+	<%@ include file="/WEB-INF/views/fix/footer.jsp"%>
 </body>
 </html>
