@@ -13,7 +13,7 @@
 
 <body>
 <%@ include file="/WEB-INF/views/fix/header.jsp"%>
-
+<style> @import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap'); </style>
 <style>
 /* 캐러셀(이미지슬라이드) 이미지 크기변경 */
 .carousel-inner {
@@ -32,6 +32,10 @@
 	height: 200px;
 	padding: 20px 0 20px 0;
 }
+h4 {
+	font-family: '도현', 산세리프;
+}
+
 </style>
 
 
@@ -73,20 +77,20 @@
 				<h2 id="orderpagetitle" class="disply-2 text-center py-4">
 					<c:choose>
 						<c:when test="${param.kind=='T' }">TOP</c:when>
-						<c:when test="${param.kind=='P' }">PANTS</c:when>
+						<c:when test="${param.kind=='B' }">PANTS</c:when>
 						<c:when test="${param.kind=='S' }">SHOES</c:when>
-						<c:when test="${param.kind=='B'}">BAG</c:when>
+						<c:when test="${param.kind=='G'}">BAG</c:when>
 						<c:otherwise>ACC</c:otherwise>
 					</c:choose>
 				</h2>
 				
-				<div class="d-grid gap-2 col-6 mx-auto">
-				  <button class="btn btn-light border border-2" onclick="location.href='<c:url value="/post/productList?kind=T"/>'" >TOP</button>
-				  <button id="pantsBtn" class="btn btn-light border border-2" onclick="location.href='<c:url value="/post/productList?kind=P"/>'">PANTS </button>
+				<div class="d-grid gap-2 col-6 mx-auto">  <!-- 클릭시(onclick) GET 매핑방식으로 해당 url을 요청을 하게됨 -->
+				  <button class="btn btn-light border border-2" onclick="location.href='<c:url value="/post/productList?kind=T"/>'">TOP</button>
+				  <button id="pantsBtn" class="btn btn-light border border-2" onclick="location.href='<c:url value="/post/productList?kind=B"/>'">PANTS </button>
 				  <button class="btn btn-light border border-2" onclick="location.href='<c:url value="/post/productList?kind=S"/>'">SHOES</button>
-				  <button class="btn btn-light border border-2" onclick="location.href='<c:url value="/post/productList?kind=B"/>'">BAG</button>
-				  <button class="btn btn-light border border-2" onclick="location.href='<c:url value="/post/productList?kind=AC"/>'">ACC</button>
-				</div>
+				  <button class="btn btn-light border border-2" onclick="location.href='<c:url value="/post/productList?kind=G"/>'">BAG</button>
+				  <button class="btn btn-light border border-2" onclick="location.href='<c:url value="/post/productList?kind=A"/>'">ACC</button>
+				</div>	<!-- 카테고리별로 상의T, 하의P, 신발S, 가방B, 악세사리 AC로 부여 -->
 			
 				
 				<div id="carouselExampleControls" class="carousel slide d-grid gap-2 col-6 mx-auto" data-bs-ride="carousel">
@@ -143,6 +147,7 @@
 							</select>
 						</div>
 						<div class="mt-1" >
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 							<button class="btn btn-secondary" type="submit">
 								<i class="d-flex fa fa-search"></i>
 							</button>
@@ -150,18 +155,20 @@
 					</div>
 				</form>
 				<div class="row">
-					<c:forEach var="shopTotalList" items="${shopTotalList}">
+					<c:forEach var="shopTotalList" items="${shopTotalList}"> <!-- m에 담겨있는 아이템 리스트의 개수(6)만큼 반복 -->
 						<div class="col-lg-4 col-md-6 mb-4">
 							<div class="card h-100">
 								<a href="${contextPath}/admin/productDetail/?product_no=${shopTotalList.product_no}"><img class="card-img-top"
 									src="${contextPath}/resources/img/product/${shopTotalList.prdt_Img.prdt_img_name}" alt="" /></a>
 								<div class="card-body">
 									<h4 class="card-title">
-										<a href="${contextPath}/admin/productDetail/?product_no=${shopTotalList.product_no}">${shopTotalList.product_name}</a>
+										<a href="${contextPath}/admin/productDetail/?product_no=${shopTotalList.product_no}" style="text-decoration:none;">${shopTotalList.product_name}</a>
 									</h4>
 									<h5><fmt:formatNumber value="${shopTotalList.product_price}" pattern="#,###" />원</h5>
 									<p class="card-text">${shopTotalList.product_info}</p>
+									<button type="button" class="btn btn-primary btn-sm" style="float:left; bottom:0;" onclick="location.href='${contextPath}/post/shoppingBag'">ADD CART</button>
 								</div>
+								
 <!-- 								<div class="card-footer">
 									<small class="text-muted">&#9733; &#9733; &#9733;
 										&#9733; &#9734;</small>
@@ -214,16 +221,31 @@
 	<!-- 페이지 끝  -->
 
 	<%@ include file="/WEB-INF/views/fix/footer.jsp"%>
-	<script
+	<script type="text/javascript">
+		window.onload = function() {
+		  var ctx = document.getElementById("myChart");
+		  var lineChart = new Chart(ctx, {
+		    type: 'line',
+		    data: {
+		      labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+		      datasets: [{
+		        label: "2015",
+		        data: [10, 8, 6, 5, 12, 8, 16, 17, 6, 7, 6, 10]
+		      }]
+		    }
+		  })
+		}
+		</script>
+ 	<script
 		src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
 		integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE"
 		crossorigin="anonymous"></script>
-	<script
+<!-- 	<script 
 		src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"
 		integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha"
 		crossorigin="anonymous">
-   </script>
-	<script type="text/javascript"
+    </script> -->
+ 	<script type="text/javascript"
 		src="${pageContext.request.contextPath }/resources/seller/js/dashboard.js"></script>
 </body>
 </html>
