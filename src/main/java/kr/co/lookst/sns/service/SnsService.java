@@ -2,7 +2,8 @@ package kr.co.lookst.sns.service;
 
 import java.util.List;
 
-import kr.co.lookst.sns.domain.PostUpload;
+import kr.co.lookst.sns.domain.PostDto;
+import kr.co.lookst.sns.domain.Post_imgDto;
 import kr.co.lookst.sns.domain.FollowDto;
 import kr.co.lookst.sns.domain.ProfileFeedDto;
 import kr.co.lookst.sns.domain.SnsProfileDto;
@@ -29,22 +30,14 @@ public interface SnsService {
 	
 	// 팔로우 유무확인
 	int followCheck(String member_id, String following) throws Exception;
-	
-	// 닉네임 수정
-	int nickNameMod(String member_id, String member_nick) throws Exception;
-	
-	// 프로필 이미지 변경
-	int profileImgModify(String member_id, String profile_img,String profile_uuid) throws Exception;
-
-	// 포스트 컨텐트 업로드
-	int contentUp(PostUpload pu) throws Exception;
-	
-	// 포스트 이미지 업로드
-	int imgUp(PostUpload pu) throws Exception;
-	
-	// 포스트 번호 가져오기
-	//int max_post_no() throws Exception;
 
 	// 게시물 삭제
 	int deletePost(Integer post_no) throws Exception;
+	
+	// 게시물 업로드
+	int insertPost(PostDto pDto) throws Exception;
+	
+	// 게시물 이미지 업로드
+	void insertPostImg(List<Post_imgDto> pImgDto);
+	
 }

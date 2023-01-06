@@ -30,9 +30,13 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import kr.co.lookst.board.domain.BoardDto;
+import kr.co.lookst.board.domain.Board_imgDto;
+import kr.co.lookst.image.service.ImageService;
 import kr.co.lookst.sns.dao.SnsProfileDao;
 import kr.co.lookst.sns.domain.FollowDto;
-import kr.co.lookst.sns.domain.PostUpload;
+import kr.co.lookst.sns.domain.PostDto;
+import kr.co.lookst.sns.domain.Post_imgDto;
 import kr.co.lookst.sns.domain.ProfileFeedDto;
 import kr.co.lookst.sns.domain.SnsProfileDto;
 import kr.co.lookst.sns.service.SnsService;
@@ -44,6 +48,9 @@ public class SnsController {
 
 	@Autowired
 	SnsService snsService;
+	
+	@Autowired
+	ImageService imageService;
 
 	/* 프로필 화면 */
 	@GetMapping("/snsProfile")
@@ -126,91 +133,6 @@ public class SnsController {
 	}
 
 	/*
-	 * @RequestMapping(value = "requestupload1") public String
-	 * requestupload1(MultipartHttpServletRequest mtfRequest) { String src =
-	 * mtfRequest.getParameter("src"); System.out.println("src value : " + src);
-	 * MultipartFile mf = mtfRequest.getFile("file");
-	 * 
-	 * String path = "C:\\image\\";
-	 * 
-	 * String originFileName = mf.getOriginalFilename(); // 원본 파일 명 long fileSize =
-	 * mf.getSize(); // 파일 사이즈
-	 * 
-	 * System.out.println("originFileName : " + originFileName);
-	 * System.out.println("fileSize : " + fileSize);
-	 * 
-	 * String safeFile = path + System.currentTimeMillis() + originFileName;
-	 * 
-	 * try { mf.transferTo(new File(safeFile)); } catch (IllegalStateException e) {
-	 * e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
-	 * 
-	 * return "redirect:/"; }
-	 */
-
-	/* 포스트 이미지 업로드 */
-	@RequestMapping(value = "postUpload", method = { RequestMethod.POST })
-	public String postUpload(PostUpload pu, MultipartHttpServletRequest mtfRequest,
-			HttpServletRequest request) {
-		List<MultipartFile> fileList = mtfRequest.getFiles("file");
-		
-		HttpSession session = request.getSession();
-		String member_id = (String) session.getAttribute("res");
-		
-		String path = "C:\\workspace-spring\\LookSt\\src\\main\\webapp\\resources\\img\\post\\";
-		// 포스트 insert & select => post_no => 이미지 반복업로드
-		/*
-		try {
-			int uploadpost = snsService.contentUp(pfd);
-			
-			System.out.println(uploadpost);
-		} catch (Exception e1) {
-			e1.printStackTrace();
-		}
-		*/
-		
-		int seq = 1;
-		int post_no = 22;
-		String content = "어캐하냐고!!";
-		
-		for (MultipartFile mf : fileList) {
-			String originFileName = mf.getOriginalFilename(); // 원본 파일 명
-			long fileSize = mf.getSize(); // 파일 사이즈
-			UUID uuid = UUID.randomUUID(); // uuid
-			
-			
-			System.out.println("원본 파일명 : " + originFileName);
-			System.out.println("파일 사이즈 : " + fileSize);
-			System.out.println("작성자 아이디 : " + member_id);
-			
-			String safeFile = uuid + "_" + originFileName;
-			try {
-				pu.setMember_id(member_id);
-				pu.setPost_no(post_no);
-				pu.setPost_img_img(safeFile);
-				pu.setPost_img_seq(seq);
-				pu.setPost_content(content);
-				
-				mf.transferTo(new File(safeFile)); // insert 이미지 반복
-				
-				System.out.println("작성자 아이디 : " + member_id);
-				System.out.println("포스트 넘버 : " + post_no);
-				System.out.println("저장된 파일명 : " + safeFile);
-				System.out.println("시퀀스넘버 : " + seq);
-				System.out.println("게시물 내용 : " + content);
-				
-				seq += 1;
-				System.out.println();
-			} catch (IllegalStateException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-
-		return "redirect:/sns/snsProfile";
-	}
-
-	/*
 	 * 피드 리스트
 	 */
 	@GetMapping("/personalPost")
@@ -251,21 +173,7 @@ public class SnsController {
 		return "sns/personalPost";
 	}
 
-	// 닉네임 수정
-	@RequestMapping(value = "/nickmodify", method = { RequestMethod.POST })
-	public String nickmodify(Model model, @RequestParam(value = "member_id") String member_id,
-			@RequestParam(value = "member_nick") String member_nick) {
-		System.out.println(member_id);
-		System.out.println(member_nick);
-
-		try {
-			snsService.nickNameMod(member_id, member_nick);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return "redirect:/sns/snsProfile";
-	}
-
+	
 	// 게시물 삭제
 	@RequestMapping(value = "/postDelete", method = { RequestMethod.POST })
 	public String postDelete(Model m, Integer post_no) {
@@ -281,7 +189,41 @@ public class SnsController {
 
 	@GetMapping("/postUpload")
 	public String postUpload() {
+		
 		return "sns/postUpload";
 	}
 
+    @PostMapping("/postUpload")
+    public String writeM(PostDto pDto, @RequestParam(value = "files") List<MultipartFile> files,
+        RedirectAttributes rattr, Model m, HttpSession session, Principal principal) {
+    	
+    	String member_id = principal.getName();
+        System.out.println("작성자 : member_id = " + member_id);
+        pDto.setMember_id(member_id);
+        
+        try {
+            if (snsService.insertPost(pDto) != 1)
+                throw new Exception("Write failed");
+
+            if (files.size() > 5) {					
+                m.addAttribute("pDto", pDto);
+                m.addAttribute("msg", "사진은 5개 이하만 업로드 가능합니다.");
+                return "sns/postUpload";
+            }
+
+            if (files.size() > 0) {
+
+                List<Post_imgDto> pImgDto = imageService
+                .storepostImg(files, pDto.getPost_no());
+                snsService.insertPostImg(pImgDto);
+            }
+            rattr.addFlashAttribute("msg", "WRT_OK");
+            return "redirect:/sns/snsProfile/?member_id="+member_id;
+        } catch (Exception e) {
+            e.printStackTrace();
+            m.addAttribute("pDto", pDto);
+            m.addAttribute("msg", "WRT_ERR");
+            return "sns/snsProfile";
+        }
+    }
 }

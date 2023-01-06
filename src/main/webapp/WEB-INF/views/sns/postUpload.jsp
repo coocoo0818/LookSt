@@ -21,22 +21,14 @@ img {
 }
 </style>
 
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
-	//이미지 업로드 썸네일
-	$(function() {
-		//파일업로드시 썸네일
-		$('#upload_image').change(function(e) {
-			const images = e.target.files
-			$('.img-box').empty();
-			for (let i = 0; i < images.length; i++) {
-				const Reader = new FileReader();
-				Reader.readAsDataURL(images[i]);
-				Reader.onload = function() {
-					const img = '<img src="'+ Reader.result +'" alt="사진">';
-					$('.img-box').append(img);
-				}
-			}
-		})
+	$(document).ready(function() {
+		var msg = '${msg}';
+		if (msg != '') {
+			alert(msg);
+		}
 
 	})
 </script>
@@ -44,6 +36,34 @@ img {
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/fix/header.jsp"%>
+	<script type="text/javascript">
+         $(document).ready(function() {   /* main() */
+         $("#uploadBtn").on("click", function() {
+            let form = $("#form")
+            form.attr("action", "<c:url value='/sns/postUpload' />")
+            form.attr("method", "post")
+            
+            if(formCheck())
+               form.submit()
+         })
+         
+         let formCheck = function() {
+            let form = document.getElementById("form")
+            if(form.post_content.value == ""){
+               alert("내용을 입력해주세요.")
+               form.post_content.focus()
+               return false
+            }
+            if(form.files.value == ""){
+                alert("사진을 선택해주세요.")
+                form.files.focus()
+                return false
+             }
+            return true;
+         }
+         
+         })
+   </script>
 	<!-- Upload -->
 	<div class="container">
 		<div class="row justify-content-md-center">
@@ -51,9 +71,9 @@ img {
 		</div>
 	</div>
 	<!-- Upload 끝 -->
-	<form name="fileForm" action="postUpload" method="post"
-		enctype="multipart/form-data">
+	<form id="form" enctype="multipart/form-data" class="txt" action="" method="post">
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+		<input type="hidden" name="post_no" value="${pDto.post_no }">
 		<div class="upload container mb-5">
 			<div class="line border border-4 p-sm-5">
 
@@ -62,10 +82,11 @@ img {
 					<div class="imgupload">
 						<button type="button" class=" btn btn-outline-dark mb-3">
 							<label class="select_img" for="upload_image"><i
-								class="bi bi-camera fs-2"></i>&nbsp;이미지 선택</label><input
-								multiple="multiple" type="file" name="file" id="upload_image"
-								style="display: none;" />
+								class="bi bi-camera fs-2"></i>&nbsp;이미지 선택</label>
+							<input type="file" class="hidden_input" id="input_imgs" name="files" multiple />
 						</button>
+						
+						<div id="preview"></div>
 
 
 					</div>
@@ -95,7 +116,9 @@ img {
 					<label class="content-icon mb-3"><i
 						class="bi bi-pencil fs-2"></i></label>
 					<div class="input-group">
-						<textarea class="form-control"></textarea>
+						<textarea name="post_content" style="resize: none;" id="textarea"
+							value="${pDto.post_content }" placeholder="내용을 입력하세요."></textarea>
+
 
 					</div>
 				</div>
@@ -104,24 +127,18 @@ img {
 
 				<!-- 업로드버튼 -->
 				<div class="upload-btn row">
-					<div<%--  data-member_id="${login_id}" --%>>
-
-						<%-- <a href="${contextPath}/sns/snsProfile/?member_id=${login_id}"
-							class="go_profile" style="text-decoration-line: none;" ></a> --%>
-						<button type="button" class="uploadbutton btn btn-primary mt-5"
-							style="float: right;">
-							<label class="uploadLabel" for="savepost">업로드</label> <input
-								id="savepost" class="btn btn-primary" type="submit"
-								style="display: none;" />
-						</button>
-
-					</div>
+					<button class="btn btn-outline-dark mb-3" type="button"
+						id="uploadBtn" name="sign">업로드</button>
 				</div>
-
-
+				<div class="upload-btn row">
+					<button class="btn btn-outline-dark mb-3" type="button" name="save"
+						onclick="${contextPath}/sns/snsProfile/?member_id=${loginId}">취소</button>
+				</div>
 			</div>
 		</div>
 	</form>
+	
+	
 	<!-- Modal -->
 	<div class="modal fade" id="prdtTag-Modal" tabindex="-1"
 		aria-labelledby="prdtTag-ModalLabel" aria-hidden="true">
@@ -149,7 +166,96 @@ img {
 			</div>
 		</div>
 	</div>
+
 	<%@ include file="/WEB-INF/views/fix/footer.jsp"%>
+	<script type="text/javascript">
+		// 이미지 썸네일
+		$(document)
+				.ready(
+						function(e) {
+							$("input[type='file']").change(
+									function(e) {
+
+										if ($(".delBtn").length > 0) {
+											deleteFile();
+										}
+										//div 내용 비워주기
+										$('#preview').empty();
+
+										var files = e.target.files;
+										var arr = Array.prototype.slice
+												.call(files);
+
+										//업로드 가능 파일인지 체크
+										for (var i = 0; i < files.length; i++) {
+											if (!checkExtension(files[i].name,
+													files[i].size)) {
+												return false;
+											}
+										}
+
+										preview(arr);
+
+									});//file change
+
+							function checkExtension(fileName, fileSize) {
+
+								var regex = new RegExp(
+										"(.*?)\.(exe|sh|zip|alz)$");
+								var maxSize = 20971520; //20MB
+
+								if (fileSize >= maxSize) {
+									alert('파일 사이즈 초과');
+									$("input[type='file']").val(""); //파일 초기화
+									return false;
+								}
+
+								if (regex.test(fileName)) {
+									alert('업로드 불가능한 파일이 있습니다.');
+									$("input[type='file']").val(""); //파일 초기화
+									return false;
+								}
+								return true;
+							}
+
+							function preview(arr) {
+								arr
+										.forEach(function(f) {
+
+											//파일명이 길면 파일명...으로 처리
+											var fileName = f.name;
+											if (fileName.length > 10) {
+												fileName = fileName.substring(
+														0, 7)
+														+ "...";
+											}
+
+											var imgdiv = $(".img_div");
+
+											//div에 이미지 추가
+											var str = '<div class="img_div" style="display: inline-flex; padding: 10px;"><li>';
+											str += '<span>' + fileName
+													+ '</span><br>';
+
+											//이미지 파일 미리보기
+											if (f.type.match('image.*')) {
+												var reader = new FileReader(); //파일을 읽기 위한 FileReader객체 생성
+												reader.onload = function(e) { //파일 읽어들이기를 성공했을때 호출되는 이벤트 핸들러
+													str += '<img class="img_list" src="'+e.target.result+'" title="'+f.name+'" width=200 height=200 />';
+													str += '</li></div>';
+													$(str).appendTo('#preview');
+												}
+												reader.readAsDataURL(f);
+											} else {
+												str += '<img class="img" src="/resources/img/fileImg.png" title="'+f.name+'" width=200 height=200 />';
+												$(str).appendTo('#preview');
+											}
+										});//arr.forEach
+
+							}// preview(arr) 끝
+
+						});
+	</script>
 </body>
 </html>
 

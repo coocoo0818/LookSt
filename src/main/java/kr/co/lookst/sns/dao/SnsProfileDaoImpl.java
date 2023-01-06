@@ -9,7 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.co.lookst.sns.domain.FollowDto;
-import kr.co.lookst.sns.domain.PostUpload;
+import kr.co.lookst.sns.domain.PostDto;
+import kr.co.lookst.sns.domain.Post_imgDto;
 import kr.co.lookst.sns.domain.ProfileFeedDto;
 import kr.co.lookst.sns.domain.SnsProfileDto;
 
@@ -71,45 +72,23 @@ public class SnsProfileDaoImpl implements SnsProfileDao {
 		// TODO Auto-generated method stub
 		return session.delete(namespace+"deleteUserAllFollow", member_id);
 	}
-	// 닉네임 수정
-	@Override
-	public int update(String member_id, String member_nick) throws Exception {
-		Map map = new HashMap();
-		map.put("member_nick", member_nick);
-		map.put("member_id", member_id);
-		return session.update(namespace + "nickmodify", map);
-	}
-	// 프로필 사진 변경
-	@Override
-	public int profileImg_Mod(String member_id, String profile_img, String profile_uuid) throws Exception {
-		Map map = new HashMap();
-		map.put("member_id", member_id);
-		map.put("profile_img", profile_img);
-		map.put("profile_uuid", profile_uuid);
-		return session.update(namespace + "profileImg_Mod", map);
-	}
-
-	// 포스트 컨텐트 업로드
-	@Override
-	public int postCon_up(PostUpload pu) throws Exception {
-		return session.insert(namespace + "postCon_up", pu);
-	}
-	// 포스트 이미지 업로드
-	@Override
-	public int postImg_up(PostUpload pu) throws Exception {
-		return session.insert(namespace + "postImg_up", pu);
-	}
-	// 포스트 번호 가져오기
-	/*
-	@Override
-	public int max_post_no() throws Exception {
-		return session.selectOne(namespace+"max_post_no");
-	}
-	*/
+	
 	// 게시물 삭제
 	@Override
 	public int deletePost(Integer post_no) throws Exception {
 		return session.update(namespace+"postDelete", post_no);
+	}
+	
+	// 게시물 업로드
+	@Override
+	public int uploadpost(PostDto pDto) throws Exception {
+		return session.insert(namespace + "uploadpost", pDto);
+	}
+	
+	// 게시물 이미지 업로드
+	@Override
+	public void uploadimg(List<Post_imgDto> pImgDto) {
+		session.insert(namespace + "uploadimg", pImgDto);
 	}
 	
 	
