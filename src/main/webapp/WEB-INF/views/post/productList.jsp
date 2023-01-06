@@ -9,6 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=dege">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>productList</title>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js" ></script>	
 </head>
 
 <body>
@@ -160,15 +161,17 @@ h4 {
 							<div class="card h-100">
 								<a href="${contextPath}/admin/productDetail/?product_no=${shopTotalList.product_no}"><img class="card-img-top"
 									src="${contextPath}/resources/img/product/${shopTotalList.prdt_Img.prdt_img_name}" alt="" /></a>
-								<div class="card-body">
-									<h4 class="card-title">
-										<a href="${contextPath}/admin/productDetail/?product_no=${shopTotalList.product_no}" style="text-decoration:none;">${shopTotalList.product_name}</a>
-									</h4>
-									<h5><fmt:formatNumber value="${shopTotalList.product_price}" pattern="#,###" />원</h5>
-									<p class="card-text">${shopTotalList.product_info}</p>
-									<button type="button" class="btn btn-primary btn-sm" style="float:left; bottom:0;" onclick="location.href='${contextPath}/post/shoppingBag'">ADD CART</button>
-								</div>
-								
+								<form action ="${contextPath}/post/shoppingBag" method="post" id="product_form">
+									<div class="card-body">
+										<h4 class="card-title">
+											<a href="${contextPath}/admin/productDetail/?product_no=${shopTotalList.product_no}" style="text-decoration:none;">${shopTotalList.product_name}</a>
+										</h4>
+										<h5><fmt:formatNumber value="${shopTotalList.product_price}" pattern="#,###" />원</h5>
+										<p class="card-text">${shopTotalList.product_info}</p>
+										<input type="hidden" name="product_no" value="${shopTotalList.product_no}" />
+										<button type="button" class="btn btn-primary btn-sm" name="prdtcart" style="float:left; bottom:0;" onclick="gotoShoppingBag()">ADD CART</button>
+									</div>
+								</form>
 <!-- 								<div class="card-footer">
 									<small class="text-muted">&#9733; &#9733; &#9733;
 										&#9733; &#9734;</small>
@@ -234,6 +237,12 @@ h4 {
 		      }]
 		    }
 		  })
+		}
+		function gotoShoppingBag(){
+			let form = $('#product_form')
+			form.attr('action',"<c:url value='/post/shoppingBag'/>");
+			form.attr('method','get')
+			form.submit();
 		}
 		</script>
  	<script
