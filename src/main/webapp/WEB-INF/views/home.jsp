@@ -16,7 +16,7 @@
 <%@ include file="/WEB-INF/views/fix/scrolltrigger.jsp"%>
 <%@ include file="/WEB-INF/views/fix/snsbanner.jsp"%>
 <%@ include file="/WEB-INF/views/fix/footer.jsp"%>
-<%@ include file="/WEB-INF/views/fix/popupLookSt.jsp"%>
+<%@ include file="/WEB-INF/views/fix/popupLookSt.jsp"%> <!-- popupLookSt.jsp 파일을 불러옴  -->
 
 	
 </body>

@@ -30,21 +30,22 @@
 <script type="text/javascript">
 		// 오늘 하루 다시 보지 않기
 		// 쿠키생성
-		function setCookie(name, value, expiredays) {
-			var todayDate = new Date();
-			todayDate.setDate(todayDate.getDate() + expiredays);
+		function setCookie(name, value, expiredays) {			// 쿠키를 설정하는 setCookie()를 정의 
+			var todayDate = new Date();							// Date(오늘 날짜로 생성)를 todayDate 함수로 선언
+			todayDate.setDate(todayDate.getDate() + expiredays);	// todayDate에 Date를 가져와서 expiredays와 더한 값을 todayDate에 값을 할당하여 준다.
+			/* console.log(todayDate) */
 			document.cookie = name + "=" + value + "; path=/; expires=" + todayDate.toGMTString() + ";";
 		}
 			//쿠키 가져오기 
 		
-		function getCookie() {
-				var cookiedata = document.cookie;
+		function getCookie() {							// getcookie()를 먼저 정의
+				var cookiedata = document.cookie;		// document.cookie를 cookiedata로 함수 선언!
 				
-				if (cookiedata.indexOf("noMoreToday=done") < 0){
-					$("#lookStModal").modal('show');
-				}
+				if (cookiedata.indexOf("noMoreToday=done") < 0){		// noMoreToday=done의 Index값이 0보다 작은 경우(없는경우)
+					$("#lookStModal").modal('show');					// #lookStModal이라는 요소를 선택 모달을 보여줌
+				}	
 				else {
-					$("#lookStModal").hide();
+					$("#lookStModal").hide();			// 그렇지 않으면 숨김
 				}
 		}
 			
@@ -56,7 +57,7 @@
 				})
 				
 				$(".btn_today_close").click(function(){
-					setCookie("noMoreToday", "done", 1);
+					setCookie("noMoreToday", "done", 1);		// name = noMoreToday, value = done, expiredays = 1 
 					$("#lookStModal").hide();
 				});
 			});
@@ -68,7 +69,7 @@
 		<div class = "modal-dialog modal-dialog-centered">
 			<div class="modal-content" style="width: auto;">
 				<div class="modal-body p-0">
-					<a href=""> <img alt="" src="${contextPath}/resources/img/post/modal.jpg"></a>
+					<a href=""> <img alt="" src="${contextPath}/resources/img/post/modal.jpg" style="width : 500px"></a>
 				</div>
 				<div class="p-1 px-2 text-bg-dark d-flex">
 					<a href="javascript:;" class="btn btn-secondary btn_today_close" data-bs-dismiss="modal">오늘 하루 보지 않기</a>
