@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.UUID;
 
 import kr.co.lookst.board.domain.Board_imgDto;
+import kr.co.lookst.main.domain.Prdt_Img;
 import kr.co.lookst.sns.domain.Post_imgDto;
 
 
@@ -126,6 +127,46 @@ public class ImageService {
         return result;
     }
 
+    
+    public List<Prdt_Img> prdtstoreFile(List<MultipartFile> files,int product_no) throws IOException {
+        File folder =new File(filePath);
+        List<Prdt_Img> result = new ArrayList<>();
+ 
+        if (!folder.exists()) {
+        	
+            folder.mkdirs();
+           
+        }
+
+        int count=1;
+        for (MultipartFile file : files) {
+        	
+        	 
+    
+            if (file.isEmpty()) {
+            
+                return null;
+            }
+           
+            
+            String uuid = createUUIDName();
+            
+            String filenameExtension = StringUtils.getFilenameExtension(file.getOriginalFilename());
+            String filename =uuid+"."+filenameExtension;
+            file.transferTo(new File(getPath(filename)));
+            
+            System.out.println("서비스 : " + filename);
+            result.add (new Prdt_Img(product_no, serverPath +filename,count++));
+        }
+        return result;
+    }
+    
+    
+    
+    
+    
+    
+    
     public String createUUIDName() {
     	// UUID 클래스 import 후 uuid 클래스의 .randomUUID() 메소드를 사용해서 유일한 식별자를 생성
     	// 생성 후 반한ㄷ뇌는 객체가 uuid 객체이므로 문자열 표현을 얻기 위해 toString() 메소드를 출력.
