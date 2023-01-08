@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.co.lookst.main.domain.Prdt_Img;
 import kr.co.lookst.main.domain.Product;
 import kr.co.lookst.main.domain.SearchItem;
 import kr.co.lookst.seller.domain.MySalesDto;
@@ -48,13 +49,13 @@ public class SellerDaoImpl implements SellerDao {
 	// 상품 리스트	
 	@Override
 	public List<PrdtListDto> searchSelectPageP(SearchItem sc) throws Exception {
-		// TODO Auto-generated method stub
+		
 		return session.selectList(namespace + "searchSelectPageP", sc);
 	}
 	
 	@Override
 	public int searchResultCntP(SearchItem sc) throws Exception {
-		// TODO Auto-generated method stub
+		
 		return session.selectOne(namespace + "searchResultCntP", sc);
 	}
 	
@@ -125,12 +126,24 @@ public class SellerDaoImpl implements SellerDao {
 		return session.selectOne(namespace + "MonthAmt");
 	}
 
-	// 상품 등록 - 수정중
-//	@Override
-//	public int ProductRegister(Product product) throws Exception {
-//		// TODO Auto-generated method stub
-//		return session.insert(namespace + "ProductRegister");
-//	}
+	@Override
+	public int insertproduct(Product product) throws Exception {
+		// TODO Auto-generated method stub
+		return session.insert(namespace + "ProductInsert", product);
+	}
+
+	@Override
+	public int insertprdtOpt(Integer product_no) throws Exception {
+		// TODO Auto-generated method stub
+		return session.insert(namespace + "ProductOptionInsert");
+	}
+
+	@Override
+	public void insertprdtImg(List<Prdt_Img> prdt_img) throws Exception {
+		// TODO Auto-generated method stub
+		session.insert(namespace + "ProductImgInsert", prdt_img);
+	}
+
 
 	
 }

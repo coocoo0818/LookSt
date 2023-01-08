@@ -4,20 +4,28 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.inject.Inject;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import kr.co.lookst.main.domain.Prdt_Img;
+import kr.co.lookst.main.domain.Prdt_Option;
+import kr.co.lookst.main.domain.Product;
 import kr.co.lookst.main.domain.SearchItem;
 import kr.co.lookst.seller.dao.SellerDao;
 import kr.co.lookst.seller.domain.MySalesDto;
 import kr.co.lookst.seller.domain.OrderListDto;
 import kr.co.lookst.seller.domain.PrdtListDto;
 
+
 @Service
 public class SellerServiceImpl implements SellerService {
 
 	@Autowired
 	SellerDao sellerDao;
+
 
 	// 주문 리스트
 	@Override
@@ -112,6 +120,24 @@ public class SellerServiceImpl implements SellerService {
 	public int monthSale() throws Exception {
 		// TODO Auto-generated method stub
 		return sellerDao.monthSale();
+	}
+
+	@Override
+	public int insertproduct(Product product) throws Exception {
+		// TODO Auto-generated method stub
+		return sellerDao.insertproduct(product);
+	}
+
+	@Override
+	public int insertprdtOpt(Integer product_no) throws Exception {
+		// TODO Auto-generated method stub
+		return sellerDao.insertprdtOpt(product_no);
+	}
+
+	@Override
+	public void insertprdtImg(List<Prdt_Img> prdt_img) throws Exception {
+		// TODO Auto-generated method stub
+		sellerDao.insertprdtImg(prdt_img);
 	}
 
 

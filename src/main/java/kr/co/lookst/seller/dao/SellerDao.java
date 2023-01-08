@@ -3,6 +3,7 @@ package kr.co.lookst.seller.dao;
 import java.util.List;
 import java.util.Map;
 
+import kr.co.lookst.main.domain.Prdt_Img;
 import kr.co.lookst.main.domain.Product;
 import kr.co.lookst.main.domain.SearchItem;
 import kr.co.lookst.seller.domain.MySalesDto;
@@ -57,11 +58,15 @@ public interface SellerDao {
 	// 나의 매출 - 이번 달 매출
 	int monthSale() throws Exception;
 
-	
-	// 상품 등록 - 수정중
-	//public int ProductRegister(Product product) throws Exception;
+	int insertproduct(Product product) throws Exception;
+
+	int insertprdtOpt(Integer product_no) throws Exception;
+
+	void insertprdtImg(List<Prdt_Img> prdt_img) throws Exception;
+
 
 	
+
 
 	
 }

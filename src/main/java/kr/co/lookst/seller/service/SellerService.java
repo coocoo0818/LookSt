@@ -2,6 +2,12 @@ package kr.co.lookst.seller.service;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+
+import kr.co.lookst.board.domain.Board_imgDto;
+import kr.co.lookst.main.domain.Prdt_Img;
+import kr.co.lookst.main.domain.Prdt_Option;
+import kr.co.lookst.main.domain.Product;
 import kr.co.lookst.main.domain.SearchItem;
 import kr.co.lookst.seller.domain.MySalesDto;
 import kr.co.lookst.seller.domain.OrderListDto;
@@ -48,4 +54,12 @@ public interface SellerService {
 
 	// 나의 매출 - 이번 달 매출
 	int monthSale() throws Exception;
+
+	int insertproduct(Product product) throws Exception;
+
+	int insertprdtOpt(Integer product_no) throws Exception;
+
+	void insertprdtImg(List<Prdt_Img> prdt_img) throws Exception;
+
+	
 }
