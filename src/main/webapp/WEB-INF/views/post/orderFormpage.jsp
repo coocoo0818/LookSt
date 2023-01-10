@@ -228,7 +228,6 @@
 						<table class="subject_table">
 							<caption>표 제목 부분</caption>
 							<tbody>
-
 								<tr>
 									<th class="td_width_2"></th>
 									<th class="td_width_3">상품명</th>

@@ -10,6 +10,29 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>productList</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js" ></script>	
+<!-- <script type="text/javascript">
+	
+	function setCookie(name, value, expiredays) {
+		var todayDate = new Date();
+		todayDate.setDate(todayDate.getDate() + expiredays);
+		console.log(todayDate)
+		document.cookie = name + "=" + value + "; path=/; expires=" + todayDate.toGMTString() + ";";
+	}
+	
+	function getCookie() {
+			var cookiedata = document.cookie;
+			
+			document.cookie = "prdtNo=1"
+	}
+	$(function() {
+		getcookie();
+		
+		$('#cartbtn').click(function(){
+			setCookie("prdtNo","1",1);
+		});
+	});
+	
+</script> -->
 </head>
 
 <body>
@@ -156,29 +179,32 @@ h4 {
 					</div>
 				</form>
 				<div class="row">
+				<%-- <form action ="${contextPath}/post/shoppingBag" method="get" id="product_form"> --%>
 					<c:forEach var="shopTotalList" items="${shopTotalList}"> <!-- m에 담겨있는 아이템 리스트의 개수(6)만큼 반복 -->
 						<div class="col-lg-4 col-md-6 mb-4">
-							<div class="card h-100">
-								<a href="${contextPath}/admin/productDetail/?product_no=${shopTotalList.product_no}"><img class="card-img-top"
-									src="${contextPath}/resources/img/product/${shopTotalList.prdt_Img.prdt_img_name}" alt="" /></a>
-								<form action ="${contextPath}/post/shoppingBag" method="post" id="product_form">
-									<div class="card-body">
-										<h4 class="card-title">
-											<a href="${contextPath}/admin/productDetail/?product_no=${shopTotalList.product_no}" style="text-decoration:none;">${shopTotalList.product_name}</a>
-										</h4>
-										<h5><fmt:formatNumber value="${shopTotalList.product_price}" pattern="#,###" />원</h5>
-										<p class="card-text">${shopTotalList.product_info}</p>
-										<input type="hidden" name="product_no" value="${shopTotalList.product_no}" />
-										<button type="button" class="btn btn-primary btn-sm" name="prdtcart" style="float:left; bottom:0;" onclick="gotoShoppingBag()">ADD CART</button>
-									</div>
-								</form>
-<!-- 								<div class="card-footer">
-									<small class="text-muted">&#9733; &#9733; &#9733;
-										&#9733; &#9734;</small>
-								</div> -->
-							</div>
+								<div class="card h-100">
+									<a href="${contextPath}/admin/productDetail/?product_no=${shopTotalList.product_no}">
+										<img class="card-img-top" src="${contextPath}/resources/img/product/${shopTotalList.prdt_Img.prdt_img_name}" alt="" /></a>
+									<%-- <form action ="${contextPath}/post/shoppingBag" method="get" id="product_form"> --%>
+										<div class="card-body">
+											<h4 class="card-title">
+												<a href="${contextPath}/admin/productDetail/?product_no=${shopTotalList.product_no}" style="text-decoration:none;">${shopTotalList.product_name}</a>
+											</h4>
+											<h5><fmt:formatNumber value="${shopTotalList.product_price}" pattern="#,###" />원</h5>
+											<p class="card-text">${shopTotalList.product_info}</p>
+											<input type="hidden" value="${shopTotalList.product_no}" />
+											<button type="button" id = cartbtn class="btn btn-primary btn-sm" name="prdtcart" style="float:left; bottom:0;" onclick="gotoShoppingBag(this)">ADD CART</button>
+										</div>
+									<!-- </form> -->
+	<!-- 								<div class="card-footer">
+										<small class="text-muted">&#9733; &#9733; &#9733;
+											&#9733; &#9734;</small>
+									</div> -->
+								</div>
+							
 						</div>
-					</c:forEach>		
+					</c:forEach>
+				<!-- </form>	 -->		
 				</div>
 				</div>
 				<!-- /.row -->
@@ -238,11 +264,38 @@ h4 {
 		    }
 		  })
 		}
-		function gotoShoppingBag(){
-			let form = $('#product_form')
-			form.attr('action',"<c:url value='/post/shoppingBag'/>");
-			form.attr('method','get')
+		
+		
+		
+		function gotoShoppingBag(element) {
+			/* let form = $('#product_form') */
+			var form = document.createElement("form");
+			
+			form.setAttribute('action',"<c:url value='/post/shoppingBag'/>");
+			form.setAttribute('method','post')
+			
+			let product_no = element.previousElementSibling.value
+			var hiddenField = document.createElement("input");
+
+	         hiddenField.setAttribute("type", "hidden");
+	         hiddenField.setAttribute("name", "product_no");
+	         hiddenField.setAttribute("value", product_no);
+	
+	         form.appendChild(hiddenField);
+	         document.body.appendChild(form);
+	         
+	         var token = document.createElement("input");
+
+	         token.setAttribute("type", "hidden");
+	         token.setAttribute("name", "${_csrf.parameterName}");
+	         token.setAttribute("value", "${_csrf.token}");
+	
+	         form.appendChild(token);
+	         document.body.appendChild(form);
+	         
 			form.submit();
+			
+			
 		}
 		</script>
  	<script

@@ -175,8 +175,8 @@ public class PostController {
 		return "redirect:/post/orderHistory";
 	}
 	/* 장바구니 페이지 */
-	@GetMapping("/shoppingBag") 
-	public String shoppingBag(Model m, HttpServletResponse response, HttpServletRequest request,String product_no ) {
+	@PostMapping("/shoppingBag") 
+	public void shoppingBag(Model m, HttpServletResponse response, HttpServletRequest request, String product_no ) {
 		System.out.println(product_no);
 		try {
 			 Cookie cookie = new Cookie("id", product_no); 
@@ -187,7 +187,13 @@ public class PostController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "/post/shoppingBag";
+	}
+	
+	/* 장바구니 알림 모달창(장바구니 페이지로 이동) */
+	@GetMapping("/shoppingBag") 
+	public String shoppingBag() {
+	
+		 return "/post/shoppingBag";
 	}
    
    
