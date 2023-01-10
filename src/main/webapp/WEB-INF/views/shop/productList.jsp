@@ -12,10 +12,31 @@
 <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <!-- Custom styles for this template -->
 <link href="css/shop-homepage.css" rel="stylesheet">
-<%@ include file="/WEB-INF/views/fix/header.jsp"%>
+
 </head>
 
 <body>
+<%@ include file="/WEB-INF/views/fix/header.jsp"%>
+
+<style>
+/* 캐러셀(이미지슬라이드) 이미지 크기변경 */
+.carousel-inner {
+	width: 100%;
+	height: 200px; /* 이미지 높이 변경 */
+}
+
+.carousel-item {
+	width: 100%;
+	height: 200px;
+}
+
+.d-block {
+	display: block;
+	width: 100%;
+	height: 200px;
+	padding: 20px;
+}
+</style>
 
 	<!-- Page Content -->
 
@@ -38,25 +59,8 @@
 			<!-- <h2 id="orderpagetitle" class="disply-2 text-center py-4">상의</h2>  -->
 			<!-- /.col-lg-3 -->
 
-			<style>
-/* 캐러셀(이미지슬라이드) 이미지 크기변경 */
-.carousel-inner {
-	width: 100%;
-	height: 200px; /* 이미지 높이 변경 */
-}
 
-.carousel-item {
-	width: 100%;
-	height: 200px;
-}
 
-.d-block {
-	display: block;
-	width: 100%;
-	height: 200px;
-	padding: 20px;
-}
-</style>
 
 			<div class="col-lg-9">
 				<div id="carouselExampleFade" class="carousel slide carousel-fade"
