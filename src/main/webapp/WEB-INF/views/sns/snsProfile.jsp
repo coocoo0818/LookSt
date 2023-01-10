@@ -317,7 +317,7 @@ $(document).ready(function() {
 									href="${contextPath}/sns/snsProfile/?member_id=${pro_following.member_id}"
 									class="followingIDbox" style="text-decoration-line: none;">
 										<img
-										src="${pageContext.request.contextPath }/resources/img/profile/${pro_following.profile_img}"
+										src="${pro_following.profile_img}"
 										class="follow_thmbnail rounded-circle" alt="..."> <span>${pro_following.member_nick }</span>
 								</a></li>
 							</c:forEach>
@@ -357,7 +357,7 @@ $(document).ready(function() {
 									href="${contextPath}/sns/snsProfile/?member_id=${pro_follower.member_id}"
 									class="followerIDbox" style="text-decoration-line: none;">
 										<img
-										src="${pageContext.request.contextPath }/resources/img/profile/${pro_follower.profile_img}"
+										src="${pro_follower.profile_img}"
 										class="follow_thmbnail rounded-circle" alt="..."> <span>${pro_follower.member_nick }</span>
 								</a></li>
 							</c:forEach>

@@ -22,9 +22,9 @@
   	<c:forEach var="stylePick" items="${stylePick}">
 	    <div class="item">
 		    <a href="${contextPath}/sns/snsProfile/?member_id=${stylePick.member_id}" class="card_link align-self-center">
-		    	<img class="post_img_box" src="${contextPath}/resources/img/post/${stylePick.post_img_img}">
+		    	<img id="post_img_box" class="post_img_box" src="${stylePick.post_img_img}" >
 		    	<div class="rounded-circle profile_img_box">
-		    		<img class="rounded-circle img_profile" alt="img" src="${contextPath}/resources/img/profile/${stylePick.profile_img}">
+		    		<img class="rounded-circle img_profile" alt="img" src="${stylePick.profile_img}">
 		    	</div>
 		    	<p class="profile_id">@${stylePick.member_nick}</p>
 		    </a>

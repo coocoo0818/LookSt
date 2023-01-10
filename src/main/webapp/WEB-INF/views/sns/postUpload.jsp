@@ -81,9 +81,9 @@ img {
 				<div class="img container">
 					<div class="imgupload">
 						<button type="button" class=" btn btn-outline-dark mb-3">
-							<label class="select_img" for="upload_image"><i
+							<label class="select_img" for="input_imgs"><i
 								class="bi bi-camera fs-2"></i>&nbsp;이미지 선택</label>
-							<input type="file" class="hidden_input" id="input_imgs" name="files" multiple />
+							<input type="file" class="hidden_input" id="input_imgs" name="files" multiple style="display:none" />
 						</button>
 						
 						<div id="preview"></div>
@@ -132,7 +132,7 @@ img {
 				</div>
 				<div class="upload-btn row">
 					<button class="btn btn-outline-dark mb-3" type="button" name="save"
-						onclick="${contextPath}/sns/snsProfile/?member_id=${loginId}">취소</button>
+						onclick="${contextPath}/sns/snsProfile/?member_id=${member_id}">취소</button>
 				</div>
 			</div>
 		</div>

@@ -57,7 +57,6 @@ public class SnsController {
 	public String snsProfile(String member_id, @RequestParam("member_id") String member_nick, Model m,
 			HttpServletRequest request, Principal principal) {
 
-
 		try {
 			String login_id = principal.getName();
 
@@ -137,12 +136,11 @@ public class SnsController {
 	 */
 	@GetMapping("/personalPost")
 	public String personalPost(String member_id, Model m, @RequestParam("member_id") String member_nick,
-			HttpServletRequest request) {
+			HttpServletRequest request, Principal principal) {
 
-		HttpSession session = request.getSession();
-
+		
 		try {
-			String login_id = (String) session.getAttribute("res");
+			String login_id = principal.getName();
 
 			/* 프로필 정보 */
 			SnsProfileDto pro_info = snsService.getinfoselect(member_id);
@@ -187,13 +185,15 @@ public class SnsController {
 		return "sns/personalPost";
 	}
 
+	// 게시물 업로드
 	@GetMapping("/postUpload")
 	public String postUpload() {
 		
 		return "sns/postUpload";
 	}
 
-    @PostMapping("/postUpload")
+	// 게시물 업로드
+	@PostMapping("/postUpload")
     public String writeM(PostDto pDto, @RequestParam(value = "files") List<MultipartFile> files,
         RedirectAttributes rattr, Model m, HttpSession session, Principal principal) {
     	
@@ -223,7 +223,7 @@ public class SnsController {
             e.printStackTrace();
             m.addAttribute("pDto", pDto);
             m.addAttribute("msg", "WRT_ERR");
-            return "sns/snsProfile";
+            return "sns/postUpload";
         }
     }
 }

@@ -50,6 +50,8 @@ input {
 	background: #f8f8f8;
 	outline-color: #e6e6e6;
 }
+
+
 </style>
 
 <script type="text/javascript">
@@ -98,15 +100,15 @@ input {
 
 						<%-- ${fn:contains(snsTopList.NPostDto.post_no, 10)? 'functionName':'no'} --%>
 						<img
-							src="${contextPath}/resources/img/post/${pro_feed.post_img_img}"
-							class="card-img-top rounded position-relative"> <span
+							src="${pro_feed.post_img_img}"
+							class="post_img card-img-top rounded position-relative"> <span
 							class="position-absolute badge rounded-pill bg-light m-1 postNo"
 							id="postNo" data-postNo="${pro_feed.post_no}">No.${pro_feed.post_no}</span>
 
 						<div class="row justify-content-start d-flex m-2">
 							<div class="col-3">
 								<img
-									src="${contextPath}/resources/img/profile/${pro_info.profile_img}"
+									src="${pro_info.profile_img}"
 									onclick="location.href='${contextPath}/sns/snsProfile/?member_id=${pro_info.member_id}'"
 									id="profile_img">
 							</div>
