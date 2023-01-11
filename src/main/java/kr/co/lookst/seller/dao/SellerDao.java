@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import kr.co.lookst.main.domain.Prdt_Img;
+import kr.co.lookst.main.domain.Prdt_Option;
 import kr.co.lookst.main.domain.Product;
 import kr.co.lookst.main.domain.SearchItem;
 import kr.co.lookst.seller.domain.MySalesDto;
@@ -60,7 +61,7 @@ public interface SellerDao {
 
 	int insertproduct(Product product) throws Exception;
 
-	int insertprdtOpt(Integer product_no) throws Exception;
+	int insertprdtOpt(Prdt_Option prdt_option) throws Exception;
 
 	void insertprdtImg(List<Prdt_Img> prdt_img) throws Exception;
 

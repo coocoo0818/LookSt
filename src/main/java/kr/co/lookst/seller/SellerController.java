@@ -1,8 +1,6 @@
 package kr.co.lookst.seller;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
+
 import java.security.Principal;
 import java.text.DateFormat;
 import java.util.Date;
@@ -222,7 +220,7 @@ public class SellerController {
 	}
 
 	@PostMapping("/registerPrdt/write")
-	public String registerproduct(Product product, @RequestParam(value = "pfiles") List<MultipartFile> files,
+	public String registerproduct(Product product, Prdt_Option prdt_option, @RequestParam(value = "pfiles") List<MultipartFile> files,
 			 RedirectAttributes rattr, Model m, HttpSession session, Principal principal) {
 		String member_id = principal.getName();
         System.out.println("member_id = " + member_id);
@@ -231,7 +229,8 @@ public class SellerController {
         try {
             if (sellerService.insertproduct(product) != 1)
                 throw new Exception("Write failed");
-           
+            	prdt_option.setProduct_no(product.getProduct_no());
+            	sellerService.insertprdtOpt(prdt_option);
             if (files.size() > 6) {					
                 m.addAttribute("product", product);
                 m.addAttribute("msg", "사진은 6개 이하만 업로드 가능합니다.");
@@ -250,6 +249,7 @@ public class SellerController {
             e.printStackTrace();
             
             m.addAttribute("product", product);
+            m.addAttribute("prdt_option", prdt_option);
             m.addAttribute("msg", "WRT_ERR");
             System.out.println(m);
             return "seller/registerPrdt";

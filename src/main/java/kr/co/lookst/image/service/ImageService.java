@@ -37,12 +37,8 @@ public class ImageService {
     
     private final static String postserverPath = "/lookst/images/";	
 
-	/*
-	 * private final static String postfilePath="C:"+ File.separator+"postImg"+
-	 * File.separator; private final static String postserverPath =
-	 * "lookst/img/post/";
-	 */
-    
+    private final static String sellerserverPath = "/lookst/images/";	
+
     /**
      * 이미지 전체 path 리턴
      * @param filename 			 @Param 어노테이션을 붙이면 본인이 원하는 명으로 mapper에서 사용할 수 있다. / 파라미터가 두개일경우 마이바티스에서 인식을 못하기때문에 @param을 사용해야한다.
@@ -156,7 +152,7 @@ public class ImageService {
             file.transferTo(new File(getPath(filename)));
             
             System.out.println("서비스 : " + filename);
-            result.add (new Prdt_Img(product_no, serverPath +filename,count++));
+            result.add (new Prdt_Img(product_no, sellerserverPath +filename,count++));
         }
         return result;
     }

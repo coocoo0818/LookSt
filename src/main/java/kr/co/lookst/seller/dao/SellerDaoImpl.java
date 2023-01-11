@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.co.lookst.main.domain.Prdt_Img;
+import kr.co.lookst.main.domain.Prdt_Option;
 import kr.co.lookst.main.domain.Product;
 import kr.co.lookst.main.domain.SearchItem;
 import kr.co.lookst.seller.domain.MySalesDto;
@@ -133,9 +134,9 @@ public class SellerDaoImpl implements SellerDao {
 	}
 
 	@Override
-	public int insertprdtOpt(Integer product_no) throws Exception {
+	public int insertprdtOpt(Prdt_Option prdt_option) throws Exception {
 		// TODO Auto-generated method stub
-		return session.insert(namespace + "ProductOptionInsert");
+		return session.insert(namespace + "ProductOptionInsert", prdt_option);
 	}
 
 	@Override
