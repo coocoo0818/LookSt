@@ -31,7 +31,7 @@
 				<a href="javascript:productDetail();" class="text-decoration-none productDetail">
 					<div class="col">
 						<div class="card border-0" data-productNo="${new_prdt.product_no}">
-							<img src="${contextPath}/resources/img/product/${new_prdt.prdt_img_name}" class="card-img-top rounded" alt="...">
+							<img src="${new_prdt.prdt_img_name}" class="card-img-top rounded" alt="...">
 							<div class="card-body">
 								<h5 class="card-title text-decoration-underline">${new_prdt.product_name}</h5>
 								<p class="card-text">${new_prdt.product_info}</p>

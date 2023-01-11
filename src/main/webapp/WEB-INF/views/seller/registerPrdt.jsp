@@ -38,47 +38,42 @@
               ]
     	  
           });
-     })	  
-//     	// onImageUpload callback
-//  	     $('#summernote').summernote({
-//  	       callbacks: {
-//  	         onImageUpload: function(files) {
-//  	           // upload image to server and create imgNode...
-//  	           $summernote.summernote('insertNode', imgNode);
-//  	         }
-//  	       }
-//  	     });
+      
+    	  // onImageUpload callback
+    	     $('#summernote').summernote({
+    	       callbacks: {
+    	         onImageUpload: function(files) {
+    	           // upload image to server and create imgNode...
+    	           $summernote.summernote('insertNode', imgNode);
+    	         }
+    	       }
+    	     });
 
-//  	     // summernote.image.upload
-//  	     $('#summernote').on('summernote.image.upload', function(we, files) {
-//  	       // upload image to server and create imgNode...
-//  	       $summernote.summernote('insertNode', imgNode);
-//  	     });
- 	
-    	  
-        	  
+    	     // summernote.image.upload
+    	     $('#summernote').on('summernote.image.upload', function(we, files) {
+    	       // upload image to server and create imgNode...
+    	       $summernote.summernote('insertNode', imgNode);
+    	     });	  
+      }) 	  
               
-// 		/**
-// 	* 이미지 파일 업로드
-// 	*/
-// 	function uploadSummernoteImageFile(file, editor) {
-// 		data = new FormData();
-// 		data.append("file", file);
-// 		$.ajax({
-// 			data : data,
-// 			type : "POST",
-// 			url : "/uploadSummernoteImageFile",
-// 			beforeSend : function(xhr){
-// 				xhr.setRequestHeader(($("meta[name='_csrf_header']").attr("content")), ($("meta[name='_csrf']").attr("content")));
-// 			},
-// 			contentType : false,
-// 			processData : false,
-// 			success : function(data) {
-//             	//항상 업로드된 파일의 url이 있어야 한다.
-// 				$(editor).summernote('insertImage', data.url);
-// 			}
-// 		});
-// 	}
+	function uploadSummernoteImageFile(file, editor) {
+		data = new FormData();
+		data.append("file", file);
+		$.ajax({
+			data : data,
+			type : "POST",
+			url : "/uploadSummernoteImageFile",
+			beforeSend : function(xhr){
+				xhr.setRequestHeader(($("meta[name='_csrf_header']").attr("content")), ($("meta[name='_csrf']").attr("content")));
+			},
+			contentType : false,
+			processData : false,
+			success : function(data) {
+            	//항상 업로드된 파일의 url이 있어야 한다.
+				$(editor).summernote('insertImage', data.url);
+			}
+		});
+	}
 </script>
 <style type="text/css">
 #orderpagetitle {
@@ -194,7 +189,7 @@ img {
 					<th class="input-group-text mb-1">상품사이즈</th>
 					<td>
 						<input class="form-control mb-1" type="text" name="prdt_option_size" id="prdt_option_size" placeholder="상품사이즈" size="40" 
-						style="padding:10px;" value="${product.prdt_option_size}">
+						style="padding:10px;" value="${prdt_option.prdt_option_size}">
 					</td>
 				</tr>
 				
@@ -202,15 +197,15 @@ img {
 					<th class="input-group-text mb-1">상품색상</th>
 					<td>
 						<input class="form-control mb-1" type="text" name="prdt_option_color" id="prdt_option_color" placeholder="컬러" size="40" 
-						style="padding:10px;" value="${product.prdt_option_color}">
+						style="padding:10px;" value="${prdt_option.prdt_option_color}">
 					</td>
 				</tr>
 				
 				<tr>
 					<th class="input-group-text mb-1">상품수량</th>
 					<td>
-					<input class="form-control mb-1"  type="text" name="prdt_option_stock" id="prdt_option_stock" placeholder="상품수량" size="40" 
-					style="padding:10px;" value="${product.prdt_option_stock}">
+					<input class="form-control mb-1"  type="int" name="prdt_option_stock" id="prdt_option_stock" placeholder="상품수량" size="40" 
+					style="padding:10px;" value="${prdt_option.prdt_option_stock}">
 					</td>
 				</tr>
 				
@@ -218,7 +213,7 @@ img {
 				<tr>
 					<th class="input-group-text mb-1">상품내용</th>
 					<td>
-						<textarea class="summernote" name="prdt_detail" id="prdt_detail">${product.prdt_detail}
+						<textarea class="summernote" name="product_detail" id="product_detail">${product.product_detail}
 						</textarea>
 					</td>
 				</tr>

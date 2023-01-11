@@ -129,9 +129,9 @@ public class SellerServiceImpl implements SellerService {
 	}
 
 	@Override
-	public int insertprdtOpt(Integer product_no) throws Exception {
+	public int insertprdtOpt(Prdt_Option prdt_option) throws Exception {
 		// TODO Auto-generated method stub
-		return sellerDao.insertprdtOpt(product_no);
+		return sellerDao.insertprdtOpt(prdt_option);
 	}
 
 	@Override

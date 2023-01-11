@@ -57,7 +57,7 @@ public interface SellerService {
 
 	int insertproduct(Product product) throws Exception;
 
-	int insertprdtOpt(Integer product_no) throws Exception;
+	int insertprdtOpt(Prdt_Option prdt_option) throws Exception;
 
 	void insertprdtImg(List<Prdt_Img> prdt_img) throws Exception;
 
