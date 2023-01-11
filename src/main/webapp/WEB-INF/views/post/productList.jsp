@@ -193,7 +193,7 @@ h4 {
 											<h5><fmt:formatNumber value="${shopTotalList.product_price}" pattern="#,###" />원</h5>
 											<p class="card-text">${shopTotalList.product_info}</p>
 											<input type="hidden" value="${shopTotalList.product_no}" />
-											<button type="button" id = cartbtn class="btn btn-primary btn-sm" name="prdtcart" style="float:left; bottom:0;" onclick="gotoShoppingBag(this)">ADD CART</button>
+											<button type="button" id = cartbtn class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" name="prdtcart" style="float:left; bottom:0;" onclick="gotoShoppingBag(this)">ADD CART</button>
 										</div>
 									<!-- </form> -->
 	<!-- 								<div class="card-footer">
@@ -206,7 +206,27 @@ h4 {
 					</c:forEach>
 				<!-- </form>	 -->		
 				</div>
+				
+				<!-- Modal -->
+				<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				  <div class="modal-dialog">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h1 class="modal-title fs-5" id="exampleModalLabel">장바구니 담기</h1>
+				        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				      </div>
+				      <div class="modal-body text-center">
+				        상품이 장바구니에 담겼습니다.</br></br>장바구니에서 상품을 확인하시겠습니까?
+				      </div>
+				      <div class="modal-footer">
+				      	<button type="button" class="btn btn-primary" onclick="location.href='${contextPath}/post/shoppingBag';">장바구니로 이동</button>
+				        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+				      </div>
+				    </div>
+				  </div>
 				</div>
+				
+			</div>
 				<!-- /.row -->
 			</div>
 			<!-- /.col-lg-9 -->
@@ -268,13 +288,14 @@ h4 {
 		
 		
 		function gotoShoppingBag(element) {
+			let product_no = element.previousElementSibling.value
 			/* let form = $('#product_form') */
-			var form = document.createElement("form");
+			/* var form = document.createElement("form");
 			
-			form.setAttribute('action',"<c:url value='/post/shoppingBag'/>");
+			form.setAttribute('action',);
 			form.setAttribute('method','post')
 			
-			let product_no = element.previousElementSibling.value
+			
 			var hiddenField = document.createElement("input");
 
 	         hiddenField.setAttribute("type", "hidden");
@@ -288,15 +309,44 @@ h4 {
 
 	         token.setAttribute("type", "hidden");
 	         token.setAttribute("name", "${_csrf.parameterName}");
-	         token.setAttribute("value", "${_csrf.token}");
+	         token.setAttribute("value", "${_csrf.token}"); 
 	
 	         form.appendChild(token);
-	         document.body.appendChild(form);
+	         document.body.appendChild(form); 
 	         
-			form.submit();
+			form.submit();*/
+			let cookie = getCookie('id')
+			setCookie('id', cookie +'/'+product_no, '3');
+			alert(getCookie('id'));
 			
 			
 		}
+		function setCookie(cookieName, value, exdays){
+    		let exdate = new Date();
+    		exdate.setDate(exdate.getDate()+exdays);
+    		let cookieValue = escape(value) + ((exdays==null)?"":"; expires="+exdate.toGMTString());
+    		document.cookie = cookieName + "=" + cookieValue;
+    	}
+    	function deleteCookie(cookieName){
+    		let expireDate = new Date;
+    		expireDate.setDate(expireDate.getDate() - 1);
+    		document.cookie = cookieName + "=" + "; expires="+ expireDate.toGMTString();
+    	}
+    	function getCookie(name){
+    	    var nameOfCookie = name + "=";
+    	    var x = 0;
+    	    while (x <= document.cookie.length){
+    	    	var y = (x + nameOfCookie.length);
+    	        if (document.cookie.substring(x, y) == nameOfCookie) {
+    	        	if ((endOfCookie = document.cookie.indexOf(";", y)) == -1) {
+    	            	endOfCookie = document.cookie.length;
+    	            }
+    	        	return unescape (document.cookie.substring(y, endOfCookie));
+    	    	}
+    	        x = document.cookie.indexOf (" ", x) + 1; if (x == 0) break;
+    	    }
+    	    return "";
+    	}
 		</script>
  	<script
 		src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"

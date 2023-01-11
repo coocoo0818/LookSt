@@ -192,6 +192,7 @@ public class PostController {
 	/* 장바구니 알림 모달창(장바구니 페이지로 이동) */
 	@GetMapping("/shoppingBag") 
 	public String shoppingBag() {
+		
 	
 		 return "/post/shoppingBag";
 	}
