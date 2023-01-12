@@ -134,10 +134,10 @@ img {
 					<th class="input-group-text mb-1">카테고리</th>
 					<td>
 						<select class="form-select mb-1" id="product_kind" name="product_kind">
-							<option value="TOP">TOP</option>
-							<option value="BOTTOM">BOTTOM</option>
-							<option value="ACC">ACC</option>
-							<option value="SHOES">SHOES</option>
+							<option value="T">TOP</option>
+							<option value="B">BOTTOM</option>
+							<option value="A">ACC</option>
+							<option value="S">SHOES</option>
 						</select>
 					</td>
 				</tr>

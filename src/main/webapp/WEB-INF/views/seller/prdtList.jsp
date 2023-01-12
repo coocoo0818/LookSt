@@ -157,7 +157,7 @@
 					<tr>
 						<th scope="row" data-title="prdtnum">${prdtListDto.product_no }</th>
 						<td data-title="PrdtImg"><img class="card-img-top"
-							src="${pageContext.request.contextPath }/resources/img/product/${prdtListDto.prdt_img_name}"
+							src="${prdtListDto.prdt_img_name}"
 							alt="..." /></td>
 						<td data-title="PrdtCate"><c:if
 								test="${prdtListDto.product_kind eq 'T'}">상의</c:if> <c:if
