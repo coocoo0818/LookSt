@@ -38,6 +38,19 @@
 	max-height: 100px;
 	max-width: 100px;
 }
+
+table {table-layout: fixed;}
+
+td.a {
+  white-space: nowrap;  
+  overflow: hidden;
+  text-overflow: ellipsis; 
+}
+
+th.b {
+  width: 100px;
+}
+
 </style>
 
 <script type="text/javascript">
@@ -138,7 +151,7 @@
 			<thead>
 				<tr>
 
-					<th scope="col">상품번호</th>
+					<th class="b" scope="col">상품번호</th>
 					<th scope="col">상품이미지</th>
 					<th scope="col">카테고리</th>
 					<th scope="col">상품명</th>
@@ -164,7 +177,7 @@
 								test="${prdtListDto.product_kind eq 'B'}">하의</c:if> <c:if
 								test="${prdtListDto.product_kind eq 'A'}">잡화</c:if> <c:if
 								test="${prdtListDto.product_kind eq 'S'}">신발</c:if></td>
-						<td data-title="PrdtInfo">${prdtListDto.product_name }</td>
+						<td class="a" data-title="PrdtInfo">${prdtListDto.product_name }</td>
 						<td data-title="PrdtSize">${prdtListDto.prdt_option_size }</td>
 						<td data-title="PrdtColor">${prdtListDto.prdt_option_color }</td>
 						<td data-title="PrdtPrice" data-type="currency">${prdtListDto.product_price }</td>
