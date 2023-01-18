@@ -4,9 +4,9 @@ public class PageResolver_prdtList {
 
 	private SearchItem_prdtList sc;
 	
-	private int totalCnt;				//게시물 총 갯수
-	//private int pageSize = 10;		//한 페이지당 게시물 갯수
-	private final int NAV_SIZE = 5;	//page navigation size
+	private int totalCnt;				//게시물 총 개수
+	//private int pageSize = 10;		//한 페이지당 게시물 개수
+	private final int NAV_SIZE = 5;		//page navigation size
 	private int totalPage;				//전체 페이지 갯수
 	//private int page;					//현재 페이지
 	private int beginPage;				//화면에 보여줄 첫 페이지
@@ -31,12 +31,12 @@ public class PageResolver_prdtList {
 	}
 	/* 페이지네이션 구현 */
 	public void doPaging(int totalCnt, SearchItem_prdtList sc) {
-		this.totalPage = totalCnt / sc.getPageSize() + (totalCnt % sc.getPageSize() == 0 ? 0 : 1);				//전체 페이지 갯수
+		this.totalPage = totalCnt / sc.getPageSize() + (totalCnt % sc.getPageSize() == 0 ? 0 : 1);		//전체 페이지 갯수 (36 / 6 + (36 % 6)
 		this.sc.setPage(Math.min(sc.getPage(), totalPage));												// page가 totalPage보다 크지 않음
 		this.beginPage = (this.sc.getPage()-1) / NAV_SIZE * NAV_SIZE + 1;								//첫 페이지 숫자 11->11, 10->1, 15->11
 		this.endPage = Math.min(this.beginPage + this.NAV_SIZE - 1, totalPage);							//둘 중에 작은게 endPage
 		this.showPrev = beginPage != 1;
-		this.showNext = endPage != totalCnt;
+		this.showNext = endPage != totalPage;
 	}
 	
 	public void print() {
