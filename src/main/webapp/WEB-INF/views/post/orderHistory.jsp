@@ -94,15 +94,15 @@
 								<td class="td_width_2 text-center">
 									<fmt:formatDate value="${orderHistory.prdt_order_date }" />
 								</td>
-								<%-- <div class="order_date"><span id="prdt_order_date" value="${orderHistory.prdt_order_date }">${orderHistory.prdt_order_date }</span></div> --%>
-								<td class="td_width_2 text-center"><c:if
-										test="${orderHistory.prdt_order_type eq 'P' && orderHistory.prdt_order_cancel ne 'D'}">
+								<!-- 상품 주문내역조회 페이지 (주문상태) -->
+								<td class="td_width_2 text-center">
+									<c:if test="${orderHistory.prdt_order_type eq 'P' && orderHistory.prdt_order_cancel ne 'D'}">
 										<a>배송준비중</a>
-									</c:if><br /> <c:if test="${orderHistory.prdt_order_cancel eq 'D' }">
+									</c:if><br /> 
+									<c:if test="${orderHistory.prdt_order_cancel eq 'D' }">
 										<a>취소접수</a>
 									</c:if><br />
 									<button type="button" class="btn btn-light modifyBtn" onclick="cancel_Btn(this)">취소</button>
-									
 								</td>
 							</tr>
 						</c:forEach>

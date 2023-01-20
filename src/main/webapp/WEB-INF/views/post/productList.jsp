@@ -114,7 +114,7 @@ h4 {
 				  <button class="btn btn-light border border-2" onclick="location.href='<c:url value="/post/productList?kind=S"/>'">SHOES</button>
 				  <button class="btn btn-light border border-2" onclick="location.href='<c:url value="/post/productList?kind=G"/>'">BAG</button>
 				  <button class="btn btn-light border border-2" onclick="location.href='<c:url value="/post/productList?kind=A"/>'">ACC</button>
-				</div>	<!-- 카테고리별로 상의T, 하의P, 신발S, 가방B, 악세사리 AC로 부여 -->
+				</div>	<!-- 카테고리별로 상의T, 하의P, 신발S, 가방B, 악세사리A로 부여 -->
 			
 				
 				<div id="carouselExampleControls" class="carousel slide d-grid gap-2 col-6 mx-auto" data-bs-ride="carousel">
@@ -143,8 +143,7 @@ h4 {
 				<form class="d-flex row py-3" action="${contextPath}/post/productList" method="get">
 					<div class="d-flex justify-content-between">
 						<div class="col mt-1 me-3">
-							<select id="inputState" class="form-select form-select-md"
-								name="option">
+							<select id="inputState" class="form-select form-select-md" name="option">
 								<option selected>전체</option>
 								<!--<option value="B" ${pr.sc.option=='I' || pr.sc.option=='' ? "selected" : ""}>판매자명</option>-->
 								<option value="T" ${pr.sc.option=='T'? "selected" : ""}>전체</option>
@@ -185,7 +184,6 @@ h4 {
 								<div class="card h-100">
 									<a href="${contextPath}/admin/productDetail/?product_no=${shopTotalList.product_no}">
 										<img class="card-img-top" src="${contextPath}/resources/img/product/${shopTotalList.prdt_Img.prdt_img_name}" alt="" /></a>
-									<%-- <form action ="${contextPath}/post/shoppingBag" method="get" id="product_form"> --%>
 										<div class="card-body">
 											<h4 class="card-title">
 												<a href="${contextPath}/admin/productDetail/?product_no=${shopTotalList.product_no}" style="text-decoration:none;">${shopTotalList.product_name}</a>
