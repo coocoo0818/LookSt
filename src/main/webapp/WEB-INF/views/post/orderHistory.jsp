@@ -30,7 +30,8 @@
 	<script type="text/javascript">
 	
 	function cancel_Btn(element){
-		let order_no = element.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.firstElementChild.firstElementChild.innerHTML
+		let order_no = element.parentElement.previousElementSibling.previousElementSibling
+						.previousElementSibling.previousElementSibling.firstElementChild.firstElementChild.innerHTML
 		/* let a = $(element).parent().parent().children('#orderNotd').children().children().html() */ /*JQuery 상속*/
 		$('#order_no').val(order_no)
 		if (!confirm("정말로 취소하시겠습니까?"))
@@ -75,7 +76,7 @@
 								value="${member_id}" />
 							<tr>
 								<td class="td_width_3 text-center">
-									<a href=""><img src="${contextPath}/resources/img/product/${orderHistory.prdt_img_name}" style="height: 150px; weight: 150px;"></a>
+									<a href=""><img src="${orderHistory.prdt_img_name}" style="height: 150px; weight: 150px;"></a>
 									<div id="product_name" value ="${orderHistory.product_name}">${orderHistory.product_name}</div>
 									<span id="prdt_option_size" value="${orderHistory.prdt_order_size}">사이즈 : ${orderHistory.prdt_order_size}</span> 
 									<span id="prdt_option_color" value="${orderHistory.prdt_order_color}">색상 : ${orderHistory.prdt_order_color}</span>
