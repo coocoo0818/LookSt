@@ -183,7 +183,7 @@ h4 {
 						<div class="col-lg-4 col-md-6 mb-4">
 								<div class="card h-100">
 									<a href="${contextPath}/admin/productDetail/?product_no=${shopTotalList.product_no}">
-										<img class="card-img-top" src="${contextPath}/resources/img/product/${shopTotalList.prdt_Img.prdt_img_name}" alt="" /></a>
+										<img class="card-img-top" src="${shopTotalList.prdt_Img.prdt_img_name}" alt="" /></a>
 										<div class="card-body">
 											<h4 class="card-title">
 												<a href="${contextPath}/admin/productDetail/?product_no=${shopTotalList.product_no}" style="text-decoration:none;">${shopTotalList.product_name}</a>
