@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -113,7 +114,7 @@ public class PostController {
 //	   return "/orderFormpage";
    }
    
-	/* 쇼핑리스트 페이지 이동!!! */ /*Dao, Service 등 등록했고 컨트롤러수정중*/
+	/* 쇼핑리스트 페이지 이동!!! */
 	@RequestMapping(value = "/productList", method = RequestMethod.GET)
 	public String shopFormList(SearchItem_prdtList sc, Model model) {	/* SearchItem_prdtList 안에 String kind = "" */
 		System.out.println(sc);
@@ -139,13 +140,11 @@ public class PostController {
 	}
 	/* 주문내역조회 */
 	@GetMapping("/orderHistory") 
-	public String orderHistory(Model m, HttpServletRequest request, Principal principal ) {
+	public String orderHistory(Model m, Principal principal ) {
 		
-		/* HttpSession session = request.getSession(); */
 		try {
-			/* String member_id = (String) session.getAttribute("res"); */
 			String member_id = principal.getName();
-			List<OrderHistoryDto> orderHistory = postService.orderHistory(member_id);
+			List<OrderHistoryDto> orderHistory = postService.orderHistory(member_id); 		/* member_id를 기준으로 상품주문내역을 리스트형식으로 가져온다.*/
 			m.addAttribute("orderHistory", orderHistory);
 			m.addAttribute("member_id", member_id);
 			System.out.println(orderHistory);
@@ -157,9 +156,10 @@ public class PostController {
 
 	/* 주문내역취소 */
 	@PostMapping("/orderCancel")
-	public String orderCancel(Integer order_no, RedirectAttributes rattr, HttpSession session) {
+	public String orderCancel(Integer order_no, RedirectAttributes rattr, HttpSession session, Authentication auth) {
 		
-		String member_id = (String) session.getAttribute("res");
+//		String member_id = (String) session.getAttribute("res");
+		String memeber_id = auth.getName();			// 시큐리티 적용 후 member_id 조회 방식 변경.
 		String msg = "DEL_OK";
 		
 		try {
