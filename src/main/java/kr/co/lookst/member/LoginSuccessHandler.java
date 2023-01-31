@@ -26,7 +26,6 @@ public class LoginSuccessHandler implements org.springframework.security.web.aut
 		System.out.println("ROLE NAMES: " + roleNames);
 		
 		if(roleNames.contains("admin")) {
-			
 			response.sendRedirect("/lookst/admin/member_management");
 			return;
 		}

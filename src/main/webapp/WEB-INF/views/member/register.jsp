@@ -14,7 +14,6 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-
 //이메일 정규표현식을 이용한 유효성 체크
 function checkId(){
 	$("#mail-Check-Btn").attr('disabled', true);
@@ -390,14 +389,12 @@ function sample6_execDaumPostcode() {
             // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
             var addr = ''; // 주소 변수
             var extraAddr = ''; // 참고항목 변수
-
             //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
             if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
                 addr = data.roadAddress;
             } else { // 사용자가 지번 주소를 선택했을 경우(J)
                 addr = data.jibunAddress;
             }
-
             // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
             if(data.userSelectedType === 'R'){
                 // 법정동명이 있을 경우 추가한다. (법정리는 제외)
@@ -419,7 +416,6 @@ function sample6_execDaumPostcode() {
             } else {
                 document.getElementById("sample6_extraAddress").value = '';
             }
-
             // 우편번호와 주소 정보를 해당 필드에 넣는다.
             document.getElementById("member_zip").value = data.zonecode;
             document.getElementById("member_addr").value = addr;

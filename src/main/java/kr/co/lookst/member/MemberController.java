@@ -33,7 +33,6 @@ public class MemberController {
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
-
 	//로그인
 	@GetMapping("/login")
 	public String getLogin(Principal principal) throws Exception {
