@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -37,7 +36,7 @@ public class MemberController {
 
 	//로그인
 	@GetMapping("/login")
-	public String getLogin() throws Exception {
+	public String getLogin(Principal principal) throws Exception {
 		logger.info("LOGIN PAGE");
 		return "member/login";
 	}
@@ -79,16 +78,9 @@ public class MemberController {
 		if(memberDto != null) {
 			System.out.println("DB에 저장된 비밀번호 : " + memberDto.getMember_pw());
 			boolean pwCheck = bCryptPasswordEncoder.matches(inputPw, memberDto.getMember_pw());
-			if(pwCheck == true) {
-				return 1;
-			}
-			else {
-				return 0;
-			}
-		}
-		else {
-			return 0;	
-		}
+			if(pwCheck == true) { return 1;	}
+			else { return 0; }
+		}	else { return 0; }
 	}
 	
 	//권한이 없는 경우 노출될 에러 페이지 (403에러 대신 노출)
@@ -98,14 +90,14 @@ public class MemberController {
 		model.addAttribute("msg", "Access Denied");
 	}
 		
-//	//로그아웃
+//	//시큐리티 미적용 로그아웃
 //	@GetMapping("/logout")
-//    public String getLogout(HttpSession session) throws Exception {
+//  public String getLogout(HttpSession session) throws Exception {
 //		logger.info("LOGOUT");
-//        session.invalidate();
-//        return "redirect:/";
-//    }
-//	
+//		session.invalidate();
+//		return "redirect:/";
+//	}
+
 	//아이디 중복체크
 	@PostMapping("/idCheck")
 	@ResponseBody
@@ -116,6 +108,18 @@ public class MemberController {
 		int cnt = service.idCheck(member_id);
 		logger.info("cnt : " + cnt);
 		return cnt;
+	}
+	
+	//이메일 인증
+	@Autowired
+	private MailSendService mailService;
+	
+	@PostMapping("/mailCheck")
+	@ResponseBody
+	public String mailCheck(@RequestParam("member_id") String member_id) throws Exception {
+		logger.info("이메일 인증 요청 접수");
+		logger.info("이메일 인증 이메일 : " + member_id);
+		return mailService.joinEmail(member_id);
 	}
 	
 	//회원가입
@@ -178,7 +182,7 @@ public class MemberController {
 		return "member/mypage";
 	}
 	
-	//회원 정보 수정)
+	//회원 정보 수정
 	@PostMapping("/mypage")
 	public String updateMember(MemberDto dto, Principal principal) throws Exception {
 		logger.info("updateMember - " + principal.getName());
@@ -206,21 +210,4 @@ public class MemberController {
         return "redirect:/member/logout";
 	}
 
-//	
-//	//이메일 인증
-//	@Autowired
-//	private MailSendService mailService;
-//	
-//	//회원가입 페이지 이동
-//	@GetMapping("/userJoin")
-//	public void userJoin() {}
-//		
-//	//이메일 인증
-//	@GetMapping("/mailCheck")
-//	@ResponseBody
-//	public String mailCheck(String email) {
-//		System.out.println("이메일 인증 요청 접수");
-//		System.out.println("이메일 인증 이메일 : " + email);
-//		return mailService.joinEmail(email);
-//	}
 }
