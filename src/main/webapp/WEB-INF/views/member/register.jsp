@@ -14,9 +14,12 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-
 //이메일 정규표현식을 이용한 유효성 체크
 function checkId(){
+	$("#mail-Check-Btn").attr('disabled', true);
+	$("#email_check").attr('disabled', true);
+	$("#mail-Check-Btn2").attr('disabled', true);
+	
 	var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 	// 검증에 사용할 정규식 변수 regExp에 저장
 	if ((($('#email_id').val()+$('#email_host').val()).length) == 0) {
@@ -45,8 +48,11 @@ function checkId(){
 						$('#email_host').attr('class','form-select');
 						$('#email_feedback').attr('class','valid-feedback');
 						$('#email_feedback').css("display","inline-block");
-						document.getElementById('email_feedback').innerHTML="사용 가능한 이메일입니다."
+						document.getElementById('email_feedback').innerHTML="사용 가능한 이메일입니다. 이메일 인증을 진행해 주세요."
 						$('#member_id').attr('value', ($('#email_id').val()));
+						$("#mail-Check-Btn").attr('disabled', false);
+						$("#email_check").attr('disabled', true);
+						$("#mail-Check-Btn2").attr('disabled', true);
 						return true;
 					} else { //cnt가 1일 경우 -> 이미 존재하는 계정
 						$('#email_id').attr('class','form-control w-25 is-invalid');
@@ -90,8 +96,11 @@ function checkId(){
 						$('#email_host').attr('class','form-select is-valid');
 						$('#email_feedback').attr('class','valid-feedback');
 						$('#email_feedback').css("display","inline-block");
-						document.getElementById('email_feedback').innerHTML="사용 가능한 이메일입니다."
+						document.getElementById('email_feedback').innerHTML="사용 가능한 이메일입니다. 이메일 인증을 진행해 주세요."
 						$('#member_id').attr('value', ($('#email_id').val()+$('#email_host').val()));
+						$("#mail-Check-Btn").attr('disabled', false);
+						$("#email_check").attr('disabled', true);
+						$("#mail-Check-Btn2").attr('disabled', true);
 						return true;
 					} else { //cnt가 1일 경우 -> 이미 존재하는 계정
 						$('#email_id').attr('class','form-control w-25');
@@ -249,27 +258,117 @@ function checkName(){
 	}
 }
 
+//인증번호 발송 체크
+function checkEmail() {
+	var regIdCheck = $('#email_feedback').attr('class');
+	
+	if(regIdCheck != 'valid-feedback'){
+		document.getElementById("email_id").focus();
+		return false;
+	}
+	
+	if(regIdCheck == 'valid-feedback'){
+		const member_id = $('#member_id').val();
+		
+		var token = $("meta[name='_csrf']").attr("content");
+		var header = $("meta[name='_csrf_header']").attr("content");
+		
+		$.ajax({
+			url:'./mailCheck?member_id=' + member_id,
+			type:'post',
+			beforeSend : function(xhr){
+				xhr.setRequestHeader(header, token);
+			},
+			success:function(data){
+				code = data;
+				$('#email_id').attr('class','form-control w-25');
+				$('#email_host').attr('class','form-select is-valid');
+				$('#email_feedback').attr('class','valid-feedback');
+				$('#email_feedback').css("display","inline-block");
+				document.getElementById('email_feedback').innerHTML="인증번호가 전송되었습니다."
+				$("#mail-Check-Btn").attr('disabled', true);
+				$("#email_check").attr('disabled', false);
+				$("#mail-Check-Btn2").attr('disabled', false);
+				document.getElementById("email_check").focus();
+			},
+/* 			error:function(){
+				alert("에러");
+			} */
+		});
+	}
+}
+
+//인증번호 체크
+function checkCode(){
+	const email_check = $('#email_check').val();
+
+	if(email_check != code) {
+		$('#email_feedback').attr('class','invalid-feedback');
+		$('#email_feedback').css("display","inline-block");
+		document.getElementById('email_feedback').innerHTML="인증번호가 일치하지 않습니다."
+		document.getElementById("email_check").focus();
+		return false;
+	}
+	
+	if(email_check === code){
+		$('#email_id').attr('class','form-control w-25');
+		$('#email_host').attr('class','form-select is-valid');
+		$('#email_feedback').attr('class','valid-feedback');
+		$('#email_feedback').css("display","inline-block");
+		document.getElementById('email_feedback').innerHTML="이메일 인증이 완료되었습니다."
+		$("#mail-Check-Btn").attr('disabled', true);
+		$("#email_check").attr('disabled', true);
+		$("#mail-Check-Btn2").attr('disabled', true);
+		return false;
+	}
+}
+
 //회원가입 빈칸 체크
 function registerSuccess() {
 	var regIdCheck = $('#email_feedback').attr('class');
 	var regPwCheck = $('#member_pw_re').attr('class');
 	var regNickCheck = $('#nick_feedback').attr('class');
 	var regNameCheck = $('#name_feedback').attr('class');
+	var regCodeCheck = document.getElementById("email_feedback").innerHTML;
 	
 	if(regIdCheck != 'valid-feedback'){
+		$('#email_id').attr('class','form-control w-25 is-invalid');
+		$('#email_host').attr('class','form-select');
+		$('#email_feedback').attr('class','invalid-feedback');
+		$('#email_feedback').css("display","inline-block");
+		document.getElementById('email_feedback').innerHTML="필수 입력 항목입니다. 이메일을 입력해 주세요."
 		document.getElementById("email_id").focus();
 		return false;
 	}
 	else if(regPwCheck != 'form-control is-valid'){
+		$('#pw_feedback').attr('class','invalid-feedback');
+		$('#pw_feedback').css('display',"inline-block");
+		document.getElementById('pw_feedback').innerHTML="필수 입력 항목입니다. 비밀번호를 입력해 주세요."
 		document.getElementById("member_pw").focus();
 		return false;
 	}
 	else if(regNickCheck != 'valid-feedback'){
+		$('#member_nick').attr('class','form-control is-invalid');
+		$('#nick_feedback').attr('class','invalid-feedback');
+		$('#nick_feedback').css('display',"inline-block");
+		document.getElementById('nick_feedback').innerHTML="필수 입력 항목입니다. 닉네임을 입력해 주세요."
 		document.getElementById("member_nick").focus();
 		return false;
 	}
 	else if(regNameCheck != 'valid-feedback'){
+		$('#member_name').attr('class','form-control is-invalid');
+		$('#name_feedback').attr('class','invalid-feedback');
+		$('#name_feedback').css('display',"inline-block");
+		document.getElementById('name_feedback').innerHTML="필수 입력 항목입니다. 이름을 입력해 주세요."
 		document.getElementById("member_name").focus();
+		return false;
+	}
+	else if(regCodeCheck != '이메일 인증이 완료되었습니다.'){
+		$('#email_feedback').attr('class','valid-feedback');
+		$('#email_feedback').css("display","inline-block");
+		document.getElementById('email_feedback').innerHTML="사용 가능한 이메일입니다. 이메일 인증을 진행해 주세요."
+		document.getElementById("mail-Check-Btn").focus();
+		document.getElementById("email_check").focus();
 		return false;
 	}
 	else{
@@ -359,12 +458,12 @@ function sample6_execDaumPostcode() {
 							<option value="@daum.net">daum.net</option>
 							<option value="@hanmail.net">hanmail.net</option>
 						</select>
-						<!-- <button type="button" class="btn btn-dark" style="width:20%; height:50px;" id="mail-Check-Btn">인증코드 발송</button> -->
+						<button type="button" class="btn btn-dark" style="width:20%; height:50px;" name="mail-Check-Btn" id="mail-Check-Btn" onclick="checkEmail()">인증번호 발송</button>
 					</div>
-					<!-- <div class="input-group" style="height:50px;">
-						<input class="form-control" placeholder="인증번호 6자리를 입력해주세요." maxlength="6">
-						<button type="button" class="btn btn-dark" style="width:20%; height:50px;" id="mail-Check-Btn2">인증확인</button>
-					</div> -->
+					<div class="input-group" style="height:50px;">
+						<input class="form-control" placeholder="인증번호 6자리를 입력해주세요." maxlength="6" name="email_check" id="email_check" disabled="true" />
+						<button type="button" class="btn btn-dark" style="width:20%; height:50px;" name="mail-Check-Btn2" id="mail-Check-Btn2" onclick="checkCode()" disabled="true">인증확인</button>
+					</div>
 					<div class="invalid-feedback" id="email_feedback" style="margin-left:2px; display:none;"></div>
 					<div class="valid-feedback" style="color:gray; margin-left:2px; display:inline-block;">로그인 시 사용할 이메일을 입력해 주세요.</div>
 				  </fieldset>
